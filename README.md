@@ -15,7 +15,7 @@
 ## If you think it's cool,Please give me a little star. (如果你也觉得很酷😎，就点一下Star吧(●ˇ∀ˇ●))
 
 
-### 目前WYBasisKit-Swift还在渐进开发中，敬请期待
+### 目前WYBasisKit-Swift版还在渐进开发中，敬请期待
 
 
 如您在使用过程中发现BUG,或有好的意见建议，可发邮件至mobileAppDvlp@icloud.com
