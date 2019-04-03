@@ -18,7 +18,7 @@ let statusBarHeight : CGFloat = UIApplication.shared.statusBarFrame.size.height
 ///导航栏高度
 let navViewHeight : CGFloat = (statusBarHeight+navBarHeight)
 
-///tabBar高度
+///tabBar高度 
 //let tabBarHeight : CGFloat = ((isNeatBang == true) ? (49.0+34.0) : 49.0)
 //
 /////tabBar安全区域
