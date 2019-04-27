@@ -13,10 +13,10 @@
 		1F2C711F223A2FDD00521AEF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F2C711E223A2FDD00521AEF /* Assets.xcassets */; };
 		1F2C7122223A2FDD00521AEF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F2C7120223A2FDD00521AEF /* LaunchScreen.storyboard */; };
 		1F2C712A223A31EE00521AEF /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2C7129223A31EE00521AEF /* MainViewController.swift */; };
-		1F2C7144223A558000521AEF /* MacroDefinition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2C7140223A558000521AEF /* MacroDefinition.swift */; };
-		1F2C7145223A558000521AEF /* Singleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2C7141223A558000521AEF /* Singleton.swift */; };
-		1F2C7146223A558000521AEF /* APIMacro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2C7143223A558000521AEF /* APIMacro.swift */; };
 		1F2C714A223A631300521AEF /* UIColor+WY_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2C7149223A631300521AEF /* UIColor+WY_Extension.swift */; };
+		1F37360C227477F500DEA8B0 /* NSDecimalNumber+WY_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F37360B227477F500DEA8B0 /* NSDecimalNumber+WY_Extension.swift */; };
+		1FF80DBE225C4DE800F3C410 /* NetworkAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF80DBD225C4DE800F3C410 /* NetworkAPI.swift */; };
+		1FF80DC1225C599700F3C410 /* ConstDefinition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF80DC0225C599700F3C410 /* ConstDefinition.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,11 +28,10 @@
 		1F2C7121223A2FDD00521AEF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1F2C7123223A2FDD00521AEF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1F2C7129223A31EE00521AEF /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
-		1F2C7140223A558000521AEF /* MacroDefinition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacroDefinition.swift; sourceTree = "<group>"; };
-		1F2C7141223A558000521AEF /* Singleton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Singleton.swift; sourceTree = "<group>"; };
-		1F2C7143223A558000521AEF /* APIMacro.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIMacro.swift; sourceTree = "<group>"; };
-		1F2C7147223A55A700521AEF /* GlobalHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlobalHeader.pch; sourceTree = "<group>"; };
 		1F2C7149223A631300521AEF /* UIColor+WY_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+WY_Extension.swift"; sourceTree = "<group>"; };
+		1F37360B227477F500DEA8B0 /* NSDecimalNumber+WY_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSDecimalNumber+WY_Extension.swift"; sourceTree = "<group>"; };
+		1FF80DBD225C4DE800F3C410 /* NetworkAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkAPI.swift; sourceTree = "<group>"; };
+		1FF80DC0225C599700F3C410 /* ConstDefinition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstDefinition.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,7 +93,7 @@
 				1F2C7130223A53BF00521AEF /* Encryption */,
 				1F2C7131223A53C800521AEF /* Layout */,
 				1F2C7132223A53D100521AEF /* LoadingState */,
-				1F2C7133223A53DA00521AEF /* MacroDefinition */,
+				1FF80DBF225C594400F3C410 /* ConstDefinition */,
 				1F2C7134223A53E200521AEF /* Memory */,
 				1F2C7136223A53F500521AEF /* Practical */,
 				1F2C7137223A540200521AEF /* RefreshView */,
@@ -152,17 +151,6 @@
 			path = LoadingState;
 			sourceTree = "<group>";
 		};
-		1F2C7133223A53DA00521AEF /* MacroDefinition */ = {
-			isa = PBXGroup;
-			children = (
-				1F2C7143223A558000521AEF /* APIMacro.swift */,
-				1F2C7141223A558000521AEF /* Singleton.swift */,
-				1F2C7140223A558000521AEF /* MacroDefinition.swift */,
-				1F2C7147223A55A700521AEF /* GlobalHeader.pch */,
-			);
-			path = MacroDefinition;
-			sourceTree = "<group>";
-		};
 		1F2C7134223A53E200521AEF /* Memory */ = {
 			isa = PBXGroup;
 			children = (
@@ -173,6 +161,7 @@
 		1F2C7136223A53F500521AEF /* Practical */ = {
 			isa = PBXGroup;
 			children = (
+				1F3736062274759200DEA8B0 /* NSDecimalNumber */,
 				1F0F0C35223DFC9700E06F63 /* UIFont */,
 				1F2C7148223A61C000521AEF /* UIColor */,
 			);
@@ -199,6 +188,23 @@
 				1F2C7149223A631300521AEF /* UIColor+WY_Extension.swift */,
 			);
 			path = UIColor;
+			sourceTree = "<group>";
+		};
+		1F3736062274759200DEA8B0 /* NSDecimalNumber */ = {
+			isa = PBXGroup;
+			children = (
+				1F37360B227477F500DEA8B0 /* NSDecimalNumber+WY_Extension.swift */,
+			);
+			path = NSDecimalNumber;
+			sourceTree = "<group>";
+		};
+		1FF80DBF225C594400F3C410 /* ConstDefinition */ = {
+			isa = PBXGroup;
+			children = (
+				1FF80DBD225C4DE800F3C410 /* NetworkAPI.swift */,
+				1FF80DC0225C599700F3C410 /* ConstDefinition.swift */,
+			);
+			path = ConstDefinition;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -233,6 +239,7 @@
 				TargetAttributes = {
 					1F2C7113223A2FDB00521AEF = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1020;
 					};
 				};
 			};
@@ -273,10 +280,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				1F0F0C34223DFC9000E06F63 /* UIFont+WY_Extension.swift in Sources */,
-				1F2C7146223A558000521AEF /* APIMacro.swift in Sources */,
-				1F2C7144223A558000521AEF /* MacroDefinition.swift in Sources */,
-				1F2C7145223A558000521AEF /* Singleton.swift in Sources */,
+				1FF80DC1225C599700F3C410 /* ConstDefinition.swift in Sources */,
+				1FF80DBE225C4DE800F3C410 /* NetworkAPI.swift in Sources */,
 				1F2C712A223A31EE00521AEF /* MainViewController.swift in Sources */,
+				1F37360C227477F500DEA8B0 /* NSDecimalNumber+WY_Extension.swift in Sources */,
 				1F2C7118223A2FDB00521AEF /* AppDelegate.swift in Sources */,
 				1F2C714A223A631300521AEF /* UIColor+WY_Extension.swift in Sources */,
 			);
@@ -434,7 +441,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jacke-xu.WYBasisKit";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -453,7 +460,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jacke-xu.WYBasisKit";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
