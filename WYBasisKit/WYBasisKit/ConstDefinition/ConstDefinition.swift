@@ -6,7 +6,6 @@
 //  Copyright © 2019 jacke-xu. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 /// NavBar高度 self.navigationController.navigationBar.frame.size.height
@@ -19,28 +18,25 @@ let wy_statusBarHeight : CGFloat = UIApplication.shared.statusBarFrame.size.heig
 let wy_navViewHeight : CGFloat = (wy_statusBarHeight+wy_navBarHeight)
 
 /// tabBar高度
-//#define wy_tabBarHeight         ((wy_isNeatBang == YES) ? (49.0f+34.0f) : 49.0f)
+let wy_tabBarHeight : CGFloat = ((UIDevice.wy_isNeatBang == true) ? (49.0+34.0) : 49.0)
 
 /// tabBar安全区域
-//#define wy_tabbarSafetyZone         ((wy_isNeatBang == YES) ? 34.0f : 0.0f)
+let wy_tabbarSafetyZone : CGFloat = ((UIDevice.wy_isNeatBang == true) ? 34.0 : 0.0)
 
 /// 导航栏安全区域
-//#define wy_navBarSafetyZone         ((wy_isNeatBang == YES) ? 44.0f : 0.0f)
+let wy_navBarSafetyZone : CGFloat = ((UIDevice.wy_isNeatBang == true) ? 44.0 : 0.0)
 
 /// 屏幕宽
 let wy_screenWidth : CGFloat = UIScreen.main.bounds.size.width
 
-/// 屏幕高(已减去tabbar安全区域高度)
-//let wy_screenHeight : CGFloat = UIScreen.main.bounds.size.height-
-
-/// 全屏高
-let wy_fullScreenHeight : CGFloat = UIScreen.main.bounds.size.height
+/// 屏幕高
+let wy_screenHeight : CGFloat = UIScreen.main.bounds.size.height
 
 /// 屏幕宽度比率
 let wy_screenWidthRatio : CGFloat = (wy_screenWidth / 375.0)
 
 /// 屏幕高度比率
-let wy_screenHeightRatio : CGFloat = (wy_fullScreenHeight / 667.0)
+let wy_screenHeightRatio : CGFloat = (wy_screenHeight / 667.0)
 
 /// DEBUG打印日志
 public func wy_print(_ messages: Any..., file: String = #file, function: String = #function, line: Int = #line) {
@@ -53,13 +49,13 @@ public func wy_print(_ messages: Any..., file: String = #file, function: String 
 /// 角度转弧度
 public func wy_degreesToRadian(degrees : CGFloat) -> CGFloat {
     
-    return floatWithDecimalNumber(number: (CGFloat.pi * (degrees) / 180.0));
+    return wy_floatWithDecimalNumber(number: (CGFloat.pi * (degrees) / 180.0));
 }
 
 /// 弧度转角度
 public func wy_radianToDegrees(radian : CGFloat) -> CGFloat {
     
-    return floatWithDecimalNumber(number: (radian*180.0)/(CGFloat.pi));
+    return wy_floatWithDecimalNumber(number: (radian*180.0)/(CGFloat.pi));
 }
 
 /// 获取app包路径
@@ -88,50 +84,6 @@ let wy_appBuildVersion : String = Bundle.main.infoDictionary!["CFBundleVersion"]
 /// 获取当前语言
 let wy_currentLanguage : String = NSLocale.preferredLanguages.first!
 
-/// 判断是否是传入的iOS系统版本
-//#define WY_iOSVersion(number)                [[[UIDevice currentDevice] systemVersion] floatValue] == number
-//
-/////判断是否是传入的iOS系统版本及以上
-//#define WY_iOSVersionAbove(number)                [[[UIDevice currentDevice] systemVersion] floatValue] >= number
-//
-/////判断是否是传入的iOS系统版本及以下
-//#define WY_iOSVersionBelow(number)                [[[UIDevice currentDevice] systemVersion] floatValue] <= number
-//
-/////判断是否在传入的iOS系统版本之间
-//#define WY_iOSVersionAmong(smallVersion,bigVersion)                (([[[UIDevice currentDevice] systemVersion] floatValue] >= smallVersion) && ([[[UIDevice currentDevice] systemVersion] floatValue] <= bigVersion))
-//
-//
-/////判断是竖屏还是横屏
-//#define UIDeviceOrientationIsPortrait(orientation)  ((orientation) == UIDeviceOrientationPortrait || (orientation) == UIDeviceOrientationPortraitUpsideDown)//竖屏
-//
-//#define UIDeviceOrientationIsLandscape(orientation) ((orientation) == UIDeviceOrientationLandscapeLeft || (orientation) == UIDeviceOrientationLandscapeRight)//横屏
-//
-////http://www.xueui.cn/design/142395.html
-/////判断是设备型号
-//#define wy_isIPhoneSE     ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 1136), [[UIScreen mainScreen] currentMode].size) && !wy_isIPad : NO)
-//
-//#define wy_isIPhone8     ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(750, 1334), [[UIScreen mainScreen] currentMode].size) && !wy_isIPad : NO)
-//
-//#define wy_isIPhone8Plus ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1242, 2208), [[UIScreen mainScreen] currentMode].size) && !wy_isIPad : NO)
-//
-//#define wy_isIPhoneXR    ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? (CGSizeEqualToSize(CGSizeMake(828, 1792), [[UIScreen mainScreen] currentMode].size) || CGSizeEqualToSize(CGSizeMake(750, 1624), [[UIScreen mainScreen] currentMode].size)) && !wy_isIPad : NO)
-//
-//#define wy_isIPhoneXS    ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125, 2436), [[UIScreen mainScreen] currentMode].size) && !wy_isIPad : NO)
-//
-//#define wy_isIPhoneXSMax    ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1242, 2688), [[UIScreen mainScreen] currentMode].size) && !wy_isIPad : NO)
-//
-/////判断当前机型是使用2x还是3x图
-//#define wy_is3x      ([[UIScreen mainScreen] currentMode].size.width/[UIScreen mainScreen].bounds.size.width == 3) ? YES : NO
-//
-/////是否是齐刘海机型
-//#define wy_isNeatBang      (wy_isIPhoneXS || wy_isIPhoneXSMax || wy_isIPhoneXR) ? YES : NO
-//
-/////是否是ipad
-//#define wy_isIPad      ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
-//
-/////是否是iphone
-//#define wy_isIPhone    ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
-//
-//#define wy_isSimulator   (TARGET_IPHONE_SIMULATOR == 1 && TARGET_OS_IPHONE == 1) ? YES : NO
+
 
 

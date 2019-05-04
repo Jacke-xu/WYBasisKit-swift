@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F059B0E227C2D09006AB1BB /* UIDevice+WY_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F059B0D227C2D09006AB1BB /* UIDevice+WY_Extension.swift */; };
 		1F0F0C34223DFC9000E06F63 /* UIFont+WY_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0F0C33223DFC9000E06F63 /* UIFont+WY_Extension.swift */; };
 		1F2C7118223A2FDB00521AEF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2C7117223A2FDB00521AEF /* AppDelegate.swift */; };
 		1F2C711D223A2FDB00521AEF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F2C711B223A2FDB00521AEF /* Main.storyboard */; };
@@ -15,11 +16,13 @@
 		1F2C712A223A31EE00521AEF /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2C7129223A31EE00521AEF /* MainViewController.swift */; };
 		1F2C714A223A631300521AEF /* UIColor+WY_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2C7149223A631300521AEF /* UIColor+WY_Extension.swift */; };
 		1F37360C227477F500DEA8B0 /* NSDecimalNumber+WY_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F37360B227477F500DEA8B0 /* NSDecimalNumber+WY_Extension.swift */; };
+		1FD7D1D7227D508100D84117 /* DataConvert+WY_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD7D1D6227D508100D84117 /* DataConvert+WY_Extension.swift */; };
 		1FF80DBE225C4DE800F3C410 /* NetworkAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF80DBD225C4DE800F3C410 /* NetworkAPI.swift */; };
 		1FF80DC1225C599700F3C410 /* ConstDefinition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF80DC0225C599700F3C410 /* ConstDefinition.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1F059B0D227C2D09006AB1BB /* UIDevice+WY_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+WY_Extension.swift"; sourceTree = "<group>"; };
 		1F0F0C33223DFC9000E06F63 /* UIFont+WY_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+WY_Extension.swift"; sourceTree = "<group>"; };
 		1F2C7114223A2FDB00521AEF /* WYBasisKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WYBasisKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F2C7117223A2FDB00521AEF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -30,6 +33,7 @@
 		1F2C7129223A31EE00521AEF /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		1F2C7149223A631300521AEF /* UIColor+WY_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+WY_Extension.swift"; sourceTree = "<group>"; };
 		1F37360B227477F500DEA8B0 /* NSDecimalNumber+WY_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSDecimalNumber+WY_Extension.swift"; sourceTree = "<group>"; };
+		1FD7D1D6227D508100D84117 /* DataConvert+WY_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DataConvert+WY_Extension.swift"; sourceTree = "<group>"; };
 		1FF80DBD225C4DE800F3C410 /* NetworkAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkAPI.swift; sourceTree = "<group>"; };
 		1FF80DC0225C599700F3C410 /* ConstDefinition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstDefinition.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -45,6 +49,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1F059B0C227C2CD0006AB1BB /* UIDevice */ = {
+			isa = PBXGroup;
+			children = (
+				1F059B0D227C2D09006AB1BB /* UIDevice+WY_Extension.swift */,
+			);
+			path = UIDevice;
+			sourceTree = "<group>";
+		};
 		1F0F0C35223DFC9700E06F63 /* UIFont */ = {
 			isa = PBXGroup;
 			children = (
@@ -86,100 +98,22 @@
 		1F2C712B223A537C00521AEF /* WYBasisKit */ = {
 			isa = PBXGroup;
 			children = (
-				1F2C712C223A539500521AEF /* AppleSystemService */,
-				1F2C712D223A53A200521AEF /* BoolJudge */,
-				1F2C712E223A53AC00521AEF /* CNLog */,
-				1F2C712F223A53B600521AEF /* Countdown */,
-				1F2C7130223A53BF00521AEF /* Encryption */,
-				1F2C7131223A53C800521AEF /* Layout */,
-				1F2C7132223A53D100521AEF /* LoadingState */,
 				1FF80DBF225C594400F3C410 /* ConstDefinition */,
-				1F2C7134223A53E200521AEF /* Memory */,
 				1F2C7136223A53F500521AEF /* Practical */,
-				1F2C7137223A540200521AEF /* RefreshView */,
-				1F2C7138223A540B00521AEF /* Libraries */,
 			);
 			path = WYBasisKit;
-			sourceTree = "<group>";
-		};
-		1F2C712C223A539500521AEF /* AppleSystemService */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = AppleSystemService;
-			sourceTree = "<group>";
-		};
-		1F2C712D223A53A200521AEF /* BoolJudge */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = BoolJudge;
-			sourceTree = "<group>";
-		};
-		1F2C712E223A53AC00521AEF /* CNLog */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = CNLog;
-			sourceTree = "<group>";
-		};
-		1F2C712F223A53B600521AEF /* Countdown */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Countdown;
-			sourceTree = "<group>";
-		};
-		1F2C7130223A53BF00521AEF /* Encryption */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Encryption;
-			sourceTree = "<group>";
-		};
-		1F2C7131223A53C800521AEF /* Layout */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Layout;
-			sourceTree = "<group>";
-		};
-		1F2C7132223A53D100521AEF /* LoadingState */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = LoadingState;
-			sourceTree = "<group>";
-		};
-		1F2C7134223A53E200521AEF /* Memory */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Memory;
 			sourceTree = "<group>";
 		};
 		1F2C7136223A53F500521AEF /* Practical */ = {
 			isa = PBXGroup;
 			children = (
+				1FD7D1D5227D4F7300D84117 /* DataConvert */,
+				1F059B0C227C2CD0006AB1BB /* UIDevice */,
 				1F3736062274759200DEA8B0 /* NSDecimalNumber */,
 				1F0F0C35223DFC9700E06F63 /* UIFont */,
 				1F2C7148223A61C000521AEF /* UIColor */,
 			);
 			path = Practical;
-			sourceTree = "<group>";
-		};
-		1F2C7137223A540200521AEF /* RefreshView */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = RefreshView;
-			sourceTree = "<group>";
-		};
-		1F2C7138223A540B00521AEF /* Libraries */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Libraries;
 			sourceTree = "<group>";
 		};
 		1F2C7148223A61C000521AEF /* UIColor */ = {
@@ -196,6 +130,14 @@
 				1F37360B227477F500DEA8B0 /* NSDecimalNumber+WY_Extension.swift */,
 			);
 			path = NSDecimalNumber;
+			sourceTree = "<group>";
+		};
+		1FD7D1D5227D4F7300D84117 /* DataConvert */ = {
+			isa = PBXGroup;
+			children = (
+				1FD7D1D6227D508100D84117 /* DataConvert+WY_Extension.swift */,
+			);
+			path = DataConvert;
 			sourceTree = "<group>";
 		};
 		1FF80DBF225C594400F3C410 /* ConstDefinition */ = {
@@ -282,6 +224,8 @@
 				1F0F0C34223DFC9000E06F63 /* UIFont+WY_Extension.swift in Sources */,
 				1FF80DC1225C599700F3C410 /* ConstDefinition.swift in Sources */,
 				1FF80DBE225C4DE800F3C410 /* NetworkAPI.swift in Sources */,
+				1FD7D1D7227D508100D84117 /* DataConvert+WY_Extension.swift in Sources */,
+				1F059B0E227C2D09006AB1BB /* UIDevice+WY_Extension.swift in Sources */,
 				1F2C712A223A31EE00521AEF /* MainViewController.swift in Sources */,
 				1F37360C227477F500DEA8B0 /* NSDecimalNumber+WY_Extension.swift in Sources */,
 				1F2C7118223A2FDB00521AEF /* AppDelegate.swift in Sources */,

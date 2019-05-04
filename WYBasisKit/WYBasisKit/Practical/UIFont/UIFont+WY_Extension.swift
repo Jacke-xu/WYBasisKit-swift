@@ -7,7 +7,6 @@
 //
 //自定义字体网址：http://iosfonts.com
 
-import Foundation
 import UIKit
 
 

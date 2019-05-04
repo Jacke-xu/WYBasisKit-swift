@@ -22,6 +22,27 @@ class MainViewController: UIViewController {
         wy_print("自适应的字号是：\(font.wy_adjustFont)")
         
         wy_print("当前语言：\(wy_currentLanguage)")
+        
+        wy_print("是否是模拟器：\(UIDevice.wy_simulatorSeries)")
+        
+        wy_print("是否是ipad：\(UIDevice.wy_iPadSeries)")
+        
+        wy_print("uudi：\(String(describing: UIDevice.wy_uuid))")
+        
+        wy_print("系统名称：\(UIDevice.wy_systemName)")
+        
+        wy_print("设备名称：\(UIDevice.wy_deviceName)")
+        
+        wy_print("设备版本：\(UIDevice.wy_deviceVersion)")
+        
+        wy_print("设备型号：\(UIDevice.wy_deviceModel)")
+        
+        wy_print("是否是版本号：\(UIDevice.wy_isVersion(version: 12.2))")
+        
+        wy_print("是否是iPhoneXr：\(UIDevice.wy_iPhone_⒍1inch)")
+        
+        let value : CGFloat = 100.1;
+        wy_print("数据转换：\(value.wy_stringValue)")
     }
     //渐进开发中，尽情期待
 
