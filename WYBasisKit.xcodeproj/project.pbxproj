@@ -8,38 +8,48 @@
 
 /* Begin PBXBuildFile section */
 		4100E69E61E1CF47C8576B92 /* Pods_WYBasisKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 322E702912EA896C89829785 /* Pods_WYBasisKit.framework */; };
+		AA327F032569179F00CF5CBE /* WYBasisKitConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA327F022569179F00CF5CBE /* WYBasisKitConfig.swift */; };
 		AA484EB324FA262100B39D60 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA484EB224FA262100B39D60 /* AppDelegate.swift */; };
 		AA484EB724FA262100B39D60 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA484EB624FA262100B39D60 /* ViewController.swift */; };
 		AA484EBA24FA262100B39D60 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA484EB824FA262100B39D60 /* Main.storyboard */; };
 		AA484EBC24FA262500B39D60 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA484EBB24FA262500B39D60 /* Assets.xcassets */; };
 		AA484EBF24FA262500B39D60 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA484EBD24FA262500B39D60 /* LaunchScreen.storyboard */; };
-		AA484ECB24FA2B9600B39D60 /* WYNetworkAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA484EC824FA2B9600B39D60 /* WYNetworkAPI.swift */; };
-		AA484ECC24FA2B9600B39D60 /* WYNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA484EC924FA2B9600B39D60 /* WYNetworkManager.swift */; };
-		AA484ECD24FA2B9600B39D60 /* WYNetworkServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA484ECA24FA2B9600B39D60 /* WYNetworkServer.swift */; };
-		AA484ED024FA2C8600B39D60 /* WYConstDefinition.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA484ECF24FA2C8600B39D60 /* WYConstDefinition.swift */; };
-		AA484ED324FA2CCF00B39D60 /* Foundation+JSONLog.m in Sources */ = {isa = PBXBuildFile; fileRef = AA484ED224FA2CCF00B39D60 /* Foundation+JSONLog.m */; };
-		AA484ED724FA2D8D00B39D60 /* NSMutableAttributedString+WYExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA484ED624FA2D8D00B39D60 /* NSMutableAttributedString+WYExtension.swift */; };
-		AA484EDA24FA2E1100B39D60 /* NumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA484ED924FA2E1100B39D60 /* NumberFormatter.swift */; };
-		AA484EDD24FA2E4300B39D60 /* UIImage+WYExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA484EDC24FA2E4300B39D60 /* UIImage+WYExtension.swift */; };
-		AA484EE024FA2EB700B39D60 /* UIColor+WYExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA484EDF24FA2EB700B39D60 /* UIColor+WYExtension.swift */; };
-		AA484EE324FA2F2700B39D60 /* UIAlertController+WYExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA484EE224FA2F2700B39D60 /* UIAlertController+WYExtension.swift */; };
-		AA484EE624FA2F8600B39D60 /* UIFont+WYExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA484EE524FA2F8600B39D60 /* UIFont+WYExtension.swift */; };
-		AA484EE924FA2FC200B39D60 /* UIDevice+WYExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA484EE824FA2FC200B39D60 /* UIDevice+WYExtension.swift */; };
-		AA484EEC24FA307A00B39D60 /* WYAuthorize.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA484EEB24FA307A00B39D60 /* WYAuthorize.swift */; };
-		AA484EEF24FA30C200B39D60 /* String+WYExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA484EEE24FA30C200B39D60 /* String+WYExtension.swift */; };
-		AA484EF224FA30FE00B39D60 /* NSObject+WYExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA484EF124FA30FE00B39D60 /* NSObject+WYExtension.swift */; };
-		AA484EF524FA314A00B39D60 /* NSDecimalNumber+WYExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA484EF424FA314A00B39D60 /* NSDecimalNumber+WYExtension.swift */; };
-		AA484EF824FA31A300B39D60 /* WYBiometric.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA484EF724FA31A300B39D60 /* WYBiometric.swift */; };
-		AA484EFE24FA378700B39D60 /* WYCountdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA484EFD24FA378700B39D60 /* WYCountdown.swift */; };
-		AA484F0124FA5D0100B39D60 /* UITextField+WYExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA484F0024FA5D0100B39D60 /* UITextField+WYExtension.swift */; };
-		AA484F0424FA5D4900B39D60 /* UIButton+WYExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA484F0324FA5D4900B39D60 /* UIButton+WYExtension.swift */; };
-		AA484F0724FA5FC700B39D60 /* UIView+WYExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA484F0624FA5FC700B39D60 /* UIView+WYExtension.swift */; };
+		AA771BCF2568F834002C748B /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA771B942568F834002C748B /* UIImage.swift */; };
+		AA771BD02568F834002C748B /* NSMutableAttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA771B962568F834002C748B /* NSMutableAttributedString.swift */; };
+		AA771BD12568F834002C748B /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA771B982568F834002C748B /* UIColor.swift */; };
+		AA771BD22568F834002C748B /* UIAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA771B9A2568F834002C748B /* UIAlertController.swift */; };
+		AA771BD32568F834002C748B /* WYCountdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA771B9C2568F834002C748B /* WYCountdown.swift */; };
+		AA771BD42568F834002C748B /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA771B9E2568F834002C748B /* UIFont.swift */; };
+		AA771BD52568F834002C748B /* UIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA771BA02568F834002C748B /* UIDevice.swift */; };
+		AA771BD62568F834002C748B /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA771BA22568F834002C748B /* UIViewController.swift */; };
+		AA771BD72568F834002C748B /* UINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA771BA42568F834002C748B /* UINavigationController.swift */; };
+		AA771BD82568F834002C748B /* WYBiometric.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA771BA62568F834002C748B /* WYBiometric.swift */; };
+		AA771BD92568F834002C748B /* WYAuthorize.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA771BA82568F834002C748B /* WYAuthorize.swift */; };
+		AA771BDA2568F834002C748B /* NumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA771BAA2568F834002C748B /* NumberFormatter.swift */; };
+		AA771BDB2568F834002C748B /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA771BAC2568F834002C748B /* String.swift */; };
+		AA771BDC2568F834002C748B /* NSObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA771BAE2568F834002C748B /* NSObject.swift */; };
+		AA771BDE2568F834002C748B /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA771BB32568F834002C748B /* UILabel.swift */; };
+		AA771BDF2568F834002C748B /* UITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA771BB52568F834002C748B /* UITableViewCell.swift */; };
+		AA771BE02568F834002C748B /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA771BB72568F834002C748B /* UIButton.swift */; };
+		AA771BE22568F834002C748B /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA771BBA2568F834002C748B /* UIView.swift */; };
+		AA771BE32568F834002C748B /* UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA771BBD2568F834002C748B /* UITableView.swift */; };
+		AA771BE42568F834002C748B /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA771BBF2568F834002C748B /* UITextField.swift */; };
+		AA771BE52568F834002C748B /* WYNetworkAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA771BC12568F834002C748B /* WYNetworkAPI.swift */; };
+		AA771BE62568F834002C748B /* WYNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA771BC22568F834002C748B /* WYNetworkManager.swift */; };
+		AA771BE72568F834002C748B /* WYNetworkServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA771BC32568F834002C748B /* WYNetworkServer.swift */; };
+		AA771BE82568F834002C748B /* WYConstDefinition.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA771BC52568F834002C748B /* WYConstDefinition.swift */; };
+		AA771BEA2568F834002C748B /* WYScrollText.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA771BC92568F834002C748B /* WYScrollText.swift */; };
+		AA771BEB2568F834002C748B /* WYBoolJudge.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA771BCB2568F834002C748B /* WYBoolJudge.swift */; };
+		AA771BF02568F859002C748B /* WYProtocolManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA771BEF2568F859002C748B /* WYProtocolManager.swift */; };
+		AA771C0F25691279002C748B /* WYLocalizableManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA771C0E25691279002C748B /* WYLocalizableManager.swift */; };
+		AA771C1825691433002C748B /* WYLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AA771C1A25691433002C748B /* WYLocalizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		322E702912EA896C89829785 /* Pods_WYBasisKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WYBasisKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		75FD4F7DFBF58D8B82417F4D /* Pods-WYBasisKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WYBasisKit.release.xcconfig"; path = "Target Support Files/Pods-WYBasisKit/Pods-WYBasisKit.release.xcconfig"; sourceTree = "<group>"; };
 		95FF853B47A9BDC19CFD8BF0 /* Pods-WYBasisKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WYBasisKit.debug.xcconfig"; path = "Target Support Files/Pods-WYBasisKit/Pods-WYBasisKit.debug.xcconfig"; sourceTree = "<group>"; };
+		AA327F022569179F00CF5CBE /* WYBasisKitConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYBasisKitConfig.swift; sourceTree = "<group>"; };
 		AA484EAF24FA262100B39D60 /* WYBasisKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WYBasisKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA484EB224FA262100B39D60 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AA484EB624FA262100B39D60 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -47,27 +57,40 @@
 		AA484EBB24FA262500B39D60 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AA484EBE24FA262500B39D60 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AA484EC024FA262500B39D60 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		AA484EC824FA2B9600B39D60 /* WYNetworkAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYNetworkAPI.swift; sourceTree = "<group>"; };
-		AA484EC924FA2B9600B39D60 /* WYNetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYNetworkManager.swift; sourceTree = "<group>"; };
-		AA484ECA24FA2B9600B39D60 /* WYNetworkServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYNetworkServer.swift; sourceTree = "<group>"; };
-		AA484ECF24FA2C8600B39D60 /* WYConstDefinition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYConstDefinition.swift; sourceTree = "<group>"; };
-		AA484ED224FA2CCF00B39D60 /* Foundation+JSONLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Foundation+JSONLog.m"; sourceTree = "<group>"; };
-		AA484ED624FA2D8D00B39D60 /* NSMutableAttributedString+WYExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSMutableAttributedString+WYExtension.swift"; sourceTree = "<group>"; };
-		AA484ED924FA2E1100B39D60 /* NumberFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberFormatter.swift; sourceTree = "<group>"; };
-		AA484EDC24FA2E4300B39D60 /* UIImage+WYExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+WYExtension.swift"; sourceTree = "<group>"; };
-		AA484EDF24FA2EB700B39D60 /* UIColor+WYExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+WYExtension.swift"; sourceTree = "<group>"; };
-		AA484EE224FA2F2700B39D60 /* UIAlertController+WYExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+WYExtension.swift"; sourceTree = "<group>"; };
-		AA484EE524FA2F8600B39D60 /* UIFont+WYExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+WYExtension.swift"; sourceTree = "<group>"; };
-		AA484EE824FA2FC200B39D60 /* UIDevice+WYExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+WYExtension.swift"; sourceTree = "<group>"; };
-		AA484EEB24FA307A00B39D60 /* WYAuthorize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYAuthorize.swift; sourceTree = "<group>"; };
-		AA484EEE24FA30C200B39D60 /* String+WYExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+WYExtension.swift"; sourceTree = "<group>"; };
-		AA484EF124FA30FE00B39D60 /* NSObject+WYExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+WYExtension.swift"; sourceTree = "<group>"; };
-		AA484EF424FA314A00B39D60 /* NSDecimalNumber+WYExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSDecimalNumber+WYExtension.swift"; sourceTree = "<group>"; };
-		AA484EF724FA31A300B39D60 /* WYBiometric.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYBiometric.swift; sourceTree = "<group>"; };
-		AA484EFD24FA378700B39D60 /* WYCountdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYCountdown.swift; sourceTree = "<group>"; };
-		AA484F0024FA5D0100B39D60 /* UITextField+WYExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+WYExtension.swift"; sourceTree = "<group>"; };
-		AA484F0324FA5D4900B39D60 /* UIButton+WYExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+WYExtension.swift"; sourceTree = "<group>"; };
-		AA484F0624FA5FC700B39D60 /* UIView+WYExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+WYExtension.swift"; sourceTree = "<group>"; };
+		AA771B942568F834002C748B /* UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
+		AA771B962568F834002C748B /* NSMutableAttributedString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSMutableAttributedString.swift; sourceTree = "<group>"; };
+		AA771B982568F834002C748B /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		AA771B9A2568F834002C748B /* UIAlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIAlertController.swift; sourceTree = "<group>"; };
+		AA771B9C2568F834002C748B /* WYCountdown.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYCountdown.swift; sourceTree = "<group>"; };
+		AA771B9E2568F834002C748B /* UIFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
+		AA771BA02568F834002C748B /* UIDevice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIDevice.swift; sourceTree = "<group>"; };
+		AA771BA22568F834002C748B /* UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
+		AA771BA42568F834002C748B /* UINavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UINavigationController.swift; sourceTree = "<group>"; };
+		AA771BA62568F834002C748B /* WYBiometric.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYBiometric.swift; sourceTree = "<group>"; };
+		AA771BA82568F834002C748B /* WYAuthorize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYAuthorize.swift; sourceTree = "<group>"; };
+		AA771BAA2568F834002C748B /* NumberFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberFormatter.swift; sourceTree = "<group>"; };
+		AA771BAC2568F834002C748B /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		AA771BAE2568F834002C748B /* NSObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSObject.swift; sourceTree = "<group>"; };
+		AA771BB32568F834002C748B /* UILabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
+		AA771BB52568F834002C748B /* UITableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITableViewCell.swift; sourceTree = "<group>"; };
+		AA771BB72568F834002C748B /* UIButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
+		AA771BBA2568F834002C748B /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
+		AA771BBD2568F834002C748B /* UITableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITableView.swift; sourceTree = "<group>"; };
+		AA771BBF2568F834002C748B /* UITextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
+		AA771BC12568F834002C748B /* WYNetworkAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYNetworkAPI.swift; sourceTree = "<group>"; };
+		AA771BC22568F834002C748B /* WYNetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYNetworkManager.swift; sourceTree = "<group>"; };
+		AA771BC32568F834002C748B /* WYNetworkServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYNetworkServer.swift; sourceTree = "<group>"; };
+		AA771BC52568F834002C748B /* WYConstDefinition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYConstDefinition.swift; sourceTree = "<group>"; };
+		AA771BC92568F834002C748B /* WYScrollText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYScrollText.swift; sourceTree = "<group>"; };
+		AA771BCB2568F834002C748B /* WYBoolJudge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYBoolJudge.swift; sourceTree = "<group>"; };
+		AA771BEF2568F859002C748B /* WYProtocolManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYProtocolManager.swift; sourceTree = "<group>"; };
+		AA771C0E25691279002C748B /* WYLocalizableManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYLocalizableManager.swift; sourceTree = "<group>"; };
+		AA771C12256913D1002C748B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		AA771C13256913D1002C748B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		AA771C1925691433002C748B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/WYLocalizable.strings; sourceTree = "<group>"; };
+		AA771C1B2569143C002C748B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/WYLocalizable.strings"; sourceTree = "<group>"; };
+		AA771C1E25691483002C748B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
+		AA771C2B25691494002C748B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,7 +143,7 @@
 		AA484EB124FA262100B39D60 /* WYBasisKit */ = {
 			isa = PBXGroup;
 			children = (
-				AA484EC624FA2B4000B39D60 /* WYBasisKit */,
+				AA771B912568F834002C748B /* WYBasisKit */,
 				AA484EB224FA262100B39D60 /* AppDelegate.swift */,
 				AA484EB624FA262100B39D60 /* ViewController.swift */,
 				AA484EB824FA262100B39D60 /* Main.storyboard */,
@@ -131,200 +154,273 @@
 			path = WYBasisKit;
 			sourceTree = "<group>";
 		};
-		AA484EC624FA2B4000B39D60 /* WYBasisKit */ = {
+		AA771B912568F834002C748B /* WYBasisKit */ = {
 			isa = PBXGroup;
 			children = (
-				AA484EF924FA328400B39D60 /* Layout */,
-				AA484ED424FA2D5300B39D60 /* Practical */,
-				AA484ED124FA2CCF00B39D60 /* CNLog */,
-				AA484ECE24FA2C6C00B39D60 /* ConstDefinition */,
-				AA484EC724FA2B9600B39D60 /* Networking */,
+				AA771C0D25691241002C748B /* Config */,
+				AA771BF62568F91F002C748B /* Extension */,
+				AA771B922568F834002C748B /* Practical */,
+				AA771BB12568F834002C748B /* Layout */,
+				AA771BC02568F834002C748B /* Networking */,
 			);
 			path = WYBasisKit;
 			sourceTree = "<group>";
 		};
-		AA484EC724FA2B9600B39D60 /* Networking */ = {
+		AA771B922568F834002C748B /* Practical */ = {
 			isa = PBXGroup;
 			children = (
-				AA484EC824FA2B9600B39D60 /* WYNetworkAPI.swift */,
-				AA484ECA24FA2B9600B39D60 /* WYNetworkServer.swift */,
-				AA484EC924FA2B9600B39D60 /* WYNetworkManager.swift */,
-			);
-			path = Networking;
-			sourceTree = "<group>";
-		};
-		AA484ECE24FA2C6C00B39D60 /* ConstDefinition */ = {
-			isa = PBXGroup;
-			children = (
-				AA484ECF24FA2C8600B39D60 /* WYConstDefinition.swift */,
-			);
-			path = ConstDefinition;
-			sourceTree = "<group>";
-		};
-		AA484ED124FA2CCF00B39D60 /* CNLog */ = {
-			isa = PBXGroup;
-			children = (
-				AA484ED224FA2CCF00B39D60 /* Foundation+JSONLog.m */,
-			);
-			path = CNLog;
-			sourceTree = "<group>";
-		};
-		AA484ED424FA2D5300B39D60 /* Practical */ = {
-			isa = PBXGroup;
-			children = (
-				AA484EED24FA30B500B39D60 /* String */,
-				AA484EE424FA2F7700B39D60 /* UIFont */,
-				AA484EDE24FA2EA400B39D60 /* UIColor */,
-				AA484EDB24FA2E2F00B39D60 /* UIImage */,
-				AA484EE724FA2FB000B39D60 /* UIDevice */,
-				AA484EF024FA30ED00B39D60 /* NSObject */,
-				AA484EEA24FA306400B39D60 /* Authorize */,
-				AA484EF624FA318600B39D60 /* Biometric */,
-				AA484EFA24FA32CA00B39D60 /* Countdown */,
-				AA484EE124FA2F1700B39D60 /* UIAlertController */,
-				AA484ED824FA2DE900B39D60 /* NumberFormatter */,
-				AA484EF324FA313B00B39D60 /* NSDecimalNumber */,
-				AA484ED524FA2D6300B39D60 /* NSMutableAttributedString */,
+				AA771BCA2568F834002C748B /* BoolJudge */,
+				AA771B9B2568F834002C748B /* Countdown */,
+				AA771BA52568F834002C748B /* Biometric */,
+				AA771BA72568F834002C748B /* Authorize */,
+				AA771BC42568F834002C748B /* ConstDefinition */,
+				AA771BEE2568F859002C748B /* ProtocolManager */,
 			);
 			path = Practical;
 			sourceTree = "<group>";
 		};
-		AA484ED524FA2D6300B39D60 /* NSMutableAttributedString */ = {
+		AA771B932568F834002C748B /* UIImage */ = {
 			isa = PBXGroup;
 			children = (
-				AA484ED624FA2D8D00B39D60 /* NSMutableAttributedString+WYExtension.swift */,
-			);
-			path = NSMutableAttributedString;
-			sourceTree = "<group>";
-		};
-		AA484ED824FA2DE900B39D60 /* NumberFormatter */ = {
-			isa = PBXGroup;
-			children = (
-				AA484ED924FA2E1100B39D60 /* NumberFormatter.swift */,
-			);
-			path = NumberFormatter;
-			sourceTree = "<group>";
-		};
-		AA484EDB24FA2E2F00B39D60 /* UIImage */ = {
-			isa = PBXGroup;
-			children = (
-				AA484EDC24FA2E4300B39D60 /* UIImage+WYExtension.swift */,
+				AA771B942568F834002C748B /* UIImage.swift */,
 			);
 			path = UIImage;
 			sourceTree = "<group>";
 		};
-		AA484EDE24FA2EA400B39D60 /* UIColor */ = {
+		AA771B952568F834002C748B /* NSMutableAttributedString */ = {
 			isa = PBXGroup;
 			children = (
-				AA484EDF24FA2EB700B39D60 /* UIColor+WYExtension.swift */,
+				AA771B962568F834002C748B /* NSMutableAttributedString.swift */,
+			);
+			path = NSMutableAttributedString;
+			sourceTree = "<group>";
+		};
+		AA771B972568F834002C748B /* UIColor */ = {
+			isa = PBXGroup;
+			children = (
+				AA771B982568F834002C748B /* UIColor.swift */,
 			);
 			path = UIColor;
 			sourceTree = "<group>";
 		};
-		AA484EE124FA2F1700B39D60 /* UIAlertController */ = {
+		AA771B992568F834002C748B /* UIAlertController */ = {
 			isa = PBXGroup;
 			children = (
-				AA484EE224FA2F2700B39D60 /* UIAlertController+WYExtension.swift */,
+				AA771B9A2568F834002C748B /* UIAlertController.swift */,
 			);
 			path = UIAlertController;
 			sourceTree = "<group>";
 		};
-		AA484EE424FA2F7700B39D60 /* UIFont */ = {
+		AA771B9B2568F834002C748B /* Countdown */ = {
 			isa = PBXGroup;
 			children = (
-				AA484EE524FA2F8600B39D60 /* UIFont+WYExtension.swift */,
-			);
-			path = UIFont;
-			sourceTree = "<group>";
-		};
-		AA484EE724FA2FB000B39D60 /* UIDevice */ = {
-			isa = PBXGroup;
-			children = (
-				AA484EE824FA2FC200B39D60 /* UIDevice+WYExtension.swift */,
-			);
-			path = UIDevice;
-			sourceTree = "<group>";
-		};
-		AA484EEA24FA306400B39D60 /* Authorize */ = {
-			isa = PBXGroup;
-			children = (
-				AA484EEB24FA307A00B39D60 /* WYAuthorize.swift */,
-			);
-			path = Authorize;
-			sourceTree = "<group>";
-		};
-		AA484EED24FA30B500B39D60 /* String */ = {
-			isa = PBXGroup;
-			children = (
-				AA484EEE24FA30C200B39D60 /* String+WYExtension.swift */,
-			);
-			path = String;
-			sourceTree = "<group>";
-		};
-		AA484EF024FA30ED00B39D60 /* NSObject */ = {
-			isa = PBXGroup;
-			children = (
-				AA484EF124FA30FE00B39D60 /* NSObject+WYExtension.swift */,
-			);
-			path = NSObject;
-			sourceTree = "<group>";
-		};
-		AA484EF324FA313B00B39D60 /* NSDecimalNumber */ = {
-			isa = PBXGroup;
-			children = (
-				AA484EF424FA314A00B39D60 /* NSDecimalNumber+WYExtension.swift */,
-			);
-			path = NSDecimalNumber;
-			sourceTree = "<group>";
-		};
-		AA484EF624FA318600B39D60 /* Biometric */ = {
-			isa = PBXGroup;
-			children = (
-				AA484EF724FA31A300B39D60 /* WYBiometric.swift */,
-			);
-			path = Biometric;
-			sourceTree = "<group>";
-		};
-		AA484EF924FA328400B39D60 /* Layout */ = {
-			isa = PBXGroup;
-			children = (
-				AA484F0524FA5FA500B39D60 /* UIView */,
-				AA484F0224FA5D2B00B39D60 /* UIButton */,
-				AA484EFF24FA5CCE00B39D60 /* UITextField */,
-			);
-			path = Layout;
-			sourceTree = "<group>";
-		};
-		AA484EFA24FA32CA00B39D60 /* Countdown */ = {
-			isa = PBXGroup;
-			children = (
-				AA484EFD24FA378700B39D60 /* WYCountdown.swift */,
+				AA771B9C2568F834002C748B /* WYCountdown.swift */,
 			);
 			path = Countdown;
 			sourceTree = "<group>";
 		};
-		AA484EFF24FA5CCE00B39D60 /* UITextField */ = {
+		AA771B9D2568F834002C748B /* UIFont */ = {
 			isa = PBXGroup;
 			children = (
-				AA484F0024FA5D0100B39D60 /* UITextField+WYExtension.swift */,
+				AA771B9E2568F834002C748B /* UIFont.swift */,
 			);
-			path = UITextField;
+			path = UIFont;
 			sourceTree = "<group>";
 		};
-		AA484F0224FA5D2B00B39D60 /* UIButton */ = {
+		AA771B9F2568F834002C748B /* UIDevice */ = {
 			isa = PBXGroup;
 			children = (
-				AA484F0324FA5D4900B39D60 /* UIButton+WYExtension.swift */,
+				AA771BA02568F834002C748B /* UIDevice.swift */,
+			);
+			path = UIDevice;
+			sourceTree = "<group>";
+		};
+		AA771BA12568F834002C748B /* UIViewController */ = {
+			isa = PBXGroup;
+			children = (
+				AA771BA22568F834002C748B /* UIViewController.swift */,
+			);
+			path = UIViewController;
+			sourceTree = "<group>";
+		};
+		AA771BA32568F834002C748B /* UINavigationController */ = {
+			isa = PBXGroup;
+			children = (
+				AA771BA42568F834002C748B /* UINavigationController.swift */,
+			);
+			path = UINavigationController;
+			sourceTree = "<group>";
+		};
+		AA771BA52568F834002C748B /* Biometric */ = {
+			isa = PBXGroup;
+			children = (
+				AA771BA62568F834002C748B /* WYBiometric.swift */,
+			);
+			path = Biometric;
+			sourceTree = "<group>";
+		};
+		AA771BA72568F834002C748B /* Authorize */ = {
+			isa = PBXGroup;
+			children = (
+				AA771BA82568F834002C748B /* WYAuthorize.swift */,
+			);
+			path = Authorize;
+			sourceTree = "<group>";
+		};
+		AA771BA92568F834002C748B /* NumberFormatter */ = {
+			isa = PBXGroup;
+			children = (
+				AA771BAA2568F834002C748B /* NumberFormatter.swift */,
+			);
+			path = NumberFormatter;
+			sourceTree = "<group>";
+		};
+		AA771BAB2568F834002C748B /* String */ = {
+			isa = PBXGroup;
+			children = (
+				AA771BAC2568F834002C748B /* String.swift */,
+			);
+			path = String;
+			sourceTree = "<group>";
+		};
+		AA771BAD2568F834002C748B /* NSObject */ = {
+			isa = PBXGroup;
+			children = (
+				AA771BAE2568F834002C748B /* NSObject.swift */,
+			);
+			path = NSObject;
+			sourceTree = "<group>";
+		};
+		AA771BB12568F834002C748B /* Layout */ = {
+			isa = PBXGroup;
+			children = (
+				AA771BC82568F834002C748B /* ScrollText */,
+			);
+			path = Layout;
+			sourceTree = "<group>";
+		};
+		AA771BB22568F834002C748B /* UILabel */ = {
+			isa = PBXGroup;
+			children = (
+				AA771BB32568F834002C748B /* UILabel.swift */,
+			);
+			path = UILabel;
+			sourceTree = "<group>";
+		};
+		AA771BB42568F834002C748B /* UITableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				AA771BB52568F834002C748B /* UITableViewCell.swift */,
+			);
+			path = UITableViewCell;
+			sourceTree = "<group>";
+		};
+		AA771BB62568F834002C748B /* UIButton */ = {
+			isa = PBXGroup;
+			children = (
+				AA771BB72568F834002C748B /* UIButton.swift */,
 			);
 			path = UIButton;
 			sourceTree = "<group>";
 		};
-		AA484F0524FA5FA500B39D60 /* UIView */ = {
+		AA771BB82568F834002C748B /* UIView */ = {
 			isa = PBXGroup;
 			children = (
-				AA484F0624FA5FC700B39D60 /* UIView+WYExtension.swift */,
+				AA771BBA2568F834002C748B /* UIView.swift */,
 			);
 			path = UIView;
+			sourceTree = "<group>";
+		};
+		AA771BBC2568F834002C748B /* UITableView */ = {
+			isa = PBXGroup;
+			children = (
+				AA771BBD2568F834002C748B /* UITableView.swift */,
+			);
+			path = UITableView;
+			sourceTree = "<group>";
+		};
+		AA771BBE2568F834002C748B /* UITextField */ = {
+			isa = PBXGroup;
+			children = (
+				AA771BBF2568F834002C748B /* UITextField.swift */,
+			);
+			path = UITextField;
+			sourceTree = "<group>";
+		};
+		AA771BC02568F834002C748B /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				AA771BC12568F834002C748B /* WYNetworkAPI.swift */,
+				AA771BC22568F834002C748B /* WYNetworkManager.swift */,
+				AA771BC32568F834002C748B /* WYNetworkServer.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		AA771BC42568F834002C748B /* ConstDefinition */ = {
+			isa = PBXGroup;
+			children = (
+				AA771BC52568F834002C748B /* WYConstDefinition.swift */,
+			);
+			path = ConstDefinition;
+			sourceTree = "<group>";
+		};
+		AA771BC82568F834002C748B /* ScrollText */ = {
+			isa = PBXGroup;
+			children = (
+				AA771BC92568F834002C748B /* WYScrollText.swift */,
+			);
+			path = ScrollText;
+			sourceTree = "<group>";
+		};
+		AA771BCA2568F834002C748B /* BoolJudge */ = {
+			isa = PBXGroup;
+			children = (
+				AA771BCB2568F834002C748B /* WYBoolJudge.swift */,
+			);
+			path = BoolJudge;
+			sourceTree = "<group>";
+		};
+		AA771BEE2568F859002C748B /* ProtocolManager */ = {
+			isa = PBXGroup;
+			children = (
+				AA771BEF2568F859002C748B /* WYProtocolManager.swift */,
+			);
+			path = ProtocolManager;
+			sourceTree = "<group>";
+		};
+		AA771BF62568F91F002C748B /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				AA771BB42568F834002C748B /* UITableViewCell */,
+				AA771BBC2568F834002C748B /* UITableView */,
+				AA771BBE2568F834002C748B /* UITextField */,
+				AA771BB82568F834002C748B /* UIView */,
+				AA771BB62568F834002C748B /* UIButton */,
+				AA771BB22568F834002C748B /* UILabel */,
+				AA771BAB2568F834002C748B /* String */,
+				AA771B9D2568F834002C748B /* UIFont */,
+				AA771B972568F834002C748B /* UIColor */,
+				AA771B932568F834002C748B /* UIImage */,
+				AA771B9F2568F834002C748B /* UIDevice */,
+				AA771BAD2568F834002C748B /* NSObject */,
+				AA771BA92568F834002C748B /* NumberFormatter */,
+				AA771BA12568F834002C748B /* UIViewController */,
+				AA771B992568F834002C748B /* UIAlertController */,
+				AA771BA32568F834002C748B /* UINavigationController */,
+				AA771B952568F834002C748B /* NSMutableAttributedString */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		AA771C0D25691241002C748B /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				AA327F022569179F00CF5CBE /* WYBasisKitConfig.swift */,
+				AA771C0E25691279002C748B /* WYLocalizableManager.swift */,
+				AA771C1A25691433002C748B /* WYLocalizable.strings */,
+			);
+			path = Config;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -371,6 +467,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = AA484EA624FA262100B39D60;
 			productRefGroup = AA484EB024FA262100B39D60 /* Products */;
@@ -390,6 +487,7 @@
 				AA484EBF24FA262500B39D60 /* LaunchScreen.storyboard in Resources */,
 				AA484EBC24FA262500B39D60 /* Assets.xcassets in Resources */,
 				AA484EBA24FA262100B39D60 /* Main.storyboard in Resources */,
+				AA771C1825691433002C748B /* WYLocalizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -442,29 +540,37 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AA484ED724FA2D8D00B39D60 /* NSMutableAttributedString+WYExtension.swift in Sources */,
-				AA484EDD24FA2E4300B39D60 /* UIImage+WYExtension.swift in Sources */,
-				AA484EF824FA31A300B39D60 /* WYBiometric.swift in Sources */,
-				AA484F0124FA5D0100B39D60 /* UITextField+WYExtension.swift in Sources */,
-				AA484EEF24FA30C200B39D60 /* String+WYExtension.swift in Sources */,
-				AA484EF524FA314A00B39D60 /* NSDecimalNumber+WYExtension.swift in Sources */,
-				AA484EEC24FA307A00B39D60 /* WYAuthorize.swift in Sources */,
-				AA484EE624FA2F8600B39D60 /* UIFont+WYExtension.swift in Sources */,
+				AA771BDE2568F834002C748B /* UILabel.swift in Sources */,
+				AA771BD42568F834002C748B /* UIFont.swift in Sources */,
+				AA771BD02568F834002C748B /* NSMutableAttributedString.swift in Sources */,
+				AA771BE72568F834002C748B /* WYNetworkServer.swift in Sources */,
+				AA771BD62568F834002C748B /* UIViewController.swift in Sources */,
+				AA771BE82568F834002C748B /* WYConstDefinition.swift in Sources */,
 				AA484EB724FA262100B39D60 /* ViewController.swift in Sources */,
-				AA484EE024FA2EB700B39D60 /* UIColor+WYExtension.swift in Sources */,
+				AA771BD92568F834002C748B /* WYAuthorize.swift in Sources */,
+				AA771BEA2568F834002C748B /* WYScrollText.swift in Sources */,
+				AA771BDC2568F834002C748B /* NSObject.swift in Sources */,
+				AA771BE32568F834002C748B /* UITableView.swift in Sources */,
+				AA771BDA2568F834002C748B /* NumberFormatter.swift in Sources */,
+				AA771BD22568F834002C748B /* UIAlertController.swift in Sources */,
+				AA771C0F25691279002C748B /* WYLocalizableManager.swift in Sources */,
+				AA327F032569179F00CF5CBE /* WYBasisKitConfig.swift in Sources */,
+				AA771BD52568F834002C748B /* UIDevice.swift in Sources */,
+				AA771BE52568F834002C748B /* WYNetworkAPI.swift in Sources */,
+				AA771BE22568F834002C748B /* UIView.swift in Sources */,
+				AA771BF02568F859002C748B /* WYProtocolManager.swift in Sources */,
+				AA771BD12568F834002C748B /* UIColor.swift in Sources */,
+				AA771BE42568F834002C748B /* UITextField.swift in Sources */,
+				AA771BD72568F834002C748B /* UINavigationController.swift in Sources */,
+				AA771BDF2568F834002C748B /* UITableViewCell.swift in Sources */,
 				AA484EB324FA262100B39D60 /* AppDelegate.swift in Sources */,
-				AA484ED324FA2CCF00B39D60 /* Foundation+JSONLog.m in Sources */,
-				AA484ED024FA2C8600B39D60 /* WYConstDefinition.swift in Sources */,
-				AA484ECD24FA2B9600B39D60 /* WYNetworkServer.swift in Sources */,
-				AA484EE324FA2F2700B39D60 /* UIAlertController+WYExtension.swift in Sources */,
-				AA484EF224FA30FE00B39D60 /* NSObject+WYExtension.swift in Sources */,
-				AA484ECC24FA2B9600B39D60 /* WYNetworkManager.swift in Sources */,
-				AA484F0424FA5D4900B39D60 /* UIButton+WYExtension.swift in Sources */,
-				AA484EDA24FA2E1100B39D60 /* NumberFormatter.swift in Sources */,
-				AA484ECB24FA2B9600B39D60 /* WYNetworkAPI.swift in Sources */,
-				AA484EE924FA2FC200B39D60 /* UIDevice+WYExtension.swift in Sources */,
-				AA484F0724FA5FC700B39D60 /* UIView+WYExtension.swift in Sources */,
-				AA484EFE24FA378700B39D60 /* WYCountdown.swift in Sources */,
+				AA771BEB2568F834002C748B /* WYBoolJudge.swift in Sources */,
+				AA771BCF2568F834002C748B /* UIImage.swift in Sources */,
+				AA771BD82568F834002C748B /* WYBiometric.swift in Sources */,
+				AA771BE62568F834002C748B /* WYNetworkManager.swift in Sources */,
+				AA771BD32568F834002C748B /* WYCountdown.swift in Sources */,
+				AA771BDB2568F834002C748B /* String.swift in Sources */,
+				AA771BE02568F834002C748B /* UIButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -475,6 +581,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				AA484EB924FA262100B39D60 /* Base */,
+				AA771C12256913D1002C748B /* zh-Hans */,
+				AA771C1E25691483002C748B /* en */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -483,8 +591,19 @@
 			isa = PBXVariantGroup;
 			children = (
 				AA484EBE24FA262500B39D60 /* Base */,
+				AA771C13256913D1002C748B /* zh-Hans */,
+				AA771C2B25691494002C748B /* en */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		AA771C1A25691433002C748B /* WYLocalizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AA771C1925691433002C748B /* en */,
+				AA771C1B2569143C002C748B /* zh-Hans */,
+			);
+			name = WYLocalizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -494,6 +613,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -554,6 +674,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

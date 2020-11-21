@@ -8,12 +8,12 @@
 
 import Foundation
 
-///所有的网络请求的地址
+/// 所有的网络请求的地址
 struct WYNetworkAPI {
     
-    ///基础API地址
-    static let API_base = "https://test........."
+    /// 测试服域名
+    static let domainPath_test = "http://test.com/api/"
     
-    ///获取短信验证码
-    static let API_sms = API_base + "service=Sms.SmsSendCode"
+    /// 正式服服域名
+    static let domainPath_formal = "http://test.com/api/"
 }

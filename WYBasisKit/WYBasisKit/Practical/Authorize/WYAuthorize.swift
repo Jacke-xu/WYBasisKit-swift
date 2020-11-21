@@ -26,7 +26,7 @@ func wy_authorizeCameraAccess(showAlert: Bool = true, handler:((_ authorized: Bo
             }else {
 
                 /// App无权访问相机 用户已明确拒绝
-                wy_showAuthorizeAlert(show: showAlert, message: "App没有访问相机的权限，现在去授权?")
+                wy_showAuthorizeAlert(show: showAlert, message: WYLocalizedString("App没有访问相机的权限，现在去授权?"))
                 handler?(false)
             }
         }
@@ -36,7 +36,7 @@ func wy_authorizeCameraAccess(showAlert: Bool = true, handler:((_ authorized: Bo
         handler?(true)
     default:
         /// App无权访问相机 用户已明确拒绝
-        wy_showAuthorizeAlert(show: showAlert, message: "App没有访问相机的权限，现在去授权?")
+        wy_showAuthorizeAlert(show: showAlert, message: WYLocalizedString("App没有访问相机的权限，现在去授权?"))
         handler?(false)
     }
 }
@@ -57,7 +57,7 @@ func wy_authorizeAlbumAccess(showAlert: Bool = true, handler:((_ authorized: Boo
             }else {
 
                 /// App无权访问照片库 用户已明确拒绝
-                wy_showAuthorizeAlert(show: showAlert, message: "App没有访问相册的权限，现在去授权?")
+                wy_showAuthorizeAlert(show: showAlert, message: WYLocalizedString("App没有访问相册的权限，现在去授权?"))
                 handler?(false)
             }
         }
@@ -67,7 +67,7 @@ func wy_authorizeAlbumAccess(showAlert: Bool = true, handler:((_ authorized: Boo
         handler?(true)
     default:
         /// App无权访问相册 用户已明确拒绝
-        wy_showAuthorizeAlert(show: showAlert, message: "App没有访问相册的权限，现在去授权?")
+        wy_showAuthorizeAlert(show: showAlert, message: WYLocalizedString("App没有访问相册的权限，现在去授权?"))
         handler?(false)
     }
 }
@@ -77,11 +77,11 @@ private func wy_showAuthorizeAlert(show: Bool, message: String) {
 
     if show {
 
-        UIAlertController.wy_show(message: message, actions: ["取消", "去授权"]) { (actionStr, _) in
+        UIAlertController.wy_show(message: message, actions: [WYLocalizedString("取消"), WYLocalizedString("去授权")]) { (actionStr, _) in
 
             DispatchQueue.main.async {
 
-                if actionStr == "去授权" {
+                if actionStr == WYLocalizedString("去授权") {
 
                     let settingUrl = URL(string: UIApplication.openSettingsURLString)
                     if let url = settingUrl, UIApplication.shared.canOpenURL(url) {

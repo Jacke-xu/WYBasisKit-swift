@@ -11,5 +11,6 @@ target 'WYBasisKit' do
   pod 'HandyJSON'
   pod 'Kingfisher'
   pod 'Moya'
-
+  pod 'IQKeyboardManagerSwift'
+  pod 'MBProgressHUD'
 end
