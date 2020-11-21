@@ -17,7 +17,7 @@ extension UITableView {
         self.mj_header?.endRefreshing()
     }
 
-    func wy_footerEndRefreshing(responseSize: NSInteger = 0, pageSize: NSInteger = WYBasisKitConfig.wy_pageSize) {
+    func wy_footerEndRefreshing(responseSize: NSInteger = 0, pageSize: NSInteger = WYBasisKitConfig.wy_pageSize <= 0 ? wy_defaultPageSize : WYBasisKitConfig.wy_pageSize) {
         
         guard self.mj_footer != nil else { return }
         
