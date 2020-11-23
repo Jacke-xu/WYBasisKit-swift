@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F4A0E49256B4A52002E932D /* WYNetworkConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4A0E48256B4A52002E932D /* WYNetworkConfig.swift */; };
 		4100E69E61E1CF47C8576B92 /* Pods_WYBasisKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 322E702912EA896C89829785 /* Pods_WYBasisKit.framework */; };
 		AA327F032569179F00CF5CBE /* WYBasisKitConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA327F022569179F00CF5CBE /* WYBasisKitConfig.swift */; };
 		AA484EB324FA262100B39D60 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA484EB224FA262100B39D60 /* AppDelegate.swift */; };
@@ -46,6 +47,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1F4A0E48256B4A52002E932D /* WYNetworkConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYNetworkConfig.swift; sourceTree = "<group>"; };
 		322E702912EA896C89829785 /* Pods_WYBasisKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WYBasisKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		75FD4F7DFBF58D8B82417F4D /* Pods-WYBasisKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WYBasisKit.release.xcconfig"; path = "Target Support Files/Pods-WYBasisKit/Pods-WYBasisKit.release.xcconfig"; sourceTree = "<group>"; };
 		95FF853B47A9BDC19CFD8BF0 /* Pods-WYBasisKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WYBasisKit.debug.xcconfig"; path = "Target Support Files/Pods-WYBasisKit/Pods-WYBasisKit.debug.xcconfig"; sourceTree = "<group>"; };
@@ -351,8 +353,9 @@
 			isa = PBXGroup;
 			children = (
 				AA771BC12568F834002C748B /* WYNetworkAPI.swift */,
-				AA771BC22568F834002C748B /* WYNetworkManager.swift */,
+				1F4A0E48256B4A52002E932D /* WYNetworkConfig.swift */,
 				AA771BC32568F834002C748B /* WYNetworkServer.swift */,
+				AA771BC22568F834002C748B /* WYNetworkManager.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -540,6 +543,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F4A0E49256B4A52002E932D /* WYNetworkConfig.swift in Sources */,
 				AA771BDE2568F834002C748B /* UILabel.swift in Sources */,
 				AA771BD42568F834002C748B /* UIFont.swift in Sources */,
 				AA771BD02568F834002C748B /* NSMutableAttributedString.swift in Sources */,

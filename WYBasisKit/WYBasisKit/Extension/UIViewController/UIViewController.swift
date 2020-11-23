@@ -16,6 +16,20 @@ enum WYDisplaMode {
     case present
 }
 
+/// 拦截返回按钮的点击和侧滑返回事件
+@objc protocol ViewControllerHandlerProtocol {
+    
+    @objc optional func wy_navigationBarWillReturn() -> Bool
+}
+
+extension UIViewController: ViewControllerHandlerProtocol {
+
+    func wy_navigationBarWillReturn() -> Bool {
+
+        return true
+    }
+}
+
 extension UIViewController {
     
     func wy_displayMessage(message: String, duration: TimeInterval = wy_messageDuration) {

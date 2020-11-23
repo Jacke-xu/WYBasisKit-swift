@@ -136,11 +136,9 @@ extension UINavigationController {
     /// 返回按钮文本
     var wy_returnButtonTitle: String {
 
-        set(newValue) {
+        /// 直接在导航栏的代理方法中全局设置
+        set {}
 
-            topViewController?.navigationItem.backBarButtonItem = UIBarButtonItem(title: newValue, style: .plain, target: nil, action: nil)
-            
-        }
         get {
 
             return topViewController?.navigationItem.backBarButtonItem?.title ?? ""
@@ -213,5 +211,71 @@ extension UINavigationController {
         }
          
         return nil
+    }
+}
+
+extension UINavigationController: UINavigationBarDelegate, UIGestureRecognizerDelegate {
+    
+    public func navigationBar(_ navigationBar: UINavigationBar, didPush item: UINavigationItem) {
+        
+        objc_setAssociatedObject(self, NavigationControllerRuntimeKey.barReturnButtonDelegate, self.interactivePopGestureRecognizer?.delegate, .OBJC_ASSOCIATION_ASSIGN)
+        self.interactivePopGestureRecognizer?.delegate = self
+        
+        /// 全局设置返回按钮文本
+        topViewController?.navigationItem.backBarButtonItem = UIBarButtonItem(title: wy_returnButtonTitle, style: .plain, target: nil, action: nil)
+    }
+    
+    public func navigationBar(_ navigationBar: UINavigationBar, shouldPop item: UINavigationItem) -> Bool {
+
+        if self.viewControllers.count < (navigationBar.items?.count)! {
+
+            return true
+        }
+
+        var shouldPop = true
+        let vc: UIViewController = topViewController!
+
+        if vc.responds(to: #selector(wy_navigationBarWillReturn)) {
+            shouldPop = vc.wy_navigationBarWillReturn()
+        }
+
+        if shouldPop == true {
+
+            DispatchQueue.main.async {
+
+                self.popViewController(animated: true)
+            }
+
+        }else {
+
+            // 取消 pop 后，复原返回按钮的状态
+            for subview in navigationBar.subviews {
+                if 0.0 < subview.alpha && subview.alpha < 1.0 {
+                    UIView.animate(withDuration: 0.25) {
+                        subview.alpha = 1.0
+                    }
+                }
+            }
+        }
+        return false
+    }
+    
+    public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        
+        if (gestureRecognizer == self.interactivePopGestureRecognizer) {
+            
+            let vc: UIViewController = topViewController!
+            
+            if vc.responds(to: #selector(wy_navigationBarWillReturn)) {
+                
+                return vc.wy_navigationBarWillReturn()
+            }
+            
+            let originDelegate: UIGestureRecognizerDelegate = objc_getAssociatedObject(self, NavigationControllerRuntimeKey.barReturnButtonDelegate)! as! UIGestureRecognizerDelegate
+            
+            return originDelegate.gestureRecognizerShouldBegin!(gestureRecognizer)
+        }
+        
+        return true
     }
 }
