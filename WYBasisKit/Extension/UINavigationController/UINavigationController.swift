@@ -22,11 +22,11 @@ extension UINavigationController {
                 
             }else {
                 
-                UINavigationBar.appearance().barTintColor = newValue
+                self.navigationBar.barTintColor = newValue
             }
         }
         get {
-            return UINavigationBar.appearance().barTintColor ?? .white
+            return self.navigationBar.barTintColor ?? .white
         }
     }
     
@@ -35,10 +35,10 @@ extension UINavigationController {
         
         set(newValue) {
             
-            UINavigationBar.appearance().setBackgroundImage(newValue, for: .default)
+            self.navigationBar.setBackgroundImage(newValue, for: .default)
         }
         get {
-            return UINavigationBar.appearance().backgroundImage(for: .default) ?? UIImage.wy_imageFromColor(color: .white)
+            return self.navigationBar.backgroundImage(for: .default) ?? UIImage.wy_imageFromColor(color: .white)
         }
     }
     
@@ -47,22 +47,22 @@ extension UINavigationController {
         
         set(newValue) {
             
-            guard UINavigationBar.appearance().titleTextAttributes != nil else {
+            guard self.navigationBar.titleTextAttributes != nil else {
                 
-                UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.font: newValue, NSAttributedString.Key.foregroundColor: wy_titleColor]
+                self.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: newValue, NSAttributedString.Key.foregroundColor: wy_titleColor]
                 
                 return
             }
             
-            var titleTextAttributes = UINavigationBar.appearance().titleTextAttributes
+            var titleTextAttributes = self.navigationBar.titleTextAttributes
             
             titleTextAttributes![NSAttributedString.Key.font] = newValue
             
-            UINavigationBar.appearance().titleTextAttributes = titleTextAttributes
+            self.navigationBar.titleTextAttributes = titleTextAttributes
         }
         get {
             
-            let titleTextAttributes = UINavigationBar.appearance().titleTextAttributes
+            let titleTextAttributes = self.navigationBar.titleTextAttributes
             if titleTextAttributes?.keys.contains(NSAttributedString.Key.font) == true {
                 
                 return titleTextAttributes![NSAttributedString.Key.font] as! UIFont
@@ -79,22 +79,22 @@ extension UINavigationController {
         
         set(newValue) {
             
-            guard UINavigationBar.appearance().titleTextAttributes != nil else {
+            guard self.navigationBar.titleTextAttributes != nil else {
                 
-                UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.font: wy_titleFont, NSAttributedString.Key.foregroundColor: newValue]
+                self.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: wy_titleFont, NSAttributedString.Key.foregroundColor: newValue]
                 
                 return
             }
             
-            var titleTextAttributes = UINavigationBar.appearance().titleTextAttributes
+            var titleTextAttributes = self.navigationBar.titleTextAttributes
             
             titleTextAttributes![NSAttributedString.Key.foregroundColor] = newValue
             
-            UINavigationBar.appearance().titleTextAttributes = titleTextAttributes
+            self.navigationBar.titleTextAttributes = titleTextAttributes
         }
         get {
             
-            let titleTextAttributes = UINavigationBar.appearance().titleTextAttributes
+            let titleTextAttributes = self.navigationBar.titleTextAttributes
             if titleTextAttributes?.keys.contains(NSAttributedString.Key.foregroundColor) == true {
                 
                 return titleTextAttributes![NSAttributedString.Key.foregroundColor] as! UIColor
@@ -111,12 +111,12 @@ extension UINavigationController {
         
         set(newValue) {
             
-            UINavigationBar.appearance().backIndicatorTransitionMaskImage = newValue
-            UINavigationBar.appearance().backIndicatorImage = newValue
+            self.navigationBar.backIndicatorTransitionMaskImage = newValue
+            self.navigationBar.backIndicatorImage = newValue
         }
         get {
             
-            return UINavigationBar.appearance().backIndicatorImage ?? UIImage.wy_imageFromColor(color: .white)
+            return self.navigationBar.backIndicatorImage ?? UIImage.wy_imageFromColor(color: .white)
         }
     }
     
@@ -125,11 +125,11 @@ extension UINavigationController {
         
         set(newValue) {
             
-            UINavigationBar.appearance().tintColor = newValue
+            self.navigationBar.tintColor = newValue
         }
         get {
             
-            return UINavigationBar.appearance().tintColor
+            return self.navigationBar.tintColor
         }
     }
     
@@ -172,13 +172,13 @@ extension UINavigationController {
     /// 隐藏导航栏底部黑线
     func wy_hiddenBottomLine() {
         
-        UINavigationBar.appearance().shadowImage = UIImage()
+        self.navigationBar.shadowImage = UIImage()
     }
     
     /// 显示导航栏底部分割线
     func wy_showBottomLine(color: UIColor?) {
         
-        UINavigationBar.appearance().shadowImage = nil
+        self.navigationBar.shadowImage = nil
         
         if let imageView = wy_sharedBottomLine() {
             
