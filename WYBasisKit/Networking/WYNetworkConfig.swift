@@ -11,7 +11,7 @@ import Foundation
 struct WYNetworkConfig {
     
     /// 设置网络请求超时事件，默认10秒
-    static var timeoutIntervalForRequest: TimeInterval = timeoutIntervalForRequest
+    static var timeoutIntervalForRequest: TimeInterval = wy_timeoutIntervalForRequest
     
     /// 配置当前使用域名
     static var currentDomainPath: String = ""

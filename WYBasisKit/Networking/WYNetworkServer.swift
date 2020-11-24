@@ -59,11 +59,6 @@ struct WYTarget: TargetType {
     
     var baseURL: URL {
         
-        guard request.domain.isEmpty == false else {
-            
-            wy_print("未设置域名")
-            return
-        }
         return URL(string: request.domain)!
     }
     

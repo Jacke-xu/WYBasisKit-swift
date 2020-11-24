@@ -11,7 +11,7 @@ import UIKit
 
 let wy_defaultPageSize: NSInteger = 10
 let wy_messageDuration: TimeInterval = 1.5
-let timeoutIntervalForRequest: TimeInterval = 10
+let wy_timeoutIntervalForRequest: TimeInterval = 10
 
 struct WYBasisKitConfig {
     

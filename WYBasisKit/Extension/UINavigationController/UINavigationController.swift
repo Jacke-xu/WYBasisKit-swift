@@ -212,6 +212,11 @@ extension UINavigationController {
          
         return nil
     }
+    
+    private struct NavigationControllerRuntimeKey {
+        
+        static let barReturnButtonDelegate = UnsafeRawPointer.init(bitPattern: "barReturnButtonDelegate".hashValue)!
+    }
 }
 
 extension UINavigationController: UINavigationBarDelegate, UIGestureRecognizerDelegate {

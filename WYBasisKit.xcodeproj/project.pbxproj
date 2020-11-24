@@ -125,7 +125,8 @@
 		AA484EA624FA262100B39D60 = {
 			isa = PBXGroup;
 			children = (
-				AA484EB124FA262100B39D60 /* WYBasisKit */,
+				AA771B912568F834002C748B /* WYBasisKit */,
+				AA484EB124FA262100B39D60 /* Examples */,
 				AA484EB024FA262100B39D60 /* Products */,
 				35AF068E98BFDE2CA01A3CDB /* Pods */,
 				94F8A53F1CB5643B124486A8 /* Frameworks */,
@@ -140,10 +141,9 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		AA484EB124FA262100B39D60 /* WYBasisKit */ = {
+		AA484EB124FA262100B39D60 /* Examples */ = {
 			isa = PBXGroup;
 			children = (
-				AA771B912568F834002C748B /* WYBasisKit */,
 				AA484EB224FA262100B39D60 /* AppDelegate.swift */,
 				AA484EB624FA262100B39D60 /* ViewController.swift */,
 				AA484EB824FA262100B39D60 /* Main.storyboard */,
@@ -151,7 +151,7 @@
 				AA484EBD24FA262500B39D60 /* LaunchScreen.storyboard */,
 				AA484EC024FA262500B39D60 /* Info.plist */,
 			);
-			path = WYBasisKit;
+			path = Examples;
 			sourceTree = "<group>";
 		};
 		AA771B912568F834002C748B /* WYBasisKit */ = {
@@ -732,7 +732,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JX362P6GEC;
-				INFOPLIST_FILE = WYBasisKit/Info.plist;
+				INFOPLIST_FILE = Examples/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -752,7 +752,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JX362P6GEC;
-				INFOPLIST_FILE = WYBasisKit/Info.plist;
+				INFOPLIST_FILE = Examples/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

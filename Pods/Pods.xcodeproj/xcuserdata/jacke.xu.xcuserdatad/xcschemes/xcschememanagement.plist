@@ -4,55 +4,128 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Alamofire.xcscheme_^#shared#^_</key>
+		<key>Alamofire.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>1</integer>
-		</dict>
-		<key>HandyJSON.xcscheme_^#shared#^_</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>2</integer>
-		</dict>
-		<key>IQKeyboardManagerSwift.xcscheme_^#shared#^_</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>3</integer>
-		</dict>
-		<key>Kingfisher.xcscheme_^#shared#^_</key>
-		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
-		<key>MBProgressHUD.xcscheme_^#shared#^_</key>
+		<key>HandyJSON.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>10</integer>
-		</dict>
-		<key>MJRefresh.xcscheme_^#shared#^_</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>7</integer>
-		</dict>
-		<key>Moya.xcscheme_^#shared#^_</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>5</integer>
-		</dict>
-		<key>Pods-WYBasisKit.xcscheme_^#shared#^_</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>6</integer>
-		</dict>
-		<key>SnapKit.xcscheme_^#shared#^_</key>
-		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>9</integer>
 		</dict>
-		<key>libPhoneNumber-iOS.xcscheme_^#shared#^_</key>
+		<key>IQKeyboardManagerSwift.xcscheme</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>4</integer>
+		</dict>
+		<key>Kingfisher.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+		<key>MBProgressHUD.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>3</integer>
+		</dict>
+		<key>MJRefresh.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>7</integer>
+		</dict>
+		<key>Moya.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>5</integer>
+		</dict>
+		<key>Pods-WYBasisKit.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>10</integer>
+		</dict>
+		<key>SnapKit.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>6</integer>
+		</dict>
+		<key>libPhoneNumber-iOS.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>10D88C24864319FF583AD6D156896F32</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>17F9141D333DA1A7BE5937F227221070</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>19622742EBA51E823D6DAE3F8CDBFAD4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>3A567DBFF88BF5D6E728E1866C01A5E5</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6868056D761E163D10FDAF8CF1C4D9B8</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>82B0A41D3031FF27D78E17B0A9A46FB0</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B490E7485944099E16C9CBD79119D1D4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>BECD36891A8DC297700F9296F5634B97</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E8022D22FAA6690B5E1C379C1BCE1491</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EAAA1AD3A8A1B59AB91319EE40752C6D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
 		</dict>
 	</dict>
 </dict>
