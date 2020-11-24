@@ -35,7 +35,6 @@
 		AA771BE22568F834002C748B /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA771BBA2568F834002C748B /* UIView.swift */; };
 		AA771BE32568F834002C748B /* UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA771BBD2568F834002C748B /* UITableView.swift */; };
 		AA771BE42568F834002C748B /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA771BBF2568F834002C748B /* UITextField.swift */; };
-		AA771BE52568F834002C748B /* WYNetworkAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA771BC12568F834002C748B /* WYNetworkAPI.swift */; };
 		AA771BE62568F834002C748B /* WYNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA771BC22568F834002C748B /* WYNetworkManager.swift */; };
 		AA771BE72568F834002C748B /* WYNetworkServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA771BC32568F834002C748B /* WYNetworkServer.swift */; };
 		AA771BE82568F834002C748B /* WYConstDefinition.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA771BC52568F834002C748B /* WYConstDefinition.swift */; };
@@ -79,7 +78,6 @@
 		AA771BBA2568F834002C748B /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		AA771BBD2568F834002C748B /* UITableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITableView.swift; sourceTree = "<group>"; };
 		AA771BBF2568F834002C748B /* UITextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
-		AA771BC12568F834002C748B /* WYNetworkAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYNetworkAPI.swift; sourceTree = "<group>"; };
 		AA771BC22568F834002C748B /* WYNetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYNetworkManager.swift; sourceTree = "<group>"; };
 		AA771BC32568F834002C748B /* WYNetworkServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYNetworkServer.swift; sourceTree = "<group>"; };
 		AA771BC52568F834002C748B /* WYConstDefinition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYConstDefinition.swift; sourceTree = "<group>"; };
@@ -352,7 +350,6 @@
 		AA771BC02568F834002C748B /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				AA771BC12568F834002C748B /* WYNetworkAPI.swift */,
 				1F4A0E48256B4A52002E932D /* WYNetworkConfig.swift */,
 				AA771BC32568F834002C748B /* WYNetworkServer.swift */,
 				AA771BC22568F834002C748B /* WYNetworkManager.swift */,
@@ -560,7 +557,6 @@
 				AA771C0F25691279002C748B /* WYLocalizableManager.swift in Sources */,
 				AA327F032569179F00CF5CBE /* WYBasisKitConfig.swift in Sources */,
 				AA771BD52568F834002C748B /* UIDevice.swift in Sources */,
-				AA771BE52568F834002C748B /* WYNetworkAPI.swift in Sources */,
 				AA771BE22568F834002C748B /* UIView.swift in Sources */,
 				AA771BF02568F859002C748B /* WYProtocolManager.swift in Sources */,
 				AA771BD12568F834002C748B /* UIColor.swift in Sources */,

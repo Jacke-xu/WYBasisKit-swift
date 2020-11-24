@@ -51,7 +51,7 @@ struct WYTarget: TargetType {
     init(request: WYRequest) {
         
         /// 设置超时时间
-        Moya.Session.default.session.configuration.timeoutIntervalForRequest = 10
+        Moya.Session.default.session.configuration.timeoutIntervalForRequest = WYNetworkConfig.timeoutIntervalForRequest
         self.request = request
     }
     
@@ -59,6 +59,11 @@ struct WYTarget: TargetType {
     
     var baseURL: URL {
         
+        guard request.domain.isEmpty == false else {
+            
+            wy_print("未设置域名")
+            return
+        }
         return URL(string: request.domain)!
     }
     

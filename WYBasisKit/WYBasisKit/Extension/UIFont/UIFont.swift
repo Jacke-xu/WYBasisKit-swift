@@ -10,12 +10,6 @@ import UIKit
 
 extension UIFont {
     
-    /// 使用自定义字体
-    class func WYFont(pointSize: CGFloat) -> UIFont {
-        
-        return UIFont.init(name: "Impact", size: pointSize)!
-    }
-    
     /// 根据屏幕比率自动调整字号大小
     var wy_adjust : UIFont {
         

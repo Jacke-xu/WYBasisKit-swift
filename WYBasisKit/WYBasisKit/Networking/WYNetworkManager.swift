@@ -146,17 +146,17 @@ class WYNetworkManager {
     
     private var networkSecurityInfo = (WYNetworkStatus.userNotSelectedConnect, "")
     
-    func post(domain: String = "", path: String = "", headers: [String : String]? = ["Content-Type":"application/x-www-form-urlencoded; charset=utf-8"], parameters: [String : Any] = [:], originJson: Bool = false, callbackQueue: DispatchQueue = .main, success:((_ response: Any?) -> Void)? = nil, failure:((_ error: String, _ serverCode: WYServerCode) -> Void)? = nil) {
+    func post(domain: String = WYNetworkConfig.currentDomainPath, path: String = "", headers: [String : String]? = WYNetworkConfig.requestHeaders, parameters: [String : Any] = [:], originJson: Bool = false, callbackQueue: DispatchQueue = .main, success:((_ response: Any?) -> Void)? = nil, failure:((_ error: String, _ serverCode: WYServerCode) -> Void)? = nil) {
         
         request(method: .post, taskMethod: .data, domain: domain, path: path, headers: headers, parameters: parameters, files: [], originJson: originJson, callbackQueue: callbackQueue, progress: nil, success: success, failure: failure)
     }
     
-    func get(domain: String = "", path: String = "", headers: [String : String]? = ["Content-Type":"application/x-www-form-urlencoded; charset=utf-8"], parameters: [String : Any] = [:], originJson: Bool = false, callbackQueue: DispatchQueue = .main, success:((_ response: Any?) -> Void)? = nil, failure:((_ error: String, _ serverCode: WYServerCode) -> Void)? = nil) {
+    func get(domain: String = WYNetworkConfig.currentDomainPath, path: String = "", headers: [String : String]? = WYNetworkConfig.requestHeaders, parameters: [String : Any] = [:], originJson: Bool = false, callbackQueue: DispatchQueue = .main, success:((_ response: Any?) -> Void)? = nil, failure:((_ error: String, _ serverCode: WYServerCode) -> Void)? = nil) {
         
         request(method: .get, taskMethod: .data, domain: domain, path: path, headers: headers, parameters: parameters, files: [], originJson: originJson, callbackQueue: callbackQueue, progress: nil, success: success, failure: failure)
     }
     
-    func upload(domain: String = "", path: String = "", headers: [String : String]? = ["Content-Type":"application/x-www-form-urlencoded; charset=utf-8"], parameters: [String : Any] = [:], files: [WYFileModel], originJson: Bool = false, callbackQueue: DispatchQueue = .main, progress:((_ progress: Double) -> Void)?, success:((_ response: Any?) -> Void)?, failure:((_ error: String, _ serverCode: WYServerCode) -> Void)?) {
+    func upload(domain: String = WYNetworkConfig.currentDomainPath, path: String = "", headers: [String : String]? = WYNetworkConfig.requestHeaders, parameters: [String : Any] = [:], files: [WYFileModel], originJson: Bool = false, callbackQueue: DispatchQueue = .main, progress:((_ progress: Double) -> Void)?, success:((_ response: Any?) -> Void)?, failure:((_ error: String, _ serverCode: WYServerCode) -> Void)?) {
         
         request(method: .post, taskMethod: .upload, domain: domain, path: path, headers: headers, parameters: parameters, files: files, originJson: originJson, callbackQueue: callbackQueue, progress: progress, success: success, failure: failure)
     }

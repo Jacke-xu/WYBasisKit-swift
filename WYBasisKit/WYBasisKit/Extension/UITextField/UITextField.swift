@@ -26,7 +26,7 @@ extension UITextField {
 
             let placeholderLabel: UILabel = object_getIvar(self, ivar) as? UILabel ?? UILabel()
             
-            return objc_getAssociatedObject(self, #function) as? UIColor ?? placeholderLabel.textColor
+            return placeholderLabel.textColor
         }
     }
     
