@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1F4A0E49256B4A52002E932D /* WYNetworkConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4A0E48256B4A52002E932D /* WYNetworkConfig.swift */; };
-		4100E69E61E1CF47C8576B92 /* Pods_WYBasisKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 322E702912EA896C89829785 /* Pods_WYBasisKit.framework */; };
+		3B3DC2F1D41BE472909DAAC1 /* libPods-WYBasisKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DC30AAA7963EADDE72D26FBC /* libPods-WYBasisKit.a */; };
 		AA327F032569179F00CF5CBE /* WYBasisKitConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA327F022569179F00CF5CBE /* WYBasisKitConfig.swift */; };
 		AA484EB324FA262100B39D60 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA484EB224FA262100B39D60 /* AppDelegate.swift */; };
 		AA484EB724FA262100B39D60 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA484EB624FA262100B39D60 /* ViewController.swift */; };
@@ -47,7 +47,6 @@
 
 /* Begin PBXFileReference section */
 		1F4A0E48256B4A52002E932D /* WYNetworkConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYNetworkConfig.swift; sourceTree = "<group>"; };
-		322E702912EA896C89829785 /* Pods_WYBasisKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WYBasisKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		75FD4F7DFBF58D8B82417F4D /* Pods-WYBasisKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WYBasisKit.release.xcconfig"; path = "Target Support Files/Pods-WYBasisKit/Pods-WYBasisKit.release.xcconfig"; sourceTree = "<group>"; };
 		95FF853B47A9BDC19CFD8BF0 /* Pods-WYBasisKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WYBasisKit.debug.xcconfig"; path = "Target Support Files/Pods-WYBasisKit/Pods-WYBasisKit.debug.xcconfig"; sourceTree = "<group>"; };
 		AA327F022569179F00CF5CBE /* WYBasisKitConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYBasisKitConfig.swift; sourceTree = "<group>"; };
@@ -91,6 +90,7 @@
 		AA771C1B2569143C002C748B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/WYLocalizable.strings"; sourceTree = "<group>"; };
 		AA771C1E25691483002C748B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		AA771C2B25691494002C748B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		DC30AAA7963EADDE72D26FBC /* libPods-WYBasisKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WYBasisKit.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,7 +98,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4100E69E61E1CF47C8576B92 /* Pods_WYBasisKit.framework in Frameworks */,
+				3B3DC2F1D41BE472909DAAC1 /* libPods-WYBasisKit.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -117,7 +117,7 @@
 		94F8A53F1CB5643B124486A8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				322E702912EA896C89829785 /* Pods_WYBasisKit.framework */,
+				DC30AAA7963EADDE72D26FBC /* libPods-WYBasisKit.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -434,7 +434,7 @@
 				AA484EAB24FA262100B39D60 /* Sources */,
 				AA484EAC24FA262100B39D60 /* Frameworks */,
 				AA484EAD24FA262100B39D60 /* Resources */,
-				B0FB0DDC0358ACF23D14D6ED /* [CP] Embed Pods Frameworks */,
+				A24449A004F4B61E6DF8A081 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -516,21 +516,21 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		B0FB0DDC0358ACF23D14D6ED /* [CP] Embed Pods Frameworks */ = {
+		A24449A004F4B61E6DF8A081 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-WYBasisKit/Pods-WYBasisKit-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-WYBasisKit/Pods-WYBasisKit-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			name = "[CP] Embed Pods Frameworks";
+			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-WYBasisKit/Pods-WYBasisKit-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-WYBasisKit/Pods-WYBasisKit-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-WYBasisKit/Pods-WYBasisKit-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-WYBasisKit/Pods-WYBasisKit-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

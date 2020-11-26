@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "3A567DBFF88BF5D6E728E1866C01A5E5"
-               BuildableName = "Pods-WYBasisKit.framework"
+               BuildableName = "libPods-WYBasisKit.a"
                BlueprintName = "Pods-WYBasisKit"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
