@@ -17,14 +17,15 @@ Pod::Spec.new do |spec|
 
   spec.name         = "WYBasisKit"
   spec.version      = "0.0.1"
-  spec.summary      = "A short description of WYBasisKit."
+  spec.summary      = "WYBasisKit 不仅可以帮助开发者快速构建一个工程，还有基于常用网络框架和系统API而封装的方法，开发者只需简单的调用API就可以快速实现相应功能， 大幅提高开发效率。"
 
   # This description is used to generate tags and improve search results.
   #   * Think: What does it do? Why did you write it? What is the focus?
   #   * Try to keep it short, snappy and to the point.
   #   * Write the description between the DESC delimiters below.
   #   * Finally, don't worry about the indent, CocoaPods strips it!
-  spec.description  = <<-DESC
+  spec.description  = <<-DESC 
+                          WYBasisKit 不仅可以帮助开发者快速构建一个工程，还有基于常用网络框架和系统API而封装的方法，开发者只需简单的调用API就可以快速实现相应功能， 大幅提高开发效率。
                    DESC
 
   spec.homepage     = "https://github.com/Jacke-xu/WYBasisKit-swift"
@@ -67,7 +68,7 @@ Pod::Spec.new do |spec|
   # spec.platform     = :ios, "5.0"
 
   #  When using multiple platforms
-  # spec.ios.deployment_target = "5.0"
+   spec.ios.deployment_target = "9.0"
   # spec.osx.deployment_target = "10.7"
   # spec.watchos.deployment_target = "2.0"
   # spec.tvos.deployment_target = "9.0"
@@ -90,10 +91,12 @@ Pod::Spec.new do |spec|
   #  Not including the public_header_files will make all headers public.
   #
 
-  spec.source_files  = "WYBasisKit/", "Classes/**/*.{h,m}"
-  spec.exclude_files = "WYBasisKit/Exclude"
+  spec.source_files  = "WYBasisKit/**/*"
+  #spec.exclude_files = "WYBasisKit/*.swift"
 
   # spec.public_header_files = "Classes/**/*.h"
+
+  spec.swift_versions = "5.0"
 
 
   # ――― Resources ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
