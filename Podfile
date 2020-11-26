@@ -4,6 +4,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 
 target 'WYBasisKit' do
   use_frameworks!
+  use_modular_headers！
 
   pod 'SnapKit'
   pod 'libPhoneNumber-iOS'
