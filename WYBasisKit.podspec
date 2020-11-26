@@ -1,149 +1,57 @@
-#
-#  Be sure to run `pod spec lint WYBasisKit.podspec' to ensure this is a
-#  valid spec and to remove all comments including this before submitting the spec.
-#
-#  To learn more about Podspec attributes see https://guides.cocoapods.org/syntax/podspec.html
-#  To see working Podspecs in the CocoaPods repo see https://github.com/CocoaPods/Specs/
-#
-
 Pod::Spec.new do |spec|
-
-  # ―――  Spec Metadata  ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  #
-  #  These will help people to find your library, and whilst it
-  #  can feel like a chore to fill in it's definitely to your advantage. The
-  #  summary should be tweet-length, and the description more in depth.
-  #
 
   spec.name         = "WYBasisKit"
   spec.version      = "0.0.1"
   spec.summary      = "WYBasisKit 不仅可以帮助开发者快速构建一个工程，还有基于常用网络框架和系统API而封装的方法，开发者只需简单的调用API就可以快速实现相应功能， 大幅提高开发效率。"
-
-  # This description is used to generate tags and improve search results.
-  #   * Think: What does it do? Why did you write it? What is the focus?
-  #   * Try to keep it short, snappy and to the point.
-  #   * Write the description between the DESC delimiters below.
-  #   * Finally, don't worry about the indent, CocoaPods strips it!
   spec.description  = <<-DESC 
                           WYBasisKit 不仅可以帮助开发者快速构建一个工程，还有基于常用网络框架和系统API而封装的方法，开发者只需简单的调用API就可以快速实现相应功能， 大幅提高开发效率。
                    DESC
 
   spec.homepage     = "https://github.com/Jacke-xu/WYBasisKit-swift"
-  # spec.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
-
-
-  # ―――  Spec License  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  #
-  #  Licensing your code is important. See https://choosealicense.com for more info.
-  #  CocoaPods will detect a license file if there is a named LICENSE*
-  #  Popular ones are 'MIT', 'BSD' and 'Apache License, Version 2.0'.
-  #
-
   spec.license      = { :type => "MIT", :file => "License.md" }
-  # spec.license      = { :type => "MIT", :file => "FILE_LICENSE" }
-
-
-  # ――― Author Metadata  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  #
-  #  Specify the authors of the library, with email addresses. Email addresses
-  #  of the authors are extracted from the SCM log. E.g. $ git log. CocoaPods also
-  #  accepts just a name if you'd rather not provide an email address.
-  #
-  #  Specify a social_media_url where others can refer to, for example a twitter
-  #  profile URL.
-  #
-
   spec.author             = { "Jacke-xu" => "mobileAppDvlp@icloud.com" }
-  # Or just: spec.author    = ""
-  # spec.authors            = { "" => "" }
-  # spec.social_media_url   = "https://twitter.com/"
-
-  # ――― Platform Specifics ――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  #
-  #  If this Pod runs only on iOS or OS X, then specify the platform and
-  #  the deployment target. You can optionally include the target after the platform.
-  #
-
-  # spec.platform     = :ios
-  # spec.platform     = :ios, "5.0"
-
-  #  When using multiple platforms
-   spec.ios.deployment_target = "9.0"
-  # spec.osx.deployment_target = "10.7"
-  # spec.watchos.deployment_target = "2.0"
-  # spec.tvos.deployment_target = "9.0"
-
-
-  # ――― Source Location ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  #
-  #  Specify the location from where the source should be retrieved.
-  #  Supports git, hg, bzr, svn and HTTP.
-  #
-
+  spec.ios.deployment_target = "9.0"
   spec.source       = { :git => "https://github.com/Jacke-xu/WYBasisKit-swift.git", :tag => "#{spec.version}" }
-
-
-  # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  #
-  #  CocoaPods is smart about how it includes source code. For source files
-  #  giving a folder will include any swift, h, m, mm, c & cpp files.
-  #  For header files it will include any header in the folder.
-  #  Not including the public_header_files will make all headers public.
-  #
-
-  spec.source_files  = "WYBasisKit/**/*"
-  #spec.exclude_files = "WYBasisKit/*.swift"
-
-  # spec.public_header_files = "Classes/**/*.h"
-
-  #spec.dependency "SnapKit"
-  #spec.dependency "libPhoneNumber-iOS"
-  #spec.dependency "MJRefresh"
-  #spec.dependency "HandyJSON"
-  #spec.dependency "Kingfisher"
-  #spec.dependency "Moya"
-  #spec.dependency "IQKeyboardManagerSwift"
-  #spec.dependency "MBProgressHUD"
-
   spec.swift_versions = "5.0"
 
+  # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
+  spec.source_files  = "WYBasisKit/**/*"
 
-  # ――― Resources ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  #
-  #  A list of resources included with the Pod. These are copied into the
-  #  target bundle with a build phase script. Anything else will be cleaned.
-  #  You can preserve files from being cleaned, please don't preserve
-  #  non-essential files like tests, examples and documentation.
-  #
-
-  # spec.resource  = "icon.png"
-  # spec.resources = "Resources/*.png"
-
-  # spec.preserve_paths = "FilesToSave", "MoreFilesToSave"
+  spec.dependency "Kingfisher"
+  spec.dependency "IQKeyboardManagerSwift"
+  spec.dependency "SnapKit"
+  spec.dependency "libPhoneNumber-iOS"
+  spec.dependency "MJRefresh"
+  spec.dependency "HandyJSON"
+  spec.dependency "Moya"
+  spec.dependency "MBProgressHUD"
 
 
-  # ――― Project Linking ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  #
-  #  Link your library with frameworks, or libraries. Libraries do not include
-  #  the lib prefix of their name.
-  #
+ #spec.subspec "UITableView" do |ss|
+    #ss.source_files = "WYBasisKit/Extension/UITableView/*.swift"
+    #ss.dependency "MJRefresh"
+  #end
 
-  # spec.framework  = "SomeFramework"
-  # spec.frameworks = "SomeFramework", "AnotherFramework"
+  #spec.subspec "String" do |ss|
+    #ss.source_files = "WYBasisKit/Extension/String/*.swift"
+    #ss.dependency "libPhoneNumber-iOS"
+  #end
 
-  # spec.library   = "iconv"
-  # spec.libraries = "iconv", "xml2"
+  #spec.subspec "UIViewController" do |ss|
+    #ss.source_files = "WYBasisKit/Extension/UIViewController/*.swift"
+    #ss.dependency "MBProgressHUD"
+  #end
 
+  #spec.subspec "ScrollText" do |ss|
+    #ss.source_files = "WYBasisKit/Layout/ScrollText/*.swift"
+    #ss.dependency "SnapKit"
+  #end
 
-  # ――― Project Settings ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  #
-  #  If your library depends on compiler flags you can set them in the xcconfig hash
-  #  where they will only apply to your library. If you depend on other Podspecs
-  #  you can include multiple dependencies to ensure it works.
-
-  # spec.requires_arc = true
-
-  # spec.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
-  # spec.dependency "JSONKit", "~> 1.4"
+  #spec.subspec "Networking" do |ss|
+    #ss.source_files = "WYBasisKit/Networking/*.swift"
+    #ss.dependency "Moya"
+    #ss.dependency "Alamofire"
+   # ss.dependency "HandyJSON"
+  #end
 
 end
