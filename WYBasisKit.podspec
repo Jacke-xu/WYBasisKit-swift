@@ -96,6 +96,15 @@ Pod::Spec.new do |spec|
 
   # spec.public_header_files = "Classes/**/*.h"
 
+  #spec.dependency "SnapKit"
+  #spec.dependency "libPhoneNumber-iOS"
+  #spec.dependency "MJRefresh"
+  #spec.dependency "HandyJSON"
+  #spec.dependency "Kingfisher"
+  #spec.dependency "Moya"
+  #spec.dependency "IQKeyboardManagerSwift"
+  #spec.dependency "MBProgressHUD"
+
   spec.swift_versions = "5.0"
 
 
