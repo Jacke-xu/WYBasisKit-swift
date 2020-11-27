@@ -46,7 +46,7 @@ extension UIAlertController {
                         }
                         handler!(alertAction.title!, texts.copy() as! Array<String>)
                     }
-                    alertController.wy_sharedAppDelegate().window?.makeKeyAndVisible()
+                    alertController.wy_sharedAppDelegate().window?!.makeKeyAndVisible()
                 }
                 alertController.addAction(action)
             }
@@ -62,7 +62,7 @@ extension UIAlertController {
                         handler!("", [])
                     }
                     alertController.wy_alertWindow?.rootViewController?.dismiss(animated: true, completion: nil)
-                    alertController.wy_sharedAppDelegate().window?.makeKeyAndVisible()
+                    alertController.wy_sharedAppDelegate().window?!.makeKeyAndVisible()
                 }
             }
         }
@@ -128,8 +128,8 @@ extension UIAlertController {
         }
     }
     
-    private func wy_sharedAppDelegate() -> AppDelegate {
+    private func wy_sharedAppDelegate() -> UIApplicationDelegate {
         
-        return UIApplication.shared.delegate as! AppDelegate
+        return UIApplication.shared.delegate!
     }
 }
