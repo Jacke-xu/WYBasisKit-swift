@@ -15,7 +15,6 @@ Pod::Spec.new do |spec|
   spec.swift_versions = "5.0"
   spec.requires_arc = true
   spec.frameworks = "Foundation", "AVFoundation", "UIKit", "Photos", "CoreFoundation"
-  spec.
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   spec.source_files  = "WYBasisKit/**/*"
