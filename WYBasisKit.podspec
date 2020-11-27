@@ -13,7 +13,9 @@ Pod::Spec.new do |spec|
   spec.ios.deployment_target = "10.0"
   spec.source       = { :git => "https://github.com/Jacke-xu/WYBasisKit-swift.git", :tag => "#{spec.version}" }
   spec.swift_versions = "5.0"
+  spec.requires_arc = true
   spec.frameworks = "Foundation", "AVFoundation", "UIKit", "Photos", "CoreFoundation"
+  spec.
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   spec.source_files  = "WYBasisKit/**/*"
