@@ -10,9 +10,10 @@ Pod::Spec.new do |spec|
   spec.homepage     = "https://github.com/Jacke-xu/WYBasisKit-swift"
   spec.license      = { :type => "MIT", :file => "License.md" }
   spec.author             = { "Jacke-xu" => "mobileAppDvlp@icloud.com" }
-  spec.ios.deployment_target = "9.0"
+  spec.ios.deployment_target = "10.0"
   spec.source       = { :git => "https://github.com/Jacke-xu/WYBasisKit-swift.git", :tag => "#{spec.version}" }
   spec.swift_versions = "5.0"
+  spec.frameworks = "Foundation", "AVFoundation", "UIKit", "Photos", "CoreFoundation"
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   spec.source_files  = "WYBasisKit/**/*"
@@ -25,33 +26,5 @@ Pod::Spec.new do |spec|
   spec.dependency "HandyJSON"
   spec.dependency "Moya"
   spec.dependency "MBProgressHUD"
-
-
- #spec.subspec "UITableView" do |ss|
-    #ss.source_files = "WYBasisKit/Extension/UITableView/*.swift"
-    #ss.dependency "MJRefresh"
-  #end
-
-  #spec.subspec "String" do |ss|
-    #ss.source_files = "WYBasisKit/Extension/String/*.swift"
-    #ss.dependency "libPhoneNumber-iOS"
-  #end
-
-  #spec.subspec "UIViewController" do |ss|
-    #ss.source_files = "WYBasisKit/Extension/UIViewController/*.swift"
-    #ss.dependency "MBProgressHUD"
-  #end
-
-  #spec.subspec "ScrollText" do |ss|
-    #ss.source_files = "WYBasisKit/Layout/ScrollText/*.swift"
-    #ss.dependency "SnapKit"
-  #end
-
-  #spec.subspec "Networking" do |ss|
-    #ss.source_files = "WYBasisKit/Networking/*.swift"
-    #ss.dependency "Moya"
-    #ss.dependency "Alamofire"
-   # ss.dependency "HandyJSON"
-  #end
 
 end
