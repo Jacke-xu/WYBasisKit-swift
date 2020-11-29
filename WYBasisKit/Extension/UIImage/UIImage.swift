@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-extension UIImage {
+public extension UIImage {
     
     /// 截取指定View快照
     class func wy_screenshot(view: UIView) -> UIImage! {

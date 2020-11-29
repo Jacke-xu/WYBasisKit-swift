@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension UIFont {
+public extension UIFont {
     
     /// 根据屏幕比率自动调整字号大小
     var wy_adjust : UIFont {

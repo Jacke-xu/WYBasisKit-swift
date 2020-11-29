@@ -8,7 +8,7 @@
 
 import UIKit
 
-enum WYGradientDirection {
+public enum WYGradientDirection {
     
     /// 从上到小
     case topToBottom
@@ -20,7 +20,7 @@ enum WYGradientDirection {
     case rightToLowlLeft
 }
 
-extension UIView {
+public extension UIView {
  
     /// 设置渐变色
     func wy_gradualColors(colors: [UIColor], gradientDirection: WYGradientDirection)  {

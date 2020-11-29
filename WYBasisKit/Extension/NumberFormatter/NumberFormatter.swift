@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension NumberFormatter {
+public extension NumberFormatter {
     
     /// 千位符之四舍五入的整数(1234.5678 -> 1235)
     class func wy_roundToInteger(string: String?) -> String {

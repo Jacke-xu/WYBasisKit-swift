@@ -8,7 +8,7 @@
 
 import UIKit
 
-enum WYButtonPosition {
+public enum WYButtonPosition {
     
     /** 图片在左，文字在右，默认 */
     case imageLeft_titleRight
@@ -20,7 +20,7 @@ enum WYButtonPosition {
     case imageBottom_titleTop
 }
 
-extension UIButton {
+public extension UIButton {
     
     /**
     *  利用UIButton的titleEdgeInsets和imageEdgeInsets来实现文字和图片的自由排列

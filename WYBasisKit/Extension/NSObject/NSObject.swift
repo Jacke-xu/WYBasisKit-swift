@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension String {
+public extension String {
     
     /// CGFloat Convert String
     init(float: CGFloat) {
@@ -17,7 +17,7 @@ extension String {
     }
 }
 
-extension NSString {
+public extension NSString {
     
     /// String Convert NSString
     class func wy_init(string: String) -> NSString {
@@ -56,7 +56,7 @@ extension NSString {
     }
 }
 
-extension Double {
+public extension Double {
     
     /// NSString Convert Double
     init(string: NSString) {
@@ -71,7 +71,7 @@ extension Double {
     }
 }
 
-extension Float {
+public extension Float {
     
     /// NSString Convert Float
     init(string: NSString) {
@@ -80,7 +80,7 @@ extension Float {
     }
 }
 
-extension CGFloat {
+public extension CGFloat {
 
     /// String Convert CGFloat
     init(string: String) {
@@ -95,7 +95,7 @@ extension CGFloat {
     }
 }
 
-extension Int {
+public extension Int {
     
     /// NSString Convert Int
     init(string: NSString) {
@@ -104,7 +104,7 @@ extension Int {
     }
 }
 
-extension NSInteger {
+public extension NSInteger {
     
     /// NSString Convert NSInteger
     init(stringValue: NSString) {
@@ -119,7 +119,7 @@ extension NSInteger {
     }
 }
 
-extension NSObject {
+public extension NSObject {
     
     class func wy_maintainAccuracy(value: CGFloat) -> String {
         

@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension UILabel {
+public extension UILabel {
     
     /** 获取UILable的行高(根据UILable的字号获取的) */
     func wy_lineHeight() -> CGFloat {

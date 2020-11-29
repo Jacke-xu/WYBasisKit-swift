@@ -10,7 +10,7 @@ import Moya
 import Alamofire
 import HandyJSON
 
-enum WYServerCode: Int {
+public enum WYServerCode: Int {
     
     /// 成功
     case success = 200
@@ -22,7 +22,7 @@ enum WYServerCode: Int {
     case notLogin = 204
 }
 
-enum WYFileType {
+public enum WYFileType {
     
     /// 上传图片
     case image
@@ -34,28 +34,28 @@ enum WYFileType {
     case urlPath
 }
 
-class WYResponse: HandyJSON {
+public class WYResponse: HandyJSON {
     
     var msg: String? = ""
     var code: Int = 200
     var data: Any?
     
-    required init() {}
+    required public init() {}
 }
 
-class WYResponseInfo: HandyJSON {
+public class WYResponseInfo: HandyJSON {
     
-    required init() {}
+    required public init() {}
 }
 
-class WYFileModel: HandyJSON {
+public class WYFileModel: HandyJSON {
     
     /**
      *  上传的文件的上传后缀(选传项，例如，JPEG图像的MIME类型是image/jpeg，具体参考http://www.iana.org/assignments/media-types/.)
      *  可根据具体的上传文件类型自由设置，默认上传图片时设置为image/jpeg，上传音频时设置为audio/aac，上传视频时设置为video/mp4，上传url时设置为application/octet-stream
      */
     private var _mimeType: String = ""
-    var mimeType: String {
+    public var mimeType: String {
         
         set {
             _mimeType = newValue
@@ -80,14 +80,14 @@ class WYFileModel: HandyJSON {
     }
     
     /// 上传的文件的名字(选传项)
-    var fileName: String = ""
+    public var fileName: String = ""
     
     /// 上传的文件的文件夹名字(选传项)
-    var folderName: String = "file"
+    public var folderName: String = "file"
     
     ///上传图片压缩比例(选传项，0~1.0区间，1.0代表无损，默认无损)
     private var _compressionQuality: CGFloat = 1.0
-    var compressionQuality: CGFloat {
+    public var compressionQuality: CGFloat {
         
         set {
             _compressionQuality = ((newValue > 1.0) || (newValue <= 0.0)) ? 1.0 : newValue
@@ -98,10 +98,10 @@ class WYFileModel: HandyJSON {
     }
     
     /// 上传文件的类型(选传项，默认image)
-    var fileType: WYFileType = .image
+    public var fileType: WYFileType = .image
     
     /// 上传的图片
-    var image: UIImage? {
+    public var image: UIImage? {
         
         willSet {
             
@@ -113,17 +113,17 @@ class WYFileModel: HandyJSON {
     }
     
     /// 上传的二进制文件
-    var data: Data?
+    public var data: Data?
     
     /// 上传的资源URL路径
-    var fileUrl: String = ""
+    public var fileUrl: String = ""
     
-    required init() {}
+    required public init() {}
 }
 
-class WYNetworkManager {
+public class WYNetworkManager {
     
-    enum WYNetworkStatus {
+    public enum WYNetworkStatus {
         
         /// 未知网络，可能是不安全的连接
         case unknown
@@ -142,21 +142,21 @@ class WYNetworkManager {
         case userContinueConnect
     }
     
-    static let shared = WYNetworkManager()
+    public static let shared = WYNetworkManager()
     
     private var networkSecurityInfo = (WYNetworkStatus.userNotSelectedConnect, "")
     
-    func post(domain: String = WYNetworkConfig.currentDomainPath, path: String = "", headers: [String : String]? = WYNetworkConfig.requestHeaders, parameters: [String : Any] = [:], originJson: Bool = false, callbackQueue: DispatchQueue = .main, success:((_ response: Any?) -> Void)? = nil, failure:((_ error: String, _ serverCode: WYServerCode) -> Void)? = nil) {
+    public func post(domain: String = WYNetworkConfig.currentDomainPath, path: String = "", headers: [String : String]? = WYNetworkConfig.requestHeaders, parameters: [String : Any] = [:], originJson: Bool = false, callbackQueue: DispatchQueue = .main, success:((_ response: Any?) -> Void)? = nil, failure:((_ error: String, _ serverCode: WYServerCode) -> Void)? = nil) {
         
         request(method: .post, taskMethod: .data, domain: domain, path: path, headers: headers, parameters: parameters, files: [], originJson: originJson, callbackQueue: callbackQueue, progress: nil, success: success, failure: failure)
     }
     
-    func get(domain: String = WYNetworkConfig.currentDomainPath, path: String = "", headers: [String : String]? = WYNetworkConfig.requestHeaders, parameters: [String : Any] = [:], originJson: Bool = false, callbackQueue: DispatchQueue = .main, success:((_ response: Any?) -> Void)? = nil, failure:((_ error: String, _ serverCode: WYServerCode) -> Void)? = nil) {
+    public func get(domain: String = WYNetworkConfig.currentDomainPath, path: String = "", headers: [String : String]? = WYNetworkConfig.requestHeaders, parameters: [String : Any] = [:], originJson: Bool = false, callbackQueue: DispatchQueue = .main, success:((_ response: Any?) -> Void)? = nil, failure:((_ error: String, _ serverCode: WYServerCode) -> Void)? = nil) {
         
         request(method: .get, taskMethod: .data, domain: domain, path: path, headers: headers, parameters: parameters, files: [], originJson: originJson, callbackQueue: callbackQueue, progress: nil, success: success, failure: failure)
     }
     
-    func upload(domain: String = WYNetworkConfig.currentDomainPath, path: String = "", headers: [String : String]? = WYNetworkConfig.requestHeaders, parameters: [String : Any] = [:], files: [WYFileModel], originJson: Bool = false, callbackQueue: DispatchQueue = .main, progress:((_ progress: Double) -> Void)?, success:((_ response: Any?) -> Void)?, failure:((_ error: String, _ serverCode: WYServerCode) -> Void)?) {
+    public func upload(domain: String = WYNetworkConfig.currentDomainPath, path: String = "", headers: [String : String]? = WYNetworkConfig.requestHeaders, parameters: [String : Any] = [:], files: [WYFileModel], originJson: Bool = false, callbackQueue: DispatchQueue = .main, progress:((_ progress: Double) -> Void)?, success:((_ response: Any?) -> Void)?, failure:((_ error: String, _ serverCode: WYServerCode) -> Void)?) {
         
         request(method: .post, taskMethod: .upload, domain: domain, path: path, headers: headers, parameters: parameters, files: files, originJson: originJson, callbackQueue: callbackQueue, progress: progress, success: success, failure: failure)
     }
@@ -327,7 +327,7 @@ class WYNetworkManager {
         })
     }
     
-    func networkStatus(showStatusAlert: Bool, openSeting: Bool, statusHandler:((_ status: WYNetworkStatus) -> Void)? = nil, actionHandler:((_ action: String, _ status: WYNetworkStatus) -> Void)? = nil) {
+    public func networkStatus(showStatusAlert: Bool, openSeting: Bool, statusHandler:((_ status: WYNetworkStatus) -> Void)? = nil, actionHandler:((_ action: String, _ status: WYNetworkStatus) -> Void)? = nil) {
         
         let manager = NetworkReachabilityManager()
         manager!.startListening(onQueue: .main, onUpdatePerforming: {[weak self] (status) in

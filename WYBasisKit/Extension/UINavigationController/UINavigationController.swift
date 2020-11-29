@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension UINavigationController {
+public extension UINavigationController {
     
     /// 导航栏背景色
     var wy_backgroundColor: UIColor {

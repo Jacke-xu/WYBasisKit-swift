@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension UITextField {
+public extension UITextField {
     
     /// 占位文字颜色
     var wy_placeholderColor: UIColor {

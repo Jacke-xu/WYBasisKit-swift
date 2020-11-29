@@ -9,7 +9,7 @@
 import Moya
 import Alamofire
 
-enum WYTaskMethod {
+public enum WYTaskMethod {
     
     /// 数据任务
     case data

@@ -19,10 +19,10 @@
 
 import UIKit
 
-extension UIDevice {
+public extension UIDevice {
     
     /// 判断设备型号
-    public class var wy_deviceModel: String {
+    class var wy_deviceModel: String {
         var systemInfo = utsname()
         uname(&systemInfo)
         let machineMirror = Mirror(reflecting: systemInfo.machine)
@@ -75,17 +75,17 @@ extension UIDevice {
     }
     
     /// 是否是iPhone
-    public class var wy_iPhoneSeries: Bool {
+    class var wy_iPhoneSeries: Bool {
         return current.userInterfaceIdiom == .phone
     }
     
     /// 是否是iPad
-    public class var wy_iPadSeries: Bool {
+    class var wy_iPadSeries: Bool {
         return current.userInterfaceIdiom == .pad
     }
     
     /// 是否是模拟器
-    public class var wy_simulatorSeries: Bool {
+    class var wy_simulatorSeries: Bool {
         #if targetEnvironment(simulator)
         return true
         #else
@@ -94,12 +94,12 @@ extension UIDevice {
     }
     
     /// 是否该使用3x图片
-    public class var wy_useAssetRatio3x: Bool {
+    class var wy_useAssetRatio3x: Bool {
         return UIScreen.main.currentMode!.size.width/UIScreen.main.bounds.size.width == 3 ? true : false
     }
     
     /// 通过状态栏高度判定是否是齐刘海手机
-    public class var wy_isNeatBang: Bool {
+    class var wy_isNeatBang: Bool {
         
         return UIApplication.shared.statusBarFrame.height != 20.0
     }
@@ -110,7 +110,7 @@ extension UIDevice {
     }
     
     /// 是否是竖屏模式
-    public class var wy_verticalScreen: Bool {
+    class var wy_verticalScreen: Bool {
         let orientation = UIApplication.shared.statusBarOrientation
         if orientation == UIInterfaceOrientation.portrait || orientation == UIInterfaceOrientation.portraitUpsideDown {
             return true
@@ -120,7 +120,7 @@ extension UIDevice {
     }
     
     /// 是否是横屏模式
-    public class var wy_horizontalScreen: Bool {
+    class var wy_horizontalScreen: Bool {
         let orientation = UIApplication.shared.statusBarOrientation
         if orientation == UIInterfaceOrientation.landscapeLeft || orientation == UIInterfaceOrientation.landscapeRight {
             return true
@@ -130,22 +130,22 @@ extension UIDevice {
     }
     
     /// uuid 注意其实uuid并不是唯一不变的
-    public class var wy_uuid: String! {
+    class var wy_uuid: String! {
         return current.identifierForVendor!.uuidString
     }
     
     /// 系统名称
-    public class var wy_systemName: String {
+    class var wy_systemName: String {
         return current.systemName
     }
     
     /// 设备名称
-    public class var wy_deviceName: String {
+    class var wy_deviceName: String {
         return current.name
     }
     
     /// 设备版本号
-    public class var wy_deviceVersion: String {
+    class var wy_deviceVersion: String {
         return current.systemVersion
     }
 }

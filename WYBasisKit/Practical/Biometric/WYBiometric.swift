@@ -9,14 +9,14 @@
 import Foundation
 import LocalAuthentication
 
-enum WYBiometricType {
+public enum WYBiometricType {
     case none
-    case TouchID
-    case FaceID
+    case touchID
+    case faceID
 }
 
 /// 获取设备支持的生物识别类型
-func wy_checkBiometric() -> WYBiometricType {
+public func wy_checkBiometric() -> WYBiometricType {
 
     var biometric = WYBiometricType.none
 
@@ -29,9 +29,9 @@ func wy_checkBiometric() -> WYBiometricType {
         //iPhoneX出厂最低系统版本号：iOS11.0.0
         if #available(iOS 11.0, *) {
             if authContent.biometryType == .faceID {
-                biometric = .FaceID
+                biometric = .faceID
             }else if authContent.biometryType == .touchID {
-                biometric = .TouchID
+                biometric = .touchID
             }else {
                 biometric = .none
             }
@@ -42,7 +42,7 @@ func wy_checkBiometric() -> WYBiometricType {
                 return biometric
             }
             if laError.code != .touchIDNotAvailable {
-                biometric = .TouchID
+                biometric = .touchID
             }
         }
     }
@@ -51,7 +51,7 @@ func wy_checkBiometric() -> WYBiometricType {
 }
 
 /// 验证生物识别
-func wy_verifyBiometrics(localizedFallbackTitle: String = "", localizedReason: String, handler:((_ isBackupHandler: Bool ,_ isSuccess: Bool, _ error: String) -> Void)?) {
+public func wy_verifyBiometrics(localizedFallbackTitle: String = "", localizedReason: String, handler:((_ isBackupHandler: Bool ,_ isSuccess: Bool, _ error: String) -> Void)?) {
 
         let authContent = LAContext()
 
@@ -196,7 +196,7 @@ func wy_verifyBiometrics(localizedFallbackTitle: String = "", localizedReason: S
 }
 
 /// 解锁生物识别
-func wy_unlockLocalAuth(handler:((_ isSuccess: Bool) -> Void)?) {
+public func wy_unlockLocalAuth(handler:((_ isSuccess: Bool) -> Void)?) {
 
     let passwordContent = LAContext()
     var error: NSError?

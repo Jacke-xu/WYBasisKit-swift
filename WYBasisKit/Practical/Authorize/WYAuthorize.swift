@@ -11,7 +11,7 @@ import AVFoundation
 import Photos
 
 /// 判断相机权限
-func wy_authorizeCameraAccess(showAlert: Bool = true, handler:((_ authorized: Bool) -> Void)?) {
+public func wy_authorizeCameraAccess(showAlert: Bool = true, handler:((_ authorized: Bool) -> Void)?) {
     
     let authStatus = AVCaptureDevice.authorizationStatus(for: .video)
     
@@ -42,7 +42,7 @@ func wy_authorizeCameraAccess(showAlert: Bool = true, handler:((_ authorized: Bo
 }
 
 /// 判断相册权限
-func wy_authorizeAlbumAccess(showAlert: Bool = true, handler:((_ authorized: Bool) -> Void)?) {
+public func wy_authorizeAlbumAccess(showAlert: Bool = true, handler:((_ authorized: Bool) -> Void)?) {
     
     let authStatus = PHPhotoLibrary.authorizationStatus()
     

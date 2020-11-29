@@ -9,7 +9,7 @@
 import UIKit
 import libPhoneNumber_iOS
 
-enum WYTimeFormat {
+public enum WYTimeFormat {
     
     /// 时:分
     case hourMinutes
@@ -25,7 +25,7 @@ enum WYTimeFormat {
     case yearMonthDayAndhourMinutesSecond
 }
 
-extension String {
+public extension String {
     
     /// 返回一个计算好的字符串的宽度
     func wy_calculateStringWidth(controlHeight: CGFloat = 0, controlFont: UIFont, lineSpacing: CGFloat = 0) -> CGFloat {

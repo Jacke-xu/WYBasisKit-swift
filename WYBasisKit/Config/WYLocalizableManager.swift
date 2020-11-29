@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum WYLanguage {
+public enum WYLanguage {
     
     /// 中文
     case chinese
@@ -17,17 +17,17 @@ enum WYLanguage {
     case english
 }
 
-let WYBasisKitLanguage = "WYBasisKitLanguage"
+private let WYBasisKitLanguage = "WYBasisKitLanguage"
 
 public func WYLocalizedString(_ key: String, value: String? = "", comment: String? = "") -> String {
     return WYLocalizableManager.shared.stringFromKey(key: key)
 }
 
-class WYLocalizableManager: NSObject {
+public class WYLocalizableManager: NSObject {
 
-    static let shared = WYLocalizableManager()
+    public static let shared = WYLocalizableManager()
     
-    var bundle: Bundle?
+    private var bundle: Bundle?
     
     override init() {
         
@@ -46,7 +46,7 @@ class WYLocalizableManager: NSObject {
         bundle = Bundle.init(path: Bundle.main.path(forResource: userLanguage, ofType: "lproj")!)
     }
     
-    func currentLanguage() -> String {
+    public func currentLanguage() -> String {
         
         var userLanguage = UserDefaults.standard.value(forKey: WYBasisKitLanguage) as? String
         if userLanguage == nil {
@@ -63,7 +63,7 @@ class WYLocalizableManager: NSObject {
         return userLanguage ?? "en"
     }
 
-    func setUserLanguage(language: WYLanguage) {
+    public func setUserLanguage(language: WYLanguage) {
         
         var languageStr = "en"
         switch language {
@@ -85,7 +85,7 @@ class WYLocalizableManager: NSObject {
         UserDefaults.standard.synchronize()
     }
 
-    func stringFromKey(key: String) -> String {
+    public func stringFromKey(key: String) -> String {
         
         guard let bundleTem = bundle else {
             return WYLocalizedString(key, comment: "")

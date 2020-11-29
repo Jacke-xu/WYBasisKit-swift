@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-extension UITableViewCell {
+public extension UITableViewCell {
     
     
 }

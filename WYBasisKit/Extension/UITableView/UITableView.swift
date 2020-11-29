@@ -8,7 +8,7 @@
 
 import MJRefresh
 
-extension UITableView {
+public extension UITableView {
     
     func wy_headerEndRefreshing() {
         

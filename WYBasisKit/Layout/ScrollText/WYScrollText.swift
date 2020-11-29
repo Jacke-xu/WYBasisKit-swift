@@ -8,23 +8,16 @@
 
 import SnapKit
 
-@objc protocol WYScrollTextDelegate {
-    
-    @objc optional func didClickText(index: NSInteger)
-}
-
-class WYScrollText: UIView {
-    
-    weak var delegate: WYScrollTextDelegate?
+public class WYScrollText: UIView {
     
     /// 占位文本
-    var placeholder: String = WYLocalizedString("暂无消息")
+    public var placeholder: String = WYLocalizedString("暂无消息")
     /// 文本颜色
-    var textColor: UIColor = .black
+    public var textColor: UIColor = .black
     /// 文本字体
-    var textFont: UIFont = .systemFont(ofSize: 12)
+    public var textFont: UIFont = .systemFont(ofSize: 12)
     /// 轮播间隔，默认3s  为保证轮播流畅，该值要求最小为2
-    var interval: TimeInterval = 3
+    public var interval: TimeInterval = 3
     
     private var _textArray: [String]!
     var textArray: [String]! {
@@ -75,6 +68,14 @@ class WYScrollText: UIView {
         return collectionview
     }()
     
+    private var actionHandler: ((_ index: NSInteger) -> Void)?
+    
+    /// 处理点击事件
+    public func didClickHandler(handler:((_ index: NSInteger) -> Void)? = nil) {
+        
+        actionHandler = handler
+    }
+    
     /// 当前文本下标
     private var textIndex: NSInteger = 0
     
@@ -120,17 +121,17 @@ class WYScrollText: UIView {
 
 extension WYScrollText: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         return CGSize(width: collectionView.bounds.self.width, height: collectionView.bounds.size.height)
     }
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         return textArray.count
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell: SctolTextCell = collectionView.dequeueReusableCell(withReuseIdentifier: "SctolTextCell", for: indexPath) as! SctolTextCell
 
@@ -142,11 +143,11 @@ extension WYScrollText: UICollectionViewDelegate, UICollectionViewDataSource, UI
         return cell;
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        if delegate != nil {
+    public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+
+        if actionHandler != nil {
             
-            delegate?.didClickText?(index: (textIndex == textArray.count-1) ? 0 : textIndex)
+            actionHandler!((textIndex == textArray.count-1) ? 0 : textIndex)
         }
     }
 }
@@ -164,5 +165,5 @@ class SctolTextCell: UICollectionViewCell {
         }
         
         return label
-    }() 
+    }()
 }

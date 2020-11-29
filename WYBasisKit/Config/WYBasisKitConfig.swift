@@ -9,17 +9,17 @@
 import Foundation
 import UIKit
 
-let wy_defaultPageSize: NSInteger = 10
-let wy_messageDuration: TimeInterval = 1.5
-let wy_timeoutIntervalForRequest: TimeInterval = 10
+public let wy_defaultPageSize: NSInteger = 10
+public let wy_messageDuration: TimeInterval = 1.5
+public let wy_timeoutIntervalForRequest: TimeInterval = 10
 
-struct WYBasisKitConfig {
+public class WYBasisKitConfig {
     
     /// 设置tableView或collectionView上拉加载更多时每次请求的数据量，默认10条
-    static var wy_pageSize: NSInteger = wy_defaultPageSize
+    public static var wy_pageSize: NSInteger = wy_defaultPageSize
     
     /// 设置当前语言环境
-    func wy_setCurrentLanguage(language: WYLanguage) {
+    public class func wy_setCurrentLanguage(language: WYLanguage) {
         
         WYLocalizableManager.shared.setUserLanguage(language: language)
     }

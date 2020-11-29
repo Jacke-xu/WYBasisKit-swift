@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension UIColor {
+public extension UIColor {
     
     /// RGB(A) convert UIColor
     class func wy_rgb(red: CGFloat, green: CGFloat, blue: CGFloat, aplha: CGFloat = 1.0) -> UIColor {

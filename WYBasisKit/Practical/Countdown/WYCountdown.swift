@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WYCountdown: NSObject {
+public class WYCountdown: NSObject {
     
     /// 计时器
     private var timer: Timer?
@@ -25,7 +25,7 @@ class WYCountdown: NSObject {
     @param totalTime 需要倒计时的时长，单位 "秒"
     @param handler 倒计时block，里面返回的是剩余时长，单位 "秒"
     */
-    func wy_begin(totalTime: Int, handler: @escaping (_ duration: Int) -> Void) {
+    public func wy_begin(totalTime: Int, handler: @escaping (_ duration: Int) -> Void) {
         
         totalSeconds = totalTime
 
@@ -55,14 +55,14 @@ class WYCountdown: NSObject {
     }
 
     /// 取消倒计时
-    func wy_cancel() {
+    public func wy_cancel() {
         
         timer?.invalidate()
         timer = nil
     }
     
     /// 传入一个秒数，返回时分秒格式的字符串
-    class func wy_format(second: Int) -> String {
+    public class func wy_format(second: Int) -> String {
         
         var cu_hour = String(second / 3600)
         var cu_minute = String((second - (Int(cu_hour)! * 3600)) / 60)
@@ -87,13 +87,13 @@ class WYCountdown: NSObject {
     }
 
     ///传入一个秒数，返回有几个小时
-    class func wy_formatFewHours(second: Int) -> String {
+    public class func wy_formatFewHours(second: Int) -> String {
         
         return String((second / 3600))
     }
 
     ///传入一个秒数，返回有多少分钟
-    class func wy_formatFewMinute(second: Int) -> String {
+    public class func wy_formatFewMinute(second: Int) -> String {
         
         let cu_hour = String(second / 3600)
         return String(((second - (Int(cu_hour)! * 3600)) / 60))

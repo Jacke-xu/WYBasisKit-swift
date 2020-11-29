@@ -10,7 +10,7 @@ import UIKit
 import MBProgressHUD
 
 /// viewController显示模式
-enum WYDisplaMode {
+public enum WYDisplaMode {
     
     case push
     case present
@@ -24,13 +24,13 @@ enum WYDisplaMode {
 
 extension UIViewController: ViewControllerHandlerProtocol {
 
-    func wy_navigationBarWillReturn() -> Bool {
+    public func wy_navigationBarWillReturn() -> Bool {
 
         return true
     }
 }
 
-extension UIViewController {
+public extension UIViewController {
     
     func wy_displayMessage(message: String, duration: TimeInterval = wy_messageDuration) {
         

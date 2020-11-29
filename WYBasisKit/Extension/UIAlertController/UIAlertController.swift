@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-extension UIAlertController {
+public extension UIAlertController {
     
     class func wy_show(style: UIAlertController.Style = .alert, title: String = "", message: String = "", duration: TimeInterval = 0.0, textFieldPlaceholders: Array<String> = [], actions: Array<String> = [], handler:((_ actionStr: String, _ textFieldTexts: Array<String>) -> Void)? = nil) {
         
