@@ -29,7 +29,6 @@ Pod::Spec.new do |spec|
   #spec.dependency "MBProgressHUD"
 
   spec.subspec "WYBasisKit" do |ss|
-
        ss.subspec "Config" do |sss|
           sss.frameworks = "Foundation", "UIKit"
           sss.source_files = "WYBasisKit/Config/**/*"
@@ -37,6 +36,7 @@ Pod::Spec.new do |spec|
 
        ss.subspec "Extension" do |sss|
           sss.frameworks = "Foundation", "UIKit"
+          sss.dependency "WYBasisKit/Config"
           sss.dependency "MJRefresh"
           sss.dependency "libPhoneNumber-iOS"
           sss.dependency "MBProgressHUD"
@@ -45,11 +45,13 @@ Pod::Spec.new do |spec|
 
        ss.subspec "Practical" do |sss|
           sss.frameworks = "Foundation", "UIKit", "LocalAuthentication", "Photos", "CoreFoundation"
+          sss.dependency "WYBasisKit/Config"
           sss.source_files  = "WYBasisKit/Practical/**/*"
        end
 
        ss.subspec "Layout" do |sss|
           sss.frameworks = "Foundation", "UIKit"
+          sss.dependency "WYBasisKit/Config"
           sss.dependency "SnapKit"
           sss.source_files  = "WYBasisKit/Layout/**/*"
        end
@@ -59,7 +61,7 @@ Pod::Spec.new do |spec|
           sss.dependency "WYBasisKit/Config"
           sss.dependency "Moya"
           sss.dependency "HandyJSON"
-          sss.source_files  = "WYBasisKit/Networking/**/*"
+          sss.source_files  = "WYBasisKit/Networking**/*"
        end
   end
 end
