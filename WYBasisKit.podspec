@@ -30,9 +30,9 @@ Pod::Spec.new do |spec|
 
   spec.subspec "WYBasisKit" do |ss|
 
-       ss.subspec 'Config' do |sss|
+       ss.subspec "Config" do |sss|
           sss.frameworks = "Foundation", "UIKit"
-          sss.source_files = "WYBasisKit/Config/*"
+          sss.source_files = "WYBasisKit/Config/**/*"
        end
 
        ss.subspec "Extension" do |sss|
@@ -59,7 +59,7 @@ Pod::Spec.new do |spec|
           sss.dependency "WYBasisKit/Config"
           sss.dependency "Moya"
           sss.dependency "HandyJSON"
-          sss.source_files  = "WYBasisKit/Networking/*"
+          sss.source_files  = "WYBasisKit/Networking/**/*"
        end
   end
 end
