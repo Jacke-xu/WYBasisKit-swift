@@ -6,7 +6,6 @@
 //  Copyright © 2020 jacke-xu. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 public let wy_defaultPageSize: NSInteger = 10

@@ -199,7 +199,7 @@ public class WYNetworkManager {
                 
                 let statusCode = response.statusCode
                 
-                if statusCode != 200 {
+                if statusCode != WYServerCode.success.rawValue {
                     
                     self?.handlerFailure(error: WYLocalizedString("数据请求失败，状态码")+"：\(statusCode)", failure: failure)
                     
@@ -213,13 +213,13 @@ public class WYNetworkManager {
                         
                         let responseData = try WYResponse.deserialize(from: response.mapString())
                         
-                        if responseData?.code == 200 {
+                        if responseData?.code == WYServerCode.success.rawValue {
                             
                             self?.handlerSuccess(response: (originJson == true) ? try response.mapJSON() : responseData?.data, success: success)
                             
                         }else {
                             
-                            self?.handlerFailure(error: responseData?.msg ?? "", serverCode: WYServerCode(rawValue: responseData!.code)!, failure: failure)
+                            self?.handlerFailure(error: responseData?.msg ?? "", serverCode: WYServerCode(rawValue: responseData!.code) ?? .error, failure: failure)
                         }
                         
                     } catch  {
