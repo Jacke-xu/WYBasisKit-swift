@@ -18,50 +18,47 @@ Pod::Spec.new do |spec|
   
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  #spec.source_files  = "WYBasisKit/**/*"
-  #spec.frameworks = "Foundation", "AVFoundation", "UIKit", "Photos", "CoreFoundation"
   spec.dependency "Kingfisher"
   spec.dependency "IQKeyboardManagerSwift"
-  #spec.dependency "SnapKit"
-  #sspec.dependency "MJRefresh"
-  #spec.dependency "HandyJSON"
-  #spec.dependency "Moya"
-  #spec.dependency "MBProgressHUD"
+
 
   spec.subspec "WYBasisKit" do |ss|
+
        ss.subspec "Config" do |sss|
-          sss.frameworks = "Foundation", "UIKit"
           sss.source_files = "WYBasisKit/Config/**/*"
+          sss.frameworks = "Foundation", "UIKit"
        end
 
        ss.subspec "Extension" do |sss|
+          sss.source_files  = "WYBasisKit/Extension/**/*"
           sss.frameworks = "Foundation", "UIKit"
           sss.dependency "WYBasisKit/Config"
           sss.dependency "MJRefresh"
           sss.dependency "libPhoneNumber-iOS"
           sss.dependency "MBProgressHUD"
-          sss.source_files  = "WYBasisKit/Extension/**/*"
        end
 
        ss.subspec "Practical" do |sss|
+          sss.source_files  = "WYBasisKit/Practical/**/*"
           sss.frameworks = "Foundation", "UIKit", "LocalAuthentication", "Photos", "CoreFoundation"
           sss.dependency "WYBasisKit/Config"
-          sss.source_files  = "WYBasisKit/Practical/**/*"
+          sss.dependency "WYBasisKit/Extension"
        end
 
        ss.subspec "Layout" do |sss|
+          sss.source_files  = "WYBasisKit/Layout/**/*"
           sss.frameworks = "Foundation", "UIKit"
           sss.dependency "WYBasisKit/Config"
           sss.dependency "SnapKit"
-          sss.source_files  = "WYBasisKit/Layout/**/*"
        end
 
        ss.subspec "Networking" do |sss|
+          sss.source_files  = "WYBasisKit/Networking/**/*"
           sss.frameworks = "Foundation", "UIKit"
           sss.dependency "WYBasisKit/Config"
+          sss.dependency "WYBasisKit/Extension"
           sss.dependency "Moya"
           sss.dependency "HandyJSON"
-          sss.source_files  = "WYBasisKit/Networking**/*"
        end
   end
 end
