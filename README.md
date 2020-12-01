@@ -7,7 +7,20 @@
 "WYBasisKit" 不仅可以帮助开发者快速构建一个工程，还有基于常用网络框架和系统API而封装的方法，开发者只需简单的调用API就可以快速实现相应功能， 大幅提高开发效率。
 
 如何使用WYBasisKit
-pod 'WYBasisKit'
+
+```
+// 集成整个WYBasisKit
+pod 'WYBasisKit' 
+
+// 集成网络请求相关
+pod 'WYBasisKit/Networking'
+
+/// 集成系统扩展类
+pod 'WYBasisKit/Extension'
+
+/// 集成实用方法类
+pod 'WYBasisKit/Practical'
+```
 
 ### [点这里穿越到Objective-C版](https://github.com/Jacke-xu/WYBasisKit.git)
 

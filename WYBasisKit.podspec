@@ -17,6 +17,7 @@ Pod::Spec.new do |spec|
   
 
 # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
+
     spec.subspec 'Config' do |sp|
        sp.source_files = 'WYBasisKit/Config/**/*'
        sp.frameworks = 'Foundation', 'UIKit'
