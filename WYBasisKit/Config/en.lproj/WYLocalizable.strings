@@ -22,7 +22,7 @@
 "App没有访问相机的权限，现在去授权?" = "The app does not have permission to access the camera, now to authorize?";
 "继续连接" = "Continue";
 "取消连接" = "Cancel";
-"数据请求失败，状态码" = "Data request failed, status code";
+"数据请求失败" = "Data request failed";
 "未知的网络，可能存在安全隐患，是否继续？" = "The unknown network may have security risks. Do you want to continue?";
 "去设置" = "Go to set";
 "已取消不安全网络连接" = "Unsecured network connection cancelled";

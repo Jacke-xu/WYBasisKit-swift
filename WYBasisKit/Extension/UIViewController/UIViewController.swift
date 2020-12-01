@@ -32,28 +32,14 @@ extension UIViewController: ViewControllerHandlerProtocol {
 
 public extension UIViewController {
     
-    func wy_displayMessage(message: String, duration: TimeInterval = wy_messageDuration) {
+    func wy_displayMessage(title: String? = .none, message: String, duration: TimeInterval = wy_messageDuration) {
         
-        UIAlertController.wy_show(message: message, duration: duration)
+        UIAlertController.wy_show(title: title ?? "", message: message, duration: duration)
     }
     
     func wy_displayMessage(title: String? = .none, message: String? = .none, actions: [String] = [WYLocalizedString("知道了")]) {
         
         UIAlertController.wy_show(title: title ?? "", message: message ?? "", actions: actions)
-    }
-    
-    func wy_displayError(string: String, serverCode: WYServerCode = .success, only: [WYServerCode] = [.success]) {
-        
-        guard only.contains(serverCode) else { return }
-        
-        UIAlertController.wy_show(message: string, duration: wy_messageDuration)
-    }
-    
-    func wy_displayError(string: String, serverCode: WYServerCode = .success, exclude: [WYServerCode] = [.success]) {
-        
-        guard exclude.contains(serverCode) == false else { return }
-        
-        UIAlertController.wy_show(message: string, duration: wy_messageDuration)
     }
     
     func wy_displayLoading(string: String = "", animated: Bool = true) {

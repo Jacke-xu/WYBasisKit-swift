@@ -27,7 +27,7 @@ public class WYScrollText: UIView {
             _textArray = NSMutableArray(array: newValue) as? [String]
             if _textArray.isEmpty == true {
 
-                _textArray.append(placeholder.wy_emptyStr())
+                _textArray.append(placeholder)
             }
             
             _textArray.append(_textArray.first ?? "")

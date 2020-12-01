@@ -88,7 +88,7 @@ public extension UIAlertController {
     
     private func wy_sharedSecureTextEntry(placeholder: String!) -> Bool {
         
-        return placeholder.wy_stringContainsIgnoringCase(find: WYLocalizedString("密码"))
+        return placeholder.range(of: WYLocalizedString("密码"), options: .caseInsensitive) != nil
     }
     
     /// 仅用于外部调用处记录，可用以判断是否正在显示弹窗

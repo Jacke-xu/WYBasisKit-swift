@@ -10,11 +10,10 @@ import UIKit
 
 public let wy_defaultPageSize: NSInteger = 10
 public let wy_messageDuration: TimeInterval = 1.5
-public let wy_timeoutIntervalForRequest: TimeInterval = 10
 
 public class WYBasisKitConfig {
     
-    /// 设置tableView或collectionView上拉加载更多时每次请求的数据量，默认10条
+    /// 设置tableView或collectionView上拉加载更多时每次请求的数据量
     public static var wy_pageSize: NSInteger = wy_defaultPageSize
     
     /// 设置当前语言环境
