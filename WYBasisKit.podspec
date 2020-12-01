@@ -23,38 +23,38 @@ Pod::Spec.new do |spec|
 
   spec.subspec 'Config' do |sp|
        sp.source_files = 'WYBasisKit/Config/**/*'
-       sp.frameworks = 'Foundation", "UIKit'
+       sp.frameworks = 'Foundation', 'UIKit'
   end
 
   #spec.subspec 'Extension' do | sp|
-       #sp.source_files = "WYBasisKit/Extension"
-       #sp.frameworks = "Foundation", "UIKit"
-       #sp.dependency "WYBasisKit/Config"
-       #sp.dependency "MJRefresh"
-       #sp.dependency "libPhoneNumber-iOS"
-       #sp.dependency "MBProgressHUD"
+       #sp.source_files = 'WYBasisKit/Extension'
+       #sp.frameworks = 'Foundation', 'UIKit'
+       #sp.dependency 'WYBasisKit/Config'
+       #sp.dependency 'MJRefresh'
+       #sp.dependency 'libPhoneNumber-iOS'
+       #sp.dependency 'MBProgressHUD'
   #end
 
   #spec.subspec 'Practical' do |sp|
-       #sp.source_files = "WYBasisKit/Practical"
-       #sp.frameworks = "Foundation", "UIKit", "LocalAuthentication", "Photos", "CoreFoundation"
-       #sp.dependency "WYBasisKit/Config"
-       #sp.dependency "WYBasisKit/Extension"
+       #sp.source_files = 'WYBasisKit/Practical'
+       #sp.frameworks = 'Foundation', 'UIKit', 'LocalAuthentication', 'Photos', 'CoreFoundation'
+       #sp.dependency 'WYBasisKit/Config'
+       #sp.dependency 'WYBasisKit/Extension'
   #end
 
   #spec.subspec 'Layout' do |sp|
-       #sp.source_files = "WYBasisKit/Layout"
-       #sp.frameworks = "Foundation", "UIKit"
-       #sp.dependency "WYBasisKit/Config"
-       #sp.dependency "SnapKit"
+       #sp.source_files = 'WYBasisKit/Layout'
+       #sp.frameworks = 'Foundation', 'UIKit'
+       #sp.dependency 'WYBasisKit/Config'
+       #sp.dependency 'SnapKit'
   #end
 
   #spec.subspec 'Networking' do |sp|
-       #sp.source_files = "WYBasisKit/Networking"
-       #sp.frameworks = "Foundation", "UIKit"
-       #sp.dependency "WYBasisKit/Config"
-       #sp.dependency "WYBasisKit/Extension"
-       #sp.dependency "Moya"
-       #sp.dependency "HandyJSON"
+       #sp.source_files = 'WYBasisKit/Networking'
+       #sp.frameworks = 'Foundation', 'UIKit'
+       #sp.dependency 'WYBasisKit/Config'
+       #sp.dependency 'WYBasisKit/Extension'
+       #sp.dependency 'Moya'
+       #sp.dependency 'HandyJSON'
   #end
 end
