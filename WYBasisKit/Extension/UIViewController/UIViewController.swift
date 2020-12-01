@@ -24,7 +24,7 @@ public enum WYDisplaMode {
 
 extension UIViewController: ViewControllerHandlerProtocol {
 
-    public func wy_navigationBarWillReturn() -> Bool {
+    open func wy_navigationBarWillReturn() -> Bool {
 
         return true
     }

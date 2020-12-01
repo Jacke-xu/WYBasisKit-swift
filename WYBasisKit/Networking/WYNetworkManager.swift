@@ -72,9 +72,9 @@ public enum WYFileType {
 
 public class WYResponse: HandyJSON {
     
-    var message: String? = ""
+    public var message: String? = ""
     private var _msg: String = ""
-    var msg: String? {
+    public var msg: String? {
         set {
             _msg = (newValue ?? "")
         }
@@ -82,13 +82,8 @@ public class WYResponse: HandyJSON {
             return (_msg.isEmpty == true) ? message : _msg
         }
     }
-    var code: Int = WYNetworkConfig.serverRequestSuccessCode
-    var data: Any?
-    
-    required public init() {}
-}
-
-public class WYResponseInfo: HandyJSON {
+    public var code: Int = WYNetworkConfig.serverRequestSuccessCode
+    public var data: Any?
     
     required public init() {}
 }

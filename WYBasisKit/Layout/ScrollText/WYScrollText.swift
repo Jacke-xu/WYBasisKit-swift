@@ -20,7 +20,7 @@ public class WYScrollText: UIView {
     public var interval: TimeInterval = 3
     
     private var _textArray: [String]!
-    var textArray: [String]! {
+    public var textArray: [String]! {
         
         set {
             
