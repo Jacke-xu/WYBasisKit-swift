@@ -37,14 +37,14 @@ Pod::Spec.new do |spec|
        sp.dependency 'HandyJSON'
     end
 
-    #spec.subspec 'Extension' do | sp|
-       #sp.source_files = 'WYBasisKit/Extension/**/*'
-       #sp.frameworks = 'Foundation', 'UIKit'
-       #sp.dependency 'WYBasisKit/Config'
-       #sp.dependency 'MJRefresh'
-       #sp.dependency 'libPhoneNumber-iOS'
-       #sp.dependency 'MBProgressHUD'
-    #end
+    spec.subspec 'Extension' do | sp|
+       sp.source_files = 'WYBasisKit/Extension/**/*', 'WYBasisKit/Practical/ConstDefinition/**/*'
+       sp.frameworks = 'Foundation', 'UIKit'
+       sp.dependency 'WYBasisKit/Config'
+       sp.dependency 'MJRefresh'
+       sp.dependency 'libPhoneNumber-iOS'
+       sp.dependency 'MBProgressHUD'
+    end
 
     spec.subspec 'Practical' do |sp|
        sp.source_files = 'WYBasisKit/Practical/**/*', 'WYBasisKit/Extension/UIAlertController/**/*', 'WYBasisKit/Extension/NSObject/**/*', 'WYBasisKit/Extension/UIDevice/**/*'
