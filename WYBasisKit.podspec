@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
 
   spec.name         = "WYBasisKit"
-  spec.version      = "0.0.4"
+  spec.version      = "0.0.5"
   spec.summary      = "一个大幅提高开发效率的工具库"
   spec.description  = <<-DESC 
                           WYBasisKit 不仅可以帮助开发者快速构建一个工程，还有基于常用网络框架和系统API而封装的方法，开发者只需简单的调用API就可以快速实现相应功能， 大幅提高开发效率。
@@ -21,87 +21,40 @@ Pod::Spec.new do |spec|
   spec.dependency "Kingfisher"
   spec.dependency "IQKeyboardManagerSwift"
 
-  Pod::Spec.new do |sp|
-
-     sp.name = 'WYBasisKit'
-
-     sp.subspec 'Config' do |ssp|
-        ssp.source_files = "WYBasisKit/Config"
-        ssp.frameworks = "Foundation", "UIKit"
-     end
-
-     sp.subspec 'Extension' do |ssp|
-        ssp.source_files = "WYBasisKit/Extension"
-        ssp.frameworks = "Foundation", "UIKit"
-        ssp.dependency "WYBasisKit/Config"
-        ssp.dependency "MJRefresh"
-        ssp.dependency "libPhoneNumber-iOS"
-        ssp.dependency "MBProgressHUD"
-     end
-
-     sp.subspec 'Practical' do |ssp|
-        ssp.source_files = "WYBasisKit/Practical"
-        ssp.frameworks = "Foundation", "UIKit", "LocalAuthentication", "Photos", "CoreFoundation"
-        ssp.dependency "WYBasisKit/Config"
-        ssp.dependency "WYBasisKit/Extension"
-     end
-
-     sp.subspec 'Layout' do |ssp|
-        ssp.source_files = "WYBasisKit/Layout"
-        ssp.frameworks = "Foundation", "UIKit"
-        ssp.dependency "WYBasisKit/Config"
-        ssp.dependency "SnapKit"
-     end
-
-     sp.subspec 'Networking' do |ssp|
-        ssp.source_files = "WYBasisKit/Networking"
-        ssp.frameworks = "Foundation", "UIKit"
-        ssp.dependency "WYBasisKit/Config"
-        ssp.dependency "WYBasisKit/Extension"
-        ssp.dependency "Moya"
-        ssp.dependency "HandyJSON"
-     end
-
+  spec.subspec 'Config' do |sp|
+       sp.source_files = 'WYBasisKit/Config/**/*'
+       sp.frameworks = 'Foundation", "UIKit'
   end
 
+  #spec.subspec 'Extension' do | sp|
+       #sp.source_files = "WYBasisKit/Extension"
+       #sp.frameworks = "Foundation", "UIKit"
+       #sp.dependency "WYBasisKit/Config"
+       #sp.dependency "MJRefresh"
+       #sp.dependency "libPhoneNumber-iOS"
+       #sp.dependency "MBProgressHUD"
+  #end
 
-  #spec.subspec "WYBasisKit" do |ss|
+  #spec.subspec 'Practical' do |sp|
+       #sp.source_files = "WYBasisKit/Practical"
+       #sp.frameworks = "Foundation", "UIKit", "LocalAuthentication", "Photos", "CoreFoundation"
+       #sp.dependency "WYBasisKit/Config"
+       #sp.dependency "WYBasisKit/Extension"
+  #end
 
-       #ss.subspec "Config" do |sss|
-          #sss.source_files = "WYBasisKit/Config/**/*"
-          #sss.frameworks = "Foundation", "UIKit"
-       #end
+  #spec.subspec 'Layout' do |sp|
+       #sp.source_files = "WYBasisKit/Layout"
+       #sp.frameworks = "Foundation", "UIKit"
+       #sp.dependency "WYBasisKit/Config"
+       #sp.dependency "SnapKit"
+  #end
 
-       #ss.subspec "Extension" do |sss|
-          #sss.source_files  = "WYBasisKit/Extension/**/*"
-          #sss.frameworks = "Foundation", "UIKit"
-          #sss.dependency "WYBasisKit/Config"
-          #sss.dependency "MJRefresh"
-          #sss.dependency "libPhoneNumber-iOS"
-          #sss.dependency "MBProgressHUD"
-       #end
-
-       #ss.subspec "Practical" do |sss|
-          #sss.source_files  = "WYBasisKit/Practical/**/*"
-          #sss.frameworks = "Foundation", "UIKit", "LocalAuthentication", "Photos", "CoreFoundation"
-          #sss.dependency "WYBasisKit/Config"
-          #sss.dependency "WYBasisKit/Extension"
-       #end
-
-       #ss.subspec "Layout" do |sss|
-          #sss.source_files  = "WYBasisKit/Layout/**/*"
-          #sss.frameworks = "Foundation", "UIKit"
-          #sss.dependency "WYBasisKit/Config"
-          #sss.dependency "SnapKit"
-       #end
-
-       #ss.subspec "Networking" do |sss|
-          #sss.source_files  = "WYBasisKit/Networking/**/*"
-          #sss.frameworks = "Foundation", "UIKit"
-          #sss.dependency "WYBasisKit/Config"
-          #sss.dependency "WYBasisKit/Extension"
-          #sss.dependency "Moya"
-          #sss.dependency "HandyJSON"
-       #end
+  #spec.subspec 'Networking' do |sp|
+       #sp.source_files = "WYBasisKit/Networking"
+       #sp.frameworks = "Foundation", "UIKit"
+       #sp.dependency "WYBasisKit/Config"
+       #sp.dependency "WYBasisKit/Extension"
+       #sp.dependency "Moya"
+       #sp.dependency "HandyJSON"
   #end
 end
