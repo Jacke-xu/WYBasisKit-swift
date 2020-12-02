@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F3CEEB325773CE200955712 /* Foundation+JSONLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F3CEEB225773CE200955712 /* Foundation+JSONLog.m */; };
 		1F4A0E49256B4A52002E932D /* WYNetworkConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4A0E48256B4A52002E932D /* WYNetworkConfig.swift */; };
 		3B3DC2F1D41BE472909DAAC1 /* libPods-WYBasisKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DC30AAA7963EADDE72D26FBC /* libPods-WYBasisKit.a */; };
 		AA327F032569179F00CF5CBE /* WYBasisKitConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA327F022569179F00CF5CBE /* WYBasisKitConfig.swift */; };
@@ -46,6 +47,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1F3CEEB225773CE200955712 /* Foundation+JSONLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Foundation+JSONLog.m"; sourceTree = "<group>"; };
 		1F4A0E48256B4A52002E932D /* WYNetworkConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYNetworkConfig.swift; sourceTree = "<group>"; };
 		75FD4F7DFBF58D8B82417F4D /* Pods-WYBasisKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WYBasisKit.release.xcconfig"; path = "Target Support Files/Pods-WYBasisKit/Pods-WYBasisKit.release.xcconfig"; sourceTree = "<group>"; };
 		95FF853B47A9BDC19CFD8BF0 /* Pods-WYBasisKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WYBasisKit.debug.xcconfig"; path = "Target Support Files/Pods-WYBasisKit/Pods-WYBasisKit.debug.xcconfig"; sourceTree = "<group>"; };
@@ -105,6 +107,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1F3CEEB125773CA500955712 /* CNLog */ = {
+			isa = PBXGroup;
+			children = (
+				1F3CEEB225773CE200955712 /* Foundation+JSONLog.m */,
+			);
+			path = CNLog;
+			sourceTree = "<group>";
+		};
 		35AF068E98BFDE2CA01A3CDB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -169,6 +179,7 @@
 		AA771B922568F834002C748B /* Practical */ = {
 			isa = PBXGroup;
 			children = (
+				1F3CEEB125773CA500955712 /* CNLog */,
 				AA771BCA2568F834002C748B /* BoolJudge */,
 				AA771B9B2568F834002C748B /* Countdown */,
 				AA771BA52568F834002C748B /* Biometric */,
@@ -457,6 +468,7 @@
 				TargetAttributes = {
 					AA484EAE24FA262100B39D60 = {
 						CreatedOnToolsVersion = 11.6;
+						LastSwiftMigration = 1220;
 					};
 				};
 			};
@@ -553,6 +565,7 @@
 				AA771BDC2568F834002C748B /* NSObject.swift in Sources */,
 				AA771BE32568F834002C748B /* UITableView.swift in Sources */,
 				AA771BDA2568F834002C748B /* NumberFormatter.swift in Sources */,
+				1F3CEEB325773CE200955712 /* Foundation+JSONLog.m in Sources */,
 				AA771BD22568F834002C748B /* UIAlertController.swift in Sources */,
 				AA771C0F25691279002C748B /* WYLocalizableManager.swift in Sources */,
 				AA327F032569179F00CF5CBE /* WYBasisKitConfig.swift in Sources */,
@@ -730,6 +743,7 @@
 			baseConfigurationReference = 95FF853B47A9BDC19CFD8BF0 /* Pods-WYBasisKit.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JX362P6GEC;
 				INFOPLIST_FILE = Examples/Info.plist;
@@ -740,6 +754,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jacke-xu.WYBasisKit";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -750,6 +765,7 @@
 			baseConfigurationReference = 75FD4F7DFBF58D8B82417F4D /* Pods-WYBasisKit.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JX362P6GEC;
 				INFOPLIST_FILE = Examples/Info.plist;

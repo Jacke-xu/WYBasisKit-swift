@@ -13,6 +13,7 @@ public let wy_serverRequestSuccessCode: Int = 200
 public let wy_otherServerFailCode: Int = 10000
 public let wy_unpackServerFailCode: Int = 10001
 public let wy_networkServerFailCode: Int = 10002
+public let wy_debugModeLog: Bool = true
 
 public struct WYNetworkConfig {
     
@@ -36,4 +37,7 @@ public struct WYNetworkConfig {
     
     /// 配置解包失败code
     public static var unpackServerFailCode: Int = wy_unpackServerFailCode
+    
+    /// debug模式下是否打印网络请求日志
+    public static var debugModeLog: Bool = wy_debugModeLog
 }

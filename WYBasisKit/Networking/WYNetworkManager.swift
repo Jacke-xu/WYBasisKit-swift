@@ -239,8 +239,10 @@ public class WYNetworkManager {
                 
                 let statusCode = response.statusCode
                 
-                if statusCode != 200 {
+                if statusCode != wy_serverRequestSuccessCode {
                     
+                    self?.showDebugModeLog(target: target, response: response, function: #function, line: #line)
+
                     self?.handlerFailure(error: WYLocalizedString("数据请求失败"), serverCode: statusCode, failure: failure)
                     
                 }else {
@@ -248,21 +250,25 @@ public class WYNetworkManager {
                     do {
                         
                         //let responseData = try response.mapJSON()  也可以更改下返回值类型，直接把这个返回出去
-                        
-                        //wy_print("接口：\(target.baseURL)\(target.path)\n 请求头：\(target.headers ?? [:])\n 参数：\(target.request.parameters))\n 返回数据：\(try response.mapJSON())")
-                        
+
                         let responseData = try WYResponse.deserialize(from: response.mapString())
                         
                         if responseData?.code == WYNetworkConfig.serverRequestSuccessCode {
+                            
+                            self?.showDebugModeLog(target: target, response: response, function: #function, line: #line)
                             
                             self?.handlerSuccess(response: (originJson == true) ? try response.mapJSON() : responseData?.data, success: success)
                             
                         }else {
                             
+                            self?.showDebugModeLog(target: target, response: response, function: #function, line: #line)
+                            
                             self?.handlerFailure(error: responseData?.msg ?? "", serverCode: responseData?.code ?? WYNetworkConfig.otherServerFailCode, failure: failure)
                         }
                         
                     } catch  {
+                        
+                        self?.showDebugModeLog(target: target, response: response, function: #function, line: #line)
 
                         self?.handlerFailure(error: error.localizedDescription, serverCode: WYNetworkConfig.unpackServerFailCode, failure: failure)
                     }
@@ -270,6 +276,8 @@ public class WYNetworkManager {
                 break
                 
             case .failure(let error):
+
+                self?.showDebugModeLog(target: target, response: Response(statusCode: error.errorCode, data: error.localizedDescription.data(using: .utf8) ?? Data()), function: #function, line: #line)
                
                 self?.handlerFailure(error: error.localizedDescription, serverCode: error.errorCode, failure: failure)
                 
@@ -302,6 +310,13 @@ public class WYNetworkManager {
             // 关闭状态栏动画
             UIApplication.shared.isNetworkActivityIndicatorVisible = false
         }
+    }
+    
+    private func showDebugModeLog(target: WYTarget, response: Response, function: String, line: Int) {
+        
+        guard WYNetworkConfig.debugModeLog == true else { return }
+
+        wy_networkPrint("接口：\(target.baseURL)\(target.path)\n 请求头：\(target.headers ?? [:])\n 参数：\(target.request.parameters))\n 返回数据：\(String(describing: try? response.mapJSON()))", function: function, line: line)
     }
     
     private func checkNetworkStatus(handler: ((_ status: (WYNetworkStatus, String)) -> Void)? = nil) {
@@ -470,5 +485,13 @@ public class WYNetworkManager {
                 }
             })
         }
+    }
+    
+    /// DEBUG打印日志
+    public func wy_networkPrint(_ messages: Any..., file: String = #file, function: String, line: Int) {
+        #if DEBUG
+        let message = messages.compactMap { "\($0)" }.joined(separator: " ")
+        print("\n【\((file as NSString).lastPathComponent) ——> \(function) ——> line:\(line)】\n\n \(message)\n\n\n")
+        #endif
     }
 }
