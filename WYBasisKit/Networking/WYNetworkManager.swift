@@ -73,15 +73,7 @@ public enum WYFileType {
 public class WYResponse: HandyJSON {
     
     public var message: String? = ""
-    private var _msg: String = ""
-    public var msg: String? {
-        set {
-            _msg = (newValue ?? "")
-        }
-        get {
-            return (_msg.isEmpty == true) ? message : _msg
-        }
-    }
+    public var msg: String? = ""
     public var code: Int = WYNetworkConfig.serverRequestSuccessCode
     public var data: Any?
     
@@ -263,7 +255,7 @@ public class WYNetworkManager {
                             
                             self?.showDebugModeLog(target: target, response: response, function: #function, line: #line)
                             
-                            self?.handlerFailure(error: responseData?.msg ?? "", serverCode: responseData?.code ?? WYNetworkConfig.otherServerFailCode, failure: failure)
+                            self?.handlerFailure(error: (responseData?.msg ?? responseData?.message) ?? WYLocalizedString("未知错误，接口message返回为空"), serverCode: responseData?.code ?? WYNetworkConfig.otherServerFailCode, failure: failure)
                         }
                         
                     } catch  {
