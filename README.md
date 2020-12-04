@@ -11,7 +11,7 @@
 一、集成方式
     1、推荐cocoaPods方式集成
 
-    // 集成整个WYBasisKit
+    // 集成整个WYBasisKit(不包含Layout库，因为有的库项目开发过程中用不上，所以该库需要按自己需求单独集成)
     pod 'WYBasisKit' 
 
     // 集成网络请求相关
@@ -22,6 +22,9 @@
 
     /// 集成实用方法类
     pod 'WYBasisKit/Practical'
+    
+    /// 单独集成Layout库(libName： 目前包含ScrollText， 具体可查看WYBasisKit.podspec文件)
+    pod 'WYBasisKit/Layout/libName'
 
     2、下载WYBasisKit，解压后将工程下的整个WYBasisKit文件或您需要的文件放进项目中
     
