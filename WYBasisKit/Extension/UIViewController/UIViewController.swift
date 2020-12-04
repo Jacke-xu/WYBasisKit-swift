@@ -176,11 +176,6 @@ public extension UIViewController {
         return displaMode;
     }
     
-    private struct ControllerRuntimeKey {
-        
-        static let wy_parameters = UnsafeRawPointer.init(bitPattern: "wy_parameters".hashValue)!
-    }
-    
     /// 控制器附加参数
     var wy_parameters: AnyObject? {
         

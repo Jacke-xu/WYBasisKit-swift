@@ -17,8 +17,8 @@ public class WYBasisKitConfig {
     public static var wy_pageSize: NSInteger = wy_defaultPageSize
     
     /// 设置当前语言环境
-    public class func wy_setCurrentLanguage(language: WYLanguage) {
+    public class func wy_switchLanguage(language: WYLanguage, reload: Bool = true, handler:(() -> Void)? = nil) {
         
-        WYLocalizableManager.shared.setUserLanguage(language: language)
+        WYLocalizableManager.shared.switchLanguage(language: language, reload: reload, handler: handler)
     }
 }

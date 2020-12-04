@@ -66,4 +66,28 @@ public extension UIColor {
     class var wy_randomColor: UIColor {
         return UIColor.init(red: CGFloat(arc4random()%256)/255.0, green: CGFloat(arc4random()%256)/255.0, blue: CGFloat(arc4random()%256)/255.0, alpha: 1.0)
     }
+    
+    /// 动态颜色
+    class func wy_dynamicColor(light: UIColor, dark: UIColor) -> UIColor {
+        
+        if #available(iOS 13.0, *) {
+            
+            let dynamicColor = UIColor { (trainCollection) -> UIColor in
+                
+                if trainCollection.userInterfaceStyle == UIUserInterfaceStyle.light {
+                    
+                    return light
+                    
+                }else {
+                    
+                    return dark
+                }
+            }
+            return dynamicColor
+            
+        } else {
+            
+            return light
+        }
+    }
 }

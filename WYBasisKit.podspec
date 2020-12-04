@@ -24,10 +24,14 @@ Pod::Spec.new do |spec|
     end
 
     spec.subspec 'Layout' do |sp|
-       sp.source_files = 'WYBasisKit/Layout/**/*'
-       sp.frameworks = 'Foundation', 'UIKit'
-       sp.dependency 'WYBasisKit/Config'
-       sp.dependency 'SnapKit'
+
+       sp.subspec 'ScrollText' do |ss|
+        ss.source_files = 'WYBasisKit/Layout/ScrollText/**/*'
+        ss.frameworks = 'Foundation', 'UIKit'
+        ss.dependency 'WYBasisKit/Config'
+        ss.dependency 'SnapKit'
+       end
+
     end
 
     spec.subspec 'Networking' do |sp|
@@ -52,5 +56,8 @@ Pod::Spec.new do |spec|
        sp.frameworks = 'Foundation', 'UIKit', 'LocalAuthentication', 'Photos', 'CoreFoundation'
        sp.dependency 'WYBasisKit/Config'
     end
+
+    # 默认不集成Layout库，因为有的库项目开发过程中用不上，所以该库需要按自己需求单独集成
+    spec.exclude_files = 'WYBasisKit/Layout/**/*'
 
 end
