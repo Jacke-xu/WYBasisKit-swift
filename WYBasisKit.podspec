@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
 
   spec.name         = "WYBasisKit"
-  spec.version      = "0.1.0"
+  spec.version      = "0.1.1"
   spec.summary      = "一个大幅提高开发效率的工具库"
   spec.description  = <<-DESC 
                           WYBasisKit 不仅可以帮助开发者快速构建一个工程，还有基于常用网络框架和系统API而封装的方法，开发者只需简单的调用API就可以快速实现相应功能， 大幅提高开发效率。
@@ -17,9 +17,6 @@ Pod::Spec.new do |spec|
   
 
 # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-
-    # 默认不集成Layout库，因为有的库项目开发过程中用不上，所以该库需要按自己需求单独集成
-    spec.exclude_files = 'WYBasisKit/Layout/**/*'
 
     spec.subspec 'Config' do |sp|
        sp.source_files = 'WYBasisKit/Config/**/*'
