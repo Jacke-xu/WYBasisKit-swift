@@ -9,13 +9,6 @@
 import UIKit
 import MBProgressHUD
 
-/// viewController显示模式
-public enum WYDisplaMode {
-    
-    case push
-    case present
-}
-
 /// 拦截返回按钮的点击和侧滑返回事件
 @objc protocol ViewControllerHandlerProtocol {
     

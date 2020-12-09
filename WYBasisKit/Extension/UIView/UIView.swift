@@ -8,18 +8,6 @@
 
 import UIKit
 
-public enum WYGradientDirection {
-    
-    /// 从上到小
-    case topToBottom
-    /// 从左到右
-    case leftToRight
-    /// 左上到右下
-    case leftToLowRight
-    /// 右上到左下
-    case rightToLowlLeft
-}
-
 public extension UIView {
  
     /// 设置渐变色

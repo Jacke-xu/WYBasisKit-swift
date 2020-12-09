@@ -22,27 +22,9 @@ Pod::Spec.new do |spec|
        sp.source_files = 'WYBasisKit/Config/**/*'
        sp.frameworks = 'Foundation', 'UIKit'
     end
-
-    spec.subspec 'Layout' do |sp|
-
-       sp.subspec 'ScrollText' do |ss|
-        ss.source_files = 'WYBasisKit/Layout/ScrollText/**/*'
-        ss.frameworks = 'Foundation', 'UIKit'
-        ss.dependency 'WYBasisKit/Config'
-        ss.dependency 'SnapKit'
-       end
-    end
-
-    spec.subspec 'Networking' do |sp|
-       sp.source_files = 'WYBasisKit/Networking/**/*', 'WYBasisKit/Extension/UIAlertController/**/*'
-       sp.frameworks = 'Foundation', 'UIKit'
-       sp.dependency 'WYBasisKit/Config'
-       sp.dependency 'Moya'
-       sp.dependency 'HandyJSON'
-    end
-
+    
     spec.subspec 'Extension' do | sp|
-       sp.source_files = 'WYBasisKit/Extension/**/*', 'WYBasisKit/Practical/ConstDefinition/**/*'
+       sp.source_files = 'WYBasisKit/Extension/**/*', 'WYBasisKit/Practical/ConstDefinition/WYConstDefinition.swift'
        sp.frameworks = 'Foundation', 'UIKit'
        sp.dependency 'WYBasisKit/Config'
        sp.dependency 'MJRefresh'
@@ -54,5 +36,29 @@ Pod::Spec.new do |spec|
        sp.source_files = 'WYBasisKit/Practical/**/*', 'WYBasisKit/Extension/UIAlertController/**/*', 'WYBasisKit/Extension/NSObject/**/*', 'WYBasisKit/Extension/UIDevice/**/*'
        sp.frameworks = 'Foundation', 'UIKit', 'LocalAuthentication', 'Photos', 'CoreFoundation'
        sp.dependency 'WYBasisKit/Config'
+    end
+    
+    spec.subspec 'Networking' do |sp|
+       sp.source_files = 'WYBasisKit/Networking/**/*', 'WYBasisKit/Extension/UIAlertController/**/*'
+       sp.frameworks = 'Foundation', 'UIKit'
+       sp.dependency 'WYBasisKit/Config'
+       sp.dependency 'Moya'
+       sp.dependency 'HandyJSON'
+    end
+
+    spec.subspec 'Layout' do |sp|
+
+       sp.subspec 'ScrollText' do |ss|
+        ss.source_files = 'WYBasisKit/Layout/ScrollText/**/*'
+        ss.frameworks = 'Foundation', 'UIKit'
+        ss.dependency 'WYBasisKit/Config'
+        ss.dependency 'SnapKit'
+       end
+        sp.subspec 'PagingView' do |ss|
+        ss.source_files = 'WYBasisKit/Layout/PagingView/**/*', 'WYBasisKit/Extension/UIButton/**/*', 'WYBasisKit/Extension/UIColor/**/*', 'WYBasisKit/Extension/UIImage/**/*', 'WYBasisKit/Practical/ConstDefinition/WYConstDefinition.swift'
+        ss.frameworks = 'Foundation', 'UIKit'
+        ss.dependency 'WYBasisKit/Config'
+        ss.dependency 'SnapKit'
+       end
     end
 end

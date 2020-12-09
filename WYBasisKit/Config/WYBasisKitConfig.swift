@@ -10,6 +10,8 @@ import UIKit
 
 public let wy_defaultPageSize: NSInteger = 10
 public let wy_messageDuration: TimeInterval = 1.5
+public let wy_currentScreenWidthRatioBase: CGFloat = 375.0
+public let wy_currentScreenHeightRatioBase: CGFloat = 812.0
 
 public class WYBasisKitConfig {
     
@@ -21,4 +23,10 @@ public class WYBasisKitConfig {
         
         WYLocalizableManager.shared.switchLanguage(language: language, reload: reload, handler: handler)
     }
+    
+    /// 设置屏幕宽度比基数
+    public static var wy_screenWidthRatioBase: CGFloat = wy_currentScreenWidthRatioBase
+    
+    /// 设置屏幕高度比基数
+    public static var wy_screenHeightRatioBase: CGFloat = wy_currentScreenHeightRatioBase
 }

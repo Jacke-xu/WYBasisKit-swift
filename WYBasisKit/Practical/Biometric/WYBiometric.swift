@@ -9,12 +9,6 @@
 import Foundation
 import LocalAuthentication
 
-public enum WYBiometricType {
-    case none
-    case touchID
-    case faceID
-}
-
 /// 获取设备支持的生物识别类型
 public func wy_checkBiometric() -> WYBiometricType {
 

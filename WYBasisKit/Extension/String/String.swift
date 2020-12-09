@@ -9,22 +9,6 @@
 import UIKit
 import libPhoneNumber_iOS
 
-public enum WYTimeFormat {
-    
-    /// 时:分
-    case hourMinutes
-    /// 年-月-日
-    case yearMonthDay
-    /// 时:分:秒
-    case hourMinutesSecond
-    /// 月-日 时:分
-    case monthDayAndHourMinutes
-    /// 年-月-日 时:分
-    case yearMonthDayAndhourMinutes
-    /// 年-月-日 时:分:秒
-    case yearMonthDayAndhourMinutesSecond
-}
-
 public extension String {
     
     /// 返回一个计算好的字符串的宽度

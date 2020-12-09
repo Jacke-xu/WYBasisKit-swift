@@ -8,15 +8,6 @@
 
 import UIKit
 
-public enum WYLanguage: String {
-    
-    /// 中文
-    case chinese = "zh-Hans"
-    
-    /// 英文
-    case english = "en"
-}
-
 private let WYBasisKitLanguage = "WYBasisKitLanguage"
 
 public func WYLocalizedString(_ key: String) -> String {

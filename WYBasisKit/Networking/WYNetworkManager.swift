@@ -58,18 +58,6 @@ import Moya
 import Alamofire
 import HandyJSON
 
-public enum WYFileType {
-    
-    /// 上传图片
-    case image
-    /// 上传音频
-    case audio
-    /// 上传视频
-    case video
-    /// URL路径上传
-    case urlPath
-}
-
 public class WYResponse: HandyJSON {
     
     public var message: String? = ""
@@ -154,25 +142,6 @@ public class WYFileModel: HandyJSON {
 }
 
 public class WYNetworkManager {
-    
-    public enum WYNetworkStatus {
-        
-        /// 未知网络，可能是不安全的连接
-        case unknown
-        /// 无网络连接
-        case notReachable
-        /// wifi网络
-        case reachableWifi
-        /// 蜂窝移动网络
-        case reachableCellular
-        
-        /// 用户未选择
-        case userNotSelectedConnect
-        /// 用户设置取消连接
-        case userCancelConnect
-        /// 用户设置继续连接
-        case userContinueConnect
-    }
     
     public static let shared = WYNetworkManager()
     

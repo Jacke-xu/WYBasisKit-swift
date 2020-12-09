@@ -9,14 +9,6 @@
 import Moya
 import Alamofire
 
-public enum WYTaskMethod {
-    
-    /// 数据任务
-    case data
-    /// 上传任务
-    case upload
-}
-
 struct WYRequest {
     
     /// 请求方式

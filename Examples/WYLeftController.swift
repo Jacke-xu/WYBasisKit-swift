@@ -19,19 +19,36 @@ class WYLeftController: UIViewController {
         
         let button = UIButton(type: .custom)
         button.backgroundColor = UIColor.wy_dynamicColor(light: .green, dark: .orange)
-        button.frame = CGRect(x: 100, y: 100, width: 200, height: 100)
         button.titleLabel?.numberOfLines = 0
         button.setTitle("亮色/中文(中英文切换看导航栏)", for: .normal)
         view.addSubview(button)
-        button.addTarget(self, action: #selector(clickButton), for: .touchUpInside)
+        button.addTarget(self, action: #selector(clickButton(sender:)), for: .touchUpInside)
+        button.snp.makeConstraints { (make) in
+            
+            make.centerX.equalToSuperview()
+            make.top.equalToSuperview().offset(100)
+            make.size.equalTo(CGSize(width: 100, height: 100))
+        }
     }
     
-    @objc func clickButton() {
+    @objc func clickButton(sender: UIButton) {
         
-        WYLocalizableManager.shared.switchLanguage(language: .chinese) {
+        /// 约束控件实现动画的关键是在animate方法中调用父视图的layoutIfNeeded方法
+        UIView.animate(withDuration: 2) {
             
-            if #available(iOS 13.0, *) {
-                UIApplication.shared.wy_switchAppDisplayBrightness(style: .light)
+            sender.snp.updateConstraints { (make) in
+                
+                make.top.equalToSuperview().offset(350)
+            }
+            sender.superview!.layoutIfNeeded()
+            
+        }completion: { (_) in
+            
+            WYLocalizableManager.shared.switchLanguage(language: .chinese) {
+
+                if #available(iOS 13.0, *) {
+                    UIApplication.shared.wy_switchAppDisplayBrightness(style: .light)
+                }
             }
         }
     }

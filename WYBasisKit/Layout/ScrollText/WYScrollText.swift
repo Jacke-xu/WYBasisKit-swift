@@ -8,8 +8,15 @@
 
 import SnapKit
 
+@objc public protocol WYScrollTextDelegate {
+    
+    @objc optional func itemDidClick(_ itemIndex: NSInteger)
+}
+
 public class WYScrollText: UIView {
     
+    /// 点击事件代理(也可以通过传入block监听)
+    public weak var delegate: WYScrollTextDelegate?
     /// 占位文本
     public var placeholder: String = WYLocalizedString("暂无消息")
     /// 文本颜色
@@ -48,9 +55,6 @@ public class WYScrollText: UIView {
         flowLayout.scrollDirection = .vertical
         flowLayout.minimumLineSpacing = 0 // 行间距
         flowLayout.minimumInteritemSpacing = 0 // 列间距
-//        flowLayout.itemSize = CGSize(width: self.bounds.size.width, height: self.bounds.size.height) // item大小
-//        flowLayout.headerReferenceSize = .zero // 组头大小
-//        flowLayout.footerReferenceSize = .zero // 组尾大小
         
         let collectionview = UICollectionView(frame: self.bounds, collectionViewLayout: flowLayout)
         collectionview.showsVerticalScrollIndicator = false
@@ -70,7 +74,7 @@ public class WYScrollText: UIView {
     
     private var actionHandler: ((_ index: NSInteger) -> Void)?
     
-    /// 处理点击事件
+    /// 点击事件(也可以通过实现代理监听)
     public func didClickHandler(handler:((_ index: NSInteger) -> Void)? = nil) {
         
         actionHandler = handler
@@ -149,6 +153,7 @@ extension WYScrollText: UICollectionViewDelegate, UICollectionViewDataSource, UI
             
             actionHandler!((textIndex == textArray.count-1) ? 0 : textIndex)
         }
+        delegate?.itemDidClick?((textIndex == textArray.count-1) ? 0 : textIndex)
     }
 }
 

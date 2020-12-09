@@ -20,13 +20,13 @@ public let wy_statusBarHeight: CGFloat = UIApplication.shared.statusBarFrame.siz
 public let wy_navViewHeight: CGFloat = (wy_statusBarHeight+wy_navBarHeight)
 
 /// tabBar高度
-public let wy_tabBarHeight: CGFloat = ((UIDevice.wy_isNeatBang == true) ? (49.0+34.0) : 49.0)
+public let wy_tabBarHeight: CGFloat = ((UIApplication.shared.statusBarFrame.height != 20.0) ? (49.0+34.0) : 49.0)
 
 /// tabBar安全区域
-public let wy_tabbarSafetyZone: CGFloat = ((UIDevice.wy_isNeatBang == true) ? 34.0 : 0.0)
+public let wy_tabbarSafetyZone: CGFloat = ((UIApplication.shared.statusBarFrame.height != 20.0) ? 34.0 : 0.0)
 
 /// 导航栏安全区域
-public let wy_navBarSafetyZone: CGFloat = ((UIDevice.wy_isNeatBang == true) ? 44.0 : 0.0)
+public let wy_navBarSafetyZone: CGFloat = ((UIApplication.shared.statusBarFrame.height != 20.0) ? 44.0 : 0.0)
 
 /// 屏幕宽
 public let wy_screenWidth: CGFloat = UIScreen.main.bounds.size.width
@@ -35,10 +35,10 @@ public let wy_screenWidth: CGFloat = UIScreen.main.bounds.size.width
 public let wy_screenHeight: CGFloat = UIScreen.main.bounds.size.height
 
 /// 屏幕宽度比率
-public let wy_screenWidthRatio: CGFloat = (wy_screenWidth / 375.0)
+public let wy_screenWidthRatio: CGFloat = (wy_screenWidth / WYBasisKitConfig.wy_screenWidthRatioBase)
 
 /// 屏幕高度比率
-public let wy_screenHeightRatio: CGFloat = (wy_screenHeight / 812.0)
+public let wy_screenHeightRatio: CGFloat = (wy_screenHeight / WYBasisKitConfig.wy_screenHeightRatioBase)
 
 /// 屏幕宽度比率转换
 public func wy_screenWidthRatioValue(value: CGFloat) -> CGFloat {
@@ -50,42 +50,12 @@ public func wy_screenHeightRatioValue(value: CGFloat) -> CGFloat {
     return (value*wy_screenHeightRatio)
 }
 
-/// 获取当前正在显示的控制器
-public func wy_showController(controller: UIViewController = UIApplication.shared.keyWindow!.rootViewController!) -> UIViewController? {
-    
-    if controller is UITabBarController {
-        
-        let tabBarController = controller as! UITabBarController
-        
-        return wy_showController(controller: tabBarController.selectedViewController!)
-    }
-    
-    if controller is UINavigationController {
-        
-        let navController = controller as! UINavigationController
-        
-        return wy_showController(controller: navController.viewControllers.last!)
-    }
-    
-    return controller
-}
-
 /// DEBUG打印日志
 public func wy_print(_ messages: Any..., file: String = #file, function: String = #function, line: Int = #line) {
     #if DEBUG
     let message = messages.compactMap { "\($0)" }.joined(separator: " ")
     print("\n【\((file as NSString).lastPathComponent) ——> \(function) ——> line:\(line)】\n\n \(message)\n\n\n")
     #endif
-}
-
-/// 角度转弧度
-public func wy_degreesToRadian(degrees: CGFloat) -> CGFloat {
-    return NSObject.wy_maintainAccuracy(value: (CGFloat.pi * (degrees) / 180.0))
-}
-
-/// 弧度转角度
-public func wy_radianToDegrees(radian: CGFloat) -> CGFloat {
-    return NSObject.wy_maintainAccuracy(value: (radian*180.0)/(CGFloat.pi))
 }
 
 /// 获取app包路径
