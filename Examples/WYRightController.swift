@@ -20,7 +20,7 @@ class WYRightController: UIViewController {
         var simageAry: [UIImage] = []
         var dimageAry: [UIImage] = []
         
-        for index in 0..<10 {
+        for index in 0..<20 {
             
             let controller = UIViewController()
             controller.view.backgroundColor = .wy_randomColor
@@ -41,6 +41,7 @@ class WYRightController: UIViewController {
         }
         pagingView.delegate = self
         pagingView.bar_Height = 80
+        //pagingView.bar_bg_defaultColor = .orange
         pagingView.layout(controllerAry: controllerAry, titleAry: titleAry, defaultImageAry: dimageAry, selectedImageAry: simageAry, superViewController: self)
         pagingView.itemDidScroll { (pagingIndex) in
             

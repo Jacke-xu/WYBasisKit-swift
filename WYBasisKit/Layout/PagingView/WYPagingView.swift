@@ -33,6 +33,9 @@ public class WYPagingView: UIView {
 
     /// 分页栏右起始点距离(最后一个标题栏距离屏幕边界的距离) 默认0
     public var bar_originlRightOffset: CGFloat = 0
+    
+    /// 显示整体宽度小于一屏，且设置了bar_Width != 0，是否需要居中显示，默认 居中 (居中后，将会动态调整bar_originlLeftOffset和bar_originlRightOffset的距离)
+    public var bar_adjustOffset: Bool = true
 
     /// 左右分页栏之间的间距
     public var bar_dividingOffset: CGFloat = wy_screenWidthRatioValue(value: 20)
@@ -137,7 +140,7 @@ public class WYPagingView: UIView {
     
     private var actionHandler: ((_ index: NSInteger) -> Void)?
     
-    init() {
+    public init() {
         super.init(frame: .zero)
     }
     
@@ -199,7 +202,10 @@ extension WYPagingView {
         
         if (needScrollOffsetX > maxAllowScrollOffsetX) { needScrollOffsetX = maxAllowScrollOffsetX }
         
-        barScrollView.setContentOffset(CGPoint(x: needScrollOffsetX, y: 0), animated: true)
+        if (barScrollView.contentSize.width > self.frame.size.width) {
+            
+            barScrollView.setContentOffset(CGPoint(x: needScrollOffsetX, y: 0), animated: true)
+        }
         
         UIView.animate(withDuration: 0.2) {
 
@@ -258,6 +264,13 @@ extension WYPagingView {
         
         layoutIfNeeded()
         
+        if ((bar_adjustOffset == true) && (bar_Width > 0) && (bar_Width * CGFloat(titles.count) <= wy_screenWidth)) {
+            
+            bar_originlLeftOffset = (self.frame.size.width - (bar_Width * CGFloat(titles.count)) - bar_dividingOffset) / 2
+            
+            bar_originlRightOffset = bar_originlLeftOffset
+        }
+        
         var lastView: UIView? = nil
         for index in 0..<titles.count {
             
@@ -277,20 +290,21 @@ extension WYPagingView {
             }
             barScrollView.insertSubview(buttonItem, at: 0)
             buttonItem.snp.makeConstraints { (make) in
+                
+                make.top.equalToSuperview()
+                make.bottom.equalToSuperview().offset(-bar_dividingStripHeight)
 
                 if lastView == nil {
                     make.left.equalToSuperview().offset(bar_originlLeftOffset)
                 }else {
                     make.left.equalTo(lastView!.snp.right).offset(bar_dividingOffset)
                 }
-                make.top.equalToSuperview()
-                make.bottom.equalToSuperview().offset(-bar_dividingStripHeight)
+                if bar_Width > 0 {
+                    make.width.equalTo(bar_Width)
+                }
                 if(index == (titles.count-1)) {
 
                     make.right.equalToSuperview().offset(-bar_originlRightOffset)
-                }
-                if bar_Width > 0 {
-                    make.width.equalTo(bar_Width)
                 }
             }
             if ((defaultImages.count == titles.count) && (selectedImages.count == titles.count)) {
@@ -414,6 +428,7 @@ extension WYPagingView {
                 make.left.equalToSuperview()
                 make.size.equalTo(CGSize(width: bar_scrollLineWidth, height: bar_scrollLineHeight))
             }
+            scrollLine?.wy_add(cornerRadius: bar_scrollLineHeight / 2)
             
             objc_setAssociatedObject(self, WYAssociatedKeys.barScrollLine, scrollLine!, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }

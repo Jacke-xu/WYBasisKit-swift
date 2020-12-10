@@ -18,17 +18,20 @@ class WYLeftController: UIViewController {
         self.navigationItem.title = WYLocalizedString("知道了")
         
         let button = UIButton(type: .custom)
-        button.backgroundColor = UIColor.wy_dynamicColor(light: .green, dark: .orange)
         button.titleLabel?.numberOfLines = 0
         button.setTitle("亮色/中文(中英文切换看导航栏)", for: .normal)
         view.addSubview(button)
         button.addTarget(self, action: #selector(clickButton(sender:)), for: .touchUpInside)
         button.snp.makeConstraints { (make) in
-            
+
             make.centerX.equalToSuperview()
             make.top.equalToSuperview().offset(100)
             make.size.equalTo(CGSize(width: 100, height: 100))
         }
+        
+        //button.wy_add(rectCorner: [.topRight, .bottomLeft], cornerRadius: 20, borderColor: .black, borderWidth: 5)
+        //button.wy_add(gradualColors: [.orange, .red], gradientDirection: .leftToRight)
+        button.wy_add(rectCorner: [.topRight, .bottomLeft], shadowColor: .orange, shadowRadius: 10, shadowOpacity: 0.5, shadowOffset: .zero)
     }
     
     @objc func clickButton(sender: UIButton) {

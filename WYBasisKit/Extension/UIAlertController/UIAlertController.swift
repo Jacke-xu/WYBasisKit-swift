@@ -11,7 +11,7 @@ import UIKit
 
 public extension UIAlertController {
     
-    class func wy_show(style: UIAlertController.Style = .alert, title: String = "", message: String = "", duration: TimeInterval = 0.0, textFieldPlaceholders: Array<String> = [], actions: Array<String> = [], handler:((_ actionStr: String, _ textFieldTexts: Array<String>) -> Void)? = nil) {
+    class func wy_show(style: UIAlertController.Style = .alert, title: String = "", message: String = "", duration: TimeInterval = 0.0, actionSheetNeedCancel: Bool = true, textFieldPlaceholders: [String] = [], actions: [String] = [], handler:((_ actionStr: String, _ textFieldTexts: [String]) -> Void)? = nil) {
         
         DispatchQueue.main.async {
             
@@ -32,24 +32,14 @@ public extension UIAlertController {
             
             for actionStr: String in actions {
                 
-                let action: UIAlertAction = UIAlertAction(title: actionStr, style: alertController.wy_sharedActionStyle(actionStr: actionStr, alertStyle: style)) { (alertAction) in
-                    
-                    if (handler != nil) {
-
-                        let texts: NSMutableArray = []
-                        if !textFieldPlaceholders.isEmpty {
-                            
-                            for textField: UITextField in alertController.textFields! {
-                                
-                                texts.add(textField.text ?? "")
-                            }
-                        }
-                        handler!(alertAction.title!, texts.copy() as! Array<String>)
-                    }
-                    alertController.wy_sharedAppDelegate().window?!.makeKeyAndVisible()
-                }
-                alertController.addAction(action)
+                alertController.wy_addAlertAction(actionStr: actionStr, actionStyle: alertController.wy_sharedActionStyle(actionStr: actionStr, alertStyle: style), alertController: alertController, textFieldPlaceholders: textFieldPlaceholders, handler: handler)
             }
+            
+            if ((style == .actionSheet) && (actionSheetNeedCancel == true)) {
+                
+                alertController.wy_addAlertAction(actionStr: WYLocalizedString("取消"), actionStyle: .cancel, alertController: alertController, textFieldPlaceholders: textFieldPlaceholders, handler: handler)
+            }
+            
             alertController.modalPresentationStyle = .fullScreen
             alertController.wy_alertWindow?.rootViewController?.present(alertController, animated: true, completion: nil)
             
@@ -68,18 +58,33 @@ public extension UIAlertController {
         }
     }
     
+    private func wy_addAlertAction(actionStr: String, actionStyle: UIAlertAction.Style, alertController: UIAlertController, textFieldPlaceholders: [String] = [], handler:((_ actionStr: String, _ textFieldTexts: [String]) -> Void)? = nil) {
+        
+        let action: UIAlertAction = UIAlertAction(title: actionStr, style: actionStyle) { (alertAction) in
+            
+            if (handler != nil) {
+
+                let texts: NSMutableArray = []
+                if !textFieldPlaceholders.isEmpty {
+                    
+                    for textField: UITextField in alertController.textFields! {
+                        
+                        texts.add(textField.text ?? "")
+                    }
+                }
+                handler!(alertAction.title!, texts.copy() as! Array<String>)
+            }
+            alertController.wy_sharedAppDelegate().window?!.makeKeyAndVisible()
+        }
+        alertController.addAction(action)
+    }
+    
     private func wy_sharedActionStyle(actionStr: String!, alertStyle: UIAlertController.Style!) -> UIAlertAction.Style {
         
         var actionStyle: UIAlertAction.Style! = UIAlertAction.Style.default
         switch actionStr {
         case WYLocalizedString("删除"):
             actionStyle = UIAlertAction.Style.destructive
-        case WYLocalizedString("取消"):
-            if alertStyle == UIAlertController.Style.actionSheet {
-                actionStyle = UIAlertAction.Style.cancel
-            }else {
-                actionStyle = UIAlertAction.Style.default
-            }
         default:
             actionStyle = UIAlertAction.Style.default
         }
@@ -95,19 +100,18 @@ public extension UIAlertController {
     class var wy_isBecomeActive: Bool {
         
         get {
-            
-            return objc_getAssociatedObject(self, #function) as? Bool ?? false
+            return objc_getAssociatedObject(self, UIAlertControllerRuntimeKey.wy_isBecomeActive) as? Bool ?? false
         }
-        
         set {
-            
-            objc_setAssociatedObject(self, #function, newValue, .OBJC_ASSOCIATION_ASSIGN)
+            objc_setAssociatedObject(self, UIAlertControllerRuntimeKey.wy_isBecomeActive, newValue, .OBJC_ASSOCIATION_ASSIGN)
         }
     }
     
     private struct UIAlertControllerRuntimeKey {
         
         static let wy_alertWindow = UnsafeRawPointer.init(bitPattern: "wy_alertWindow".hashValue)!
+        
+        static let wy_isBecomeActive = UnsafeRawPointer.init(bitPattern: "wy_isBecomeActive".hashValue)!
     }
     
     private var wy_alertWindow: UIWindow? {

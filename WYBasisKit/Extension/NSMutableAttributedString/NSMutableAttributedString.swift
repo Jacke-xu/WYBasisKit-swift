@@ -69,10 +69,11 @@ public extension NSMutableAttributedString {
     }
     
     /// 设置行间距
-    func wy_lineSpacing(lineSpacing: CGFloat, string: String) {
+    func wy_lineSpacing(lineSpacing: CGFloat, string: String, alignment: NSTextAlignment = .left) {
         
         let paragraphStyle: NSMutableParagraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = lineSpacing
+        paragraphStyle.alignment = alignment
         
         let selfStr: NSString = self.string as NSString
         self.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: selfStr.range(of: string))

@@ -9,46 +9,6 @@
 import UIKit
 
 public extension UIView {
- 
-    /// 设置渐变色
-    func wy_gradualColors(colors: [UIColor], gradientDirection: WYGradientDirection)  {
-        
-        DispatchQueue.main.async {
-            
-            var CGColors: [CGColor] = NSMutableArray.init() as! [CGColor]
-            for color: UIColor in colors {
-                
-                CGColors.append(color.cgColor)
-            }
-            
-            var startPoint: CGPoint!
-            var endPoint: CGPoint!
-            switch gradientDirection {
-            case .topToBottom:
-                startPoint = CGPoint(x: 0.0, y: 0.0)
-                endPoint = CGPoint(x: 0.0, y: 1.0)
-                break
-            case .leftToRight:
-                startPoint = CGPoint(x: 0.0, y: 0.0)
-                endPoint = CGPoint(x: 1.0, y: 0.0)
-                break
-            case .leftToLowRight:
-                startPoint = CGPoint(x: 0.0, y: 0.0)
-                endPoint = CGPoint(x: 1.0, y: 1.0)
-                break
-            default:
-                startPoint = CGPoint(x: 1.0, y: 0.0)
-                endPoint = CGPoint(x: 0.0, y: 1.0)
-            }
-            
-            let layer = CAGradientLayer()
-            layer.frame = self.bounds
-            layer.colors = CGColors
-            layer.startPoint = startPoint
-            layer.endPoint = endPoint
-            self.layer.insertSublayer(layer, at: 0)
-        }
-    }
     
     /** view.width */
     var wy_width: CGFloat {
@@ -225,8 +185,8 @@ public extension UIView {
     func wy_addGestureAction(target: Any?, action: Selector?) {
         
         let gestureRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: target, action: action)
-        self.isUserInteractionEnabled = true
-        self.addGestureRecognizer(gestureRecognizer)
+        isUserInteractionEnabled = true
+        addGestureRecognizer(gestureRecognizer)
     }
     
     /// 添加收起键盘的手势
@@ -236,11 +196,118 @@ public extension UIView {
         gestureRecognizer.numberOfTapsRequired = 1
         //设置成false表示当前控件响应后会传播到其他控件上，默认为true
         gestureRecognizer.cancelsTouchesInView = false
-        self.addGestureRecognizer(gestureRecognizer)
+        addGestureRecognizer(gestureRecognizer)
     }
     
     @objc private func wy_keyboardHide() {
         
-        self.endEditing(true)
+        endEditing(true)
+    }
+}
+
+public extension UIView {
+    
+    /**
+    * 设置圆角、边框
+    * @param rectCorner        要圆角的位置，默认4角圆角
+    * @param cornerRadius      圆角半径
+    * @param borderColor       边框颜色
+    * @param borderWidth       边框宽度
+    */
+    func wy_add(rectCorner: UIRectCorner = .allCorners, cornerRadius: CGFloat = 0, borderColor: UIColor = .clear, borderWidth: CGFloat = 0) {
+        
+        DispatchQueue.main.async {
+            
+            self.layoutIfNeeded()
+            
+            // 抗锯齿边缘
+            self.layer.rasterizationScale = UIScreen.main.scale
+            
+            // 设置圆角
+            let maskPath = UIBezierPath.init(roundedRect: self.bounds, byRoundingCorners: rectCorner, cornerRadii: CGSize(width: cornerRadius, height: cornerRadius))
+            let maskLayer = CAShapeLayer()
+            maskLayer.frame = self.bounds
+            maskLayer.path = maskPath.cgPath
+            self.layer.mask = maskLayer
+            
+            // 设置边框
+            let borderLayer = CAShapeLayer()
+            borderLayer.path = maskLayer.path
+            borderLayer.fillColor = UIColor.clear.cgColor
+            borderLayer.strokeColor = borderColor.cgColor
+            borderLayer.lineWidth = borderWidth
+            borderLayer.frame = self.bounds
+            self.layer.addSublayer(borderLayer)
+        }
+    }
+    
+    /**
+    * 设置阴影
+    * @param rectCorner        要圆角的位置，默认不圆角
+    * @param shadowColor       阴影颜色
+    * @param shadowRadius      阴影半径
+    * @param shadowOpacity     阴影透明度，默认值是0.0，取值范围0~1
+    * @param shadowOffset      阴影偏移度(width : 为正数时，向右偏移，为负数时，向左偏移，height : 为正数时，向下偏移，为负数时，向上偏移)
+    */
+    func wy_add(rectCorner: UIRectCorner = .init(), shadowColor: UIColor = .clear, shadowRadius: CGFloat = 0, shadowOpacity: CGFloat = 0.5, shadowOffset: CGSize = CGSize.zero) {
+        
+        DispatchQueue.main.async {
+            
+            self.layoutIfNeeded()
+            
+            // 抗锯齿边缘
+            self.layer.rasterizationScale = UIScreen.main.scale
+            
+            // 设置阴影
+            self.layer.shadowColor = shadowColor.cgColor
+            self.layer.shadowOffset = shadowOffset
+            self.layer.shadowOpacity = Float(shadowOpacity)
+            self.layer.shadowPath = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: rectCorner, cornerRadii: CGSize(width: shadowRadius, height: shadowRadius)).cgPath
+        }
+    }
+    
+    /// 设置渐变色
+    func wy_add(gradualColors: [UIColor], gradientDirection: WYGradientDirection)  {
+        
+        DispatchQueue.main.async {
+            
+            self.layoutIfNeeded()
+            
+            // 抗锯齿边缘
+            self.layer.rasterizationScale = UIScreen.main.scale
+            
+            var CGColors: [CGColor] = NSMutableArray.init() as! [CGColor]
+            for color: UIColor in gradualColors {
+                
+                CGColors.append(color.cgColor)
+            }
+            
+            var startPoint: CGPoint!
+            var endPoint: CGPoint!
+            switch gradientDirection {
+            case .topToBottom:
+                startPoint = CGPoint(x: 0.0, y: 0.0)
+                endPoint = CGPoint(x: 0.0, y: 1.0)
+                break
+            case .leftToRight:
+                startPoint = CGPoint(x: 0.0, y: 0.0)
+                endPoint = CGPoint(x: 1.0, y: 0.0)
+                break
+            case .leftToLowRight:
+                startPoint = CGPoint(x: 0.0, y: 0.0)
+                endPoint = CGPoint(x: 1.0, y: 1.0)
+                break
+            default:
+                startPoint = CGPoint(x: 1.0, y: 0.0)
+                endPoint = CGPoint(x: 0.0, y: 1.0)
+            }
+            
+            let layer = CAGradientLayer()
+            layer.frame = self.bounds
+            layer.colors = CGColors
+            layer.startPoint = startPoint
+            layer.endPoint = endPoint
+            self.layer.insertSublayer(layer, at: 0)
+        }
     }
 }
