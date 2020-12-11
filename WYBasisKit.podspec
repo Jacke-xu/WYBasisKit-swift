@@ -55,7 +55,7 @@ Pod::Spec.new do |spec|
         ss.dependency 'SnapKit'
        end
         sp.subspec 'PagingView' do |ss|
-        ss.source_files = 'WYBasisKit/Layout/PagingView/**/*', 'WYBasisKit/Extension/UIButton/**/*', 'WYBasisKit/Extension/UIColor/**/*', 'WYBasisKit/Extension/UIImage/**/*', 'WYBasisKit/Practical/ConstDefinition/WYConstDefinition.swift'
+        ss.source_files = 'WYBasisKit/Layout/PagingView/**/*', 'WYBasisKit/Extension/UIButton/**/*', 'WYBasisKit/Extension/UIColor/**/*', 'WYBasisKit/Extension/UIImage/**/*', 'WYBasisKit/Extension/UIView/**/*', 'WYBasisKit/Practical/ConstDefinition/WYConstDefinition.swift'
         ss.frameworks = 'Foundation', 'UIKit'
         ss.dependency 'WYBasisKit/Config'
         ss.dependency 'SnapKit'

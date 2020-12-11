@@ -18,6 +18,7 @@ class WYLeftController: UIViewController {
         self.navigationItem.title = WYLocalizedString("知道了")
         
         let button = UIButton(type: .custom)
+        button.backgroundColor = UIColor.wy_dynamicColor(light: .green, dark: .orange)
         button.titleLabel?.numberOfLines = 0
         button.setTitle("亮色/中文(中英文切换看导航栏)", for: .normal)
         view.addSubview(button)
@@ -28,13 +29,22 @@ class WYLeftController: UIViewController {
             make.top.equalToSuperview().offset(100)
             make.size.equalTo(CGSize(width: 100, height: 100))
         }
+        button.wy_add(rectCorner: [.topLeft, .bottomRight], cornerRadius: 10, borderColor: .orange, borderWidth: 5, shadowColor: .purple, shadowRadius: 20, shadowOpacity: 0.5, shadowOffset: .zero, gradualColors: [.orange, .red], gradientDirection: .topToBottom)
+
         
-        //button.wy_add(rectCorner: [.topRight, .bottomLeft], cornerRadius: 20, borderColor: .black, borderWidth: 5)
-        //button.wy_add(gradualColors: [.orange, .red], gradientDirection: .leftToRight)
-        button.wy_add(rectCorner: [.topRight, .bottomLeft], shadowColor: .orange, shadowRadius: 10, shadowOpacity: 0.5, shadowOffset: .zero)
+        let number = WYTestView.sequencing { (make) in
+            
+            make.add(num: 5)
+            make.add(num: 2)
+            make.subtract(num: 3)
+        }
+        wy_print("number = \(number)")
     }
     
     @objc func clickButton(sender: UIButton) {
+        
+        let testViewController = WYTestViewController()
+        navigationController?.pushViewController(testViewController, animated: true)
         
         /// 约束控件实现动画的关键是在animate方法中调用父视图的layoutIfNeeded方法
         UIView.animate(withDuration: 2) {

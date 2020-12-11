@@ -29,16 +29,16 @@ public enum WYLanguage: String {
 }
 
 /// 渐变方向
-public enum WYGradientDirection {
+public enum WYGradientDirection: UInt {
     
     /// 从上到小
-    case topToBottom
+    case topToBottom = 0
     /// 从左到右
-    case leftToRight
+    case leftToRight = 1
     /// 左上到右下
-    case leftToLowRight
+    case leftToLowRight = 2
     /// 右上到左下
-    case rightToLowlLeft
+    case rightToLowlLeft = 3
 }
 
 /// UIButton图片控件和文本控件显示位置
