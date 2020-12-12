@@ -49,7 +49,9 @@ class WYTestVisualController: UIViewController {
         }
     }
     
-
+    deinit {
+        wy_print("WYTestVisualController release")
+    }
     /*
     // MARK: - Navigation
 
