@@ -145,7 +145,8 @@ public extension UIViewController {
         let controller = wy_projectName + "." + className
         
         guard let controllerClass = NSClassFromString(controller) as? UIViewController.Type else {
-            
+
+            wy_print("找不到 \(className) 这个控制器")
             return nil
         }
         return controllerClass.init()

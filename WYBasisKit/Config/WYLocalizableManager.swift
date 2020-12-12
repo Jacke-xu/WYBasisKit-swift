@@ -15,6 +15,11 @@ public func WYLocalizedString(_ key: String) -> String {
     return WYLocalizableManager.shared.stringFromKey(key: key)
 }
 
+public func WYLocalizedString(_ chinese: String = "", _ english: String = "") -> String {
+    
+    return (WYLocalizableManager.shared.currentLanguage() == .chinese) ? chinese : english
+}
+
 public class WYLocalizableManager: NSObject {
 
     public static let shared = WYLocalizableManager()

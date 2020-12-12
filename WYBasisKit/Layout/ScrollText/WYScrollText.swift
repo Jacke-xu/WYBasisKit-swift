@@ -143,7 +143,6 @@ extension WYScrollText: UICollectionViewDelegate, UICollectionViewDataSource, UI
         cell.textView.textColor = self.textColor
         cell.textView.text = textArray[indexPath.item]
         
-
         return cell;
     }
     

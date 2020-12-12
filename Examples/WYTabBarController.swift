@@ -22,15 +22,16 @@ class WYTabBarController: UITabBarController {
         
         let leftController = WYLeftController()
         leftController.view.backgroundColor = .wy_dynamicColor(light: .white, dark: .black)
-        layoutTabbrItem(controller: leftController, title: WYLocalizedString("左"), defaultImage: UIImage(named: "tabbar_left_default")!, selectedImage: UIImage(named: "tabbar_left_selected")!)
+        
+        layoutTabbrItem(controller: leftController, title: WYLocalizedString("左", "Left"), defaultImage: UIImage(named: "tabbar_left_default")!, selectedImage: UIImage(named: "tabbar_left_selected")!)
         
         let centerController = WYCenterController()
         centerController.view.backgroundColor = .wy_dynamicColor(light: .white, dark: .black)
-        layoutTabbrItem(controller: centerController, title: WYLocalizedString("中"), defaultImage: UIImage(named: "tabbar_center_default")!, selectedImage: UIImage(named: "tabbar_center_selected")!)
+        layoutTabbrItem(controller: centerController, title: WYLocalizedString("中", "Center"), defaultImage: UIImage(named: "tabbar_center_default")!, selectedImage: UIImage(named: "tabbar_center_selected")!)
         
         let rightController = WYRightController()
         rightController.view.backgroundColor = .wy_dynamicColor(light: .white, dark: .black)
-        layoutTabbrItem(controller: rightController, title: WYLocalizedString("右"), defaultImage: UIImage(named: "tabbar_right_default")!, selectedImage: UIImage(named: "tabbar_right_selected")!)
+        layoutTabbrItem(controller: rightController, title: WYLocalizedString("右", "Right"), defaultImage: UIImage(named: "tabbar_right_default")!, selectedImage: UIImage(named: "tabbar_right_selected")!)
     }
     
     func layoutTabbrItem(controller: UIViewController, title: String, defaultImage: UIImage, selectedImage: UIImage) {

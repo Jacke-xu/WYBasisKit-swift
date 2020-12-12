@@ -125,3 +125,12 @@ public enum WYNetworkStatus {
     /// 用户设置继续连接
     case userContinueConnect
 }
+
+/// TableView注册类型
+public enum WYTableViewRegisterType {
+    
+    /// 注册Cell
+    case cell
+    /// 注册HeaderFooterView
+    case headerFooterView
+}

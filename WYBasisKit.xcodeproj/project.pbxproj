@@ -16,7 +16,6 @@
 		1F5C3E5625787ED300E0DBFF /* WYRightController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5C3E5525787ED300E0DBFF /* WYRightController.swift */; };
 		1F5C3E612578B61B00E0DBFF /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5C3E602578B61B00E0DBFF /* UIApplication.swift */; };
 		1F5C3E942578CD5400E0DBFF /* WYLocalizableManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5C3E932578CD5400E0DBFF /* WYLocalizableManager.swift */; };
-		1F764CBF25835AAB00F927EB /* WYTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F764CBE25835AAB00F927EB /* WYTestViewController.swift */; };
 		1F952EF425806EB100F03251 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 1F952EF225806EB100F03251 /* README.md */; };
 		1F952EF525806EB100F03251 /* WYBasisKit.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 1F952EF325806EB100F03251 /* WYBasisKit.podspec */; };
 		1F952EF825807ACE00F03251 /* WYConstMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F952EF725807ACE00F03251 /* WYConstMethod.swift */; };
@@ -43,7 +42,6 @@
 		AA771BDB2568F834002C748B /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA771BAC2568F834002C748B /* String.swift */; };
 		AA771BDC2568F834002C748B /* NSObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA771BAE2568F834002C748B /* NSObject.swift */; };
 		AA771BDE2568F834002C748B /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA771BB32568F834002C748B /* UILabel.swift */; };
-		AA771BDF2568F834002C748B /* UITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA771BB52568F834002C748B /* UITableViewCell.swift */; };
 		AA771BE02568F834002C748B /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA771BB72568F834002C748B /* UIButton.swift */; };
 		AA771BE22568F834002C748B /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA771BBA2568F834002C748B /* UIView.swift */; };
 		AA771BE32568F834002C748B /* UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA771BBD2568F834002C748B /* UITableView.swift */; };
@@ -55,6 +53,10 @@
 		AA771BEB2568F834002C748B /* WYBoolJudge.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA771BCB2568F834002C748B /* WYBoolJudge.swift */; };
 		AA771BF02568F859002C748B /* WYProtocolManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA771BEF2568F859002C748B /* WYProtocolManager.swift */; };
 		AA771C1825691433002C748B /* WYLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AA771C1A25691433002C748B /* WYLocalizable.strings */; };
+		AA9CF8232584B47B008A7DE1 /* WYLeftControllerHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9CF8222584B47B008A7DE1 /* WYLeftControllerHeaderView.swift */; };
+		AA9CF82A2584B97C008A7DE1 /* WYTestDarkNightModeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9CF8292584B97C008A7DE1 /* WYTestDarkNightModeController.swift */; };
+		AA9CF82D2584C262008A7DE1 /* WYTestAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9CF82C2584C262008A7DE1 /* WYTestAnimationController.swift */; };
+		AA9CF8302584C456008A7DE1 /* WYTestVisualController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9CF82F2584C456008A7DE1 /* WYTestVisualController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,7 +69,6 @@
 		1F5C3E5525787ED300E0DBFF /* WYRightController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYRightController.swift; sourceTree = "<group>"; };
 		1F5C3E602578B61B00E0DBFF /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
 		1F5C3E932578CD5400E0DBFF /* WYLocalizableManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYLocalizableManager.swift; sourceTree = "<group>"; };
-		1F764CBE25835AAB00F927EB /* WYTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYTestViewController.swift; sourceTree = "<group>"; };
 		1F952EF225806EB100F03251 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		1F952EF325806EB100F03251 /* WYBasisKit.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = WYBasisKit.podspec; sourceTree = SOURCE_ROOT; };
 		1F952EF725807ACE00F03251 /* WYConstMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYConstMethod.swift; sourceTree = "<group>"; };
@@ -97,7 +98,6 @@
 		AA771BAC2568F834002C748B /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		AA771BAE2568F834002C748B /* NSObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSObject.swift; sourceTree = "<group>"; };
 		AA771BB32568F834002C748B /* UILabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
-		AA771BB52568F834002C748B /* UITableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITableViewCell.swift; sourceTree = "<group>"; };
 		AA771BB72568F834002C748B /* UIButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
 		AA771BBA2568F834002C748B /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		AA771BBD2568F834002C748B /* UITableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITableView.swift; sourceTree = "<group>"; };
@@ -114,6 +114,10 @@
 		AA771C1B2569143C002C748B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/WYLocalizable.strings"; sourceTree = "<group>"; };
 		AA771C1E25691483002C748B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		AA771C2B25691494002C748B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		AA9CF8222584B47B008A7DE1 /* WYLeftControllerHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYLeftControllerHeaderView.swift; sourceTree = "<group>"; };
+		AA9CF8292584B97C008A7DE1 /* WYTestDarkNightModeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYTestDarkNightModeController.swift; sourceTree = "<group>"; };
+		AA9CF82C2584C262008A7DE1 /* WYTestAnimationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYTestAnimationController.swift; sourceTree = "<group>"; };
+		AA9CF82F2584C456008A7DE1 /* WYTestVisualController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYTestVisualController.swift; sourceTree = "<group>"; };
 		DC30AAA7963EADDE72D26FBC /* libPods-WYBasisKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WYBasisKit.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -202,12 +206,9 @@
 		AA484EB124FA262100B39D60 /* Examples */ = {
 			isa = PBXGroup;
 			children = (
+				AA9CF8262584B757008A7DE1 /* View */,
+				AA9CF8252584B74F008A7DE1 /* Controller */,
 				AA484EB224FA262100B39D60 /* AppDelegate.swift */,
-				1F5C3E4F25787EB400E0DBFF /* WYLeftController.swift */,
-				1F5C3E5225787EC500E0DBFF /* WYCenterController.swift */,
-				1F5C3E5525787ED300E0DBFF /* WYRightController.swift */,
-				1F764CBE25835AAB00F927EB /* WYTestViewController.swift */,
-				1F04CF5925820501002B8B11 /* WYTestView.swift */,
 				1F5C3E4C25787E7D00E0DBFF /* WYTabBarController.swift */,
 				AA484EB824FA262100B39D60 /* Main.storyboard */,
 				AA484EBB24FA262500B39D60 /* Assets.xcassets */,
@@ -372,14 +373,6 @@
 			path = UILabel;
 			sourceTree = "<group>";
 		};
-		AA771BB42568F834002C748B /* UITableViewCell */ = {
-			isa = PBXGroup;
-			children = (
-				AA771BB52568F834002C748B /* UITableViewCell.swift */,
-			);
-			path = UITableViewCell;
-			sourceTree = "<group>";
-		};
 		AA771BB62568F834002C748B /* UIButton */ = {
 			isa = PBXGroup;
 			children = (
@@ -459,7 +452,6 @@
 			isa = PBXGroup;
 			children = (
 				1F5C3E5F2578B60C00E0DBFF /* UIApplication */,
-				AA771BB42568F834002C748B /* UITableViewCell */,
 				AA771BBC2568F834002C748B /* UITableView */,
 				AA771BBE2568F834002C748B /* UITextField */,
 				AA771BB82568F834002C748B /* UIView */,
@@ -489,6 +481,28 @@
 				AA771C1A25691433002C748B /* WYLocalizable.strings */,
 			);
 			path = Config;
+			sourceTree = "<group>";
+		};
+		AA9CF8252584B74F008A7DE1 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				1F5C3E4F25787EB400E0DBFF /* WYLeftController.swift */,
+				AA9CF8292584B97C008A7DE1 /* WYTestDarkNightModeController.swift */,
+				AA9CF82C2584C262008A7DE1 /* WYTestAnimationController.swift */,
+				AA9CF82F2584C456008A7DE1 /* WYTestVisualController.swift */,
+				1F5C3E5225787EC500E0DBFF /* WYCenterController.swift */,
+				1F5C3E5525787ED300E0DBFF /* WYRightController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		AA9CF8262584B757008A7DE1 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1F04CF5925820501002B8B11 /* WYTestView.swift */,
+				AA9CF8222584B47B008A7DE1 /* WYLeftControllerHeaderView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -627,7 +641,6 @@
 				1F5C3E612578B61B00E0DBFF /* UIApplication.swift in Sources */,
 				AA771BE32568F834002C748B /* UITableView.swift in Sources */,
 				AA771BDA2568F834002C748B /* NumberFormatter.swift in Sources */,
-				1F764CBF25835AAB00F927EB /* WYTestViewController.swift in Sources */,
 				1F3CEEB325773CE200955712 /* Foundation+JSONLog.m in Sources */,
 				AA771BD22568F834002C748B /* UIAlertController.swift in Sources */,
 				1F5C3E5625787ED300E0DBFF /* WYRightController.swift in Sources */,
@@ -635,19 +648,22 @@
 				AA771BD52568F834002C748B /* UIDevice.swift in Sources */,
 				1F5C3E942578CD5400E0DBFF /* WYLocalizableManager.swift in Sources */,
 				AA771BE22568F834002C748B /* UIView.swift in Sources */,
+				AA9CF8302584C456008A7DE1 /* WYTestVisualController.swift in Sources */,
 				1F04CF5A25820501002B8B11 /* WYTestView.swift in Sources */,
 				AA771BF02568F859002C748B /* WYProtocolManager.swift in Sources */,
 				AA771BD12568F834002C748B /* UIColor.swift in Sources */,
+				AA9CF8232584B47B008A7DE1 /* WYLeftControllerHeaderView.swift in Sources */,
 				1F99DCC8257DCFAE003D2408 /* WYPagingView.swift in Sources */,
 				AA771BE42568F834002C748B /* UITextField.swift in Sources */,
 				AA771BD72568F834002C748B /* UINavigationController.swift in Sources */,
-				AA771BDF2568F834002C748B /* UITableViewCell.swift in Sources */,
 				AA484EB324FA262100B39D60 /* AppDelegate.swift in Sources */,
 				1F952EFC25807F5600F03251 /* WYEnums.swift in Sources */,
 				AA771BEB2568F834002C748B /* WYBoolJudge.swift in Sources */,
 				1F952EF825807ACE00F03251 /* WYConstMethod.swift in Sources */,
 				AA771BCF2568F834002C748B /* UIImage.swift in Sources */,
+				AA9CF82A2584B97C008A7DE1 /* WYTestDarkNightModeController.swift in Sources */,
 				AA771BD82568F834002C748B /* WYBiometric.swift in Sources */,
+				AA9CF82D2584C262008A7DE1 /* WYTestAnimationController.swift in Sources */,
 				AA771BE62568F834002C748B /* WYNetworkManager.swift in Sources */,
 				AA771BD32568F834002C748B /* WYCountdown.swift in Sources */,
 				1F5C3E4D25787E7D00E0DBFF /* WYTabBarController.swift in Sources */,

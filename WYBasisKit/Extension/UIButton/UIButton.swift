@@ -34,7 +34,6 @@ public extension UIButton {
         if imageView?.image == nil || currentImage == nil || currentTitle?.isEmpty == true || titleLabel?.text?.isEmpty == true {
             
             wy_print("wy_layouEdgeInsets方法 需要在设置图片、文字与约束或者frame之后才可以调用，且button的size要大于 图片大小+文字大小+spacing")
-            return
         }
         
         superview?.layoutIfNeeded()
