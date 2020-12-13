@@ -428,7 +428,7 @@ extension WYPagingView {
                 make.left.equalToSuperview()
                 make.size.equalTo(CGSize(width: bar_scrollLineWidth, height: bar_scrollLineHeight))
             }
-            scrollLine?.wy_add(cornerRadius: bar_scrollLineHeight / 2)
+            scrollLine?.wy_add(rectCorner: .allCorners, cornerRadius: bar_scrollLineHeight / 2)
             
             objc_setAssociatedObject(self, WYAssociatedKeys.barScrollLine, scrollLine!, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
