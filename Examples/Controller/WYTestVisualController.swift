@@ -20,33 +20,47 @@ class WYTestVisualController: UIViewController {
         button1.wy_setBackgroundColor(.orange, forState: .normal)
         button1.titleLabel?.numberOfLines = 0
         button1.setTitle("frame控件", for: .normal)
-        button1.frame = CGRect(x: 20, y: 200, width: 100, height: 100)
         button1.wy_borderWidth(5).wy_borderColor(.yellow).wy_rectCorner([.bottomLeft, .topRight]).wy_cornerRadius(10).wy_shadowRadius(20).wy_shadowColor(.green).wy_shadowOpacity(0.5).wy_showVisual()
+        button1.frame = CGRect(x: 20, y: 200, width: 100, height: 100)
         
-        let button = UIButton(type: .custom)
-        button.titleLabel?.numberOfLines = 0
-        button.setTitle("约束控件", for: .normal)
-        view.addSubview(button)
-        button.snp.makeConstraints { (make) in
-
+//        let button = UIButton(type: .custom)
+//        button.titleLabel?.numberOfLines = 0
+//        button.setTitle("约束控件", for: .normal)
+//        view.addSubview(button)
+//        button.wy_makeVisual { (current) in
+//
+//            current.wy_gradualColors([.yellow, .purple])
+//            current.wy_gradientDirection(.leftToLowRight)
+//            current.wy_borderWidth(5)
+//            current.wy_borderColor(.black)
+//            current.wy_rectCorner(.topRight)
+//            current.wy_cornerRadius(20)
+//            current.wy_shadowRadius(30)
+//            current.wy_shadowColor(.green)
+//            current.wy_shadowOffset(.zero)
+//            current.wy_shadowOpacity(0.5)
+//            //current.wy_bezierPath(UIBezierPath(ovalIn: CGRect(x: 0, y: 0, width: 100, height: 50)))
+//        }
+//        button.snp.makeConstraints { (make) in
+//
+//            make.right.equalToSuperview().offset(-20)
+//            make.top.equalToSuperview().offset(200)
+//            make.size.equalTo(CGSize(width: 100, height: 100))
+//        }
+        
+        let gradualView = UIView()
+        //gradualView.backgroundColor = .orange
+        view.addSubview(gradualView)
+        gradualView.snp.makeConstraints { (make) in
+            
             make.right.equalToSuperview().offset(-20)
             make.top.equalToSuperview().offset(200)
             make.size.equalTo(CGSize(width: 100, height: 100))
         }
-        button.wy_makeVisual { (current) in
-
-            current.wy_borderWidth(5)
-            current.wy_borderColor(.black)
-            current.wy_rectCorner(.topRight)
-            current.wy_cornerRadius(20)
-            current.wy_shadowRadius(30)
-            current.wy_shadowColor(.green)
-            current.wy_shadowOffset(.zero)
-            current.wy_shadowOpacity(0.5)
-            current.wy_gradualColors([.yellow, .purple])
-            current.wy_gradientDirection(.leftToLowRight)
-            //current.wy_bezierPath(UIBezierPath(ovalIn: CGRect(x: 0, y: 0, width: 100, height: 50)))
-        }
+        
+        gradualView.wy_add(gradualColors: [UIColor.orange,
+                                           UIColor.red], gradientDirection: .leftToRight)
+        gradualView.wy_add(rectCorner: .allCorners, cornerRadius: 10, borderColor: .white)
     }
     
     deinit {
