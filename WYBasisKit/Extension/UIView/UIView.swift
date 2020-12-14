@@ -208,19 +208,20 @@ public extension UIView {
 public extension UIView {
     
     /**
-    * 设置圆角、边框、阴影
-    * @param rectCorner        要圆角的位置，默认没有圆角
+    * 设置圆角、边框、阴影、渐变
+    * @param rectCorner        要圆角的位置，默认4角圆角
     * @param cornerRadius      圆角半径， 默认0
-    * @param borderColor       边框颜色，默认黑色
+    * @param borderColor       边框颜色，默认透明
     * @param borderWidth       边框宽度， 默认0
-    * @param shadowColor       阴影颜色， 默认黑色
+    * @param shadowColor       阴影颜色， 默认透明
     * @param shadowRadius      阴影半径， 默认0
     * @param shadowOpacity     阴影透明度，默认值是0.5，取值范围0~1
     * @param shadowOffset      阴影偏移度，默认CGSize.zero (width : 为正数时，向右偏移，为负数时，向左偏移，height : 为正数时，向下偏移，为负数时，向上偏移)
     * @param gradualColors     渐变色数组，默认为空 (设置渐变色时不能设置背景色，会有影响)
     * @param gradientDirection 渐变色方向，默认从左到右
+    * @param viewBounds        设置圆角时，会去获取视图的Bounds属性，如果此时获取不到，则需要传入该参数，默认为 nil，如果传入该参数，会设置视图的frame为bounds
     */
-    func wy_add(rectCorner: UIRectCorner? = nil, cornerRadius: CGFloat? = nil, borderColor: UIColor? = nil, borderWidth: CGFloat? = nil, shadowColor: UIColor? = nil, shadowRadius: CGFloat? = nil, shadowOpacity: CGFloat? = nil, shadowOffset: CGSize? = nil, gradualColors: [UIColor]? = nil, gradientDirection: WYGradientDirection? = nil) {
+    func wy_add(rectCorner: UIRectCorner? = nil, cornerRadius: CGFloat? = nil, borderColor: UIColor? = nil, borderWidth: CGFloat? = nil, shadowColor: UIColor? = nil, shadowRadius: CGFloat? = nil, shadowOpacity: CGFloat? = nil, shadowOffset: CGSize? = nil, gradualColors: [UIColor]? = nil, gradientDirection: WYGradientDirection? = nil, viewBounds: CGRect = .zero) {
         
         DispatchQueue.main.async {
             
@@ -234,6 +235,7 @@ public extension UIView {
                 .wy_shadowOffset(shadowOffset ?? self.privateShadowOffset)
                 .wy_gradualColors((gradualColors ?? self.privateGradualColors) ?? [])
                 .wy_gradientDirection(gradientDirection ?? self.privateGradientDirection)
+                .wy_viewBounds(viewBounds)
                 .wy_showVisual()
         }
     }
@@ -247,7 +249,7 @@ public extension UIView {
     }
     
     @discardableResult
-    /// 圆角的位置， 默认不圆角
+    /// 圆角的位置， 默认4角圆角
     func wy_rectCorner(_ corner: UIRectCorner) -> UIView {
         privateRectCorner = corner
         return self
@@ -319,6 +321,14 @@ public extension UIView {
     }
     
     @discardableResult
+    /// 设置圆角时，会去获取视图的Bounds属性，如果此时获取不到，则需要传入该参数，默认为 nil，如果传入该参数，会设置视图的frame为bounds
+    func wy_viewBounds(_ bounds: CGRect) -> UIView {
+        self.frame = bounds
+        privateViewBounds = bounds
+        return self
+    }
+    
+    @discardableResult
     /// 贝塞尔路径 默认nil (有值时，radius属性将失效)
     func wy_bezierPath(_ path: UIBezierPath) -> UIView {
         privateBezierPath = path
@@ -336,7 +346,7 @@ public extension UIView {
         wy_addShadow()
         // 添加边框、圆角
         wy_addBorderAndRadius()
-        // 添加阴影
+        // 添加渐变
         wy_addGradual()
         
         return self
@@ -366,13 +376,14 @@ public extension UIView {
         }
         
         // 恢复默认设置
-        privateRectCorner    = UIRectCorner.init()
+        privateRectCorner    = .allCorners
         privateConrnerRadius = 0.0
         privateBorderColor   = .clear
         privateBorderWidth   = 0.0
         privateShadowOpacity = 0.0
         privateShadowRadius  = 0.0
         privateShadowOffset  = .zero
+        privateViewBounds    = .zero
         privateShadowColor   = .clear
         privateGradualColors = nil
         privateGradientDirection = .leftToRight
@@ -576,7 +587,7 @@ public extension UIView {
         }
         get {
             
-            return UIRectCorner.init(rawValue: objc_getAssociatedObject(self, WYAssociatedKeys.privateRectCorner) as? UInt ?? UInt(UIRectCorner.init().rawValue))
+            return UIRectCorner.init(rawValue: objc_getAssociatedObject(self, WYAssociatedKeys.privateRectCorner) as? UInt ?? UInt(UIRectCorner.allCorners.rawValue))
         }
     }
     
@@ -681,6 +692,18 @@ public extension UIView {
         }
     }
     
+    private var privateViewBounds: CGRect {
+        
+        set(newValue) {
+            
+            objc_setAssociatedObject(self, WYAssociatedKeys.privateViewBounds, NSCoder.string(for: newValue), .OBJC_ASSOCIATION_COPY_NONATOMIC)
+        }
+        get {
+            
+            return NSCoder.cgRect(for: objc_getAssociatedObject(self, WYAssociatedKeys.privateViewBounds) as? String ?? (NSCoder.string(for: CGRect.zero)))
+        }
+    }
+    
     private var privateBezierPath: UIBezierPath? {
         
         set(newValue) {
@@ -715,6 +738,7 @@ public extension UIView {
         static let privateShadowOpacity = UnsafeRawPointer.init(bitPattern: "privateShadowOpacity".hashValue)!
         static let privateGradualColors = UnsafeRawPointer.init(bitPattern: "privateGradualColors".hashValue)!
         static let privateGradientDirection = UnsafeRawPointer.init(bitPattern: "privateGradientDirection".hashValue)!
+        static let privateViewBounds = UnsafeRawPointer.init(bitPattern: "privateViewBounds".hashValue)!
         static let privateBezierPath = UnsafeRawPointer.init(bitPattern: "privateBezierPath".hashValue)!
         static let shadowBackgroundView = UnsafeRawPointer.init(bitPattern: "shadowBackgroundView".hashValue)!
         static let wy_boardLayer = "wy_boardLayer"

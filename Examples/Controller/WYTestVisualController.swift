@@ -51,16 +51,15 @@ class WYTestVisualController: UIViewController {
         let gradualView = UIView()
         //gradualView.backgroundColor = .orange
         view.addSubview(gradualView)
-        gradualView.snp.makeConstraints { (make) in
-            
-            make.right.equalToSuperview().offset(-20)
-            make.top.equalToSuperview().offset(200)
-            make.size.equalTo(CGSize(width: 100, height: 100))
-        }
+//        gradualView.snp.makeConstraints { (make) in
+//
+//            make.right.equalToSuperview().offset(-20)
+//            make.top.equalToSuperview().offset(200)
+//            make.size.equalTo(CGSize(width: 100, height: 100))
+//        }
         
-        gradualView.wy_add(gradualColors: [UIColor.orange,
-                                           UIColor.red], gradientDirection: .leftToRight)
-        gradualView.wy_add(rectCorner: .allCorners, cornerRadius: 10, borderColor: .white)
+        gradualView.wy_add(rectCorner: .allCorners, cornerRadius: 10, borderColor: .white,gradualColors: [UIColor.orange,
+                                           UIColor.red], gradientDirection: .leftToRight, viewBounds: CGRect(x: 200, y: 300, width: 100, height: 100))
     }
     
     deinit {
