@@ -17,7 +17,7 @@ public let wy_debugModeLog: Bool = true
 
 public struct WYNetworkConfig {
     
-    /// 设置网络请求超时事件
+    /// 设置网络请求超时时间
     public static var timeoutIntervalForRequest: TimeInterval = wy_timeoutIntervalForRequest
     
     /// 配置当前使用域名

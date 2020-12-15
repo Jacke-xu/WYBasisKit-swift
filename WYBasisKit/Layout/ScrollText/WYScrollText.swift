@@ -17,13 +17,18 @@ public class WYScrollText: UIView {
     
     /// 点击事件代理(也可以通过传入block监听)
     public weak var delegate: WYScrollTextDelegate?
+    /// 点击事件(也可以通过实现代理监听)
+    public func didClickHandler(handler:((_ index: NSInteger) -> Void)? = nil) {
+        
+        actionHandler = handler
+    }
     /// 占位文本
     public var placeholder: String = WYLocalizedString("暂无消息")
     /// 文本颜色
     public var textColor: UIColor = .black
     /// 文本字体
-    public var textFont: UIFont = .systemFont(ofSize: 12)
-    /// 轮播间隔，默认3s  为保证轮播流畅，该值要求最小为2
+    public var textFont: UIFont = .systemFont(ofSize: wy_screenWidthRatioValue(value: 12))
+    /// 轮播间隔，默认3s  为保证轮播流畅，该值要求最小为2s
     public var interval: TimeInterval = 3
     
     private var _textArray: [String]!
@@ -51,12 +56,14 @@ public class WYScrollText: UIView {
     
     private lazy var collectionView: UICollectionView = {
         
+        superview?.layoutIfNeeded()
+        
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .vertical
         flowLayout.minimumLineSpacing = 0 // 行间距
         flowLayout.minimumInteritemSpacing = 0 // 列间距
         
-        let collectionview = UICollectionView(frame: self.bounds, collectionViewLayout: flowLayout)
+        let collectionview = UICollectionView(frame: bounds, collectionViewLayout: flowLayout)
         collectionview.showsVerticalScrollIndicator = false
         collectionview.showsHorizontalScrollIndicator = false
         collectionview.delegate = self
@@ -64,7 +71,7 @@ public class WYScrollText: UIView {
         collectionview.backgroundColor = .white
         collectionview.register(SctolTextCell.self, forCellWithReuseIdentifier: "SctolTextCell")
         collectionview.isScrollEnabled = false
-        self.addSubview(collectionview)
+        addSubview(collectionview)
         collectionview.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
@@ -73,12 +80,6 @@ public class WYScrollText: UIView {
     }()
     
     private var actionHandler: ((_ index: NSInteger) -> Void)?
-    
-    /// 点击事件(也可以通过实现代理监听)
-    public func didClickHandler(handler:((_ index: NSInteger) -> Void)? = nil) {
-        
-        actionHandler = handler
-    }
     
     /// 当前文本下标
     private var textIndex: NSInteger = 0
@@ -143,7 +144,7 @@ extension WYScrollText: UICollectionViewDelegate, UICollectionViewDataSource, UI
         cell.textView.textColor = self.textColor
         cell.textView.text = textArray[indexPath.item]
         
-        return cell;
+        return cell
     }
     
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

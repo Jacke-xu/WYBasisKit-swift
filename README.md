@@ -23,7 +23,7 @@
     /// 集成实用方法类
     pod 'WYBasisKit/Practical'
     
-    /// 集成Layout库(libName： 目前包含ScrollText和PagingView， 具体可查看WYBasisKit.podspec文件)
+    /// 集成Layout库(libName： 目前包含ScrollText、PagingView和BannerView， 具体可查看WYBasisKit.podspec文件)
     pod 'WYBasisKit/Layout' 或者 pod 'WYBasisKit/Layout/libName'
 
     2、下载WYBasisKit，解压后将工程下的整个WYBasisKit文件或您需要的文件放进项目中

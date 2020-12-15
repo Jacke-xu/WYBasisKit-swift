@@ -19,6 +19,16 @@ public class WYPagingView: UIView {
     /// 点击或滚动事件代理(也可以通过传入block监听)
     public weak var delegate: WYPagingViewDelegate?
     
+    /**
+     * 点击或滚动事件(也可以通过实现代理监听)
+     *
+     * @param handler 点击或滚动事件的block
+     */
+    public func itemDidScroll(handler: @escaping ((_ pagingIndex: NSInteger) -> Void)) {
+        
+        actionHandler = handler
+    }
+    
     /// 分页栏宽度 默认对应每页标题文本宽度(若传入则整体使用传入宽度)
     public var bar_Width: CGFloat = 0
 
@@ -124,16 +134,6 @@ public class WYPagingView: UIView {
         superController = superViewController
         
         layoutMethod()
-    }
-    
-    /**
-     * 点击或滚动事件(也可以通过实现代理监听)
-     *
-     * @param handler 点击或滚动事件的block
-     */
-    public func itemDidScroll(handler: @escaping ((_ pagingIndex: NSInteger) -> Void)) {
-        
-        actionHandler = handler
     }
     
     private var currentButtonItem: UIButton!

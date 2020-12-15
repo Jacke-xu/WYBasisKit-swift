@@ -182,6 +182,9 @@ public class WYNetworkManager {
     
     private func request(target: WYTarget, originJson: Bool, callbackQueue: DispatchQueue = .main, progress:((_ progress: Double) -> Void)? = nil, success:((_ response: Any?) -> Void)? = nil, failure:((_ error: String, _ serverCode: Int) -> Void)? = nil) {
         
+        /// 设置超时时间
+        Moya.Session.default.session.configuration.timeoutIntervalForRequest = WYNetworkConfig.timeoutIntervalForRequest
+        
         // 开启状态栏动画
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         

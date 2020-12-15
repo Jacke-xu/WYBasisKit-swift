@@ -134,3 +134,13 @@ public enum WYTableViewRegisterType {
     /// 注册HeaderFooterView
     case headerFooterView
 }
+
+/// 图片切换效果
+public enum WYBannerSwitchMode {
+    
+    /// 滚动切换
+    case scroll
+    
+    /// 淡入淡出
+    case fade
+}

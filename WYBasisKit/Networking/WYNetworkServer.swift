@@ -42,8 +42,6 @@ struct WYTarget: TargetType {
     
     init(request: WYRequest) {
         
-        /// 设置超时时间
-        Moya.Session.default.session.configuration.timeoutIntervalForRequest = WYNetworkConfig.timeoutIntervalForRequest
         self.request = request
     }
     

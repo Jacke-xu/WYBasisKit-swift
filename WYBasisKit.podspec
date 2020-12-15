@@ -49,7 +49,7 @@ Pod::Spec.new do |spec|
     spec.subspec 'Layout' do |sp|
 
        sp.subspec 'ScrollText' do |ss|
-        ss.source_files = 'WYBasisKit/Layout/ScrollText/**/*'
+        ss.source_files = 'WYBasisKit/Layout/ScrollText/**/*', 'WYBasisKit/Practical/ConstDefinition/WYConstDefinition.swift'
         ss.frameworks = 'Foundation', 'UIKit'
         ss.dependency 'WYBasisKit/Config'
         ss.dependency 'SnapKit'
