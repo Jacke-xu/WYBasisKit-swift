@@ -31,56 +31,59 @@ public extension UIButton {
     */
     func wy_layouEdgeInsets(position: WYButtonPosition, spacing: CGFloat) {
         
-        if imageView?.image == nil || currentImage == nil || currentTitle?.isEmpty == true || titleLabel?.text?.isEmpty == true {
+        DispatchQueue.main.async {
             
-            wy_print("wy_layouEdgeInsets方法 需要在设置图片、文字与约束或者frame之后才可以调用，且button的size要大于 图片大小+文字大小+spacing")
-        }
-        
-        superview?.layoutIfNeeded()
+            if self.imageView?.image == nil || self.currentImage == nil || self.currentTitle?.isEmpty == true || self.titleLabel?.text?.isEmpty == true {
+                
+                wy_print("wy_layouEdgeInsets方法 需要在设置图片、文字与约束或者frame之后才可以调用，且button的size要大于 图片大小+文字大小+spacing")
+            }
+            
+            self.superview?.layoutIfNeeded()
 
-        let imageWidth: CGFloat = (imageView?.image?.size.width)!
-        let imageHeight: CGFloat = (imageView?.image?.size.height)!
-        let textWidth: CGFloat = (titleWidth(title: currentTitle!,controlFont: titleLabel!.font))
-        let textHeight: CGFloat = (titleLabel?.font.lineHeight)!
+            let imageWidth: CGFloat = (self.imageView?.image?.size.width)!
+            let imageHeight: CGFloat = (self.imageView?.image?.size.height)!
+            let textWidth: CGFloat = (self.titleWidth(title: self.currentTitle!,controlFont: self.titleLabel!.font))
+            let textHeight: CGFloat = (self.titleLabel?.font.lineHeight)!
 
-        //image中心移动的x距离
-        let imageOffsetX: CGFloat = (imageWidth + textWidth) / 2 - imageWidth / 2
-        //image中心移动的y距离
-        let imageOffsetY: CGFloat = imageHeight / 2 + spacing / 2
-        //文字中心移动的x距离
-        let textOffsetX: CGFloat = (imageWidth + textWidth / 2) - (imageWidth + textWidth) / 2
-        //文字中心移动的y距离
-        let textOffsetY: CGFloat = textHeight / 2 + spacing / 2
+            //image中心移动的x距离
+            let imageOffsetX: CGFloat = (imageWidth + textWidth) / 2 - imageWidth / 2
+            //image中心移动的y距离
+            let imageOffsetY: CGFloat = imageHeight / 2 + spacing / 2
+            //文字中心移动的x距离
+            let textOffsetX: CGFloat = (imageWidth + textWidth / 2) - (imageWidth + textWidth) / 2
+            //文字中心移动的y距离
+            let textOffsetY: CGFloat = textHeight / 2 + spacing / 2
 
-        switch position {
+            switch position {
 
-        case .imageRight_titleLeft:
+            case .imageRight_titleLeft:
 
-            imageEdgeInsets = UIEdgeInsets(top: 0, left: textWidth+spacing/2, bottom: 0, right: -(textWidth+spacing/2))
-            titleEdgeInsets = UIEdgeInsets(top: 0, left: -(imageHeight+spacing/2), bottom: 0, right: imageHeight+spacing/2)
+                self.imageEdgeInsets = UIEdgeInsets(top: 0, left: textWidth+spacing/2, bottom: 0, right: -(textWidth+spacing/2))
+                self.titleEdgeInsets = UIEdgeInsets(top: 0, left: -(imageHeight+spacing/2), bottom: 0, right: imageHeight+spacing/2)
 
-            break
+                break
 
-        case .imageLeft_titleRight:
+            case .imageLeft_titleRight:
 
-            imageEdgeInsets = UIEdgeInsets(top: 0, left: -spacing/2, bottom: 0, right: spacing/2)
-            titleEdgeInsets = UIEdgeInsets(top: 0, left: spacing/2, bottom: 0, right: -spacing/2)
+                self.imageEdgeInsets = UIEdgeInsets(top: 0, left: -spacing/2, bottom: 0, right: spacing/2)
+                self.titleEdgeInsets = UIEdgeInsets(top: 0, left: spacing/2, bottom: 0, right: -spacing/2)
 
-            break
+                break
 
-        case .imageTop_titleBottom:
+            case .imageTop_titleBottom:
 
-            imageEdgeInsets = UIEdgeInsets(top: -imageOffsetY, left: imageOffsetX, bottom: imageOffsetY, right: -imageOffsetX)
-            titleEdgeInsets = UIEdgeInsets(top: textOffsetY, left: -textOffsetX, bottom: -textOffsetY, right: textOffsetX)
+                self.imageEdgeInsets = UIEdgeInsets(top: -imageOffsetY, left: imageOffsetX, bottom: imageOffsetY, right: -imageOffsetX)
+                self.titleEdgeInsets = UIEdgeInsets(top: textOffsetY, left: -textOffsetX, bottom: -textOffsetY, right: textOffsetX)
 
-            break
+                break
 
-        case .imageBottom_titleTop:
+            case .imageBottom_titleTop:
 
-            imageEdgeInsets = UIEdgeInsets(top: imageOffsetY, left: imageOffsetX, bottom: -imageOffsetY, right: -imageOffsetX)
-            titleEdgeInsets = UIEdgeInsets(top: -textOffsetY, left: -textOffsetX, bottom: textOffsetY, right: textOffsetX)
+                self.imageEdgeInsets = UIEdgeInsets(top: imageOffsetY, left: imageOffsetX, bottom: -imageOffsetY, right: -imageOffsetX)
+                self.titleEdgeInsets = UIEdgeInsets(top: -textOffsetY, left: -textOffsetX, bottom: textOffsetY, right: textOffsetX)
 
-            break
+                break
+            }
         }
     }
     

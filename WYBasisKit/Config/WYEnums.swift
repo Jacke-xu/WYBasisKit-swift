@@ -55,20 +55,25 @@ public enum WYButtonPosition {
 }
 
 /// 时间格式化模式
-public enum WYTimeFormat {
+public enum WYTimeFormat: String {
     
     /// 时:分
-    case hourMinutes
+    case HM = "HH:mm"
     /// 年-月-日
-    case yearMonthDay
+    case YMD = "yyyy-MM-dd"
     /// 时:分:秒
-    case hourMinutesSecond
+    case HMS = "HH:mm:ss"
     /// 月-日 时:分
-    case monthDayAndHourMinutes
+    case MDHM = "MM-dd HH:mm"
     /// 年-月-日 时:分
-    case yearMonthDayAndhourMinutes
+    case YMDHM = "yyyy-MM-dd HH:mm"
     /// 年-月-日 时:分:秒
-    case yearMonthDayAndhourMinutesSecond
+    case YMDHMS = "yyyy-MM-dd HH:mm:ss"
+    /// 传入自定义格式
+    var customFormat: String {
+        
+        return rawValue
+    }
 }
 
 /// 生物识别模式

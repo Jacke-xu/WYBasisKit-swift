@@ -221,22 +221,56 @@ public extension UIView {
     * @param gradientDirection 渐变色方向，默认从左到右
     * @param viewBounds        设置圆角时，会去获取视图的Bounds属性，如果此时获取不到，则需要传入该参数，默认为 nil，如果传入该参数，会设置视图的frame为bounds
     */
-    func wy_add(rectCorner: UIRectCorner? = nil, cornerRadius: CGFloat? = nil, borderColor: UIColor? = nil, borderWidth: CGFloat? = nil, shadowColor: UIColor? = nil, shadowRadius: CGFloat? = nil, shadowOpacity: CGFloat? = nil, shadowOffset: CGSize? = nil, gradualColors: [UIColor]? = nil, gradientDirection: WYGradientDirection? = nil, viewBounds: CGRect = .zero) {
+    func wy_add(rectCorner: UIRectCorner? = nil, cornerRadius: CGFloat? = nil, borderColor: UIColor? = nil, borderWidth: CGFloat? = nil, shadowColor: UIColor? = nil, shadowRadius: CGFloat? = nil, shadowOpacity: CGFloat? = nil, shadowOffset: CGSize? = nil, gradualColors: [UIColor]? = nil, gradientDirection: WYGradientDirection? = nil, viewBounds: CGRect? = nil) {
         
         DispatchQueue.main.async {
             
-            self.wy_rectCorner(rectCorner ?? self.privateRectCorner)
-                .wy_cornerRadius(cornerRadius ?? self.privateConrnerRadius)
-                .wy_borderColor(borderColor ?? self.privateBorderColor)
-                .wy_borderWidth(borderWidth ?? self.privateBorderWidth)
-                .wy_shadowColor(shadowColor ?? self.privateShadowColor)
-                .wy_shadowRadius(shadowRadius ?? self.privateShadowRadius)
-                .wy_shadowOpacity(shadowOpacity ?? self.privateShadowOpacity)
-                .wy_shadowOffset(shadowOffset ?? self.privateShadowOffset)
-                .wy_gradualColors((gradualColors ?? self.privateGradualColors) ?? [])
-                .wy_gradientDirection(gradientDirection ?? self.privateGradientDirection)
-                .wy_viewBounds(viewBounds)
-                .wy_showVisual()
+            if rectCorner != nil {
+                
+                self.wy_rectCorner(rectCorner ?? self.privateRectCorner)
+            }
+            if cornerRadius != nil {
+                
+                self.wy_cornerRadius(cornerRadius ?? self.privateConrnerRadius)
+            }
+            if borderColor != nil {
+                
+                self.wy_borderColor(borderColor ?? self.privateBorderColor)
+            }
+            if borderWidth != nil {
+                
+                self.wy_borderWidth(borderWidth ?? self.privateBorderWidth)
+            }
+            if shadowColor != nil {
+                
+                self.wy_shadowColor(shadowColor ?? self.privateShadowColor)
+            }
+            if shadowRadius != nil {
+                
+                self.wy_shadowRadius(shadowRadius ?? self.privateShadowRadius)
+            }
+            if shadowOpacity != nil {
+                
+                self.wy_shadowOpacity(shadowOpacity ?? self.privateShadowOpacity)
+            }
+            if shadowOffset != nil {
+                
+                self.wy_shadowOffset(shadowOffset ?? self.privateShadowOffset)
+            }
+            if gradualColors != nil {
+                
+                self.wy_gradualColors((gradualColors ?? self.privateGradualColors) ?? [])
+            }
+            if gradientDirection != nil {
+                
+                self.wy_gradientDirection(gradientDirection ?? self.privateGradientDirection)
+            }
+            
+            if viewBounds != nil {
+                
+                self.wy_viewBounds(viewBounds ?? self.privateViewBounds)
+            }
+            self.wy_showVisual()
         }
     }
     

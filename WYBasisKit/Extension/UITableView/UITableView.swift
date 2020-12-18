@@ -47,8 +47,11 @@ public extension UITableView {
         tableview.dataSource = dataSource
         tableview.separatorStyle = separatorStyle
         tableview.backgroundColor = backgroundColor
+        tableview.estimatedSectionHeaderHeight = headerHeight
         tableview.sectionHeaderHeight = headerHeight
+        tableview.estimatedSectionFooterHeight = footerHeight
         tableview.sectionFooterHeight = footerHeight
+        tableview.estimatedRowHeight = rowHeight
         tableview.rowHeight = rowHeight
         tableview.tableHeaderView = UIView()
         tableview.tableFooterView = UIView()
@@ -120,6 +123,22 @@ public extension UITableView {
             }
             register(headerFooterViewClass.self, forHeaderFooterViewReuseIdentifier: className)
             break
+        }
+    }
+    
+    /// 设置plain模式下headerView不悬停(需在scrollViewDidScroll方法中调用)
+    func wy_scrollWithoutPasting(scrollView: UIScrollView, headerHeight: CGFloat) {
+
+        if (scrollView == self) {
+            
+            if (scrollView.contentOffset.y <= headerHeight && scrollView.contentOffset.y >= 0) {
+                
+                scrollView.contentInset = UIEdgeInsets(top: -scrollView.contentOffset.y, left: 0, bottom: 0, right: 0)
+                
+            } else if (scrollView.contentOffset.y >= headerHeight) {
+                
+                scrollView.contentInset = UIEdgeInsets(top: -headerHeight, left: 0, bottom: 0, right: 0)
+            }
         }
     }
     

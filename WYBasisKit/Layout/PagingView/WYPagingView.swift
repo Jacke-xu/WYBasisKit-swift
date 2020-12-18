@@ -127,13 +127,16 @@ public class WYPagingView: UIView {
      */
     public func layout(controllerAry: [UIViewController], titleAry: [String], defaultImageAry: [UIImage] = [], selectedImageAry: [UIImage] = [], superViewController: UIViewController) {
         
-        controllers = controllerAry
-        titles = titleAry
-        defaultImages = defaultImageAry
-        selectedImages = selectedImageAry
-        superController = superViewController
-        
-        layoutMethod()
+        DispatchQueue.main.async {
+            
+            self.controllers = controllerAry
+            self.titles = titleAry
+            self.defaultImages = defaultImageAry
+            self.selectedImages = selectedImageAry
+            self.superController = superViewController
+            
+            self.layoutMethod()
+        }
     }
     
     private var currentButtonItem: UIButton!

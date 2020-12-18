@@ -62,21 +62,9 @@ public extension String {
         let date: NSDate = NSDate.init(timeIntervalSince1970: Double(self)!)
         
         let formatter = DateFormatter.init()
-
-        switch dateFormat {
-        case .yearMonthDay:
-            formatter.dateFormat = "yyyy-MM-dd"
-        case .hourMinutes:
-            formatter.dateFormat = "HH:mm"
-        case .hourMinutesSecond:
-            formatter.dateFormat = "HH:mm:ss"
-        case .yearMonthDayAndhourMinutes:
-            formatter.dateFormat = "yyyy-MM-dd HH:mm"
-        case .monthDayAndHourMinutes:
-            formatter.dateFormat = "MM-dd HH:mm"
-        case .yearMonthDayAndhourMinutesSecond:
-            formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        }
+        
+        formatter.dateFormat = dateFormat.rawValue
+        
         return formatter.string(from: date as Date)
     }
     
