@@ -70,9 +70,9 @@ public enum WYTimeFormat: String {
     /// 年-月-日 时:分:秒
     case YMDHMS = "yyyy-MM-dd HH:mm:ss"
     /// 传入自定义格式
-    var customFormat: String {
+    static func custom(_ format: String) ->String {
         
-        return rawValue
+        return format
     }
 }
 
