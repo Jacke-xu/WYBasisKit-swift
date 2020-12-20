@@ -39,19 +39,19 @@ public extension UIButton {
             }
             
             self.superview?.layoutIfNeeded()
+            
+            let imageWidth: CGFloat = (self.currentImage?.size.width) ?? 0
+            let imageHeight: CGFloat = (self.currentImage?.size.height) ?? 0
+            let textWidth: CGFloat = (self.titleWidth(title: self.currentTitle ?? "",controlFont: self.titleLabel?.font ?? .systemFont(ofSize: 15)))
+            let textHeight: CGFloat = (self.titleLabel?.font.lineHeight) ?? 0
 
-            let imageWidth: CGFloat = (self.imageView?.image?.size.width)!
-            let imageHeight: CGFloat = (self.imageView?.image?.size.height)!
-            let textWidth: CGFloat = (self.titleWidth(title: self.currentTitle!,controlFont: self.titleLabel!.font))
-            let textHeight: CGFloat = (self.titleLabel?.font.lineHeight)!
-
-            //image中心移动的x距离
+            // image中心移动的x距离
             let imageOffsetX: CGFloat = (imageWidth + textWidth) / 2 - imageWidth / 2
-            //image中心移动的y距离
+            // image中心移动的y距离
             let imageOffsetY: CGFloat = imageHeight / 2 + spacing / 2
-            //文字中心移动的x距离
+            // 文字中心移动的x距离
             let textOffsetX: CGFloat = (imageWidth + textWidth / 2) - (imageWidth + textWidth) / 2
-            //文字中心移动的y距离
+            // 文字中心移动的y距离
             let textOffsetY: CGFloat = textHeight / 2 + spacing / 2
 
             switch position {
@@ -60,6 +60,10 @@ public extension UIButton {
 
                 self.imageEdgeInsets = UIEdgeInsets(top: 0, left: textWidth+spacing/2, bottom: 0, right: -(textWidth+spacing/2))
                 self.titleEdgeInsets = UIEdgeInsets(top: 0, left: -(imageHeight+spacing/2), bottom: 0, right: imageHeight+spacing/2)
+                
+                // 内容偏移x距离
+                let contentOffsetx: CGFloat = spacing / 2
+                self.contentEdgeInsets = UIEdgeInsets(top: 0, left: contentOffsetx, bottom: 0, right: contentOffsetx)
 
                 break
 
@@ -67,6 +71,10 @@ public extension UIButton {
 
                 self.imageEdgeInsets = UIEdgeInsets(top: 0, left: -spacing/2, bottom: 0, right: spacing/2)
                 self.titleEdgeInsets = UIEdgeInsets(top: 0, left: spacing/2, bottom: 0, right: -spacing/2)
+                
+                // 内容偏移x距离
+                let contentOffsetx: CGFloat = spacing / 2
+                self.contentEdgeInsets = UIEdgeInsets(top: 0, left: contentOffsetx, bottom: 0, right: contentOffsetx)
 
                 break
 
@@ -74,6 +82,12 @@ public extension UIButton {
 
                 self.imageEdgeInsets = UIEdgeInsets(top: -imageOffsetY, left: imageOffsetX, bottom: imageOffsetY, right: -imageOffsetX)
                 self.titleEdgeInsets = UIEdgeInsets(top: textOffsetY, left: -textOffsetX, bottom: -textOffsetY, right: textOffsetX)
+                
+                // 内容偏移x距离
+                let contentOffsetx: CGFloat = ([imageWidth, textWidth].min()!) / 2
+                // 内容偏移y距离
+                let contentOffsety: CGFloat = (([imageHeight, textHeight].min()!) / 2) + (spacing / 2)
+                self.contentEdgeInsets = UIEdgeInsets(top: contentOffsety, left: -contentOffsetx, bottom: contentOffsety, right: -contentOffsetx)
 
                 break
 
@@ -81,6 +95,13 @@ public extension UIButton {
 
                 self.imageEdgeInsets = UIEdgeInsets(top: imageOffsetY, left: imageOffsetX, bottom: -imageOffsetY, right: -imageOffsetX)
                 self.titleEdgeInsets = UIEdgeInsets(top: -textOffsetY, left: -textOffsetX, bottom: textOffsetY, right: textOffsetX)
+                self.contentEdgeInsets = UIEdgeInsets(top: 0, left: -(imageWidth / 2), bottom: 0, right: -(imageWidth / 2))
+                
+                // 内容偏移x距离
+                let contentOffsetx: CGFloat = ([imageWidth, textWidth].min()!) / 2
+                // 内容偏移y距离
+                let contentOffsety: CGFloat = (([imageHeight, textHeight].min()!) / 2) + (spacing / 2)
+                self.contentEdgeInsets = UIEdgeInsets(top: contentOffsety, left: -contentOffsetx, bottom: contentOffsety, right: -contentOffsetx)
 
                 break
             }
