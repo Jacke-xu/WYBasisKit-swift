@@ -54,6 +54,18 @@ public extension String {
                                               withTemplate: replacement)
     }
     
+    /// 获取设备时间戳
+    static func wy_sharedDeviceTimestamp(mode: WYTimestampMode = .second) -> String {
+        
+        let timeInterval: TimeInterval = NSDate().timeIntervalSince1970
+        switch mode {
+        case .second:
+            return "\(Int(timeInterval))"
+        case .millisecond:
+            return "\(CLongLong(round(timeInterval*1000)))"
+        }
+    }
+    
     /// 时间戳转字符串
     func  wy_timestampConvertDate(dateFormat: WYTimeFormat) -> String {
         
@@ -69,7 +81,7 @@ public extension String {
     }
     
     /// 字符串转时间戳
-    func wy_dateStrConvertTimestamp() -> String {
+    func wy_dateStrConvertTimestamp(dateFormat: WYTimeFormat) -> String {
         
         if self.isEmpty {return ""}
         
@@ -77,7 +89,7 @@ public extension String {
         
         format.dateStyle = .medium
         format.timeStyle = .short
-        format.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        format.dateFormat = dateFormat.rawValue
         
         let date = format.date(from: self)
         

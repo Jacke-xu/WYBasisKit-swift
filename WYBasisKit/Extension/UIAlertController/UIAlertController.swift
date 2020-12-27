@@ -37,7 +37,7 @@ public extension UIAlertController {
             
             if ((style == .actionSheet) && (actionSheetNeedCancel == true)) {
                 
-                alertController.wy_addAlertAction(actionStr: WYLocalizedString("取消"), actionStyle: .cancel, alertController: alertController, textFieldPlaceholders: textFieldPlaceholders, handler: handler)
+                alertController.wy_addAlertAction(actionStr: WYLocalizedString("取消"), actionStyle: .cancel, alertController: alertController, textFieldPlaceholders: textFieldPlaceholders, handler: nil)
             }
             
             alertController.modalPresentationStyle = .fullScreen

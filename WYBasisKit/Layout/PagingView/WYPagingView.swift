@@ -56,6 +56,9 @@ public class WYPagingView: UIView {
     /// 分页控制器背景色 默认白色
     public var bar_pagingContro_bg_color: UIColor = .white
     
+    /// 分页控制器是否需要弹跳效果
+    public var bar_pagingContro_bounce: Bool = true
+    
     /// 分页栏默认背景色 默认白色
     public var bar_bg_defaultColor: UIColor = .white
     
@@ -228,6 +231,8 @@ extension WYPagingView {
             self.barScrollLine.superview?.layoutIfNeeded()
         }
         
+        bar_selectedIndex = currentButtonItem.tag-buttonItemTagBegin
+        
         if actionHandler != nil {
             
             actionHandler!(currentButtonItem.tag-buttonItemTagBegin)
@@ -241,6 +246,7 @@ extension WYPagingView {
         if(currentItem.tag != currentButtonItem.tag) {
             
             currentButtonItem.isSelected = false
+            currentButtonItem.contentView.isSelected = false
             
             currentButtonItem.backgroundColor = bar_item_bg_defaultColor
             currentButtonItem.contentView.setTitleColor(bar_title_defaultColor, for: .normal)
@@ -249,6 +255,7 @@ extension WYPagingView {
             
             /// 将当前选中的item赋值
             currentItem.isSelected = true
+            currentItem.contentView.isSelected = true
             currentButtonItem = currentItem
             
             currentButtonItem.backgroundColor = bar_item_bg_selectedColor
@@ -316,6 +323,7 @@ extension WYPagingView {
             if(index == bar_selectedIndex) {
                 
                 buttonItem.isSelected = true
+                buttonItem.contentView.isSelected = true
                 currentButtonItem = buttonItem
             }
             barScrollView.insertSubview(buttonItem, at: 0)
@@ -388,6 +396,7 @@ extension WYPagingView {
             scrollView!.showsHorizontalScrollIndicator = false
             scrollView!.showsVerticalScrollIndicator = false
             scrollView!.backgroundColor = bar_pagingContro_content_color
+            scrollView!.bounces = bar_pagingContro_bounce
             addSubview(scrollView!)
             scrollView!.snp.makeConstraints { (make) in
                 
@@ -436,6 +445,7 @@ extension WYPagingView {
             barScroll = UIScrollView()
             barScroll!.showsHorizontalScrollIndicator = false
             barScroll!.backgroundColor = bar_bg_defaultColor
+            barScroll!.bounces = bar_pagingContro_bounce
             addSubview(barScroll!)
             barScroll!.snp.makeConstraints { (make) in
 

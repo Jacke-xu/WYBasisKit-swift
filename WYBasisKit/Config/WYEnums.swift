@@ -69,11 +69,16 @@ public enum WYTimeFormat: String {
     case YMDHM = "yyyy-MM-dd HH:mm"
     /// 年-月-日 时:分:秒
     case YMDHMS = "yyyy-MM-dd HH:mm:ss"
-    /// 传入自定义格式
-    static func custom(_ format: String) ->String {
-        
-        return format
-    }
+}
+
+/// 获取时间戳的模式
+public enum WYTimestampMode {
+    
+    /// 秒
+    case second
+    
+    /// 毫秒
+    case millisecond
 }
 
 /// 生物识别模式
