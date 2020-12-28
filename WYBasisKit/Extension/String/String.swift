@@ -75,13 +75,13 @@ public extension String {
         
         let formatter = DateFormatter.init()
         
-        formatter.dateFormat = dateFormat.rawValue
+        formatter.dateFormat = sharedTimeFormat(dateFormat: dateFormat)
         
         return formatter.string(from: date as Date)
     }
     
     /// 字符串转时间戳
-    func wy_dateConvertTimestamp(dateFormat: WYTimeFormat) -> String {
+    func wy_dateStrConvertTimestamp(dateFormat: WYTimeFormat) -> String {
         
         if self.isEmpty {return ""}
         
@@ -89,7 +89,7 @@ public extension String {
         
         format.dateStyle = .medium
         format.timeStyle = .short
-        format.dateFormat = dateFormat.rawValue
+        format.dateFormat = sharedTimeFormat(dateFormat: dateFormat)
         
         let date = format.date(from: self)
         
@@ -127,5 +127,25 @@ public extension String {
     func wy_emptyStr() -> String {
         
         return (self.isEmpty) ? "" : self
+    }
+    
+    private func sharedTimeFormat(dateFormat: WYTimeFormat) -> String {
+        
+        switch dateFormat {
+        case .HM:
+            return "HH:mm"
+        case .YMD:
+            return "yyyy-MM-dd"
+        case .HMS:
+            return "HH:mm:ss"
+        case .MDHM:
+            return "MM-dd HH:mm"
+        case .YMDHM:
+            return "yyyy-MM-dd HH:mm"
+        case .YMDHMS:
+            return "yyyy-MM-dd HH:mm:ss"
+        case .custom(format: let format):
+            return format
+        }
     }
 }

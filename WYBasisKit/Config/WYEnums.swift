@@ -55,20 +55,22 @@ public enum WYButtonPosition {
 }
 
 /// 时间格式化模式
-public enum WYTimeFormat: String {
+public enum WYTimeFormat {
     
     /// 时:分
-    case HM = "HH:mm"
+    case HM
     /// 年-月-日
-    case YMD = "yyyy-MM-dd"
+    case YMD
     /// 时:分:秒
-    case HMS = "HH:mm:ss"
+    case HMS
     /// 月-日 时:分
-    case MDHM = "MM-dd HH:mm"
+    case MDHM
     /// 年-月-日 时:分
-    case YMDHM = "yyyy-MM-dd HH:mm"
+    case YMDHM
     /// 年-月-日 时:分:秒
-    case YMDHMS = "yyyy-MM-dd HH:mm:ss"
+    case YMDHMS
+    /// 传入自定义格式
+    case custom(format: String)
 }
 
 /// 获取时间戳的模式
