@@ -145,7 +145,7 @@ public extension NSObject {
 public extension Dictionary {
     
     /// 字典转JSON字符串
-    func mapJSON() -> String {
+    func wy_convertJSON() -> String {
         
         let data = try? JSONSerialization.data(withJSONObject: self, options: JSONSerialization.WritingOptions.init(rawValue: 0))
         
@@ -155,7 +155,7 @@ public extension Dictionary {
     }
     
     /// 字典转Data
-    func mapData() -> Data {
+    func wy_convertData() -> Data {
         
         return try! JSONSerialization.data(withJSONObject: self, options: [JSONSerialization.WritingOptions.prettyPrinted])
     }
@@ -164,7 +164,7 @@ public extension Dictionary {
 public extension String {
     
     /// JSON字符串转字典
-    func mapDictionary() -> [String: AnyObject]? {
+    func wy_convertDictionary() -> [String: AnyObject]? {
         
         if let data = self.data(using: String.Encoding.utf8) {
             do {
@@ -177,7 +177,7 @@ public extension String {
     }
     
     /// JSON字符串转数组
-    func mapArray() -> [String: AnyObject] {
+    func wy_convertArray() -> [String: AnyObject] {
         
         let jsonData: Data = self.data(using: .utf8)!
         
@@ -192,7 +192,7 @@ public extension String {
 public extension Array {
     
     /// 数组转JSON字符串
-    func mapJSON() -> String {
+    func wy_convertJSON() -> String {
         
         if (!JSONSerialization.isValidJSONObject(self)) {
             wy_print("is not a valid json object")
@@ -209,7 +209,7 @@ public extension Array {
 public extension Data {
     
     /// Data转JSON字符串
-    func mapJSON() -> String {
+    func wy_convertJSON() -> String {
         
         return String(data: self, encoding: .utf8) ?? ""
     }
