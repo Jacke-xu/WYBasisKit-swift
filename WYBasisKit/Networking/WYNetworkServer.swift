@@ -78,7 +78,6 @@ struct WYTarget: TargetType {
         case .data:
             return .requestCompositeData(bodyData: request.data!, urlParameters: request.parameters)
         case .upload:
-
             var multiparts: [Moya.MultipartFormData] = []
             for fileModel in request.files {
                 switch fileModel.fileType {
