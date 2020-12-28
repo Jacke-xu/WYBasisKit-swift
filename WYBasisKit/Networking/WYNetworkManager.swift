@@ -147,22 +147,22 @@ public class WYNetworkManager {
     
     private var networkSecurityInfo = (WYNetworkStatus.userNotSelectedConnect, "")
     
-    public func post(domain: String = WYNetworkConfig.currentDomainPath, path: String = "", headers: [String : String]? = WYNetworkConfig.requestHeaders, parameters: [String : Any] = [:], originJson: Bool = false, callbackQueue: DispatchQueue = .main, success:((_ response: Any?) -> Void)? = nil, failure:((_ error: String, _ serverCode: Int) -> Void)? = nil) {
+    public func post(taskMethod: WYTaskMethod = .parameters, domain: String = WYNetworkConfig.currentDomainPath, path: String = "", headers: [String : String]? = WYNetworkConfig.requestHeaders, data: Data? = nil, parameters: [String : Any] = [:], originJson: Bool = false, callbackQueue: DispatchQueue = .main, success:((_ response: Any?) -> Void)? = nil, failure:((_ error: String, _ serverCode: Int) -> Void)? = nil) {
         
-        request(method: .post, taskMethod: .data, domain: domain, path: path, headers: headers, parameters: parameters, files: [], originJson: originJson, callbackQueue: callbackQueue, progress: nil, success: success, failure: failure)
+        request(method: .post, taskMethod: taskMethod, domain: domain, path: path, headers: headers, data: data, parameters: parameters, files: [], originJson: originJson, callbackQueue: callbackQueue, progress: nil, success: success, failure: failure)
     }
     
-    public func get(domain: String = WYNetworkConfig.currentDomainPath, path: String = "", headers: [String : String]? = WYNetworkConfig.requestHeaders, parameters: [String : Any] = [:], originJson: Bool = false, callbackQueue: DispatchQueue = .main, success:((_ response: Any?) -> Void)? = nil, failure:((_ error: String, _ serverCode: Int) -> Void)? = nil) {
+    public func get(taskMethod: WYTaskMethod = .parameters, domain: String = WYNetworkConfig.currentDomainPath, path: String = "", headers: [String : String]? = WYNetworkConfig.requestHeaders, data: Data? = nil, parameters: [String : Any] = [:], originJson: Bool = false, callbackQueue: DispatchQueue = .main, success:((_ response: Any?) -> Void)? = nil, failure:((_ error: String, _ serverCode: Int) -> Void)? = nil) {
         
-        request(method: .get, taskMethod: .data, domain: domain, path: path, headers: headers, parameters: parameters, files: [], originJson: originJson, callbackQueue: callbackQueue, progress: nil, success: success, failure: failure)
+        request(method: .get, taskMethod: taskMethod, domain: domain, path: path, headers: headers, data: data, parameters: parameters, files: [], originJson: originJson, callbackQueue: callbackQueue, progress: nil, success: success, failure: failure)
     }
     
     public func upload(domain: String = WYNetworkConfig.currentDomainPath, path: String = "", headers: [String : String]? = WYNetworkConfig.requestHeaders, parameters: [String : Any] = [:], files: [WYFileModel], originJson: Bool = false, callbackQueue: DispatchQueue = .main, progress:((_ progress: Double) -> Void)?, success:((_ response: Any?) -> Void)?, failure:((_ error: String, _ serverCode: Int) -> Void)?) {
         
-        request(method: .post, taskMethod: .upload, domain: domain, path: path, headers: headers, parameters: parameters, files: files, originJson: originJson, callbackQueue: callbackQueue, progress: progress, success: success, failure: failure)
+        request(method: .post, taskMethod: .upload, domain: domain, path: path, headers: headers, data: nil, parameters: parameters, files: files, originJson: originJson, callbackQueue: callbackQueue, progress: progress, success: success, failure: failure)
     }
     
-    private func request(method: HTTPMethod, taskMethod: WYTaskMethod, domain: String, path: String, headers: [String : String]?, parameters: [String : Any], files: [WYFileModel], originJson: Bool, callbackQueue: DispatchQueue, progress:((_ progress: Double) -> Void)?, success:((_ response: Any?) -> Void)?, failure:((_ error: String, _ serverCode: Int) -> Void)?) {
+    private func request(method: HTTPMethod, taskMethod: WYTaskMethod, domain: String, path: String, headers: [String : String]?, data: Data?, parameters: [String : Any], files: [WYFileModel], originJson: Bool, callbackQueue: DispatchQueue, progress:((_ progress: Double) -> Void)?, success:((_ response: Any?) -> Void)?, failure:((_ error: String, _ serverCode: Int) -> Void)?) {
         
         self.checkNetworkStatus {[weak self] (statusInfo) in
             
@@ -172,7 +172,7 @@ public class WYNetworkManager {
                 
             }else {
                 
-                let request = WYRequest(method: method, taskMethod: taskMethod, domain: domain, path: path, headers: headers, parameters: parameters, files: files)
+                let request = WYRequest(method: method, taskMethod: taskMethod, domain: domain, path: path, headers: headers, data: data, parameters: parameters, files: files)
                 let target = WYTarget(request: request)
                 
                 self?.request(target: target, originJson: originJson, callbackQueue: callbackQueue, progress: progress, success: success, failure: failure)
@@ -279,8 +279,8 @@ public class WYNetworkManager {
     private func showDebugModeLog(target: WYTarget, response: Response, function: String, line: Int) {
         
         guard WYNetworkConfig.debugModeLog == true else { return }
-
-        wy_networkPrint("接口：\(target.baseURL)\(target.path)\n 请求头：\(target.headers ?? [:])\n 参数：\(target.request.parameters))\n 返回数据：\(String(describing: try? response.mapJSON()))", function: function, line: line)
+        
+        wy_networkPrint("接口：\(target.baseURL)\(target.path)\n 请求头：\(target.headers ?? [:])\ndata:\(target.request.data?.mapJSON() ?? "")\n 参数：\(target.request.parameters))\n 返回数据：\(String(describing: try? response.mapJSON()))", function: function, line: line)
     }
     
     private func checkNetworkStatus(handler: ((_ status: (WYNetworkStatus, String)) -> Void)? = nil) {

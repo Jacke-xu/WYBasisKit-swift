@@ -21,18 +21,21 @@ struct WYRequest {
     var headers: [String : String]?
     /// 参数
     var parameters: [String: Any]
+    /// 自定义data
+    var data: Data?
     /// 任务类型
     var taskMethod: WYTaskMethod
     /// 要上传的文件
     var files: [WYFileModel] = []
     
-    init(method: HTTPMethod, taskMethod: WYTaskMethod, domain: String, path: String, headers: [String : String]?, parameters: [String : Any], files: [WYFileModel] = []) {
+    init(method: HTTPMethod, taskMethod: WYTaskMethod, domain: String, path: String, headers: [String : String]?, data: Data?, parameters: [String : Any], files: [WYFileModel] = []) {
         
         self.method = method
         self.taskMethod = taskMethod
         self.domain = domain
         self.path = path
         self.headers = headers
+        self.data = data
         self.parameters = parameters
         self.files = files
     }
@@ -70,10 +73,12 @@ struct WYTarget: TargetType {
     var task: Task {
         
         switch request.taskMethod {
-        case .data:
+        case .parameters:
             return .requestParameters(parameters: request.parameters, encoding: URLEncoding.default)
+        case .data:
+            return .requestCompositeData(bodyData: request.data!, urlParameters: request.parameters)
         case .upload:
-            
+
             var multiparts: [Moya.MultipartFormData] = []
             for fileModel in request.files {
                 switch fileModel.fileType {

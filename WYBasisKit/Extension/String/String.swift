@@ -81,7 +81,7 @@ public extension String {
     }
     
     /// 字符串转时间戳
-    func wy_dateStrConvertTimestamp(dateFormat: WYTimeFormat) -> String {
+    func wy_dateConvertTimestamp(dateFormat: WYTimeFormat) -> String {
         
         if self.isEmpty {return ""}
         

@@ -142,3 +142,75 @@ public extension NSObject {
     }
 }
 
+public extension Dictionary {
+    
+    /// 字典转JSON字符串
+    func mapJSON() -> String {
+        
+        let data = try? JSONSerialization.data(withJSONObject: self, options: JSONSerialization.WritingOptions.init(rawValue: 0))
+        
+        let jsonStr = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
+        
+        return jsonStr! as String
+    }
+    
+    /// 字典转Data
+    func mapData() -> Data {
+        
+        return try! JSONSerialization.data(withJSONObject: self, options: [JSONSerialization.WritingOptions.prettyPrinted])
+    }
+}
+
+public extension String {
+    
+    /// JSON字符串转字典
+    func mapDictionary() -> [String: AnyObject]? {
+        
+        if let data = self.data(using: String.Encoding.utf8) {
+            do {
+                return try JSONSerialization.jsonObject(with: data, options: [JSONSerialization.ReadingOptions.init(rawValue: 0)]) as? [String: AnyObject]
+            } catch let error as NSError {
+                wy_print(error)
+            }
+        }
+        return nil
+    }
+    
+    /// JSON字符串转数组
+    func mapArray() -> [String: AnyObject] {
+        
+        let jsonData: Data = self.data(using: .utf8)!
+        
+        let array = try? JSONSerialization.jsonObject(with: jsonData, options: .mutableContainers)
+        if array != nil {
+            return array as! [String : AnyObject]
+        }
+        return array as! [String : AnyObject]
+    }
+}
+
+public extension Array {
+    
+    /// 数组转JSON字符串
+    func mapJSON() -> String {
+        
+        if (!JSONSerialization.isValidJSONObject(self)) {
+            wy_print("is not a valid json object")
+            return ""
+        }
+        let data = try? JSONSerialization.data(withJSONObject: self, options: [JSONSerialization.WritingOptions.init(rawValue: 0)])
+        
+        let jsonStr = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
+        
+        return jsonStr! as String
+    }
+}
+
+public extension Data {
+    
+    /// Data转JSON字符串
+    func mapJSON() -> String {
+        
+        return String(data: self, encoding: .utf8) ?? ""
+    }
+}

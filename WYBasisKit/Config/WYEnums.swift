@@ -98,6 +98,8 @@ public enum WYBiometricType {
 public enum WYTaskMethod {
     
     /// 数据任务
+    case parameters
+    /// data数据任务(对应Postman的raw)
     case data
     /// 上传任务
     case upload
