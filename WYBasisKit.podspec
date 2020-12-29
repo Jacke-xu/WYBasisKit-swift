@@ -38,13 +38,13 @@ Pod::Spec.new do |spec|
        sp.dependency 'WYBasisKit/Config'
     end
     
-    #spec.subspec 'Networking' do |sp|
-       #sp.source_files = 'WYBasisKit/Networking/**/*', 'WYBasisKit/Extension/UIAlertController/**/*'
-       #sp.frameworks = 'Foundation', 'UIKit'
-       #sp.dependency 'WYBasisKit/Config'
-       #sp.dependency 'Moya'
-       #sp.dependency 'HandyJSON'
-    #end
+    spec.subspec 'Networking' do |sp|
+       sp.source_files = 'WYBasisKit/Networking/**/*', 'WYBasisKit/Extension/UIAlertController/**/*'
+       sp.frameworks = 'Foundation', 'UIKit'
+       sp.dependency 'WYBasisKit/Config'
+       sp.dependency 'Moya'
+       sp.dependency 'HandyJSON'
+    end
 
     spec.subspec 'Layout' do |sp|
 
