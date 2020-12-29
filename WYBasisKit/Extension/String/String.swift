@@ -96,6 +96,18 @@ public extension String {
         return String(date!.timeIntervalSince1970)
     }
     
+    /// 从字符串中提取数字
+    var wy_extractNumbers: String {
+        
+        let scanner = Scanner(string: self)
+        scanner.scanUpToCharacters(from: CharacterSet.decimalDigits, into: nil)
+        var number :Int = 0
+        
+        scanner.scanInt(&number)
+
+        return String(number)
+    }
+    
     /// 检测手机号合法性
     func wy_isValidPhoneNumber(countryCode: String) -> Bool {
         
@@ -123,8 +135,8 @@ public extension String {
         return true
     }
     
-    /// 验证非空字符串
-    func wy_emptyStr() -> String {
+    /// 获取非空字符串
+    var wy_emptyStr: String {
         
         return (self.isEmpty) ? "" : self
     }

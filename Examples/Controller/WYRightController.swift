@@ -26,7 +26,7 @@ class WYRightController: UIViewController {
             controller.view.backgroundColor = .wy_randomColor
             controllerAry.append(controller)
             
-            //simageAry.append(UIImage(named: "tabbar_right_selected")!)
+            simageAry.append(UIImage(named: "tabbar_right_selected")!)
             dimageAry.append(UIImage(named: "tabbar_right_default")!)
             
             titleAry.append("测试" + "\(index)")
