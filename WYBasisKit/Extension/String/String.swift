@@ -71,9 +71,9 @@ public extension String {
         
         if self.isEmpty {return ""}
         
-        let date: NSDate = NSDate.init(timeIntervalSince1970: Double(self)!)
+        let date: NSDate = NSDate(timeIntervalSince1970: Double(self)!)
         
-        let formatter = DateFormatter.init()
+        let formatter = DateFormatter()
         
         formatter.dateFormat = sharedTimeFormat(dateFormat: dateFormat)
         
@@ -137,8 +137,7 @@ public extension String {
     
     /// 获取非空字符串
     var wy_emptyStr: String {
-        
-        return (self.isEmpty) ? "" : self
+        return (self.isEmpty == true) ? "" : self
     }
     
     private func sharedTimeFormat(dateFormat: WYTimeFormat) -> String {
