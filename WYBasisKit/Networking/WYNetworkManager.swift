@@ -280,7 +280,7 @@ public class WYNetworkManager {
 
         guard WYNetworkConfig.debugModeLog == true else { return }
 
-        wy_networkPrint("接口：\(target.baseURL)\(target.path)\n 请求头：\(target.headers ?? [:])\ndata：\((target.request.data == nil ? "" : (String(data: target.request.data!, encoding: .utf8))) ?? "")\n 参数：\(target.request.parameters))\n 返回数据：\(String(describing: try? response.mapJSON()))", function: function, line: line)
+        wy_networkPrint("接口：\(target.baseURL)\(target.path)\n 请求头：\(target.headers ?? [:])\n 自定义data：\((target.request.data == nil ? "" : (String(data: target.request.data!, encoding: .utf8))) ?? "")\n 参数：\(target.request.parameters))\n 返回数据：\(String(describing: try? response.mapJSON()))", function: function, line: line)
     }
 
     private func checkNetworkStatus(handler: ((_ status: (WYNetworkStatus, String)) -> Void)? = nil) {

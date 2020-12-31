@@ -29,13 +29,13 @@ public extension UIButton {
     *  什么都不设置默认为图片在左，文字在右，居中且挨着排列的
     *  @param spacing 图片和文字的间隔
     */
-    func wy_layouEdgeInsets(position: WYButtonPosition, spacing: CGFloat) {
+    func wy_layouEdgeInsets(position: WYButtonPosition, spacing: CGFloat = 0) {
         
         DispatchQueue.main.async {
             
             if self.imageView?.image == nil || self.currentImage == nil || self.currentTitle?.isEmpty == true || self.titleLabel?.text?.isEmpty == true {
                 
-                wy_print("wy_layouEdgeInsets方法 需要在设置图片、文字与约束或者frame之后才可以调用，且button的size要大于 图片大小+文字大小+spacing")
+                //wy_print("wy_layouEdgeInsets方法 需要在设置图片、文字与约束或者frame之后才可以调用，且button的size最好大于 图片大小+文字大小+spacing")
             }
             
             self.superview?.layoutIfNeeded()
@@ -59,11 +59,14 @@ public extension UIButton {
             case .imageRight_titleLeft:
 
                 self.imageEdgeInsets = UIEdgeInsets(top: 0, left: textWidth+spacing/2, bottom: 0, right: -(textWidth+spacing/2))
-                self.titleEdgeInsets = UIEdgeInsets(top: 0, left: -(imageHeight+spacing/2), bottom: 0, right: imageHeight+spacing/2)
+                self.titleEdgeInsets = UIEdgeInsets(top: 0, left: -(imageWidth+spacing/2), bottom: 0, right: imageWidth+spacing/2)
                 
-                // 内容偏移x距离
-                let contentOffsetx: CGFloat = spacing / 2
-                self.contentEdgeInsets = UIEdgeInsets(top: 0, left: contentOffsetx, bottom: 0, right: contentOffsetx)
+                if (textWidth + imageWidth + spacing) > self.frame.size.width {
+                    
+                    // 内容偏移x距离
+                    let contentOffsetx: CGFloat = spacing / 2
+                    self.contentEdgeInsets = UIEdgeInsets(top: 0, left: contentOffsetx, bottom: 0, right: contentOffsetx)
+                }
 
                 break
 
@@ -72,9 +75,12 @@ public extension UIButton {
                 self.imageEdgeInsets = UIEdgeInsets(top: 0, left: -spacing/2, bottom: 0, right: spacing/2)
                 self.titleEdgeInsets = UIEdgeInsets(top: 0, left: spacing/2, bottom: 0, right: -spacing/2)
                 
-                // 内容偏移x距离
-                let contentOffsetx: CGFloat = spacing / 2
-                self.contentEdgeInsets = UIEdgeInsets(top: 0, left: contentOffsetx, bottom: 0, right: contentOffsetx)
+                if (textWidth + imageWidth + spacing) > self.frame.size.width {
+                    
+                    // 内容偏移x距离
+                    let contentOffsetx: CGFloat = spacing / 2
+                    self.contentEdgeInsets = UIEdgeInsets(top: 0, left: contentOffsetx, bottom: 0, right: contentOffsetx)
+                }
 
                 break
 
@@ -83,11 +89,14 @@ public extension UIButton {
                 self.imageEdgeInsets = UIEdgeInsets(top: -imageOffsetY, left: imageOffsetX, bottom: imageOffsetY, right: -imageOffsetX)
                 self.titleEdgeInsets = UIEdgeInsets(top: textOffsetY, left: -textOffsetX, bottom: -textOffsetY, right: textOffsetX)
                 
-                // 内容偏移x距离
-                let contentOffsetx: CGFloat = ([imageWidth, textWidth].min()!) / 2
-                // 内容偏移y距离
-                let contentOffsety: CGFloat = (([imageHeight, textHeight].min()!) / 2) + (spacing / 2)
-                self.contentEdgeInsets = UIEdgeInsets(top: contentOffsety, left: -contentOffsetx, bottom: contentOffsety, right: -contentOffsetx)
+                if (((textWidth + imageWidth + spacing) > self.frame.size.width) || ((textHeight + imageHeight + spacing) > self.frame.size.height)) {
+                    
+                    // 内容偏移x距离
+                    let contentOffsetx: CGFloat = ([imageWidth, textWidth].min()!) / 2
+                    // 内容偏移y距离
+                    let contentOffsety: CGFloat = (([imageHeight, textHeight].min()!) / 2) + (spacing / 2)
+                    self.contentEdgeInsets = UIEdgeInsets(top: contentOffsety, left: -contentOffsetx, bottom: contentOffsety, right: -contentOffsetx)
+                }
 
                 break
 
@@ -97,11 +106,14 @@ public extension UIButton {
                 self.titleEdgeInsets = UIEdgeInsets(top: -textOffsetY, left: -textOffsetX, bottom: textOffsetY, right: textOffsetX)
                 self.contentEdgeInsets = UIEdgeInsets(top: 0, left: -(imageWidth / 2), bottom: 0, right: -(imageWidth / 2))
                 
-                // 内容偏移x距离
-                let contentOffsetx: CGFloat = ([imageWidth, textWidth].min()!) / 2
-                // 内容偏移y距离
-                let contentOffsety: CGFloat = (([imageHeight, textHeight].min()!) / 2) + (spacing / 2)
-                self.contentEdgeInsets = UIEdgeInsets(top: contentOffsety, left: -contentOffsetx, bottom: contentOffsety, right: -contentOffsetx)
+                if (((textWidth + imageWidth + spacing) > self.frame.size.width) || ((textHeight + imageHeight + spacing) > self.frame.size.height)) {
+                    
+                    // 内容偏移x距离
+                    let contentOffsetx: CGFloat = ([imageWidth, textWidth].min()!) / 2
+                    // 内容偏移y距离
+                    let contentOffsety: CGFloat = (([imageHeight, textHeight].min()!) / 2) + (spacing / 2)
+                    self.contentEdgeInsets = UIEdgeInsets(top: contentOffsety, left: -contentOffsetx, bottom: contentOffsety, right: -contentOffsetx)
+                }
 
                 break
             }
