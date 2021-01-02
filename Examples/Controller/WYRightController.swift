@@ -56,7 +56,7 @@ class WYRightController: UIViewController {
         pagingView.layout(controllerAry: controllerAry, titleAry: titleAry, defaultImageAry: dimageAry, selectedImageAry: simageAry, superViewController: self)
         pagingView.itemDidScroll { (pagingIndex) in
             
-            wy_print("pagingIndex = \(pagingIndex)")
+            //wy_print("pagingIndex = \(pagingIndex)")
         }
     }
     

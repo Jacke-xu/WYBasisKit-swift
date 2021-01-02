@@ -155,6 +155,6 @@ public enum WYBannerSwitchMode {
     /// 滚动切换
     case scroll
     
-    /// 淡入淡出
+    /// 淡入淡出(待完善开发)
     case fade
 }

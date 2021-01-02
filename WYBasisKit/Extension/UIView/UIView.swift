@@ -219,7 +219,7 @@ public extension UIView {
     * @param shadowOffset      阴影偏移度，默认CGSize.zero (width : 为正数时，向右偏移，为负数时，向左偏移，height : 为正数时，向下偏移，为负数时，向上偏移)
     * @param gradualColors     渐变色数组，默认为空 (设置渐变色时不能设置背景色，会有影响)
     * @param gradientDirection 渐变色方向，默认从左到右
-    * @param viewBounds        设置圆角时，会去获取视图的Bounds属性，如果此时获取不到，则需要传入该参数，默认为 nil，如果传入该参数，会设置视图的frame为bounds
+    * @param viewBounds        设置圆角时，会去获取视图的Bounds属性，如果此时获取不到，则需要传入该参数，默认为 nil，如果传入该参数，会使用传入的bounds
     */
     func wy_add(rectCorner: UIRectCorner? = nil, cornerRadius: CGFloat? = nil, borderColor: UIColor? = nil, borderWidth: CGFloat? = nil, shadowColor: UIColor? = nil, shadowRadius: CGFloat? = nil, shadowOpacity: CGFloat? = nil, shadowOffset: CGSize? = nil, gradualColors: [UIColor]? = nil, gradientDirection: WYGradientDirection? = nil, viewBounds: CGRect? = nil) {
         
@@ -357,7 +357,6 @@ public extension UIView {
     @discardableResult
     /// 设置圆角时，会去获取视图的Bounds属性，如果此时获取不到，则需要传入该参数，默认为 nil，如果传入该参数，会设置视图的frame为bounds
     func wy_viewBounds(_ bounds: CGRect) -> UIView {
-        self.frame = bounds
         privateViewBounds = bounds
         return self
     }
@@ -589,17 +588,24 @@ public extension UIView {
     private func wy_sharedBounds() -> CGRect {
         
         // 获取在自动布局前的视图大小
-        if (superview != nil) {
+        if privateViewBounds.equalTo(.zero) == false {
             
-            superview?.layoutIfNeeded()
-        }
-        
-        if bounds.equalTo(.zero) {
+            return privateViewBounds
             
-            wy_print("设置圆角、边框、阴影、渐变时需要view拥有frame或约束")
+        }else {
+            
+            if (superview != nil) {
+                
+                superview?.layoutIfNeeded()
+            }
+            
+            if bounds.equalTo(.zero) {
+                
+                wy_print("设置圆角、边框、阴影、渐变时需要view拥有frame或约束")
+            }
+            
+            return bounds
         }
-        
-        return bounds
     }
     
     private func wy_sharedBezierPath() -> UIBezierPath {

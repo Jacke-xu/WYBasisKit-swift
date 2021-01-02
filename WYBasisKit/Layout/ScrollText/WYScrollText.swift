@@ -30,7 +30,7 @@ public class WYScrollText: UIView {
     public var textFont: UIFont = .systemFont(ofSize: wy_screenWidthRatioValue(value: 12))
     /// 轮播间隔，默认3s  为保证轮播流畅，该值要求最小为2s
     public var interval: TimeInterval = 3
-    /// 背景色
+    /// 背景色, 默认透明色
     public var contentColor: UIColor = .clear
     
     private var _textArray: [String]!
@@ -98,7 +98,19 @@ public class WYScrollText: UIView {
         }
     }
     
+    /// 停止定时器
+    private func stopTimer() {
+        
+        timer?.invalidate()
+        timer = nil
+    }
+    
     @objc private func scroll() {
+        
+        guard self.superview != nil else {
+            stopTimer()
+            return
+        }
         
         textIndex += 1
         
@@ -144,6 +156,7 @@ extension WYScrollText: UICollectionViewDelegate, UICollectionViewDataSource, UI
 
         cell.textView.font = self.textFont
         cell.textView.textColor = self.textColor
+        cell.textView.backgroundColor = contentColor
         cell.textView.text = textArray[indexPath.item]
         
         return cell
@@ -165,7 +178,6 @@ class SctolTextCell: UICollectionViewCell {
     
         let label = UILabel()
         label.textAlignment = .left
-        label.backgroundColor = .clear
         self.contentView.addSubview(label)
         label.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
