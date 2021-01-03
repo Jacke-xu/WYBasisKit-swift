@@ -8,6 +8,7 @@
 
 import UIKit
 import Kingfisher
+import SnapKit
 
 @objc public protocol WYBannerViewDelegate {
     
@@ -374,7 +375,7 @@ public class WYBannerView: UIView {
         
         let bundlePath = Bundle.main.path(forResource: "WYBannerView", ofType: "bundle")
         let bannerBundle = Bundle(path: bundlePath ?? "")
-        let placeholder = UIImage(named: (WYLocalizableManager.shared.currentLanguage() == .chinese) ? "placeholder_cn" : "placeholder_en", in: bannerBundle, compatibleWith: nil)
+        let placeholder = UIImage(named: "placeholder_"+WYLocalizableManager.shared.currentLanguage().rawValue, in: bannerBundle, compatibleWith: nil)
         return placeholder!
     }
     

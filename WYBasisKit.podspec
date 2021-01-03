@@ -67,7 +67,7 @@ Pod::Spec.new do |spec|
         ss.dependency 'SnapKit'
         ss.dependency 'Kingfisher'
         ss.resource_bundles = {
-           'WYBannerView' => ['WYBasisKit/Layout/WYBannerView/**/*']
+           'WYBannerView' => ['WYBasisKit/Layout/BannerView/WYBannerView.bundle/**/*']
         }
        end
     end
