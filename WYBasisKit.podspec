@@ -1,9 +1,9 @@
 Pod::Spec.new do |spec|
 
   spec.name         = "WYBasisKit"
-  spec.version      = "0.2.0"
+  spec.version      = "0.2.1"
   spec.summary      = "一个大幅提高开发效率的工具库"
-  spec.description  = <<-DESC 
+  spec.description  = <<-DESC
                           WYBasisKit 不仅可以帮助开发者快速构建一个工程，还有基于常用网络框架和系统API而封装的方法，开发者只需简单的调用API就可以快速实现相应功能， 大幅提高开发效率。
                    DESC
 
@@ -66,9 +66,7 @@ Pod::Spec.new do |spec|
         ss.dependency 'WYBasisKit/Config'
         ss.dependency 'SnapKit'
         ss.dependency 'Kingfisher'
-        ss.resource_bundles = {
-           'WYBannerView' => ['WYBasisKit/Layout/BannerView/WYBannerView.bundle/**/*']
-        }
+        ss.resource = 'WYBasisKit/Layout/BannerView/WYBannerView.bundle'
        end
     end
 end

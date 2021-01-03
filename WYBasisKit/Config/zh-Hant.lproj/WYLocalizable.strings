@@ -1,0 +1,33 @@
+/* 
+  WYLocalizable.strings
+  WYBasisKit
+
+  Created by jacke·xu on 2020/11/21.
+  Copyright © 2020 jacke-xu. All rights reserved.
+*/
+
+"知道了" = "I know";
+"密码" = "Password";
+"取消" = "Cancel";
+"删除" = "Delete";
+"生物识别不可用" = "Biometric is not available";
+"生物识别已被锁定，锁屏并成功解锁设备后重新打开本页面即可重新开启" = "Biometrics has been locked, lock the screen and successfully unlock reopen after";
+"系统中断了本次识别" = "The system interrupted this recognition";
+"生物识别前请设置解锁密码" = "Please set an unlock password before biometric identification";
+"请在设备设置中开启/设置生物识别功能" = "Please enable/set the biometric function in the device settings";
+"请输入密码验证生物识别" = "Please enter your password to verify biometrics";
+"暂无消息" = "Not has message";
+"去授权" = "Go to authorize";
+"App没有访问相册的权限，现在去授权?" = "The app does not have permission to access the album, now to authorize?";
+"App没有访问相机的权限，现在去授权?" = "The app does not have permission to access the camera, now to authorize?";
+"继续连接" = "Continue";
+"取消连接" = "Cancel";
+"数据请求失败" = "Data request failed";
+"未知的网络，可能存在安全隐患，是否继续？" = "The unknown network may have security risks. Do you want to continue?";
+"去设置" = "Go to set";
+"已取消不安全网络连接" = "Unsecured network connection cancelled";
+"无网络连接，请检查您的网络设置" = "No network connection, please check your network settings";
+"您正在使用Wifi联网" = "You are using Wifi to connect";
+"您正在使用蜂窝移动网络联网" = "You are using a cellular mobile network to connect";
+"不可用的网络，请确认您的网络环境或网络连接权限已正确设置" = "Unavailable network, please confirm that your network environment or network connection permissions have been set correctly";
+"未知错误，接口message返回为空" = "Unknown error, interface message return is empty";

@@ -19,6 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // 屏蔽控制台约束输出
         UserDefaults.standard.setValue(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")
         
+        wy_print(WYLocalizedString("知道了"))
+        
         return true
     }
     
