@@ -42,12 +42,12 @@ public let wy_screenHeightRatio: CGFloat = (wy_screenHeight / WYBasisKitConfig.w
 
 /// 屏幕宽度比率转换
 public func wy_screenWidthRatioValue(value: CGFloat) -> CGFloat {
-    return (value*wy_screenWidthRatio)
+    return round(value*wy_screenWidthRatio)
 }
 
 /// 屏幕高度比率转换
 public func wy_screenHeightRatioValue(value: CGFloat) -> CGFloat {
-    return (value*wy_screenHeightRatio)
+    return round(value*wy_screenHeightRatio)
 }
 
 /// DEBUG打印日志

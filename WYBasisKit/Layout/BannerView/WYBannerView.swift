@@ -45,11 +45,11 @@ public class WYBannerView: UIView {
     }
     
     /**
-     *  设置分页控件位置，默认为底部往上30像素且居中
+     *  设置分页控件位置，默认为底部往上5像素且居中
      *  只有一张图片时，pageControl隐藏
      *  第一次reload前设置有效
      */
-    public var pageControlPosition: CGPoint = .zero
+    public var pageControlPosition: CGPoint = CGPoint(x: (wy_screenWidth / 2), y: -wy_screenWidthRatioValue(value: 5))
     
     /**
      *  设置分页控件指示器的图片
@@ -154,14 +154,8 @@ public class WYBannerView: UIView {
         }
     }
     
-    /// 设置圆角位置，默认4角圆角(第一次reload前设置有效)
-    public var rectCorner: UIRectCorner = .allCorners
-    
-    /// 设置圆角半径，默认0(第一次reload前设置有效)
-    public var cornerRadius: CGFloat = 0.0
-    
     /// banner图背景色(第一次reload前设置有效)
-    public var bannerBackgroundColor: UIColor = .white
+    public var bannerBackgroundColor: UIColor = .clear
     
     /// 描述文本控件frame, 默认底部居中(第一次reload前设置有效)
     public var describeViewFrame: CGRect = .zero
@@ -197,10 +191,7 @@ public class WYBannerView: UIView {
             
             self.imageArray.removeAll()
             self.describeArray.removeAll()
-            if ((self.unlimitedCarousel == false) || (images.count <= 1)) {
-                self.unlimitedCarousel = false
-                self.automaticCarousel = false
-            }
+            
             if images.isEmpty == true {
                 self.imageArray.append(self.placeholderImage as Any)
             }else {
@@ -208,14 +199,15 @@ public class WYBannerView: UIView {
                     self.imageArray.append(images.last as Any)
                     self.imageArray.append(contentsOf: images)
                     self.imageArray.append(images.first as Any)
+                    self.pageControl.numberOfPages = self.imageArray.count - 2
                 }else {
                     self.imageArray = images
+                    self.pageControl.numberOfPages = images.count
                 }
             }
             if describes.isEmpty == true {
                 self.describeArray.append(self.placeholderDescribe ?? " ")
             }else {
-                
                 if ((describes.count > 1) && (self.unlimitedCarousel == true)) {
                     self.describeArray.append(describes.last ?? self.placeholderDescribe ?? " ")
                     self.describeArray.append(contentsOf: describes)
@@ -225,21 +217,22 @@ public class WYBannerView: UIView {
                 }
             }
             
-            if ((self.unlimitedCarousel == true) && (images.count > 1)) {
+            if (self.pageControl.numberOfPages != self.imageArray.count) {
+                
+                self.collectionView.reloadData()
                 self.collectionView.performBatchUpdates {
-                    self.collectionView.reloadData()
-                } completion: { (finished) in
                     
                     self.collectionView.scrollToItem(at: IndexPath(item: self.currentIndex, section: 0), at: .init(), animated: false)
                     
-                    if ((self.automaticCarousel == true) && (self.timer == nil)) {
-                        self.startTimer()
+                    self.pageControl.isHidden = false
+                    self.pageControl.currentPage = (self.currentIndex - 1)
+                    if (self.automaticCarousel == true) {
+                        if self.timer == nil {
+                            self.startTimer()
+                        }
                     }else {
                         self.stopTimer()
                     }
-                    self.pageControl.isHidden = false
-                    self.pageControl.currentPage = self.currentIndex
-                    self.pageControl.numberOfPages = self.imageArray.count - 2
                 }
 
             }else {
@@ -253,9 +246,9 @@ public class WYBannerView: UIView {
                         self.pageControl.currentPage = (self.currentIndex > (images.count - 1)) ? 0 : self.currentIndex
                     }
                 }
-                self.pageControl.numberOfPages = images.count
             }
-            self.collectionView.bounces = self.unlimitedCarousel
+            self.collectionView.bounces = (self.pageControl.numberOfPages != self.imageArray.count)
+            self.bringSubviewToFront(self.pageControl)
         }
     }
     
@@ -270,7 +263,7 @@ public class WYBannerView: UIView {
             stopTimer()
         }
         // 判断是否需要开启定时器
-        if ((imageArray.count <= 1) || (unlimitedCarousel == false) || (automaticCarousel == false)) { return }
+        if ((imageArray.count <= 1) || (unlimitedCarousel == false) || (automaticCarousel == false) || (pageControl.numberOfPages == imageArray.count)) { return }
         
         timer = Timer.scheduledTimer(timeInterval: (standingTime < 1) ? 3 : standingTime, target: self, selector: #selector(nextPage), userInfo: nil, repeats: true)
         
@@ -310,8 +303,6 @@ public class WYBannerView: UIView {
     private var pageControlSize: CGSize?
     // 定时器
     private var timer: Timer?
-    // 是否启用了定时器
-    private var isTimer: Bool = true
     // 判断手动拖拽后是否需要启动定时器
     private var userTiming: Bool = false
     // block点击事件
@@ -327,17 +318,15 @@ public class WYBannerView: UIView {
         addSubview(pagecontrol)
         pagecontrol.snp.makeConstraints { (make) in
             
-            if pageControlPosition.equalTo(.zero) {
+            if pageControlPosition.equalTo(CGPoint(x: (wy_screenWidth / 2), y: -wy_screenWidthRatioValue(value: 5))) {
                 make.centerX.equalToSuperview()
-                make.bottom.equalToSuperview().offset(-wy_screenWidthRatioValue(value: 30))
-                
+                make.bottom.equalToSuperview().offset(pageControlPosition.y)
             }else {
                 make.left.equalTo(pageControlPosition.x)
                 make.top.equalTo(pageControlPosition.y)
             }
             make.width.lessThanOrEqualToSuperview()
         }
-        
         return pagecontrol
     }()
     
@@ -362,7 +351,6 @@ public class WYBannerView: UIView {
         collectionview.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
-        collectionview.wy_rectCorner(rectCorner).wy_cornerRadius(cornerRadius).wy_showVisual()
         
         return collectionview
     }()
@@ -373,8 +361,8 @@ public class WYBannerView: UIView {
     
     private class func getPlaceholderImage() -> UIImage {
         
-        let bundlePath = Bundle.main.path(forResource: "WYBannerView", ofType: "bundle")
-        let bannerBundle = Bundle(path: bundlePath ?? "")
+        let bundlePath = Bundle(for: WYBannerView.self).resourcePath! + "/WYBannerView.bundle"
+        let bannerBundle = Bundle(path: bundlePath)
         let placeholder = UIImage(named: "placeholder_"+WYLocalizableManager.shared.currentLanguage().rawValue, in: bannerBundle, compatibleWith: nil)
         return placeholder!
     }
@@ -408,7 +396,7 @@ public class WYBannerView: UIView {
         
         let offsetx = collectionView.contentOffset.x
         let currentPage = offsetx / collectionView.frame.size.width
-        if unlimitedCarousel == true {
+        if pageControl.numberOfPages != imageArray.count {
             // 左滑
             if offsetx <= 0 {
                 let indexPath = IndexPath(item: imageArray.count - 2, section: 0)
@@ -495,8 +483,8 @@ extension WYBannerView: UICollectionViewDelegate, UICollectionViewDataSource {
         // 支持无限轮播
         setUnlimitedCarousel()
         
-        let contentOffset = CGPoint(x: scrollView.contentOffset.x - ((unlimitedCarousel == true) ? collectionView.frame.size.width : 0.0), y: 0)
-        
+        let contentOffset = CGPoint(x: scrollView.contentOffset.x - ((pageControl.numberOfPages != imageArray.count) ? collectionView.frame.size.width : 0.0), y: 0)
+
         // 判断只有滚动到准确下标后才返回代理或block
         if (contentOffset.x.truncatingRemainder(dividingBy: collectionView.frame.size.width) == 0) {
             if ((imageArray.count != pageControl.numberOfPages) && ((currentIndex == (imageArray.count - 1) || (currentIndex == 0)))) {
@@ -513,7 +501,7 @@ extension WYBannerView: UICollectionViewDelegate, UICollectionViewDataSource {
     // 判断是否重启定时器
     public func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
 
-        if ((userTiming == true) && (unlimitedCarousel == true) && (automaticCarousel == true)) {
+        if ((userTiming == true) && (unlimitedCarousel == true) && (automaticCarousel == true) && (pageControl.numberOfPages != imageArray.count)) {
             startTimer()
         }
     }
