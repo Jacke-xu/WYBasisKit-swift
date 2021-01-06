@@ -107,6 +107,17 @@ public enum WYTaskMethod {
     case upload
 }
 
+/// 网络请求方式
+public enum WYNetworkRequestWay {
+    
+    /// HTTP和CAHTTPS(无需额外配置  CAHTTPS：向正规CA机构购买的HTTPS服务)
+    case httpOrCAHttps
+    /// HTTPS单向验证(自建证书，需要将一个服务端的server.cer文件放进工程目录，并调用WYNetworkConfig对应方法配置cer文件路径)
+    case httpsSingleValidation
+    /// HTTPS双向验证(自建证书，需要将一个服务端的server.cer文件与一个带密码的客户端client.p12文件放进工程目录，并调用WYNetworkConfig对应方法配置cer、P12文件路径与P12文件密码)
+    case httpsBothwayValidation
+}
+
 /// 上传类型
 public enum WYFileType {
     

@@ -41,6 +41,20 @@ struct WYRequest {
     }
 }
 
+let requestProvider = { (endpoint: Endpoint, done: @escaping MoyaProvider<WYTarget>.RequestResultClosure) in
+    
+    do {
+        var request: URLRequest = try endpoint.urlRequest()
+        /// 设置请求超时时间
+        request.timeoutInterval = WYNetworkConfig.timeoutIntervalForRequest
+        done(.success(request))
+    } catch  {
+        return
+    }
+}
+
+let WYTargetProvider = MoyaProvider<WYTarget>(requestClosure: requestProvider)
+
 struct WYTarget: TargetType {
     
     init(request: WYRequest) {
