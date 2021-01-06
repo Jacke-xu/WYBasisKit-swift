@@ -289,7 +289,7 @@ public class WYBannerView: UIView {
      */
     private var _unlimitedCarousel: Bool = true
     /**
-     *  设置分页控件位置，默认为底部往上30像素且居中
+     *  设置分页控件位置，默认为底部往上5像素且居中
      *  只有一张图片时，pageControl隐藏
      */
     private var _pageControlPosition: CGPoint = .zero
