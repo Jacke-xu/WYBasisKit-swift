@@ -69,7 +69,7 @@ public extension UINavigationController {
                 
             }else {
                 
-                return .systemFont(ofSize: wy_screenWidthRatioValue(value: 16))
+                return .systemFont(ofSize: wy_screenWidthRatio(16))
             }
         }
     }

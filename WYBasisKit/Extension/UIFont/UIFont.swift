@@ -13,6 +13,6 @@ public extension UIFont {
     /// 根据屏幕比率自动调整字号大小
     var wy_adjust : UIFont {
         
-        return UIFont.init(name: self.fontName, size: self.pointSize*wy_screenWidthRatio)!
+        return UIFont.init(name: self.fontName, size: wy_fontRatio(self.pointSize))!
     }
 }

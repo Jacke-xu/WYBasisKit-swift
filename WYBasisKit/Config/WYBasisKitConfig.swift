@@ -12,6 +12,7 @@ public let wy_defaultPageSize: NSInteger = 10
 public let wy_messageDuration: TimeInterval = 1.5
 public let wy_currentScreenWidthRatioBase: CGFloat = 375.0
 public let wy_currentScreenHeightRatioBase: CGFloat = 812.0
+public let wy_maxFontRatioBase: CGFloat = 1.0
 
 public class WYBasisKitConfig {
     
@@ -29,4 +30,7 @@ public class WYBasisKitConfig {
     
     /// 设置屏幕高度比基数
     public static var wy_screenHeightRatioBase: CGFloat = wy_currentScreenHeightRatioBase
+    
+    /// 设置字号适配的最大比率数
+    public static var wy_maxFontRatio: CGFloat = wy_maxFontRatioBase
 }

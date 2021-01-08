@@ -41,13 +41,19 @@ public let wy_screenWidthRatio: CGFloat = (wy_screenWidth / WYBasisKitConfig.wy_
 public let wy_screenHeightRatio: CGFloat = (wy_screenHeight / WYBasisKitConfig.wy_screenHeightRatioBase)
 
 /// 屏幕宽度比率转换
-public func wy_screenWidthRatioValue(value: CGFloat) -> CGFloat {
+public func wy_screenWidthRatio(_ value: CGFloat) -> CGFloat {
     return round(value*wy_screenWidthRatio)
 }
 
 /// 屏幕高度比率转换
-public func wy_screenHeightRatioValue(value: CGFloat) -> CGFloat {
+public func wy_screenHeightRatio(_ value: CGFloat) -> CGFloat {
     return round(value*wy_screenHeightRatio)
+}
+
+/// 字号比率转换
+public func wy_fontRatio(_ value: CGFloat) -> CGFloat {
+    
+    return value * ((wy_screenWidthRatio > WYBasisKitConfig.wy_maxFontRatio) ? WYBasisKitConfig.wy_maxFontRatio : wy_screenWidthRatio)
 }
 
 /// DEBUG打印日志

@@ -125,14 +125,14 @@ public class WYNetworkManager {
             }else {
 
                 let request = WYRequest(method: method, taskMethod: taskMethod, domain: domain, path: path, headers: headers, data: data, parameters: parameters, files: files)
-                let target = WYTarget(request: request)
+                let target = WYProvider(request: request)
 
                 self?.request(target: target, originJson: originJson, callbackQueue: callbackQueue, progress: progress, success: success, failure: failure)
             }
         }
     }
 
-    private func request(target: WYTarget, originJson: Bool, callbackQueue: DispatchQueue = .main, progress:((_ progress: Double) -> Void)? = nil, success:((_ response: Any?) -> Void)? = nil, failure:((_ error: String, _ serverCode: Int) -> Void)? = nil) {
+    private func request(target: WYProvider, originJson: Bool, callbackQueue: DispatchQueue = .main, progress:((_ progress: Double) -> Void)? = nil, success:((_ response: Any?) -> Void)? = nil, failure:((_ error: String, _ serverCode: Int) -> Void)? = nil) {
 
         // 开启状态栏动画
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
@@ -229,7 +229,7 @@ public class WYNetworkManager {
         }
     }
 
-    private func showDebugModeLog(target: WYTarget, response: Response, function: String, line: Int) {
+    private func showDebugModeLog(target: WYProvider, response: Response, function: String, line: Int) {
 
         guard WYNetworkConfig.debugModeLog == true else { return }
 

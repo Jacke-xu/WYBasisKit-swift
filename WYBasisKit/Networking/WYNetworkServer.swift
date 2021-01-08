@@ -41,7 +41,7 @@ struct WYRequest {
     }
 }
 
-let requestProvider = { (endpoint: Endpoint, done: @escaping MoyaProvider<WYTarget>.RequestResultClosure) in
+let requestProvider = { (endpoint: Endpoint, done: @escaping MoyaProvider<WYProvider>.RequestResultClosure) in
     
     do {
         var request: URLRequest = try endpoint.urlRequest()
@@ -53,9 +53,9 @@ let requestProvider = { (endpoint: Endpoint, done: @escaping MoyaProvider<WYTarg
     }
 }
 
-let WYTargetProvider = MoyaProvider<WYTarget>(requestClosure: requestProvider)
+let WYTargetProvider = MoyaProvider<WYProvider>(requestClosure: requestProvider)
 
-struct WYTarget: TargetType {
+struct WYProvider: TargetType {
     
     init(request: WYRequest) {
         
@@ -112,4 +112,13 @@ struct WYTarget: TargetType {
         
         return request.headers
     }
+}
+
+struct WYHTTPSProvider {
+    
+//    let delegate = SessionDelegate()
+//    delegate.urlSession(URLSession(), task: URLSessionTask(), didReceive: URLAuthenticationChallenge(), completionHandler: { (challenge, credential) in
+//        
+//        
+//    })
 }

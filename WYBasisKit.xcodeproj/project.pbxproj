@@ -73,6 +73,7 @@
 		1F5C3E5525787ED300E0DBFF /* WYRightController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYRightController.swift; sourceTree = "<group>"; };
 		1F5C3E602578B61B00E0DBFF /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
 		1F5C3E932578CD5400E0DBFF /* WYLocalizableManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYLocalizableManager.swift; sourceTree = "<group>"; };
+		1F6AA1C325A6D56F00AADEE3 /* WYBasisKit.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WYBasisKit.entitlements; sourceTree = "<group>"; };
 		1F952EF225806EB100F03251 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		1F952EF325806EB100F03251 /* WYBasisKit.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = WYBasisKit.podspec; sourceTree = SOURCE_ROOT; };
 		1F952EF725807ACE00F03251 /* WYConstMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYConstMethod.swift; sourceTree = "<group>"; };
@@ -236,6 +237,7 @@
 		AA771B912568F834002C748B /* WYBasisKit */ = {
 			isa = PBXGroup;
 			children = (
+				1F6AA1C325A6D56F00AADEE3 /* WYBasisKit.entitlements */,
 				AA771C0D25691241002C748B /* Config */,
 				AA771BF62568F91F002C748B /* Extension */,
 				AA771B922568F834002C748B /* Practical */,
@@ -849,8 +851,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = WYBasisKit/WYBasisKit.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = JX362P6GEC;
+				DEVELOPMENT_TEAM = TC77GVY4C9;
 				INFOPLIST_FILE = Examples/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -859,9 +862,10 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jacke-xu.WYBasisKit";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -871,8 +875,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = WYBasisKit/WYBasisKit.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = JX362P6GEC;
+				DEVELOPMENT_TEAM = TC77GVY4C9;
 				INFOPLIST_FILE = Examples/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -881,8 +886,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jacke-xu.WYBasisKit";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
