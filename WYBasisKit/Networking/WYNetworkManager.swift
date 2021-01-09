@@ -113,6 +113,32 @@ public class WYNetworkManager {
 
         request(method: .post, taskMethod: .upload, domain: domain, path: path, headers: headers, data: nil, parameters: parameters, files: files, originJson: originJson, callbackQueue: callbackQueue, progress: progress, success: success, failure: failure)
     }
+    
+    /// 取消所有网络请求
+    public func cancelAllRequest() {
+        
+        Moya.Session.default.session.getAllTasks { (tasks) in
+
+            tasks.forEach { (task) in
+
+                task.cancel()
+            }
+        }
+    }
+    
+    /// 取消指定url的请求
+    public func cancelRequest(domain: String = WYNetworkConfig.currentDomainPath, path: String) {
+        
+        Moya.Session.default.session.getAllTasks { (tasks) in
+
+            tasks.forEach { (task) in
+
+                if (task.originalRequest?.url?.absoluteString == (domain + path)) {
+                    task.cancel()
+                }
+            }
+        }
+    }
 
     private func request(method: HTTPMethod, taskMethod: WYTaskMethod, domain: String, path: String, headers: [String : String]?, data: Data?, parameters: [String : Any], files: [WYFileModel], originJson: Bool, callbackQueue: DispatchQueue, progress:((_ progress: Double) -> Void)?, success:((_ response: Any?) -> Void)?, failure:((_ error: String, _ serverCode: Int) -> Void)?) {
 
@@ -385,24 +411,8 @@ public class WYNetworkManager {
                     let errorStr = (actionStr == WYLocalizedString("取消连接")) ? WYLocalizedString("已取消不安全网络连接") : WYLocalizedString("无网络连接，请检查您的网络设置")
                     self.networkSecurityInfo = (WYNetworkStatus.userCancelConnect, errorStr)
 
-                    Moya.Session.default.session.getAllTasks { (tasks) in
-
-                        tasks.forEach { (task) in
-
-                            task.cancel()
-                        }
-
-                        /*
-
-                         取消指定url的请求
-
-                         if (task.originalRequest?.url?.absoluteString == "http://www.apple.com") {
-
-                             task.cancel()
-                         }
-
-                        */
-                    }
+                    self.cancelAllRequest()
+                    
                 }else {
 
                     self.networkSecurityInfo = (WYNetworkStatus.userNotSelectedConnect, "")

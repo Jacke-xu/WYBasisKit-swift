@@ -10,10 +10,9 @@ import Foundation
 
 public class WYBoolJudge: NSObject {
     
-    /// 判断是否是6-16位字母与数字的组合
-    public class func wy_isLettersAndNumbers(string: String) -> Bool {
-        
-        let pwd =  "^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,16}$"
+    /// 判断是否是指定位字母与数字的组合(默认6-16位)
+    public class func wy_isLettersAndNumbers(string: String, min: Int = 6, max: Int = 16) -> Bool {
+        let pwd =  "^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{\(min),\(max)}$"
         let regextestpwd = NSPredicate(format: "SELF MATCHES %@",pwd)
         
         return regextestpwd.evaluate(with: string)

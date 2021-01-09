@@ -89,7 +89,7 @@ public class WYLocalizableManager: NSObject {
         
         if let appdelegate = UIApplication.shared.delegate {
             
-            let storyBoard = UIStoryboard.init(name: "Main", bundle: nil)
+            let storyBoard = UIStoryboard(name: "Main", bundle: nil)
             
             let mainController = storyBoard.instantiateViewController(withIdentifier: "rootViewController")
             
