@@ -30,7 +30,7 @@ public class WYPagingView: UIView {
     }
 
     /// 分页栏的高度 默认45
-    public var bar_Height: CGFloat = wy_screenWidthRatio(45)
+    public var bar_Height: CGFloat = wy_screenWidth(45)
     
     /// 图片和文字显示模式
     public var buttonPosition: WYButtonPosition = .imageTop_titleBottom
@@ -44,11 +44,11 @@ public class WYPagingView: UIView {
     /// 显示整体宽度小于一屏，且设置了bar_Width != 0，是否需要居中显示，默认 居中 (居中后，将会动态调整bar_originlLeftOffset和bar_originlRightOffset的距离)
     public var bar_adjustOffset: Bool = true
 
-    /// 左右分页栏之间的间距
-    public var bar_dividingOffset: CGFloat = wy_screenWidthRatio(20)
+    /// 左右分页栏之间的间距，默认20像素
+    public var bar_dividingOffset: CGFloat = wy_screenWidth(20)
 
     /// 内部按钮图片和文字的上下或左右间距 默认5
-    public var barButton_dividingOffset: CGFloat = wy_screenWidthRatio(5)
+    public var barButton_dividingOffset: CGFloat = wy_screenWidth(5)
     
     /// 分页控制器底部背景色 默认白色
     public var bar_pagingContro_content_color: UIColor = .white
@@ -93,22 +93,22 @@ public class WYPagingView: UIView {
     public var bar_scrollLineColor: UIColor = .wy_hexColor(hexColor: "#2D3952")
 
     /// 滑动线条宽度 默认25像素
-    public var bar_scrollLineWidth: CGFloat = wy_screenWidthRatio(25)
+    public var bar_scrollLineWidth: CGFloat = wy_screenWidth(25)
 
     /// 滑动线条距离分页栏底部的距离 默认5像素
-    public var bar_scrollLineBottomOffset: CGFloat = wy_screenWidthRatio(5)
+    public var bar_scrollLineBottomOffset: CGFloat = wy_screenWidth(5)
 
     /// 分隔带高度 默认2像素
-    public var bar_dividingStripHeight: CGFloat = wy_screenWidthRatio(2)
+    public var bar_dividingStripHeight: CGFloat = wy_screenWidth(2)
 
     /// 滑动线条高度 默认2像素
-    public var bar_scrollLineHeight: CGFloat = wy_screenWidthRatio(2)
+    public var bar_scrollLineHeight: CGFloat = wy_screenWidth(2)
 
     /// 分页栏标题默认字号 默认14号；
-    public var bar_title_defaultFont: UIFont = .systemFont(ofSize: wy_fontRatio(14))
+    public var bar_title_defaultFont: UIFont = .systemFont(ofSize: wy_fontSize(14))
 
     /// 分页栏标题选中字号 默认粗体17号；
-    public var bar_title_selectedFont: UIFont = .boldSystemFont(ofSize: wy_fontRatio(17))
+    public var bar_title_selectedFont: UIFont = .boldSystemFont(ofSize: wy_fontSize(17))
 
     /// 初始选中第几项  默认第一项
     public var bar_selectedIndex: NSInteger = 0

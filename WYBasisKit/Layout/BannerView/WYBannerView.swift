@@ -49,7 +49,7 @@ public class WYBannerView: UIView {
      *  只有一张图片时，pageControl隐藏
      *  第一次reload前设置有效
      */
-    public var pageControlPosition: CGPoint = CGPoint(x: (wy_screenWidth / 2), y: -wy_screenWidthRatio(5))
+    public var pageControlPosition: CGPoint = CGPoint(x: (wy_screenWidth / 2), y: -wy_screenWidth(5))
     
     /**
      *  设置分页控件指示器的图片
@@ -170,7 +170,7 @@ public class WYBannerView: UIView {
     public var describeBackgroundColor: UIColor = .clear
     
     /// 描述文本字体(第一次reload前设置有效)
-    public var describeTextFont: UIFont = .systemFont(ofSize: wy_fontRatio(12))
+    public var describeTextFont: UIFont = .systemFont(ofSize: wy_fontSize(12))
     
     /// 描述占位文本(第一次reload前设置有效)
     public var placeholderDescribe: String?
@@ -318,7 +318,7 @@ public class WYBannerView: UIView {
         addSubview(pagecontrol)
         pagecontrol.snp.makeConstraints { (make) in
             
-            if pageControlPosition.equalTo(CGPoint(x: (wy_screenWidth / 2), y: -wy_screenWidthRatio(5))) {
+            if pageControlPosition.equalTo(CGPoint(x: (wy_screenWidth / 2), y: -wy_screenWidth(5))) {
                 make.centerX.equalToSuperview()
                 make.bottom.equalToSuperview().offset(pageControlPosition.y)
             }else {

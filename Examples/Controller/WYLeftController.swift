@@ -118,7 +118,7 @@ extension WYLeftController: UITableViewDelegate, UITableViewDataSource {
         cell.textLabel?.text = cellTitles[indexPath.section][indexPath.row]
         cell.textLabel?.textColor = UIColor.wy_dynamicColor(light: .black, dark: .white)
         //cell.textLabel?.adjustsFontSizeToFitWidth = true
-        cell.textLabel?.font = .systemFont(ofSize: wy_fontRatio(15))
+        cell.textLabel?.font = .systemFont(ofSize: wy_fontSize(15))
         
         return cell
     }
