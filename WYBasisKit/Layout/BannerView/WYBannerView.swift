@@ -222,7 +222,7 @@ public class WYBannerView: UIView {
                 self.collectionView.reloadData()
                 self.collectionView.performBatchUpdates {
                     
-                    self.collectionView.scrollToItem(at: IndexPath(item: self.currentIndex, section: 0), at: .init(), animated: false)
+                    self.showSwitchAnimation(indexPath: IndexPath(item: self.currentIndex, section: 0), animation: false)
                     
                     self.pageControl.isHidden = false
                     self.pageControl.currentPage = (self.currentIndex - 1)
@@ -381,7 +381,7 @@ public class WYBannerView: UIView {
             currentIndex = 2
         }
         if currentIndex < imageArray.count {
-            collectionView.scrollToItem(at: IndexPath(item: currentIndex, section: 0), at: .left, animated: true)
+            showSwitchAnimation(indexPath: IndexPath(item: currentIndex, section: 0), animation: true)
             if currentIndex == (imageArray.count - 1) {
                 self.perform(#selector(changeCurrentIndex), with: nil, afterDelay: 1)
             }
@@ -400,12 +400,12 @@ public class WYBannerView: UIView {
             // 左滑
             if offsetx <= 0 {
                 let indexPath = IndexPath(item: imageArray.count - 2, section: 0)
-                collectionView.scrollToItem(at: indexPath, at: .init(), animated: false)
+                showSwitchAnimation(indexPath: indexPath, animation: false)
             }
             // 右滑
             if (offsetx >= (collectionView.bounds.size.width * CGFloat((imageArray.count - 1)))) {
                 let indexPath = IndexPath(item: 1, section: 0)
-                collectionView.scrollToItem(at: indexPath, at: .init(), animated: false)
+                showSwitchAnimation(indexPath: indexPath, animation: false)
             }
             if currentPage == 0 {
                 pageControl.currentPage = (pageControl.numberOfPages - 1)
@@ -462,6 +462,10 @@ extension WYBannerView: UICollectionViewDelegate, UICollectionViewDataSource {
     
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
+        guard !((imageArray.count == 1) && (imageArray.first is UIImage) && ((imageArray.first as! UIImage) == placeholderImage)) else {
+            return
+        }
+        
         let index = (imageArray.count == pageControl.numberOfPages) ? indexPath.item : ((imageArray.count > 1 ) ? (indexPath.item - 1) : indexPath.item)
 
         delegate?.itemDidClick?(self, index)
@@ -483,6 +487,10 @@ extension WYBannerView: UICollectionViewDelegate, UICollectionViewDataSource {
         // 支持无限轮播
         setUnlimitedCarousel()
         
+        guard !((imageArray.count == 1) && (imageArray.first is UIImage) && ((imageArray.first as! UIImage) == placeholderImage)) else {
+            return
+        }
+
         let contentOffset = CGPoint(x: scrollView.contentOffset.x - ((pageControl.numberOfPages != imageArray.count) ? collectionView.frame.size.width : 0.0), y: 0)
 
         // 判断只有滚动到准确下标后才返回代理或block
@@ -495,6 +503,43 @@ extension WYBannerView: UICollectionViewDelegate, UICollectionViewDataSource {
                 scrollHandler!(contentOffset, bannerIndex)
             }
             delegate?.itemDidScroll?(self, contentOffset, bannerIndex)
+        }
+    }
+    
+    // 根据不同的显示模式提供切换动画
+    func showSwitchAnimation(indexPath: IndexPath, animation: Bool) {
+        
+        switch switchModel {
+        case .scroll:
+            collectionView.scrollToItem(at: indexPath, at: ((animation == false) ? .init() : .left), animated: animation)
+            break
+        case .fade:
+            if (indexPath.row == (imageArray.count == pageControl.numberOfPages ? 0 : 1)) {
+                self.collectionView.performBatchUpdates {
+                    self.collectionView.scrollToItem(at: indexPath, at: .init(), animated: false)
+                } completion: { ( finish) in
+                    let currentCell = self.collectionView.visibleCells.first
+                    currentCell?.contentView.alpha = 1.0
+                }
+                return
+            }
+            let currentCell = collectionView.visibleCells.first
+            currentCell?.contentView.alpha = 1.0
+            UIView.animate(withDuration: 1) {
+                currentCell?.contentView.alpha = 0.0
+            }completion: { (finish) in
+                currentCell?.contentView.alpha = 1.0
+                self.collectionView.performBatchUpdates {
+                    self.collectionView.scrollToItem(at: indexPath, at: .init(), animated: false)
+                } completion: { ( finish) in
+                    let nextCell = self.collectionView.visibleCells.first
+                    nextCell?.contentView.alpha = 0.0
+                    UIView.animate(withDuration: 1) {
+                        nextCell?.contentView.alpha = 1.0
+                    }
+                }
+            }
+            break
         }
     }
     

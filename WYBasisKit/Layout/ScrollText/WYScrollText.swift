@@ -46,9 +46,12 @@ public class WYScrollText: UIView {
             
             _textArray.append(_textArray.first ?? "")
             
-            self.collectionView.reloadData()
-            
-            self.startTimer()
+            DispatchQueue.main.async {
+                
+                self.collectionView.reloadData()
+                
+                self.startTimer()
+            }
         }
         
         get {
@@ -57,8 +60,6 @@ public class WYScrollText: UIView {
     }
     
     private lazy var collectionView: UICollectionView = {
-        
-        superview?.layoutIfNeeded()
         
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .vertical
@@ -164,6 +165,9 @@ extension WYScrollText: UICollectionViewDelegate, UICollectionViewDataSource, UI
     
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
+        guard !((textArray.count == 2) && (textArray.first == placeholder) && (textArray.last == placeholder)) else {
+            return
+        }
         if actionHandler != nil {
             
             actionHandler!((textIndex == textArray.count-1) ? 0 : textIndex)
