@@ -68,7 +68,7 @@ public class WYPagingView: UIView {
     /// 分页栏Item高度 默认bar_Height-bar_dividingStripHeight(若传入则整体使用传入高度)
     public var bar_item_height: CGFloat = 0
     
-    /// 分页栏Item在约束size的基础上追加如传入的size大小，默认.zero
+    /// 分页栏Item在约束size的基础上追加如传入的size大小，默认.zero(高度等于bar_Height)
     public var bar_item_appendSize: CGSize = .zero
 
     /// 分页栏item默认背景色 默认白色
@@ -104,11 +104,11 @@ public class WYPagingView: UIView {
     /// 滑动线条高度 默认2像素
     public var bar_scrollLineHeight: CGFloat = wy_screenWidth(2)
 
-    /// 分页栏标题默认字号 默认14号；
-    public var bar_title_defaultFont: UIFont = .systemFont(ofSize: wy_fontSize(14))
+    /// 分页栏标题默认字号 默认15号；
+    public var bar_title_defaultFont: UIFont = .systemFont(ofSize: wy_fontSize(15))
 
-    /// 分页栏标题选中字号 默认粗体17号；
-    public var bar_title_selectedFont: UIFont = .boldSystemFont(ofSize: wy_fontSize(17))
+    /// 分页栏标题选中字号 默认15号；
+    public var bar_title_selectedFont: UIFont = .systemFont(ofSize: wy_fontSize(15))
 
     /// 初始选中第几项  默认第一项
     public var bar_selectedIndex: NSInteger = 0
@@ -468,10 +468,9 @@ extension WYPagingView {
             barScrollView.addSubview(scrollLine!)
             
             scrollLine!.snp.makeConstraints { (make) in
-                
-                make.top.equalToSuperview().offset(bar_Height-bar_scrollLineBottomOffset)
                 make.left.equalToSuperview()
                 make.size.equalTo(CGSize(width: bar_scrollLineWidth, height: bar_scrollLineHeight))
+                make.top.equalToSuperview().offset(bar_Height-bar_scrollLineBottomOffset-bar_scrollLineHeight)
             }
             scrollLine?.wy_rectCorner(.allCorners).wy_cornerRadius(bar_scrollLineHeight / 2).wy_showVisual()
             
@@ -481,7 +480,6 @@ extension WYPagingView {
     }
     
     var buttonItemTagBegin: NSInteger {
-        
         return 1000
     }
     

@@ -45,13 +45,15 @@ class WYRightController: UIViewController {
         pagingView.bar_item_bg_defaultColor = .orange
         pagingView.bar_item_bg_selectedColor = .green
         pagingView.bar_selectedIndex = 2
+        //pagingView.bar_scrollLineBottomOffset = 0
+        pagingView.bar_scrollLineColor = .orange
 //        pagingView.buttonPosition = .imageTop_titleBottom
 //        pagingView.barButton_dividingOffset = 20
         pagingView.bar_dividingStripColor = .purple
 //        pagingView.bar_item_height = 50
 //        pagingView.bar_item_width = 80
         pagingView.bar_item_cornerRadius = 5
-        pagingView.bar_item_appendSize = CGSize(width: 0.01, height: 0)
+        //pagingView.bar_item_appendSize = CGSize(width: 0.01, height: 0)
         
         pagingView.layout(controllerAry: controllerAry, titleAry: titleAry, defaultImageAry: dimageAry, selectedImageAry: simageAry, superViewController: self)
         pagingView.itemDidScroll { (pagingIndex) in
