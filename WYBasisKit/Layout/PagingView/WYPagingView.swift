@@ -126,7 +126,7 @@ public class WYPagingView: UIView {
     public private(set) var selectedImages: [UIImage] = []
     
     /// 传入的父控制器
-    public private(set) var superController: UIViewController!
+    public private(set) weak var superController: UIViewController!
     
     /**
      *调用后开始布局

@@ -84,7 +84,7 @@ extension UILabel {
     
     open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
-        guard wy_isClickAction == true else {
+        guard ((wy_isClickAction == true) && (attributedText != nil)) else {
             return
         }
         wy_isClickEffect = wy_enableClickEffect
@@ -123,7 +123,11 @@ extension UILabel {
     
     open override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         
-        if ((wy_isClickAction == true) && (wy_richTextFrame(touchPoint: point) == true)) {
+        guard ((wy_isClickAction == true) && (attributedText != nil)) else {
+            return super.hitTest(point, with: event)
+        }
+        
+        if (wy_richTextFrame(touchPoint: point) == true) {
             return self
         }
         return super.hitTest(point, with: event)

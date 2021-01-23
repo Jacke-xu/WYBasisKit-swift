@@ -1,5 +1,5 @@
 //
-//  WYCollectionViewFlowLayout.swift
+//  WYCollectionAlignmentFlowLayout.swift
 //  WYBasisKit
 //
 //  Created by jacke·xu on 2021/1/14.
@@ -21,7 +21,7 @@ enum WYFlowLayoutAlignment {
     case right
 }
 
-class WYCollectionViewFlowLayout: UICollectionViewFlowLayout {
+class WYCollectionAlignmentFlowLayout: UICollectionViewFlowLayout {
 
     /// cell对齐方式
     var wy_layoutAlignment: WYFlowLayoutAlignment = .center

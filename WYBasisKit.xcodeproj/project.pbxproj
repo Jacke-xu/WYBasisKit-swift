@@ -24,6 +24,7 @@
 		1F952EF525806EB100F03251 /* WYBasisKit.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 1F952EF325806EB100F03251 /* WYBasisKit.podspec */; };
 		1F952EF825807ACE00F03251 /* WYConstMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F952EF725807ACE00F03251 /* WYConstMethod.swift */; };
 		1F952EFC25807F5600F03251 /* WYEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F952EFB25807F5600F03251 /* WYEnums.swift */; };
+		1F9717FE25B55CB600CA7A33 /* WYCollectionWaterfallsFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9717FD25B55CB600CA7A33 /* WYCollectionWaterfallsFlowLayout.swift */; };
 		1F99DCC8257DCFAE003D2408 /* WYPagingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F99DCC7257DCFAE003D2408 /* WYPagingView.swift */; };
 		1F9B22BB258747830099AC92 /* WYBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9B22BA258747830099AC92 /* WYBannerView.swift */; };
 		3B3DC2F1D41BE472909DAAC1 /* libPods-WYBasisKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DC30AAA7963EADDE72D26FBC /* libPods-WYBasisKit.a */; };
@@ -83,6 +84,7 @@
 		1F952EF325806EB100F03251 /* WYBasisKit.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = WYBasisKit.podspec; sourceTree = SOURCE_ROOT; };
 		1F952EF725807ACE00F03251 /* WYConstMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYConstMethod.swift; sourceTree = "<group>"; };
 		1F952EFB25807F5600F03251 /* WYEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYEnums.swift; sourceTree = "<group>"; };
+		1F9717FD25B55CB600CA7A33 /* WYCollectionWaterfallsFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYCollectionWaterfallsFlowLayout.swift; sourceTree = "<group>"; };
 		1F99DCC7257DCFAE003D2408 /* WYPagingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYPagingView.swift; sourceTree = "<group>"; };
 		1F9B22BA258747830099AC92 /* WYBannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYBannerView.swift; sourceTree = "<group>"; };
 		75FD4F7DFBF58D8B82417F4D /* Pods-WYBasisKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WYBasisKit.release.xcconfig"; path = "Target Support Files/Pods-WYBasisKit/Pods-WYBasisKit.release.xcconfig"; sourceTree = "<group>"; };
@@ -165,6 +167,7 @@
 			isa = PBXGroup;
 			children = (
 				1F24689E25B13DFB00E02F78 /* WYCollectionViewFlowLayout.swift */,
+				1F9717FD25B55CB600CA7A33 /* WYCollectionWaterfallsFlowLayout.swift */,
 			);
 			path = UICollectionViewFlowLayout;
 			sourceTree = "<group>";
@@ -708,6 +711,7 @@
 				AA771BCF2568F834002C748B /* UIImage.swift in Sources */,
 				AA9CF82A2584B97C008A7DE1 /* WYTestDarkNightModeController.swift in Sources */,
 				AA771BD82568F834002C748B /* WYBiometric.swift in Sources */,
+				1F9717FE25B55CB600CA7A33 /* WYCollectionWaterfallsFlowLayout.swift in Sources */,
 				AA9CF82D2584C262008A7DE1 /* WYTestAnimationController.swift in Sources */,
 				AA771BE62568F834002C748B /* WYNetworkManager.swift in Sources */,
 				AA771BD32568F834002C748B /* WYCountdown.swift in Sources */,
