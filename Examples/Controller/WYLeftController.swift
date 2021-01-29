@@ -14,19 +14,22 @@ class WYLeftController: UIViewController {
                                  WYLocalizedString("约束view添加动画", "Constrain the view to add animation"),
                                  WYLocalizedString("边框、圆角、阴影、渐变", "Borders, rounded corners, shadows, gradients"),
                                  "Banner",
-                                 "RichText"]
+                                 "RichText",
+                                 "无限层折叠TableView"]
     
     let cellTitles: [[String]] = [[WYLocalizedString("暗夜/白昼模式", "Dark night/day mode")],
                                   [WYLocalizedString("约束view添加动画", "Constrain the view to add animation")],
                                   [WYLocalizedString("边框、圆角、阴影、渐变", "Borders, rounded corners, shadows, gradients")],
                                   ["Banner"],
-                                  ["RichText"]]
+                                  ["RichText"],
+                                  ["无限层折叠TableView"]]
     
     let controller: [[String]] = [["WYTestDarkNightModeController"],
                                 ["WYTestAnimationController"],
                                 ["WYTestVisualController"],
                                 ["WYTestBannerController"],
-                                ["WYTestRichTextController"]]
+                                ["WYTestRichTextController"],
+                                ["WYMultilevelTableViewController"]]
     
     lazy var tableView: UITableView = {
         

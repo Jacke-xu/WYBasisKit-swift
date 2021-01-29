@@ -75,44 +75,46 @@ public extension NSMutableAttributedString {
     
     @discardableResult
     /// 设置行间距
-    func wy_lineSpacing(lineSpacing: CGFloat, string: String, alignment: NSTextAlignment = .left) -> NSMutableAttributedString {
+    func wy_lineSpacing(lineSpacing: CGFloat, string: String? = nil, alignment: NSTextAlignment = .left) -> NSMutableAttributedString {
         
         let paragraphStyle: NSMutableParagraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = lineSpacing
         paragraphStyle.alignment = alignment
         
         let selfStr: NSString = self.string as NSString
-        addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: selfStr.range(of: string))
+        addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: selfStr.range(of: (string == nil ? self.string : string!)))
         
         return self
     }
     
     @discardableResult
     /// 设置字间距
-    func wy_wordsSpacing(wordsSpacing: Double, string: String) -> NSMutableAttributedString {
+    func wy_wordsSpacing(wordsSpacing: Double, string: String? = nil) -> NSMutableAttributedString {
         
         let selfStr: NSString = self.string as NSString
-        addAttributes([NSAttributedString.Key.kern: NSNumber(value: wordsSpacing)], range: selfStr.range(of: string))
+        addAttributes([NSAttributedString.Key.kern: NSNumber(value: wordsSpacing)], range: selfStr.range(of: string == nil ? self.string : string!))
         
         return self
     }
     
     @discardableResult
     /// 文本添加下滑线
-    func wy_underline(color: UIColor) -> NSMutableAttributedString {
+    func wy_underline(color: UIColor, string: String? = nil) -> NSMutableAttributedString {
          
-        addAttribute(NSAttributedString.Key.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: NSRange(location: 0, length: string.count))
-        addAttribute(NSAttributedString.Key.underlineColor, value: color, range: NSRange(location: 0, length: string.count))
+        let selfStr: NSString = self.string as NSString
+        addAttribute(NSAttributedString.Key.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: selfStr.range(of: string == nil ? self.string : string!))
+        addAttribute(NSAttributedString.Key.underlineColor, value: color, range: selfStr.range(of: string == nil ? self.string : string!))
         
         return self
     }
     
     @discardableResult
     /// 文本添加删除线
-    func wy_strikethrough(color: UIColor) -> NSMutableAttributedString {
+    func wy_strikethrough(color: UIColor, string: String? = nil) -> NSMutableAttributedString {
          
-        addAttribute(NSAttributedString.Key.strikethroughStyle, value: NSUnderlineStyle.single.rawValue, range: NSRange(location: 0, length: string.count))
-        addAttribute(NSAttributedString.Key.strikethroughColor, value: color, range: NSRange(location: 0, length: string.count))
+        let selfStr: NSString = self.string as NSString
+        addAttribute(NSAttributedString.Key.strikethroughStyle, value: NSUnderlineStyle.single.rawValue, range: selfStr.range(of: string == nil ? self.string : string!))
+        addAttribute(NSAttributedString.Key.strikethroughColor, value: color, range: selfStr.range(of: string == nil ? self.string : string!))
         
         return self
     }

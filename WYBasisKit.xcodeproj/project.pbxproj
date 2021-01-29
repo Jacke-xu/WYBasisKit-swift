@@ -14,6 +14,7 @@
 		1F2723302588869200E78AE0 /* WYTestBannerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F27232F2588869200E78AE0 /* WYTestBannerController.swift */; };
 		1F3CEEB325773CE200955712 /* Foundation+JSONLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F3CEEB225773CE200955712 /* Foundation+JSONLog.m */; };
 		1F4A0E49256B4A52002E932D /* WYNetworkConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4A0E48256B4A52002E932D /* WYNetworkConfig.swift */; };
+		1F4A73DD25C25FA300ED1FCF /* WYMultilevelTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4A73DC25C25FA300ED1FCF /* WYMultilevelTableViewController.swift */; };
 		1F5C3E4D25787E7D00E0DBFF /* WYTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5C3E4C25787E7D00E0DBFF /* WYTabBarController.swift */; };
 		1F5C3E5025787EB400E0DBFF /* WYLeftController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5C3E4F25787EB400E0DBFF /* WYLeftController.swift */; };
 		1F5C3E5325787EC500E0DBFF /* WYCenterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5C3E5225787EC500E0DBFF /* WYCenterController.swift */; };
@@ -24,7 +25,7 @@
 		1F952EF525806EB100F03251 /* WYBasisKit.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 1F952EF325806EB100F03251 /* WYBasisKit.podspec */; };
 		1F952EF825807ACE00F03251 /* WYConstMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F952EF725807ACE00F03251 /* WYConstMethod.swift */; };
 		1F952EFC25807F5600F03251 /* WYEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F952EFB25807F5600F03251 /* WYEnums.swift */; };
-		1F9717FE25B55CB600CA7A33 /* WYCollectionWaterfallsFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9717FD25B55CB600CA7A33 /* WYCollectionWaterfallsFlowLayout.swift */; };
+		1F9717FE25B55CB600CA7A33 /* WYWaterfallsFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9717FD25B55CB600CA7A33 /* WYWaterfallsFlowLayout.swift */; };
 		1F99DCC8257DCFAE003D2408 /* WYPagingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F99DCC7257DCFAE003D2408 /* WYPagingView.swift */; };
 		1F9B22BB258747830099AC92 /* WYBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9B22BA258747830099AC92 /* WYBannerView.swift */; };
 		3B3DC2F1D41BE472909DAAC1 /* libPods-WYBasisKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DC30AAA7963EADDE72D26FBC /* libPods-WYBasisKit.a */; };
@@ -73,6 +74,7 @@
 		1F27232F2588869200E78AE0 /* WYTestBannerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYTestBannerController.swift; sourceTree = "<group>"; };
 		1F3CEEB225773CE200955712 /* Foundation+JSONLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Foundation+JSONLog.m"; sourceTree = "<group>"; };
 		1F4A0E48256B4A52002E932D /* WYNetworkConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYNetworkConfig.swift; sourceTree = "<group>"; };
+		1F4A73DC25C25FA300ED1FCF /* WYMultilevelTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYMultilevelTableViewController.swift; sourceTree = "<group>"; };
 		1F5C3E4C25787E7D00E0DBFF /* WYTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYTabBarController.swift; sourceTree = "<group>"; };
 		1F5C3E4F25787EB400E0DBFF /* WYLeftController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYLeftController.swift; sourceTree = "<group>"; };
 		1F5C3E5225787EC500E0DBFF /* WYCenterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYCenterController.swift; sourceTree = "<group>"; };
@@ -84,7 +86,7 @@
 		1F952EF325806EB100F03251 /* WYBasisKit.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = WYBasisKit.podspec; sourceTree = SOURCE_ROOT; };
 		1F952EF725807ACE00F03251 /* WYConstMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYConstMethod.swift; sourceTree = "<group>"; };
 		1F952EFB25807F5600F03251 /* WYEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYEnums.swift; sourceTree = "<group>"; };
-		1F9717FD25B55CB600CA7A33 /* WYCollectionWaterfallsFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYCollectionWaterfallsFlowLayout.swift; sourceTree = "<group>"; };
+		1F9717FD25B55CB600CA7A33 /* WYWaterfallsFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYWaterfallsFlowLayout.swift; sourceTree = "<group>"; };
 		1F99DCC7257DCFAE003D2408 /* WYPagingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYPagingView.swift; sourceTree = "<group>"; };
 		1F9B22BA258747830099AC92 /* WYBannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYBannerView.swift; sourceTree = "<group>"; };
 		75FD4F7DFBF58D8B82417F4D /* Pods-WYBasisKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WYBasisKit.release.xcconfig"; path = "Target Support Files/Pods-WYBasisKit/Pods-WYBasisKit.release.xcconfig"; sourceTree = "<group>"; };
@@ -167,7 +169,7 @@
 			isa = PBXGroup;
 			children = (
 				1F24689E25B13DFB00E02F78 /* WYCollectionViewFlowLayout.swift */,
-				1F9717FD25B55CB600CA7A33 /* WYCollectionWaterfallsFlowLayout.swift */,
+				1F9717FD25B55CB600CA7A33 /* WYWaterfallsFlowLayout.swift */,
 			);
 			path = UICollectionViewFlowLayout;
 			sourceTree = "<group>";
@@ -536,6 +538,7 @@
 				1F5C3E5525787ED300E0DBFF /* WYRightController.swift */,
 				1F27232F2588869200E78AE0 /* WYTestBannerController.swift */,
 				1F2468A725B17B6C00E02F78 /* WYTestRichTextController.swift */,
+				1F4A73DC25C25FA300ED1FCF /* WYMultilevelTableViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -683,6 +686,7 @@
 				AA771BD92568F834002C748B /* WYAuthorize.swift in Sources */,
 				AA771BEA2568F834002C748B /* WYScrollText.swift in Sources */,
 				AA771BDC2568F834002C748B /* NSObject.swift in Sources */,
+				1F4A73DD25C25FA300ED1FCF /* WYMultilevelTableViewController.swift in Sources */,
 				1F5C3E612578B61B00E0DBFF /* UIApplication.swift in Sources */,
 				1F2723302588869200E78AE0 /* WYTestBannerController.swift in Sources */,
 				AA771BE32568F834002C748B /* UITableView.swift in Sources */,
@@ -711,7 +715,7 @@
 				AA771BCF2568F834002C748B /* UIImage.swift in Sources */,
 				AA9CF82A2584B97C008A7DE1 /* WYTestDarkNightModeController.swift in Sources */,
 				AA771BD82568F834002C748B /* WYBiometric.swift in Sources */,
-				1F9717FE25B55CB600CA7A33 /* WYCollectionWaterfallsFlowLayout.swift in Sources */,
+				1F9717FE25B55CB600CA7A33 /* WYWaterfallsFlowLayout.swift in Sources */,
 				AA9CF82D2584C262008A7DE1 /* WYTestAnimationController.swift in Sources */,
 				AA771BE62568F834002C748B /* WYNetworkManager.swift in Sources */,
 				AA771BD32568F834002C748B /* WYCountdown.swift in Sources */,
