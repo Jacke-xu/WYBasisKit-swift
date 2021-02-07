@@ -200,11 +200,11 @@ extension WYWaterfallsFlowLayout {
         let destColumn: Int = columnHeights.firstIndex(of: minColumnHeight) ?? 0
         
         // 设置布局属性item的frame
-        let itemWidth: CGFloat = (collectionWidth - sectionInset.left - sectionInset.right - (CGFloat(numberOfColumns - 1)) * minimumLineSpacing) / CGFloat(numberOfColumns)
+        let itemWidth: CGFloat = (collectionWidth - sectionInset.left - sectionInset.right - (CGFloat(numberOfColumns - 1)) * minimumInteritemSpacing) / CGFloat(numberOfColumns)
         let itemHeight: CGFloat = delegate?.waterfallsFlowLayout?(self, sizeForItemAt: indexPath).height ?? itemSize.height
         
-        let itemx: CGFloat = sectionInset.left + CGFloat(destColumn) * (itemWidth + minimumLineSpacing)
-        let itemy: CGFloat = (minColumnHeight != sectionInset.top) ? (minColumnHeight + minimumInteritemSpacing) : minColumnHeight
+        let itemx: CGFloat = sectionInset.left + CGFloat(destColumn) * (itemWidth + minimumInteritemSpacing)
+        let itemy: CGFloat = (minColumnHeight != sectionInset.top) ? (minColumnHeight + minimumLineSpacing) : minColumnHeight
         
         // 更新最短那列的高度
         columnHeights[destColumn] = CGRect(x: itemx, y: itemy, width: itemWidth, height: itemHeight).maxY
@@ -228,11 +228,11 @@ extension WYWaterfallsFlowLayout {
         var itemy: CGFloat = 0.0
         // 记录最后一行的内容的横坐标和纵坐标
         if collectionWidth - (rowWidths.first ?? 0.0) > itemWidth + sectionInset.right {
-            itemx = ((rowWidths.first ?? 0.0) == sectionInset.left) ? sectionInset.left : ((rowWidths.first ?? 0.0) + minimumLineSpacing)
+            itemx = ((rowWidths.first ?? 0.0) == sectionInset.left) ? sectionInset.left : ((rowWidths.first ?? 0.0) + minimumInteritemSpacing)
             if (columnHeights.first ?? 0.0) == sectionInset.top {
                 itemy = sectionInset.top
             }else if (columnHeights.first ?? 0.0) == (sectionInset.top + headViewSize.height) {
-                itemy = sectionInset.top + headViewSize.height + minimumInteritemSpacing
+                itemy = sectionInset.top + headViewSize.height + minimumLineSpacing
             }else {
                 itemy = (columnHeights.first ?? 0.0) - itemHeight
             }
@@ -241,7 +241,7 @@ extension WYWaterfallsFlowLayout {
             }
         }else if collectionWidth - (rowWidths.first ?? 0.0) == itemWidth + sectionInset.right {
             itemx = sectionInset.left
-            itemy = (columnHeights.first ?? 0.0) + minimumInteritemSpacing
+            itemy = (columnHeights.first ?? 0.0) + minimumLineSpacing
             if rowWidths.isEmpty == false {
                 rowWidths[0] = itemx + itemWidth
             }
@@ -250,7 +250,7 @@ extension WYWaterfallsFlowLayout {
             }
         }else {
             itemx = sectionInset.left
-            itemy = (columnHeights.first ?? 0.0) + minimumInteritemSpacing
+            itemy = (columnHeights.first ?? 0.0) + minimumLineSpacing
             if rowWidths.isEmpty == false {
                 rowWidths[0] = itemx + itemWidth
             }
@@ -268,14 +268,14 @@ extension WYWaterfallsFlowLayout {
         // collectionView的宽度
         let collectionHeight: CGFloat = collectionView?.frame.size.height ?? 0.0
         let itemWidth = delegate?.waterfallsFlowLayout?(self, sizeForItemAt: indexPath).width ?? itemSize.width
-        let itemHeight = (collectionHeight - sectionInset.top - sectionInset.bottom - (CGFloat((numberOfColumns - 1)) * minimumInteritemSpacing)) / CGFloat(numberOfColumns)
+        let itemHeight = (collectionHeight - sectionInset.top - sectionInset.bottom - (CGFloat((numberOfColumns - 1)) * minimumLineSpacing)) / CGFloat(numberOfColumns)
         
         // 找出宽度最短的那一行
         let minRowWidth: CGFloat = rowWidths.min() ?? 0.0
         let destRow: Int = rowWidths.firstIndex(of: minRowWidth) ?? 0
         
-        let itemx = (minRowWidth != sectionInset.left) ? (minRowWidth + minimumLineSpacing) : minRowWidth
-        let itemy = sectionInset.top + CGFloat(destRow) * (itemHeight + minimumInteritemSpacing)
+        let itemx = (minRowWidth != sectionInset.left) ? (minRowWidth + minimumInteritemSpacing) : minRowWidth
+        let itemy = sectionInset.top + CGFloat(destRow) * (itemHeight + minimumLineSpacing)
         
         // 更新最短那行的宽度
         rowWidths[destRow] = CGRect(x: itemx, y: itemy, width: itemWidth, height: itemHeight).maxX
@@ -297,11 +297,11 @@ extension WYWaterfallsFlowLayout {
         let minRowWidth: CGFloat = rowWidths.min() ?? 0.0
         let destRow: Int = rowWidths.firstIndex(of: minRowWidth) ?? 0
         
-        var itemx = (rowWidths[destRow] == sectionInset.left) ? sectionInset.left : (rowWidths[destRow] + minimumLineSpacing)
-        let itemy: CGFloat = (destRow == 0) ? sectionInset.top : (sectionInset.top + itemHeight + minimumInteritemSpacing)
+        var itemx = (rowWidths[destRow] == sectionInset.left) ? sectionInset.left : (rowWidths[destRow] + minimumInteritemSpacing)
+        let itemy: CGFloat = (destRow == 0) ? sectionInset.top : (sectionInset.top + itemHeight + minimumLineSpacing)
         // 更新最短那行的宽度
         if (itemHeight >= collectionHeight - sectionInset.bottom - sectionInset.top) {
-            itemx = (rowWidths[destRow] == sectionInset.left) ? sectionInset.left : (maxRowWidth + minimumLineSpacing)
+            itemx = (rowWidths[destRow] == sectionInset.left) ? sectionInset.left : (maxRowWidth + minimumInteritemSpacing)
             for index in 0..<2 {
                 rowWidths[index] = itemx + itemWidth
             }
@@ -321,7 +321,7 @@ extension WYWaterfallsFlowLayout {
         if waterfallsFlowStyle == .verticalEqualWidth {
             var headery = (maxColumnHeight == 0) ? sectionInset.top : maxColumnHeight
             if delegate?.waterfallsFlowLayout?(self, sizeForFooterIn: indexPath.section).height == 0 {
-                headery = (maxColumnHeight == 0) ? sectionInset.top : (maxColumnHeight + minimumInteritemSpacing)
+                headery = (maxColumnHeight == 0) ? sectionInset.top : (maxColumnHeight + minimumLineSpacing)
             }
             maxColumnHeight = headery + headerSize.height
             columnHeights.removeAll()
@@ -334,7 +334,7 @@ extension WYWaterfallsFlowLayout {
         if waterfallsFlowStyle == .verticalEqualHeight {
             var headery = (maxColumnHeight == 0) ? sectionInset.top : maxColumnHeight
             if delegate?.waterfallsFlowLayout?(self, sizeForFooterIn: indexPath.section).height == 0 {
-                headery = (maxColumnHeight == 0) ? sectionInset.top : (maxColumnHeight + minimumInteritemSpacing)
+                headery = (maxColumnHeight == 0) ? sectionInset.top : (maxColumnHeight + minimumLineSpacing)
             }
             maxColumnHeight = headery + headerSize.height
             rowWidths[0] = collectionView?.frame.size.width ?? 0.0
@@ -349,7 +349,7 @@ extension WYWaterfallsFlowLayout {
         let footerSize = delegate?.waterfallsFlowLayout?(self, sizeForFooterIn: indexPath.section) ?? footerReferenceSize
         
         if waterfallsFlowStyle == .verticalEqualWidth {
-            let footery = (footerSize.height == 0) ? maxColumnHeight : (maxColumnHeight + minimumInteritemSpacing)
+            let footery = (footerSize.height == 0) ? maxColumnHeight : (maxColumnHeight + minimumLineSpacing)
             maxColumnHeight = footery + footerSize.height
             
             columnHeights.removeAll()
@@ -360,7 +360,7 @@ extension WYWaterfallsFlowLayout {
         }
         
         if waterfallsFlowStyle == .verticalEqualHeight {
-            let footery = (footerSize.height == 0) ? maxColumnHeight : (maxColumnHeight + minimumInteritemSpacing)
+            let footery = (footerSize.height == 0) ? maxColumnHeight : (maxColumnHeight + minimumLineSpacing)
             maxColumnHeight = footery + footerSize.height
             rowWidths[0] = collectionView?.frame.size.width ?? 0.0
             columnHeights[0] = maxColumnHeight
@@ -443,5 +443,4 @@ extension WYWaterfallsFlowLayout {
         static let wy_maxRowWidth = UnsafeRawPointer.init(bitPattern: "wy_maxRowWidth".hashValue)!
     }
 }
-
 

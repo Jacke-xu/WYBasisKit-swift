@@ -41,6 +41,9 @@ public class WYPagingView: UIView {
     /// 分页栏右起始点距离(最后一个标题栏距离屏幕边界的距离) 默认0
     public var bar_originlRightOffset: CGFloat = 0
     
+    /// item距离分页栏顶部的偏移量， 默认nil
+    public var bar_itemTopOffset: CGFloat?
+    
     /// 显示整体宽度小于一屏，且设置了bar_Width != 0，是否需要居中显示，默认 居中 (居中后，将会动态调整bar_originlLeftOffset和bar_originlRightOffset的距离)
     public var bar_adjustOffset: Bool = true
 
@@ -330,7 +333,11 @@ extension WYPagingView {
             
             buttonItem.snp.makeConstraints { (make) in
 
-                make.centerY.equalToSuperview()
+                if bar_itemTopOffset == nil {
+                    make.centerY.equalToSuperview()
+                }else {
+                    make.top.equalToSuperview().offset(bar_itemTopOffset!)
+                }
                 if lastView == nil {
                     make.left.equalToSuperview().offset(bar_originlLeftOffset)
                 }else {

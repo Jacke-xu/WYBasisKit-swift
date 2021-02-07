@@ -141,7 +141,7 @@ extension WYMultilevelTableViewController: UITableViewDelegate, UITableViewDataS
 class WYMultilevelTable: NSObject {
     
     /// 当前所属父层级
-    var superLevel: Int = 0
+    private(set) var superLevel: Int = 0
     /// 当前所属层级
     private(set) var level: Int = 0
     /// 当前所属层级下的子层级数量

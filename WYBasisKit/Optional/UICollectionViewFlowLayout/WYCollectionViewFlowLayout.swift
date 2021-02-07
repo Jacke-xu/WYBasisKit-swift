@@ -21,17 +21,27 @@ enum WYFlowLayoutAlignment {
     case right
 }
 
+@objc protocol WYCollectionAlignmentFlowLayoutDelegate {
+    
+    /** cell换行事件 */
+    @objc optional func alignmentFlowLayout(_ flowLayout: WYCollectionAlignmentFlowLayout, numberOfLines: Int)
+}
+
 class WYCollectionAlignmentFlowLayout: UICollectionViewFlowLayout {
 
     /// cell对齐方式
     var wy_layoutAlignment: WYFlowLayoutAlignment = .center
     
+    /** delegate */
+    weak var delegate: WYCollectionAlignmentFlowLayoutDelegate?
+    
     /// 在居中对齐的时候需要知道这行所有cell的宽度总和
     private(set) var wy_cellTotalWidth: CGFloat = 0.0
     
-    convenience init(_ layoutAlignment: WYFlowLayoutAlignment){
+    convenience init(_ layoutAlignment: WYFlowLayoutAlignment, delegate: WYCollectionAlignmentFlowLayoutDelegate? = nil){
         self.init()
         wy_layoutAlignment = layoutAlignment
+        self.delegate = delegate
     }
     
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
@@ -39,6 +49,7 @@ class WYCollectionAlignmentFlowLayout: UICollectionViewFlowLayout {
         let layoutAttributes_super : [UICollectionViewLayoutAttributes] = super.layoutAttributesForElements(in: rect) ?? [UICollectionViewLayoutAttributes]()
         let layoutAttributes:[UICollectionViewLayoutAttributes] = NSArray(array: layoutAttributes_super, copyItems:true)as! [UICollectionViewLayoutAttributes]
         var layoutAttributes_t : [UICollectionViewLayoutAttributes] = [UICollectionViewLayoutAttributes]()
+        var numberOfLines: Int = 0
         for index in 0..<layoutAttributes.count {
             
             let currentAttr = layoutAttributes[index]
@@ -66,6 +77,8 @@ class WYCollectionAlignmentFlowLayout: UICollectionViewFlowLayout {
                 updateCellAttributes(layoutAttributes: layoutAttributes_t)
                 layoutAttributes_t.removeAll()
                 wy_cellTotalWidth = 0.0
+                numberOfLines += 1
+                delegate?.alignmentFlowLayout?(self, numberOfLines: numberOfLines)
             }
         }
         return layoutAttributes

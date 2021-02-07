@@ -33,7 +33,7 @@ public extension String {
         let string = self as NSString
         let stringSize: CGSize! = string.boundingRect(with: controlSize, options: NSStringDrawingOptions(rawValue: NSStringDrawingOptions.truncatesLastVisibleLine.rawValue | NSStringDrawingOptions.usesLineFragmentOrigin.rawValue | NSStringDrawingOptions.usesFontLeading.rawValue), attributes: attributes, context: nil).size
         
-        return stringSize
+        return CGSize(width: ceil(stringSize.width), height: ceil(stringSize.height))
     }
     
     /// 判断字符串包含某个字符串
