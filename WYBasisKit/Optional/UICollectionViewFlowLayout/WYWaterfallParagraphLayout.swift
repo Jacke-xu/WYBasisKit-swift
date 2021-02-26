@@ -19,7 +19,7 @@ import UIKit
     /** 尾视图的高度 */
     @objc optional func waterfallsFlowLayout(_ waterfallsLayout: WYWaterfallParagraphLayout, heightForFooterIn section: Int) -> CGFloat
     
-    /** 列数，默认2 */
+    /** 列数，默认1 */
     @objc optional func waterfallsFlowLayout(_ waterfallsLayout: WYWaterfallParagraphLayout, numberOfColumnsIn section: Int) -> Int
     
     /** section内边距，默认0 */
@@ -33,15 +33,15 @@ import UIKit
     
     /** 分区header与上个分区footer之间的间距，默认0 */
     @objc optional func waterfallsFlowLayout(_ waterfallsLayout: WYWaterfallParagraphLayout, offsetIn section: Int) -> CGFloat
+    
+    /** 分区header是否需要悬停，默认false */
+    @objc optional func waterfallsFlowLayout(_ waterfallsLayout: WYWaterfallParagraphLayout, headerHoverIn section: Int) -> Bool
 }
 
 class WYWaterfallParagraphLayout: UICollectionViewFlowLayout {
     
     /** delegate */
     weak var delegate: WYWaterfallParagraphLayoutDelegate?
-    
-    /** 分区header是否悬停, 默认false(待完善) */
-    var sectionHeaderHover: Bool = false
     
     init(delegate: WYWaterfallParagraphLayoutDelegate) {
         super.init()
@@ -72,7 +72,8 @@ extension WYWaterfallParagraphLayout {
             
             lastContentHeight = contentHeight
             
-            let numberOfColumnsInSection: Int = (delegate?.waterfallsFlowLayout?(self, numberOfColumnsIn: section) ?? 2) > 0 ? (delegate?.waterfallsFlowLayout?(self, numberOfColumnsIn: section) ?? 2) : 2
+            let numberOfColumnsInSection: Int = (delegate?.waterfallsFlowLayout?(self, numberOfColumnsIn: section) ?? 1) > 0 ? (delegate?.waterfallsFlowLayout?(self, numberOfColumnsIn: section) ?? 1) : 1
+            
             // 初始化分区 y 值
             for _ in 0..<numberOfColumnsInSection {
                 columnHeights.append(contentHeight)
@@ -109,7 +110,7 @@ extension WYWaterfallParagraphLayout {
     
     override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
         
-        let numberOfColumnsInSection: Int = (delegate?.waterfallsFlowLayout?(self, numberOfColumnsIn: indexPath.section) ?? 2) > 0 ? (delegate?.waterfallsFlowLayout?(self, numberOfColumnsIn: indexPath.section) ?? 2) : 2
+        let numberOfColumnsInSection: Int = (delegate?.waterfallsFlowLayout?(self, numberOfColumnsIn: indexPath.section) ?? 1) > 0 ? (delegate?.waterfallsFlowLayout?(self, numberOfColumnsIn: indexPath.section) ?? 1) : 1
         
         let lineSpacing: CGFloat = delegate?.waterfallsFlowLayout?(self, minimumLineSpacingIn: indexPath.section) ?? 0
         
@@ -131,9 +132,9 @@ extension WYWaterfallParagraphLayout {
         
         let minColumnHeight: CGFloat = columnHeights.min() ?? 0.0
         
-        let minColumnWidth: Int = columnHeights.firstIndex(of: minColumnHeight) ?? 0
+        let minColumn: Int = columnHeights.firstIndex(of: minColumnHeight) ?? 0
         
-        let itemOffsetx: CGFloat = sectionInsets.left + CGFloat(minColumnWidth) * (itemWidth + interitemSpacing)
+        let itemOffsetx: CGFloat = sectionInsets.left + CGFloat(minColumn) * (itemWidth + interitemSpacing)
         
         let sectionOffset: CGFloat = delegate?.waterfallsFlowLayout?(self, offsetIn: indexPath.section) ?? 0.0
         
@@ -148,7 +149,7 @@ extension WYWaterfallParagraphLayout {
         attributes.frame = CGRect(x: itemOffsetx, y: itemOffsety, width: itemWidth, height: itemHeight)
         
         if columnHeights.isEmpty == false {
-            columnHeights[minColumnWidth] = attributes.frame.maxY
+            columnHeights[minColumn] = attributes.frame.maxY
         }
         
         contentHeight = ((columnHeights.max() ?? 0.0) > contentHeight) ? (columnHeights.max() ?? 0.0) : contentHeight
@@ -162,21 +163,36 @@ extension WYWaterfallParagraphLayout {
         
         let sectionInsets: UIEdgeInsets = delegate?.waterfallsFlowLayout?(self, edgeInsetsIn: indexPath.section) ?? .zero
         
+        let footerSize: CGSize = CGSize(width: collectionView?.frame.size.width ?? 0.0, height: delegate?.waterfallsFlowLayout?(self, heightForFooterIn: indexPath.section) ?? 0.0)
+        
         if elementKind == UICollectionView.elementKindSectionHeader {
             
             let headerSize: CGSize = CGSize(width: collectionView?.frame.size.width ?? 0.0, height: delegate?.waterfallsFlowLayout?(self, heightForHeaderIn: indexPath.section) ?? 0.0)
             
             let sectionOffset: CGFloat = delegate?.waterfallsFlowLayout?(self, offsetIn: indexPath.section) ?? 0.0
             
-//            // 悬浮方案
-//            let contentOffsety: CGFloat = collectionView?.contentOffset.y ?? 0.0
-//            let minOffsety: CGFloat = max(sectionOffset + lastContentHeight, contentOffsety)
-//            let maxOffsety: CGFloat = (columnHeights.max() ?? 0) + sectionInsets.bottom
-//            let headerOffset: CGFloat = min(minOffsety, maxOffsety)
+            var headerOffset: CGFloat = 0.0
             
-            // 不悬浮方案
-            let headerOffset: CGFloat = sectionOffset + lastContentHeight
+            let sectionHeaderHover: Bool = delegate?.waterfallsFlowLayout?(self, headerHoverIn: indexPath.section) ?? false
             
+            if sectionHeaderHover == true {
+                // 悬浮方案
+                let contentOffsety: CGFloat = collectionView?.contentOffset.y ?? 0.0
+                let minOffsety: CGFloat = max(sectionOffset + lastContentHeight, contentOffsety)
+                let maxOffsety: CGFloat = max((columnHeights.max() ?? 0.0) - sectionInsets.bottom - footerSize.height - sectionOffset, sectionOffset)
+                headerOffset = min(minOffsety, maxOffsety)
+                
+                // 设置headerView在最上层
+                let headerView: UICollectionReusableView? = collectionView?.supplementaryView(forElementKind: UICollectionView.elementKindSectionHeader, at: indexPath)
+                if headerView != nil {
+                    collectionView?.bringSubviewToFront(headerView!)
+                }
+                
+            }else {
+                
+                // 不悬浮方案
+                headerOffset = sectionOffset + lastContentHeight
+            }
             attributes.frame = CGRect(x: 0, y: headerOffset, width: headerSize.width, height: headerSize.height)
             
             let itemCount: Int = collectionView?.numberOfItems(inSection: indexPath.section) ?? 0
@@ -185,8 +201,6 @@ extension WYWaterfallParagraphLayout {
             }
             
         } else if elementKind == UICollectionView.elementKindSectionFooter {
-            
-            let footerSize: CGSize = CGSize(width: collectionView?.frame.size.width ?? 0.0, height: delegate?.waterfallsFlowLayout?(self, heightForFooterIn: indexPath.section) ?? 0.0)
             
             contentHeight += sectionInsets.bottom
             
@@ -202,7 +216,18 @@ extension WYWaterfallParagraphLayout {
     }
     
     override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
-        return sectionHeaderHover
+        
+        let visibleSections: [IndexPath]? = collectionView?.indexPathsForVisibleSupplementaryElements(ofKind: UICollectionView.elementKindSectionHeader)
+        
+        if visibleSections?.isEmpty == false {
+            
+            let firstVisibleSection: Int = (visibleSections?.first?.section == 0) ? 0 : (visibleSections?.last!.section)!
+
+            return delegate?.waterfallsFlowLayout?(self, headerHoverIn: firstVisibleSection) ?? false
+            
+        }else {
+            return false
+        }
     }
 }
 
