@@ -2,9 +2,7 @@ PODS:
   - Alamofire (5.4.1)
   - HandyJSON (5.0.2)
   - IQKeyboardManagerSwift (6.5.6)
-  - Kingfisher (5.15.8):
-    - Kingfisher/Core (= 5.15.8)
-  - Kingfisher/Core (5.15.8)
+  - Kingfisher (6.1.1)
   - libPhoneNumber-iOS (0.9.15)
   - MBProgressHUD (1.2.0)
   - MJRefresh (3.5.0)
@@ -40,7 +38,7 @@ SPEC CHECKSUMS:
   Alamofire: 2291f7d21ca607c491dd17642e5d40fdcda0e65c
   HandyJSON: 9e4e236f5d2dbefad5155a77417bbea438201c03
   IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
-  Kingfisher: a3c03d702433fa6cfedabb2bddbe076fb8f2e902
+  Kingfisher: 676d63307fbef6ed5d5ed400bff36983480d7500
   libPhoneNumber-iOS: 0a32a9525cf8744fe02c5206eb30d571e38f7d75
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
   MJRefresh: 6afc955813966afb08305477dd7a0d9ad5e79a16

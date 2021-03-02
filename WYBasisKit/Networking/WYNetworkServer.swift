@@ -113,12 +113,3 @@ struct WYProvider: TargetType {
         return request.headers
     }
 }
-
-struct WYHTTPSProvider {
-    
-//    let delegate = SessionDelegate()
-//    delegate.urlSession(URLSession(), task: URLSessionTask(), didReceive: URLAuthenticationChallenge(), completionHandler: { (challenge, credential) in
-//        
-//        
-//    })
-}
