@@ -2,8 +2,8 @@
 //  WYTestDarkNightModeController.swift
 //  WYBasisKit
 //
-//  Created by jacke·xu on 2020/12/12.
-//  Copyright © 2020 jacke·xu. All rights reserved.
+//  Created by Jacke·xu on 2020/12/12.
+//  Copyright © 2020 Jacke·xu. All rights reserved.
 //
 
 import UIKit
@@ -33,13 +33,13 @@ class WYTestDarkNightModeController: UIViewController {
     }
     
     @objc func clickButton(sender: UIButton) {
-        
+
         if WYLocalizableManager.shared.currentLanguage() == .chinese {
-            
+
             WYLocalizableManager.shared.switchLanguage(language: .english) {
 
                 DispatchQueue.main.async(execute: {
-                    
+
                     let tabbarController = AppDelegate.shared().window?.rootViewController! as! WYTabBarController
                     let navController = tabbarController.selectedViewController as! UINavigationController
                     navController.topViewController!.wy_showViewController(className: "WYTestDarkNightModeController", animated: false)
@@ -48,13 +48,13 @@ class WYTestDarkNightModeController: UIViewController {
             if #available(iOS 13.0, *) {
                 UIApplication.shared.wy_switchAppDisplayBrightness(style: .dark)
             }
-            
+
         }else {
-            
+
             WYLocalizableManager.shared.switchLanguage(language: .chinese) {
 
                 DispatchQueue.main.async(execute: {
-                    
+
                     let tabbarController = AppDelegate.shared().window?.rootViewController! as! WYTabBarController
                     let navController = tabbarController.selectedViewController as! UINavigationController
                     navController.topViewController!.wy_showViewController(className: "WYTestDarkNightModeController", animated: false)

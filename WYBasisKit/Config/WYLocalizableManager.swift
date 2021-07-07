@@ -2,11 +2,21 @@
 //  WYLocalizableManager.swift
 //  WYBasisKit
 //
-//  Created by jacke·xu on 2020/8/29.
-//  Copyright © 2020 jacke-xu. All rights reserved.
+//  Created by Jacke·xu on 2020/8/29.
+//  Copyright © 2020 Jacke·xu. All rights reserved.
 //
 
 import UIKit
+
+/// 国际化语言版本
+public enum WYLanguage: String {
+    
+    /// 中文
+    case chinese = "zh-Hans"
+    
+    /// 英文
+    case english = "en"
+}
 
 private let WYBasisKitLanguage = "WYBasisKitLanguage"
 
@@ -20,21 +30,19 @@ public func WYLocalizedString(_ chinese: String = "", _ english: String = "") ->
     return (WYLocalizableManager.shared.currentLanguage() == .chinese) ? chinese : english
 }
 
-public class WYLocalizableManager: NSObject {
+public class WYLocalizableManager {
 
-    public static let shared = WYLocalizableManager()
+    public static var shared = WYLocalizableManager()
     
     private var showLanguage: WYLanguage!
     
     private var bundle: Bundle?
     
-    override init() {
-        
-        super.init()
+    init() {
         
         showLanguage = currentLanguage()
 
-        bundle = Bundle.init(path: Bundle.main.path(forResource: currentLanguage().rawValue, ofType: "lproj")!)
+        bundle = Bundle.init(path: Bundle.main.path(forResource: currentLanguage().rawValue, ofType: "lproj") ?? "")
     }
     
     /// 当前语言
@@ -75,11 +83,14 @@ public class WYLocalizableManager: NSObject {
 
     public func stringFromKey(key: String) -> String {
         
-        guard let bundleTem = bundle else {
-            return WYLocalizedString(key)
+        if (Bundle.main.path(forResource: currentLanguage().rawValue, ofType: "lproj") ?? "").isEmpty {
+            return key
+        }else {
+            guard let bundleTem = bundle else {
+                return WYLocalizedString(key)
+            }
+            return bundleTem.localizedString(forKey: key, value: nil, table: "WYLocalizable")
         }
-
-        return bundleTem.localizedString(forKey: key, value: nil, table: "WYLocalizable")
     }
     
     /// 点击切换语言后调用该方法切换本地语言(需要给 Main.Storyboard 设置 Storyboard ID 为rootViewController)

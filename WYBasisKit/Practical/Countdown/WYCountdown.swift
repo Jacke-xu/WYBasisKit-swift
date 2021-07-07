@@ -2,8 +2,8 @@
 //  WYCountdown.swift
 //  WYBasisKit
 //
-//  Created by jacke·xu on 2020/8/29.
-//  Copyright © 2020 jacke-xu. All rights reserved.
+//  Created by Jacke·xu on 2020/8/29.
+//  Copyright © 2020 Jacke·xu. All rights reserved.
 //
 
 import UIKit
@@ -31,7 +31,11 @@ public class WYCountdown: NSObject {
 
         countdownHandler = handler
         
-        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(wy_beginCountdown), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block:{ [weak self] (timer: Timer) -> Void in
+            self?.wy_beginCountdown()
+        })
+        // 把定时器加入到RunLoop里面，保证持续运行，不被表视图滑动事件这些打断
+        RunLoop.current.add(timer!, forMode: .common)
         
         NotificationCenter.default.addObserver(self, selector: #selector(wy_didEnterBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
         
@@ -39,7 +43,7 @@ public class WYCountdown: NSObject {
     }
     
     /// 倒计时方法
-    @objc private func wy_beginCountdown() {
+    private func wy_beginCountdown() {
 
         totalSeconds -= 1
         
@@ -126,8 +130,16 @@ public class WYCountdown: NSObject {
                 
                 wy_cancel()
                 
-                timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(wy_beginCountdown), userInfo: nil, repeats: true)
+                timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block:{ [weak self] (timer: Timer) -> Void in
+                    self?.wy_beginCountdown()
+                })
+                // 把定时器加入到RunLoop里面，保证持续运行，不被表视图滑动事件这些打断
+                RunLoop.current.add(timer!, forMode: .common)
             }
         }
+    }
+    
+    deinit {
+        wy_cancel()
     }
 }

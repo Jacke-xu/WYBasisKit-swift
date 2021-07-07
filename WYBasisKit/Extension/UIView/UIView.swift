@@ -2,11 +2,24 @@
 //  UIView.swift
 //  WYBasisKit
 //
-//  Created by jacke·xu on 2020/8/29.
-//  Copyright © 2020 jacke-xu. All rights reserved.
+//  Created by Jacke·xu on 2020/8/29.
+//  Copyright © 2020 Jacke·xu. All rights reserved.
 //
 
 import UIKit
+
+/// 渐变方向
+public enum WYGradientDirection: UInt {
+    
+    /// 从上到下
+    case topToBottom = 0
+    /// 从左到右
+    case leftToRight = 1
+    /// 左上到右下
+    case leftToLowRight = 2
+    /// 右上到左下
+    case rightToLowlLeft = 3
+}
 
 public extension UIView {
     
@@ -274,8 +287,8 @@ public extension UIView {
         }
     }
     
-    @discardableResult
     /// 使用链式编程设置圆角、边框、阴影(调用方式类似SnapKit， 也可直接.语法)
+    @discardableResult
     func wy_makeVisual(visualView: (UIView) -> Void) -> UIView {
 
         visualView(self)
@@ -289,87 +302,87 @@ public extension UIView {
         return self
     }
     
-    @discardableResult
     /// 圆角的半径 默认0.0
+    @discardableResult
     func wy_cornerRadius(_ radius: CGFloat) -> UIView {
         privateConrnerRadius = radius
         return self
     }
     
-    @discardableResult
     /// 边框颜色 默认透明
+    @discardableResult
     func wy_borderColor(_ color: UIColor) -> UIView {
         privateBorderColor = color
         return self
     }
     
-    @discardableResult
     /// 边框宽度 默认0.0
+    @discardableResult
     func wy_borderWidth(_ width: CGFloat) -> UIView {
         privateBorderWidth = width
         return self
     }
     
-    @discardableResult
     /// 阴影颜色 默认透明
+    @discardableResult
     func wy_shadowColor(_ color: UIColor) -> UIView {
         privateShadowColor = color
         return self
     }
     
-    @discardableResult
     /// 阴影偏移度 默认CGSize.zero (width : 为正数时，向右偏移，为负数时，向左偏移，height : 为正数时，向下偏移，为负数时，向上偏移)
+    @discardableResult
     func wy_shadowOffset(_ offset: CGSize) -> UIView {
         privateShadowOffset = offset
         return self
     }
     
-    @discardableResult
     /// 阴影半径 默认0.0
+    @discardableResult
     func wy_shadowRadius(_ redius: CGFloat) -> UIView {
         privateShadowRadius = redius
         return self
     }
     
-    @discardableResult
     /// 阴影模糊度，默认0.5，取值范围0~1
+    @discardableResult
     func wy_shadowOpacity(_ opacity: CGFloat) -> UIView {
         privateShadowOpacity = opacity
         return self
     }
     
-    @discardableResult
     /// 渐变色数组(设置渐变色时不能设置背景色，会有影响)
+    @discardableResult
     func wy_gradualColors(_ colors: [UIColor]) -> UIView {
 
         privateGradualColors = colors
         return self
     }
 
-    @discardableResult
     /// 渐变色方向 默认从左到右
+    @discardableResult
     func wy_gradientDirection(_ direction: WYGradientDirection) -> UIView {
 
         privateGradientDirection = direction
         return self
     }
     
-    @discardableResult
     /// 设置圆角时，会去获取视图的Bounds属性，如果此时获取不到，则需要传入该参数，默认为 nil，如果传入该参数，会设置视图的frame为bounds
+    @discardableResult
     func wy_viewBounds(_ bounds: CGRect) -> UIView {
         privateViewBounds = bounds
         return self
     }
     
-    @discardableResult
     /// 贝塞尔路径 默认nil (有值时，radius属性将失效)
+    @discardableResult
     func wy_bezierPath(_ path: UIBezierPath) -> UIView {
         privateBezierPath = path
         return self
     }
     
-    @discardableResult
     /// 显示边框、阴影、圆角
+    @discardableResult
     func wy_showVisual() -> UIView {
         
         // 抗锯齿边缘
@@ -385,8 +398,8 @@ public extension UIView {
         return self
     }
     
-    @discardableResult
     /// 清除边框、阴影、圆角、渐变
+    @discardableResult
     func wy_clearVisual() -> UIView {
         
         // 阴影

@@ -2,8 +2,8 @@
 //  AppDelegate.swift
 //  WYBasisKit
 //
-//  Created by jacke·xu on 2020/8/29.
-//  Copyright © 2020 jacke-xu. All rights reserved.
+//  Created by Jacke·xu on 2020/8/29.
+//  Copyright © 2020 Jacke·xu. All rights reserved.
 //
 
 import UIKit
@@ -18,9 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // 屏蔽控制台约束输出
         UserDefaults.standard.setValue(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")
-        
-        wy_print(WYLocalizedString("知道了"))
-        
+        wy_print(WYLocalizedString("知道了") + "  这里是测试当前是中文还是英文环境")
         return true
     }
     

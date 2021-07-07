@@ -2,8 +2,8 @@
 //  WYBiometric.swift
 //  WYBasisKit
 //
-//  Created by jacke·xu on 2020/8/29.
-//  Copyright © 2020 jacke-xu. All rights reserved.
+//  Created by Jacke·xu on 2020/8/29.
+//  Copyright © 2020 Jacke·xu. All rights reserved.
 //
 
 import Foundation

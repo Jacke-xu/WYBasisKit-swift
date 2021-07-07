@@ -2,8 +2,8 @@
 //  UIImage.swift
 //  WYBasisKit
 //
-//  Created by jacke·xu on 2020/8/29.
-//  Copyright © 2020 jacke-xu. All rights reserved.
+//  Created by Jacke·xu on 2020/8/29.
+//  Copyright © 2020 Jacke·xu. All rights reserved.
 //
 
 import Foundation
@@ -12,7 +12,7 @@ import UIKit
 public extension UIImage {
     
     /// 截取指定View快照
-    class func wy_screenshot(view: UIView) -> UIImage! {
+    class func wy_screenshot(_ view: UIView) -> UIImage! {
         
         // 设置屏幕倍率可以保证截图的质量
         let scale: CGFloat = UIScreen.main.scale
@@ -29,7 +29,7 @@ public extension UIImage {
     }
     
     /// 根据颜色创建图片
-    class func wy_imageFromColor(color: UIColor) -> UIImage! {
+    class func wy_image(from color: UIColor) -> UIImage! {
         
         let rect = CGRect(x: 0, y: 0, width: 1, height: 1)
         UIGraphicsBeginImageContext(rect.size)
@@ -42,10 +42,10 @@ public extension UIImage {
     }
     
     /// 生成渐变图片
-    class func wy_imageFromGradientColors(colors: [UIColor], gradientDirection: WYGradientDirection, imageSize: CGSize) -> UIImage {
+    class func wy_image(from gradientColors: [UIColor], gradientDirection: WYGradientDirection, imageSize: CGSize) -> UIImage {
         
         var array: [CGColor] = []
-        for color in colors {
+        for color in gradientColors {
             array.append(color.cgColor)
         }
         UIGraphicsBeginImageContextWithOptions(imageSize, true, 1)

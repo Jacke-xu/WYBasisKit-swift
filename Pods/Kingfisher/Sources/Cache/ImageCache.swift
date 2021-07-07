@@ -182,19 +182,11 @@ open class ImageCache {
 
         let notifications: [(Notification.Name, Selector)]
         #if !os(macOS) && !os(watchOS)
-        #if swift(>=4.2)
         notifications = [
             (UIApplication.didReceiveMemoryWarningNotification, #selector(clearMemoryCache)),
             (UIApplication.willTerminateNotification, #selector(cleanExpiredDiskCache)),
             (UIApplication.didEnterBackgroundNotification, #selector(backgroundCleanExpiredDiskCache))
         ]
-        #else
-        notifications = [
-            (NSNotification.Name.UIApplicationDidReceiveMemoryWarning, #selector(clearMemoryCache)),
-            (NSNotification.Name.UIApplicationWillTerminate, #selector(cleanExpiredDiskCache)),
-            (NSNotification.Name.UIApplicationDidEnterBackground, #selector(backgroundCleanExpiredDiskCache))
-        ]
-        #endif
         #elseif os(macOS)
         notifications = [
             (NSApplication.willResignActiveNotification, #selector(cleanExpiredDiskCache)),
@@ -465,7 +457,7 @@ open class ImageCache {
         let computedKey = key.computedKey(with: identifier)
 
         if fromMemory {
-            try? memoryStorage.remove(forKey: computedKey)
+            memoryStorage.remove(forKey: computedKey)
         }
         
         if fromDisk {
@@ -633,7 +625,7 @@ open class ImageCache {
     
     /// Clears the memory storage of this cache.
     @objc public func clearMemoryCache() {
-        try? memoryStorage.removeAll()
+        memoryStorage.removeAll()
     }
     
     /// Clears the disk storage of this cache. This is an async operation.
@@ -708,11 +700,7 @@ open class ImageCache {
 
         func endBackgroundTask(_ task: inout UIBackgroundTaskIdentifier) {
             sharedApplication.endBackgroundTask(task)
-            #if swift(>=4.2)
             task = UIBackgroundTaskIdentifier.invalid
-            #else
-            task = UIBackgroundTaskInvalid
-            #endif
         }
         
         var backgroundTask: UIBackgroundTaskIdentifier!

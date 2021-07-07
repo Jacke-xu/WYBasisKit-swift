@@ -2,8 +2,8 @@
 //  UILabel.swift
 //  WYBasisKit
 //
-//  Created by jacke·xu on 2020/8/29.
-//  Copyright © 2020 jacke-xu. All rights reserved.
+//  Created by Jacke·xu on 2020/8/29.
+//  Copyright © 2020 Jacke·xu. All rights reserved.
 //
 
 import UIKit
@@ -287,7 +287,7 @@ extension UILabel {
                 
                 totalString = totalString?.replacingCharacters(in: range!, with: wy_sharedString(count: str.count))
                 
-                let model = WYRichTextModel()
+                var model = WYRichTextModel()
                 model.wy_range =  totalString?.nsRange(from: range!) ?? NSRange()
                 model.wy_richText = str
                 
@@ -379,7 +379,7 @@ extension UILabel {
     }
 }
 
-private class WYRichTextModel: NSObject {
+private struct WYRichTextModel {
     
     var wy_richText: String = ""
     var wy_range: NSRange = NSRange()

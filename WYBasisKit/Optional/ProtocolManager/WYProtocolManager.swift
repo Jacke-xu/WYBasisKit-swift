@@ -2,7 +2,7 @@
 //  WYProtocolManager.swift
 //  WYBasisKit
 //
-//  Created by jacke·xu on 2020/11/6.
+//  Created by Jacke·xu on 2020/11/6.
 //
 
 import Foundation
@@ -12,7 +12,7 @@ import Foundation
     @objc optional func test()
 }
 
-class WYProtocolManager {
+struct WYProtocolManager {
 
     static let shared: WYProtocolManager = WYProtocolManager()
     

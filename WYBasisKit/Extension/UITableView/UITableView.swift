@@ -2,12 +2,21 @@
 //  UITableView.swift
 //  WYBasisKit
 //
-//  Created by jacke·xu on 2020/8/29.
-//  Copyright © 2020 jacke-xu. All rights reserved.
+//  Created by Jacke·xu on 2020/8/29.
+//  Copyright © 2020 Jacke·xu. All rights reserved.
 //
 
 import UIKit
 import MJRefresh
+
+/// TableView注册类型
+public enum WYTableViewRegisterType {
+    
+    /// 注册Cell
+    case cell
+    /// 注册HeaderFooterView
+    case headerFooterView
+}
 
 public extension UITableView {
     
@@ -16,7 +25,7 @@ public extension UITableView {
      * plain模式：
                 1、如果实现了viewForHeaderInSection、viewForFooterInSection方法之一或两个都实现了，则与之对应的header或者footer在滑动的时候会有悬浮效果
      
-                2、如果实现了viewForHeaderInSection、viewForFooterInSection方法之一或两个都实现了，则header或footer的高度会显示为传入的高度，相反，则不会显示header或footer，与之对应的高度也会自动置零
+                2、如果实现了heightForHeaderInSection、heightForFooterInSection方法之一或两个都实现了，则header或footer的高度会显示为传入的高度，相反，则不会显示header或footer，与之对应的高度也会自动置零
      
                 3、该模式下实现对应代理方法后可以在右侧显示分区索引，参考手机通讯录界面可理解
      
@@ -61,14 +70,14 @@ public extension UITableView {
     }
     
     /// 是否允许其它手势识别，默认false，在tableView嵌套的类似需求下可设置为true
-    var wy_openOtherGestureRecognizer: Bool {
+    var wy_allowOtherGestureRecognizer: Bool {
         
         set(newValue) {
             
-            objc_setAssociatedObject(self, WYAssociatedKeys.wy_openOtherGestureRecognizer, newValue, .OBJC_ASSOCIATION_ASSIGN)
+            objc_setAssociatedObject(self, WYAssociatedKeys.wy_allowOtherGestureRecognizer, newValue, .OBJC_ASSOCIATION_ASSIGN)
         }
         get {
-            return objc_getAssociatedObject(self, WYAssociatedKeys.wy_openOtherGestureRecognizer) as? Bool ?? false
+            return objc_getAssociatedObject(self, WYAssociatedKeys.wy_allowOtherGestureRecognizer) as? Bool ?? false
         }
     }
     
@@ -81,7 +90,7 @@ public extension UITableView {
     }
 
     /// 结束mj_footer刷新状态
-    func wy_footerEndRefreshing(responseSize: NSInteger = 0, pageSize: NSInteger = WYBasisKitConfig.wy_pageSize <= 0 ? wy_defaultPageSize : WYBasisKitConfig.wy_pageSize) {
+    func wy_footerEndRefreshing(responseSize: NSInteger = 0, pageSize: NSInteger = WYBasisKitConfig.pageSize) {
         
         guard self.mj_footer != nil else { return }
         
@@ -90,7 +99,6 @@ public extension UITableView {
             self.mj_footer?.endRefreshingWithNoMoreData()
             
         }else {
-            
             self.mj_footer?.endRefreshing()
         }
     }
@@ -99,7 +107,6 @@ public extension UITableView {
     func wy_register(_ className: String, _ type: WYTableViewRegisterType) {
         
         guard className.isEmpty == false else {
-
             fatalError("调用注册方法前必须创建与className对应的类文件")
         }
         
@@ -108,7 +115,6 @@ public extension UITableView {
         switch type {
         case .cell:
             guard let cellClass = NSClassFromString(registerClass) as? UITableViewCell.Type else {
-                
                 wy_print("注册 \(className) 失败")
                 return
             }
@@ -117,7 +123,6 @@ public extension UITableView {
 
         case .headerFooterView:
             guard let headerFooterViewClass = NSClassFromString(registerClass) as? UITableViewHeaderFooterView.Type else {
-                
                 wy_print("注册 \(className) 失败")
                 return
             }
@@ -126,32 +131,14 @@ public extension UITableView {
         }
     }
     
-    /// 设置plain模式下headerView不悬停(需在scrollViewDidScroll方法中调用)
-    func wy_scrollWithoutPasting(scrollView: UIScrollView, headerHeight: CGFloat) {
-
-        if (scrollView == self) {
-            
-            if (scrollView.contentOffset.y <= headerHeight && scrollView.contentOffset.y >= 0) {
-                
-                scrollView.contentInset = UIEdgeInsets(top: -scrollView.contentOffset.y, left: 0, bottom: 0, right: 0)
-                
-            } else if (scrollView.contentOffset.y >= headerHeight) {
-                
-                scrollView.contentInset = UIEdgeInsets(top: -headerHeight, left: 0, bottom: 0, right: 0)
-            }
-        }
-    }
-    
     private struct WYAssociatedKeys {
-        
-        static let wy_openOtherGestureRecognizer = UnsafeRawPointer.init(bitPattern: "wy_openOtherGestureRecognizer".hashValue)!
+        static let wy_allowOtherGestureRecognizer = UnsafeRawPointer.init(bitPattern: "wy_allowOtherGestureRecognizer".hashValue)!
     }
 }
 
 extension UITableView: UIGestureRecognizerDelegate {
     
     public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        
-        return wy_openOtherGestureRecognizer
+        return wy_allowOtherGestureRecognizer
     }
 }

@@ -2,8 +2,8 @@
 //  UIColor.swift
 //  WYBasisKit
 //
-//  Created by jacke·xu on 2020/8/29.
-//  Copyright © 2020 jacke-xu. All rights reserved.
+//  Created by Jacke·xu on 2020/8/29.
+//  Copyright © 2020 Jacke·xu. All rights reserved.
 //
 
 import UIKit
@@ -11,12 +11,12 @@ import UIKit
 public extension UIColor {
     
     /// RGB(A) convert UIColor
-    class func wy_rgb(red: CGFloat, green: CGFloat, blue: CGFloat, aplha: CGFloat = 1.0) -> UIColor {
+    class func wy_rgb(_ red: CGFloat, _ green: CGFloat, _ blue: CGFloat, _ aplha: CGFloat = 1.0) -> UIColor {
         return UIColor.init(red: red/255.0, green: green/255.0, blue: blue/255.0, alpha: aplha)
     }
 
     /// hexColor convert UIColor
-    class func wy_hexColor(hexColor: String, alpha: CGFloat = 1.0) -> UIColor {
+    class func wy_hex(_ hexColor: String, _ alpha: CGFloat = 1.0) -> UIColor {
         var colorStr = hexColor.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).uppercased() as NSString
         if colorStr.length < 6 {
             return UIColor.clear
@@ -51,10 +51,8 @@ public extension UIColor {
     }
     
     /// hexColor convert UIColor
-    class func wy_hexColor(hexColor: UInt, alpha: CGFloat = 1.0) -> UIColor {
-        
+    class func wy_hex(_ hexColor: UInt, _ alpha: CGFloat = 1.0) -> UIColor {
         return UIColor(
-            
             red: CGFloat((hexColor & 0xFF0000) >> 16) / 255.0,
             green: CGFloat((hexColor & 0x00FF00) >> 8) / 255.0,
             blue: CGFloat(hexColor & 0x0000FF) / 255.0,
@@ -63,30 +61,23 @@ public extension UIColor {
     }
 
     /// randomColor
-    class var wy_randomColor: UIColor {
+    class var wy_random: UIColor {
         return UIColor.init(red: CGFloat(arc4random()%256)/255.0, green: CGFloat(arc4random()%256)/255.0, blue: CGFloat(arc4random()%256)/255.0, alpha: 1.0)
     }
     
     /// 动态颜色
-    class func wy_dynamicColor(light: UIColor, dark: UIColor) -> UIColor {
-        
+    class func wy_dynamic(_ light: UIColor, _ dark: UIColor) -> UIColor {
         if #available(iOS 13.0, *) {
-            
             let dynamicColor = UIColor { (trainCollection) -> UIColor in
-                
                 if trainCollection.userInterfaceStyle == UIUserInterfaceStyle.light {
-                    
                     return light
-                    
                 }else {
-                    
                     return dark
                 }
             }
             return dynamicColor
             
         } else {
-            
             return light
         }
     }

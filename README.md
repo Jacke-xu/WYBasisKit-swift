@@ -34,7 +34,7 @@
     2、在需要使用的页面引入，即 import WYBasisKit
 ```
 
-### [点这里穿越到Objective-C版](https://github.com/Jacke-xu/WYBasisKit.git)
+### [点这里穿越到Objective-C版](https://github.com/Jacke·xu/WYBasisKit.git)
 
 
 

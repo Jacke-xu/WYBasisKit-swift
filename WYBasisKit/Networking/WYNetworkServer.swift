@@ -2,8 +2,8 @@
 //  WYNetworkServer.swift
 //  WYBasisKit
 //
-//  Created by jacke·xu on 2020/8/29.
-//  Copyright © 2020 jacke·xu. All rights reserved.
+//  Created by Jacke·xu on 2020/8/29.
+//  Copyright © 2020 Jacke·xu. All rights reserved.
 //
 
 import Moya
@@ -58,29 +58,24 @@ let WYTargetProvider = MoyaProvider<WYProvider>(requestClosure: requestProvider)
 struct WYProvider: TargetType {
     
     init(request: WYRequest) {
-        
         self.request = request
     }
     
     var request: WYRequest
     
     var baseURL: URL {
-        
         return URL(string: request.domain)!
     }
     
     var path: String {
-        
         return request.path
     }
     
     var method: Moya.Method {
-        
         return request.method
     }
     
     var sampleData: Data {
-        
         return "".data(using: .utf8)!
     }
     
@@ -93,7 +88,7 @@ struct WYProvider: TargetType {
             return .requestCompositeData(bodyData: request.data!, urlParameters: request.parameters)
         case .upload:
             var multiparts: [Moya.MultipartFormData] = []
-            for fileModel in request.files {
+            for var fileModel in request.files {
                 switch fileModel.fileType {
                 case .urlPath:
                     if let multipart = try? MultipartFormData(provider: .data(Data(contentsOf: URL(fileURLWithPath: fileModel.fileUrl))), name: fileModel.folderName, fileName: fileModel.fileName, mimeType: fileModel.mimeType) {
@@ -109,7 +104,6 @@ struct WYProvider: TargetType {
     }
     
     var headers: [String : String]? {
-        
         return request.headers
     }
 }

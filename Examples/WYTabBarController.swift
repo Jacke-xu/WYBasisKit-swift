@@ -2,8 +2,8 @@
 //  WYTabBarController.swift
 //  WYBasisKit
 //
-//  Created by jacke·xu on 2020/12/3.
-//  Copyright © 2020 jacke-xu. All rights reserved.
+//  Created by Jacke·xu on 2020/12/3.
+//  Copyright © 2020 Jacke·xu. All rights reserved.
 //
 
 import UIKit
@@ -14,23 +14,23 @@ class WYTabBarController: UITabBarController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        view.backgroundColor = .wy_dynamicColor(light: .white, dark: .black)
+        view.backgroundColor = .wy_dynamic(.white, .black)
         layoutTabBar()
     }
     
     func layoutTabBar() {
         
         let leftController = WYLeftController()
-        leftController.view.backgroundColor = .wy_dynamicColor(light: .white, dark: .black)
+        leftController.view.backgroundColor = .wy_dynamic(.white, .black)
         
         layoutTabbrItem(controller: leftController, title: WYLocalizedString("左", "Left"), defaultImage: UIImage(named: "tabbar_left_default")!, selectedImage: UIImage(named: "tabbar_left_selected")!)
         
         let centerController = WYCenterController()
-        centerController.view.backgroundColor = .wy_dynamicColor(light: .white, dark: .black)
+        centerController.view.backgroundColor = .wy_dynamic(.white, .black)
         layoutTabbrItem(controller: centerController, title: WYLocalizedString("中", "Center"), defaultImage: UIImage(named: "tabbar_center_default")!, selectedImage: UIImage(named: "tabbar_center_selected")!)
         
         let rightController = WYRightController()
-        rightController.view.backgroundColor = .wy_dynamicColor(light: .white, dark: .black)
+        rightController.view.backgroundColor = .wy_dynamic(.white, .black)
         layoutTabbrItem(controller: rightController, title: WYLocalizedString("右", "Right"), defaultImage: UIImage(named: "tabbar_right_default")!, selectedImage: UIImage(named: "tabbar_right_selected")!)
     }
     
@@ -61,14 +61,14 @@ class WYTabBarController: UITabBarController {
         }
         
         let clearView = UIView(frame: CGRect(x: 0, y: 0, width: wy_screenWidth, height: wy_tabBarHeight))
-        clearView.backgroundColor = .wy_dynamicColor(light: .white, dark: .black)
+        clearView.backgroundColor = .wy_dynamic(.white, .black)
         self.tabBar.insertSubview(clearView, at: 0)
     }
     
     func layoutNavigationBar(nav: UINavigationController) {
         
-        nav.wy_backgroundColor = .wy_dynamicColor(light: .wy_hexColor(hexColor: "#2AACFF"), dark: .wy_hexColor(hexColor: "#2A7DFF"))
-        nav.wy_titleColor = .wy_dynamicColor(light: .black, dark: .white)
+        nav.wy_backgroundColor = .wy_dynamic(.wy_hex("#2AACFF"), .wy_hex("#2A7DFF"))
+        nav.wy_titleColor = .wy_dynamic(.black, .white)
         //nav.wy_titleFont = .systemFont(ofSize: 15)
         nav.wy_returnButtonImage = UIImage(named: "back")!
         //nav.wy_returnButtonColor = .orange

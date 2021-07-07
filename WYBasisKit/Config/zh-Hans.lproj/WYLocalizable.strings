@@ -2,8 +2,8 @@
   WYLocalizable.strings
   WYBasisKit
 
-  Created by jacke·xu on 2020/11/21.
-  Copyright © 2020 jacke-xu. All rights reserved.
+  Created by Jacke·xu on 2020/11/21.
+  Copyright © 2020 Jacke·xu. All rights reserved.
 */
 
 "知道了" = "知道了";
@@ -23,6 +23,7 @@
 "继续连接" = "继续连接";
 "取消连接" = "取消连接";
 "数据请求失败" = "数据请求失败";
+"状态码异常" = "状态码异常";
 "未知的网络，可能存在安全隐患，是否继续？" = "未知的网络，可能存在安全隐患，是否继续？";
 "去设置" = "去设置";
 "已取消不安全网络连接" = "已取消不安全网络连接";
@@ -31,3 +32,9 @@
 "您正在使用蜂窝移动网络联网" = "您正在使用蜂窝移动网络联网";
 "不可用的网络，请确认您的网络环境或网络连接权限已正确设置" = "不可用的网络，请确认您的网络环境或网络连接权限已正确设置";
 "未知错误，接口message返回为空" = "未知错误，接口message返回为空";
+"刚刚" = "Just now";
+"分钟前" = "minutes ago";
+"小时前" = "hours ago";
+"天前" = "days ago";
+"月前" = "months ago";
+"年前" = "years ago";

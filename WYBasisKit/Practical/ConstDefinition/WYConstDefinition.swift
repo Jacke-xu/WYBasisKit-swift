@@ -2,8 +2,8 @@
 //  WYConstDefinition.swift
 //  WYBasisKit
 //
-//  Created by jacke·xu on 2020/8/29.
-//  Copyright © 2020 jacke-xu. All rights reserved.
+//  Created by Jacke·xu on 2020/8/29.
+//  Copyright © 2020 Jacke·xu. All rights reserved.
 //
 
 import UIKit
@@ -35,10 +35,10 @@ public let wy_screenWidth: CGFloat = UIScreen.main.bounds.size.width
 public let wy_screenHeight: CGFloat = UIScreen.main.bounds.size.height
 
 /// 屏幕宽度比率
-public let wy_screenWidthRatio: CGFloat = (wy_screenWidth / WYBasisKitConfig.wy_screenWidthRatioBase)
+public let wy_screenWidthRatio: CGFloat = (wy_screenWidth / WYBasisKitConfig.screenWidthRatioBase)
 
 /// 屏幕高度比率
-public let wy_screenHeightRatio: CGFloat = (wy_screenHeight / WYBasisKitConfig.wy_screenHeightRatioBase)
+public let wy_screenHeightRatio: CGFloat = (wy_screenHeight / WYBasisKitConfig.screenHeightRatioBase)
 
 /// 屏幕宽度比率转换
 public func wy_screenWidth(_ ratioValue: CGFloat) -> CGFloat {
@@ -52,8 +52,7 @@ public func wy_screenHeight(_ ratioValue: CGFloat) -> CGFloat {
 
 /// 字号比率转换
 public func wy_fontSize(_ ratioValue: CGFloat) -> CGFloat {
-    
-    return ratioValue * ((wy_screenWidthRatio > WYBasisKitConfig.wy_maxFontRatio) ? WYBasisKitConfig.wy_maxFontRatio : wy_screenWidthRatio)
+    return ratioValue * ((wy_screenWidthRatio > WYBasisKitConfig.maxFontRatio) ? WYBasisKitConfig.maxFontRatio : wy_screenWidthRatio)
 }
 
 /// DEBUG打印日志

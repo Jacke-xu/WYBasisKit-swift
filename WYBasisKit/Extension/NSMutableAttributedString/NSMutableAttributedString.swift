@@ -2,8 +2,8 @@
 //  NSMutableAttributedString.swift
 //  WYBasisKit
 //
-//  Created by jacke·xu on 2020/8/29.
-//  Copyright © 2020 jacke-xu. All rights reserved.
+//  Created by Jacke·xu on 2020/8/29.
+//  Copyright © 2020 Jacke·xu. All rights reserved.
 //
 
 import Foundation
@@ -11,13 +11,13 @@ import UIKit
 
 public extension NSMutableAttributedString {
     
-    @discardableResult
     /**
 
     *  需要修改的字符颜色数组及量程，由字典组成  key = 颜色   value = 量程或需要修改的字符串
     *  例：NSArray *colorsOfRanges = @[@{color:@[@"0",@"1"]},@{color:@[@"1",@"2"]}]
     *  或：NSArray *colorsOfRanges = @[@{color:str},@{color:str}]
     */
+    @discardableResult
     func wy_colorsOfRanges(colorsOfRanges: Array<Dictionary<UIColor, Any>>) -> NSMutableAttributedString {
         
         for dic: Dictionary in colorsOfRanges {
@@ -43,13 +43,13 @@ public extension NSMutableAttributedString {
         return self
     }
     
-    @discardableResult
     /**
 
     *  需要修改的字符字体数组及量程，由字典组成  key = 颜色   value = 量程或需要修改的字符串
     *  例：NSArray *fontsOfRanges = @[@{font:@[@"0",@"1"]},@{font:@[@"1",@"2"]}]
     *  或：NSArray *fontsOfRanges = @[@{font:str},@{font:str}]
     */
+    @discardableResult
     func wy_fontsOfRanges(fontsOfRanges: Array<Dictionary<UIFont, Any>>) -> NSMutableAttributedString {
         for dic: Dictionary in fontsOfRanges {
             
@@ -73,8 +73,8 @@ public extension NSMutableAttributedString {
         return self
     }
     
-    @discardableResult
     /// 设置行间距
+    @discardableResult
     func wy_lineSpacing(lineSpacing: CGFloat, string: String? = nil, alignment: NSTextAlignment = .left) -> NSMutableAttributedString {
         
         let paragraphStyle: NSMutableParagraphStyle = NSMutableParagraphStyle()
@@ -87,8 +87,8 @@ public extension NSMutableAttributedString {
         return self
     }
     
-    @discardableResult
     /// 设置字间距
+    @discardableResult
     func wy_wordsSpacing(wordsSpacing: Double, string: String? = nil) -> NSMutableAttributedString {
         
         let selfStr: NSString = self.string as NSString
@@ -97,8 +97,8 @@ public extension NSMutableAttributedString {
         return self
     }
     
-    @discardableResult
     /// 文本添加下滑线
+    @discardableResult
     func wy_underline(color: UIColor, string: String? = nil) -> NSMutableAttributedString {
          
         let selfStr: NSString = self.string as NSString
@@ -108,8 +108,8 @@ public extension NSMutableAttributedString {
         return self
     }
     
-    @discardableResult
     /// 文本添加删除线
+    @discardableResult
     func wy_strikethrough(color: UIColor, string: String? = nil) -> NSMutableAttributedString {
          
         let selfStr: NSString = self.string as NSString

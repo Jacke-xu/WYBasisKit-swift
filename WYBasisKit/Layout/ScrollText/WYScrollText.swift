@@ -2,8 +2,8 @@
 //  WYScrollText.swift
 //  WYBasisKit
 //
-//  Created by jacke·xu on 2020/11/1.
-//  Copyright © 2020 jacke-xu. All rights reserved.
+//  Created by Jacke·xu on 2020/11/1.
+//  Copyright © 2020 Jacke·xu. All rights reserved.
 //
 
 import SnapKit
@@ -95,8 +95,12 @@ public class WYScrollText: UIView {
         
         if timer == nil {
             
-            self.timer = Timer.scheduledTimer(timeInterval: (interval < 2) ? 2 : interval, target: self, selector: #selector(scroll), userInfo: nil, repeats: true)
+            timer = Timer.scheduledTimer(withTimeInterval: (interval < 2) ? 2 : interval, repeats: true, block:{ [weak self] (timer: Timer) -> Void in
+                self?.scroll()
+            })
         }
+        // 把定时器加入到RunLoop里面，保证持续运行，不被表视图滑动事件这些打断
+        RunLoop.current.add(timer!, forMode: .common)
     }
     
     /// 停止定时器
@@ -106,7 +110,7 @@ public class WYScrollText: UIView {
         timer = nil
     }
     
-    @objc private func scroll() {
+    private func scroll() {
         
         guard self.superview != nil else {
             stopTimer()
@@ -127,6 +131,10 @@ public class WYScrollText: UIView {
     @objc private func scrollToFirstText() {
         
         collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .centeredVertically, animated: false)
+    }
+    
+    deinit {
+        stopTimer()
     }
     
     /*

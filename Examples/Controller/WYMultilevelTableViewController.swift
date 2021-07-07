@@ -2,8 +2,8 @@
 //  WYMultilevelTableViewController.swift
 //  WYBasisKit
 //
-//  Created by jacke·xu on 2021/1/28.
-//  Copyright © 2021 jacke·xu. All rights reserved.
+//  Created by Jacke·xu on 2021/1/28.
+//  Copyright © 2021 Jacke·xu. All rights reserved.
 //
 
 import UIKit
@@ -17,7 +17,7 @@ import UIKit
 class WYMultilevelTableViewController: UIViewController {
     
     var dataSource: [WYMultilevelTable] = []
-    
+
     lazy var tableView: UITableView = {
 
         let tableview = UITableView.wy_shared(style: .plain, separatorStyle: .singleLine, delegate: self, dataSource: self, superView: view)
@@ -27,7 +27,7 @@ class WYMultilevelTableViewController: UIViewController {
             make.bottom.equalToSuperview().offset(-wy_tabBarHeight)
         }
         dataSource.append(WYMultilevelTable(superLevel: 0, level: 0))
-        
+
         return tableview
     }()
 
@@ -41,13 +41,13 @@ class WYMultilevelTableViewController: UIViewController {
     }
     
     func expand(model: WYMultilevelTable, indexPath: IndexPath) {
-        
+
         var reloadRows: [IndexPath] = []
         let insertLocation: Int = indexPath.row + 1
         let subLevel: Int = randomNumber()
         model.subLevel = subLevel
         for index in 0..<subLevel {
-            
+
             let insertModel = WYMultilevelTable(superLevel: model.level, level: model.level+1)
             dataSource.insert(insertModel, at: insertLocation + Int(index))
             reloadRows.append(IndexPath(row: insertLocation + Int(index), section: 0))
@@ -56,12 +56,12 @@ class WYMultilevelTableViewController: UIViewController {
         tableView.beginUpdates()
         tableView.insertRows(at: reloadRows, with: .automatic)
         tableView.endUpdates()
-        
+
         tableView.reloadRows(at: reloadRows, with: .none)
     }
-    
+
     func fold(model: WYMultilevelTable, indexPath: IndexPath) {
-        
+
         var reloadRows: [IndexPath] = []
         var length: Int = 0
         let location: Int = indexPath.row + 1
@@ -78,19 +78,19 @@ class WYMultilevelTableViewController: UIViewController {
         tableView.beginUpdates()
         tableView.deleteRows(at: reloadRows, with: .automatic)
         tableView.endUpdates()
-        
+
         tableView.reloadSections(IndexSet(integer: indexPath.section), with: .none)
     }
-    
+
     func sharedLevelName(model: WYMultilevelTable) -> String {
-        
+
         var offset: String = ""
         for _ in 0..<model.level {
             offset = offset + "    "
         }
         return offset + "第\(model.level)级"
     }
-    
+
     func randomNumber(min: Int = 1, max: Int = 5) -> Int {
         return min + Int(arc4random_uniform(UInt32(max - min)))
     }
@@ -117,7 +117,7 @@ extension WYMultilevelTableViewController: UITableViewDelegate, UITableViewDataS
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "UITableViewCell", for: indexPath)
         
-        cell.textLabel?.textColor = UIColor.wy_dynamicColor(light: .black, dark: .white)
+        cell.textLabel?.textColor = UIColor.wy_dynamic(.black, .white)
         cell.textLabel?.font = .systemFont(ofSize: wy_fontSize(15))
         cell.textLabel?.text = sharedLevelName(model: dataSource[indexPath.row])
         

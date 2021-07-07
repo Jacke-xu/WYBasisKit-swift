@@ -2,8 +2,8 @@
 //  WYPagingView.swift
 //  WYBasisKit
 //
-//  Created by jacke·xu on 2020/12/7.
-//  Copyright © 2020 jacke-xu. All rights reserved.
+//  Created by Jacke·xu on 2020/12/7.
+//  Copyright © 2020 Jacke·xu. All rights reserved.
 //
 
 import UIKit
@@ -84,16 +84,16 @@ public class WYPagingView: UIView {
     public var bar_item_cornerRadius: CGFloat = 0.0
 
     /// 分页栏标题默认颜色 默认<#7B809E>
-    public var bar_title_defaultColor: UIColor = .wy_hexColor(hexColor: "#7B809E")
+    public var bar_title_defaultColor: UIColor = .wy_hex("#7B809E")
 
     /// 分页栏标题选中颜色 默认<#2D3952>
-    public var bar_title_selectedColor: UIColor = .wy_hexColor(hexColor: "#2D3952")
+    public var bar_title_selectedColor: UIColor = .wy_hex("#2D3952")
 
     /// 分页栏底部分隔带背景色 默认<#F2F2F2>
-    public var bar_dividingStripColor: UIColor = .wy_hexColor(hexColor: "#F2F2F2")
+    public var bar_dividingStripColor: UIColor = .wy_hex("#F2F2F2")
 
     /// 滑动线条背景色 默认<#2D3952>
-    public var bar_scrollLineColor: UIColor = .wy_hexColor(hexColor: "#2D3952")
+    public var bar_scrollLineColor: UIColor = .wy_hex("#2D3952")
 
     /// 滑动线条宽度 默认25像素
     public var bar_scrollLineWidth: CGFloat = wy_screenWidth(25)

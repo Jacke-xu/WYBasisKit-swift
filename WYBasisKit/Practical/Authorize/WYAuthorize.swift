@@ -2,13 +2,26 @@
 //  WYAuthorize.swift
 //  WYBasisKit
 //
-//  Created by jacke·xu on 2020/8/29.
-//  Copyright © 2020 jacke-xu. All rights reserved.
+//  Created by Jacke·xu on 2020/8/29.
+//  Copyright © 2020 Jacke·xu. All rights reserved.
 //
 
 import UIKit
 import AVFoundation
 import Photos
+
+/// 生物识别模式
+public enum WYBiometricType {
+    
+    /// 未知或者不支持
+    case none
+    
+    /// 指纹识别
+    case touchID
+    
+    /// 面部识别
+    case faceID
+}
 
 /// 判断相机权限
 public func wy_authorizeCameraAccess(showAlert: Bool = true, handler:((_ authorized: Bool) -> Void)?) {

@@ -1,11 +1,11 @@
 PODS:
-  - Alamofire (5.4.1)
+  - Alamofire (5.4.3)
   - HandyJSON (5.0.2)
   - IQKeyboardManagerSwift (6.5.6)
-  - Kingfisher (6.1.1)
+  - Kingfisher (6.3.0)
   - libPhoneNumber-iOS (0.9.15)
   - MBProgressHUD (1.2.0)
-  - MJRefresh (3.5.0)
+  - MJRefresh (3.6.1)
   - Moya (14.0.0):
     - Moya/Core (= 14.0.0)
   - Moya/Core (14.0.0):
@@ -23,7 +23,7 @@ DEPENDENCIES:
   - SnapKit
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git:
     - Alamofire
     - HandyJSON
     - IQKeyboardManagerSwift
@@ -35,16 +35,16 @@ SPEC REPOS:
     - SnapKit
 
 SPEC CHECKSUMS:
-  Alamofire: 2291f7d21ca607c491dd17642e5d40fdcda0e65c
+  Alamofire: e447a2774a40c996748296fa2c55112fdbbc42f9
   HandyJSON: 9e4e236f5d2dbefad5155a77417bbea438201c03
   IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
-  Kingfisher: 676d63307fbef6ed5d5ed400bff36983480d7500
+  Kingfisher: 6c3df386db71d82c0817a429d2c9421a77396529
   libPhoneNumber-iOS: 0a32a9525cf8744fe02c5206eb30d571e38f7d75
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
-  MJRefresh: 6afc955813966afb08305477dd7a0d9ad5e79a16
+  MJRefresh: d2c1970d1cf6e77fcfcdfe76c943dfab8dbfa5c1
   Moya: 5b45dacb75adb009f97fde91c204c1e565d31916
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
 
-PODFILE CHECKSUM: d93d00e70f35048c1328299b4d69480be545eb3c
+PODFILE CHECKSUM: 756bffcfc9d8fafc1fd612f4fdeff93e799cfddb
 
-COCOAPODS: 1.10.0
+COCOAPODS: 1.10.1

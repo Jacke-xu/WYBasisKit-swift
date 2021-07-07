@@ -2,12 +2,22 @@
 //  UIViewController.swift
 //  WYBasisKit
 //
-//  Created by jacke·xu on 2020/8/29.
-//  Copyright © 2020 jacke-xu. All rights reserved.
+//  Created by Jacke·xu on 2020/8/29.
+//  Copyright © 2020 Jacke·xu. All rights reserved.
 //
 
 import UIKit
 import MBProgressHUD
+
+/// viewController显示模式
+public enum WYDisplaMode {
+    
+    /// push模式
+    case push
+    
+    /// present模式
+    case present
+}
 
 /// 拦截返回按钮的点击和侧滑返回事件
 @objc protocol ViewControllerHandlerProtocol {
@@ -25,7 +35,7 @@ extension UIViewController: ViewControllerHandlerProtocol {
 
 public extension UIViewController {
     
-    func wy_displayMessage(title: String? = .none, message: String, duration: TimeInterval = wy_messageDuration) {
+    func wy_displayMessage(title: String? = .none, message: String, duration: TimeInterval = WYBasisKitConfig.messageDuration) {
         
         UIAlertController.wy_show(title: title ?? "", message: message, duration: duration)
     }
@@ -174,7 +184,6 @@ public extension UIViewController {
     var wy_parameters: AnyObject? {
         
         set(newValue) {
-            
             objc_setAssociatedObject(self, WYAssociatedKeys.wy_parameters, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
         get {

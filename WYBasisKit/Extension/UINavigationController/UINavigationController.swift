@@ -2,8 +2,8 @@
 //  UINavigationController.swift
 //  WYBasisKit
 //
-//  Created by jacke·xu on 2020/8/29.
-//  Copyright © 2020 jacke-xu. All rights reserved.
+//  Created by Jacke·xu on 2020/8/29.
+//  Copyright © 2020 Jacke·xu. All rights reserved.
 //
 
 import UIKit
@@ -38,7 +38,7 @@ public extension UINavigationController {
             self.navigationBar.setBackgroundImage(newValue, for: .default)
         }
         get {
-            return self.navigationBar.backgroundImage(for: .default) ?? UIImage.wy_imageFromColor(color: .white)
+            return self.navigationBar.backgroundImage(for: .default) ?? UIImage.wy_image(from: .white)
         }
     }
     
@@ -108,7 +108,6 @@ public extension UINavigationController {
     
     /// 返回按钮图片
     var wy_returnButtonImage: UIImage {
-        
         set(newValue) {
             
             self.navigationBar.backIndicatorTransitionMaskImage = newValue
@@ -116,7 +115,7 @@ public extension UINavigationController {
         }
         get {
             
-            return self.navigationBar.backIndicatorImage ?? UIImage.wy_imageFromColor(color: .white)
+            return self.navigationBar.backIndicatorImage ?? UIImage.wy_image(from: .white)
         }
     }
     

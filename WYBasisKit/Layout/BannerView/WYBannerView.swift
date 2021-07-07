@@ -2,13 +2,36 @@
 //  WYBannerView.swift
 //  WYBasisKit
 //
-//  Created by jacke·xu on 2020/12/14.
-//  Copyright © 2020 jacke·xu. All rights reserved.
+//  Created by Jacke·xu on 2021/4/13.
+//  Copyright © 2021 Jacke·xu. All rights reserved.
 //
 
 import UIKit
 import Kingfisher
 import SnapKit
+
+/// 图片切换效果
+public enum WYBannerSwitchMode {
+    
+    /// 滚动切换
+    case scroll
+    
+    /// 淡入淡出
+    case fade
+}
+
+/// 分页控件显示位置
+public enum WYPageControlPosition {
+    
+    /// 左下角
+    case bottomLeft
+    /// 右下角
+    case bottomRight
+    /// 底部居中
+    case bottomCenter
+    /// 隐藏
+    case hide
+}
 
 @objc public protocol WYBannerViewDelegate {
     
@@ -301,7 +324,7 @@ public class WYBannerView: UIView {
     private var currentIndex: NSInteger = 1
     // pageControl图片大小
     private var pageControlSize: CGSize?
-    // 定时器
+    // 定时器startTimer
     private var timer: Timer?
     // 判断手动拖拽后是否需要启动定时器
     private var userTiming: Bool = false

@@ -8,29 +8,20 @@
 
 import UIKit
 
-public let wy_defaultPageSize: NSInteger = 10
-public let wy_messageDuration: TimeInterval = 1.5
-public let wy_currentScreenWidthRatioBase: CGFloat = 375.0
-public let wy_currentScreenHeightRatioBase: CGFloat = 812.0
-public let wy_maxFontRatioBase: CGFloat = 1.0
-
-public class WYBasisKitConfig {
-    
-    /// 设置tableView或collectionView上拉加载更多时每次请求的数据量
-    public static var wy_pageSize: NSInteger = wy_defaultPageSize
-    
-    /// 设置当前语言环境
-    public class func wy_switchLanguage(language: WYLanguage, reload: Bool = true, handler:(() -> Void)? = nil) {
-        
-        WYLocalizableManager.shared.switchLanguage(language: language, reload: reload, handler: handler)
-    }
+public struct WYBasisKitConfig {
     
     /// 设置屏幕宽度比基数
-    public static var wy_screenWidthRatioBase: CGFloat = wy_currentScreenWidthRatioBase
+    public static var screenWidthRatioBase: CGFloat = 375.0
     
     /// 设置屏幕高度比基数
-    public static var wy_screenHeightRatioBase: CGFloat = wy_currentScreenHeightRatioBase
+    public static var screenHeightRatioBase: CGFloat = 812.0
     
     /// 设置字号适配的最大比率数
-    public static var wy_maxFontRatio: CGFloat = wy_maxFontRatioBase
+    public static var maxFontRatio: CGFloat = 1.0
+    
+    /// 设置AlertView提示控件驻留时间
+    public static var messageDuration: TimeInterval = 1.5
+    
+    /// 设置tableView或collectionView上拉加载更多时每次请求的数据量
+    public static var pageSize: NSInteger = 10
 }

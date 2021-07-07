@@ -2,8 +2,8 @@
 //  UIAlertController.swift
 //  WYBasisKit
 //
-//  Created by jacke·xu on 2020/8/29.
-//  Copyright © 2020 jacke-xu. All rights reserved.
+//  Created by Jacke·xu on 2020/8/29.
+//  Copyright © 2020 Jacke·xu. All rights reserved.
 //
 
 import Foundation
@@ -117,7 +117,6 @@ public extension UIAlertController {
     private var wy_alertWindow: UIWindow? {
         
         get {
-            
             var showWindow: UIWindow? = objc_getAssociatedObject(self, UIAlertControllerRuntimeKey.wy_alertWindow) as? UIWindow
             
             if showWindow == nil {
@@ -133,7 +132,6 @@ public extension UIAlertController {
     }
     
     private func wy_sharedAppDelegate() -> UIApplicationDelegate {
-        
         return UIApplication.shared.delegate!
     }
 }

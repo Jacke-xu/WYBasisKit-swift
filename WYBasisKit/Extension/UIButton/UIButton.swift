@@ -2,23 +2,36 @@
 //  UIButton.swift
 //  WYBasisKit
 //
-//  Created by jacke·xu on 2020/8/29.
-//  Copyright © 2020 jacke-xu. All rights reserved.
+//  Created by Jacke·xu on 2020/8/29.
+//  Copyright © 2020 Jacke·xu. All rights reserved.
 //
 
 import UIKit
 
+/// UIButton图片控件和文本控件显示位置
+public enum WYButtonPosition {
+    
+    /** 图片在左，文字在右，默认 */
+    case imageLeft_titleRight
+    /** 图片在右，文字在左 */
+    case imageRight_titleLeft
+    /** 图片在上，文字在下 */
+    case imageTop_titleBottom
+    /** 图片在下，文字在上 */
+    case imageBottom_titleTop
+}
+
 public extension UIButton {
     
     /// 返回一个计算好的字符串的宽度
-    private func titleWidth(title: String, controlHeight: CGFloat = 0, controlFont: UIFont, lineSpacing: CGFloat = 0) -> CGFloat {
+    private func wy_stringWidth(string: String, controlHeight: CGFloat = 0, controlFont: UIFont, lineSpacing: CGFloat = 0) -> CGFloat {
         
         let sharedControlHeight = (controlHeight == 0) ? controlFont.lineHeight : controlHeight
         
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = lineSpacing
         let attributes = [NSAttributedString.Key.font: controlFont, NSAttributedString.Key.paragraphStyle: paragraphStyle]
-        let stringSize: CGSize! = title.boundingRect(with: CGSize(width: .greatestFiniteMagnitude, height: sharedControlHeight), options: NSStringDrawingOptions(rawValue: NSStringDrawingOptions.truncatesLastVisibleLine.rawValue | NSStringDrawingOptions.usesLineFragmentOrigin.rawValue | NSStringDrawingOptions.usesFontLeading.rawValue), attributes: attributes, context: nil).size
+        let stringSize: CGSize! = string.boundingRect(with: CGSize(width: .greatestFiniteMagnitude, height: sharedControlHeight), options: NSStringDrawingOptions(rawValue: NSStringDrawingOptions.truncatesLastVisibleLine.rawValue | NSStringDrawingOptions.usesLineFragmentOrigin.rawValue | NSStringDrawingOptions.usesFontLeading.rawValue), attributes: attributes, context: nil).size
         
         return stringSize.width
     }
@@ -38,12 +51,11 @@ public extension UIButton {
                 //wy_print("wy_layouEdgeInsets方法 需要在设置图片、文字与约束或者frame之后才可以调用，且button的size最好大于 图片大小+文字大小+spacing")
                 return
             }
-            
             self.superview?.layoutIfNeeded()
             
             let imageWidth: CGFloat = (self.currentImage?.size.width) ?? 0
             let imageHeight: CGFloat = (self.currentImage?.size.height) ?? 0
-            let textWidth: CGFloat = (self.titleWidth(title: self.currentTitle ?? "",controlFont: self.titleLabel?.font ?? .systemFont(ofSize: 15)))
+            let textWidth: CGFloat = (self.wy_stringWidth(string: self.currentTitle ?? "",controlFont: self.titleLabel?.font ?? .systemFont(ofSize: 15)))
             let textHeight: CGFloat = (self.titleLabel?.font.lineHeight) ?? 0
 
             // image中心移动的x距离
@@ -68,7 +80,6 @@ public extension UIButton {
                     let contentOffsetx: CGFloat = spacing / 2
                     self.contentEdgeInsets = UIEdgeInsets(top: 0, left: contentOffsetx, bottom: 0, right: contentOffsetx)
                 }
-
                 break
 
             case .imageLeft_titleRight:
@@ -82,7 +93,6 @@ public extension UIButton {
                     let contentOffsetx: CGFloat = spacing / 2
                     self.contentEdgeInsets = UIEdgeInsets(top: 0, left: contentOffsetx, bottom: 0, right: contentOffsetx)
                 }
-
                 break
 
             case .imageTop_titleBottom:
@@ -98,7 +108,6 @@ public extension UIButton {
                     let contentOffsety: CGFloat = (([imageHeight, textHeight].min()!) / 2) + (spacing / 2)
                     self.contentEdgeInsets = UIEdgeInsets(top: contentOffsety, left: -contentOffsetx, bottom: contentOffsety, right: -contentOffsetx)
                 }
-
                 break
 
             case .imageBottom_titleTop:
@@ -115,7 +124,6 @@ public extension UIButton {
                     let contentOffsety: CGFloat = (([imageHeight, textHeight].min()!) / 2) + (spacing / 2)
                     self.contentEdgeInsets = UIEdgeInsets(top: contentOffsety, left: -contentOffsetx, bottom: contentOffsety, right: -contentOffsetx)
                 }
-
                 break
             }
         }
@@ -123,11 +131,9 @@ public extension UIButton {
     
     /** 按钮默认状态文字 */
     var wy_nTitle: String {
-        
         set {
             setTitle(newValue, for: .normal)
         }
-        
         get {
             return title(for: .normal) ?? ""
         }
@@ -135,11 +141,9 @@ public extension UIButton {
 
     /** 按钮高亮状态文字 */
     var wy_hTitle: String {
-        
         set {
             setTitle(newValue, for: .highlighted)
         }
-        
         get {
             return title(for: .highlighted) ?? ""
         }
@@ -147,24 +151,19 @@ public extension UIButton {
 
     /** 按钮选中状态文字 */
     var wy_sTitle: String {
-        
         set {
             setTitle(newValue, for: .selected)
         }
-        
         get {
             return title(for: .selected) ?? ""
         }
     }
 
-
     /** 按钮默认状态文字颜色 */
     var wy_title_nColor: UIColor {
-        
         set {
             setTitleColor(newValue, for: .normal)
         }
-        
         get {
             return titleColor(for: .normal) ?? .clear
         }
@@ -172,11 +171,9 @@ public extension UIButton {
 
     /** 按钮高亮状态文字颜色 */
     var wy_title_hColor: UIColor {
-        
         set {
             setTitleColor(newValue, for: .highlighted)
         }
-        
         get {
             return titleColor(for: .highlighted) ?? .clear
         }
@@ -184,11 +181,9 @@ public extension UIButton {
 
     /** 按钮选中状态文字颜色 */
     var wy_title_sColor: UIColor {
-        
         set {
             setTitleColor(newValue, for: .selected)
         }
-        
         get {
             return titleColor(for: .selected) ?? .clear
         }
@@ -197,40 +192,31 @@ public extension UIButton {
 
     /** 按钮默认状态图片 */
     var wy_nImage: UIImage {
-        
         set {
             setImage(newValue, for: .normal)
         }
-        
         get {
-            
-            return image(for: .normal) ?? UIKit.UIImage.wy_imageFromColor(color: .clear)
+            return image(for: .normal) ?? UIKit.UIImage.wy_image(from: .clear)
         }
     }
 
     /** 按钮高亮状态图片 */
     var wy_hImage: UIImage {
-        
         set {
             setImage(newValue, for: .highlighted)
         }
-        
         get {
-            
-            return image(for: .highlighted) ?? UIKit.UIImage.wy_imageFromColor(color: .clear)
+            return image(for: .highlighted) ?? UIKit.UIImage.wy_image(from: .clear)
         }
     }
 
     /** 按钮选中状态图片 */
     var wy_sImage: UIImage {
-        
         set {
             setImage(newValue, for: .selected)
         }
-        
         get {
-            
-            return image(for: .selected) ?? UIKit.UIImage.wy_imageFromColor(color: .clear)
+            return image(for: .selected) ?? UIKit.UIImage.wy_image(from: .clear)
         }
     }
     

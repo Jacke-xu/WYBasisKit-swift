@@ -2,8 +2,8 @@
 //  WYWaterfallParagraphLayout.swift
 //  WYBasisKit
 //
-//  Created by jacke·xu on 2021/2/5.
-//  Copyright © 2021 jacke·xu. All rights reserved.
+//  Created by Jacke·xu on 2021/2/5.
+//  Copyright © 2021 Jacke·xu. All rights reserved.
 //
 
 import UIKit
