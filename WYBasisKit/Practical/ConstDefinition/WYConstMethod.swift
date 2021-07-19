@@ -37,3 +37,13 @@ public func wy_degreesToRadian(degrees: CGFloat) -> CGFloat {
 public func wy_radianToDegrees(radian: CGFloat) -> CGFloat {
     return NSObject.wy_maintainAccuracy(value: (radian*180.0)/(CGFloat.pi))
 }
+
+/// 获取自定义控件所需要的换行数
+public func wy_numberOfLines(total: NSInteger, perLine: NSInteger) -> NSInteger {
+    
+    if CGFloat(total).truncatingRemainder(dividingBy: CGFloat(perLine)) == 0 {
+        return total / perLine
+    }else {
+        return (total / perLine) + 1
+    }
+}
