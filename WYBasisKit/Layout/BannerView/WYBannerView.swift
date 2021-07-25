@@ -52,7 +52,6 @@ public class WYBannerView: UIView {
      * @param handler 点击事件的block
      */
     public func itemDidClick(handler: @escaping ((_ bannerIndex: NSInteger) -> Void)) {
-        
          clickHandler = handler
     }
     

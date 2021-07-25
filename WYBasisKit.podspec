@@ -14,7 +14,7 @@ Pod::Spec.new do |kit|
   kit.source       = { :git => 'https://github.com/Jacke-xu/WYBasisKit-swift.git', :tag => '#{kit.version}' }
   kit.swift_versions = '5.0'
   kit.requires_arc = true
-  kit.default_subspec = 'Config', 'Extension', 'Practical', 'Networking'
+  kit.default_subspec = 'Extension', 'Practical', 'Networking'
   kit.static_framework = true
 
 
@@ -32,7 +32,7 @@ Pod::Spec.new do |kit|
     kit.subspec 'Extension' do |extension|
        extension.source_files = 'WYBasisKit/Extension/**/*', 'WYBasisKit/Practical/ConstDefinition/WYConstDefinition.swift'
        extension.frameworks = 'Foundation', 'UIKit'
-       extension.dependency 'WYBasisKit/Config'
+       extension.dependency 'WYBasisKit/Config', 'WYBasisKit/Localizable'
        extension.dependency 'MJRefresh'
        extension.dependency 'libPhoneNumber-iOS'
        extension.dependency 'MBProgressHUD'
@@ -41,13 +41,13 @@ Pod::Spec.new do |kit|
     kit.subspec 'Practical' do |practical|
        practical.source_files = 'WYBasisKit/Practical/**/*', 'WYBasisKit/Extension/UIAlertController/**/*', 'WYBasisKit/Extension/NSObject/**/*', 'WYBasisKit/Extension/UIDevice/**/*'
        practical.frameworks = 'Foundation', 'UIKit', 'LocalAuthentication', 'Photos', 'CoreFoundation'
-       practical.dependency 'WYBasisKit/Config'
+       practical.dependency 'WYBasisKit/Config', 'WYBasisKit/Localizable'
     end
     
     kit.subspec 'Networking' do |networking|
        networking.source_files = 'WYBasisKit/Networking/**/*', 'WYBasisKit/Extension/UIAlertController/**/*'
        networking.frameworks = 'Foundation', 'UIKit'
-       networking.dependency 'WYBasisKit/Config'
+       networking.dependency 'WYBasisKit/Config', 'WYBasisKit/Localizable'
        networking.dependency 'Moya'
        networking.dependency 'HandyJSON'
     end
@@ -75,7 +75,7 @@ Pod::Spec.new do |kit|
        layout.subspec 'ScrollText' do |scrollText|
         scrollText.source_files = 'WYBasisKit/Layout/ScrollText/**/*', 'WYBasisKit/Practical/ConstDefinition/WYConstDefinition.swift'
         scrollText.frameworks = 'Foundation', 'UIKit'
-        scrollText.dependency 'WYBasisKit/Config'
+        scrollText.dependency 'WYBasisKit/Config', 'WYBasisKit/Localizable'
         scrollText.dependency 'SnapKit'
        end
 
@@ -86,13 +86,13 @@ Pod::Spec.new do |kit|
         pagingView.dependency 'SnapKit'
        end
 
-        layout.subspec 'BannerView' do |pannerView|
-        pannerView.source_files = 'WYBasisKit/Layout/BannerView/**/*.swift', 'WYBasisKit/Extension/UIView/**/*', 'WYBasisKit/Practical/ConstDefinition/WYConstDefinition.swift'
-        pannerView.frameworks = 'Foundation', 'UIKit'
-        pannerView.dependency 'WYBasisKit/Config'
-        pannerView.dependency 'SnapKit'
-        pannerView.dependency 'Kingfisher'
-        pannerView.resource = 'WYBasisKit/Layout/BannerView/WYBannerView.bundle'
+        layout.subspec 'BannerView' do |bannerView|
+        bannerView.source_files = 'WYBasisKit/Layout/BannerView/**/*.swift', 'WYBasisKit/Extension/UIView/**/*', 'WYBasisKit/Practical/ConstDefinition/WYConstDefinition.swift'
+        bannerView.frameworks = 'Foundation', 'UIKit'
+        bannerView.dependency 'WYBasisKit/Config'
+        bannerView.dependency 'SnapKit'
+        bannerView.dependency 'Kingfisher'
+        bannerView.resource = 'WYBasisKit/Layout/BannerView/WYBannerView.bundle'
        end
     end
 end
