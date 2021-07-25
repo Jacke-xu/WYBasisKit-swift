@@ -1,7 +1,7 @@
 Pod::Spec.new do |kit|
 
   kit.name         = 'WYBasisKit'
-  kit.version      = '0.2.8'
+  kit.version      = '0.2.9'
   kit.summary      = '一个大幅提高开发效率的工具库'
   kit.description  = <<-DESC
                           WYBasisKit 不仅可以帮助开发者快速构建一个工程，还有基于常用网络框架和系统API而封装的方法，开发者只需简单的调用API就可以快速实现相应功能， 大幅提高开发效率。
@@ -16,9 +16,7 @@ Pod::Spec.new do |kit|
   kit.requires_arc = true
   kit.default_subspec = 'Config', 'Extension', 'Practical', 'Networking'
   kit.static_framework = true
-  
 
-# ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
 
     kit.subspec 'Config' do |config|
        config.source_files = 'WYBasisKit/Config/**/*'
