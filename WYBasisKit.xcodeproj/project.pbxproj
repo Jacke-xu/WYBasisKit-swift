@@ -519,6 +519,7 @@
 			isa = PBXGroup;
 			children = (
 				AA327F022569179F00CF5CBE /* WYBasisKitConfig.swift */,
+				AA771C1A25691433002C748B /* WYLocalizable.strings */,
 			);
 			path = Config;
 			sourceTree = "<group>";
@@ -564,7 +565,6 @@
 			isa = PBXGroup;
 			children = (
 				1F5C3E932578CD5400E0DBFF /* WYLocalizableManager.swift */,
-				AA771C1A25691433002C748B /* WYLocalizable.strings */,
 			);
 			path = Localizable;
 			sourceTree = "<group>";
