@@ -9,7 +9,7 @@
 import UIKit
 
 /// WaterfallsFlowLayoutStyle
-enum WYWaterfallsFlowLayoutStyle {
+public enum WYWaterfallsFlowLayoutStyle {
     
     /** 竖向瀑布流 item等宽不等高 支持头尾视图 */
     case verticalEqualWidth
@@ -29,7 +29,7 @@ enum WYWaterfallsFlowLayoutStyle {
  当样式为 horizontalEqualHeight 时 传入的size.height无效 ，所以可以是任意值 ，因为内部会根据样式自己计算布局
  当样式为 horizontalGrid  时 传入的size宽高都有效， 此时返回列数、行数的代理方法无效，
  */
-@objc protocol WYWaterfallsFlowLayoutDelegate {
+@objc public protocol WYWaterfallsFlowLayoutDelegate {
     
     /** item的size */
     @objc optional func waterfallsFlowLayout(_ waterfallsLayout: WYWaterfallsFlowLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
@@ -44,16 +44,16 @@ enum WYWaterfallsFlowLayoutStyle {
     @objc optional func numberOfColumnsInWaterfallsFlowLayout() -> Int
 }
 
-class WYWaterfallsFlowLayout: UICollectionViewFlowLayout {
+public class WYWaterfallsFlowLayout: UICollectionViewFlowLayout {
     
     /** delegate */
-    weak var delegate: WYWaterfallsFlowLayoutDelegate?
+    public weak var delegate: WYWaterfallsFlowLayoutDelegate?
     
     /** 瀑布流样式, 默认verticalEqualWidth */
-    var waterfallsFlowStyle: WYWaterfallsFlowLayoutStyle = .verticalEqualWidth
+    public var waterfallsFlowStyle: WYWaterfallsFlowLayoutStyle = .verticalEqualWidth
     
     /** 列数，竖向或水平布局时选传，竖向默认2， 横向默认1 */
-    var numberOfColumns: Int {
+    public var numberOfColumns: Int {
         set(newValue) {
             defaultNumberOfColumns = newValue
         }
@@ -62,7 +62,7 @@ class WYWaterfallsFlowLayout: UICollectionViewFlowLayout {
         }
     }
     
-    init(delegate: WYWaterfallsFlowLayoutDelegate) {
+    public init(delegate: WYWaterfallsFlowLayoutDelegate) {
         super.init()
         self.delegate = delegate
     }
@@ -72,7 +72,7 @@ class WYWaterfallsFlowLayout: UICollectionViewFlowLayout {
     }
 }
 
-extension WYWaterfallsFlowLayout {
+public extension WYWaterfallsFlowLayout {
     
     override func prepare() {
 

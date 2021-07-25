@@ -11,9 +11,9 @@ import Foundation
     @objc optional func test()
 }
 
-struct WYProtocolManager {
+public struct WYProtocolManager {
 
-    static let shared: WYProtocolManager = WYProtocolManager()
+    public static let shared: WYProtocolManager = WYProtocolManager()
     
     private let multiProtocol: NSHashTable<AnyObject> = NSHashTable.weakObjects()
     

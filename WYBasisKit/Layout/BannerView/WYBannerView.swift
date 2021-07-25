@@ -290,7 +290,7 @@ public class WYBannerView: UIView {
         let bundlePath = Bundle(for: WYBannerView.self).resourcePath! + "/WYBannerView.bundle"
         let bannerBundle = Bundle(path: bundlePath)
         let placeholder = UIImage(named: "placeholder_"+WYLocalizableManager.shared.currentLanguage().rawValue, in: bannerBundle, compatibleWith: nil)
-        return placeholder ?? UIImage()
+        return placeholder ?? UIImage(named: "placeholder_"+WYLanguage.chinese.rawValue, in: bannerBundle, compatibleWith: nil)!
     }
     
     // 滚动控件

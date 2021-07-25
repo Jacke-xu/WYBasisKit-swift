@@ -8,7 +8,7 @@
 
 import UIKit
 
-@objc protocol WYWaterfallParagraphLayoutDelegate {
+@objc public protocol WYWaterfallParagraphLayoutDelegate {
     
     /** item的高度 */
     @objc optional func waterfallsFlowLayout(_ waterfallsLayout: WYWaterfallParagraphLayout, heightForItemAt indexPath: IndexPath) -> CGFloat
@@ -38,12 +38,12 @@ import UIKit
     @objc optional func waterfallsFlowLayout(_ waterfallsLayout: WYWaterfallParagraphLayout, headerHoverIn section: Int) -> Bool
 }
 
-class WYWaterfallParagraphLayout: UICollectionViewFlowLayout {
+public class WYWaterfallParagraphLayout: UICollectionViewFlowLayout {
     
     /** delegate */
-    weak var delegate: WYWaterfallParagraphLayoutDelegate?
+    public weak var delegate: WYWaterfallParagraphLayoutDelegate?
     
-    init(delegate: WYWaterfallParagraphLayoutDelegate) {
+    public init(delegate: WYWaterfallParagraphLayoutDelegate) {
         super.init()
         self.delegate = delegate
     }
@@ -53,7 +53,7 @@ class WYWaterfallParagraphLayout: UICollectionViewFlowLayout {
     }
 }
 
-extension WYWaterfallParagraphLayout {
+public extension WYWaterfallParagraphLayout {
     
     override func prepare() {
         

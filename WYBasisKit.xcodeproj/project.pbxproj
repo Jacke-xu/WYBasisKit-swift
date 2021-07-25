@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		1F04CF5A25820501002B8B11 /* WYTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F04CF5925820501002B8B11 /* WYTestView.swift */; };
 		1F24689A25B13DB700E02F78 /* WYProtocolManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F24689925B13DB700E02F78 /* WYProtocolManager.swift */; };
-		1F2468A025B13DFB00E02F78 /* WYCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F24689E25B13DFB00E02F78 /* WYCollectionViewFlowLayout.swift */; };
+		1F2468A025B13DFB00E02F78 /* WYAlignmentFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F24689E25B13DFB00E02F78 /* WYAlignmentFlowLayout.swift */; };
 		1F2468A825B17B6C00E02F78 /* WYTestRichTextController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2468A725B17B6C00E02F78 /* WYTestRichTextController.swift */; };
 		1F2723302588869200E78AE0 /* WYTestBannerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F27232F2588869200E78AE0 /* WYTestBannerController.swift */; };
 		1F3CEEB325773CE200955712 /* Foundation+JSONLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F3CEEB225773CE200955712 /* Foundation+JSONLog.m */; };
@@ -72,7 +72,7 @@
 /* Begin PBXFileReference section */
 		1F04CF5925820501002B8B11 /* WYTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYTestView.swift; sourceTree = "<group>"; };
 		1F24689925B13DB700E02F78 /* WYProtocolManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYProtocolManager.swift; sourceTree = "<group>"; };
-		1F24689E25B13DFB00E02F78 /* WYCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
+		1F24689E25B13DFB00E02F78 /* WYAlignmentFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYAlignmentFlowLayout.swift; sourceTree = "<group>"; };
 		1F2468A725B17B6C00E02F78 /* WYTestRichTextController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYTestRichTextController.swift; sourceTree = "<group>"; };
 		1F27232F2588869200E78AE0 /* WYTestBannerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYTestBannerController.swift; sourceTree = "<group>"; };
 		1F3CEEB225773CE200955712 /* Foundation+JSONLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Foundation+JSONLog.m"; sourceTree = "<group>"; };
@@ -154,13 +154,12 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1F24689725B13D9D00E02F78 /* Optional */ = {
+		1F24689725B13D9D00E02F78 /* Other */ = {
 			isa = PBXGroup;
 			children = (
-				1F24689C25B13DEF00E02F78 /* UICollectionViewFlowLayout */,
 				1F24689825B13DB700E02F78 /* ProtocolManager */,
 			);
-			path = Optional;
+			path = Other;
 			sourceTree = "<group>";
 		};
 		1F24689825B13DB700E02F78 /* ProtocolManager */ = {
@@ -171,14 +170,14 @@
 			path = ProtocolManager;
 			sourceTree = "<group>";
 		};
-		1F24689C25B13DEF00E02F78 /* UICollectionViewFlowLayout */ = {
+		1F24689C25B13DEF00E02F78 /* FlowLayout */ = {
 			isa = PBXGroup;
 			children = (
-				1F24689E25B13DFB00E02F78 /* WYCollectionViewFlowLayout.swift */,
+				1F24689E25B13DFB00E02F78 /* WYAlignmentFlowLayout.swift */,
 				1F9717FD25B55CB600CA7A33 /* WYWaterfallsFlowLayout.swift */,
 				1FA6B68A25CD1B3400005170 /* WYWaterfallParagraphLayout.swift */,
 			);
-			path = UICollectionViewFlowLayout;
+			path = FlowLayout;
 			sourceTree = "<group>";
 		};
 		1F3CEEB125773CA500955712 /* CNLog */ = {
@@ -270,11 +269,12 @@
 			children = (
 				1F6AA1C325A6D56F00AADEE3 /* WYBasisKit.entitlements */,
 				AA771C0D25691241002C748B /* Config */,
+				AAE2E0F726AD7F740077B770 /* Localizable */,
 				AA771BF62568F91F002C748B /* Extension */,
 				AA771B922568F834002C748B /* Practical */,
 				AA771BB12568F834002C748B /* Layout */,
 				AA771BC02568F834002C748B /* Networking */,
-				1F24689725B13D9D00E02F78 /* Optional */,
+				1F24689725B13D9D00E02F78 /* Other */,
 			);
 			path = WYBasisKit;
 			sourceTree = "<group>";
@@ -407,6 +407,7 @@
 		AA771BB12568F834002C748B /* Layout */ = {
 			isa = PBXGroup;
 			children = (
+				1F24689C25B13DEF00E02F78 /* FlowLayout */,
 				1F9B22B9258747770099AC92 /* BannerView */,
 				1F99DCC6257DCECB003D2408 /* PagingView */,
 				AA771BC82568F834002C748B /* ScrollText */,
@@ -518,8 +519,6 @@
 			isa = PBXGroup;
 			children = (
 				AA327F022569179F00CF5CBE /* WYBasisKitConfig.swift */,
-				1F5C3E932578CD5400E0DBFF /* WYLocalizableManager.swift */,
-				AA771C1A25691433002C748B /* WYLocalizable.strings */,
 			);
 			path = Config;
 			sourceTree = "<group>";
@@ -559,6 +558,15 @@
 				AAE02B19267C61E000EF6D36 /* CALayer.swift */,
 			);
 			path = CALayer;
+			sourceTree = "<group>";
+		};
+		AAE2E0F726AD7F740077B770 /* Localizable */ = {
+			isa = PBXGroup;
+			children = (
+				1F5C3E932578CD5400E0DBFF /* WYLocalizableManager.swift */,
+				AA771C1A25691433002C748B /* WYLocalizable.strings */,
+			);
+			path = Localizable;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -698,7 +706,7 @@
 				1F5C3E612578B61B00E0DBFF /* UIApplication.swift in Sources */,
 				1F2723302588869200E78AE0 /* WYTestBannerController.swift in Sources */,
 				AA771BE32568F834002C748B /* UITableView.swift in Sources */,
-				1F2468A025B13DFB00E02F78 /* WYCollectionViewFlowLayout.swift in Sources */,
+				1F2468A025B13DFB00E02F78 /* WYAlignmentFlowLayout.swift in Sources */,
 				AA771BDA2568F834002C748B /* NumberFormatter.swift in Sources */,
 				AAC6B39126916E9F00D90D15 /* WYTableViewGroupedController.swift in Sources */,
 				1F3CEEB325773CE200955712 /* Foundation+JSONLog.m in Sources */,

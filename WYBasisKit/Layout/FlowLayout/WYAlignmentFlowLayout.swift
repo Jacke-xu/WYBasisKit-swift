@@ -1,5 +1,5 @@
 //
-//  WYCollectionAlignmentFlowLayout.swift
+//  WYAlignmentFlowLayout.swift
 //  WYBasisKit
 //
 //  Created by Jacke·xu on 2021/1/14.
@@ -9,7 +9,7 @@
 import UIKit
 
 /// UICollectionFlowLayoutAlignment
-enum WYFlowLayoutAlignment {
+public enum WYFlowLayoutAlignment {
     
     /// 左对齐
     case left
@@ -21,30 +21,30 @@ enum WYFlowLayoutAlignment {
     case right
 }
 
-@objc protocol WYCollectionAlignmentFlowLayoutDelegate {
+@objc public protocol WYAlignmentFlowLayoutDelegate {
     
     /** cell换行事件 */
-    @objc optional func alignmentFlowLayout(_ flowLayout: WYCollectionAlignmentFlowLayout, numberOfLines: Int)
+    @objc optional func alignmentFlowLayout(_ flowLayout: WYAlignmentFlowLayout, numberOfLines: Int)
 }
 
-class WYCollectionAlignmentFlowLayout: UICollectionViewFlowLayout {
+public class WYAlignmentFlowLayout: UICollectionViewFlowLayout {
 
     /// cell对齐方式
-    var wy_layoutAlignment: WYFlowLayoutAlignment = .center
+    public var wy_layoutAlignment: WYFlowLayoutAlignment = .center
     
     /** delegate */
-    weak var delegate: WYCollectionAlignmentFlowLayoutDelegate?
+    public weak var delegate: WYAlignmentFlowLayoutDelegate?
     
     /// 在居中对齐的时候需要知道这行所有cell的宽度总和
     private(set) var wy_cellTotalWidth: CGFloat = 0.0
     
-    convenience init(_ layoutAlignment: WYFlowLayoutAlignment, delegate: WYCollectionAlignmentFlowLayoutDelegate? = nil){
+    public convenience init(_ layoutAlignment: WYFlowLayoutAlignment, delegate: WYAlignmentFlowLayoutDelegate? = nil){
         self.init()
         wy_layoutAlignment = layoutAlignment
         self.delegate = delegate
     }
     
-    override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+    public override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         
         let layoutAttributes_super : [UICollectionViewLayoutAttributes] = super.layoutAttributesForElements(in: rect) ?? [UICollectionViewLayoutAttributes]()
         let layoutAttributes:[UICollectionViewLayoutAttributes] = NSArray(array: layoutAttributes_super, copyItems:true)as! [UICollectionViewLayoutAttributes]

@@ -20,15 +20,12 @@ public enum WYDisplaMode {
 }
 
 /// 拦截返回按钮的点击和侧滑返回事件
-@objc protocol ViewControllerHandlerProtocol {
-    
+@objc public protocol ViewControllerHandlerProtocol {
     @objc optional func wy_navigationBarWillReturn() -> Bool
 }
 
 extension UIViewController: ViewControllerHandlerProtocol {
-
     open func wy_navigationBarWillReturn() -> Bool {
-
         return true
     }
 }

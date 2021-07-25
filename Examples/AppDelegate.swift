@@ -18,7 +18,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // 屏蔽控制台约束输出
         UserDefaults.standard.setValue(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")
-        wy_print(WYLocalizedString("知道了") + "  这里是测试当前是中文还是英文环境")
+        
+        wy_print("currentLanguage = \(WYLocalizableManager.shared.currentLanguage()), code = \(WYLocalizableManager.shared.currentLanguage().rawValue)")
+        
         return true
     }
     
@@ -38,3 +40,4 @@ extension AppDelegate {
         return UIApplication.shared.delegate as! AppDelegate
     }
 }
+
