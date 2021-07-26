@@ -629,3 +629,4 @@ private class WYBannerCell: UICollectionViewCell {
         describeView.text = describe
     }
 }
+
