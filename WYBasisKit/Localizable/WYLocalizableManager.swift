@@ -12,13 +12,16 @@
 
 import UIKit
 
-/// 国际化语言版本(目前只国际化了中文及英文，其他的可以调用WYBasisKitConfig.localizableTable属性来设置需要加载的本地化语言读取表)
+/// 国际化语言版本(目前只国际化了中文及英文，其他的可以调用WYBasisKitConfig.localizableTable属性来设置需要加载的自定义本地化语言读取表)
 public enum WYLanguage: RawRepresentable {
 
+    /// 简体中文
     case chinese
     
+    /// 英文
     case english
     
+    /// 其他语言(具体查看other.rawValue)
     case other
     
     public typealias RawValue = String
