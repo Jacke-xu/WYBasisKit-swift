@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // 屏蔽控制台约束输出
         UserDefaults.standard.setValue(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")
         
-        wy_print("currentLanguage = \(WYLocalizableManager.shared.currentLanguage()), code = \(WYLocalizableManager.shared.currentLanguage().rawValue)")
+        wy_print("currentLanguage = \(WYLocalizableManager.currentLanguage()), code = \(WYLocalizableManager.currentLanguage().rawValue)")
         
         return true
     }
@@ -36,7 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate {
     
     class func shared() -> AppDelegate {
-        
+
         return UIApplication.shared.delegate as! AppDelegate
     }
 }

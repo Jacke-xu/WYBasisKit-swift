@@ -6,8 +6,6 @@
 //  Copyright © 2021 Jacke·xu. All rights reserved.
 //
 import UIKit
-import Kingfisher
-import SnapKit
 
 /// 图片切换效果
 public enum WYBannerSwitchMode {
@@ -35,10 +33,10 @@ public enum WYPageControlPosition {
 @objc public protocol WYBannerViewDelegate {
     
     /// 监控banner点击事件
-    @objc optional func itemDidClick(_ bannerView: WYBannerView, _ bannerIndex: NSInteger)
+    @objc optional func didClick(_ bannerView: WYBannerView, _ index: NSInteger)
     
     /// 监控banner的轮播事件
-    @objc optional func itemDidScroll(_ bannerView: WYBannerView, _ bannerOffset: CGPoint, _ bannerIndex: NSInteger)
+    @objc optional func didScroll(_ bannerView: WYBannerView, _ offset: CGPoint, _ index: NSInteger)
 }
 
 public class WYBannerView: UIView {
@@ -46,31 +44,157 @@ public class WYBannerView: UIView {
     /// 点击或滚动事件代理(也可以通过传入block监听)
     public weak var delegate: WYBannerViewDelegate?
     
-    /**
-     * 监控banner点击事件(也可以通过实现代理监听)
-     *
-     * @param handler 点击事件的block
-     */
-    public func itemDidClick(handler: @escaping ((_ bannerIndex: NSInteger) -> Void)) {
-         clickHandler = handler
-    }
+    /// 设置Banner切换模式，默认为scroll
+    public var switchMode: WYBannerSwitchMode = .scroll
+    
+    /// 图片显示模式
+    public var imageContentMode: UIView.ContentMode = .scaleAspectFit
+    
+    /// banner控件背景色
+    public var bannerBackgroundColor: UIColor = .clear
+    
+    /// 描述控件占位文本
+    public var placeholderDescribe: String = ""
+    
+    /// 占位图
+    public var placeholderImage: UIImage = WYBannerView.sharedPlaceholderImage()
     
     /**
-     * 监控banner的轮播事件(也可以通过实现代理监听)
-     *
-     * @param handler 轮播事件的block
-     */
-    public func itemDidScroll(handler: @escaping ((_ bannerOffset: CGPoint, _ bannerIndex: NSInteger) -> Void)) {
-        
-        scrollHandler = handler
-    }
-    
-    /**
-     *  设置分页控件位置，默认为底部往上5像素且居中
+     *  设置分页控件位置，默认为bottomCenter
      *  只有一张图片时，pageControl隐藏
-     *  第一次reload前设置有效
      */
-    public var pageControlPosition: CGPoint = CGPoint(x: (wy_screenWidth / 2), y: -wy_screenWidth(5))
+    public var pageControlPosition: WYPageControlPosition = .bottomCenter
+    
+    /**
+     *  设置分页控件距离滚动控件底部间距，默认wy_screenWidth(5)
+     *  只有一张图片时，pageControl隐藏
+     */
+    public var margin_bottom_pageControl: CGFloat = wy_screenWidth(5)
+    
+    /**
+     *  每一页停留时间，默认为3s，最少1s
+     *  当设置的值小于1s时，则为默认值
+     */
+    public var timeInterval: TimeInterval = 3 {
+        
+        didSet {
+            
+            guard timeInterval != oldValue else {
+                return
+            }
+            
+            if timeInterval < 1 {
+                
+                timeInterval = 1
+            }
+        }
+    }
+    
+    /**
+     *  是否需要自动轮播，默认开启
+     *  当设置false时，会关闭定时器
+     *  当设置true时，unlimitedCarousel会强制设置为True
+     */
+    public var autoCarousel: Bool = true {
+        
+        didSet {
+            
+            if oldValue != autoCarousel {
+                
+                if autoCarousel == true {
+                    unlimitedCarousel = true
+                }
+                updateContentSize()
+            }
+        }
+    }
+    
+    /**
+     *  是否需要无限轮播，默认开启
+     *  当设置false时，会强制设置autoCarousel为false
+     */
+    public var unlimitedCarousel: Bool = true {
+        
+        didSet {
+            
+            if oldValue != unlimitedCarousel {
+                
+                if unlimitedCarousel == false {
+                    autoCarousel = false
+                }
+                updateContentSize()
+            }
+        }
+    }
+    
+    /**
+     *  文本描述控件高度
+     */
+    public var describeLabelHeight: CGFloat = wy_screenWidth(20)
+    
+    /**
+     *  文本描述控件和滚动控件的垂直间距
+     */
+    public var margin_vertical_describe: CGFloat = wy_screenWidth(5)
+    
+    /**
+     *  文本描述控件距离滚动控件的左间距
+     */
+    public var margin_horizontal_describe: CGFloat = wy_screenWidth(10)
+    
+    /**
+     *  设置要显示的图片数组和描述文本数组
+     *
+     *  @param images 轮播的图片数组，只能是UIImage或者网络url(String类型)
+     *
+     *  @param describes 描述图片的字符串数组，应与图片顺序对应，为空时描述控件自动隐藏
+     *
+     */
+    public func show(_ images: [Any] = [], _ describes: [String] = []) {
+        
+        DispatchQueue.main.async {
+            
+            self.superview?.layoutIfNeeded()
+            
+            self.imageArray.removeAll()
+            self.describeArray.removeAll()
+            
+            self.describeLabel.isHidden = ((describes.isEmpty && self.placeholderDescribe.isEmpty) || (images.isEmpty)) ? true : false
+            
+            if images.isEmpty {
+                self.imageArray.append(self.placeholderImage)
+                self.describeArray.append(self.placeholderDescribe)
+            }else {
+            
+                for objectIndex in 0..<images.count {
+                    if images[objectIndex] is UIImage {
+                        self.imageArray.append(images[objectIndex] as? UIImage ?? self.placeholderImage)
+                    }
+                    if images[objectIndex] is String {
+                        // 如果是网络图片，则先添加占位图片，下载完成后替换
+                        self.imageArray.append(self.placeholderImage)
+                        self.downloadImage(imageIndex:objectIndex)
+                    }
+                    
+                    self.describeArray.append((objectIndex < self.describeArray.count) ? describes[objectIndex] : self.placeholderDescribe)
+                }
+            }
+            self.reload()
+        }
+    }
+    
+    /// 图片描述控件，默认在底部
+    public lazy var describeLabel: UILabel = {
+        
+        let label = UILabel()
+        label.backgroundColor = UIColor.white.withAlphaComponent(0.5)
+        label.textColor = .white
+        label.font = .systemFont(ofSize: wy_fontSize(15))
+        label.textAlignment = .center
+        addSubview(label)
+        
+        return label
+    }()
     
     /**
      *  设置分页控件指示器的图片
@@ -81,8 +205,6 @@ public class WYBannerView: UIView {
      *  @param currentImage    当前页码的图片
      */
     public func pageControlUpdate(defaultImage: UIImage, currentImage: UIImage) {
-        
-        pageControlSize = defaultImage.size
         pageControl.setValue(currentImage, forKey: "_currentPageImage")
         pageControl.setValue(defaultImage, forKey: "_pageImage")
     }
@@ -95,357 +217,291 @@ public class WYBannerView: UIView {
      *  @param currentColor    当前页码的颜色
      */
     public func pageControlUpdate(defaultColor: UIColor, currentColor: UIColor) {
-        
         pageControl.pageIndicatorTintColor = defaultColor
         pageControl.currentPageIndicatorTintColor = currentColor
     }
     
-    /// 设置图片的切换模式
-    public var switchModel: WYBannerSwitchMode = .scroll
-    
-    /// 图片显示模式(第一次reload前设置有效)
-    public var imageContentMode: UIView.ContentMode = .scaleAspectFit
-    
-    /**
-     *  每一页停留时间，默认为3s，最少1s
-     *  当设置的值小于1s时，则为默认值
-     */
-    public var standingTime: TimeInterval = 3
-    
-    /**
-     *  是否需要自动轮播，默认开启
-     *  当设置false时，会关闭定时器
-     *  当设置true时，unlimitedCarousel会强制设置为True
-     */
-    public var automaticCarousel: Bool {
-
-        set {
-            if ((_automaticCarousel == true) && (newValue == false) && (imageArray.count > 3) && (pageControl.numberOfPages < imageArray.count)) {
-
-                imageArray.removeFirst()
-                imageArray.removeLast()
-
-                describeArray.removeFirst()
-                describeArray.removeLast()
-                
-                stopTimer()
-                collectionView.reloadData()
-            }
-            _automaticCarousel = newValue
-            if newValue == false {
-                stopTimer()
-            }else {
-                unlimitedCarousel = newValue
-                reload(images: imageArray, describes: describeArray)
-            }
-        }
-        get {
-            return _automaticCarousel
-        }
-    }
-
-    /**
-     *  是否需要无限轮播，默认开启
-     *  当设置false时，会强制设置automaticCarousel为false
-     */
-    public var unlimitedCarousel: Bool {
-    
-        set {
-            if ((_unlimitedCarousel == true) && (newValue == false) && (imageArray.count > 3) && (pageControl.numberOfPages < imageArray.count)) {
-
-                imageArray.removeFirst()
-                imageArray.removeLast()
-
-                describeArray.removeFirst()
-                describeArray.removeLast()
-                
-                stopTimer()
-                collectionView.reloadData()
-            }
-            _unlimitedCarousel = newValue
-            if newValue == false {
-                stopTimer()
-                automaticCarousel = newValue
-            }else {
-                reload(images: imageArray, describes: describeArray)
-            }
-        }
-        get {
-            return _unlimitedCarousel
-        }
-    }
-    
-    /// banner图背景色(第一次reload前设置有效)
-    public var bannerBackgroundColor: UIColor = .clear
-    
-    /// 描述文本控件frame, 默认底部居中(第一次reload前设置有效)
-    public var describeViewFrame: CGRect = .zero
-    
-    /// 描述文本内容位置(第一次reload前设置有效)
-    public var describeTextAlignment: NSTextAlignment = .center
-    
-    /// 描述文本颜色(第一次reload前设置有效)
-    public var describeTextColor: UIColor = .black
-    
-    /// 描述文本背景色(第一次reload前设置有效)
-    public var describeBackgroundColor: UIColor = .clear
-    
-    /// 描述文本字体(第一次reload前设置有效)
-    public var describeTextFont: UIFont = .systemFont(ofSize: wy_fontSize(12))
-    
-    /// 描述占位文本(第一次reload前设置有效)
-    public var placeholderDescribe: String?
-    
-    /// 占位图
-    public var placeholderImage: UIImage = WYBannerView.getPlaceholderImage()
-    
-    /**
-     *  刷新/显示轮播图
-     *
-     *  @param images    轮播图片数组(可以是UIImage，也可以是图片网络路径)，如果不传的话会去调用imageArray后刷新
-     */
-    public func reload(images: [Any] = [], describes: [String] = []) {
-        
-        DispatchQueue.main.async {
-            
-            self.superview?.layoutIfNeeded()
-            
-            self.imageArray.removeAll()
-            self.describeArray.removeAll()
-            
-            if images.isEmpty == true {
-                self.imageArray.append(self.placeholderImage as Any)
-            }else {
-                if ((images.count > 1) && (self.unlimitedCarousel == true)) {
-                    self.imageArray.append(images.last as Any)
-                    self.imageArray.append(contentsOf: images)
-                    self.imageArray.append(images.first as Any)
-                    self.pageControl.numberOfPages = self.imageArray.count - 2
-                }else {
-                    self.imageArray = images
-                    self.pageControl.numberOfPages = images.count
-                }
-            }
-            if describes.isEmpty == true {
-                self.describeArray.append(self.placeholderDescribe ?? " ")
-            }else {
-                if ((describes.count > 1) && (self.unlimitedCarousel == true)) {
-                    self.describeArray.append(describes.last ?? self.placeholderDescribe ?? " ")
-                    self.describeArray.append(contentsOf: describes)
-                    self.describeArray.append((describes.first ?? self.placeholderDescribe) ?? " ")
-                }else {
-                    self.describeArray = describes
-                }
-            }
-            
-            if (self.pageControl.numberOfPages != self.imageArray.count) {
-                
-                self.collectionView.reloadData()
-                self.collectionView.performBatchUpdates {
-                    
-                    self.showSwitchAnimation(indexPath: IndexPath(item: self.currentIndex, section: 0), animation: false)
-                    
-                    self.pageControl.isHidden = false
-                    self.pageControl.currentPage = (self.currentIndex - 1)
-                    if (self.automaticCarousel == true) {
-                        if self.timer == nil {
-                            self.startTimer()
-                        }
-                    }else {
-                        self.stopTimer()
-                    }
-                }
-
-            }else {
-                self.stopTimer()
-                self.collectionView.reloadData()
-                self.pageControl.isHidden = (images.count <= 1)
-                if images.count > 1 {
-                    if self.pageControl.numberOfPages <= 0 {
-                        self.pageControl.currentPage = 0
-                    }else {
-                        self.pageControl.currentPage = (self.currentIndex > (images.count - 1)) ? 0 : self.currentIndex
-                    }
-                }
-            }
-            self.collectionView.bounces = (self.pageControl.numberOfPages != self.imageArray.count)
-            self.bringSubviewToFront(self.pageControl)
-        }
-    }
-    
     /**
      *  开启定时器
-     *  默认开启，调用该方法会重新开启
+     *  默认已开启，调用该方法会重新开启
      */
     public func startTimer() {
         
-        // 如果定时器已开启，先停止再根据条件重新开启
-        if (timer != nil) {
-            stopTimer()
-        }
-        // 判断是否需要开启定时器
-        if ((imageArray.count <= 1) || (unlimitedCarousel == false) || (automaticCarousel == false) || (pageControl.numberOfPages == imageArray.count)) { return }
-        
-        timer = Timer.scheduledTimer(timeInterval: (standingTime < 1) ? 3 : standingTime, target: self, selector: #selector(nextPage), userInfo: nil, repeats: true)
-        
-        userTiming = true
+        // 如果只有一张图片，或者自动轮播、无限轮播是关闭状态，则直接返回，不开启定时器
+//        guard (imageArray.count > 1) && (autoCarousel == true) && (unlimitedCarousel == true) else {
+//            return
+//        }
+//
+//        // 如果定时器已开启，先停止再重新开启
+//        if timer != nil {
+//            stopTimer()
+//        }
+//
+//        timer = Timer.scheduledTimer(withTimeInterval: timeInterval, repeats: true, block:{ [weak self] (timer: Timer) -> Void in
+//            self?.switchImage()
+//        })
+//        // 把定时器加入到RunLoop里面，保证持续运行，不被表视图滑动事件这些打断
+//        RunLoop.current.add(timer!, forMode: .common)
+//
+//        useTimer = true
+//        autoCarousel = true
+//        unlimitedCarousel = true
     }
-
+    
     /**
      *  停止定时器
-     *  滚动视图将不再自动轮播
+     *  停止后，如果手动滚动图片，定时器会检查滚动前的定时器状态，判断是否需要重启定时器
      */
     public func stopTimer() {
         
         timer?.invalidate()
         timer = nil
+        useTimer = false
+        
+        autoCarousel = false
     }
     
     /**
-     *  是否需要自动轮播，默认开启
+     * 监控banner点击事件(也可以通过实现代理监听)
+     *
+     * @param handler 点击事件的block
      */
-    private var _automaticCarousel: Bool = true
+    public func didClick(handler: @escaping ((_ index: NSInteger) -> Void)) {
+         clickHandler = handler
+    }
+    
     /**
-     *  是否需要无限轮播，默认开启
+     * 监控banner的轮播事件(也可以通过实现代理监听)
+     *
+     * @param handler 轮播事件的block
      */
-    private var _unlimitedCarousel: Bool = true
-    /**
-     *  设置分页控件位置，默认为底部往上5像素且居中
-     *  只有一张图片时，pageControl隐藏
-     */
-    private var _pageControlPosition: CGPoint = .zero
-    /// 轮播图片数组(可以是UIImage或图片网络路径，也可以是本地图片的图片名)
-    private var imageArray: [Any] = []
-    /// 描述文本数组
-    private var describeArray: [String] = []
-    // 当前显示图片的索引
-    private var currentIndex: NSInteger = 1
-    // pageControl图片大小
-    private var pageControlSize: CGSize?
-    // 定时器startTimer
-    private var timer: Timer?
-    // 判断手动拖拽后是否需要启动定时器
-    private var userTiming: Bool = false
+    public func didScroll(handler: @escaping ((_ offset: CGPoint, _ index: NSInteger) -> Void)) {
+        scrollHandler = handler
+    }
+    
     // block点击事件
-    private var clickHandler: ((_ bannerIndex: NSInteger) -> Void)?
+    private var clickHandler: ((_ index: NSInteger) -> Void)?
     // block轮播事件
-    private var scrollHandler: ((_ bannerOffset: CGPoint, _ bannerIndex: NSInteger) -> Void)?
-
-    // 分页控件
-    private lazy var pageControl: UIPageControl = {
-        
-        let pagecontrol = UIPageControl()
-        pagecontrol.isUserInteractionEnabled = false
-        addSubview(pagecontrol)
-        pagecontrol.snp.makeConstraints { (make) in
-            
-            if pageControlPosition.equalTo(CGPoint(x: (wy_screenWidth / 2), y: -wy_screenWidth(5))) {
-                make.centerX.equalToSuperview()
-                make.bottom.equalToSuperview().offset(pageControlPosition.y)
-            }else {
-                make.left.equalTo(pageControlPosition.x)
-                make.top.equalTo(pageControlPosition.y)
-            }
-            make.width.lessThanOrEqualToSuperview()
-        }
-        return pagecontrol
-    }()
-    
-    // 使用UICollectionView实现轮播
-    private lazy var collectionView: UICollectionView = {
-
-        let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.scrollDirection = .horizontal
-        flowLayout.minimumLineSpacing = 0
-        flowLayout.itemSize = CGSize(width: bounds.size.width, height: bounds.size.height)
-        
-        let collectionview = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
-        collectionview.showsVerticalScrollIndicator = false
-        collectionview.showsHorizontalScrollIndicator = false
-        collectionview.alwaysBounceHorizontal = true
-        collectionview.isPagingEnabled = true
-        collectionview.delegate = self
-        collectionview.dataSource = self
-        collectionview.backgroundColor = bannerBackgroundColor
-        collectionview.register(WYBannerCell.self, forCellWithReuseIdentifier: "WYBannerCell")
-        addSubview(collectionview)
-        collectionview.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
-        }
-        
-        return collectionview
-    }()
-    
-    public init() {
-        super.init(frame: .zero)
-    }
-    
-    private class func getPlaceholderImage() -> UIImage {
+    private var scrollHandler: ((_ offset: CGPoint, _ index: NSInteger) -> Void)?
+    // 获取本地占位图
+    private class func sharedPlaceholderImage() -> UIImage {
         
         let bundlePath = Bundle(for: WYBannerView.self).resourcePath! + "/WYBannerView.bundle"
         let bannerBundle = Bundle(path: bundlePath)
-        let placeholder = UIImage(named: "placeholder_"+WYLocalizableManager.shared.currentLanguage().rawValue, in: bannerBundle, compatibleWith: nil)
+        let placeholder = UIImage(named: "placeholder_"+WYLocalizableManager.currentLanguage().rawValue, in: bannerBundle, compatibleWith: nil)
         return placeholder ?? UIImage(named: "placeholder_"+WYLanguage.chinese.rawValue, in: bannerBundle, compatibleWith: nil)!
     }
     
-    @objc private func nextPage() {
+    // 滚动控件
+    private lazy var scrollView: UIScrollView = {
         
-        guard self.superview != nil else {
-            stopTimer()
+        let scrollView = UIScrollView(frame: CGRect(x: 0, y: 0, width: wy_width, height: wy_height))
+        scrollView.isPagingEnabled = true
+        scrollView.bounces = false
+        scrollView.showsVerticalScrollIndicator = false
+        scrollView.showsVerticalScrollIndicator = false
+        scrollView.delegate = self
+        
+        // 添加手势，监听图片的点击事件
+        scrollView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didClickImage)))
+        
+        otherImageView.contentMode = imageContentMode
+        otherImageView.wy_size = CGSize(width: wy_width, height: wy_height)
+        scrollView.addSubview(otherImageView)
+        
+        currentImageView.contentMode = imageContentMode
+        currentImageView.wy_size = CGSize(width: wy_width, height: wy_height)
+        scrollView.addSubview(currentImageView)
+        
+        useTimer = true
+        
+        otherImageView.backgroundColor = .orange
+        currentImageView.backgroundColor = .purple
+        
+        addSubview(scrollView)
+        
+        return scrollView
+    }()
+    
+    // 分页控件
+    private lazy var pageControl: UIPageControl = {
+        
+        let pageControl = UIPageControl()
+        pageControl.isUserInteractionEnabled = false
+        addSubview(pageControl)
+        
+        switch pageControlPosition {
+        case .bottomLeft:
+            break
+        case .bottomCenter:
+            
+            break
+        case .bottomRight:
+            
+            break
+        case .hide:
+            break
+        }
+        
+        return pageControl
+    }()
+    
+    // 当前正在显示的imageView
+    private let currentImageView = UIImageView()
+    
+    // 轮播显示的imageView
+    private let otherImageView = UIImageView()
+    
+    // 当前显示图片的索引
+    private var currentIndex: NSInteger = 0
+    
+    // 定时器
+    private var timer: Timer?
+    
+    // 判断手动拖拽后是否需要启动定时器
+    private var useTimer: Bool = false
+    
+    /// 轮播的图片数组
+    private var imageArray: [UIImage] = []
+    /// 描述文本数组
+    private var describeArray: [String] = []
+    
+    @objc private func didClickImage() {
+        
+    }
+    
+    private func switchImage(first: Bool = false) {
+        
+        let nextIndex: NSInteger = first ? currentIndex : ((currentIndex == (imageArray.count - 1)) ? 0 : (currentIndex + 1))
+        
+        wy_print("currentIndex = \(currentIndex), nextIndex = \(nextIndex)")
+        
+        if first {
+            
+            if imageArray.count > 1 {
+                
+                currentImageView.wy_origin = CGPoint(x: (unlimitedCarousel == true) ? wy_width : 0, y: 0)
+                otherImageView.wy_origin = CGPoint(x: (unlimitedCarousel == true) ? wy_width : 0, y: 0)
+                scrollView.contentOffset = currentImageView.wy_origin
+                
+            }else {
+                currentImageView.wy_origin = CGPoint.zero
+                otherImageView.wy_origin = CGPoint.zero
+            }
+            currentImageView.image = imageArray[currentIndex]
+
+            describeLabel.text = describeArray[currentIndex]
+            
             return
         }
-        currentIndex += 1
-        if currentIndex == 1 {
-            currentIndex = (imageArray.count - 1)
-        }
-        if currentIndex >= imageArray.count {
-            currentIndex = 2
-        }
-        if currentIndex < imageArray.count {
-            showSwitchAnimation(indexPath: IndexPath(item: currentIndex, section: 0), animation: true)
-            if currentIndex == (imageArray.count - 1) {
-                self.perform(#selector(changeCurrentIndex), with: nil, afterDelay: 1)
-            }
-        }
-    }
-    
-    @objc private func changeCurrentIndex() {
-        currentIndex = 1
-    }
-    
-    @objc private func setUnlimitedCarousel() {
         
-        let offsetx = collectionView.contentOffset.x
-        let currentPage = offsetx / collectionView.frame.size.width
-        if pageControl.numberOfPages != imageArray.count {
-            // 左滑
-            if offsetx <= 0 {
-                let indexPath = IndexPath(item: imageArray.count - 2, section: 0)
-                showSwitchAnimation(indexPath: indexPath, animation: false)
+        switch switchMode {
+        case .scroll:
+            // 滚动切换模式直接修改偏移量就行
+            otherImageView.wy_origin = CGPoint(x: wy_width * ((unlimitedCarousel == true) ? 2 : 1), y: 0)
+            scrollView.setContentOffset(otherImageView.wy_origin, animated: true)
+            break
+        case .fade:
+            // 淡入淡出模式，不需要修改scrollview偏移量，改变两张图片的透明度即可
+            otherImageView.image = imageArray[nextIndex]
+            UIView.animate(withDuration: 1.2) {
+                self.currentImageView.alpha = 0.0
+                self.otherImageView.alpha = 1.0
+                self.pageControl.currentPage = nextIndex
+            } completion: { _ in
+                self.switchDisplay()
             }
-            // 右滑
-            if (offsetx >= (collectionView.bounds.size.width * CGFloat((imageArray.count - 1)))) {
-                let indexPath = IndexPath(item: 1, section: 0)
-                showSwitchAnimation(indexPath: indexPath, animation: false)
-            }
-            if currentPage == 0 {
-                pageControl.currentPage = (pageControl.numberOfPages - 1)
-            }else if (currentPage == CGFloat((imageArray.count - 1))) {
-                pageControl.currentPage = 0
-            }else {
-                pageControl.currentPage = Int((currentPage - 1))
-            }
-        }else {
-            collectionView.alwaysBounceHorizontal = false
-            pageControl.currentPage = Int(currentPage)
+            break
         }
-        currentIndex = NSInteger(currentPage)
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    private func switchDisplay() {
+        
+        guard currentImageView.image == otherImageView.image else {
+            return
+        }
+        
+        switch switchMode {
+        case .fade:
+            currentImageView.alpha = 1.0
+            otherImageView.alpha = 0.0
+            break
+        default :
+            break
+        }
+        
+        // 切换到下一张图片
+        currentImageView.image = otherImageView.image
+        
+        currentIndex = (currentIndex == (imageArray.count - 1)) ? 0 : (currentIndex + 1)
+        scrollView.contentOffset = CGPoint(x: wy_width, y: 0)
 
+        pageControl.currentPage = currentIndex
+        
+        describeLabel.text = describeArray[currentIndex]
+    }
+    
+    // 当图片滚动过半时就修改当前页码
+    private func updatePageControlCurrentPage(_ offset: CGFloat) {
+        
+        if ((offset - (wy_width * CGFloat(pageControl.currentPage + 1))) > (wy_width * 0.5) && (unlimitedCarousel == true) && (currentIndex != (pageControl.numberOfPages - 1))) {
+            pageControl.currentPage = (pageControl.currentPage + 1) > (pageControl.numberOfPages - 1) ? 0 : (pageControl.currentPage + 1)
+        }else if (((wy_width * CGFloat(pageControl.currentPage - 1)) - offset)  > (wy_width * 0.5)) && (unlimitedCarousel == true) && (currentIndex != 0) {
+            
+            pageControl.currentPage = (pageControl.currentPage - 1) < 0 ? (pageControl.numberOfPages - 1) : (pageControl.currentPage - 1)
+        }else {
+            pageControl.currentPage = currentIndex
+        }
+    }
+    
+    private func updateContentSize() {
+
+        // 需要的contentSize
+        let needContentSize = (autoCarousel == true || unlimitedCarousel == true) ? CGSize(width: wy_width * 3, height: wy_height) : CGSize(width: wy_width * CGFloat(imageArray.count > 3 ? 3 : imageArray.count), height: wy_height)
+        
+        // 排除相等的情况
+        guard scrollView.contentSize.equalTo(needContentSize) == false else {
+            return
+        }
+        
+        // 更新需要的contentSize
+        scrollView.contentSize = needContentSize
+    }
+    
+    private func reload() {
+        
+        if currentIndex > (imageArray.count - 1) {
+            currentIndex = 0
+        }
+        autoCarousel = ((imageArray.count > 1) && (autoCarousel == true)) ? true : false
+
+        unlimitedCarousel = ((imageArray.count > 1) && (unlimitedCarousel == true)) ? true : false
+        
+        updateContentSize()
+
+        if autoCarousel == true && unlimitedCarousel == true && imageArray.count > 1 {
+            startTimer()
+        }else {
+            stopTimer()
+        }
+        switchImage(first: currentIndex == 0)
+        pageControl.numberOfPages = imageArray.count
+    }
+    
+    private func downloadImage(imageIndex: Int) {
+        
+    }
+    
+    private func clearDiskCache() {
+        
+    }
+    
+    deinit {
+        wy_print("WYBannerView 准备释放")
+        stopTimer()
+        wy_print("WYBannerView 已经释放")
+    }
+    
     /*
     // Only override draw() if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
@@ -456,177 +512,75 @@ public class WYBannerView: UIView {
 
 }
 
-extension WYBannerView: UICollectionViewDelegate, UICollectionViewDataSource {
+extension WYBannerView: UIScrollViewDelegate {
     
-    public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
-        return imageArray.count
-    }
-    
-    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        let cell: WYBannerCell = collectionView.dequeueReusableCell(withReuseIdentifier: "WYBannerCell", for: indexPath) as! WYBannerCell
-        
-        cell.bannerBackgroundColor = bannerBackgroundColor
-        cell.describeTextColor = describeTextColor
-        cell.describeBackgroundColor = describeBackgroundColor
-        cell.describeTextFont = describeTextFont
-        cell.describeTextAlignment = describeTextAlignment
-        cell.describeViewFrame = describeViewFrame
-        cell.placeholderImage = placeholderImage
-        cell.imageContentMode = imageContentMode
-
-        cell.reload(image: imageArray[indexPath.item], describe: (indexPath.item < describeArray.count) ? describeArray[indexPath.item] : (placeholderDescribe ?? ""))
-        
-        return cell
-    }
-    
-    public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        guard !((imageArray.count == 1) && (imageArray.first is UIImage) && ((imageArray.first as! UIImage) == placeholderImage)) else {
-            return
-        }
-        
-        let index = (imageArray.count == pageControl.numberOfPages) ? indexPath.item : ((imageArray.count > 1 ) ? (indexPath.item - 1) : indexPath.item)
-
-        delegate?.itemDidClick?(self, index)
-        
-        if clickHandler != nil {
-            
-            clickHandler!(index)
-        }
-    }
-    
-    // 开始拖动时停止定时器
-    public func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        stopTimer()
-    }
-    
-    // 实现无限轮播
     public func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
-        // 支持无限轮播
-        setUnlimitedCarousel()
-        
-        guard !((imageArray.count == 1) && (imageArray.first is UIImage) && ((imageArray.first as! UIImage) == placeholderImage)) else {
+        guard scrollView.contentSize.equalTo(.zero) == false else {
             return
         }
-
-        let contentOffset = CGPoint(x: scrollView.contentOffset.x - ((pageControl.numberOfPages != imageArray.count) ? collectionView.frame.size.width : 0.0), y: 0)
-
-        // 判断只有滚动到准确下标后才返回代理或block
-        if (contentOffset.x.truncatingRemainder(dividingBy: collectionView.frame.size.width) == 0) {
-            if ((imageArray.count != pageControl.numberOfPages) && ((currentIndex == (imageArray.count - 1) || (currentIndex == 0)))) {
-                return
-            }
-            let bannerIndex = NSInteger(contentOffset.x / collectionView.frame.size.width)
-            if scrollHandler != nil {
-                scrollHandler!(contentOffset, bannerIndex)
-            }
-            delegate?.itemDidScroll?(self, contentOffset, bannerIndex)
-        }
-    }
-    
-    // 根据不同的显示模式提供切换动画
-    func showSwitchAnimation(indexPath: IndexPath, animation: Bool) {
         
-        switch switchModel {
-        case .scroll:
-            collectionView.scrollToItem(at: indexPath, at: ((animation == false) ? .init() : .left), animated: animation)
-            break
-        case .fade:
-            if (indexPath.row == (imageArray.count == pageControl.numberOfPages ? 0 : 1)) {
-                self.collectionView.performBatchUpdates {
-                    self.collectionView.scrollToItem(at: indexPath, at: .init(), animated: false)
-                } completion: { ( finish) in
-                    let currentCell = self.collectionView.visibleCells.first
-                    currentCell?.contentView.alpha = 1.0
-                }
-                return
-            }
-            let currentCell = collectionView.visibleCells.first
-            currentCell?.contentView.alpha = 1.0
-            UIView.animate(withDuration: 1) {
-                currentCell?.contentView.alpha = 0.0
-            }completion: { (finish) in
-                currentCell?.contentView.alpha = 1.0
-                self.collectionView.performBatchUpdates {
-                    self.collectionView.scrollToItem(at: indexPath, at: .init(), animated: false)
-                } completion: { ( finish) in
-                    let nextCell = self.collectionView.visibleCells.first
-                    nextCell?.contentView.alpha = 0.0
-                    UIView.animate(withDuration: 1) {
-                        nextCell?.contentView.alpha = 1.0
-                    }
-                }
-            }
-            break
-        }
-    }
-    
-    // 判断是否重启定时器
-    public func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        let offset = scrollView.contentOffset.x
 
-        if ((userTiming == true) && (unlimitedCarousel == true) && (automaticCarousel == true) && (pageControl.numberOfPages != imageArray.count)) {
-            startTimer()
-        }
-    }
-}
-
-private class WYBannerCell: UICollectionViewCell {
-    
-    internal var bannerBackgroundColor: UIColor!
-    internal var describeTextColor: UIColor!
-    internal var describeBackgroundColor: UIColor!
-    internal var describeTextFont: UIFont!
-    internal var describeTextAlignment: NSTextAlignment!
-    internal var describeViewFrame: CGRect!
-    internal var placeholderImage: UIImage!
-    internal var imageContentMode: UIView.ContentMode!
-
-    internal lazy var bannerView: UIImageView = {
+        //滚动过程中改变pageControl的当前页码
+        updatePageControlCurrentPage(offset)
         
-        contentView.backgroundColor = bannerBackgroundColor
-    
-        let bannerview = UIImageView()
-        bannerview.backgroundColor = bannerBackgroundColor
-        bannerview.contentMode = imageContentMode
-        contentView.addSubview(bannerview)
-        bannerview.snp.makeConstraints { (make) in
+        if (offset - (wy_width * CGFloat(pageControl.currentPage + 1))) > (wy_width * 0.5) {
             
-            make.edges.equalToSuperview()
-        }
-        return bannerview
-    }()
-    
-    internal lazy var describeView: UILabel = {
-    
-        let describeview = UILabel()
-        describeview.font = describeTextFont
-        describeview.backgroundColor = describeBackgroundColor
-        describeview.textColor = describeTextColor
-        describeview.textAlignment = describeTextAlignment
-        contentView.addSubview(describeview)
-        describeview.snp.makeConstraints { (make) in
-            if describeViewFrame.equalTo(.zero) {
-                make.width.centerX.bottom.equalToSuperview()
-            }else {
-                make.left.equalTo(describeViewFrame.origin.x)
-                make.top.equalTo(describeViewFrame.origin.y)
-                make.size.equalTo(describeViewFrame.size)
+            wy_print("offset = \(offset), + 1")
+            
+            otherImageView.image = imageArray[(currentIndex + 1) > (imageArray.count - 1) ? 0 : (currentIndex + 1)]
+            
+            switch switchMode {
+            case .fade:
+                currentImageView.alpha = offset / wy_width - 1
+                otherImageView.alpha = 2 - offset / wy_width
+                break
+            default:
+                otherImageView.wy_origin = CGPoint(x: currentImageView.wy_right, y: 0)
+                break
             }
+            switchDisplay()
         }
-        return describeview
-    }()
-    
-    func reload(image: Any, describe: String) {
         
-        if image is UIImage {
-            bannerView.image = image as? UIImage
-        }else {
-            bannerView.kf.setImage(with: URL(string: image as? String ?? ""), placeholder: placeholderImage)
+        if ((wy_width * CGFloat(pageControl.currentPage - 1)) - offset)  > (wy_width * 0.5) {
+            
+            wy_print("offset = \(offset), - 1")
+            
+            otherImageView.image = imageArray[currentIndex > 0 ? (currentIndex - 1) : (imageArray.count - 1)]
+            
+            switch switchMode {
+            case .fade:
+                currentImageView.alpha = 3 - offset / wy_width
+                otherImageView.alpha = offset / wy_width - 2
+                break
+            default:
+                otherImageView.wy_origin = CGPoint.zero
+                break
+            }
+            switchDisplay()
         }
-        describeView.text = describe
+    }
+    
+    public func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        
+        if useTimer {
+            stopTimer()
+            useTimer = true
+        }else {
+            stopTimer()
+        }
+    }
+    
+    public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        
+        // 滚动结束后让currentImageView无缝显示otherImageView的图片
+        switchDisplay()
+        
+        if useTimer {
+           startTimer()
+        }else {
+            stopTimer()
+        }
     }
 }
-

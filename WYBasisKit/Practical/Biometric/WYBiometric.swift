@@ -147,7 +147,7 @@ public func wy_verifyBiometrics(localizedFallbackTitle: String = "", localizedRe
                         DispatchQueue.main.async {
                             
                             //wy_print("用户未设置解锁密码")
-                            handler!(false, false, WYLocalizedString("生物识别前请设置解锁密码"))
+                            handler!(false, false, WYLocalizedString("开启生物识别前请设置解锁密码"))
                         }
                     case .touchIDNotAvailable:
                         

@@ -246,7 +246,7 @@ public struct WYNetworkManager {
 
                             showDebugModeLog(target: target, response: response, function: #function, line: #line)
 
-                            handlerFailure(error: (responseData?.msg ?? WYLocalizedString("未知错误，接口message返回为空")), code: responseData?.code ?? WYNetworkConfig.otherServerFailCode, function: #function, line: #line, failure: failure)
+                            handlerFailure(error: (responseData?.msg ?? WYLocalizedString("未知错误，接口信息返回为空")), code: responseData?.code ?? WYNetworkConfig.otherServerFailCode, function: #function, line: #line, failure: failure)
                         }
 
                     } catch  {

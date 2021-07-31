@@ -53,28 +53,24 @@ public enum WYLanguage: RawRepresentable {
 private let WYBasisKitLanguage = "WYBasisKitLanguage"
 
 public func WYLocalizedString(_ key: String) -> String {
-    return WYLocalizableManager.shared.localizedString(key: key)
+    return WYLocalizableManager.localizedString(key: key)
 }
 
 public func WYLocalizedString(_ chinese: String = "", _ english: String = "") -> String {
-    return (WYLocalizableManager.shared.currentLanguage() == .chinese) ? chinese : english
+    return (WYLocalizableManager.currentLanguage() == .chinese) ? chinese : english
 }
 
-public class WYLocalizableManager {
-
-    public static var shared = WYLocalizableManager()
+public struct WYLocalizableManager {
     
-    private var showLanguage: WYLanguage!
+    /// 设置本地化语言读取表，不设置默认则使用默认WYLocalizable
+    public static var localizableTable: String = "WYLocalizable"
     
-    private var bundle: Bundle?
+    private static var showLanguage: WYLanguage = WYLocalizableManager.currentLanguage()
     
-    init() {
-        showLanguage = currentLanguage()
-        bundle = Bundle(path: Bundle.main.path(forResource: currentLanguage().rawValue, ofType: "lproj") ?? "")
-    }
+    private static var bundle: Bundle? = Bundle(path: Bundle.main.path(forResource: WYLocalizableManager.currentLanguage().rawValue, ofType: "lproj") ?? "")
     
     /// 当前语言
-    public func currentLanguage() -> WYLanguage {
+    public static func currentLanguage() -> WYLanguage {
         
         let userLanguage: String = (UserDefaults.standard.value(forKey: WYBasisKitLanguage) as? String) ?? (Bundle.main.preferredLocalizations.first!)
         switch userLanguage {
@@ -88,13 +84,13 @@ public class WYLocalizableManager {
     }
     
     /// 获取各个国家语言标识符列表(如简体中文 = zh-Hans)
-    public class func isoLanguageCodes() -> [String] {
+    public static func isoLanguageCodes() -> [String] {
         return Locale.isoLanguageCodes
     }
 
-    /// 切换语言
-    public func switchLanguage(language: WYLanguage, reload: Bool = true, handler:(() -> Void)? = nil) {
-        
+    /// 切换语言(如果reload为True，需要给 Storyboard 设置 Name 和 Identifier，默认从 Main.Storyboard 重启)
+    public static func switchLanguage(language: WYLanguage, reload: Bool = true, name: String = "Main", identifier: String = "rootViewController", handler:(() -> Void)? = nil) {
+
         guard language.rawValue != currentLanguage().rawValue else {
             return
         }
@@ -103,12 +99,14 @@ public class WYLocalizableManager {
             return
         }
 
-        guard let bundleTem = Bundle.init(path: path) else {
+        guard let bundleTem = Bundle(path: path) else {
             return
         }
         bundle = bundleTem
         UserDefaults.standard.setValue(language.rawValue, forKey: WYBasisKitLanguage)
         UserDefaults.standard.synchronize()
+        
+        showLanguage = currentLanguage()
         
         guard reload == true else {
             if handler != nil {
@@ -116,10 +114,10 @@ public class WYLocalizableManager {
             }
             return
         }
-        reloadMainStoryboardController(handler: handler)
+        reloadStoryboard(name: name, identifier: identifier, handler: handler)
     }
 
-    public func localizedString(key: String) -> String {
+    public static func localizedString(key: String) -> String {
         
         if (Bundle.main.path(forResource: currentLanguage().rawValue, ofType: "lproj") ?? "").isEmpty {
             return key
@@ -127,25 +125,21 @@ public class WYLocalizableManager {
             guard let bundleTem = bundle else {
                 return WYLocalizedString(key)
             }
-            return bundleTem.localizedString(forKey: key, value: nil, table: WYBasisKitConfig.localizableTable)
+            return bundleTem.localizedString(forKey: key, value: nil, table: localizableTable)
         }
     }
     
-    /// 点击切换语言后调用该方法切换本地语言(需要给 Main.Storyboard 设置 Storyboard ID 为"rootViewController")
-    private func reloadMainStoryboardController(handler:(() -> Void)? = nil) {
-        
-        guard showLanguage != currentLanguage() else { return }
+    /// 点击切换语言后调用该方法切换本地语言
+    private static func reloadStoryboard(name: String, identifier: String, handler:(() -> Void)? = nil) {
         
         if let appdelegate = UIApplication.shared.delegate {
             
-            let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+            let storyBoard = UIStoryboard(name: name, bundle: nil)
             
-            let mainController = storyBoard.instantiateViewController(withIdentifier: "rootViewController")
+            let mainController = storyBoard.instantiateViewController(withIdentifier: identifier)
             
             appdelegate.window??.rootViewController = mainController
         }
-        
-        showLanguage = currentLanguage()
         
         if handler != nil {
             

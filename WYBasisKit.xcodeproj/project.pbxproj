@@ -35,7 +35,6 @@
 		AA771BD02568F834002C748B /* NSMutableAttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA771B962568F834002C748B /* NSMutableAttributedString.swift */; };
 		AA771BD12568F834002C748B /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA771B982568F834002C748B /* UIColor.swift */; };
 		AA771BD22568F834002C748B /* UIAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA771B9A2568F834002C748B /* UIAlertController.swift */; };
-		AA771BD32568F834002C748B /* WYCountdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA771B9C2568F834002C748B /* WYCountdown.swift */; };
 		AA771BD42568F834002C748B /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA771B9E2568F834002C748B /* UIFont.swift */; };
 		AA771BD52568F834002C748B /* UIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA771BA02568F834002C748B /* UIDevice.swift */; };
 		AA771BD62568F834002C748B /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA771BA22568F834002C748B /* UIViewController.swift */; };
@@ -58,6 +57,7 @@
 		AA9CF82A2584B97C008A7DE1 /* WYTestDarkNightModeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9CF8292584B97C008A7DE1 /* WYTestDarkNightModeController.swift */; };
 		AA9CF82D2584C262008A7DE1 /* WYTestAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9CF82C2584C262008A7DE1 /* WYTestAnimationController.swift */; };
 		AA9CF8302584C456008A7DE1 /* WYTestVisualController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9CF82F2584C456008A7DE1 /* WYTestVisualController.swift */; };
+		AAB2712826B571F300771549 /* WYTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB2712726B571F300771549 /* WYTimer.swift */; };
 		AAB7BDE726257F3600BD57EC /* WYBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB7BDE626257F3600BD57EC /* WYBannerView.swift */; };
 		AAC3825A25A1874500B2D41C /* WYBannerView.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AAC3825925A1874500B2D41C /* WYBannerView.bundle */; };
 		AAC6B38F26916E6E00D90D15 /* WYTableViewPlainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC6B38E26916E6E00D90D15 /* WYTableViewPlainController.swift */; };
@@ -102,7 +102,6 @@
 		AA771B962568F834002C748B /* NSMutableAttributedString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSMutableAttributedString.swift; sourceTree = "<group>"; };
 		AA771B982568F834002C748B /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		AA771B9A2568F834002C748B /* UIAlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIAlertController.swift; sourceTree = "<group>"; };
-		AA771B9C2568F834002C748B /* WYCountdown.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYCountdown.swift; sourceTree = "<group>"; };
 		AA771B9E2568F834002C748B /* UIFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
 		AA771BA02568F834002C748B /* UIDevice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIDevice.swift; sourceTree = "<group>"; };
 		AA771BA22568F834002C748B /* UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
@@ -130,6 +129,7 @@
 		AA9CF8292584B97C008A7DE1 /* WYTestDarkNightModeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYTestDarkNightModeController.swift; sourceTree = "<group>"; };
 		AA9CF82C2584C262008A7DE1 /* WYTestAnimationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYTestAnimationController.swift; sourceTree = "<group>"; };
 		AA9CF82F2584C456008A7DE1 /* WYTestVisualController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYTestVisualController.swift; sourceTree = "<group>"; };
+		AAB2712726B571F300771549 /* WYTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYTimer.swift; sourceTree = "<group>"; };
 		AAB7BDE626257F3600BD57EC /* WYBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYBannerView.swift; sourceTree = "<group>"; };
 		AAC3825925A1874500B2D41C /* WYBannerView.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = WYBannerView.bundle; sourceTree = "<group>"; };
 		AAC6B38E26916E6E00D90D15 /* WYTableViewPlainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYTableViewPlainController.swift; sourceTree = "<group>"; };
@@ -283,8 +283,8 @@
 			isa = PBXGroup;
 			children = (
 				1F3CEEB125773CA500955712 /* CNLog */,
+				AAB2712626B571F300771549 /* Timer */,
 				AA771BCA2568F834002C748B /* BoolJudge */,
-				AA771B9B2568F834002C748B /* Countdown */,
 				AA771BA52568F834002C748B /* Biometric */,
 				AA771BA72568F834002C748B /* Authorize */,
 				AA771BC42568F834002C748B /* ConstDefinition */,
@@ -322,14 +322,6 @@
 				AA771B9A2568F834002C748B /* UIAlertController.swift */,
 			);
 			path = UIAlertController;
-			sourceTree = "<group>";
-		};
-		AA771B9B2568F834002C748B /* Countdown */ = {
-			isa = PBXGroup;
-			children = (
-				AA771B9C2568F834002C748B /* WYCountdown.swift */,
-			);
-			path = Countdown;
 			sourceTree = "<group>";
 		};
 		AA771B9D2568F834002C748B /* UIFont */ = {
@@ -519,7 +511,6 @@
 			isa = PBXGroup;
 			children = (
 				AA327F022569179F00CF5CBE /* WYBasisKitConfig.swift */,
-				AA771C1A25691433002C748B /* WYLocalizable.strings */,
 			);
 			path = Config;
 			sourceTree = "<group>";
@@ -553,6 +544,14 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		AAB2712626B571F300771549 /* Timer */ = {
+			isa = PBXGroup;
+			children = (
+				AAB2712726B571F300771549 /* WYTimer.swift */,
+			);
+			path = Timer;
+			sourceTree = "<group>";
+		};
 		AAE02B18267C61B400EF6D36 /* CALayer */ = {
 			isa = PBXGroup;
 			children = (
@@ -565,6 +564,7 @@
 			isa = PBXGroup;
 			children = (
 				1F5C3E932578CD5400E0DBFF /* WYLocalizableManager.swift */,
+				AA771C1A25691433002C748B /* WYLocalizable.strings */,
 			);
 			path = Localizable;
 			sourceTree = "<group>";
@@ -716,6 +716,7 @@
 				AA771BD52568F834002C748B /* UIDevice.swift in Sources */,
 				AAEE9002265B9558003B1748 /* WYNetworkManager.swift in Sources */,
 				1F5C3E942578CD5400E0DBFF /* WYLocalizableManager.swift in Sources */,
+				AAB2712826B571F300771549 /* WYTimer.swift in Sources */,
 				AA771BE22568F834002C748B /* UIView.swift in Sources */,
 				AA9CF8302584C456008A7DE1 /* WYTestVisualController.swift in Sources */,
 				1F04CF5A25820501002B8B11 /* WYTestView.swift in Sources */,
@@ -737,7 +738,6 @@
 				AA771BD82568F834002C748B /* WYBiometric.swift in Sources */,
 				1F9717FE25B55CB600CA7A33 /* WYWaterfallsFlowLayout.swift in Sources */,
 				AA9CF82D2584C262008A7DE1 /* WYTestAnimationController.swift in Sources */,
-				AA771BD32568F834002C748B /* WYCountdown.swift in Sources */,
 				1F5C3E4D25787E7D00E0DBFF /* WYTabBarController.swift in Sources */,
 				AA771BDB2568F834002C748B /* String.swift in Sources */,
 				AAEE9003265B9558003B1748 /* WYNetworkServer.swift in Sources */,

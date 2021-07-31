@@ -1,7 +1,7 @@
 Pod::Spec.new do |kit|
 
   kit.name         = 'WYBasisKit'
-  kit.version      = '0.2.9'
+  kit.version      = '0.3.0'
   kit.summary      = '一个大幅提高开发效率的工具库'
   kit.description  = <<-DESC
                           WYBasisKit 不仅可以帮助开发者快速构建一个工程，还有基于常用网络框架和系统API而封装的方法，开发者只需简单的调用API就可以快速实现相应功能， 大幅提高开发效率。
@@ -14,7 +14,7 @@ Pod::Spec.new do |kit|
   kit.source       = { :git => 'https://github.com/Jacke-xu/WYBasisKit-swift.git', :tag => "#{kit.version}" }
   kit.swift_versions = '5.0'
   kit.requires_arc = true
-  kit.default_subspec = 'Config', 'Localizable', 'Extension', 'Practical', 'Networking'
+  kit.default_subspec = 'Extension', 'Practical'
  
 
     kit.subspec 'Config' do |config|
@@ -23,14 +23,14 @@ Pod::Spec.new do |kit|
     end
 
     kit.subspec 'Localizable' do |localizable|
-       localizable.source_files = 'WYBasisKit/Localizable/**/*'
+       localizable.source_files = 'WYBasisKit/Localizable/WYLocalizableManager.swift'
        localizable.frameworks = 'Foundation', 'UIKit'
-       localizable.dependency 'WYBasisKit/Config'
     end
     
     kit.subspec 'Extension' do |extension|
-       extension.source_files = 'WYBasisKit/Extension/**/*', 'WYBasisKit/Practical/ConstDefinition/WYConstDefinition.swift'
+       extension.source_files = 'WYBasisKit/Extension/**/*', 'WYBasisKit/Practical/ConstDefinition/WYConstDefinition.swift','WYBasisKit/Localizable/WYLocalizable.strings'
        extension.frameworks = 'Foundation', 'UIKit'
+       extension.dependency 'WYBasisKit/Config'
        extension.dependency 'WYBasisKit/Localizable'
        extension.dependency 'MJRefresh'
        extension.dependency 'libPhoneNumber-iOS'
@@ -38,13 +38,14 @@ Pod::Spec.new do |kit|
     end
 
     kit.subspec 'Practical' do |practical|
-       practical.source_files = 'WYBasisKit/Practical/**/*', 'WYBasisKit/Extension/UIAlertController/**/*', 'WYBasisKit/Extension/NSObject/**/*', 'WYBasisKit/Extension/UIDevice/**/*'
+       practical.source_files = 'WYBasisKit/Practical/**/*', 'WYBasisKit/Extension/UIAlertController/**/*', 'WYBasisKit/Extension/NSObject/**/*', 'WYBasisKit/Extension/UIDevice/**/*','WYBasisKit/Localizable/WYLocalizable.strings'
        practical.frameworks = 'Foundation', 'UIKit', 'LocalAuthentication', 'Photos', 'CoreFoundation'
+       practical.dependency 'WYBasisKit/Config'
        practical.dependency 'WYBasisKit/Localizable'
     end
     
     kit.subspec 'Networking' do |networking|
-       networking.source_files = 'WYBasisKit/Networking/**/*', 'WYBasisKit/Extension/UIAlertController/**/*'
+       networking.source_files = 'WYBasisKit/Networking/**/*', 'WYBasisKit/Extension/UIAlertController/**/*','WYBasisKit/Localizable/WYLocalizable.strings'
        networking.frameworks = 'Foundation', 'UIKit'
        networking.dependency 'WYBasisKit/Localizable'
        networking.dependency 'Moya'
@@ -72,8 +73,9 @@ Pod::Spec.new do |kit|
         end
 
         layout.subspec 'ScrollText' do |scrollText|
-          scrollText.source_files = 'WYBasisKit/Layout/ScrollText/**/*', 'WYBasisKit/Practical/ConstDefinition/WYConstDefinition.swift'
+          scrollText.source_files = 'WYBasisKit/Layout/ScrollText/**/*', 'WYBasisKit/Practical/ConstDefinition/WYConstDefinition.swift','WYBasisKit/Localizable/WYLocalizable.strings'
           scrollText.frameworks = 'Foundation', 'UIKit'
+          scrollText.dependency 'WYBasisKit/Config'
           scrollText.dependency 'WYBasisKit/Localizable'
           scrollText.dependency 'SnapKit'
        end
@@ -86,8 +88,9 @@ Pod::Spec.new do |kit|
        end
 
         layout.subspec 'BannerView' do |bannerView|
-          bannerView.source_files = 'WYBasisKit/Layout/BannerView/**/*.swift', 'WYBasisKit/Extension/UIView/**/*', 'WYBasisKit/Practical/ConstDefinition/WYConstDefinition.swift'
+          bannerView.source_files = 'WYBasisKit/Layout/BannerView/**/*.swift', 'WYBasisKit/Extension/UIView/**/*', 'WYBasisKit/Practical/ConstDefinition/WYConstDefinition.swift','WYBasisKit/Localizable/WYLocalizable.strings'
           bannerView.frameworks = 'Foundation', 'UIKit'
+          bannerView.dependency 'WYBasisKit/Config'
           bannerView.dependency 'WYBasisKit/Localizable'
           bannerView.dependency 'SnapKit'
           bannerView.dependency 'Kingfisher'

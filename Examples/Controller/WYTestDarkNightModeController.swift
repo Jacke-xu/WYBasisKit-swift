@@ -21,7 +21,7 @@ class WYTestDarkNightModeController: UIViewController {
         button.titleLabel?.numberOfLines = 0
         button.setTitle("亮色/中文", for: .normal)
         button.setTitle("Dark night/English", for: .selected)
-        button.isSelected = (WYLocalizableManager.shared.currentLanguage() == .english)
+        button.isSelected = (WYLocalizableManager.currentLanguage() == .english)
         view.addSubview(button)
         button.addTarget(self, action: #selector(clickButton(sender:)), for: .touchUpInside)
         button.snp.makeConstraints { (make) in
@@ -34,9 +34,9 @@ class WYTestDarkNightModeController: UIViewController {
     
     @objc func clickButton(sender: UIButton) {
 
-        if WYLocalizableManager.shared.currentLanguage() == .chinese {
+        if WYLocalizableManager.currentLanguage() == .chinese {
 
-            WYLocalizableManager.shared.switchLanguage(language: .english) {
+            WYLocalizableManager.switchLanguage(language: .english) {
 
                 DispatchQueue.main.async(execute: {
 
@@ -51,7 +51,7 @@ class WYTestDarkNightModeController: UIViewController {
 
         }else {
 
-            WYLocalizableManager.shared.switchLanguage(language: .chinese) {
+            WYLocalizableManager.switchLanguage(language: .chinese) {
 
                 DispatchQueue.main.async(execute: {
 

@@ -50,10 +50,6 @@ class WYLeftController: UIViewController {
         
         navigationItem.title = WYLocalizedString("各种测试样例", "Various test examples")
         tableView.backgroundColor = UIColor.wy_dynamic(.white, .black)
-        
-        WYNetworkManager.post(domain: "https://api.apiopen.top/recommendPoetry", path: "", originJson: false) { result in
-            //wy_print("result = \(String(describing: result))")
-        }
     }
     
 

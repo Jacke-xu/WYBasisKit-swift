@@ -1,5 +1,5 @@
 //
-//  WYCountdown.swift
+//  WYTimer.swift
 //  WYBasisKit
 //
 //  Created by Jacke·xu on 2020/8/29.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class WYCountdown: NSObject {
+public class WYTimer {
     
     /// 计时器
     private var timer: Timer?
@@ -17,7 +17,7 @@ public class WYCountdown: NSObject {
     private var totalSeconds: Int = 0
     
     /// 倒计时回调
-    private var countdownHandler: ((_ duration: Int) -> Void)?
+    private var timerHandler: ((_ duration: Int) -> Void)?
 
     /**
     开始倒计时
@@ -29,7 +29,7 @@ public class WYCountdown: NSObject {
         
         totalSeconds = totalTime
 
-        countdownHandler = handler
+        timerHandler = handler
         
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block:{ [weak self] (timer: Timer) -> Void in
             self?.wy_beginCountdown()
@@ -42,22 +42,6 @@ public class WYCountdown: NSObject {
         NotificationCenter.default.addObserver(self, selector: #selector(wy_didBecomeActive), name: UIApplication.didBecomeActiveNotification, object: nil)
     }
     
-    /// 倒计时方法
-    private func wy_beginCountdown() {
-
-        totalSeconds -= 1
-        
-        if (countdownHandler != nil) {
-            
-            countdownHandler!(totalSeconds)
-        }
-        
-        if totalSeconds <= 0 {
-            
-            wy_cancel()
-        }
-    }
-
     /// 取消倒计时
     public func wy_cancel() {
         
@@ -90,17 +74,33 @@ public class WYCountdown: NSObject {
         return cu_hour + ":" + cu_minute + ":" + cu_second
     }
 
-    ///传入一个秒数，返回有几个小时
+    /// 传入一个秒数，返回有几个小时
     public class func wy_formatFewHours(second: Int) -> String {
         
         return String((second / 3600))
     }
 
-    ///传入一个秒数，返回有多少分钟
+    /// 传入一个秒数，返回有多少分钟
     public class func wy_formatFewMinute(second: Int) -> String {
         
         let cu_hour = String(second / 3600)
         return String(((second - (Int(cu_hour)! * 3600)) / 60))
+    }
+    
+    /// 倒计时方法
+    private func wy_beginCountdown() {
+
+        totalSeconds -= 1
+        
+        if (timerHandler != nil) {
+            
+            timerHandler!(totalSeconds)
+        }
+        
+        if totalSeconds <= 0 {
+            
+            wy_cancel()
+        }
     }
     
     @objc private func wy_didEnterBackground() {

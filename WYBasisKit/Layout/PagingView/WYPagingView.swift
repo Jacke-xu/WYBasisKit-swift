@@ -406,7 +406,6 @@ extension WYPagingView {
             scrollView!.bounces = bar_pagingContro_bounce
             addSubview(scrollView!)
             scrollView!.snp.makeConstraints { (make) in
-                
                 make.top.equalTo(barScrollView.snp.bottom)
                 make.left.bottom.width.equalToSuperview()
             }
@@ -430,7 +429,6 @@ extension WYPagingView {
                         make.left.equalTo(lastView!.snp.right)
                     }
                     if (index == (controllers.count - 1)) {
-
                         make.right.equalToSuperview()
                     }
                 })
@@ -455,12 +453,13 @@ extension WYPagingView {
             barScroll!.bounces = bar_pagingContro_bounce
             addSubview(barScroll!)
             barScroll!.snp.makeConstraints { (make) in
-
                 make.top.left.width.equalToSuperview()
                 make.height.equalTo(bar_Height)
             }
             objc_setAssociatedObject(self, WYAssociatedKeys.barScrollView, barScroll, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
+        barScroll!.contentSize = CGSize(width: barScroll!.contentSize.width, height: 0)
+        
         return barScroll!
     }
     

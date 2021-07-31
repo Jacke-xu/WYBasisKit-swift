@@ -24,7 +24,4 @@ public struct WYBasisKitConfig {
     
     /// 设置tableView或collectionView上拉加载更多时每次请求的数据量
     public static var pageSize: NSInteger = 10
-    
-    /// 设置本地化语言读取表，不设置默认则使用默认WYLocalizable
-    public static var localizableTable: String = "WYLocalizable"
 }
