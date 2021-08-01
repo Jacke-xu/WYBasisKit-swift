@@ -515,6 +515,14 @@
 			path = Config;
 			sourceTree = "<group>";
 		};
+		AA8BAB6B26B651C100AE12E8 /* Localizable.strings */ = {
+			isa = PBXGroup;
+			children = (
+				AA771C1A25691433002C748B /* WYLocalizable.strings */,
+			);
+			path = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		AA9CF8252584B74F008A7DE1 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -564,7 +572,7 @@
 			isa = PBXGroup;
 			children = (
 				1F5C3E932578CD5400E0DBFF /* WYLocalizableManager.swift */,
-				AA771C1A25691433002C748B /* WYLocalizable.strings */,
+				AA8BAB6B26B651C100AE12E8 /* Localizable.strings */,
 			);
 			path = Localizable;
 			sourceTree = "<group>";

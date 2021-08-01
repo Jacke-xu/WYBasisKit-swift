@@ -1,10 +1,10 @@
 Pod::Spec.new do |kit|
 
   kit.name         = 'WYBasisKit'
-  kit.version      = '0.3.0'
-  kit.summary      = 'WYBasisKit 不仅可以帮助开发者快速构建一个工程，还有基于常用网络框架和系统API而封装的方法，开发者只需简单的调用API就可以快速实现相应功能， 大幅提高开发效率。'
+  kit.version      = '0.3.1'
+  kit.summary      = 'WYBasisKit包含常用框架和系统API封装而成的方法，开发者只需简单的调用就可快速实现相应功能， 大幅提升开发效率。'
   kit.description  = <<-DESC
-                          一个大幅提高开发效率的工具库
+                          WYBasisKit不仅可以帮助开发者快速构建一个工程，还有基于常用框架和系统API而封装的方法，开发者只需简单的调用API就可以快速实现相应功能， 大幅提升开发效率。
                    DESC
 
   kit.homepage     = 'https://github.com/Jacke-xu/WYBasisKit-swift'
@@ -28,7 +28,7 @@ Pod::Spec.new do |kit|
     end
     
     kit.subspec 'Extension' do |extension|
-       extension.source_files = 'WYBasisKit/Extension/**/*', 'WYBasisKit/Practical/ConstDefinition/WYConstDefinition.swift','WYBasisKit/Localizable/WYLocalizable.strings'
+       extension.source_files = 'WYBasisKit/Extension/**/*', 'WYBasisKit/Practical/ConstDefinition/WYConstDefinition.swift','WYBasisKit/Localizable/Localizable.strings/**/*'
        extension.frameworks = 'Foundation', 'UIKit'
        extension.dependency 'WYBasisKit/Config'
        extension.dependency 'WYBasisKit/Localizable'
@@ -38,14 +38,14 @@ Pod::Spec.new do |kit|
     end
 
     kit.subspec 'Practical' do |practical|
-       practical.source_files = 'WYBasisKit/Practical/**/*', 'WYBasisKit/Extension/UIAlertController/**/*', 'WYBasisKit/Extension/NSObject/**/*', 'WYBasisKit/Extension/UIDevice/**/*','WYBasisKit/Localizable/WYLocalizable.strings'
+       practical.source_files = 'WYBasisKit/Practical/**/*', 'WYBasisKit/Extension/UIAlertController/**/*', 'WYBasisKit/Extension/NSObject/**/*', 'WYBasisKit/Extension/UIDevice/**/*','WYBasisKit/Localizable/Localizable.strings/**/*'
        practical.frameworks = 'Foundation', 'UIKit', 'LocalAuthentication', 'Photos', 'CoreFoundation'
        practical.dependency 'WYBasisKit/Config'
        practical.dependency 'WYBasisKit/Localizable'
     end
     
     kit.subspec 'Networking' do |networking|
-       networking.source_files = 'WYBasisKit/Networking/**/*', 'WYBasisKit/Extension/UIAlertController/**/*','WYBasisKit/Localizable/WYLocalizable.strings'
+       networking.source_files = 'WYBasisKit/Networking/**/*', 'WYBasisKit/Extension/UIAlertController/**/*','WYBasisKit/Localizable/Localizable.strings/**/*'
        networking.frameworks = 'Foundation', 'UIKit'
        networking.dependency 'WYBasisKit/Localizable'
        networking.dependency 'Moya'
@@ -73,7 +73,7 @@ Pod::Spec.new do |kit|
         end
 
         layout.subspec 'ScrollText' do |scrollText|
-          scrollText.source_files = 'WYBasisKit/Layout/ScrollText/**/*', 'WYBasisKit/Practical/ConstDefinition/WYConstDefinition.swift','WYBasisKit/Localizable/WYLocalizable.strings'
+          scrollText.source_files = 'WYBasisKit/Layout/ScrollText/**/*', 'WYBasisKit/Practical/ConstDefinition/WYConstDefinition.swift','WYBasisKit/Localizable/Localizable.strings/**/*'
           scrollText.frameworks = 'Foundation', 'UIKit'
           scrollText.dependency 'WYBasisKit/Config'
           scrollText.dependency 'WYBasisKit/Localizable'
@@ -88,7 +88,7 @@ Pod::Spec.new do |kit|
        end
 
         layout.subspec 'BannerView' do |bannerView|
-          bannerView.source_files = 'WYBasisKit/Layout/BannerView/**/*.swift', 'WYBasisKit/Extension/UIView/**/*', 'WYBasisKit/Practical/ConstDefinition/WYConstDefinition.swift','WYBasisKit/Localizable/WYLocalizable.strings'
+          bannerView.source_files = 'WYBasisKit/Layout/BannerView/**/*.swift', 'WYBasisKit/Extension/UIView/**/*', 'WYBasisKit/Practical/ConstDefinition/WYConstDefinition.swift','WYBasisKit/Localizable/Localizable.strings/**/*'
           bannerView.frameworks = 'Foundation', 'UIKit'
           bannerView.dependency 'WYBasisKit/Config'
           bannerView.dependency 'WYBasisKit/Localizable'
