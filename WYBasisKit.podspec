@@ -2,9 +2,9 @@ Pod::Spec.new do |kit|
 
   kit.name         = 'WYBasisKit'
   kit.version      = '0.3.0'
-  kit.summary      = '一个大幅提高开发效率的工具库'
+  kit.summary      = 'WYBasisKit 不仅可以帮助开发者快速构建一个工程，还有基于常用网络框架和系统API而封装的方法，开发者只需简单的调用API就可以快速实现相应功能， 大幅提高开发效率。'
   kit.description  = <<-DESC
-                          WYBasisKit 不仅可以帮助开发者快速构建一个工程，还有基于常用网络框架和系统API而封装的方法，开发者只需简单的调用API就可以快速实现相应功能， 大幅提高开发效率。
+                          一个大幅提高开发效率的工具库
                    DESC
 
   kit.homepage     = 'https://github.com/Jacke-xu/WYBasisKit-swift'
