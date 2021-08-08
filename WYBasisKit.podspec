@@ -1,7 +1,7 @@
 Pod::Spec.new do |kit|
 
   kit.name         = 'WYBasisKit'
-  kit.version      = '0.3.0'
+  kit.version      = '0.3.2'
   kit.summary      = '一个大幅提高开发效率的工具库'
   kit.description  = <<-DESC
                           WYBasisKit 不仅可以帮助开发者快速构建一个工程，还有基于常用网络框架和系统API而封装的方法，开发者只需简单的调用API就可以快速实现相应功能， 大幅提高开发效率。
@@ -17,39 +17,35 @@ Pod::Spec.new do |kit|
   kit.default_subspec = 'Extension', 'Practical'
  
 
-    kit.subspec 'Config' do |config|
-       config.source_files = 'WYBasisKit/Config/**/*'
-       config.frameworks = 'Foundation', 'UIKit'
-    end
-
     kit.subspec 'Localizable' do |localizable|
        localizable.source_files = 'WYBasisKit/Localizable/WYLocalizableManager.swift'
        localizable.frameworks = 'Foundation', 'UIKit'
     end
     
     kit.subspec 'Extension' do |extension|
-       extension.source_files = 'WYBasisKit/Extension/**/*', 'WYBasisKit/Practical/ConstDefinition/WYConstDefinition.swift','WYBasisKit/Localizable/WYLocalizable.strings'
+       extension.source_files = 'WYBasisKit/Extension/**/*', 'WYBasisKit/Practical/ConstDefinition/WYConstDefinition.swift', 'WYBasisKit/Config/WYBasisKitConfig.swift'
        extension.frameworks = 'Foundation', 'UIKit'
-       extension.dependency 'WYBasisKit/Config'
        extension.dependency 'WYBasisKit/Localizable'
        extension.dependency 'MJRefresh'
        extension.dependency 'libPhoneNumber-iOS'
        extension.dependency 'MBProgressHUD'
+       extension.resource = 'WYBasisKit/Localizable/WYLocalizable.bundle'
     end
 
     kit.subspec 'Practical' do |practical|
-       practical.source_files = 'WYBasisKit/Practical/**/*', 'WYBasisKit/Extension/UIAlertController/**/*', 'WYBasisKit/Extension/NSObject/**/*', 'WYBasisKit/Extension/UIDevice/**/*','WYBasisKit/Localizable/WYLocalizable.strings'
+       practical.source_files = 'WYBasisKit/Practical/**/*', 'WYBasisKit/Extension/UIAlertController/**/*', 'WYBasisKit/Extension/NSObject/**/*', 'WYBasisKit/Extension/UIDevice/**/*', 'WYBasisKit/Config/WYBasisKitConfig.swift'
        practical.frameworks = 'Foundation', 'UIKit', 'LocalAuthentication', 'Photos', 'CoreFoundation'
-       practical.dependency 'WYBasisKit/Config'
        practical.dependency 'WYBasisKit/Localizable'
+       practical.resource = 'WYBasisKit/Localizable/WYLocalizable.bundle'
     end
     
     kit.subspec 'Networking' do |networking|
-       networking.source_files = 'WYBasisKit/Networking/**/*', 'WYBasisKit/Extension/UIAlertController/**/*','WYBasisKit/Localizable/WYLocalizable.strings'
+       networking.source_files = 'WYBasisKit/Networking/**/*', 'WYBasisKit/Extension/UIAlertController/**/*'
        networking.frameworks = 'Foundation', 'UIKit'
        networking.dependency 'WYBasisKit/Localizable'
        networking.dependency 'Moya'
        networking.dependency 'HandyJSON'
+       networking.resource = 'WYBasisKit/Localizable/WYLocalizable.bundle'
     end
 
     kit.subspec 'Layout' do |layout|
@@ -73,28 +69,26 @@ Pod::Spec.new do |kit|
         end
 
         layout.subspec 'ScrollText' do |scrollText|
-          scrollText.source_files = 'WYBasisKit/Layout/ScrollText/**/*', 'WYBasisKit/Practical/ConstDefinition/WYConstDefinition.swift','WYBasisKit/Localizable/WYLocalizable.strings'
+          scrollText.source_files = 'WYBasisKit/Layout/ScrollText/**/*', 'WYBasisKit/Practical/ConstDefinition/WYConstDefinition.swift', 'WYBasisKit/Config/WYBasisKitConfig.swift'
           scrollText.frameworks = 'Foundation', 'UIKit'
-          scrollText.dependency 'WYBasisKit/Config'
           scrollText.dependency 'WYBasisKit/Localizable'
           scrollText.dependency 'SnapKit'
+          scrollText.resource = 'WYBasisKit/Localizable/WYLocalizable.bundle'
        end
 
         layout.subspec 'PagingView' do |pagingView|
-          pagingView.source_files = 'WYBasisKit/Layout/PagingView/**/*', 'WYBasisKit/Extension/UIButton/**/*', 'WYBasisKit/Extension/UIColor/**/*', 'WYBasisKit/Extension/UIImage/**/*', 'WYBasisKit/Extension/UIView/**/*', 'WYBasisKit/Practical/ConstDefinition/WYConstDefinition.swift'
+          pagingView.source_files = 'WYBasisKit/Layout/PagingView/**/*', 'WYBasisKit/Extension/UIButton/**/*', 'WYBasisKit/Extension/UIColor/**/*', 'WYBasisKit/Extension/UIImage/**/*', 'WYBasisKit/Extension/UIView/**/*', 'WYBasisKit/Practical/ConstDefinition/WYConstDefinition.swift', 'WYBasisKit/Config/WYBasisKitConfig.swift'
           pagingView.frameworks = 'Foundation', 'UIKit'
-          pagingView.dependency 'WYBasisKit/Config'
           pagingView.dependency 'SnapKit'
        end
 
         layout.subspec 'BannerView' do |bannerView|
-          bannerView.source_files = 'WYBasisKit/Layout/BannerView/**/*.swift', 'WYBasisKit/Extension/UIView/**/*', 'WYBasisKit/Practical/ConstDefinition/WYConstDefinition.swift','WYBasisKit/Localizable/WYLocalizable.strings'
+          bannerView.source_files = 'WYBasisKit/Layout/BannerView/**/*.swift', 'WYBasisKit/Extension/UIView/**/*', 'WYBasisKit/Practical/ConstDefinition/WYConstDefinition.swift', 'WYBasisKit/Config/WYBasisKitConfig.swift'
           bannerView.frameworks = 'Foundation', 'UIKit'
-          bannerView.dependency 'WYBasisKit/Config'
           bannerView.dependency 'WYBasisKit/Localizable'
           bannerView.dependency 'SnapKit'
           bannerView.dependency 'Kingfisher'
-          bannerView.resource = 'WYBasisKit/Layout/BannerView/WYBannerView.bundle'
+          bannerView.resource = 'WYBasisKit/Layout/BannerView/WYBannerView.bundle', 'WYBasisKit/Localizable/WYLocalizable.bundle'
        end
     end
 end

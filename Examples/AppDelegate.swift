@@ -21,6 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         wy_print("currentLanguage = \(WYLocalizableManager.currentLanguage()), code = \(WYLocalizableManager.currentLanguage().rawValue)")
         
+        wy_print("localizableString = \(WYLocalizedString("您正在使用Wifi联网"))")
+        
         return true
     }
     
