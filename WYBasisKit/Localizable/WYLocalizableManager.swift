@@ -61,8 +61,6 @@ public struct WYLocalizableManager {
     /// 设置本地化语言读取表(如果有Bundle，则要求Bundle名与表名一致，否则会读取失败)，不设置默认则使用默认WYLocalizable
     public static var localizableTable: String = "WYLocalizable"
     
-    private static var showLanguage: WYLanguage = WYLocalizableManager.currentLanguage()
-    
     private static var bundle: Bundle? = localizableBundle()
     
     /// 当前语言
@@ -91,16 +89,13 @@ public struct WYLocalizableManager {
             return
         }
         
-        guard localizableBundle(from: language) != nil else {
+        guard let languageBundle = localizableBundle(from: language) else {
             return
         }
-        
-        bundle = localizableBundle(from: language)
+        bundle = languageBundle
         
         UserDefaults.standard.setValue(language.rawValue, forKey: WYBasisKitLanguage)
         UserDefaults.standard.synchronize()
-        
-        showLanguage = currentLanguage()
         
         guard reload == true else {
             if handler != nil {
@@ -140,14 +135,14 @@ public struct WYLocalizableManager {
     /// 获取存放国际化资源的Bundle
     private static func localizableBundle(from language: WYLanguage = currentLanguage()) -> Bundle? {
 
-        let bundlePath = (Bundle(for: WYBundleClass.self).path(forResource: localizableTable, ofType: "bundle")) ?? (Bundle.main.path(forResource: localizableTable, ofType: "bundle"))
+        let bundlePath = (Bundle(for: WYLocalizableClass.self).path(forResource: localizableTable, ofType: "bundle")) ?? (Bundle.main.path(forResource: localizableTable, ofType: "bundle"))
 
         guard let resourcePath = bundlePath else {
 
-            return Bundle(path: (Bundle(for: WYBundleClass.self).path(forResource: language.rawValue, ofType: "lproj") ?? Bundle.main.path(forResource: language.rawValue, ofType: "lproj")) ?? "")
+            return Bundle(path: (Bundle(for: WYLocalizableClass.self).path(forResource: language.rawValue, ofType: "lproj") ?? Bundle.main.path(forResource: language.rawValue, ofType: "lproj")) ?? "")
         }
         return Bundle(path: Bundle(path: resourcePath)?.path(forResource: language.rawValue, ofType: "lproj") ?? "")
     }
 }
 
-private class WYBundleClass {}
+private class WYLocalizableClass {}
