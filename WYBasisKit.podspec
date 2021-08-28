@@ -40,12 +40,6 @@ Pod::Spec.new do |kit|
           sstm.dependency 'MBProgressHUD'
           sstm.resource = 'WYBasisKit/Localizable/WYLocalizable.bundle'
        end
-
-       extension.subspec 'NetworkImage' do |networkImage|
-          networkImage.source_files = 'WYBasisKit/Extension/NetworkImage/**/*'
-          networkImage.frameworks = 'Foundation', 'UIKit'
-          networkImage.dependency 'Kingfisher'
-       end
     end
 
     kit.subspec 'Practical' do |practical|

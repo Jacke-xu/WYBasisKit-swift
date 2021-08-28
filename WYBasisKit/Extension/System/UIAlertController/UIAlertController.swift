@@ -11,51 +11,104 @@ import UIKit
 
 public extension UIAlertController {
     
-    class func wy_show(style: UIAlertController.Style = .alert, title: String = "", message: String = "", duration: TimeInterval = 0.0, actionSheetNeedCancel: Bool = true, textFieldPlaceholders: [String] = [], actions: [String] = [], handler:((_ actionStr: String, _ textFieldTexts: [String]) -> Void)? = nil) {
+    class func wy_show<T>(style: UIAlertController.Style = .alert, title: T? = nil, message: T? = nil, duration: TimeInterval = 0.0, actionSheetNeedCancel: Bool = true, textFieldPlaceholders: [T] = [], actions: [T] = [], handler:((_ actionStr: String, _ textFieldTexts: [String]) -> Void)? = nil) {
         
         DispatchQueue.main.async {
             
-            if title.isEmpty && message.isEmpty && textFieldPlaceholders.isEmpty && actions.isEmpty {
-                return
-            }
+            let alertTitle: String = wy_sharedGenericString(object: title)
             
-            let alertController: UIAlertController! = UIAlertController(title: (title.isEmpty ? nil : title), message: (message.isEmpty ? nil : message), preferredStyle: style)
+            let alertMessage: String = wy_sharedGenericString(object: message)
             
-            for placeholder: String in textFieldPlaceholders {
-                
-                alertController.addTextField { (textField) in
-                    
-                    textField.placeholder = placeholder
-                    textField.isSecureTextEntry = alertController.wy_sharedSecureTextEntry(placeholder: placeholder)
+            var alertPlaceholders: [String] = []
+            if style == .alert {
+                for placeholder: T in textFieldPlaceholders {
+                    alertPlaceholders.append(wy_sharedGenericString(object: placeholder))
                 }
             }
             
-            for actionStr: String in actions {
-                
-                alertController.wy_addAlertAction(actionStr: actionStr, actionStyle: alertController.wy_sharedActionStyle(actionStr: actionStr, alertStyle: style), alertController: alertController, textFieldPlaceholders: textFieldPlaceholders, handler: handler)
+            var alertTitles: [String] = []
+            for actionTitle: T in actions {
+                alertTitles.append(wy_sharedGenericString(object: actionTitle))
             }
             
-            if ((style == .actionSheet) && (actionSheetNeedCancel == true)) {
-                
-                alertController.wy_addAlertAction(actionStr: WYLocalizedString("取消"), actionStyle: .cancel, alertController: alertController, textFieldPlaceholders: textFieldPlaceholders, handler: nil)
+            let alertController: UIAlertController? = wy_internalShow(style: style, title: alertTitle, message: alertMessage, duration: duration, actionSheetNeedCancel: actionSheetNeedCancel, textFieldPlaceholders: alertPlaceholders, actions: alertTitles, handler: handler)
+            
+            if (title != nil) && (title is NSAttributedString) {
+                alertController?.setValue(title as! NSAttributedString, forKey: "attributedTitle")
             }
             
-            alertController.modalPresentationStyle = .fullScreen
-            alertController.wy_alertWindow?.rootViewController?.present(alertController, animated: true, completion: nil)
+            if (message != nil) && (message is NSAttributedString) {
+                alertController?.setValue(message as! NSAttributedString, forKey: "attributedMessage")
+            }
             
-            if duration > 0.0 {
-                
-                DispatchQueue.main.asyncAfter(deadline: .now()+duration) {
-                    
-                    if (handler != nil) {
-
-                        handler!("", [])
+            if alertController?.textFields?.isEmpty == false {
+                for index in 0 ..< alertController!.textFields!.count {
+                    let textField: UITextField = alertController!.textFields![index]
+                    let placeholder = textFieldPlaceholders[index]
+                    if placeholder is NSAttributedString {
+                        textField.attributedPlaceholder = (placeholder as! NSAttributedString)
                     }
-                    alertController.wy_alertWindow?.rootViewController?.dismiss(animated: true, completion: nil)
-                    alertController.wy_sharedAppDelegate().window?!.makeKeyAndVisible()
+                }
+            }
+            
+            if alertController?.actions.isEmpty == false {
+                for index in 0 ..< alertController!.actions.count {
+                    let alertAction: UIAlertAction = alertController!.actions[index]
+                    if index < actions.count {
+                        let actionTitle = actions[index]
+                        if actionTitle is NSAttributedString {
+                            alertAction.setValue((actionTitle as! NSAttributedString).attribute(NSAttributedString.Key.foregroundColor, at: 0, effectiveRange: nil), forKey: "titleTextColor")
+                        }
+                    }
                 }
             }
         }
+    }
+
+    @discardableResult
+    private class func wy_internalShow(style: UIAlertController.Style = .alert, title: String = "", message: String = "", duration: TimeInterval = 0.0, actionSheetNeedCancel: Bool = true, textFieldPlaceholders: [String] = [], actions: [String] = [], handler:((_ actionStr: String, _ textFieldTexts: [String]) -> Void)? = nil) -> UIAlertController? {
+        
+        if title.isEmpty && message.isEmpty && textFieldPlaceholders.isEmpty && actions.isEmpty {
+            return nil
+        }
+        
+        let alertController: UIAlertController! = UIAlertController(title: (title.isEmpty ? nil : title), message: (message.isEmpty ? nil : message), preferredStyle: style)
+        
+        for placeholder: String in textFieldPlaceholders {
+            
+            alertController.addTextField { (textField) in
+                
+                textField.placeholder = placeholder
+                textField.isSecureTextEntry = alertController.wy_sharedSecureTextEntry(placeholder: placeholder)
+            }
+        }
+        
+        for actionStr: String in actions {
+            
+            alertController.wy_addAlertAction(actionStr: actionStr, actionStyle: alertController.wy_sharedActionStyle(actionStr: actionStr, alertStyle: style), alertController: alertController, textFieldPlaceholders: textFieldPlaceholders, handler: handler)
+        }
+        
+        if ((style == .actionSheet) && (actionSheetNeedCancel == true)) {
+            
+            alertController.wy_addAlertAction(actionStr: WYLocalizedString("取消"), actionStyle: .cancel, alertController: alertController, textFieldPlaceholders: textFieldPlaceholders, handler: nil)
+        }
+        
+        alertController.modalPresentationStyle = .fullScreen
+        alertController.wy_alertWindow?.rootViewController?.present(alertController, animated: true, completion: nil)
+        
+        if duration > 0.0 {
+            
+            DispatchQueue.main.asyncAfter(deadline: .now()+duration) {
+                
+                if (handler != nil) {
+
+                    handler!("", [])
+                }
+                alertController.wy_alertWindow?.rootViewController?.dismiss(animated: true, completion: nil)
+                alertController.wy_sharedAppDelegate().window?!.makeKeyAndVisible()
+            }
+        }
+        return alertController
     }
     
     private func wy_addAlertAction(actionStr: String, actionStyle: UIAlertAction.Style, alertController: UIAlertController, textFieldPlaceholders: [String] = [], handler:((_ actionStr: String, _ textFieldTexts: [String]) -> Void)? = nil) {
@@ -96,22 +149,26 @@ public extension UIAlertController {
         return placeholder.range(of: WYLocalizedString("密码"), options: .caseInsensitive) != nil
     }
     
-    /// 仅用于外部调用处记录，可用以判断是否正在显示弹窗
-    class var wy_isBecomeActive: Bool {
+    private class func wy_sharedGenericString<T>(object: T?) -> String {
         
-        get {
-            return objc_getAssociatedObject(self, UIAlertControllerRuntimeKey.wy_isBecomeActive) as? Bool ?? false
+        guard let obj = object else {
+            return ""
         }
-        set {
-            objc_setAssociatedObject(self, UIAlertControllerRuntimeKey.wy_isBecomeActive, newValue, .OBJC_ASSOCIATION_ASSIGN)
+
+        if obj is String {
+            return obj as! String
+        }
+        else if obj is NSAttributedString {
+            return (obj as! NSAttributedString).string
+        }else {
+            wy_print("\(obj)" + "只能是 String 或者 NSAttributedString 类型的")
+            return ""
         }
     }
     
     private struct UIAlertControllerRuntimeKey {
         
         static let wy_alertWindow = UnsafeRawPointer.init(bitPattern: "wy_alertWindow".hashValue)!
-        
-        static let wy_isBecomeActive = UnsafeRawPointer.init(bitPattern: "wy_isBecomeActive".hashValue)!
     }
     
     private var wy_alertWindow: UIWindow? {
