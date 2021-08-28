@@ -11,6 +11,18 @@ import UIKit
 
 public extension UIImage {
     
+    /// 加载本地图片(按照 本地图片-->Bundle图片 的顺序去获取)
+    class func wy_named(_ imageName: String, _ bundleSource: String = WYBasisKitConfig.bundleSource) -> UIImage? {
+        
+        guard let imageSource = UIImage(named: imageName) else {
+            
+            let resourcePath = ((Bundle(for: WYLocalizableClass.self).path(forResource: bundleSource, ofType: "bundle")) ?? (Bundle.main.path(forResource: bundleSource, ofType: "bundle"))) ?? ""
+            
+            return UIImage(named: imageName, in: Bundle(path: resourcePath), compatibleWith: nil)
+        }
+        return imageSource
+    }
+    
     /// 截取指定View快照
     class func wy_screenshot(_ view: UIView) -> UIImage! {
         
@@ -127,3 +139,5 @@ public extension UIImage {
         return newImage
     }
 }
+
+private class WYLocalizableClass {}

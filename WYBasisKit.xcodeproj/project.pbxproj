@@ -67,6 +67,8 @@
 		AAE02B1A267C61E000EF6D36 /* CALayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE02B19267C61E000EF6D36 /* CALayer.swift */; };
 		AAEE9002265B9558003B1748 /* WYNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAEE9000265B9558003B1748 /* WYNetworkManager.swift */; };
 		AAEE9003265B9558003B1748 /* WYNetworkServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAEE9001265B9558003B1748 /* WYNetworkServer.swift */; };
+		AAF09E7426DA2E420063102C /* UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF09E7326DA2E410063102C /* UICollectionView.swift */; };
+		AAF09E7E26DA573C0063102C /* WYRefresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF09E7D26DA573C0063102C /* WYRefresh.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -138,6 +140,8 @@
 		AAE02B19267C61E000EF6D36 /* CALayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CALayer.swift; sourceTree = "<group>"; };
 		AAEE9000265B9558003B1748 /* WYNetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYNetworkManager.swift; sourceTree = "<group>"; };
 		AAEE9001265B9558003B1748 /* WYNetworkServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYNetworkServer.swift; sourceTree = "<group>"; };
+		AAF09E7326DA2E410063102C /* UICollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionView.swift; sourceTree = "<group>"; };
+		AAF09E7D26DA573C0063102C /* WYRefresh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYRefresh.swift; sourceTree = "<group>"; };
 		DC30AAA7963EADDE72D26FBC /* libPods-WYBasisKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WYBasisKit.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -281,12 +285,8 @@
 		AA771B922568F834002C748B /* Practical */ = {
 			isa = PBXGroup;
 			children = (
-				1F3CEEB125773CA500955712 /* CNLog */,
-				AAB2712626B571F300771549 /* Timer */,
+				AAF09E7726DA43040063102C /* System */,
 				AA771BCA2568F834002C748B /* BoolJudge */,
-				AA771BA52568F834002C748B /* Biometric */,
-				AA771BA72568F834002C748B /* Authorize */,
-				AA771BC42568F834002C748B /* ConstDefinition */,
 			);
 			path = Practical;
 			sourceTree = "<group>";
@@ -484,24 +484,8 @@
 		AA771BF62568F91F002C748B /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				AAE02B18267C61B400EF6D36 /* CALayer */,
-				1F5C3E5F2578B60C00E0DBFF /* UIApplication */,
-				AA771BBC2568F834002C748B /* UITableView */,
-				AA771BBE2568F834002C748B /* UITextField */,
-				AA771BB82568F834002C748B /* UIView */,
-				AA771BB62568F834002C748B /* UIButton */,
-				AA771BB22568F834002C748B /* UILabel */,
-				AA771BAB2568F834002C748B /* String */,
-				AA771B9D2568F834002C748B /* UIFont */,
-				AA771B972568F834002C748B /* UIColor */,
-				AA771B932568F834002C748B /* UIImage */,
-				AA771B9F2568F834002C748B /* UIDevice */,
-				AA771BAD2568F834002C748B /* NSObject */,
-				AA771BA92568F834002C748B /* NumberFormatter */,
-				AA771BA12568F834002C748B /* UIViewController */,
-				AA771B992568F834002C748B /* UIAlertController */,
-				AA771BA32568F834002C748B /* UINavigationController */,
-				AA771B952568F834002C748B /* NSMutableAttributedString */,
+				AAF09E7626DA3B250063102C /* System */,
+				AAF09E6E26DA27C70063102C /* Refresh */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -566,6 +550,60 @@
 				AA2827B326BFCF7A00EB9DBC /* WYLocalizable.bundle */,
 			);
 			path = Localizable;
+			sourceTree = "<group>";
+		};
+		AAF09E6E26DA27C70063102C /* Refresh */ = {
+			isa = PBXGroup;
+			children = (
+				AAF09E7D26DA573C0063102C /* WYRefresh.swift */,
+			);
+			path = Refresh;
+			sourceTree = "<group>";
+		};
+		AAF09E7226DA2DEC0063102C /* UICollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				AAF09E7326DA2E410063102C /* UICollectionView.swift */,
+			);
+			path = UICollectionView;
+			sourceTree = "<group>";
+		};
+		AAF09E7626DA3B250063102C /* System */ = {
+			isa = PBXGroup;
+			children = (
+				AAE02B18267C61B400EF6D36 /* CALayer */,
+				AA771BB82568F834002C748B /* UIView */,
+				AA771BB62568F834002C748B /* UIButton */,
+				AA771BB22568F834002C748B /* UILabel */,
+				AA771BAB2568F834002C748B /* String */,
+				AA771B9D2568F834002C748B /* UIFont */,
+				AA771B972568F834002C748B /* UIColor */,
+				AA771B932568F834002C748B /* UIImage */,
+				AA771B9F2568F834002C748B /* UIDevice */,
+				AA771BAD2568F834002C748B /* NSObject */,
+				AA771BBE2568F834002C748B /* UITextField */,
+				1F5C3E5F2578B60C00E0DBFF /* UIApplication */,
+				AA771BBC2568F834002C748B /* UITableView */,
+				AAF09E7226DA2DEC0063102C /* UICollectionView */,
+				AA771BA92568F834002C748B /* NumberFormatter */,
+				AA771BA12568F834002C748B /* UIViewController */,
+				AA771B992568F834002C748B /* UIAlertController */,
+				AA771BA32568F834002C748B /* UINavigationController */,
+				AA771B952568F834002C748B /* NSMutableAttributedString */,
+			);
+			path = System;
+			sourceTree = "<group>";
+		};
+		AAF09E7726DA43040063102C /* System */ = {
+			isa = PBXGroup;
+			children = (
+				1F3CEEB125773CA500955712 /* CNLog */,
+				AAB2712626B571F300771549 /* Timer */,
+				AA771BA52568F834002C748B /* Biometric */,
+				AA771BA72568F834002C748B /* Authorize */,
+				AA771BC42568F834002C748B /* ConstDefinition */,
+			);
+			path = System;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -718,6 +756,7 @@
 				AAB2712826B571F300771549 /* WYTimer.swift in Sources */,
 				AA771BE22568F834002C748B /* UIView.swift in Sources */,
 				AA9CF8302584C456008A7DE1 /* WYTestVisualController.swift in Sources */,
+				AAF09E7426DA2E420063102C /* UICollectionView.swift in Sources */,
 				1F04CF5A25820501002B8B11 /* WYTestView.swift in Sources */,
 				AA771BD12568F834002C748B /* UIColor.swift in Sources */,
 				AA9CF8232584B47B008A7DE1 /* WYLeftControllerHeaderView.swift in Sources */,
@@ -733,6 +772,7 @@
 				1FA6B68B25CD1B3400005170 /* WYWaterfallParagraphLayout.swift in Sources */,
 				1F952EF825807ACE00F03251 /* WYConstMethod.swift in Sources */,
 				AA771BCF2568F834002C748B /* UIImage.swift in Sources */,
+				AAF09E7E26DA573C0063102C /* WYRefresh.swift in Sources */,
 				AA9CF82A2584B97C008A7DE1 /* WYTestDarkNightModeController.swift in Sources */,
 				AA771BD82568F834002C748B /* WYBiometric.swift in Sources */,
 				1F9717FE25B55CB600CA7A33 /* WYWaterfallsFlowLayout.swift in Sources */,

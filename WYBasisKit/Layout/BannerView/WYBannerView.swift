@@ -382,10 +382,13 @@ public class WYBannerView: UIView {
     
     private class func getPlaceholderImage() -> UIImage {
         
-        let bundlePath = Bundle(for: WYBannerView.self).resourcePath! + "/WYBannerView.bundle"
-        let bannerBundle = Bundle(path: bundlePath)
-        let placeholder = UIImage(named: "placeholder_"+WYLocalizableManager.currentLanguage().rawValue, in: bannerBundle, compatibleWith: nil)
-        return placeholder ?? UIImage(named: "placeholder_"+WYLanguage.chinese.rawValue, in: bannerBundle, compatibleWith: nil)!
+        guard let imageSource = UIImage(named: "wy_placeholder_" + WYLocalizableManager.currentLanguage().rawValue) ?? UIImage(named: "wy_placeholder_" + WYLanguage.english.rawValue) else {
+            
+            let resourcePath = ((Bundle(for: WYBannerView.self).path(forResource: "WYBannerView", ofType: "bundle")) ?? (Bundle.main.path(forResource: "WYBannerView", ofType: "bundle"))) ?? ""
+            
+            return (UIImage(named: "wy_placeholder_" + WYLocalizableManager.currentLanguage().rawValue, in: Bundle(path: resourcePath), compatibleWith: nil) ?? UIImage(named: "wy_placeholder_" + WYLanguage.english.rawValue, in: Bundle(path: resourcePath), compatibleWith: nil))!
+        }
+        return imageSource
     }
     
     @objc private func nextPage() {

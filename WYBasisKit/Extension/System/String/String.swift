@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import libPhoneNumber_iOS
 
 /// 获取时间戳的模式
 public enum WYTimestampMode {
@@ -120,7 +119,11 @@ public extension String {
         return self.range(of: find, options: .caseInsensitive) != nil
     }
     
-    /// 使用正则表达式替换自定字符
+    /**
+     *  使用正则表达式替换自定字符
+     *  @param appointSymbol: 要替换的字符
+     *  @param replacement: 替换成什么字符
+     */
     func wy_replace(appointSymbol: String ,replacement: String) -> String {
         let regex = try! NSRegularExpression(pattern: "[\(appointSymbol)]", options: [])
         return regex.stringByReplacingMatches(in: self, options: [],
@@ -224,38 +227,6 @@ public extension String {
         scanner.scanInt(&number)
 
         return String(number)
-    }
-    
-    /// 检测手机号合法性
-    func wy_isValidPhoneNumber(countryCode: String) -> Bool {
-        
-        if self.isEmpty || countryCode.isEmpty {
-            
-            return false
-        }
-        
-        let phoneCode: String = self
-        
-        let phoneUtil = NBPhoneNumberUtil()
-        let new_countryCode: NSNumber = NSNumber(value: Int((countryCode.wy_replace(appointSymbol: "+", replacement: "")))!)
-        
-        do {
-            let phoneNumber: NBPhoneNumber = try phoneUtil.parse(phoneCode, defaultRegion: phoneUtil.getRegionCode(forCountryCode: new_countryCode))
-            
-            if phoneUtil.isValidNumber(forRegion: phoneNumber, regionCode: phoneUtil.getRegionCode(forCountryCode: new_countryCode)) == false {
-                
-                return false
-            }
-        }
-        catch _ as NSError {
-            return false
-        }
-        return true
-    }
-    
-    /// 获取非空字符串
-    var wy_emptyStr: String {
-        return (self.isEmpty == true) ? "" : self
     }
     
     private func sharedTimeFormat(dateFormat: WYTimeFormat) -> String {

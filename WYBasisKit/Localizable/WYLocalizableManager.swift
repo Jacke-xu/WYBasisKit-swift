@@ -138,9 +138,11 @@ public struct WYLocalizableManager {
         let bundlePath = (Bundle(for: WYLocalizableClass.self).path(forResource: localizableTable, ofType: "bundle")) ?? (Bundle.main.path(forResource: localizableTable, ofType: "bundle"))
 
         guard let resourcePath = bundlePath else {
-
+            
+            /// 如果没有找到存放国际化资源的Bundle文件，就直接从本地加载国际化文件
             return Bundle(path: (Bundle(for: WYLocalizableClass.self).path(forResource: language.rawValue, ofType: "lproj") ?? Bundle.main.path(forResource: language.rawValue, ofType: "lproj")) ?? "")
         }
+        /// 从找到的存放国际化资源的Bundle文件中加载国际化资源
         return Bundle(path: Bundle(path: resourcePath)?.path(forResource: language.rawValue, ofType: "lproj") ?? "")
     }
 }

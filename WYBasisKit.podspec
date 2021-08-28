@@ -23,20 +23,47 @@ Pod::Spec.new do |kit|
     end
     
     kit.subspec 'Extension' do |extension|
-       extension.source_files = 'WYBasisKit/Extension/**/*', 'WYBasisKit/Practical/ConstDefinition/WYConstDefinition.swift', 'WYBasisKit/Config/WYBasisKitConfig.swift'
-       extension.frameworks = 'Foundation', 'UIKit'
-       extension.dependency 'WYBasisKit/Localizable'
-       extension.dependency 'MJRefresh'
-       extension.dependency 'libPhoneNumber-iOS'
-       extension.dependency 'MBProgressHUD'
-       extension.resource = 'WYBasisKit/Localizable/WYLocalizable.bundle'
+
+       extension.default_subspec = 'System'
+       
+       extension.subspec 'Refresh' do |refresh|
+          refresh.source_files = 'WYBasisKit/Extension/Refresh/**/*', 'WYBasisKit/Config/WYBasisKitConfig.swift'
+          refresh.frameworks = 'Foundation', 'UIKit'
+          refresh.dependency 'WYBasisKit/Localizable'
+          refresh.dependency 'MJRefresh'
+       end
+
+       extension.subspec 'System' do |sstm|
+          sstm.source_files = 'WYBasisKit/Extension/System/**/*', 'WYBasisKit/Practical/ConstDefinition/WYConstDefinition.swift', 'WYBasisKit/Config/WYBasisKitConfig.swift'
+          sstm.frameworks = 'Foundation', 'UIKit'
+          sstm.dependency 'WYBasisKit/Localizable'
+          sstm.dependency 'MBProgressHUD'
+          sstm.resource = 'WYBasisKit/Localizable/WYLocalizable.bundle'
+       end
+
+       extension.subspec 'NetworkImage' do |networkImage|
+          networkImage.source_files = 'WYBasisKit/Extension/NetworkImage/**/*'
+          networkImage.frameworks = 'Foundation', 'UIKit'
+          networkImage.dependency 'Kingfisher'
+       end
     end
 
     kit.subspec 'Practical' do |practical|
-       practical.source_files = 'WYBasisKit/Practical/**/*', 'WYBasisKit/Extension/UIAlertController/**/*', 'WYBasisKit/Extension/NSObject/**/*', 'WYBasisKit/Extension/UIDevice/**/*', 'WYBasisKit/Config/WYBasisKitConfig.swift'
-       practical.frameworks = 'Foundation', 'UIKit', 'LocalAuthentication', 'Photos', 'CoreFoundation'
-       practical.dependency 'WYBasisKit/Localizable'
-       practical.resource = 'WYBasisKit/Localizable/WYLocalizable.bundle'
+   
+       practical.default_subspec = 'System' 
+
+       practical.subspec 'BoolJudge' do |boolJudge|
+          boolJudge.source_files = 'WYBasisKit/Practical/BoolJudge/**/*', 'WYBasisKit/Config/WYBasisKitConfig.swift'
+          refresh.frameworks = 'Foundation', 'UIKit', 'libPhoneNumber_iOS'
+          refresh.dependency 'libPhoneNumber-iOS'
+       end
+
+       practical.subspec 'System' do |sstm|
+          sstm.source_files = 'WYBasisKit/Practical/System/**/*', 'WYBasisKit/Extension/UIAlertController/**/*', 'WYBasisKit/Extension/NSObject/**/*', 'WYBasisKit/Extension/UIDevice/**/*', 'WYBasisKit/Config/WYBasisKitConfig.swift'
+          sstm.frameworks = 'Foundation', 'UIKit', 'LocalAuthentication', 'Photos', 'CoreFoundation'
+          sstm.dependency 'WYBasisKit/Localizable'
+          sstm.resource = 'WYBasisKit/Localizable/WYLocalizable.bundle'
+       end
     end
     
     kit.subspec 'Networking' do |networking|

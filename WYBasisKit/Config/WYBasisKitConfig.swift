@@ -24,4 +24,10 @@ public struct WYBasisKitConfig {
     
     /// 设置tableView或collectionView上拉加载更多时每次请求的数据量
     public static var pageSize: NSInteger = 10
+    
+    /// 设置默认图片加载的Bundle名(例如：ImageSource.bundle)
+    public static var bundleSource: String = "ImageSource"
+    
+    /// 设置默认的国家码
+    public static var countryCode: String = "86"
 }

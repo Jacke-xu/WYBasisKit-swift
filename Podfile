@@ -13,5 +13,5 @@ target 'WYBasisKit' do
   pod 'Moya'
   pod 'IQKeyboardManagerSwift'
   pod 'MBProgressHUD'
-  #pod 'AvoidCarsh'
+  pod 'AvoidCarsh'
 end

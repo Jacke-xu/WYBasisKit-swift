@@ -7,9 +7,8 @@
 //
 
 import UIKit
-import MJRefresh
 
-/// TableView注册类型
+/// UITableView注册类型
 public enum WYTableViewRegisterType {
     
     /// 注册Cell
@@ -81,33 +80,11 @@ public extension UITableView {
         }
     }
     
-    /// 结束mj_header刷新状态
-    func wy_headerEndRefreshing() {
-        
-        guard self.mj_header != nil else { return }
-        
-        self.mj_header?.endRefreshing()
-    }
-
-    /// 结束mj_footer刷新状态
-    func wy_footerEndRefreshing(responseSize: NSInteger = 0, pageSize: NSInteger = WYBasisKitConfig.pageSize) {
-        
-        guard self.mj_footer != nil else { return }
-        
-        if responseSize < pageSize {
-            
-            self.mj_footer?.endRefreshingWithNoMoreData()
-            
-        }else {
-            self.mj_footer?.endRefreshing()
-        }
-    }
-    
     /// 注册UITableView的Cell或HeaderFooterView
     func wy_register(_ className: String, _ type: WYTableViewRegisterType) {
         
         guard className.isEmpty == false else {
-            fatalError("调用注册方法前必须创建与className对应的类文件")
+            fatalError("调用注册方法前必须创建与 \(className) 对应的类文件")
         }
         
         let registerClass = (className == "UITableViewCell") ? className : (wy_projectName + "." + className)
