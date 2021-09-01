@@ -20,14 +20,17 @@ public struct WYBasisKitConfig {
     public static var maxFontRatio: CGFloat = 1.0
     
     /// 设置AlertView提示控件驻留时间
-    public static var messageDuration: TimeInterval = 1.5
+    public static var alertDuration: TimeInterval = 1.5
     
     /// 设置tableView或collectionView上拉加载更多时每次请求的数据量
     public static var pageSize: NSInteger = 10
     
-    /// 设置默认图片加载的Bundle名(例如：ImageSource.bundle)
-    public static var bundleSource: String = "ImageSource"
+    /// 设置默认图片加载的Bundle名(例如：ImageSource.bundle 设置bundleName为 ImageSource 即可)
+    public static var bundleName: String = ""
     
     /// 设置默认的国家码
     public static var countryCode: String = "86"
+    
+    /// Debug模式下是否打印日志
+    public static var debugModeLog: Bool = true
 }

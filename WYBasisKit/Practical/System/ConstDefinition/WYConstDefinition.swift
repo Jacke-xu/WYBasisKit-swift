@@ -58,8 +58,10 @@ public func wy_fontSize(_ ratioValue: CGFloat) -> CGFloat {
 /// DEBUG打印日志
 public func wy_print(_ messages: Any..., file: String = #file, function: String = #function, line: Int = #line) {
     #if DEBUG
-    let message = messages.compactMap { "\($0)" }.joined(separator: " ")
-    print("\n【\((file as NSString).lastPathComponent) ——> \(function) ——> line:\(line)】\n\n \(message)\n\n\n")
+    if WYBasisKitConfig.debugModeLog == true {
+        let message = messages.compactMap { "\($0)" }.joined(separator: " ")
+        print("\n【\((file as NSString).lastPathComponent) ——> \(function) ——> line:\(line)】\n\n \(message)\n\n\n")
+    }
     #endif
 }
 

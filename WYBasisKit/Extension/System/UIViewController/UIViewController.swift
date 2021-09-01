@@ -32,7 +32,7 @@ extension UIViewController: ViewControllerHandlerProtocol {
 
 public extension UIViewController {
     
-    func wy_displayMessage(title: String? = .none, message: String, duration: TimeInterval = WYBasisKitConfig.messageDuration) {
+    func wy_displayMessage(title: String? = .none, message: String, duration: TimeInterval = WYBasisKitConfig.alertDuration) {
         
         UIAlertController.wy_show(title: title ?? "", message: message, duration: duration)
     }

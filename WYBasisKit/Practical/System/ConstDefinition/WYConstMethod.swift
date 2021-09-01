@@ -9,23 +9,24 @@
 import UIKit
 
 /// 获取当前正在显示的控制器
-public func wy_currentController(controller: UIViewController = UIApplication.shared.keyWindow!.rootViewController!) -> UIViewController? {
+public func wy_currentController(windowController: UIViewController? = (UIApplication.shared.delegate?.window)??.rootViewController) -> UIViewController? {
     
-    if controller is UITabBarController {
+    if let navigationController = windowController as? UINavigationController {
         
-        let tabBarController = controller as! UITabBarController
+        return wy_currentController(windowController: navigationController.visibleViewController)
         
-        return wy_currentController(controller: tabBarController.selectedViewController!)
+    }else if let tabBarController = windowController as? UITabBarController {
+        
+        return wy_currentController(windowController: tabBarController.selectedViewController)
+        
+    }else if let presentedController = windowController?.presentedViewController {
+        
+        return wy_currentController(windowController: presentedController)
+        
+    }else {
+        
+        return windowController
     }
-    
-    if controller is UINavigationController {
-        
-        let navController = controller as! UINavigationController
-        
-        return wy_currentController(controller: navController.viewControllers.last!)
-    }
-    
-    return controller
 }
 
 /// 角度转弧度

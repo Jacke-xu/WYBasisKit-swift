@@ -11,18 +11,6 @@ import UIKit
 
 public extension UIImage {
     
-    /// 加载本地图片(按照 本地图片-->Bundle图片 的顺序去获取)
-    class func wy_named(_ imageName: String, _ bundleSource: String = WYBasisKitConfig.bundleSource) -> UIImage? {
-        
-        guard let imageSource = UIImage(named: imageName) else {
-            
-            let resourcePath = ((Bundle(for: WYLocalizableClass.self).path(forResource: bundleSource, ofType: "bundle")) ?? (Bundle.main.path(forResource: bundleSource, ofType: "bundle"))) ?? ""
-            
-            return UIImage(named: imageName, in: Bundle(path: resourcePath), compatibleWith: nil)
-        }
-        return imageSource
-    }
-    
     /// 截取指定View快照
     class func wy_screenshot(_ view: UIView) -> UIImage! {
         
@@ -137,6 +125,58 @@ public extension UIImage {
         UIGraphicsEndImageContext()
         
         return newImage
+    }
+    
+    /**
+     *  加载本地图片
+     *
+     *  @param imageName             要加载的图片名
+     *
+     *  @param bundleName            从哪个bundle文件内查找，如果为空，则直接在本地路径下查找
+     *
+     *  @param subdirectory         bundleName.bundle下面的子文件夹目录(如果图片是放在bundle文件下面的子文件夹中，则需要传入该路径，例如ImageSource.bundle下面有个叫apple的子文件夹，则subdirectory应该传入 apple )
+     *
+     */
+    class func wy_named(_ imageName: String, inBundle bundleName: String = WYBasisKitConfig.bundleName, subdirectory: String = "") -> UIImage {
+        
+        if imageName.isEmpty {
+            
+            wy_print("没有找到相关图片，因为传入的 imageName 为空， 已默认创建一张随机颜色图片供您使用")
+            return wy_image(from: UIColor(red: CGFloat(arc4random()%256)/255.0, green: CGFloat(arc4random()%256)/255.0, blue: CGFloat(arc4random()%256)/255.0, alpha: 1.0))
+        }
+        
+        if bundleName.isEmpty {
+            
+            guard let image = UIImage(named: imageName) else {
+
+                let resourcePath = ((Bundle(for: WYLocalizableClass.self).path(forResource: imageName, ofType: nil)) ?? (Bundle.main.path(forResource: imageName, ofType: nil))) ?? ""
+                
+                guard let contentImage = UIImage(named: imageName, in: Bundle(path: resourcePath), compatibleWith: nil) else {
+                    
+                    wy_print("在项目路径或Assets下面，没有找到 \(imageName) 这张图片，已默认创建一张随机颜色图片供您使用")
+                    
+                    return wy_image(from: UIColor(red: CGFloat(arc4random()%256)/255.0, green: CGFloat(arc4random()%256)/255.0, blue: CGFloat(arc4random()%256)/255.0, alpha: 1.0))
+                }
+                return contentImage
+            }
+            return image
+            
+        }else {
+            
+            var subdirectoryPath = subdirectory
+            if  (subdirectory.isEmpty == false) && (subdirectory.hasPrefix("/") == false) {
+                subdirectoryPath = "/" + subdirectory
+            }
+            
+            let resourcePath = (((Bundle(for: WYLocalizableClass.self).path(forResource: bundleName, ofType: "bundle")) ?? (Bundle.main.path(forResource: bundleName, ofType: "bundle"))) ?? "").appending(subdirectoryPath)
+            
+            guard let contentImage = UIImage(named: imageName, in: Bundle(path: resourcePath), compatibleWith: nil) else {
+                
+                wy_print("在 \(bundleName).bundle\(subdirectory) 中没有找到 \(imageName) 这张图片，已默认创建一张随机颜色图片供您使用")
+                return wy_image(from: UIColor(red: CGFloat(arc4random()%256)/255.0, green: CGFloat(arc4random()%256)/255.0, blue: CGFloat(arc4random()%256)/255.0, alpha: 1.0))
+            }
+            return contentImage
+        }
     }
 }
 

@@ -57,6 +57,8 @@
 		AA9CF82A2584B97C008A7DE1 /* WYTestDarkNightModeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9CF8292584B97C008A7DE1 /* WYTestDarkNightModeController.swift */; };
 		AA9CF82D2584C262008A7DE1 /* WYTestAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9CF82C2584C262008A7DE1 /* WYTestAnimationController.swift */; };
 		AA9CF8302584C456008A7DE1 /* WYTestVisualController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9CF82F2584C456008A7DE1 /* WYTestVisualController.swift */; };
+		AAA9E5E726DB3D0F009C064B /* WYActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA9E5E626DB3D0F009C064B /* WYActivity.swift */; };
+		AAA9E5E926DB6569009C064B /* WYActivity.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AAA9E5E826DB6569009C064B /* WYActivity.bundle */; };
 		AAB2712826B571F300771549 /* WYTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB2712726B571F300771549 /* WYTimer.swift */; };
 		AAB7BDE726257F3600BD57EC /* WYBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB7BDE626257F3600BD57EC /* WYBannerView.swift */; };
 		AAC3825A25A1874500B2D41C /* WYBannerView.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AAC3825925A1874500B2D41C /* WYBannerView.bundle */; };
@@ -130,6 +132,8 @@
 		AA9CF8292584B97C008A7DE1 /* WYTestDarkNightModeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYTestDarkNightModeController.swift; sourceTree = "<group>"; };
 		AA9CF82C2584C262008A7DE1 /* WYTestAnimationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYTestAnimationController.swift; sourceTree = "<group>"; };
 		AA9CF82F2584C456008A7DE1 /* WYTestVisualController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYTestVisualController.swift; sourceTree = "<group>"; };
+		AAA9E5E626DB3D0F009C064B /* WYActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYActivity.swift; sourceTree = "<group>"; };
+		AAA9E5E826DB6569009C064B /* WYActivity.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = WYActivity.bundle; sourceTree = "<group>"; };
 		AAB2712726B571F300771549 /* WYTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYTimer.swift; sourceTree = "<group>"; };
 		AAB7BDE626257F3600BD57EC /* WYBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYBannerView.swift; sourceTree = "<group>"; };
 		AAC3825925A1874500B2D41C /* WYBannerView.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = WYBannerView.bundle; sourceTree = "<group>"; };
@@ -272,10 +276,11 @@
 			children = (
 				1F6AA1C325A6D56F00AADEE3 /* WYBasisKit.entitlements */,
 				AA771C0D25691241002C748B /* Config */,
-				AAE2E0F726AD7F740077B770 /* Localizable */,
-				AA771BF62568F91F002C748B /* Extension */,
-				AA771B922568F834002C748B /* Practical */,
 				AA771BB12568F834002C748B /* Layout */,
+				AAA9E5E126DB3B68009C064B /* Activity */,
+				AA771B922568F834002C748B /* Practical */,
+				AA771BF62568F91F002C748B /* Extension */,
+				AAE2E0F726AD7F740077B770 /* Localizable */,
 				AA771BC02568F834002C748B /* Networking */,
 				1F24689725B13D9D00E02F78 /* Other */,
 			);
@@ -527,6 +532,15 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		AAA9E5E126DB3B68009C064B /* Activity */ = {
+			isa = PBXGroup;
+			children = (
+				AAA9E5E626DB3D0F009C064B /* WYActivity.swift */,
+				AAA9E5E826DB6569009C064B /* WYActivity.bundle */,
+			);
+			path = Activity;
+			sourceTree = "<group>";
+		};
 		AAB2712626B571F300771549 /* Timer */ = {
 			isa = PBXGroup;
 			children = (
@@ -669,6 +683,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AAA9E5E926DB6569009C064B /* WYActivity.bundle in Resources */,
 				AA484EBF24FA262500B39D60 /* LaunchScreen.storyboard in Resources */,
 				AA484EBC24FA262500B39D60 /* Assets.xcassets in Resources */,
 				AAC3825A25A1874500B2D41C /* WYBannerView.bundle in Resources */,
@@ -752,6 +767,7 @@
 				AA327F032569179F00CF5CBE /* WYBasisKitConfig.swift in Sources */,
 				AA771BD52568F834002C748B /* UIDevice.swift in Sources */,
 				AAEE9002265B9558003B1748 /* WYNetworkManager.swift in Sources */,
+				AAA9E5E726DB3D0F009C064B /* WYActivity.swift in Sources */,
 				1F5C3E942578CD5400E0DBFF /* WYLocalizableManager.swift in Sources */,
 				AAB2712826B571F300771549 /* WYTimer.swift in Sources */,
 				AA771BE22568F834002C748B /* UIView.swift in Sources */,
