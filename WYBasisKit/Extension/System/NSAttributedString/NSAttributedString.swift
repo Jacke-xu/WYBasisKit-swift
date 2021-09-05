@@ -1,5 +1,5 @@
 //
-//  NSMutableAttributedString.swift
+//  NSAttributedString.swift
 //  WYBasisKit
 //
 //  Created by Jacke·xu on 2020/8/29.
@@ -89,10 +89,10 @@ public extension NSMutableAttributedString {
     
     /// 设置字间距
     @discardableResult
-    func wy_wordsSpacing(wordsSpacing: Double, string: String? = nil) -> NSMutableAttributedString {
+    func wy_wordsSpacing(wordsSpacing: CGFloat, string: String? = nil) -> NSMutableAttributedString {
         
         let selfStr: NSString = self.string as NSString
-        addAttributes([NSAttributedString.Key.kern: NSNumber(value: wordsSpacing)], range: selfStr.range(of: string == nil ? self.string : string!))
+        addAttributes([NSAttributedString.Key.kern: NSNumber(value: Double(wordsSpacing))], range: selfStr.range(of: string == nil ? self.string : string!))
         
         return self
     }
@@ -117,5 +117,28 @@ public extension NSMutableAttributedString {
         addAttribute(NSAttributedString.Key.strikethroughColor, value: color, range: selfStr.range(of: string == nil ? self.string : string!))
         
         return self
+    }
+}
+
+extension NSAttributedString {
+    
+    /// 计算富文本宽度
+    func wy_calculateWidth(controlHeight: CGFloat) -> CGFloat {
+        
+        return wy_calculateSize(controlSize: CGSize(width: .greatestFiniteMagnitude, height: controlHeight)).width
+    }
+    
+    /// 计算富文本高度
+    func wy_calculateHeight(controlWidth: CGFloat) -> CGFloat {
+        
+        return wy_calculateSize(controlSize: CGSize(width: controlWidth, height: .greatestFiniteMagnitude)).height
+    }
+    
+    /// 计算富文本宽高
+    func wy_calculateSize(controlSize: CGSize) -> CGSize {
+        
+        let attributedSize = boundingRect(with: controlSize, options: [.truncatesLastVisibleLine, .usesLineFragmentOrigin, .usesFontLeading], context: nil)
+        
+        return CGSize(width: ceil(attributedSize.width), height: ceil(attributedSize.height))
     }
 }

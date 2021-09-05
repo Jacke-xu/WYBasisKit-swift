@@ -33,7 +33,7 @@
 		AA484EBC24FA262500B39D60 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA484EBB24FA262500B39D60 /* Assets.xcassets */; };
 		AA484EBF24FA262500B39D60 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA484EBD24FA262500B39D60 /* LaunchScreen.storyboard */; };
 		AA771BCF2568F834002C748B /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA771B942568F834002C748B /* UIImage.swift */; };
-		AA771BD02568F834002C748B /* NSMutableAttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA771B962568F834002C748B /* NSMutableAttributedString.swift */; };
+		AA771BD02568F834002C748B /* NSAttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA771B962568F834002C748B /* NSAttributedString.swift */; };
 		AA771BD12568F834002C748B /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA771B982568F834002C748B /* UIColor.swift */; };
 		AA771BD22568F834002C748B /* UIAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA771B9A2568F834002C748B /* UIAlertController.swift */; };
 		AA771BD42568F834002C748B /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA771B9E2568F834002C748B /* UIFont.swift */; };
@@ -106,7 +106,7 @@
 		AA484EBE24FA262500B39D60 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AA484EC024FA262500B39D60 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AA771B942568F834002C748B /* UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
-		AA771B962568F834002C748B /* NSMutableAttributedString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSMutableAttributedString.swift; sourceTree = "<group>"; };
+		AA771B962568F834002C748B /* NSAttributedString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSAttributedString.swift; sourceTree = "<group>"; };
 		AA771B982568F834002C748B /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		AA771B9A2568F834002C748B /* UIAlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIAlertController.swift; sourceTree = "<group>"; };
 		AA771B9E2568F834002C748B /* UIFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
@@ -304,12 +304,12 @@
 			path = UIImage;
 			sourceTree = "<group>";
 		};
-		AA771B952568F834002C748B /* NSMutableAttributedString */ = {
+		AA771B952568F834002C748B /* NSAttributedString */ = {
 			isa = PBXGroup;
 			children = (
-				AA771B962568F834002C748B /* NSMutableAttributedString.swift */,
+				AA771B962568F834002C748B /* NSAttributedString.swift */,
 			);
-			path = NSMutableAttributedString;
+			path = NSAttributedString;
 			sourceTree = "<group>";
 		};
 		AA771B972568F834002C748B /* UIColor */ = {
@@ -602,8 +602,8 @@
 				AA771BA92568F834002C748B /* NumberFormatter */,
 				AA771BA12568F834002C748B /* UIViewController */,
 				AA771B992568F834002C748B /* UIAlertController */,
+				AA771B952568F834002C748B /* NSAttributedString */,
 				AA771BA32568F834002C748B /* UINavigationController */,
-				AA771B952568F834002C748B /* NSMutableAttributedString */,
 			);
 			path = System;
 			sourceTree = "<group>";
@@ -745,7 +745,7 @@
 				AA771BDE2568F834002C748B /* UILabel.swift in Sources */,
 				AA771BD42568F834002C748B /* UIFont.swift in Sources */,
 				AAC6B3952691706E00D90D15 /* WYTestTableViewFooterView.swift in Sources */,
-				AA771BD02568F834002C748B /* NSMutableAttributedString.swift in Sources */,
+				AA771BD02568F834002C748B /* NSAttributedString.swift in Sources */,
 				1F5C3E5325787EC500E0DBFF /* WYCenterController.swift in Sources */,
 				1F5C3E5025787EB400E0DBFF /* WYLeftController.swift in Sources */,
 				AA771BD62568F834002C748B /* UIViewController.swift in Sources */,

@@ -19,10 +19,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // 屏蔽控制台约束输出
         UserDefaults.standard.setValue(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")
         
-        wy_print("currentLanguage = \(WYLocalizableManager.currentLanguage()), code = \(WYLocalizableManager.currentLanguage().rawValue)")
-        
-        wy_print("localizableString = \(WYLocalizedString("您正在使用Wifi联网"))")
-        
         return true
     }
     

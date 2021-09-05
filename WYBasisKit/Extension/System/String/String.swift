@@ -40,24 +40,26 @@ public enum WYTimeFormat {
 public extension String {
     
     /// 返回一个计算好的字符串的宽度
-    func wy_calculateStringWidth(controlHeight: CGFloat = 0, controlFont: UIFont, lineSpacing: CGFloat = 0) -> CGFloat {
+    func wy_calculateWidth(controlHeight: CGFloat = 0, controlFont: UIFont, lineSpacing: CGFloat = 0, wordsSpacing: CGFloat = 0) -> CGFloat {
         
         let sharedControlHeight = (controlHeight == 0) ? controlFont.lineHeight : controlHeight
-        return wy_calculateStringSize(controlSize: CGSize(width: .greatestFiniteMagnitude, height: sharedControlHeight), controlFont: controlFont, lineSpacing: lineSpacing).width
+        return wy_calculategSize(controlSize: CGSize(width: .greatestFiniteMagnitude, height: sharedControlHeight), controlFont: controlFont, lineSpacing: lineSpacing, wordsSpacing: wordsSpacing).width
     }
     
     /// 返回一个计算好的字符串的高度
-    func wy_calculateStringHeight(controlWidth: CGFloat, controlFont: UIFont, lineSpacing: CGFloat = 0) -> CGFloat {
+    func wy_calculateHeight(controlWidth: CGFloat, controlFont: UIFont, lineSpacing: CGFloat = 0, wordsSpacing: CGFloat = 0) -> CGFloat {
         
-        return wy_calculateStringSize(controlSize: CGSize(width: controlWidth, height: .greatestFiniteMagnitude), controlFont: controlFont, lineSpacing: lineSpacing).height
+        return wy_calculategSize(controlSize: CGSize(width: controlWidth, height: .greatestFiniteMagnitude), controlFont: controlFont, lineSpacing: lineSpacing, wordsSpacing: wordsSpacing).height
     }
     
     /// 返回一个计算好的字符串的size
-    func wy_calculateStringSize(controlSize: CGSize, controlFont: UIFont, lineSpacing: CGFloat = 0) -> CGSize {
-
+    func wy_calculategSize(controlSize: CGSize, controlFont: UIFont, lineSpacing: CGFloat = 0, wordsSpacing: CGFloat = 0) -> CGSize {
+        
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = lineSpacing
-        let attributes = [NSAttributedString.Key.font: controlFont, NSAttributedString.Key.paragraphStyle: paragraphStyle]
+        let attributes = [NSAttributedString.Key.font: controlFont, NSAttributedString.Key.paragraphStyle: paragraphStyle, NSAttributedString.Key.kern: NSNumber(value: Double(wordsSpacing))]
+        
+        
         let string = self as NSString
         let stringSize: CGSize! = string.boundingRect(with: controlSize, options: NSStringDrawingOptions(rawValue: NSStringDrawingOptions.truncatesLastVisibleLine.rawValue | NSStringDrawingOptions.usesLineFragmentOrigin.rawValue | NSStringDrawingOptions.usesFontLeading.rawValue), attributes: attributes, context: nil).size
         
@@ -65,17 +67,20 @@ public extension String {
     }
     
     /// 获取每行显示的字符串
-    func wy_stringPerLine(font: UIFont, controlWidth: CGFloat) -> [String] {
+    func wy_stringPerLine(font: UIFont, controlWidth: CGFloat, wordsSpacing: CGFloat = 0) -> [String] {
         
         if self.isEmpty {
             return []
         }
         
-        let myFont = CTFontCreateWithName(font.fontName as CFString, font.pointSize, nil)
+        let myFont = CTFontCreateUIFontForLanguage(.system, font.pointSize, font.fontName as CFString)
         
         let attStr = NSMutableAttributedString(string: self)
         
-        attStr.addAttribute(kCTFontAttributeName as NSAttributedString.Key, value: myFont, range: NSMakeRange(0, attStr.length))
+        attStr.addAttribute(kCTFontAttributeName as NSAttributedString.Key, value: myFont as Any, range: NSMakeRange(0, attStr.length))
+        
+        let selfStr: NSString = attStr.string as NSString
+        attStr.addAttributes([NSAttributedString.Key.kern: NSNumber(value: Double(wordsSpacing))], range: selfStr.range(of: attStr.string))
         
         let frameSetter: CTFramesetter = CTFramesetterCreateWithAttributedString(attStr)
         
@@ -105,8 +110,8 @@ public extension String {
     }
     
     /// 判断字符串显示完毕需要几行
-    func wy_numberOfRows(font: UIFont, controlWidth: CGFloat) -> NSInteger {
-        return wy_stringPerLine(font: font, controlWidth: controlWidth).count
+    func wy_numberOfRows(font: UIFont, controlWidth: CGFloat, wordsSpacing: CGFloat = 0) -> NSInteger {
+        return wy_stringPerLine(font: font, controlWidth: controlWidth, wordsSpacing: wordsSpacing).count
     }
     
     /// 判断字符串包含某个字符串
@@ -117,6 +122,40 @@ public extension String {
     /// 判断字符串包含某个字符串(忽略大小写)
     func wy_stringContainsIgnoringCase(find: String) -> Bool{
         return self.range(of: find, options: .caseInsensitive) != nil
+    }
+    
+    /// 字符串截取(从第几位截取到第几位)
+    func wy_substring(from: NSInteger, to: NSInteger) -> String {
+        
+        guard from < self.count else {
+            return self
+        }
+        
+        guard to < self.count else {
+            return self
+        }
+        
+        let startIndex = self.index(self.startIndex, offsetBy: from)
+        let endIndex = self.index(self.startIndex, offsetBy: to)
+        
+        return String(self[startIndex...endIndex])
+    }
+    
+    /// 字符串截取(从第几位往后截取几位)
+    func wy_substring(from: NSInteger, after: NSInteger) -> String {
+        
+        guard from < self.count else {
+            return self
+        }
+        
+        guard (from + after) < self.count else {
+            return self
+        }
+        
+        let startIndex = self.index(self.startIndex, offsetBy: from)
+        let endIndex = self.index(self.startIndex, offsetBy: from + after)
+        
+        return String(self[startIndex...endIndex])
     }
     
     /**
