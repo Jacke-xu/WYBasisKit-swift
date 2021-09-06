@@ -166,9 +166,27 @@ public extension UIAlertController {
         }
     }
     
+    private class func checkPropertySecurity(property: String, className: String = "UIAlertController") -> Bool {
+        
+        guard let objClass = NSClassFromString(className) else {
+            return false
+        }
+        var propertys: [String: Any] = [:]
+        var count: UInt32 = 0
+        let ivars = class_copyIvarList(objClass, &count)
+        for i in 0..<count {
+            let ivar = ivars?[Int(i)]
+            let ivarName = NSString(cString: ivar_getName(ivar!)!, encoding: String.Encoding.utf8.rawValue)
+            let ivarType = NSString(cString: ivar_getTypeEncoding(ivar!)!, encoding: String.Encoding.utf8.rawValue)
+            
+            propertys[((ivarName ?? "") as String)] = (ivarType as String?) ?? "未知"
+        }
+        return propertys.keys.contains(property)
+    }
+    
     private struct UIAlertControllerRuntimeKey {
         
-        static let wy_alertWindow = UnsafeRawPointer.init(bitPattern: "wy_alertWindow".hashValue)!
+        static let wy_alertWindow = UnsafeRawPointer(bitPattern: "wy_alertWindow".hashValue)!
     }
     
     private var wy_alertWindow: UIWindow? {

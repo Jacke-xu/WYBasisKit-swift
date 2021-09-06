@@ -114,3 +114,32 @@ public func wy_randomString(minimux: NSInteger = 1, maximum: NSInteger = 100) ->
     
     return String(contentString[startIndex...endIndex])
 }
+
+/// 获取对象或者类的所有属性和对应的类型
+public func wy_objectPropertys(object: AnyObject? = nil, className: String = "") -> [String: Any] {
+    
+    var propertys: [String: Any] = [:]
+    
+    if (object != nil) {
+
+        Mirror(reflecting: object!).children.forEach { (child) in
+            propertys[child.label ?? "未知"] = type(of: child.value)
+        }
+    }
+    
+    guard let objClass = NSClassFromString(className) else {
+        return propertys
+    }
+    
+    var count: UInt32 = 0
+    let ivars = class_copyIvarList(objClass, &count)
+    for i in 0..<count {
+        let ivar = ivars?[Int(i)]
+        let ivarName = NSString(cString: ivar_getName(ivar!)!, encoding: String.Encoding.utf8.rawValue)
+        let ivarType = NSString(cString: ivar_getTypeEncoding(ivar!)!, encoding: String.Encoding.utf8.rawValue)
+        
+        propertys[((ivarName ?? "") as String)] = (ivarType as String?) ?? "未知"
+    }
+    
+    return propertys
+}
