@@ -116,7 +116,7 @@ public func wy_randomString(minimux: NSInteger = 1, maximum: NSInteger = 100) ->
 }
 
 /// 获取对象或者类的所有属性和对应的类型
-public func wy_objectPropertys(object: AnyObject? = nil, className: String = "") -> [String: Any] {
+public func wy_sharedPropertys(object: AnyObject? = nil, className: String = "") -> [String: Any] {
     
     var propertys: [String: Any] = [:]
     
@@ -126,7 +126,6 @@ public func wy_objectPropertys(object: AnyObject? = nil, className: String = "")
             propertys[child.label ?? "未知"] = type(of: child.value)
         }
     }
-    
     guard let objClass = NSClassFromString(className) else {
         return propertys
     }
@@ -140,6 +139,5 @@ public func wy_objectPropertys(object: AnyObject? = nil, className: String = "")
         
         propertys[((ivarName ?? "") as String)] = (ivarType as String?) ?? "未知"
     }
-    
     return propertys
 }

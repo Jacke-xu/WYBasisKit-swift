@@ -11,7 +11,7 @@ import UIKit
 
 public extension UIAlertController {
     
-    class func wy_show<T>(style: UIAlertController.Style = .alert, title: T? = nil, message: T? = nil, duration: TimeInterval = 0.0, actionSheetNeedCancel: Bool = true, textFieldPlaceholders: [T] = [], actions: [T] = [], handler:((_ actionStr: String, _ textFieldTexts: [String]) -> Void)? = nil) {
+    class func wy_show(style: UIAlertController.Style = .alert, title: Any? = nil, message: Any? = nil, duration: TimeInterval = 0.0, actionSheetNeedCancel: Bool = true, textFieldPlaceholders: [Any] = [], actions: [Any] = [], handler:((_ actionStr: String, _ textFieldTexts: [String]) -> Void)? = nil) {
         
         DispatchQueue.main.async {
             
@@ -21,23 +21,23 @@ public extension UIAlertController {
             
             var alertPlaceholders: [String] = []
             if style == .alert {
-                for placeholder: T in textFieldPlaceholders {
+                for placeholder: Any in textFieldPlaceholders {
                     alertPlaceholders.append(wy_sharedGenericString(object: placeholder))
                 }
             }
             
             var alertTitles: [String] = []
-            for actionTitle: T in actions {
+            for actionTitle: Any in actions {
                 alertTitles.append(wy_sharedGenericString(object: actionTitle))
             }
             
             let alertController: UIAlertController? = wy_internalShow(style: style, title: alertTitle, message: alertMessage, duration: duration, actionSheetNeedCancel: actionSheetNeedCancel, textFieldPlaceholders: alertPlaceholders, actions: alertTitles, handler: handler)
             
-            if (title != nil) && (title is NSAttributedString) {
+            if (title != nil) && (title is NSAttributedString) && (checkPropertySecurity(property: "_attributedTitle", object: alertController, className: "UIAlertController")) {
                 alertController?.setValue(title as! NSAttributedString, forKey: "attributedTitle")
             }
             
-            if (message != nil) && (message is NSAttributedString) {
+            if (message != nil) && (message is NSAttributedString) && (checkPropertySecurity(property: "_attributedMessage", object: alertController, className: "UIAlertController")) {
                 alertController?.setValue(message as! NSAttributedString, forKey: "attributedMessage")
             }
             
@@ -56,7 +56,7 @@ public extension UIAlertController {
                     let alertAction: UIAlertAction = alertController!.actions[index]
                     if index < actions.count {
                         let actionTitle = actions[index]
-                        if actionTitle is NSAttributedString {
+                        if (actionTitle is NSAttributedString) && (checkPropertySecurity(property: "_titleTextColor", object: alertAction, className: "UIAlertAction")) {
                             alertAction.setValue((actionTitle as! NSAttributedString).attribute(NSAttributedString.Key.foregroundColor, at: 0, effectiveRange: nil), forKey: "titleTextColor")
                         }
                     }
@@ -166,12 +166,19 @@ public extension UIAlertController {
         }
     }
     
-    private class func checkPropertySecurity(property: String, className: String = "UIAlertController") -> Bool {
+    private class func checkPropertySecurity(property: String, object: AnyObject?, className: String) -> Bool {
         
-        guard let objClass = NSClassFromString(className) else {
-            return false
-        }
         var propertys: [String: Any] = [:]
+        
+        if (object != nil) {
+            Mirror(reflecting: object!).children.forEach { (child) in
+                propertys[child.label ?? "未知"] = type(of: child.value)
+            }
+        }
+        guard let objClass = NSClassFromString(className) else {
+            return propertys.keys.contains(property)
+        }
+        
         var count: UInt32 = 0
         let ivars = class_copyIvarList(objClass, &count)
         for i in 0..<count {

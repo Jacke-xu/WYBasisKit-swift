@@ -133,10 +133,7 @@ extension WYLeftController: UITableViewDelegate, UITableViewDataSource {
 
         tableView.deselectRow(at: indexPath, animated: true)
 
-//        let className: String = controller[indexPath.section][indexPath.row]
-//        wy_showViewController(className: className)
-        
-        let aa = NSMutableAttributedString(string: "message")
-        UIAlertController.wy_show(style: UIAlertController.Style.alert, message: aa, actions: ["11", "22"])
+        let className: String = controller[indexPath.section][indexPath.row]
+        wy_showViewController(className: className)
     }
 }
