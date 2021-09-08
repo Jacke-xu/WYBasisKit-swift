@@ -43,16 +43,16 @@ public struct WYNetworkConfig {
     public static var requestHeaders: [String : String]? = ["Content-Type": "application/x-www-form-urlencoded; charset=utf-8"]
     
     /// 配置服务端自定义的成功code
-    public static var serverRequestSuccessCode: Int = 200
+    public static var serverRequestSuccessCode: String = "200"
     
     /// 配置其它失败code
-    public static var otherServerFailCode: Int = 10000
+    public static var otherServerFailCode: String = "10000"
     
     /// 配置网络判断失败code
-    public static var networkServerFailCode: Int = 10002
+    public static var networkServerFailCode: String = "10002"
     
     /// 配置解包失败code
-    public static var unpackServerFailCode: Int = 10001
+    public static var unpackServerFailCode: String = "10001"
     
     /// Debug模式下是否打印网络请求日志
     public static var debugModeLog: Bool = true
