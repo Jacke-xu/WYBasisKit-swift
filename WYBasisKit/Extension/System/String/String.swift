@@ -268,6 +268,21 @@ public extension String {
         return String(number)
     }
     
+    /// Encode
+    func wy_encoded(escape: String = "?!@#$^&%*+,:;='\"`<>()[]{}/\\| ") -> String {
+        
+        let characterSet = NSCharacterSet(charactersIn: escape).inverted
+        return self.addingPercentEncoding(withAllowedCharacters: characterSet) ?? self
+    }
+    
+    /// Decode
+    func wy_decoded() -> String {
+        
+        let targetString: NSMutableString = NSMutableString(string: self)
+        targetString.replaceOccurrences(of: "+", with: "", options: .literal, range: NSMakeRange(0, targetString.length))
+        return targetString.removingPercentEncoding ?? self
+    }
+    
     private func sharedTimeFormat(dateFormat: WYTimeFormat) -> String {
         
         switch dateFormat {
