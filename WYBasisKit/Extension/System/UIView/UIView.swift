@@ -23,6 +23,26 @@ public enum WYGradientDirection: UInt {
 
 public extension UIView {
     
+    /** View所属的UIViewController */
+    var wy_belongsViewController: UIViewController? {
+        
+        for view in sequence(first: self.superview, next: { $0?.superview }) {
+            
+            if let responder = view?.next {
+                
+                if responder.isKind(of: UIViewController.self) {
+                    
+                    if responder.isKind(of: UINavigationController.self) {
+                        return (responder as? UINavigationController)?.topViewController
+                    }else {
+                        return responder as? UIViewController
+                    }
+                }
+            }
+        }
+        return nil
+    }
+    
     /** view.width */
     var wy_width: CGFloat {
         
@@ -170,27 +190,6 @@ public extension UIView {
             
             let view = subviews[0]
             view.removeFromSuperview()
-        }
-    }
-    
-    /// 获取当前正在显示的Controller
-    func wy_currentController(windowController: UIViewController? = (UIApplication.shared.delegate?.window)??.rootViewController) -> UIViewController? {
-        
-        if let navigationController = windowController as? UINavigationController {
-            
-            return wy_currentController(windowController: navigationController.visibleViewController)
-            
-        }else if let tabBarController = windowController as? UITabBarController {
-            
-            return wy_currentController(windowController: tabBarController.selectedViewController)
-            
-        }else if let presentedController = windowController?.presentedViewController {
-            
-            return wy_currentController(windowController: presentedController)
-            
-        }else {
-            
-            return windowController
         }
     }
     

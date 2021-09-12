@@ -193,7 +193,7 @@ public extension UINavigationController {
     }
     
     /// 获取导航栏底部分隔线View
-    func wy_sharedBottomLine(findView: UIView? = UIApplication.shared.keyWindow?.wy_currentController()?.navigationController?.navigationBar) -> UIImageView? {
+    func wy_sharedBottomLine(findView: UIView? = wy_currentController()?.navigationController?.navigationBar) -> UIImageView? {
         
         if let view = findView {
             

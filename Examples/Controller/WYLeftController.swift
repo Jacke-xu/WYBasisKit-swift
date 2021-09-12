@@ -133,7 +133,16 @@ extension WYLeftController: UITableViewDelegate, UITableViewDataSource {
 
         tableView.deselectRow(at: indexPath, animated: true)
 
-        let className: String = controller[indexPath.section][indexPath.row]
-        wy_showViewController(className: className)
+//        let className: String = controller[indexPath.section][indexPath.row]
+//        wy_showViewController(className: className)
+        
+        if indexPath.section % 2 == 0 {
+
+            //加载中...
+            //wy_randomString(minimux: 3, maximum: 60)
+            WYActivity.showLoading(wy_randomString(minimux: 3, maximum: 50), in: view, userInteraction: true, animation: .indicator, delay: 0)
+        }else {
+            WYActivity.dismissLoading(in: view)
+        }
     }
 }
