@@ -275,9 +275,9 @@ extension WYWaterfallParagraphLayout {
     
     private struct WYAssociatedKeys {
         
-        static let wy_attributesArray = UnsafeRawPointer.init(bitPattern: "wy_attributesArray".hashValue)!
-        static let wy_columnHeights = UnsafeRawPointer.init(bitPattern: "wy_columnHeights".hashValue)!
-        static let wy_contentHeight = UnsafeRawPointer.init(bitPattern: "wy_contentHeight".hashValue)!
-        static let wy_lastContentHeight = UnsafeRawPointer.init(bitPattern: "wy_lastContentHeight".hashValue)!
+        static let wy_attributesArray = UnsafeRawPointer(bitPattern: "wy_attributesArray".hashValue)!
+        static let wy_columnHeights = UnsafeRawPointer(bitPattern: "wy_columnHeights".hashValue)!
+        static let wy_contentHeight = UnsafeRawPointer(bitPattern: "wy_contentHeight".hashValue)!
+        static let wy_lastContentHeight = UnsafeRawPointer(bitPattern: "wy_lastContentHeight".hashValue)!
     }
 }

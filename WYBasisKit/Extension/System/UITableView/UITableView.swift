@@ -109,7 +109,7 @@ public extension UITableView {
     }
     
     private struct WYAssociatedKeys {
-        static let wy_allowOtherGestureRecognizer = UnsafeRawPointer.init(bitPattern: "wy_allowOtherGestureRecognizer".hashValue)!
+        static let wy_allowOtherGestureRecognizer = UnsafeRawPointer(bitPattern: "wy_allowOtherGestureRecognizer".hashValue)!
     }
 }
 

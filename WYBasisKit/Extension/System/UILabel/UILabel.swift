@@ -367,15 +367,15 @@ extension UILabel {
     
     private struct WYAssociatedKeys {
         
-        static let wy_richTextDelegate = UnsafeRawPointer.init(bitPattern: "wy_richTextDelegate".hashValue)!
-        static let wy_enableClickEffect = UnsafeRawPointer.init(bitPattern: "wy_enableClickEffect".hashValue)!
-        static let wy_isClickEffect = UnsafeRawPointer.init(bitPattern: "wy_isClickEffect".hashValue)!
-        static let wy_isClickAction = UnsafeRawPointer.init(bitPattern: "wy_isClickAction".hashValue)!
-        static let wy_clickEffectColor = UnsafeRawPointer.init(bitPattern: "wy_clickEffectColor".hashValue)!
-        static let wy_attributeStrings = UnsafeRawPointer.init(bitPattern: "wy_attributeStrings".hashValue)!
-        static let wy_effectDic = UnsafeRawPointer.init(bitPattern: "wy_effectDic".hashValue)!
-        static let wy_clickBlock = UnsafeRawPointer.init(bitPattern: "wy_clickBlock".hashValue)!
-        static let wy_transformForCoreText = UnsafeRawPointer.init(bitPattern: "wy_transformForCoreText".hashValue)!
+        static let wy_richTextDelegate = UnsafeRawPointer(bitPattern: "wy_richTextDelegate".hashValue)!
+        static let wy_enableClickEffect = UnsafeRawPointer(bitPattern: "wy_enableClickEffect".hashValue)!
+        static let wy_isClickEffect = UnsafeRawPointer(bitPattern: "wy_isClickEffect".hashValue)!
+        static let wy_isClickAction = UnsafeRawPointer(bitPattern: "wy_isClickAction".hashValue)!
+        static let wy_clickEffectColor = UnsafeRawPointer(bitPattern: "wy_clickEffectColor".hashValue)!
+        static let wy_attributeStrings = UnsafeRawPointer(bitPattern: "wy_attributeStrings".hashValue)!
+        static let wy_effectDic = UnsafeRawPointer(bitPattern: "wy_effectDic".hashValue)!
+        static let wy_clickBlock = UnsafeRawPointer(bitPattern: "wy_clickBlock".hashValue)!
+        static let wy_transformForCoreText = UnsafeRawPointer(bitPattern: "wy_transformForCoreText".hashValue)!
     }
 }
 

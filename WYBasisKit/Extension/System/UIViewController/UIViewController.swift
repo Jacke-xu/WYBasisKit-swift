@@ -190,7 +190,7 @@ public extension UIViewController {
     
     private struct WYAssociatedKeys {
         
-        static let wy_parameters = UnsafeRawPointer.init(bitPattern: "wy_parameters".hashValue)!
+        static let wy_parameters = UnsafeRawPointer(bitPattern: "wy_parameters".hashValue)!
     }
 }
 

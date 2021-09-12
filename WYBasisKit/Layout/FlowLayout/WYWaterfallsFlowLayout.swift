@@ -435,12 +435,12 @@ extension WYWaterfallsFlowLayout {
     
     private struct WYAssociatedKeys {
         
-        static let wy_attributesArray = UnsafeRawPointer.init(bitPattern: "wy_attributesArray".hashValue)!
-        static let wy_columnHeights = UnsafeRawPointer.init(bitPattern: "wy_columnHeights".hashValue)!
-        static let wy_rowWidths = UnsafeRawPointer.init(bitPattern: "wy_rowWidths".hashValue)!
-        static let wy_defaultNumberOfColumns = UnsafeRawPointer.init(bitPattern: "wy_defaultNumberOfColumns".hashValue)!
-        static let wy_maxColumnHeight = UnsafeRawPointer.init(bitPattern: "wy_maxColumnHeight".hashValue)!
-        static let wy_maxRowWidth = UnsafeRawPointer.init(bitPattern: "wy_maxRowWidth".hashValue)!
+        static let wy_attributesArray = UnsafeRawPointer(bitPattern: "wy_attributesArray".hashValue)!
+        static let wy_columnHeights = UnsafeRawPointer(bitPattern: "wy_columnHeights".hashValue)!
+        static let wy_rowWidths = UnsafeRawPointer(bitPattern: "wy_rowWidths".hashValue)!
+        static let wy_defaultNumberOfColumns = UnsafeRawPointer(bitPattern: "wy_defaultNumberOfColumns".hashValue)!
+        static let wy_maxColumnHeight = UnsafeRawPointer(bitPattern: "wy_maxColumnHeight".hashValue)!
+        static let wy_maxRowWidth = UnsafeRawPointer(bitPattern: "wy_maxRowWidth".hashValue)!
     }
 }
 

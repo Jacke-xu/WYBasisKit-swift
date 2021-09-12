@@ -430,6 +430,7 @@ private class WYActivityLoadingView: UIView {
         }
         
         let loadingView = WYActivityLoadingView()
+        loadingView.isHidden = true
         loadingView.backgroundColor = config.loadingBackgroundColor
         contentView.addSubview(loadingView)
         
@@ -531,7 +532,7 @@ private class WYActivityLoadingView: UIView {
     }
     
     @objc func showAnimate() {
-        
+        self.isHidden = false
         self.alpha = 0.0
         UIView.animate(withDuration: 0.5) {
             self.alpha = 1.0
@@ -547,6 +548,7 @@ private class WYActivityLoadingView: UIView {
             loadingView.alpha = 0.0;
         } completion: { _ in
             loadingView.removeActivity()
+            contentView.wy_loadingView = nil
         }
     }
     
@@ -581,10 +583,6 @@ private class WYActivityLoadingView: UIView {
         activity?.superview?.isUserInteractionEnabled = interactionEnabled
         activity?.removeFromSuperview()
         activity = nil
-    }
-    
-    deinit {
-        wy_print("deinit")
     }
 }
 
@@ -691,6 +689,6 @@ private extension UIView {
     }
     
     private struct WYAssociatedKeys {
-        static let private_wy_loadingView = UnsafeRawPointer.init(bitPattern: "private_wy_loadingView".hashValue)!
+        static let private_wy_loadingView = UnsafeRawPointer(bitPattern: "private_wy_loadingView".hashValue)!
     }
 }

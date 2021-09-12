@@ -491,11 +491,11 @@ extension WYPagingView {
     
     private struct WYAssociatedKeys {
         
-        static let barScrollView = UnsafeRawPointer.init(bitPattern: "barScrollView".hashValue)!
+        static let barScrollView = UnsafeRawPointer(bitPattern: "barScrollView".hashValue)!
         
-        static let controllerScrollView = UnsafeRawPointer.init(bitPattern: "controllerScrollView".hashValue)!
+        static let controllerScrollView = UnsafeRawPointer(bitPattern: "controllerScrollView".hashValue)!
         
-        static let barScrollLine = UnsafeRawPointer.init(bitPattern: "barScrollLine".hashValue)!
+        static let barScrollLine = UnsafeRawPointer(bitPattern: "barScrollLine".hashValue)!
     }
 }
 

@@ -780,19 +780,19 @@ public extension UIView {
     
     private struct WYAssociatedKeys {
         
-        static let privateRectCorner = UnsafeRawPointer.init(bitPattern: "privateRectCorner".hashValue)!
-        static let privateConrnerRadius = UnsafeRawPointer.init(bitPattern: "privateConrnerRadius".hashValue)!
-        static let privateBorderColor = UnsafeRawPointer.init(bitPattern: "privateBorderColor".hashValue)!
-        static let privateBorderWidth = UnsafeRawPointer.init(bitPattern: "privateBorderWidth".hashValue)!
-        static let privateShadowColor = UnsafeRawPointer.init(bitPattern: "privateShadowColor".hashValue)!
-        static let privateShadowOffset = UnsafeRawPointer.init(bitPattern: "privateShadowOffset".hashValue)!
-        static let privateShadowRadius = UnsafeRawPointer.init(bitPattern: "privateShadowRadius".hashValue)!
-        static let privateShadowOpacity = UnsafeRawPointer.init(bitPattern: "privateShadowOpacity".hashValue)!
-        static let privateGradualColors = UnsafeRawPointer.init(bitPattern: "privateGradualColors".hashValue)!
-        static let privateGradientDirection = UnsafeRawPointer.init(bitPattern: "privateGradientDirection".hashValue)!
-        static let privateViewBounds = UnsafeRawPointer.init(bitPattern: "privateViewBounds".hashValue)!
-        static let privateBezierPath = UnsafeRawPointer.init(bitPattern: "privateBezierPath".hashValue)!
-        static let shadowBackgroundView = UnsafeRawPointer.init(bitPattern: "shadowBackgroundView".hashValue)!
+        static let privateRectCorner = UnsafeRawPointer(bitPattern: "privateRectCorner".hashValue)!
+        static let privateConrnerRadius = UnsafeRawPointer(bitPattern: "privateConrnerRadius".hashValue)!
+        static let privateBorderColor = UnsafeRawPointer(bitPattern: "privateBorderColor".hashValue)!
+        static let privateBorderWidth = UnsafeRawPointer(bitPattern: "privateBorderWidth".hashValue)!
+        static let privateShadowColor = UnsafeRawPointer(bitPattern: "privateShadowColor".hashValue)!
+        static let privateShadowOffset = UnsafeRawPointer(bitPattern: "privateShadowOffset".hashValue)!
+        static let privateShadowRadius = UnsafeRawPointer(bitPattern: "privateShadowRadius".hashValue)!
+        static let privateShadowOpacity = UnsafeRawPointer(bitPattern: "privateShadowOpacity".hashValue)!
+        static let privateGradualColors = UnsafeRawPointer(bitPattern: "privateGradualColors".hashValue)!
+        static let privateGradientDirection = UnsafeRawPointer(bitPattern: "privateGradientDirection".hashValue)!
+        static let privateViewBounds = UnsafeRawPointer(bitPattern: "privateViewBounds".hashValue)!
+        static let privateBezierPath = UnsafeRawPointer(bitPattern: "privateBezierPath".hashValue)!
+        static let shadowBackgroundView = UnsafeRawPointer(bitPattern: "shadowBackgroundView".hashValue)!
         static let wy_boardLayer = "wy_boardLayer"
         static let wy_gradientLayer = "wy_gradientLayer"
     }
