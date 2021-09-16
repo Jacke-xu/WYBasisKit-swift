@@ -161,8 +161,7 @@ public extension UIAlertController {
         else if obj is NSAttributedString {
             return (obj as! NSAttributedString).string
         }else {
-            wy_print("\(obj)" + "只能是 String 或者 NSAttributedString 类型的")
-            return ""
+            fatalError("\(obj)" + "只能是 String 或者 NSAttributedString 类型的")
         }
     }
     

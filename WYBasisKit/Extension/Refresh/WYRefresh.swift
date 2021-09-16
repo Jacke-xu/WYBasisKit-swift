@@ -13,7 +13,7 @@ public extension MJRefreshConfig {
     
     /// 本地化语言切换
     class func switchLanguage(_ language: WYLanguage = WYLocalizableManager.currentLanguage()) {
-        MJRefreshConfig.default().languageCode = language.rawValue
+        MJRefreshConfig.default.languageCode = language.rawValue
     }
 }
 

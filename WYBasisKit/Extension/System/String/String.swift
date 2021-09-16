@@ -218,7 +218,7 @@ public extension String {
         // 当前时时间戳
         let currentTime = Date().timeIntervalSince1970
         // 传入的时间
-        let computingTime = (self.count == 13) ? (NSInteger(stringValue: self) / 1000) : NSInteger(stringValue: self)
+        let computingTime = (self.count == 13) ? ((NSInteger(self) ?? 0) / 1000) : (NSInteger(self) ?? 0)
         // 距离当前的时间差
         let timeDifference = NSInteger(currentTime) - computingTime
         // 秒转分钟

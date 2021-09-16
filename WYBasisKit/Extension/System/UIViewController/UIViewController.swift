@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import MBProgressHUD
 
 /// viewController显示模式
 public enum WYDisplaMode {
@@ -31,27 +30,6 @@ extension UIViewController: ViewControllerHandlerProtocol {
 }
 
 public extension UIViewController {
-    
-    func wy_displayMessage(title: String? = .none, message: String, duration: TimeInterval = WYBasisKitConfig.alertDuration) {
-        
-        UIAlertController.wy_show(title: title ?? "", message: message, duration: duration)
-    }
-    
-    func wy_displayMessage(title: String? = .none, message: String? = .none, actions: [String] = [WYLocalizedString("知道了")]) {
-        
-        UIAlertController.wy_show(title: title ?? "", message: message ?? "", actions: actions)
-    }
-    
-    func wy_displayLoading(string: String = "", animated: Bool = true) {
-        
-        let hud = MBProgressHUD.showAdded(to: self.view, animated: animated)
-        hud.label.text = string
-    }
-    
-    func wy_dismissLoading() {
-        
-        MBProgressHUD.hide(for: view, animated: true)
-    }
     
     /** 从导航控制器栈中查找ViewController，没有时返回nil */
     func wy_findViewController(className: String) -> UIViewController? {

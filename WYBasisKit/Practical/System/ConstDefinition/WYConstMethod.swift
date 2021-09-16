@@ -31,12 +31,14 @@ public func wy_currentController(windowController: UIViewController? = (UIApplic
 
 /// 角度转弧度
 public func wy_degreesToRadian(degrees: CGFloat) -> CGFloat {
-    return NSObject.wy_maintainAccuracy(value: (CGFloat.pi * (degrees) / 180.0))
+
+    return CGFloat(NSDecimalNumber(decimal: Decimal(Double((CGFloat.pi * (degrees) / 180.0)))).floatValue)
 }
 
 /// 弧度转角度
 public func wy_radianToDegrees(radian: CGFloat) -> CGFloat {
-    return NSObject.wy_maintainAccuracy(value: (radian*180.0)/(CGFloat.pi))
+    
+    return CGFloat(NSDecimalNumber(decimal: Decimal(Double((radian*180.0)/(CGFloat.pi)))).floatValue)
 }
 
 /**

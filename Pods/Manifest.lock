@@ -3,13 +3,12 @@ PODS:
   - AvoidCrash (2.5.2)
   - HandyJSON (5.0.2)
   - IQKeyboardManagerSwift (6.5.6)
-  - Kingfisher (6.3.0)
+  - Kingfisher (6.3.1)
   - libPhoneNumber-iOS (0.9.15)
-  - MBProgressHUD (1.2.0)
-  - MJRefresh (3.6.1)
-  - Moya (14.0.0):
-    - Moya/Core (= 14.0.0)
-  - Moya/Core (14.0.0):
+  - MJRefresh (3.7.2)
+  - Moya (15.0.0):
+    - Moya/Core (= 15.0.0)
+  - Moya/Core (15.0.0):
     - Alamofire (~> 5.0)
   - SnapKit (5.0.1)
 
@@ -19,7 +18,6 @@ DEPENDENCIES:
   - IQKeyboardManagerSwift
   - Kingfisher
   - libPhoneNumber-iOS
-  - MBProgressHUD
   - MJRefresh
   - Moya
   - SnapKit
@@ -32,7 +30,6 @@ SPEC REPOS:
     - IQKeyboardManagerSwift
     - Kingfisher
     - libPhoneNumber-iOS
-    - MBProgressHUD
     - MJRefresh
     - Moya
     - SnapKit
@@ -42,13 +39,12 @@ SPEC CHECKSUMS:
   AvoidCrash: 28c6916fe19bd2b84126b8dec7cbe61c9a12741d
   HandyJSON: 9e4e236f5d2dbefad5155a77417bbea438201c03
   IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
-  Kingfisher: 6c3df386db71d82c0817a429d2c9421a77396529
+  Kingfisher: 016c8b653a35add51dd34a3aba36b580041acc74
   libPhoneNumber-iOS: 0a32a9525cf8744fe02c5206eb30d571e38f7d75
-  MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
-  MJRefresh: d2c1970d1cf6e77fcfcdfe76c943dfab8dbfa5c1
-  Moya: 5b45dacb75adb009f97fde91c204c1e565d31916
+  MJRefresh: 30997d30b347c8e9508a4db11e3a690da0c9b85a
+  Moya: 138f0573e53411fb3dc17016add0b748dfbd78ee
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
 
-PODFILE CHECKSUM: 287c73d49524ac38ea925217d521a952faf41593
+PODFILE CHECKSUM: 63b0db9e508e61bc8a76b3cf26cf4be1e0920ddc
 
 COCOAPODS: 1.10.1

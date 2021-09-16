@@ -59,8 +59,12 @@ public func wy_fontSize(_ ratioValue: CGFloat) -> CGFloat {
 public func wy_print(_ messages: Any..., file: String = #file, function: String = #function, line: Int = #line) {
     #if DEBUG
     if WYBasisKitConfig.debugModeLog == true {
+        
+        let timeFormatter = DateFormatter()
+        timeFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss.SSS"
+        let time = timeFormatter.string(from: Date())
         let message = messages.compactMap { "\($0)" }.joined(separator: " ")
-        print("\n【\((file as NSString).lastPathComponent) ——> \(function) ——> line:\(line)】\n\n \(message)\n\n\n")
+        print("\n【\((file as NSString).lastPathComponent) ——> \(function) ——> line:\(line) ——> time:\(time)】\n\n \(message)\n\n\n")
     }
     #endif
 }
