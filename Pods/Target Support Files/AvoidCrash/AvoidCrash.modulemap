@@ -1,4 +1,4 @@
-module AvoidCrash {
+framework module AvoidCrash {
   umbrella header "AvoidCrash-umbrella.h"
 
   export *

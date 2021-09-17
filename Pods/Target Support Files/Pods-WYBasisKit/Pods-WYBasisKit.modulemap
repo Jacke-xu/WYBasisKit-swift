@@ -1,4 +1,4 @@
-module Pods_WYBasisKit {
+framework module Pods_WYBasisKit {
   umbrella header "Pods-WYBasisKit-umbrella.h"
 
   export *

@@ -283,6 +283,15 @@ private class WYActivityInfoView: UIView {
         addSubview(label)
         return label
     }()
+    lazy var swipeGesture: UISwipeGestureRecognizer = {
+        
+        let swipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe))
+        swipe.numberOfTouchesRequired = 1
+        addGestureRecognizer(swipe)
+        return swipe
+    }()
+    
+    var dismissOffset: CGFloat = 0
 
     func showContent(_ content: Any, in contentView: UIView, position: WYActivityPosition, offset: CGFloat, config: WYActivityConfig) {
 
@@ -303,6 +312,8 @@ private class WYActivityInfoView: UIView {
 
         contentLabel.frame = CGRect(x: wy_screenWidth(10), y: wy_screenWidth(10), width: controlWidth - wy_screenWidth(20), height: wy_screenWidth(10))
         contentLabel.sizeToFit()
+        
+        swipeGesture.direction = [.up, .left, .down][position.rawValue]
 
         showAnimate(contentView: contentView, position: position, offset: offset, config: config)
     }
@@ -313,8 +324,11 @@ private class WYActivityInfoView: UIView {
 
         switch position {
         case .top:
+            
             contentLabel.textAlignment = .left
             let controlHeight: CGFloat = contentLabel.frame.size.height + wy_screenWidth(20)
+            
+            dismissOffset = -controlHeight
 
             self.frame = CGRect(x: (contentView.frame.size.width - controlWidth) / 2, y: -controlHeight, width: controlWidth, height: controlHeight)
 
@@ -325,7 +339,7 @@ private class WYActivityInfoView: UIView {
             } completion: { _ in
 
                 self.activityTimer = Timer.scheduledTimer(withTimeInterval: self.sharedTimeInterval(config: config), repeats: false, block: { [weak self] _ in
-                    self?.dismissActivity(config: config, position: position, offset: -controlHeight)
+                    self?.dismissActivity(direction: .up, isHandleSwipe: false)
                 })
             }
             break
@@ -347,6 +361,8 @@ private class WYActivityInfoView: UIView {
                 offsety = (contentView.frame.size.height - contentLabel.frame.size.height - wy_screenWidth(20) - tabbarOffset) / 2
             }else {
                 offsety = contentView.frame.size.height - contentLabel.frame.size.height - wy_screenWidth(80) - tabbarOffset
+                
+                dismissOffset = contentView.frame.size.height
             }
             self.frame = CGRect(x: offsetx, y: offsety, width: contentLabel.frame.size.width + wy_screenWidth(20), height: contentLabel.frame.size.height + wy_screenWidth(20))
 
@@ -356,19 +372,33 @@ private class WYActivityInfoView: UIView {
             } completion: { _ in
 
                 self.activityTimer = Timer.scheduledTimer(withTimeInterval: self.sharedTimeInterval(config: config), repeats: false, block: { [weak self] _ in
-                    self?.dismissActivity(config: config, position: position)
+                    self?.dismissActivity(direction: .right, isHandleSwipe: false)
                 })
             }
             break
         }
     }
+    
+    @objc func handleSwipe() {
+        
+        if swipeGesture.direction != .right {
+            dismissActivity(direction: swipeGesture.direction, isHandleSwipe: true)
+        }
+    }
 
-    func dismissActivity(config: WYActivityConfig, position: WYActivityPosition, offset: CGFloat = 0) {
-
-        switch position {
-        case .top:
+    func dismissActivity(direction: UISwipeGestureRecognizer.Direction, isHandleSwipe: Bool) {
+        
+        switch direction {
+        case .up, .down:
             UIView.animate(withDuration: 0.5) {
-                self.frame = CGRect(x: self.frame.origin.x, y: offset, width: self.frame.size.width, height: self.frame.size.height)
+                self.wy_top = self.dismissOffset
+            } completion: { _ in
+                self.removeActivity()
+            }
+            break
+        case .left:
+            UIView.animate(withDuration: 0.5) {
+                self.wy_right = self.superview?.frame.origin.x ?? 0
             } completion: { _ in
                 self.removeActivity()
             }
