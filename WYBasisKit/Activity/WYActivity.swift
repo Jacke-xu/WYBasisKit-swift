@@ -95,25 +95,13 @@ public struct WYActivityConfig {
     public var animationSize: CGSize = animationSize
 
     /// 滚动信息提示窗口默认配置
-    public static func scroll() -> WYActivityConfig {
-
-        // 内部使用了这几项配置
-        return WYActivityConfig(scrollInfoBackgroundColor: scrollInfoBackgroundColor, movingSpeed: movingSpeed, scrollInfoTextColor: scrollInfoTextColor, scrollInfoTextFont: scrollInfoTextFont)
-    }
+    public static let scroll: WYActivityConfig = WYActivityConfig(scrollInfoBackgroundColor: scrollInfoBackgroundColor, movingSpeed: movingSpeed, scrollInfoTextColor: scrollInfoTextColor, scrollInfoTextFont: scrollInfoTextFont)
 
     /// 信息提示窗口默认配置
-    public static func info() -> WYActivityConfig {
-
-        // 内部使用了这几项配置
-        return WYActivityConfig(infoBackgroundColor: infoBackgroundColor, infoTextColor: infoTextColor, infoTextFont: infoTextFont)
-    }
+    public static let info: WYActivityConfig = WYActivityConfig(infoBackgroundColor: infoBackgroundColor, infoTextColor: infoTextColor, infoTextFont: infoTextFont)
 
     /// Loading提示窗口默认配置
-    public static func loading() -> WYActivityConfig {
-
-        // 内部使用了这几项配置
-        return WYActivityConfig(loadingBackgroundColor: loadingBackgroundColor, loadingTextColor: loadingTextColor, loadingTextFont: loadingTextFont, loadingImages: loadingImages, gifImageDuration: gifImageDuration, indicatorColor: indicatorColor, loadingNumberOfLines: loadingNumberOfLines, animationSize: animationSize)
-    }
+    public static let loading: WYActivityConfig = WYActivityConfig(loadingBackgroundColor: loadingBackgroundColor, loadingTextColor: loadingTextColor, loadingTextFont: loadingTextFont, loadingImages: loadingImages, gifImageDuration: gifImageDuration, indicatorColor: indicatorColor, loadingNumberOfLines: loadingNumberOfLines, animationSize: animationSize)
 
     /// 获取Loading提示窗口默认动图
     private static func defaultLoadingImages() -> [UIImage] {
@@ -122,7 +110,6 @@ public struct WYActivityConfig {
         for index in 0..<5 {
             defaultImages.append(UIImage.wy_named("loading" + "\(index + 1)", inBundle: "WYActivity", subdirectory: "LoadingState"))
         }
-
         return defaultImages
     }
 }
@@ -141,7 +128,7 @@ public struct WYActivity {
      *  @param config             信息提示窗口配置选项
      *
      */
-    public static func showScrollInfo(_ content: Any, in contentView: UIView? = nil, offset: CGFloat? = nil, config: WYActivityConfig = .scroll()) {
+    public static func showScrollInfo(_ content: Any, in contentView: UIView? = nil, offset: CGFloat? = nil, config: WYActivityConfig = .scroll) {
         
         guard let windowView = sharedContentView(contentView) else {
             return
@@ -162,7 +149,7 @@ public struct WYActivity {
      *
      *  @param config             信息提示窗口配置选项
      */
-    public static func showInfo(_ content: Any, in contentView: UIView? = nil, position: WYActivityPosition = .middle, offset: CGFloat? = nil, config: WYActivityConfig = .info()) {
+    public static func showInfo(_ content: Any, in contentView: UIView? = nil, position: WYActivityPosition = .middle, offset: CGFloat? = nil, config: WYActivityConfig = .info) {
         
         guard let windowView = sharedContentView(contentView) else {
             return
@@ -186,7 +173,7 @@ public struct WYActivity {
      *  @param config             信息提示窗口配置选项
      *
      */
-    public static func showLoading(_ content: Any? = nil, in contentView: UIView, userInteraction: Bool = true, animation: WYActivityAnimation = .indicator, delay: TimeInterval = 0, config: WYActivityConfig = .loading()) {
+    public static func showLoading(_ content: Any? = nil, in contentView: UIView, userInteraction: Bool = true, animation: WYActivityAnimation = .indicator, delay: TimeInterval = 0, config: WYActivityConfig = .loading) {
         
         WYActivityLoadingView.showContent(content, in: contentView, userInteraction: userInteraction, animation: animation, delay: delay, config: config)
     }
@@ -221,6 +208,10 @@ private class WYActivityScrollInfoView: UIView {
     var movingSpeed: CGFloat = 0.0
 
     func showContent(_ content: Any, in contentView: UIView, offset: CGFloat, config: WYActivityConfig) {
+        
+        if contentView.wy_scrollInfoView != nil {
+            contentView.wy_scrollInfoView?.stopScroll(initial: true)
+        }
 
         let attributedText = WYActivity.sharedContentAttributed(content: content, textColor: config.scrollInfoTextColor, textFont: config.scrollInfoTextFont)
 
@@ -238,6 +229,8 @@ private class WYActivityScrollInfoView: UIView {
         movingSpeed = config.movingSpeed
 
         displayLink.isPaused = false
+        
+        contentView.wy_scrollInfoView = self
     }
 
     @objc func refreshScrollInfo() {
@@ -249,19 +242,21 @@ private class WYActivityScrollInfoView: UIView {
         }else {
             if (contentLabel.frame.origin.x + contentLabel.frame.size.width) <= (self.frame.size.width - wy_screenWidth(10)) {
                 stopScroll()
+                self.superview?.wy_scrollInfoView = nil
             }
         }
     }
 
-    func stopScroll() {
+    func stopScroll(initial: Bool = false) {
 
         displayLink.isPaused = true
         displayLink.invalidate()
 
-        UIView.animate(withDuration: 2) {
+        UIView.animate(withDuration: (initial ? 0 : 2)) {
             self.alpha = 0.0
         }completion: { _ in
             self.removeActivity()
+            self.superview?.wy_scrollInfoView = nil
         }
     }
 
@@ -283,9 +278,10 @@ private class WYActivityInfoView: UIView {
         addSubview(label)
         return label
     }()
+    
     lazy var swipeGesture: UISwipeGestureRecognizer = {
         
-        let swipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe))
+        let swipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe(sender:)))
         swipe.numberOfTouchesRequired = 1
         addGestureRecognizer(swipe)
         return swipe
@@ -294,6 +290,10 @@ private class WYActivityInfoView: UIView {
     var dismissOffset: CGFloat = 0
 
     func showContent(_ content: Any, in contentView: UIView, position: WYActivityPosition, offset: CGFloat, config: WYActivityConfig) {
+        
+        if contentView.wy_infoView != nil {
+            contentView.wy_infoView?.removeActivity()
+        }
 
         let attributedText = WYActivity.sharedContentAttributed(content: content, textColor: config.infoTextColor, textFont: config.infoTextFont)
 
@@ -304,6 +304,8 @@ private class WYActivityInfoView: UIView {
         contentView.addSubview(self)
 
         layoutActivity(contentView: contentView, position: position, offset: offset, config: config)
+        
+        contentView.wy_infoView = self
     }
 
     func layoutActivity(contentView: UIView, position: WYActivityPosition, offset: CGFloat, config: WYActivityConfig) {
@@ -314,6 +316,13 @@ private class WYActivityInfoView: UIView {
         contentLabel.sizeToFit()
         
         swipeGesture.direction = [.up, .left, .down][position.rawValue]
+        if position == .middle {
+            
+            let swipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe(sender:)))
+            swipe.numberOfTouchesRequired = 1
+            swipe.direction = .right
+            addGestureRecognizer(swipe)
+        }
 
         showAnimate(contentView: contentView, position: position, offset: offset, config: config)
     }
@@ -340,6 +349,7 @@ private class WYActivityInfoView: UIView {
 
                 self.activityTimer = Timer.scheduledTimer(withTimeInterval: self.sharedTimeInterval(config: config), repeats: false, block: { [weak self] _ in
                     self?.dismissActivity(direction: .up, isHandleSwipe: false)
+                    self?.superview?.wy_infoView = nil
                 })
             }
             break
@@ -373,17 +383,16 @@ private class WYActivityInfoView: UIView {
 
                 self.activityTimer = Timer.scheduledTimer(withTimeInterval: self.sharedTimeInterval(config: config), repeats: false, block: { [weak self] _ in
                     self?.dismissActivity(direction: .right, isHandleSwipe: false)
+                    self?.superview?.wy_infoView = nil
                 })
             }
             break
         }
     }
     
-    @objc func handleSwipe() {
-        
-        if swipeGesture.direction != .right {
-            dismissActivity(direction: swipeGesture.direction, isHandleSwipe: true)
-        }
+    @objc func handleSwipe(sender: UISwipeGestureRecognizer) {
+        dismissActivity(direction: sender.direction, isHandleSwipe: true)
+        superview?.wy_infoView = nil
     }
 
     func dismissActivity(direction: UISwipeGestureRecognizer.Direction, isHandleSwipe: Bool) {
@@ -394,6 +403,7 @@ private class WYActivityInfoView: UIView {
                 self.wy_top = self.dismissOffset
             } completion: { _ in
                 self.removeActivity()
+                self.superview?.wy_infoView = nil
             }
             break
         case .left:
@@ -401,13 +411,19 @@ private class WYActivityInfoView: UIView {
                 self.wy_right = self.superview?.frame.origin.x ?? 0
             } completion: { _ in
                 self.removeActivity()
+                self.superview?.wy_infoView = nil
             }
             break
         default:
             UIView.animate(withDuration: 0.5) {
-                self.alpha = 0.0;
+                if isHandleSwipe {
+                    self.wy_left = self.superview?.wy_right ?? 0
+                }else {
+                    self.alpha = 0.0
+                }
             } completion: { _ in
                 self.removeActivity()
+                self.superview?.wy_infoView = nil
             }
             break
         }
@@ -707,6 +723,28 @@ private extension WYActivity {
 }
 
 private extension UIView {
+    
+    var wy_scrollInfoView: WYActivityScrollInfoView? {
+
+        set(newValue) {
+
+            objc_setAssociatedObject(self, WYAssociatedKeys.private_wy_scrollInfoView, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        }
+        get {
+            return objc_getAssociatedObject(self, WYAssociatedKeys.private_wy_scrollInfoView) as? WYActivityScrollInfoView
+        }
+    }
+    
+    var wy_infoView: WYActivityInfoView? {
+
+        set(newValue) {
+
+            objc_setAssociatedObject(self, WYAssociatedKeys.private_wy_infoView, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        }
+        get {
+            return objc_getAssociatedObject(self, WYAssociatedKeys.private_wy_infoView) as? WYActivityInfoView
+        }
+    }
 
     var wy_loadingView: WYActivityLoadingView? {
 
@@ -720,6 +758,9 @@ private extension UIView {
     }
 
     private struct WYAssociatedKeys {
+        
+        static let private_wy_scrollInfoView = UnsafeRawPointer(bitPattern: "private_wy_scrollInfoView".hashValue)!
+        static let private_wy_infoView = UnsafeRawPointer(bitPattern: "private_wy_infoView".hashValue)!
         static let private_wy_loadingView = UnsafeRawPointer(bitPattern: "private_wy_loadingView".hashValue)!
     }
 }

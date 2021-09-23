@@ -13,62 +13,56 @@ struct WYRequest {
     
     /// 请求方式
     var method: HTTPMethod
-    /// 接口域名
-    var domain: String
-    /// 接口路径
+    /// 网络请求url路径
     var path: String
-    /// 请求头
-    var headers: [String : String]?
     /// 参数
-    var parameters: [String: Any]
-    /// 自定义data
+    var parameter: [String: Any]
+    /// data数据任务时对应的data，非data数据任务传nil即可
     var data: Data?
-    /// 任务类型
-    var taskMethod: WYTaskMethod
     /// 要上传的文件
     var files: [WYFileModel] = []
+    /// 请求配置
+    var config: WYNetworkConfig = .default
     
-    init(method: HTTPMethod, taskMethod: WYTaskMethod, domain: String, path: String, headers: [String : String]?, data: Data?, parameters: [String : Any], files: [WYFileModel] = []) {
+    init(method: HTTPMethod, path: String, data: Data?, parameter: [String : Any], files: [WYFileModel] = [], config: WYNetworkConfig) {
         
         self.method = method
-        self.taskMethod = taskMethod
-        self.domain = domain
         self.path = path
-        self.headers = headers
         self.data = data
-        self.parameters = parameters
+        self.parameter = parameter
         self.files = files
+        self.config = config
     }
 }
 
-let requestProvider = { (endpoint: Endpoint, done: @escaping MoyaProvider<WYProvider>.RequestResultClosure) in
-    
-    do {
-        var request: URLRequest = try endpoint.urlRequest()
-        /// 设置请求超时时间
-        request.timeoutInterval = WYNetworkConfig.timeoutIntervalForRequest
-        done(.success(request))
-    } catch  {
-        return
-    }
-}
+let WYTargetProvider = MoyaProvider<WYTarget>.config()
 
-let WYTargetProvider = MoyaProvider<WYProvider>(requestClosure: requestProvider)
-
-struct WYProvider: TargetType {
+struct WYTarget: TargetType {
     
     init(request: WYRequest) {
         self.request = request
+        MoyaProvider<WYTarget>.config = request.config
     }
     
     var request: WYRequest
     
     var baseURL: URL {
-        return URL(string: request.domain)!
+        
+        let domain: String = request.config.domain.isEmpty ? request.path : request.config.domain
+        
+        guard domain.isEmpty == false else {
+            fatalError("发起网络请求时 request.config.domain + request.path 不能为空")
+        }
+        
+        if (request.config.specialCharacters.contains(where: (domain.contains(request.path) ? domain : (request.config.domain + request.path)).contains)) {
+            return URL(string: (domain.contains(request.path) ? domain : (request.config.domain + request.path)))!
+        }else {
+            return URL(string: domain)!
+        }
     }
     
     var path: String {
-        return request.path
+        return baseURL.absoluteString.contains(request.path) ? "" : request.path
     }
     
     var method: Moya.Method {
@@ -81,11 +75,11 @@ struct WYProvider: TargetType {
     
     var task: Task {
         
-        switch request.taskMethod {
+        switch request.config.taskMethod {
         case .parameters:
-            return .requestParameters(parameters: request.parameters, encoding: URLEncoding.default)
+            return .requestParameters(parameters: request.parameter, encoding: URLEncoding.default)
         case .data:
-            return .requestCompositeData(bodyData: request.data!, urlParameters: request.parameters)
+            return .requestCompositeData(bodyData: request.data!, urlParameters: request.parameter)
         case .upload:
             var multiparts: [Moya.MultipartFormData] = []
             for var fileModel in request.files {
@@ -99,11 +93,188 @@ struct WYProvider: TargetType {
                     multiparts.append(multipart)
                 }
             }
-            return .uploadCompositeMultipart(multiparts, urlParameters: request.parameters)
+            return .uploadCompositeMultipart(multiparts, urlParameters: request.parameter)
         }
     }
     
     var headers: [String : String]? {
-        return request.headers
+        return request.config.header
+    }
+}
+
+extension MoyaProvider {
+    
+    static var config: WYNetworkConfig {
+
+        set(newValue) {
+            
+            objc_setAssociatedObject(self, configKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        }
+        get {
+            return objc_getAssociatedObject(self, configKey) as? WYNetworkConfig ?? .default
+        }
+    }
+    
+    static func config(requestClosure: @escaping Moya.MoyaProvider<WYTarget>.RequestClosure = WYProviderConfig<WYTarget>.requestClosure,
+        session: Moya.Session = WYProviderConfig<WYTarget>.session()) -> MoyaProvider {
+        return MoyaProvider(requestClosure: requestClosure, session: session)
+    }
+    
+    static var configKey: UnsafeRawPointer {
+        return UnsafeRawPointer(bitPattern: "configKey".hashValue)!
+    }
+}
+
+struct WYProviderConfig<target: TargetType> {
+    
+    static func requestClosure(endpoint: Endpoint, done: @escaping MoyaProvider<WYTarget>.RequestResultClosure) {
+        do {
+            var request: URLRequest = try endpoint.urlRequest()
+            request.timeoutInterval = MoyaProvider<WYTarget>.config.timeoutInterval
+            done(.success(request))
+        } catch {
+            return
+        }
+    }
+    
+    static func session() -> Session {
+        
+        let defaultSession = MoyaProvider<WYTarget>.defaultAlamofireSession()
+        let configuration = defaultSession.sessionConfiguration
+        let config = MoyaProvider<WYTarget>.config
+        
+        var serverTrustManager: ServerTrustManager? = nil
+        var sessionDelegate: SessionDelegate = SessionDelegate()
+        
+        if config.requestStyle != .httpOrCAHttps {
+            
+            if let trustManager = config.httpsConfig.trustManager {
+                serverTrustManager = trustManager
+            }else {
+                
+                if let cerPath = ((Bundle(for: WYBothwayVerifyDeleagte.self).path(forResource: config.httpsConfig.serverCer, ofType: "cer")) ?? (Bundle.main.path(forResource: config.httpsConfig.serverCer, ofType: "cer"))) {
+                    do {
+                        let certificationData = try Data(contentsOf: URL(fileURLWithPath: cerPath)) as CFData
+                        if let certificate = SecCertificateCreateWithData(nil, certificationData){
+                            
+                            var policies: [String: ServerTrustEvaluating] = [:]
+                            switch config.httpsConfig.verifyStrategy {
+                            case .pinnedCertificates:
+                                
+                                let certificates: [SecCertificate] = [certificate]
+                                
+                                policies = [config.domain: PinnedCertificatesTrustEvaluator(certificates: certificates, acceptSelfSignedCertificates: true, performDefaultValidation: config.httpsConfig.defaultValidation, validateHost: config.httpsConfig.validateDomain)]
+                                
+                                break
+                                
+                            case .publicKeys:
+                                
+                                let secKeys: [SecKey] = Bundle.main.af.publicKeys
+                                
+                                policies = [config.domain: PublicKeysTrustEvaluator(keys: secKeys, performDefaultValidation: config.httpsConfig.defaultValidation, validateHost: config.httpsConfig.validateDomain)]
+                                
+                                break
+                                
+                            case .chainTrust:
+                                
+                                policies = [config.domain: DefaultTrustEvaluator(validateHost: config.httpsConfig.validateDomain)]
+                                
+                                break
+                                
+                            case .directTrust:
+                                
+                                policies = [config.domain: DisabledTrustEvaluator()]
+                                
+                                break
+                            }
+                            
+                            serverTrustManager = ServerTrustManager(allHostsMustBeEvaluated: config.httpsConfig.allHostsMustBeEvaluated, evaluators: policies)
+                        }
+                    } catch {
+                        WYNetworkManager.networkPrint("\(config.httpsConfig.serverCer).cer 这个证书转换为 CFData类型 失败")
+                    }
+                }else {
+                    WYNetworkManager.networkPrint("找不到 \(config.httpsConfig.serverCer).cer 这个证书")
+                }
+            }
+            
+            if config.requestStyle == .httpsBothway {
+                sessionDelegate = config.httpsConfig.sessionDelegate ?? WYBothwayVerifyDeleagte()
+            }
+        }
+        return Session(configuration: configuration, delegate: sessionDelegate, serverTrustManager: serverTrustManager)
+    }
+}
+
+private class WYBothwayVerifyDeleagte: SessionDelegate {
+    
+    override func urlSession(_ session: URLSession, task: URLSessionTask, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
+        switch challenge.protectionSpace.authenticationMethod {
+        case NSURLAuthenticationMethodClientCertificate:
+            
+            let config = MoyaProvider<WYTarget>.config
+            
+            guard let p12Path = ((Bundle(for: WYBothwayVerifyDeleagte.self).path(forResource: config.httpsConfig.clientP12, ofType: "p12")) ?? (Bundle.main.path(forResource: config.httpsConfig.clientP12, ofType: "p12"))),
+                  let p12Data = try? Data(contentsOf: URL(fileURLWithPath: p12Path)) else {
+                completionHandler(.performDefaultHandling, nil)
+                return
+            }
+            
+            let p12Contents = PKCS12(pkcs12Data: p12Data, password: config.httpsConfig.clientP12Password, clientP12: config.httpsConfig.clientP12)
+            guard let identity = p12Contents.identity else {
+                completionHandler(.performDefaultHandling, nil)
+                return
+            }
+            
+            let credential = URLCredential(identity: identity,
+                                           certificates: nil,
+                                           persistence: .none)
+            challenge.sender?.use(credential, for: challenge)
+            completionHandler(.useCredential, credential)
+        default:
+            completionHandler(.performDefaultHandling, nil)
+        }
+    }
+    
+    private struct PKCS12 {
+        let label: String?
+        let keyID: NSData?
+        let trust: SecTrust?
+        let certChain: [SecTrust]?
+        let identity: SecIdentity?
+        
+        public init(pkcs12Data: Data, password: String, clientP12: String) {
+            let importPasswordOption: NSDictionary
+                = [kSecImportExportPassphrase as NSString: password]
+            var items: CFArray?
+            let secError: OSStatus
+                = SecPKCS12Import(pkcs12Data as NSData,
+                                  importPasswordOption, &items)
+            guard secError == errSecSuccess else {
+                if secError == errSecAuthFailed {
+                    WYNetworkManager.networkPrint("\(clientP12).p12 证书密码错误")
+                }
+                fatalError("尝试导入 \(pkcs12Data) 时出错")
+            }
+            guard let theItemsCFArray = items else { fatalError() }
+            let theItemsNSArray: NSArray = theItemsCFArray as NSArray
+            guard let dictArray
+                    = theItemsNSArray as? [[String: AnyObject]] else {
+                fatalError()
+            }
+            func f<T>(key: CFString) -> T? {
+                for dict in dictArray {
+                    if let value = dict[key as String] as? T {
+                        return value
+                    }
+                }
+                return nil
+            }
+            self.label = f(key: kSecImportItemLabel)
+            self.keyID = f(key: kSecImportItemKeyID)
+            self.trust = f(key: kSecImportItemTrust)
+            self.certChain = f(key: kSecImportItemCertChain)
+            self.identity = f(key: kSecImportItemIdentity)
+        }
     }
 }

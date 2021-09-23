@@ -10,7 +10,7 @@ import Moya
 import Alamofire
 import HandyJSON
 
-/// 网络请求类型
+/// 网络请求任务类型
 public enum WYTaskMethod {
     
     /// 数据任务
@@ -57,12 +57,13 @@ public enum WYNetworkStatus {
 public struct WYResponse: HandyJSON {
     
     public var msg: String? = ""
-    public var code: String = WYNetworkConfig.serverRequestSuccessCode
+    public var code: String = ""
     public var data: Any? = nil
     
     public mutating func mapping(mapper: HelpingMapper) {
         mapper.specify(property: &msg, name: "reason")
         mapper.specify(property: &msg, name: "message")
+        mapper.specify(property: &code, name: "ret")
     }
     
     public init() {}
@@ -136,6 +137,8 @@ public struct WYFileModel {
             if ((data == nil) && (newValue != nil)) {
                 
                 data = newValue!.jpegData(compressionQuality: compressionQuality)
+            }else {
+                fatalError("二进制文件 \(String(describing: data)) 与 图片 \(String(describing: image))只传入其中一项即可")
             }
         }
     }
@@ -149,20 +152,78 @@ public struct WYFileModel {
 
 public struct WYNetworkManager {
     
+    /**
+     *  发起一个网络请求
+     *
+     *  @param method       网络请求类型
+     *
+     *  @param path         网络请求url路径
+     *
+     *  @param data         data数据任务时对应的data，非data数据任务传nil即可
+     *
+     *  @param parameter    参数
+     *
+     *  @param config       请求配置
+     *
+     *  @param progress     进度回调
+     *
+     *  @param success      成功回调
+     *
+     *  @param failure      失败回调
+     *
+     */
+    public static func request(method: HTTPMethod = .post, path: String = "", data: Data? = nil, parameter: [String : Any] = [:], config: WYNetworkConfig = .default, success:((_ response: Any?) -> Void)? = .none, failure:((_ error: WYError) -> Void)? = .none, progress:((_ progress: Double) -> Void)? = .none) {
+        
+        request(method: method, path: path, data: data, config: config, parameter: parameter, files: [], progress: progress, success: success, failure: failure)
+    }
+
+    /**
+     *  发起一个上传请求
+     *
+     *  @param path         网络请求url路径
+     *
+     *  @param parameter    参数
+     *
+     *  @param files        要上传的文件
+     *
+     *  @param config       请求配置
+     *
+     *  @param progress     进度回调
+     *
+     *  @param success      成功回调
+     *
+     *  @param failure      失败回调
+     *
+     */
+    public static func upload(path: String = "", parameter: [String : Any] = [:], files: [WYFileModel], config: WYNetworkConfig = .default, progress:((_ progress: Double) -> Void)? = .none, success:((_ response: Any?) -> Void)? = .none, failure:((_ error: WYError) -> Void)? = .none) {
+        
+        var taskConfig = config
+        taskConfig.taskMethod = .upload
+
+        request(method: .post, path: path, data: nil, config: taskConfig, parameter: parameter, files: files, progress: progress, success: success, failure: failure)
+    }
+    
     /// 取消所有网络请求
     public static func cancelAllRequest() {
         
         Moya.Session.default.session.getAllTasks { (tasks) in
 
             tasks.forEach { (task) in
-
+                
                 task.cancel()
             }
         }
     }
     
-    /// 取消指定url的请求
-    public static func cancelRequest(domain: String = WYNetworkConfig.currentDomainPath, path: String) {
+    /**
+     *  取消指定url的请求
+     *
+     *  @param domain      域名
+     *
+     *  @param path        网络请求url路径
+     *
+     */
+    public static func cancelRequest(domain: String = WYNetworkConfig.default.domain, path: String) {
         
         Moya.Session.default.session.getAllTasks { (tasks) in
 
@@ -174,52 +235,40 @@ public struct WYNetworkManager {
             }
         }
     }
+}
 
-    public static func post(taskMethod: WYTaskMethod = .parameters, domain: String = WYNetworkConfig.currentDomainPath, path: String = "", headers: [String : String]? = WYNetworkConfig.requestHeaders, data: Data? = nil, parameters: [String : Any] = [:], originObject: Bool = false, callbackQueue: DispatchQueue = .main, progress progressHandler:((_ progress: Double) -> Void)? = nil, success successHandler:((_ response: Any?) -> Void)? = nil, failure failureHandler:((_ error: WYError) -> Void)? = nil) {
-
-        request(method: .post, taskMethod: taskMethod, domain: domain, path: path, headers: headers, data: data, parameters: parameters, files: [], originObject: originObject, callbackQueue: callbackQueue, progress: progressHandler, success: successHandler, failure: failureHandler)
-    }
-
-    public static func get(taskMethod: WYTaskMethod = .parameters, domain: String = WYNetworkConfig.currentDomainPath, path: String = "", headers: [String : String]? = WYNetworkConfig.requestHeaders, data: Data? = nil, parameters: [String : Any] = [:], originObject: Bool = false, callbackQueue: DispatchQueue = .main, progress progressHandler:((_ progress: Double) -> Void)? = nil, success successHandler:((_ response: Any?) -> Void)? = nil, failure failureHandler:((_ error: WYError) -> Void)? = nil) {
-
-        request(method: .get, taskMethod: taskMethod, domain: domain, path: path, headers: headers, data: data, parameters: parameters, files: [], originObject: originObject, callbackQueue: callbackQueue, progress: progressHandler, success: successHandler, failure: failureHandler)
-    }
-
-    public static func upload(domain: String = WYNetworkConfig.currentDomainPath, path: String = "", headers: [String : String]? = WYNetworkConfig.requestHeaders, parameters: [String : Any] = [:], files: [WYFileModel], originObject: Bool = false, callbackQueue: DispatchQueue = .main, progress progressHandler:((_ progress: Double) -> Void)?, success successHandler:((_ response: Any?) -> Void)?, failure failureHandler:((_ error: WYError) -> Void)?) {
-
-        request(method: .post, taskMethod: .upload, domain: domain, path: path, headers: headers, data: nil, parameters: parameters, files: files, originObject: originObject, callbackQueue: callbackQueue, progress: progressHandler, success: successHandler, failure: failureHandler)
-    }
+extension WYNetworkManager {
     
     private static var networkSecurityInfo = (WYNetworkStatus.userNotSelectedConnect, "")
 
-    private static func request(method: HTTPMethod, taskMethod: WYTaskMethod, domain: String, path: String, headers: [String : String]?, data: Data?, parameters: [String : Any], files: [WYFileModel], originObject: Bool, callbackQueue: DispatchQueue, progress:((_ progress: Double) -> Void)?, success:((_ response: Any?) -> Void)?, failure:((_ error: WYError) -> Void)?) {
+    private static func request(method: HTTPMethod, path: String, data: Data?, config: WYNetworkConfig = .default, parameter: [String : Any], files: [WYFileModel], progress:((_ progress: Double) -> Void)?, success:((_ response: Any?) -> Void)?, failure:((_ error: WYError) -> Void)?) {
 
         checkNetworkStatus { (statusInfo) in
 
             if (statusInfo.0 == .userCancelConnect) {
                 
-                handlerFailure(error: WYError(code: WYNetworkConfig.networkServerFailCode, describe: statusInfo.1), function: #function, line: #line, failure: failure)
+                handlerFailure(error: WYError(code: WYNetworkConfig.networkServerFailCode, describe: statusInfo.1), failure: failure)
 
             }else {
+                
+                let request = WYRequest(method: method, path: path, data: data, parameter: parameter, files: files, config: config)
+                
+                let target = WYTarget(request: request)
 
-                let request = WYRequest(method: method, taskMethod: taskMethod, domain: domain, path: path, headers: headers, data: data, parameters: parameters, files: files)
-                let target = WYProvider(request: request)
-
-                self.request(target: target, originObject: originObject, callbackQueue: callbackQueue, progress: progress, success: success, failure: failure)
+                self.request(target: target, config: config, progress: progress, success: success, failure: failure)
             }
         }
     }
 
-    private static func request(target: WYProvider, originObject: Bool, callbackQueue: DispatchQueue = .main, progress progressHandler:((_ progress: Double) -> Void)? = nil, success successHandler:((_ response: Any?) -> Void)? = nil, failure failureHandler:((_ error: WYError) -> Void)? = nil) {
+    private static func request(target: WYTarget, config: WYNetworkConfig, progress:((_ progress: Double) -> Void)? = .none, success:((_ response: Any?) -> Void)? = .none, failure:((_ error: WYError) -> Void)? = .none) {
 
         // 开启状态栏动画
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        WYTargetProvider.request(target, callbackQueue: config.callbackQueue) { (progressResponse) in
 
-        WYTargetProvider.request(target, callbackQueue: callbackQueue) { (progressResponse) in
+            if progress != nil {
 
-            if progressHandler != nil {
-
-                progressHandler!(progressResponse.progress)
+                progress!(progressResponse.progress)
             }
 
         } completion: { (result) in
@@ -232,15 +281,17 @@ public struct WYNetworkManager {
 
                 if statusCode != 200 {
 
-                    showDebugModeLog(target: target, response: response, function: #function, line: #line)
+                    showDebugModeLog(target: target, response: response)
 
-                    handlerFailure(error: WYError(code: String(statusCode), describe: WYLocalizedString("状态码异常")), isStatusCodeError: true, function: #function, line: #line, failure: failureHandler)
+                    handlerFailure(error: WYError(code: String(statusCode), describe: WYLocalizedString("状态码异常")), isStatusCodeError: true, failure: failure)
 
                 }else {
                     
-                    if originObject {
+                    if config.originObject {
                         
-                        handlerSuccess(response: response.data, success: successHandler)
+                        showDebugModeLog(target: target, response: response)
+                        
+                        handlerSuccess(response: response.data, success: success)
                         
                     }else {
                         
@@ -251,22 +302,22 @@ public struct WYNetworkManager {
 
                             if responseData?.code == WYNetworkConfig.serverRequestSuccessCode {
 
-                                showDebugModeLog(target: target, response: response, function: #function, line: #line)
+                                showDebugModeLog(target: target, response: response)
 
-                                handlerSuccess(response: responseData?.data, success: successHandler)
+                                handlerSuccess(response: responseData?.data, success: success)
 
                             }else {
 
-                                showDebugModeLog(target: target, response: response, function: #function, line: #line)
+                                showDebugModeLog(target: target, response: response)
                                 
-                                handlerFailure(error: WYError(code: responseData?.code ?? WYNetworkConfig.otherServerFailCode, describe: (responseData?.msg ?? WYLocalizedString("未知错误，接口信息返回为空"))), function: #function, line: #line, failure: failureHandler)
+                                handlerFailure(error: WYError(code: responseData?.code ?? WYNetworkConfig.otherServerFailCode, describe: (responseData?.msg ?? WYLocalizedString("未知错误，接口信息返回为空"))), failure: failure)
                             }
 
                         } catch  {
 
-                            showDebugModeLog(target: target, response: response, function: #function, line: #line)
+                            showDebugModeLog(target: target, response: response)
 
-                            handlerFailure(error: WYError(code: WYNetworkConfig.unpackServerFailCode, describe: error.localizedDescription), function: #function, line: #line, failure: failureHandler)
+                            handlerFailure(error: WYError(code: WYNetworkConfig.unpackServerFailCode, describe: error.localizedDescription), failure: failure)
                         }
                     }
                 }
@@ -274,9 +325,9 @@ public struct WYNetworkManager {
 
             case .failure(let error):
 
-                showDebugModeLog(target: target, response: Response(statusCode: error.errorCode, data: error.localizedDescription.data(using: .utf8) ?? Data()), function: #function, line: #line)
+                showDebugModeLog(target: target, response: Response(statusCode: error.errorCode, data: error.localizedDescription.data(using: .utf8) ?? Data()))
                 
-                handlerFailure(error: WYError(code: String(error.errorCode), describe: error.localizedDescription), function: #function, line: #line, failure: failureHandler)
+                handlerFailure(error: WYError(code: String(error.errorCode), describe: error.localizedDescription), failure: failure)
 
                 break
             }
@@ -296,7 +347,7 @@ public struct WYNetworkManager {
         }
     }
 
-    private static func handlerFailure(error: WYError, isStatusCodeError: Bool = false, function: String, line: Int, failure:((_ error: WYError) -> Void)? = nil) {
+    private static func handlerFailure(error: WYError, isStatusCodeError: Bool = false, function: String = #function, line: Int = #line, failure:((_ error: WYError) -> Void)? = nil) {
 
         DispatchQueue.main.async {
 
@@ -310,28 +361,28 @@ public struct WYNetworkManager {
             guard WYNetworkConfig.debugModeLog == true else { return }
             
             if isStatusCodeError {
-                wy_networkPrint("statusCode: \(error.code)\n statusError:  \(error)", function: function, line: line)
+                networkPrint("statusCode: \(error.code)\n statusError:  \(error)", function: function, line: line)
             }else {
-                wy_networkPrint("serverCode: \(error.code)\n serverError:  \(error)", function: function, line: line)
+                networkPrint("serverCode: \(error.code)\n serverError:  \(error)", function: function, line: line)
             }
         }
     }
 
-    private static func showDebugModeLog(target: WYProvider, response: Response, function: String, line: Int) {
+    private static func showDebugModeLog(target: WYTarget, response: Response, function: String = #function, line: Int = #line) {
 
         guard WYNetworkConfig.debugModeLog == true else { return }
 
-        if target.request.taskMethod == .data {
+        if target.request.config.taskMethod == .data {
             
-            wy_networkPrint("接口: \(target.baseURL)\(target.path)\n 请求头: \(target.headers ?? [:])\n dataString: \((target.request.data == nil ? "" : (String(data: target.request.data!, encoding: .utf8))) ?? "")\n 参数: \(target.request.parameters))\n 返回数据: \(String(describing: try? response.mapJSON()))", function: function, line: line)
+            networkPrint("接口: \(target.baseURL)\(target.path)\n 请求头: \(target.headers ?? [:])\n dataString: \((target.request.data == nil ? "" : (String(data: target.request.data!, encoding: .utf8))) ?? "")\n 参数: \(target.request.parameter))\n 返回数据: \(String(describing: try? response.mapJSON()))", function: function, line: line)
             
         }else {
             
-            wy_networkPrint("接口: \(target.baseURL)\(target.path)\n 请求头: \(target.headers ?? [:])\n 参数: \(target.request.parameters))\n 返回数据: \(String(describing: try? response.mapJSON()))", function: function, line: line)
+            networkPrint("接口: \(target.baseURL)\(target.path)\n 请求头: \(target.headers ?? [:])\n 参数: \(target.request.parameter))\n 返回数据: \(String(describing: try? response.mapJSON()))", function: function, line: line)
         }
     }
 
-    private static func checkNetworkStatus(handler: ((_ status: (WYNetworkStatus, String)) -> Void)? = nil) {
+    private static func checkNetworkStatus(handler: ((_ status: (WYNetworkStatus, String)) -> Void)? = .none) {
 
         networkStatus(showStatusAlert: false, openSeting: true, statusHandler: { (status) in
 
@@ -394,7 +445,7 @@ public struct WYNetworkManager {
         })
     }
 
-    public static func networkStatus(showStatusAlert: Bool, openSeting: Bool, statusHandler:((_ status: WYNetworkStatus) -> Void)? = nil, actionHandler:((_ action: String, _ status: WYNetworkStatus) -> Void)? = nil) {
+    private static func networkStatus(showStatusAlert: Bool, openSeting: Bool, statusHandler:((_ status: WYNetworkStatus) -> Void)? = nil, actionHandler:((_ action: String, _ status: WYNetworkStatus) -> Void)? = nil) {
 
         let manager = NetworkReachabilityManager()
         manager!.startListening(onQueue: .main, onUpdatePerforming: { (status) in
@@ -484,7 +535,7 @@ public struct WYNetworkManager {
     }
 
     /// DEBUG打印日志
-    public static func wy_networkPrint(_ messages: Any..., file: String = #file, function: String, line: Int) {
+    public static func networkPrint(_ messages: Any..., file: String = #file, function: String = #function, line: Int = #line) {
         #if DEBUG
         let timeFormatter = DateFormatter()
         timeFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss.SSS"

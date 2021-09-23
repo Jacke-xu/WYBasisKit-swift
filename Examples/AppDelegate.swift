@@ -18,15 +18,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // 屏蔽控制台约束输出
         UserDefaults.standard.setValue(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")
-        
+
         return true
     }
     
     /// 切换为深色或浅色模式
     func applicationDidBecomeActive(_ application: UIApplication) {
-        
+
         if #available(iOS 13.0, *) {
-            application.wy_switchAppDisplayBrightness(style: UITraitCollection.current.userInterfaceStyle)
+            application.wy_switchAppDisplayBrightness(style: (WYLocalizableManager.currentLanguage() == .english) ? .dark : .light)
         }
     }
 }
