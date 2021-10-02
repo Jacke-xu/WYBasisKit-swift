@@ -157,37 +157,41 @@ struct WYProviderConfig<target: TargetType> {
                         let certificationData = try Data(contentsOf: URL(fileURLWithPath: cerPath)) as CFData
                         if let certificate = SecCertificateCreateWithData(nil, certificationData){
                             
-                            var policies: [String: ServerTrustEvaluating] = [:]
+                            let domains: [String] = domainsFrom(domain: config.domain)
+                            
+                            var trustEvaluator: ServerTrustEvaluating = DisabledTrustEvaluator()
+                            
                             switch config.httpsConfig.verifyStrategy {
                             case .pinnedCertificates:
                                 
                                 let certificates: [SecCertificate] = [certificate]
                                 
-                                policies = [config.domain: PinnedCertificatesTrustEvaluator(certificates: certificates, acceptSelfSignedCertificates: true, performDefaultValidation: config.httpsConfig.defaultValidation, validateHost: config.httpsConfig.validateDomain)]
+                                trustEvaluator = PinnedCertificatesTrustEvaluator(certificates: certificates, acceptSelfSignedCertificates: true, performDefaultValidation: config.httpsConfig.defaultValidation, validateHost: config.httpsConfig.validateDomain)
                                 
                                 break
                                 
                             case .publicKeys:
                                 
-                                let secKeys: [SecKey] = Bundle.main.af.publicKeys
+                                let certificates: [SecCertificate] = [certificate]
                                 
-                                policies = [config.domain: PublicKeysTrustEvaluator(keys: secKeys, performDefaultValidation: config.httpsConfig.defaultValidation, validateHost: config.httpsConfig.validateDomain)]
+                                let secKeys: [SecKey] = certificates.af.publicKeys
                                 
-                                break
-                                
-                            case .chainTrust:
-                                
-                                policies = [config.domain: DefaultTrustEvaluator(validateHost: config.httpsConfig.validateDomain)]
+                                trustEvaluator = PublicKeysTrustEvaluator(keys: secKeys, performDefaultValidation: config.httpsConfig.defaultValidation, validateHost: config.httpsConfig.validateDomain)
                                 
                                 break
                                 
                             case .directTrust:
                                 
-                                policies = [config.domain: DisabledTrustEvaluator()]
+                                trustEvaluator = DisabledTrustEvaluator()
                                 
                                 break
                             }
                             
+                            var policies: [String: ServerTrustEvaluating] = [:]
+                            
+                            for index in 0..<domains.count {
+                                policies[domains[index]] = trustEvaluator
+                            }
                             serverTrustManager = ServerTrustManager(allHostsMustBeEvaluated: config.httpsConfig.allHostsMustBeEvaluated, evaluators: policies)
                         }
                     } catch {
@@ -203,6 +207,34 @@ struct WYProviderConfig<target: TargetType> {
             }
         }
         return Session(configuration: configuration, delegate: sessionDelegate, serverTrustManager: serverTrustManager)
+    }
+    
+    private static func domainsFrom(domain: String) -> [String] {
+        
+        var domains: [String] = [domain]
+        if let url = URL(string: domain)  {
+            if let hostName = url.host  {
+                
+                if domains.contains(hostName) == false {
+                    domains.append(hostName)
+                }
+                
+                let subStrings = hostName.components(separatedBy: ".")
+                var domainName = ""
+                let count = subStrings.count
+                if count > 2 {
+                    domainName = subStrings[count - 2] + "." + subStrings[count - 1]
+                } else if count == 2 {
+                    domainName = hostName
+                }
+                if domains.contains(domainName) == false {
+                    domains.append(domainName)
+                }
+            }
+        }else {
+            fatalError("使用HTTPS自建证书进行网络请求时 request.config.domain 传入有误，至少应该包含必要的域名部分")
+        }
+        return domains
     }
 }
 

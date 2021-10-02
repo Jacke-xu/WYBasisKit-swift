@@ -23,14 +23,11 @@ public enum WYNetworkRequestStyle {
 /// HTTPS自建证书验证策略
 public enum WYHttpsVerifyStrategy {
     
-    /// 如果固定证书之一与服务器证书匹配，则服务器信任被视为有效
+    /// 证书验证模式，客户端会将服务器返回的证书和本地保存的证书中的 所有内容 全部进行校验，如果正确，才继续执行
     case pinnedCertificates
     
-    /// 如果固定的公钥之一与服务器证书的公钥匹配，则认为服务器信任有效
+    /// 公钥验证模式，客户端会将服务器返回的证书和本地保存的证书中的 公钥 部分 进行校验，如果正确，才继续执行
     case publicKeys
-    
-    /// 通过证书信任链，来验证证书的有效性
-    case chainTrust
     
     /// 不进行任何验证,无条件信任证书(不建议使用此选项，如果确实要使用此选项的，最好自己实现验证策略)
     case directTrust
