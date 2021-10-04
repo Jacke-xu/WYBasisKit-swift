@@ -111,6 +111,18 @@ public struct WYNetworkConfig {
     public static var originObject: Bool = false
     public var originObject: Bool = originObject
     
+    /// 网络请求的缓存数据(缓存)路径
+    public static var requestSavePath: URL = createDirectory(directory: .documentDirectory, subDirectory: "WYBasisKit/Request")
+    public var requestSavePath: URL = requestSavePath
+
+    /// 下载的文件、资源保存(缓存)路径
+    public static var downloadSavePath: URL = createDirectory(directory: .documentDirectory, subDirectory: "WYBasisKit/Download")
+    public var downloadSavePath: URL = downloadSavePath
+    
+    /// 下载是是否自动覆盖同名文件
+    public static var removeSameNameFile: Bool = true
+    public var removeSameNameFile: Bool = removeSameNameFile
+    
     /// 网络请求时队列
     public static var callbackQueue: DispatchQueue? = .global()
     public var callbackQueue: DispatchQueue? = callbackQueue
@@ -137,4 +149,23 @@ public struct WYNetworkConfig {
     
     /// 获取一个默认config
     public static let `default`: WYNetworkConfig = WYNetworkConfig()
+    
+    /// 创建一个指定目录/文件夹
+    public static func createDirectory(directory: FileManager.SearchPathDirectory, subDirectory: String) -> URL {
+        
+        let directoryURLs = FileManager.default.urls(for: directory,
+                                                     in: .userDomainMask)
+        
+        let savePath = (directoryURLs.first ?? URL(fileURLWithPath: NSTemporaryDirectory())).appendingPathComponent(subDirectory)
+        let isExists: Bool = FileManager.default.fileExists(atPath: savePath.path)
+        
+        if !isExists {
+            
+            guard let _ = try? FileManager.default.createDirectory(at: savePath, withIntermediateDirectories: true, attributes: nil) else {
+            
+                fatalError("创建 \(savePath) 路径失败")
+            }
+        }
+        return savePath
+    }
 }

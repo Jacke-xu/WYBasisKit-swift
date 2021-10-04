@@ -15,21 +15,21 @@ class WYLeftController: UIViewController {
                                  WYLocalizedString("边框、圆角、阴影、渐变", "Borders, rounded corners, shadows, gradients"),
                                  "Banner",
                                  "RichText",
-                                 "无限层折叠TableView", "测试tableView"]
+                                 "无限层折叠TableView", "测试tableView", "测试下载"]
 
     let cellTitles: [[String]] = [[WYLocalizedString("暗夜/白昼模式", "Dark night/day mode")],
                                   [WYLocalizedString("约束view添加动画", "Constrain the view to add animation")],
                                   [WYLocalizedString("边框、圆角、阴影、渐变", "Borders, rounded corners, shadows, gradients")],
                                   ["Banner"],
                                   ["RichText"],
-                                  ["无限层折叠TableView"],["测试tableView.plain模式", "测试tableView.grouped模式"]]
+                                  ["无限层折叠TableView"],["测试tableView.plain模式", "测试tableView.grouped模式"], ["下载"]]
 
     let controller: [[String]] = [["WYTestDarkNightModeController"],
                                 ["WYTestAnimationController"],
                                 ["WYTestVisualController"],
                                 ["WYTestBannerController"],
                                 ["WYTestRichTextController"],
-                                ["WYMultilevelTableViewController"],["WYTableViewPlainController", "WYTableViewGroupedController"]]
+                                ["WYMultilevelTableViewController"],["WYTableViewPlainController", "WYTableViewGroupedController"], ["WYTestDownloadController"]]
 
     lazy var tableView: UITableView = {
 

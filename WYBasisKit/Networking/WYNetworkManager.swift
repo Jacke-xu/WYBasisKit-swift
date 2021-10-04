@@ -9,16 +9,19 @@
 import Moya
 import Alamofire
 import HandyJSON
+import Foundation
 
 /// 网络请求任务类型
 public enum WYTaskMethod {
     
     /// 数据任务
     case parameters
-    /// data数据任务(对应Postman的raw)
+    /// Data数据任务(对应Postman的raw)
     case data
     /// 上传任务
     case upload
+    /// 下载任务
+    case download
 }
 
 /// 上传类型
@@ -203,6 +206,97 @@ public struct WYNetworkManager {
         request(method: .post, path: path, data: nil, config: taskConfig, parameter: parameter, files: files, progress: progress, success: success, failure: failure)
     }
     
+    /**
+     *  发起一个下载请求
+     *
+     *  @param path         网络请求url路径
+     *
+     *  @param parameter    参数
+     *
+     *  @param assetName    自定义要保存的资源文件的名字，不传则使用默认名
+     *
+     *  @param config       请求配置
+     *
+     *  @param progress     进度回调
+     *
+     *  @param success      成功回调
+     *
+     *  @param failure      失败回调
+     *
+     */
+    public static func download(path: String = "", parameter: [String : Any] = [:], assetName: String = "", config: WYNetworkConfig = .default, progress:((_ progress: Double) -> Void)? = .none, success:((_ response: Any?) -> Void)? = .none, failure:((_ error: WYError) -> Void)? = .none) {
+        
+        var taskConfig = config
+        taskConfig.taskMethod = .download
+
+        request(method: .get, path: path, data: nil, config: taskConfig, parameter: parameter, files: [], assetName: assetName, progress: progress, success: success, failure: failure)
+    }
+    
+    /**
+     *  清除缓存
+     *
+     *  @param path         要清除的资源文件的路径
+     *
+     *  @param asset    为空表示清除传入 path 下所有资源文件，否则表示清除传入 path 下对应 asset 的指定资源
+     *
+     *  @param complte      完成后回调，error 为空表示成功，否则为失败
+     *
+     */
+    public static func clearDiskCache(path: String = WYNetworkConfig.default.downloadSavePath.path, asset: String = "", complte:((_ error: String?) -> Void)? = .none) {
+
+        guard let contents = try? FileManager.default.contentsOfDirectory(atPath: path) else {
+            
+            if complte != nil {
+                complte!("\(path) 路径不存在或者该路径下没有需要删除的文件")
+            }
+            return
+        }
+        
+        if asset.isEmpty {
+            
+            for obj: String in contents {
+                
+                let contentPath: String = URL(fileURLWithPath: path).appendingPathComponent(obj).path
+
+                guard let _ = try? FileManager.default.removeItem(atPath: contentPath) else {
+                    
+                    if complte != nil {
+                        complte!("移除 \(obj) 文件失败")
+                    }
+                    return
+                }
+                if complte != nil {
+                    complte!(nil)
+                }
+            }
+            
+        }else {
+            
+            if contents.contains(asset) {
+                
+                let contentPath: String = URL(fileURLWithPath: path).appendingPathComponent(asset).path
+
+                guard let _ = try? FileManager.default.removeItem(atPath: contentPath) else {
+                
+                    if complte != nil {
+                        complte!("移除 \(asset) 文件失败")
+                    }
+                    return
+                }
+                if complte != nil {
+                    complte!(nil)
+                }
+                return
+                
+            }else {
+                if complte != nil {
+                    complte!("没有找到 \(asset) 这个文件")
+                }
+                return
+            }
+        }
+    }
+    
     /// 取消所有网络请求
     public static func cancelAllRequest() {
         
@@ -241,7 +335,7 @@ extension WYNetworkManager {
     
     private static var networkSecurityInfo = (WYNetworkStatus.userNotSelectedConnect, "")
 
-    private static func request(method: HTTPMethod, path: String, data: Data?, config: WYNetworkConfig = .default, parameter: [String : Any], files: [WYFileModel], progress:((_ progress: Double) -> Void)?, success:((_ response: Any?) -> Void)?, failure:((_ error: WYError) -> Void)?) {
+    private static func request(method: HTTPMethod, path: String, data: Data?, config: WYNetworkConfig = .default, parameter: [String : Any], files: [WYFileModel], assetName: String = "", progress:((_ progress: Double) -> Void)?, success:((_ response: Any?) -> Void)?, failure:((_ error: WYError) -> Void)?) {
 
         checkNetworkStatus { (statusInfo) in
 
@@ -251,7 +345,7 @@ extension WYNetworkManager {
 
             }else {
                 
-                let request = WYRequest(method: method, path: path, data: data, parameter: parameter, files: files, config: config)
+                let request = WYRequest(method: method, path: path, data: data, parameter: parameter, files: files, assetName: assetName, config: config)
                 
                 let target = WYTarget(request: request)
 
@@ -276,48 +370,61 @@ extension WYNetworkManager {
             switch result {
 
             case .success(let response):
+                
+                if config.taskMethod == .download {
+                    
+                    let format: String = ((response.response?.mimeType ?? "").components(separatedBy: "/").count > 1) ? ((response.response?.mimeType ?? "").components(separatedBy: "/").last ?? "") : ""
+                    let saveName: String = (target.request.assetName.isEmpty ? (response.response?.suggestedFilename ?? "") : target.request.assetName) + "." + format
 
-                let statusCode = response.statusCode
-
-                if statusCode != 200 {
-
-                    showDebugModeLog(target: target, response: response)
-
-                    handlerFailure(error: WYError(code: String(statusCode), describe: WYLocalizedString("状态码异常")), isStatusCodeError: true, failure: failure)
-
+                    let saveUrl: URL = config.downloadSavePath.appendingPathComponent(saveName)
+                    showDebugModeLog(target: target, response: response, saveUrl: saveUrl)
+                    
+                    handlerSuccess(response: ["directoryPath": saveUrl.absoluteString, "diskCache": config.downloadSavePath.path, "assetPath": saveUrl.path, "assetName": (target.request.assetName.isEmpty ? (response.response?.suggestedFilename ?? "") : target.request.assetName), "mimeType": format], success: success)
+                    
                 }else {
                     
-                    if config.originObject {
-                        
+                    let statusCode = response.statusCode
+
+                    if statusCode != 200 {
+
                         showDebugModeLog(target: target, response: response)
-                        
-                        handlerSuccess(response: response.data, success: success)
-                        
+
+                        handlerFailure(error: WYError(code: String(statusCode), describe: WYLocalizedString("状态码异常")), isStatusCodeError: true, failure: failure)
+
                     }else {
                         
-                        do {
-                            //let responseData = try response.mapJSON()  也可以更改下返回值类型，直接把这个返回出去
-
-                            let responseData = try WYResponse.deserialize(from: response.mapString())
-
-                            if responseData?.code == WYNetworkConfig.serverRequestSuccessCode {
-
-                                showDebugModeLog(target: target, response: response)
-
-                                handlerSuccess(response: responseData?.data, success: success)
-
-                            }else {
-
-                                showDebugModeLog(target: target, response: response)
-                                
-                                handlerFailure(error: WYError(code: responseData?.code ?? WYNetworkConfig.otherServerFailCode, describe: (responseData?.msg ?? WYLocalizedString("未知错误，接口信息返回为空"))), failure: failure)
-                            }
-
-                        } catch  {
-
+                        if config.originObject {
+                            
                             showDebugModeLog(target: target, response: response)
+                            
+                            handlerSuccess(response: response.data, success: success)
+                            
+                        }else {
+                            
+                            do {
+                                //let responseData = try response.mapJSON()  也可以更改下返回值类型，直接把这个返回出去
 
-                            handlerFailure(error: WYError(code: WYNetworkConfig.unpackServerFailCode, describe: error.localizedDescription), failure: failure)
+                                let responseData = try WYResponse.deserialize(from: response.mapString())
+
+                                if responseData?.code == WYNetworkConfig.serverRequestSuccessCode {
+
+                                    showDebugModeLog(target: target, response: response)
+
+                                    handlerSuccess(response: responseData?.data, success: success)
+
+                                }else {
+
+                                    showDebugModeLog(target: target, response: response)
+                                    
+                                    handlerFailure(error: WYError(code: responseData?.code ?? WYNetworkConfig.otherServerFailCode, describe: (responseData?.msg ?? WYLocalizedString("未知错误，接口信息返回为空"))), failure: failure)
+                                }
+
+                            } catch  {
+
+                                showDebugModeLog(target: target, response: response)
+
+                                handlerFailure(error: WYError(code: WYNetworkConfig.unpackServerFailCode, describe: error.localizedDescription), failure: failure)
+                            }
                         }
                     }
                 }
@@ -368,16 +475,18 @@ extension WYNetworkManager {
         }
     }
 
-    private static func showDebugModeLog(target: WYTarget, response: Response, function: String = #function, line: Int = #line) {
+    private static func showDebugModeLog(target: WYTarget, response: Response, saveUrl: URL? = nil, function: String = #function, line: Int = #line) {
 
         guard WYNetworkConfig.debugModeLog == true else { return }
-
-        if target.request.config.taskMethod == .data {
-            
+        
+        switch target.request.config.taskMethod {
+        case .data:
             networkPrint("接口: \(target.baseURL)\(target.path)\n 请求头: \(target.headers ?? [:])\n dataString: \((target.request.data == nil ? "" : (String(data: target.request.data!, encoding: .utf8))) ?? "")\n 参数: \(target.request.parameter))\n 返回数据: \(String(describing: try? response.mapJSON()))", function: function, line: line)
             
-        }else {
+        case .download:
+            networkPrint("下载地址: \(target.baseURL)\(target.path)\n 请求头: \(target.headers ?? [:])\n 参数: \(target.request.parameter))\n 资源保存路径: \(saveUrl?.absoluteString ?? "")", function: function, line: line)
             
+        default:
             networkPrint("接口: \(target.baseURL)\(target.path)\n 请求头: \(target.headers ?? [:])\n 参数: \(target.request.parameter))\n 返回数据: \(String(describing: try? response.mapJSON()))", function: function, line: line)
         }
     }

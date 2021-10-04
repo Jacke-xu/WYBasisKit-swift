@@ -118,7 +118,7 @@ public func wy_randomString(minimux: NSInteger = 1, maximum: NSInteger = 100) ->
 }
 
 /// 获取对象或者类的所有属性和对应的类型
-public func wy_sharedPropertys(object: AnyObject? = nil, className: String = "") -> [String: Any] {
+public func wy_sharedPropertys(object: Any? = nil, className: String = "") -> [String: Any] {
     
     var propertys: [String: Any] = [:]
     
