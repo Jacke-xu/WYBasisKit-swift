@@ -31,7 +31,7 @@
 "您正在使用Wifi联网" = "You are using Wifi to connect to the Internet";
 "您正在使用蜂窝移动网络联网" = "You are using a cellular mobile network to connect to the Internet";
 "不可用的网络，请确认您的网络环境或网络连接权限已正确设置" = "Unavailable network, please confirm that your network environment or network connection permissions have been correctly set";
-"未知错误，接口信息返回为空" = "Unknown error, the interface information returned is empty";
+"响应数据Code校验失败" = "Response data code verification failed";
 "刚刚" = "Just now";
 "分钟前" = "minutes ago";
 "小时前" = "hours ago";

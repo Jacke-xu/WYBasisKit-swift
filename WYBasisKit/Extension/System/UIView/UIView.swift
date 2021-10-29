@@ -51,7 +51,6 @@ public extension UIView {
             frame.size.width = newValue
             self.frame = frame
         }
-        
         get {
             return self.frame.size.width
         }

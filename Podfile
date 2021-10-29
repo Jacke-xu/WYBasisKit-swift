@@ -13,5 +13,4 @@ target 'WYBasisKit' do
   pod 'Kingfisher'
   pod 'Moya'
   pod 'IQKeyboardManagerSwift'
-  pod 'AvoidCrash'
 end

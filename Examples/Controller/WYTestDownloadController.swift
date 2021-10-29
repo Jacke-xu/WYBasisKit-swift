@@ -15,40 +15,85 @@ class WYTestDownloadController: UIViewController {
 
         // Do any additional setup after loading the view.
         
-        let imageView = UIImageView()
-        imageView.backgroundColor = .orange
-        self.view.addSubview(imageView)
-        imageView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+        let memoryData = WYStorage.takeOutData(forKey: "AAAAA")
+        var localImage: UIImage? = nil
+        if memoryData.userData != nil {
+            localImage = UIImage(data: memoryData.userData!)
+        }else {
+            wy_print("\(memoryData.error!)")
+        }
+
+        let localImageView = UIImageView()
+        localImageView.backgroundColor = .orange
+        localImageView.image = localImage
+        self.view.addSubview(localImageView)
+        localImageView.snp.makeConstraints { make in
+            make.left.right.top.equalToSuperview()
+            make.height.equalTo(wy_screenHeight / 2)
+        }
+
+        let downloadImageView = UIImageView()
+        downloadImageView.backgroundColor = .orange
+        self.view.addSubview(downloadImageView)
+        downloadImageView.snp.makeConstraints { make in
+            make.left.right.bottom.equalToSuperview()
+            make.height.equalTo(wy_screenHeight / 2)
         }
         
-        WYNetworkManager.download(path: "https://t7.baidu.com/it/u=2478304529,1778129966&fm=193&f=GIF", assetName: "AAAAA", config: .default) { progress in
-            wy_print("\(progress)")
-        } success: { response in
+        WYNetworkManager.download(path: "https://www.apple.com.cn/v/iphone-13-pro/b/images/overview/camera/macro/macro_photography__dphcvz878gia_large_2x.jpg", assetName: "AAAAA") { result in
             
-            let assetObj: [String: String] = response as? [String: String] ?? [:]
-            
-            wy_print("\ndirectoryPath = \(assetObj["directoryPath"] ?? "")\ndiskCache = \(assetObj["diskCache"] ?? "")\nassetPath = \(assetObj["assetPath"] ?? ""), \nmimeType = \(assetObj["mimeType"] ?? ""), \nassetName = \(assetObj["assetName"] ?? "")")
-            
-            let imagePath: String = assetObj["assetPath"] ?? ""
-            let image = UIImage(contentsOfFile: imagePath)
-            imageView.image = image
-            
-            let diskCachePath = assetObj["diskCache"] ?? ""
-            
-            let asset: String = (assetObj["assetName"] ?? "") + "." + (assetObj["mimeType"] ?? "")
+            switch result {
+                
+            case .progress(let progress):
+                
+                wy_print("\(progress.progress)")
+                
+                break
+            case .success(let success):
+                
+                let assetObj: WYDownloadModel? = WYDownloadModel.deserialize(from: success.origin)
 
-            WYNetworkManager.clearDiskCache(path: diskCachePath, asset: asset) { error in
+                wy_print("assetObj = \(String(describing: assetObj))")
 
-                if error != nil {
-                    wy_print("error = \(error!)")
+                let imagePath: String = assetObj?.assetPath ?? ""
+                let image = UIImage(contentsOfFile: imagePath)
+                downloadImageView.image = image
+
+                let diskCachePath = assetObj?.diskPath ?? ""
+
+                let asset: String = (assetObj?.assetName ?? "") + "." + (assetObj?.mimeType ?? "")
+
+                let memoryData: WYStorageData = WYStorage.storageData(forKey: "AAAAA", data: image!.jpegData(compressionQuality: 1.0)!, durable: .minute(1))
+                if memoryData.error == nil {
+
+                    wy_print("缓存成功 = \(memoryData)")
                 }else {
-                    wy_print("移除成功")
+                    wy_print("缓存失败 = \(memoryData.error ?? "")")
                 }
+
+                WYNetworkManager.clearDiskCache(path: diskCachePath, asset: asset) { error in
+
+                    if error != nil {
+                        wy_print("error = \(error!)")
+                    }else {
+                        wy_print("移除成功")
+                    }
+                }
+                
+//                WYNetworkManager.clearDiskCache(path: WYNetworkConfig.default.downloadSavePath.path, asset: asset) { error in
+//
+//                    if error != nil {
+//                        wy_print("error = \(error!)")
+//                    }else {
+//                        wy_print("下载缓存全部移除成功")
+//                    }
+//                }
+                
+                break
+            case .error(let error):
+                wy_print("\(error)")
+                break
             }
-            
-        } failure: { error in
-            wy_print("\(error)")
         }
     }
     

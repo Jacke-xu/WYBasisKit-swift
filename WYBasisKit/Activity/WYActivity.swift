@@ -713,7 +713,10 @@ private extension WYActivity {
 
     /// 计算文本控件显示需要的行数
     static func textNumberOfLines(controlWidth: CGFloat = 0, contentLabel: UILabel, defaultFont: UIFont) -> NSInteger {
-
+        
+        guard contentLabel.attributedText?.string.isEmpty == false else {
+            return 0
+        }
         let textfont: UIFont = contentLabel.attributedText?.attribute(NSAttributedString.Key.font, at: 0, effectiveRange: nil) as? UIFont ?? defaultFont
 
         let numberOfLines: NSInteger = contentLabel.attributedText?.string.wy_numberOfRows(font: textfont, controlWidth: (controlWidth > 0 ? controlWidth : contentLabel.frame.size.width), wordsSpacing: 1) ?? 1

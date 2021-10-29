@@ -98,7 +98,7 @@ struct WYTarget: TargetType {
             }
             return .uploadCompositeMultipart(multiparts, urlParameters: request.parameter)
         case .download:
-            
+
             let downloadDestination: DownloadDestination = { temporaryURL, response in
                 
                 let format: String = ((response.mimeType ?? "").components(separatedBy: "/").count > 1) ? ((response.mimeType ?? "").components(separatedBy: "/").last ?? "") : ""
@@ -207,10 +207,10 @@ struct WYProviderConfig<target: TargetType> {
                             serverTrustManager = ServerTrustManager(allHostsMustBeEvaluated: config.httpsConfig.allHostsMustBeEvaluated, evaluators: policies)
                         }
                     } catch {
-                        WYNetworkManager.networkPrint("\(config.httpsConfig.serverCer).cer 这个证书转换为 CFData类型 失败")
+                        WYNetworkManager.wy_networkPrint("\(config.httpsConfig.serverCer).cer 这个证书转换为 CFData类型 失败")
                     }
                 }else {
-                    WYNetworkManager.networkPrint("找不到 \(config.httpsConfig.serverCer).cer 这个证书")
+                    WYNetworkManager.wy_networkPrint("找不到 \(config.httpsConfig.serverCer).cer 这个证书")
                 }
             }
             
@@ -296,7 +296,7 @@ private class WYBothwayVerifyDeleagte: SessionDelegate {
                               importPasswordOption, &items)
             guard secError == errSecSuccess else {
                 if secError == errSecAuthFailed {
-                    WYNetworkManager.networkPrint("\(clientP12).p12 证书密码错误")
+                    WYNetworkManager.wy_networkPrint("\(clientP12).p12 证书密码错误")
                 }
                 fatalError("尝试导入 \(pkcs12Data) 时出错")
             }

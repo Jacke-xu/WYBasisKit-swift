@@ -9,10 +9,10 @@
 import UIKit
 
 class WYTabBarController: UITabBarController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         view.backgroundColor = .wy_dynamic(.white, .black)
         layoutTabBar()
@@ -69,22 +69,33 @@ class WYTabBarController: UITabBarController {
         
         nav.wy_backgroundColor = .wy_dynamic(.wy_hex("#2AACFF"), .wy_hex("#2A7DFF"))
         nav.wy_titleColor = .wy_dynamic(.black, .white)
-        //nav.wy_titleFont = .systemFont(ofSize: 15)
+        nav.wy_titleFont = .systemFont(ofSize: 18)
         nav.wy_returnButtonImage = UIImage(named: "back")!
-        //nav.wy_returnButtonColor = .orange
+        nav.wy_returnButtonColor = .orange
         nav.wy_returnButtonTitle = ""
         nav.wy_hiddenBottomLine()
+        
+        if #available(iOS 15.0, *) {
+
+            let appearnce = UINavigationBarAppearance()
+            appearnce.configureWithOpaqueBackground()
+            appearnce.backgroundColor = nav.wy_backgroundColor
+            appearnce.titleTextAttributes = [NSAttributedString.Key.font: nav.wy_titleFont, NSAttributedString.Key.foregroundColor: nav.wy_titleColor]
+            UINavigationBar.appearance().standardAppearance = appearnce
+            UINavigationBar.appearance().scrollEdgeAppearance = appearnce
+
+        } else {}
     }
     
-
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }

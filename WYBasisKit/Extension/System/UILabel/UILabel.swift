@@ -240,7 +240,7 @@ extension UILabel {
     
     @objc private func wy_clickEffect(_ status: Bool) {
         
-        if wy_isClickEffect == true {
+        if (wy_isClickEffect == true) && (wy_effectDic?.values.isEmpty == false) && (attributedText != nil) {
             
             let attStr = NSMutableAttributedString.init(attributedString: attributedText!)
             let subAtt = NSMutableAttributedString.init(attributedString: (wy_effectDic?.values.first)!)

@@ -20,21 +20,21 @@ public enum WYNetworkRequestStyle {
     case httpsBothway
 }
 
-/// HTTPS自建证书验证策略
-public enum WYHttpsVerifyStrategy {
-    
-    /// 证书验证模式，客户端会将服务器返回的证书和本地保存的证书中的 所有内容 全部进行校验，如果正确，才继续执行
-    case pinnedCertificates
-    
-    /// 公钥验证模式，客户端会将服务器返回的证书和本地保存的证书中的 公钥 部分 进行校验，如果正确，才继续执行
-    case publicKeys
-    
-    /// 不进行任何验证,无条件信任证书(不建议使用此选项，如果确实要使用此选项的，最好自己实现验证策略)
-    case directTrust
-}
-
 /// HTTPS自建证书相关配置
 public struct WYHttpsConfig {
+    
+    /// HTTPS自建证书验证策略
+    public enum WYHttpsVerifyStrategy {
+        
+        /// 证书验证模式，客户端会将服务器返回的证书和本地保存的证书中的 所有内容 全部进行校验，如果正确，才继续执行
+        case pinnedCertificates
+        
+        /// 公钥验证模式，客户端会将服务器返回的证书和本地保存的证书中的 公钥 部分 进行校验，如果正确，才继续执行
+        case publicKeys
+        
+        /// 不进行任何验证,无条件信任证书(不建议使用此选项，如果确实要使用此选项的，最好自己实现验证策略)
+        case directTrust
+    }
     
     /// 自定义单向认证验证策略
     public static var trustManager: ServerTrustManager? = nil
@@ -76,6 +76,22 @@ public struct WYHttpsConfig {
     public static let `default`: WYHttpsConfig = WYHttpsConfig()
 }
 
+/// 网络请求数据缓存相关配置
+public struct WYNetworkRequestCache {
+    
+    /// 缓存数据唯一标识(Key)
+    public static var cacheKey: String = ""
+    public var cacheKey: String = cacheKey
+    
+    /// 数据缓存路径
+    public static var cachePath: URL = WYStorage.createDirectory(directory: .cachesDirectory, subDirectory: "WYBasisKit/NetworkRequest")
+    public var cachePath: URL = cachePath
+    
+    /// 数据缓存有效期
+    public static var storageDurable: WYStorageDurable = .day(1)
+    public var storageDurable: WYStorageDurable = storageDurable
+}
+
 /// 网络请求相关配置
 public struct WYNetworkConfig {
     
@@ -107,16 +123,16 @@ public struct WYNetworkConfig {
     public static var specialCharacters: [String] = ["?"]
     public var specialCharacters: [String] = specialCharacters
     
-    /// 返回数据是否需要最原始的data对象
+    /// 返回数据是否需要最原始的返回数据
     public static var originObject: Bool = false
     public var originObject: Bool = originObject
     
-    /// 网络请求的缓存数据(缓存)路径
-    public static var requestSavePath: URL = createDirectory(directory: .documentDirectory, subDirectory: "WYBasisKit/Request")
-    public var requestSavePath: URL = requestSavePath
+    /// 网络请求数据缓存相关配置(nil时不进行缓存)
+    public static var requestCache: WYNetworkRequestCache? = nil
+    public var requestCache: WYNetworkRequestCache? = requestCache
 
     /// 下载的文件、资源保存(缓存)路径
-    public static var downloadSavePath: URL = createDirectory(directory: .documentDirectory, subDirectory: "WYBasisKit/Download")
+    public static var downloadSavePath: URL = WYStorage.createDirectory(directory: .cachesDirectory, subDirectory: "WYBasisKit/Download")
     public var downloadSavePath: URL = downloadSavePath
     
     /// 下载是是否自动覆盖同名文件
@@ -127,15 +143,15 @@ public struct WYNetworkConfig {
     public static var callbackQueue: DispatchQueue? = .global()
     public var callbackQueue: DispatchQueue? = callbackQueue
     
+    /// 自定义传入JSON解析时需要映射的Key及其对应的解析字段
+    public static var mapper: [WYMappingKey: String] = [:]
+    public var mapper: [WYMappingKey: String] = mapper
+    
     /// 配置服务端自定义的成功code
     public static var serverRequestSuccessCode: String = "200"
     public var serverRequestSuccessCode: String = serverRequestSuccessCode
     
-    /// 配置其它失败code
-    public static var otherServerFailCode: String = "10000"
-    public var otherServerFailCode: String = otherServerFailCode
-    
-    /// 配置网络判断失败code
+    /// 配置网络连接失败code
     public static var networkServerFailCode: String = "10002"
     public var networkServerFailCode: String = networkServerFailCode
     
@@ -149,23 +165,4 @@ public struct WYNetworkConfig {
     
     /// 获取一个默认config
     public static let `default`: WYNetworkConfig = WYNetworkConfig()
-    
-    /// 创建一个指定目录/文件夹
-    public static func createDirectory(directory: FileManager.SearchPathDirectory, subDirectory: String) -> URL {
-        
-        let directoryURLs = FileManager.default.urls(for: directory,
-                                                     in: .userDomainMask)
-        
-        let savePath = (directoryURLs.first ?? URL(fileURLWithPath: NSTemporaryDirectory())).appendingPathComponent(subDirectory)
-        let isExists: Bool = FileManager.default.fileExists(atPath: savePath.path)
-        
-        if !isExists {
-            
-            guard let _ = try? FileManager.default.createDirectory(at: savePath, withIntermediateDirectories: true, attributes: nil) else {
-            
-                fatalError("创建 \(savePath) 路径失败")
-            }
-        }
-        return savePath
-    }
 }

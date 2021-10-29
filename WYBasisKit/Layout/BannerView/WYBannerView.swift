@@ -9,16 +9,6 @@ import UIKit
 import Kingfisher
 import SnapKit
 
-/// 图片切换效果
-public enum WYBannerSwitchMode {
-    
-    /// 滚动切换
-    case scroll
-    
-    /// 淡入淡出
-    case fade
-}
-
 /// 分页控件显示位置
 public enum WYPageControlPosition {
     
@@ -61,7 +51,6 @@ public class WYBannerView: UIView {
      * @param handler 轮播事件的block
      */
     public func itemDidScroll(handler: @escaping ((_ bannerOffset: CGPoint, _ bannerIndex: NSInteger) -> Void)) {
-        
         scrollHandler = handler
     }
     
@@ -99,9 +88,6 @@ public class WYBannerView: UIView {
         pageControl.pageIndicatorTintColor = defaultColor
         pageControl.currentPageIndicatorTintColor = currentColor
     }
-    
-    /// 设置图片的切换模式
-    public var switchModel: WYBannerSwitchMode = .scroll
     
     /// 图片显示模式(第一次reload前设置有效)
     public var imageContentMode: UIView.ContentMode = .scaleAspectFit
@@ -383,9 +369,9 @@ public class WYBannerView: UIView {
     private class func getPlaceholderImage() -> UIImage {
         
         guard let imageSource = UIImage(named: "wy_placeholder_" + WYLocalizableManager.currentLanguage().rawValue) ?? UIImage(named: "wy_placeholder_" + WYLanguage.english.rawValue) else {
-            
+
             let resourcePath = ((Bundle(for: WYBannerView.self).path(forResource: "WYBannerView", ofType: "bundle")) ?? (Bundle.main.path(forResource: "WYBannerView", ofType: "bundle"))) ?? ""
-            
+
             return (UIImage(named: "wy_placeholder_" + WYLocalizableManager.currentLanguage().rawValue, in: Bundle(path: resourcePath), compatibleWith: nil) ?? UIImage(named: "wy_placeholder_" + WYLanguage.english.rawValue, in: Bundle(path: resourcePath), compatibleWith: nil))!
         }
         return imageSource
@@ -462,7 +448,6 @@ public class WYBannerView: UIView {
 extension WYBannerView: UICollectionViewDelegate, UICollectionViewDataSource {
     
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
         return imageArray.count
     }
     
@@ -533,38 +518,7 @@ extension WYBannerView: UICollectionViewDelegate, UICollectionViewDataSource {
     // 根据不同的显示模式提供切换动画
     func showSwitchAnimation(indexPath: IndexPath, animation: Bool) {
         
-        switch switchModel {
-        case .scroll:
-            collectionView.scrollToItem(at: indexPath, at: ((animation == false) ? .init() : .left), animated: animation)
-            break
-        case .fade:
-            if (indexPath.row == (imageArray.count == pageControl.numberOfPages ? 0 : 1)) {
-                self.collectionView.performBatchUpdates {
-                    self.collectionView.scrollToItem(at: indexPath, at: .init(), animated: false)
-                } completion: { ( finish) in
-                    let currentCell = self.collectionView.visibleCells.first
-                    currentCell?.contentView.alpha = 1.0
-                }
-                return
-            }
-            let currentCell = collectionView.visibleCells.first
-            currentCell?.contentView.alpha = 1.0
-            UIView.animate(withDuration: 1) {
-                currentCell?.contentView.alpha = 0.0
-            }completion: { (finish) in
-                currentCell?.contentView.alpha = 1.0
-                self.collectionView.performBatchUpdates {
-                    self.collectionView.scrollToItem(at: indexPath, at: .init(), animated: false)
-                } completion: { ( finish) in
-                    let nextCell = self.collectionView.visibleCells.first
-                    nextCell?.contentView.alpha = 0.0
-                    UIView.animate(withDuration: 1) {
-                        nextCell?.contentView.alpha = 1.0
-                    }
-                }
-            }
-            break
-        }
+        collectionView.scrollToItem(at: indexPath, at: ((animation == false) ? .init() : .left), animated: animation)
     }
     
     // 判断是否重启定时器
@@ -596,7 +550,6 @@ private class WYBannerCell: UICollectionViewCell {
         bannerview.contentMode = imageContentMode
         contentView.addSubview(bannerview)
         bannerview.snp.makeConstraints { (make) in
-            
             make.edges.equalToSuperview()
         }
         return bannerview

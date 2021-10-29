@@ -139,7 +139,6 @@ public extension UINavigationController {
         set {}
 
         get {
-
             return topViewController?.navigationItem.backBarButtonItem?.title ?? ""
         }
     }

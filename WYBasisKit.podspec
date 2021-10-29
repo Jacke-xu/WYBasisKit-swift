@@ -1,7 +1,7 @@
 Pod::Spec.new do |kit|
 
   kit.name         = 'WYBasisKit'
-  kit.version      = '0.3.3'
+  kit.version      = '1.0.0'
   kit.summary      = '一个大幅提高开发效率的工具库'
   kit.description  = <<-DESC
                           WYBasisKit 不仅可以帮助开发者快速构建一个工程，还有基于常用网络框架和系统API而封装的方法，开发者只需简单的调用API就可以快速实现相应功能， 大幅提高开发效率。
@@ -61,6 +61,7 @@ Pod::Spec.new do |kit|
        networking.source_files = 'WYBasisKit/Networking/**/*', 'WYBasisKit/Extension/System/UIAlertController/**/*'
        networking.frameworks = 'Foundation', 'UIKit'
        networking.dependency 'WYBasisKit/Localizable'
+       networking.dependency 'WYBasisKit/Storage'
        networking.dependency 'Moya'
        networking.dependency 'HandyJSON'
        networking.resource = 'WYBasisKit/Localizable/WYLocalizable.bundle'
@@ -71,6 +72,11 @@ Pod::Spec.new do |kit|
        activity.frameworks = 'Foundation', 'UIKit'
        activity.dependency 'WYBasisKit/Localizable'
        activity.resource = 'WYBasisKit/Activity/WYActivity.bundle', 'WYBasisKit/Localizable/WYLocalizable.bundle'
+    end
+
+    kit.subspec 'Storage' do |storage|
+       storage.source_files = 'WYBasisKit/Storage/**/*'
+       storage.frameworks = 'Foundation', 'UIKit'
     end
 
     kit.subspec 'Layout' do |layout|
@@ -108,7 +114,7 @@ Pod::Spec.new do |kit|
        end
 
         layout.subspec 'BannerView' do |bannerView|
-          bannerView.source_files = 'WYBasisKit/Layout/BannerView/**/*.swift', 'WYBasisKit/Extension/System/UIView/**/*', 'WYBasisKit/Practical/System/ConstDefinition/WYConstDefinition.swift', 'WYBasisKit/Config/WYBasisKitConfig.swift'
+          bannerView.source_files = 'WYBasisKit/Layout/BannerView/WYBannerView.swift', 'WYBasisKit/Extension/System/UIView/**/*', 'WYBasisKit/Practical/System/ConstDefinition/WYConstDefinition.swift', 'WYBasisKit/Config/WYBasisKitConfig.swift'
           bannerView.frameworks = 'Foundation', 'UIKit'
           bannerView.dependency 'WYBasisKit/Localizable'
           bannerView.dependency 'SnapKit'

@@ -118,6 +118,27 @@ public extension NSMutableAttributedString {
         
         return self
     }
+    
+    /**
+    *  文本添加内边距
+    *  @param firstLineHeadIndent  首行左边距
+    *  @param headIndent  第二行及以后的左边距(换行符\n除外)
+    *  @param tailIndent  尾部右边距
+    */
+    @discardableResult
+    func wy_innerMargin(firstLineHeadIndent: CGFloat = 0, headIndent: CGFloat = 0, tailIndent: CGFloat = 0, alignment: NSTextAlignment = .justified) -> NSMutableAttributedString {
+        
+        let paragraphStyle: NSMutableParagraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = alignment
+        paragraphStyle.firstLineHeadIndent = firstLineHeadIndent
+        paragraphStyle.headIndent = headIndent
+        paragraphStyle.tailIndent = tailIndent
+        
+        let selfStr: NSString = self.string as NSString
+        addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: selfStr.range(of: self.string))
+        
+        return self
+    }
 }
 
 extension NSAttributedString {

@@ -187,7 +187,7 @@ public extension String {
         
         if self.isEmpty {return ""}
         
-        let date: NSDate = NSDate(timeIntervalSince1970: Double(self)!)
+        let date: Date = Date(timeIntervalSince1970: Double(self)!)
         
         let formatter = DateFormatter()
         

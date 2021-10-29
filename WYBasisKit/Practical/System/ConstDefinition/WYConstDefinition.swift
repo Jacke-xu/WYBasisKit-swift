@@ -61,7 +61,7 @@ public func wy_print(_ messages: Any..., file: String = #file, function: String 
     if WYBasisKitConfig.debugModeLog == true {
         
         let timeFormatter = DateFormatter()
-        timeFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss.SSS"
+        timeFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         let time = timeFormatter.string(from: Date())
         let message = messages.compactMap { "\($0)" }.joined(separator: " ")
         print("\n【\((file as NSString).lastPathComponent) ——> \(function) ——> line:\(line) ——> time:\(time)】\n\n \(message)\n\n\n")
