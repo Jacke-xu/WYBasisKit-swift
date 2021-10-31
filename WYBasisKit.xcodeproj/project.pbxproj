@@ -25,6 +25,7 @@
 		1F9717FE25B55CB600CA7A33 /* WYWaterfallsFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9717FD25B55CB600CA7A33 /* WYWaterfallsFlowLayout.swift */; };
 		1F99DCC8257DCFAE003D2408 /* WYPagingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F99DCC7257DCFAE003D2408 /* WYPagingView.swift */; };
 		1FA6B68B25CD1B3400005170 /* WYWaterfallParagraphLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA6B68A25CD1B3400005170 /* WYWaterfallParagraphLayout.swift */; };
+		278FF4A8C0F49629ADC8E0FB /* Pods_WYBasisKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6038257BCBDA65021463BC7 /* Pods_WYBasisKit.framework */; };
 		AA0B8849270989CB006F26C8 /* WYTestDownloadController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0B8848270989CB006F26C8 /* WYTestDownloadController.swift */; };
 		AA2827B426BFCF7A00EB9DBC /* WYLocalizable.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AA2827B326BFCF7A00EB9DBC /* WYLocalizable.bundle */; };
 		AA327F032569179F00CF5CBE /* WYBasisKitConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA327F022569179F00CF5CBE /* WYBasisKitConfig.swift */; };
@@ -71,13 +72,11 @@
 		AAEE9003265B9558003B1748 /* WYNetworkServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAEE9001265B9558003B1748 /* WYNetworkServer.swift */; };
 		AAF09E7426DA2E420063102C /* UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF09E7326DA2E410063102C /* UICollectionView.swift */; };
 		AAF09E7E26DA573C0063102C /* WYRefresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF09E7D26DA573C0063102C /* WYRefresh.swift */; };
-		D31D786A0A2BFD7BAA61ADE3 /* Pods_WYBasisKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08D5A6C4CC168395B60FE06B /* Pods_WYBasisKit.framework */; };
 		DC3E0CE92727979D003CB61E /* WYTestRequestController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC3E0CE82727979D003CB61E /* WYTestRequestController.swift */; };
 		DC4D24BD271D55A1005FFE21 /* WYStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4D24BC271D55A1005FFE21 /* WYStorage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		08D5A6C4CC168395B60FE06B /* Pods_WYBasisKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WYBasisKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F04CF5925820501002B8B11 /* WYTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYTestView.swift; sourceTree = "<group>"; };
 		1F24689925B13DB700E02F78 /* WYProtocolManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYProtocolManager.swift; sourceTree = "<group>"; };
 		1F24689E25B13DFB00E02F78 /* WYAlignmentFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYAlignmentFlowLayout.swift; sourceTree = "<group>"; };
@@ -151,6 +150,7 @@
 		AAEE9001265B9558003B1748 /* WYNetworkServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYNetworkServer.swift; sourceTree = "<group>"; };
 		AAF09E7326DA2E410063102C /* UICollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionView.swift; sourceTree = "<group>"; };
 		AAF09E7D26DA573C0063102C /* WYRefresh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYRefresh.swift; sourceTree = "<group>"; };
+		C6038257BCBDA65021463BC7 /* Pods_WYBasisKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WYBasisKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC3E0CE82727979D003CB61E /* WYTestRequestController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYTestRequestController.swift; sourceTree = "<group>"; };
 		DC4D24BC271D55A1005FFE21 /* WYStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYStorage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -160,7 +160,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D31D786A0A2BFD7BAA61ADE3 /* Pods_WYBasisKit.framework in Frameworks */,
+				278FF4A8C0F49629ADC8E0FB /* Pods_WYBasisKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -238,7 +238,7 @@
 		94F8A53F1CB5643B124486A8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				08D5A6C4CC168395B60FE06B /* Pods_WYBasisKit.framework */,
+				C6038257BCBDA65021463BC7 /* Pods_WYBasisKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -648,7 +648,7 @@
 				AA484EAB24FA262100B39D60 /* Sources */,
 				AA484EAC24FA262100B39D60 /* Frameworks */,
 				AA484EAD24FA262100B39D60 /* Resources */,
-				8CB3AD52FF7A1601966D5883 /* [CP] Embed Pods Frameworks */,
+				FABA86DA11D91221339EA8AD /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -734,7 +734,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		8CB3AD52FF7A1601966D5883 /* [CP] Embed Pods Frameworks */ = {
+		FABA86DA11D91221339EA8AD /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
