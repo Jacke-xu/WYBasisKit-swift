@@ -10,7 +10,7 @@ Pod::Spec.new do |kit|
   kit.homepage     = 'https://github.com/Jacke-xu/WYBasisKit-swift'
   kit.license      = { :type => 'MIT', :file => 'License.md' }
   kit.author             = { 'Jacke-xu' => 'mobileAppDvlp@icloud.com' }
-  kit.ios.deployment_target = '10.0'
+  kit.ios.deployment_target = '11.0'
   kit.source       = { :git => 'https://github.com/Jacke-xu/WYBasisKit-swift.git', :tag => "#{kit.version}" }
   kit.swift_versions = '5.0'
   kit.requires_arc = true
