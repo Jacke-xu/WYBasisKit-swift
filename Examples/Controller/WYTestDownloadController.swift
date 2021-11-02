@@ -40,6 +40,7 @@ class WYTestDownloadController: UIViewController {
             make.height.equalTo(wy_screenHeight / 2)
         }
         
+        WYActivity.showLoading(in: self.view)
         WYNetworkManager.download(path: "https://www.apple.com.cn/v/iphone-13-pro/b/images/overview/camera/macro/macro_photography__dphcvz878gia_large_2x.jpg", assetName: "AAAAA") { result in
             
             switch result {
@@ -50,6 +51,8 @@ class WYTestDownloadController: UIViewController {
                 
                 break
             case .success(let success):
+                
+                WYActivity.dismissLoading(in: self.view)
                 
                 let assetObj: WYDownloadModel? = WYDownloadModel.deserialize(from: success.origin)
 
@@ -92,6 +95,7 @@ class WYTestDownloadController: UIViewController {
                 break
             case .error(let error):
                 wy_print("\(error)")
+                WYActivity.dismissLoading(in: self.view)
                 break
             }
         }
