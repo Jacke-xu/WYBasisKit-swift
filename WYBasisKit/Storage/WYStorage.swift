@@ -107,6 +107,15 @@ public struct WYStorage {
             return storageData
         }
         
+        if FileManager.default.fileExists(atPath: path.path) == false {
+            
+            guard let _ = try? FileManager.default.createDirectory(at: path, withIntermediateDirectories: true, attributes: nil) else {
+                
+                storageData.error = "创建 \(path) 路径失败"
+                return storageData
+            }
+        }
+        
         let saveUrl: URL = path.appendingPathComponent(key)
         
         storageData.path = saveUrl

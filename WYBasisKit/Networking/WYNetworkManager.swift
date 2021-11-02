@@ -491,6 +491,8 @@ extension WYNetworkManager {
                                 handlerFailure(error: WYError(code: config.unpackServerFailCode, describe: error.localizedDescription), debugModeLog: config.debugModeLog, handler: handler)
                             }
                         }
+                        guard let storageError = storage?.error else { return  }
+                        wy_networkPrint("数据缓存到本地失败：\(storageError)")
                     }
                 }
                 break
