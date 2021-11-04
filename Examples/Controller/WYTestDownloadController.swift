@@ -70,6 +70,7 @@ class WYTestDownloadController: UIViewController {
                 if memoryData.error == nil {
 
                     wy_print("缓存成功 = \(memoryData)")
+                    localImageView.image = UIImage(data: memoryData.userData!)
                 }else {
                     wy_print("缓存失败 = \(memoryData.error ?? "")")
                 }
