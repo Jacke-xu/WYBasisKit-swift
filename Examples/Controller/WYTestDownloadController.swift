@@ -68,7 +68,6 @@ class WYTestDownloadController: UIViewController {
 
                 let memoryData: WYStorageData = WYStorage.storageData(forKey: "AAAAA", data: image!.jpegData(compressionQuality: 1.0)!, durable: .minute(1))
                 if memoryData.error == nil {
-
                     wy_print("缓存成功 = \(memoryData)")
                     localImageView.image = UIImage(data: memoryData.userData!)
                 }else {
