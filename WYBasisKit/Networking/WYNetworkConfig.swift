@@ -36,7 +36,7 @@ public struct WYHttpsConfig {
         case directTrust
     }
     
-    /// 自定义单向认证验证策略
+    /// 自定义验证策略
     public static var trustManager: ServerTrustManager? = nil
     public var trustManager: ServerTrustManager? = trustManager
     
