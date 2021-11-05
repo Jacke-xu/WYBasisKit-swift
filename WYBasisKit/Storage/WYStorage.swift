@@ -101,9 +101,7 @@ public struct WYStorage {
         var storageData: WYStorageData = WYStorageData(userData: data, durable: interval(with: durable), isInvalid: false)
         
         guard key.count > 0 else {
-            
             storageData.error = "本地存储时传入的 Key 不能为空"
-            
             return storageData
         }
         
@@ -125,14 +123,12 @@ public struct WYStorage {
         guard let storageJson = try? JSONEncoder().encode(storageData) else {
             
             storageData.error = "\(storageData) 转换成 Data 类型失败"
-            
             return storageData
         }
         
         guard let _ = try? storageJson.write(to: saveUrl) else {
             
             storageData.error = "\(storageJson) 写入 \(path) 路径失败"
-            
             return storageData
         }
         return storageData
