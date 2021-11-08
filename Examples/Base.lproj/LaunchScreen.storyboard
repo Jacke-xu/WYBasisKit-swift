@@ -20,7 +20,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WYBasisKit_1024x1024" translatesAutoresizingMaskIntoConstraints="NO" id="lU7-dr-dnD">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WYBasisKit_launch" translatesAutoresizingMaskIntoConstraints="NO" id="lU7-dr-dnD">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
                         </subviews>
@@ -39,7 +39,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="WYBasisKit_1024x1024" width="1024" height="1024"/>
+        <image name="WYBasisKit_launch" width="1024" height="1024"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
