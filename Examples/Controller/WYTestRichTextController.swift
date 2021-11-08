@@ -13,6 +13,8 @@ class WYTestRichTextController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.backgroundColor = .white
+        
         // Do any additional setup after loading the view.
         let label = UILabel()
         let str = "治性之道，必审己之所有余而强其所不足，盖聪明疏通者戒于太察，寡闻少见者戒于壅蔽，勇猛刚强者戒于太暴，仁爱温良者戒于无断，湛静安舒者戒于后时，广心浩大者戒于遗忘。必审己之所当戒而齐之以义，然后中和之化应，而巧伪之徒不敢比周而望进。"
@@ -26,8 +28,10 @@ class WYTestRichTextController: UIViewController {
         label.attributedText = attribute
         label.textAlignment = NSTextAlignment.center
         label.wy_clickEffectColor = .green
-        label.wy_addRichText(strings: ["勇猛刚强", "仁爱温良者戒于无断", "安舒"]) { (string, range, index) in
-            wy_print("string = \(string), range = \(range), index = \(index)")
+        label.wy_addRichText(strings: ["勇猛刚强", "仁爱温良者戒于无断", "安舒"]) { [weak self] (string, range, index) in
+            //wy_print("string = \(string), range = \(range), index = \(index)")
+            
+            WYActivity.showInfo("string = \(string), range = \(range), index = \(index)", in: self?.view, position: .middle)
         }
         label.wy_addRichText(strings: ["勇猛刚强", "仁爱温良者戒于无断", "安舒"], delegate: self)
         view.addSubview(label)
@@ -79,6 +83,7 @@ extension WYTestRichTextController: WYRichTextDelegate {
     
     func wy_didClick(richText: String, range: NSRange, index: NSInteger) {
         
-        wy_print("string = \(richText), range = \(range), index = \(index)")
+        //wy_print("string = \(richText), range = \(range), index = \(index)")
+        WYActivity.showInfo("string = \(richText), range = \(range), index = \(index)", in: self.view, position: .middle)
     }
 }

@@ -15,6 +15,8 @@ class WYRightController: UIViewController {
 
         // Do any additional setup after loading the view.
         
+        view.backgroundColor = .white
+        
         var controllerAry: [UIViewController] = []
         var titleAry: [String] = []
         var simageAry: [UIImage] = []
