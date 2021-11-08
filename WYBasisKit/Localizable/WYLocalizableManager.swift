@@ -47,6 +47,7 @@ public enum WYLanguage: RawRepresentable {
 }
 
 private let WYBasisKitLanguage = "WYBasisKitLanguage"
+private let WYBasisKit_preferred_language = "preferredLocalizations"
 
 public func WYLocalizedString(_ key: String) -> String {
     return WYLocalizableManager.localizedString(key: key)
@@ -66,8 +67,21 @@ public struct WYLocalizableManager {
     /// 当前语言
     public static func currentLanguage() -> WYLanguage {
         
-        let userLanguage: String = (UserDefaults.standard.value(forKey: WYBasisKitLanguage) as? String) ?? (Bundle.main.preferredLocalizations.first!)
-        switch userLanguage {
+        var preferredLanguage: String = UserDefaults.standard.value(forKey: WYBasisKit_preferred_language) as? String ?? ""
+        if Bundle.main.preferredLocalizations.first! != preferredLanguage {
+            
+            UserDefaults.standard.set(Bundle.main.preferredLocalizations.first!, forKey: WYBasisKit_preferred_language)
+            
+            UserDefaults.standard.set(Bundle.main.preferredLocalizations.first!, forKey: WYBasisKitLanguage)
+            
+            UserDefaults.standard.synchronize()
+            
+            preferredLanguage = Bundle.main.preferredLocalizations.first!
+            
+        }else {
+            preferredLanguage = (UserDefaults.standard.value(forKey: WYBasisKitLanguage) as? String) ?? (Bundle.main.preferredLocalizations.first!)
+        }
+        switch preferredLanguage {
         case "zh-Hans":
             return WYLanguage(rawValue: WYLanguage.chinese.rawValue)!
         case "en":
