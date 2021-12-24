@@ -23,31 +23,15 @@ class WYTestInterfaceOrientationController: UIViewController {
         
         /*
          *  实现屏幕旋转步骤
-         *  1.在AppDelegate中创建 interfaceOrientation 属性，即：
-         var interfaceOrientation: UIInterfaceOrientation = UIInterfaceOrientation.portrait {
-             didSet{
-                 UIDevice.current.setValue(AppDelegate.shared().interfaceOrientation.rawValue, forKey: "orientation")
-                 UIViewController.attemptRotationToDeviceOrientation()
-             }
+         
+         *  1.在AppDelegate中重写屏幕旋转代理方法，即：
+         func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
+             return UIDevice.current.wy_interfaceOrientation
          }
          
-         *  2.在AppDelegate中重写屏幕旋转代理方法，即：
-         switch interfaceOrientation {
-         case .portrait:
-             return .portrait
-         case .portraitUpsideDown:
-             return .portraitUpsideDown
-         case .landscapeLeft:
-             return .landscapeLeft
-         case .landscapeRight:
-             return .landscapeRight
-         default:
-             return .all
-         }
+         *  2.在需要旋转操作的时候，动态设置 UIDevice.current.wy_interfaceOrientation 属性为需要支持的旋转方向
          
-         *  3.在需要做旋转的时候，动态设置AppDelegate中创建的 interfaceOrientation 属性
-         
-         *  4.在旋转结束时，恢复设置AppDelegate中创建的 interfaceOrientation 属性
+         *  3.在旋转结束时，恢复 UIDevice.current.wy_interfaceOrientation 属性为默认方向(看具体需求，也可以不用恢复为默认方向)
          */
         
         label.textColor = .wy_dynamic(.black, .white)
@@ -67,7 +51,7 @@ class WYTestInterfaceOrientationController: UIViewController {
     
     @objc func layoutInterfaceOrientation() {
         
-        UIAlertController.wy_show(style: .alert, message: "设置屏幕方向", actions: ["竖向", "横向-左", "横向-右", "纵向-颠倒"]) {[weak self] actionStr, textFieldTexts in
+        UIAlertController.wy_show(style: .alert, message: "设置屏幕方向", actions: ["竖向", "横向-左", "横向-右", "竖向-颠倒", "横向", "竖向 / 横向", "竖向 / 横向 /  竖向-颠倒"]) {[weak self] actionStr, textFieldTexts in
             
             DispatchQueue.main.async {
                 
@@ -75,21 +59,29 @@ class WYTestInterfaceOrientationController: UIViewController {
                     
                     switch actionStr {
                     case "竖向":
-                        AppDelegate.shared().interfaceOrientation = .portrait
+                        UIDevice.current.wy_interfaceOrientation = .portrait
 
                     case "横向-左":
-                        AppDelegate.shared().interfaceOrientation = .landscapeLeft
+                        UIDevice.current.wy_interfaceOrientation = .landscapeLeft
 
                     case "横向-右":
-                        AppDelegate.shared().interfaceOrientation = .landscapeRight
+                        UIDevice.current.wy_interfaceOrientation = .landscapeRight
                         
-                    case "纵向-颠倒":
-                        AppDelegate.shared().interfaceOrientation = .portraitUpsideDown
+                    case "竖向-颠倒":
+                        UIDevice.current.wy_interfaceOrientation = .portraitUpsideDown
+                        
+                    case "横向":
+                        UIDevice.current.wy_interfaceOrientation = .landscape
+                        
+                    case "竖向 / 横向":
+                        UIDevice.current.wy_interfaceOrientation = .allButUpsideDown
+                     
+                    case "竖向 / 横向 /  竖向-颠倒":
+                        UIDevice.current.wy_interfaceOrientation = .all
                         
                     default:
                         break
                     }
-                    
                     self?.label.text = self?.sharedInterfaceOrientationString()
                 }
             }
@@ -99,7 +91,7 @@ class WYTestInterfaceOrientationController: UIViewController {
     func sharedInterfaceOrientationString() -> String {
         
         var string: String = ""
-        switch AppDelegate.shared().interfaceOrientation {
+        switch UIDevice.current.wy_interfaceOrientation {
         case .portrait:
             string = "竖向"
         case .landscapeLeft:
@@ -107,7 +99,13 @@ class WYTestInterfaceOrientationController: UIViewController {
         case .landscapeRight:
             string = "横向-右"
         case .portraitUpsideDown:
-            string = "纵向-颠倒"
+            string = "竖向-颠倒"
+        case .landscape:
+            string = "横向"
+        case .allButUpsideDown:
+            string = "竖向 / 横向"
+        case .all:
+            string = "竖向 / 横向 /  竖向-颠倒"
         default:
             string = "未知"
         }
@@ -116,7 +114,7 @@ class WYTestInterfaceOrientationController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        AppDelegate.shared().interfaceOrientation = .portrait
+        UIDevice.current.wy_interfaceOrientation = .portrait
     }
 
     /*

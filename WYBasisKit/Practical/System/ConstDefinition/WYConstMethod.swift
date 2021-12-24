@@ -29,6 +29,11 @@ public func wy_currentController(windowController: UIViewController? = (UIApplic
     }
 }
 
+/// 获取非空字符串
+public func wy_safe(_ string: String?) -> String {
+    return string ?? ""
+}
+
 /// 角度转弧度
 public func wy_degreesToRadian(degrees: CGFloat) -> CGFloat {
 
