@@ -15,21 +15,22 @@ class WYLeftController: UIViewController {
                                  WYLocalizedString("边框、圆角、阴影、渐变", "Borders, rounded corners, shadows, gradients"),
                                  "Banner",
                                  "RichText",
-                                 "无限层折叠TableView", "测试tableView", "测试下载", "测试网络请求"]
+                                 "无限层折叠TableView", "测试tableView", "测试下载", "测试网络请求", "测试屏幕旋转"]
 
     let cellTitles: [[String]] = [[WYLocalizedString("暗夜/白昼模式", "Dark night/day mode")],
                                   [WYLocalizedString("约束view添加动画", "Constrain the view to add animation")],
                                   [WYLocalizedString("边框、圆角、阴影、渐变", "Borders, rounded corners, shadows, gradients")],
                                   ["Banner"],
                                   ["RichText"],
-                                  ["无限层折叠TableView"],["测试tableView.plain模式", "测试tableView.grouped模式"], ["下载"], ["网络请求"]]
+                                  ["无限层折叠TableView"],["测试tableView.plain模式", "测试tableView.grouped模式"], ["下载"], ["网络请求"], ["屏幕旋转"]]
 
     let controller: [[String]] = [["WYTestDarkNightModeController"],
                                 ["WYTestAnimationController"],
                                 ["WYTestVisualController"],
                                 ["WYTestBannerController"],
                                 ["WYTestRichTextController"],
-                                ["WYMultilevelTableViewController"],["WYTableViewPlainController", "WYTableViewGroupedController"], ["WYTestDownloadController"],["WYTestRequestController"]]
+                                ["WYMultilevelTableViewController"],["WYTableViewPlainController", "WYTableViewGroupedController"], ["WYTestDownloadController"],["WYTestRequestController"],
+                                  ["WYTestInterfaceOrientationController"]]
 
     lazy var tableView: UITableView = {
 
@@ -132,7 +133,6 @@ extension WYLeftController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
         tableView.deselectRow(at: indexPath, animated: true)
-
         let className: String = controller[indexPath.section][indexPath.row]
         wy_showViewController(className: className)
     }

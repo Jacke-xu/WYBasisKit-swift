@@ -74,6 +74,7 @@
 		AAF09E7E26DA573C0063102C /* WYRefresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF09E7D26DA573C0063102C /* WYRefresh.swift */; };
 		DC3E0CE92727979D003CB61E /* WYTestRequestController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC3E0CE82727979D003CB61E /* WYTestRequestController.swift */; };
 		DC4D24BD271D55A1005FFE21 /* WYStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4D24BC271D55A1005FFE21 /* WYStorage.swift */; };
+		DC5BC14627745FC300B0D741 /* WYTestInterfaceOrientationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5BC14527745FC300B0D741 /* WYTestInterfaceOrientationController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -153,6 +154,7 @@
 		C6038257BCBDA65021463BC7 /* Pods_WYBasisKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WYBasisKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC3E0CE82727979D003CB61E /* WYTestRequestController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYTestRequestController.swift; sourceTree = "<group>"; };
 		DC4D24BC271D55A1005FFE21 /* WYStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYStorage.swift; sourceTree = "<group>"; };
+		DC5BC14527745FC300B0D741 /* WYTestInterfaceOrientationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYTestInterfaceOrientationController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -526,6 +528,7 @@
 				AAC6B39026916E9F00D90D15 /* WYTableViewGroupedController.swift */,
 				AA0B8848270989CB006F26C8 /* WYTestDownloadController.swift */,
 				DC3E0CE82727979D003CB61E /* WYTestRequestController.swift */,
+				DC5BC14527745FC300B0D741 /* WYTestInterfaceOrientationController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -767,6 +770,7 @@
 				1F5C3E5025787EB400E0DBFF /* WYLeftController.swift in Sources */,
 				AA771BD62568F834002C748B /* UIViewController.swift in Sources */,
 				AA771BE82568F834002C748B /* WYConstDefinition.swift in Sources */,
+				DC5BC14627745FC300B0D741 /* WYTestInterfaceOrientationController.swift in Sources */,
 				AA771BD92568F834002C748B /* WYAuthorize.swift in Sources */,
 				AAE02B1A267C61E000EF6D36 /* CALayer.swift in Sources */,
 				AA771BEA2568F834002C748B /* WYScrollText.swift in Sources */,
