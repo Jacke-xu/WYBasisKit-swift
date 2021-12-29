@@ -111,18 +111,22 @@ public extension UIDevice {
             
             switch newValue {
             case .portrait:
+                wy_currentInterfaceOrientation = .portrait
                 UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation")
                 UIViewController.attemptRotationToDeviceOrientation()
                 break
             case .landscapeLeft:
+                wy_currentInterfaceOrientation = .landscapeLeft
                 UIDevice.current.setValue(UIInterfaceOrientation.landscapeLeft.rawValue, forKey: "orientation")
                 UIViewController.attemptRotationToDeviceOrientation()
                 break
             case .landscapeRight:
+                wy_currentInterfaceOrientation = .landscapeRight
                 UIDevice.current.setValue(UIInterfaceOrientation.landscapeRight.rawValue, forKey: "orientation")
                 UIViewController.attemptRotationToDeviceOrientation()
                 break
             case .portraitUpsideDown:
+                wy_currentInterfaceOrientation = .portraitUpsideDown
                 UIDevice.current.setValue(UIInterfaceOrientation.portraitUpsideDown.rawValue, forKey: "orientation")
                 UIViewController.attemptRotationToDeviceOrientation()
                 break
@@ -133,6 +137,18 @@ public extension UIDevice {
         }
         get {
             return objc_getAssociatedObject(self, WYAssociatedKeys.privateInterfaceOrientation) as? UIInterfaceOrientationMask ?? .portrait
+        }
+    }
+    
+    /// 获取当前屏幕方向(只会出现 portrait、landscapeLeft、landscapeRight、portraitUpsideDown 四种情况)
+    private(set) var wy_currentInterfaceOrientation: UIInterfaceOrientationMask {
+        set(newValue) {
+            
+            objc_setAssociatedObject(self, WYAssociatedKeys.privateCurrentInterfaceOrientation, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        }
+        
+        get {
+            return objc_getAssociatedObject(self, WYAssociatedKeys.privateCurrentInterfaceOrientation) as? UIInterfaceOrientationMask ?? .portrait
         }
     }
 }
@@ -167,10 +183,14 @@ extension UIDevice {
                                 return
                             }
                             
+                            self?.wy_currentInterfaceOrientation = .portraitUpsideDown
+                            
                             UIDevice.current.setValue(UIInterfaceOrientation.portraitUpsideDown.rawValue, forKey: "orientation")
                             UIViewController.attemptRotationToDeviceOrientation()
                             
                         } else {
+                            
+                            self?.wy_currentInterfaceOrientation = .portrait
 
                             UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation")
                             UIViewController.attemptRotationToDeviceOrientation()
@@ -180,10 +200,14 @@ extension UIDevice {
                         
                         if x >= 0 {
                             
+                            self?.wy_currentInterfaceOrientation = .landscapeLeft
+                            
                             UIDevice.current.setValue(UIInterfaceOrientation.landscapeLeft.rawValue, forKey: "orientation")
                             UIViewController.attemptRotationToDeviceOrientation()
                             
                         } else{
+                            
+                            self?.wy_currentInterfaceOrientation = .landscapeRight
                             
                             UIDevice.current.setValue(UIInterfaceOrientation.landscapeRight.rawValue, forKey: "orientation")
                             UIViewController.attemptRotationToDeviceOrientation()
@@ -245,5 +269,7 @@ extension UIDevice {
         static let privateInterfaceOrientation = UnsafeRawPointer(bitPattern: "privateInterfaceOrientation".hashValue)!
         
         static let privateLastInterfaceOrientation = UnsafeRawPointer(bitPattern: "privateLastInterfaceOrientation".hashValue)!
+        
+        static let privateCurrentInterfaceOrientation = UnsafeRawPointer(bitPattern: "privateCurrentInterfaceOrientation".hashValue)!
     }
 }

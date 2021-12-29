@@ -63,6 +63,9 @@ public extension UITableView {
         tableview.rowHeight = rowHeight
         tableview.tableHeaderView = UIView()
         tableview.tableFooterView = UIView()
+        if #available(iOS 15.0, *) {
+            tableview.sectionHeaderTopPadding = 0
+        }
         superView?.addSubview(tableview)
         
         return tableview
