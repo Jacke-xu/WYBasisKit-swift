@@ -107,25 +107,27 @@ public extension UIDevice {
             
             objc_setAssociatedObject(self, WYAssociatedKeys.privateInterfaceOrientation, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
             
-            releaseMotionManager(newValue)
-            
             switch newValue {
             case .portrait:
+                stopMotionManager()
                 wy_currentInterfaceOrientation = .portrait
                 UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation")
                 UIViewController.attemptRotationToDeviceOrientation()
                 break
             case .landscapeLeft:
+                stopMotionManager()
                 wy_currentInterfaceOrientation = .landscapeLeft
                 UIDevice.current.setValue(UIInterfaceOrientation.landscapeLeft.rawValue, forKey: "orientation")
                 UIViewController.attemptRotationToDeviceOrientation()
                 break
             case .landscapeRight:
+                stopMotionManager()
                 wy_currentInterfaceOrientation = .landscapeRight
                 UIDevice.current.setValue(UIInterfaceOrientation.landscapeRight.rawValue, forKey: "orientation")
                 UIViewController.attemptRotationToDeviceOrientation()
                 break
             case .portraitUpsideDown:
+                stopMotionManager()
                 wy_currentInterfaceOrientation = .portraitUpsideDown
                 UIDevice.current.setValue(UIInterfaceOrientation.portraitUpsideDown.rawValue, forKey: "orientation")
                 UIViewController.attemptRotationToDeviceOrientation()
@@ -220,14 +222,6 @@ extension UIDevice {
         }
     }
     
-    private func releaseMotionManager(_ newInterfaceOrientation: UIInterfaceOrientationMask) {
-        
-        if (motionManager != nil) && (newInterfaceOrientation != lastInterfaceOrientation) {
-            lastInterfaceOrientation = newInterfaceOrientation
-            stopMotionManager()
-        }
-    }
-    
     private func stopMotionManager() {
         
         guard motionManager != nil else {
@@ -251,24 +245,11 @@ extension UIDevice {
         }
     }
     
-    private var lastInterfaceOrientation: UIInterfaceOrientationMask {
-        
-        set(newValue) {
-            
-            objc_setAssociatedObject(self, WYAssociatedKeys.privateLastInterfaceOrientation, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-        }
-        get {
-            return objc_getAssociatedObject(self, WYAssociatedKeys.privateLastInterfaceOrientation) as? UIInterfaceOrientationMask ?? .portrait
-        }
-    }
-    
     private struct WYAssociatedKeys {
         
         static let privateMotionManager = UnsafeRawPointer(bitPattern: "privateMotionManager".hashValue)!
         
         static let privateInterfaceOrientation = UnsafeRawPointer(bitPattern: "privateInterfaceOrientation".hashValue)!
-        
-        static let privateLastInterfaceOrientation = UnsafeRawPointer(bitPattern: "privateLastInterfaceOrientation".hashValue)!
         
         static let privateCurrentInterfaceOrientation = UnsafeRawPointer(bitPattern: "privateCurrentInterfaceOrientation".hashValue)!
     }
