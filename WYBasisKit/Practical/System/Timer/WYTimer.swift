@@ -42,6 +42,11 @@ public class WYTimer {
         NotificationCenter.default.addObserver(self, selector: #selector(wy_didBecomeActive), name: UIApplication.didBecomeActiveNotification, object: nil)
     }
     
+    /// 更新倒计时剩余时间，单位 "秒"
+    public func wy_updateTime(remaining: Int) {
+        totalSeconds = remaining
+    }
+    
     /// 取消倒计时
     public func wy_cancel() {
         

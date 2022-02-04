@@ -38,7 +38,7 @@ public extension UINavigationController {
             self.navigationBar.setBackgroundImage(newValue, for: .default)
         }
         get {
-            return self.navigationBar.backgroundImage(for: .default) ?? UIImage.wy_image(from: .white)
+            return self.navigationBar.backgroundImage(for: .default) ?? UIImage.wy_createImage(from: .white)
         }
     }
     
@@ -115,7 +115,7 @@ public extension UINavigationController {
         }
         get {
             
-            return self.navigationBar.backIndicatorImage ?? UIImage.wy_image(from: .white)
+            return self.navigationBar.backIndicatorImage ?? UIImage.wy_createImage(from: .white)
         }
     }
     

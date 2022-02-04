@@ -118,7 +118,7 @@ public extension String {
     func wy_stringContains(find: String) -> Bool{
         return self.range(of: find) != nil
     }
-
+    
     /// 判断字符串包含某个字符串(忽略大小写)
     func wy_stringContainsIgnoringCase(find: String) -> Bool{
         return self.range(of: find, options: .caseInsensitive) != nil
@@ -187,7 +187,9 @@ public extension String {
         
         if self.isEmpty {return ""}
         
-        let date: Date = Date(timeIntervalSince1970: Double(self)!)
+        let dateString: String = (self.count >= 13 ? "\(self.wy_substring(from: 0, to: 9))" : self)
+        
+        let date: Date = Date(timeIntervalSince1970: Double(dateString)!)
         
         let formatter = DateFormatter()
         
@@ -201,13 +203,15 @@ public extension String {
         
         if self.isEmpty {return ""}
         
-        let format = DateFormatter.init()
+        let dateString: String = (self.count >= 13 ? "\(self.wy_substring(from: 0, to: 9))" : self)
+        
+        let format = DateFormatter()
         
         format.dateStyle = .medium
         format.timeStyle = .short
         format.dateFormat = sharedTimeFormat(dateFormat: dateFormat)
         
-        let date = format.date(from: self)
+        let date = format.date(from: dateString)
         
         return String(date!.timeIntervalSince1970)
     }
@@ -218,7 +222,7 @@ public extension String {
         // 当前时时间戳
         let currentTime = Date().timeIntervalSince1970
         // 传入的时间
-        let computingTime = (self.count == 13) ? ((NSInteger(self) ?? 0) / 1000) : (NSInteger(self) ?? 0)
+        let computingTime = (self.count >= 13) ? ((NSInteger(self) ?? 0) / 1000) : (NSInteger(self) ?? 0)
         // 距离当前的时间差
         let timeDifference = NSInteger(currentTime) - computingTime
         // 秒转分钟
@@ -264,8 +268,64 @@ public extension String {
         var number :Int = 0
         
         scanner.scanInt(&number)
-
+        
         return String(number)
+    }
+    
+    /**
+     *  汉字转拼音
+     *  @param tone: 是否需要保留音调
+     *  @param interval: 是否需要去除空格
+     */
+    func wy_phoneticTransform(tone: Bool = false, interval: Bool = false) -> String {
+        
+        // 转化为可变字符串
+        let mString = NSMutableString(string: self)
+        
+        // 转化为带声调的拼音
+        CFStringTransform(mString, nil, kCFStringTransformToLatin, false)
+        
+        if !tone {
+            // 转化为不带声调
+            CFStringTransform(mString, nil, kCFStringTransformStripDiacritics, false)
+        }
+        
+        let phonetic = (NSString(string: mString) as String)
+        
+        if !interval {
+            // 去除字符串之间的空格
+            return phonetic.replacingOccurrences(of: " ", with: "")
+        }
+        return phonetic
+    }
+    
+    /// 根据时间戳获取星座
+    static func wy_constellation(from timestamp: String) -> String {
+        
+        let timeInterval = TimeInterval(string: (timestamp.count >= 13 ? "\(timestamp.wy_substring(from: 0, to: 9))" : timestamp))
+        let oneDay:Double = 86400
+        let constellationDics = ["摩羯座": "12.22-1.19",
+                                 "水瓶座": "1.20-2.18",
+                                 "双鱼座": "2.19-3.20",
+                                 "白羊座": "3.21-4.19",
+                                 "金牛座": "4.20-5.20",
+                                 "双子座": "5.21-6.21",
+                                 "巨蟹座": "6.22-7.22",
+                                 "狮子座": "7.23-8.22",
+                                 "处女座": "8.23-9.22",
+                                 "天秤座": "9.23-10.23",
+                                 "天蝎座": "10.24-11.22",
+                                 "射手座": "11.23-12.21"]
+        
+        let currConstellation = constellationDics.filter {
+            
+            let timeRange = constellationDivision(timestamp: (timestamp.count >= 13 ? "\(timestamp.wy_substring(from: 0, to: 9))" : timestamp), range: $1)
+            let startTime = timeRange.0
+            let endTime = timeRange.1 + oneDay
+            
+            return timeInterval > startTime && timeInterval < endTime
+        }
+        return currConstellation.first?.key ?? "摩羯座"
     }
     
     /// Encode
@@ -301,5 +361,40 @@ public extension String {
         case .custom(format: let format):
             return format
         }
+    }
+    
+    /// 获取星座开始、结束时间
+    private static func constellationDivision(timestamp: String, range: String) -> (TimeInterval, TimeInterval) {
+        
+        /// 获取当前年份
+        func getCurrYear(date:Date) -> String {
+            
+            let dm = DateFormatter()
+            dm.dateFormat = "yyyy."
+            let currYear = dm.string(from: date)
+            return currYear
+        }
+        
+        /// 日期转换当前时间戳
+        func toTimeInterval(dateStr: String) -> TimeInterval? {
+            
+            let dm = DateFormatter()
+            dm.dateFormat = "yyyy.MM.dd"
+            
+            let date = dm.date(from: dateStr)
+            let interval = date?.timeIntervalSince1970
+            
+            return interval
+        }
+        
+        let timeStrArr = range.components(separatedBy: "-")
+        let dateYear = getCurrYear(date: Date(timeIntervalSince1970: TimeInterval(string: timestamp)))
+        let startTimeStr = dateYear + timeStrArr.first!
+        let endTimeStr = dateYear + timeStrArr.last!
+        
+        let startTime = toTimeInterval(dateStr: startTimeStr)!
+        let endTime = toTimeInterval(dateStr: endTimeStr)!
+        
+        return (startTime, endTime)
     }
 }

@@ -15,14 +15,14 @@ class WYLeftController: UIViewController {
                                  WYLocalizedString("边框、圆角、阴影、渐变", "Borders, rounded corners, shadows, gradients"),
                                  "Banner",
                                  "RichText",
-                                 "无限层折叠TableView", "测试tableView", "测试下载", "测试网络请求", "测试屏幕旋转"]
+                                 "无限层折叠TableView", "测试tableView", "测试下载", "测试网络请求", "测试屏幕旋转", "测试二维码"]
 
     let cellTitles: [[String]] = [[WYLocalizedString("暗夜/白昼模式", "Dark night/day mode")],
                                   [WYLocalizedString("约束view添加动画", "Constrain the view to add animation")],
                                   [WYLocalizedString("边框、圆角、阴影、渐变", "Borders, rounded corners, shadows, gradients")],
                                   ["Banner"],
                                   ["RichText"],
-                                  ["无限层折叠TableView"],["测试tableView.plain模式", "测试tableView.grouped模式"], ["下载"], ["网络请求"], ["屏幕旋转"]]
+                                  ["无限层折叠TableView"],["测试tableView.plain模式", "测试tableView.grouped模式"], ["下载"], ["网络请求"], ["屏幕旋转"], ["二维码"]]
 
     let controller: [[String]] = [["WYTestDarkNightModeController"],
                                 ["WYTestAnimationController"],
@@ -30,7 +30,7 @@ class WYLeftController: UIViewController {
                                 ["WYTestBannerController"],
                                 ["WYTestRichTextController"],
                                 ["WYMultilevelTableViewController"],["WYTableViewPlainController", "WYTableViewGroupedController"], ["WYTestDownloadController"],["WYTestRequestController"],
-                                  ["WYTestInterfaceOrientationController"]]
+                                  ["WYTestInterfaceOrientationController"], ["WYQRCodeController"]]
 
     lazy var tableView: UITableView = {
 

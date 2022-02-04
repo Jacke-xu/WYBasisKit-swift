@@ -16,20 +16,20 @@ public extension UIImage {
         
         // 设置屏幕倍率可以保证截图的质量
         let scale: CGFloat = UIScreen.main.scale
-
+        
         UIGraphicsBeginImageContextWithOptions(view.frame.size, true, scale)
-
+        
         view.layer.render(in: UIGraphicsGetCurrentContext()!)
-
+        
         let image = UIGraphicsGetImageFromCurrentImageContext()
-
+        
         UIGraphicsEndImageContext()
         
         return image
     }
     
     /// 根据颜色创建图片
-    class func wy_image(from color: UIColor) -> UIImage! {
+    class func wy_createImage(from color: UIColor) -> UIImage! {
         
         let rect = CGRect(x: 0, y: 0, width: 1, height: 1)
         UIGraphicsBeginImageContext(rect.size)
@@ -42,13 +42,13 @@ public extension UIImage {
     }
     
     /// 生成渐变图片
-    class func wy_image(from gradientColors: [UIColor], gradientDirection: WYGradientDirection, imageSize: CGSize) -> UIImage {
+    class func wy_gradient(from colors: [UIColor], direction: WYGradientDirection, size: CGSize) -> UIImage {
         
         var array: [CGColor] = []
-        for color in gradientColors {
+        for color in colors {
             array.append(color.cgColor)
         }
-        UIGraphicsBeginImageContextWithOptions(imageSize, true, 1)
+        UIGraphicsBeginImageContextWithOptions(size, true, 1)
         let context = UIGraphicsGetCurrentContext()
         context?.saveGState()
         let colorSpace = CGColorSpaceCreateDeviceRGB()
@@ -56,27 +56,27 @@ public extension UIImage {
         
         var start: CGPoint
         var end: CGPoint
-        switch gradientDirection {
+        switch direction {
         case .topToBottom:
             start = CGPoint.zero
-            end = CGPoint(x: 0, y: imageSize.height)
+            end = CGPoint(x: 0, y: size.height)
             break
         case .leftToRight:
             start = CGPoint.zero
-            end = CGPoint(x: imageSize.width, y: 0)
+            end = CGPoint(x: size.width, y: 0)
             break
         case .leftToLowRight:
             start = CGPoint.zero
-            end = CGPoint(x: imageSize.width, y: imageSize.height)
+            end = CGPoint(x: size.width, y: size.height)
             break
         case .rightToLowlLeft:
-            start = CGPoint(x: imageSize.width, y: 0)
-            end = CGPoint(x: 0, y: imageSize.height)
+            start = CGPoint(x: size.width, y: 0)
+            end = CGPoint(x: 0, y: size.height)
             break
         }
         
         context?.scaleBy(x: 1.0, y: -1.0)
-        context?.translateBy(x: 0, y: -imageSize.height)
+        context?.translateBy(x: 0, y: -size.height)
         context?.drawLinearGradient(gradient!, start: start, end: end, options: .init())
         
         let image = UIGraphicsGetImageFromCurrentImageContext()
@@ -84,6 +84,69 @@ public extension UIImage {
         UIGraphicsEndImageContext()
         
         return image!
+    }
+    
+    /**
+     *  生成一个二维码图片
+     *
+     *  @param info         二维码中需要包含的信息
+     *  @param size         二维码的size
+     *  @param waterImage   水印图片(选传，传入后水印在二维码中央，注意，此图片最大不能超过二维码图片size的30%，否则会扫码失败)
+     *
+     *  @return 二维码图片
+     */
+    class func wy_createQrCode(with info: Data, size: CGSize, waterImage: UIImage? = nil) -> UIImage {
+        
+        // CIFilter
+        let filter = CIFilter(name: "CIQRCodeGenerator")
+        filter?.setDefaults()
+
+        // Add Data
+        filter?.setValue(info, forKeyPath: "inputMessage")
+        
+        // Out Put
+        let outputImage = filter?.outputImage
+        //  QRCode
+        let extent = outputImage!.extent.integral
+        let scale = min(size.width / extent.width, size.height / extent.height)
+        
+        // Create bitmap
+        let width: size_t = size_t(extent.width * scale)
+        let height: size_t = size_t(extent.height * scale)
+        let cs: CGColorSpace = CGColorSpaceCreateDeviceGray()
+        let bitmap: CGContext = CGContext(data: nil, width: width, height: height, bitsPerComponent: 8, bytesPerRow: 0, space: cs, bitmapInfo: 1)!
+        let context = CIContext()
+        let bitmapImage = context.createCGImage(outputImage!, from: extent)
+        bitmap.interpolationQuality = .none
+        bitmap.scaleBy(x: scale, y: scale)
+        bitmap.draw(bitmapImage!, in: extent)
+        
+        let scaledImage = bitmap.makeImage()
+        let originalImage = UIImage(cgImage: scaledImage!)
+        if waterImage == nil {
+            return originalImage
+        }else {
+            //把logo镶嵌到生成的二维码图片上，注意尺寸不要太大（最大不超过二维码图片的%30），太大会造成扫不出来
+            return originalImage.wy_mosaic(image: waterImage!)
+        }
+    }
+    
+    /**
+    *  图片镶嵌
+    *
+    *  @param image  需要镶嵌到原图中央的图片
+    *  @return 镶嵌好的图片
+    */
+    func wy_mosaic(image: UIImage) -> UIImage {
+        
+        UIGraphicsBeginImageContextWithOptions(self.size, false, UIScreen.main.scale)
+        self.draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
+        image.draw(in: CGRect(x: (size.width - image.size.width) / 2, y: (size.height - image.size.height) / 2, width: image.size.width, height: image.size.height))
+        
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage!
     }
     
     /**
@@ -127,6 +190,39 @@ public extension UIImage {
         return newImage
     }
     
+    /** 图片上绘制文字 */
+    func wy_addText(text: String, font: UIFont, color: UIColor, titlePoint: CGPoint, lineSpacing: CGFloat = 0, wordsSpacing: CGFloat = 0) -> UIImage {
+        
+        // 画布大小
+        let size = CGSize(width: self.size.width, height: self.size.height)
+        
+        // 创建一个基于位图的上下文
+        UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
+        
+        self.draw(at: CGPoint.zero)
+        
+        // 文字显示在画布上
+        let paragraphStyle: NSMutableParagraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineBreakMode = .byCharWrapping
+        paragraphStyle.alignment = .center
+        paragraphStyle.lineSpacing = lineSpacing
+        let attributes = [NSAttributedString.Key.font: font, NSAttributedString.Key.paragraphStyle: paragraphStyle, NSAttributedString.Key.kern: NSNumber(value: Double(wordsSpacing))]
+        
+        let stringSize: CGSize = text.boundingRect(with: size, options: NSStringDrawingOptions(rawValue: NSStringDrawingOptions.truncatesLastVisibleLine.rawValue | NSStringDrawingOptions.usesLineFragmentOrigin.rawValue | NSStringDrawingOptions.usesFontLeading.rawValue), attributes: attributes, context: nil).size
+        
+        let textSize: CGSize = CGSize(width: ceil(stringSize.width), height: ceil(stringSize.height))
+        
+        let rect = CGRect(x: titlePoint.x, y: titlePoint.y, width: textSize.width, height: textSize.height)
+        
+        // 绘制文字
+        (text as NSString).draw(in: rect, withAttributes: [NSAttributedString.Key.font: font, NSAttributedString.Key.foregroundColor: color, NSAttributedString.Key.paragraphStyle: paragraphStyle])
+        
+        // 返回绘制的新图形
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return newImage!
+    }
+    
     /**
      *  加载本地图片
      *
@@ -142,20 +238,20 @@ public extension UIImage {
         if imageName.isEmpty {
             
             wy_print("没有找到相关图片，因为传入的 imageName 为空， 已默认创建一张随机颜色图片供您使用")
-            return wy_image(from: UIColor(red: CGFloat(arc4random()%256)/255.0, green: CGFloat(arc4random()%256)/255.0, blue: CGFloat(arc4random()%256)/255.0, alpha: 1.0))
+            return wy_createImage(from: UIColor(red: CGFloat(arc4random()%256)/255.0, green: CGFloat(arc4random()%256)/255.0, blue: CGFloat(arc4random()%256)/255.0, alpha: 1.0))
         }
         
         if bundleName.isEmpty {
             
             guard let image = UIImage(named: imageName) else {
-
+                
                 let resourcePath = ((Bundle(for: WYLocalizableClass.self).path(forResource: imageName, ofType: nil)) ?? (Bundle.main.path(forResource: imageName, ofType: nil))) ?? ""
                 
                 guard let contentImage = UIImage(named: imageName, in: Bundle(path: resourcePath), compatibleWith: nil) else {
                     
                     wy_print("在项目路径或Assets下面，没有找到 \(imageName) 这张图片，已默认创建一张随机颜色图片供您使用")
                     
-                    return wy_image(from: UIColor(red: CGFloat(arc4random()%256)/255.0, green: CGFloat(arc4random()%256)/255.0, blue: CGFloat(arc4random()%256)/255.0, alpha: 1.0))
+                    return wy_createImage(from: UIColor(red: CGFloat(arc4random()%256)/255.0, green: CGFloat(arc4random()%256)/255.0, blue: CGFloat(arc4random()%256)/255.0, alpha: 1.0))
                 }
                 return contentImage
             }
@@ -173,7 +269,7 @@ public extension UIImage {
             guard let contentImage = UIImage(named: imageName, in: Bundle(path: resourcePath), compatibleWith: nil) else {
                 
                 wy_print("在 \(bundleName).bundle\(subdirectory) 中没有找到 \(imageName) 这张图片，已默认创建一张随机颜色图片供您使用")
-                return wy_image(from: UIColor(red: CGFloat(arc4random()%256)/255.0, green: CGFloat(arc4random()%256)/255.0, blue: CGFloat(arc4random()%256)/255.0, alpha: 1.0))
+                return wy_createImage(from: UIColor(red: CGFloat(arc4random()%256)/255.0, green: CGFloat(arc4random()%256)/255.0, blue: CGFloat(arc4random()%256)/255.0, alpha: 1.0))
             }
             return contentImage
         }

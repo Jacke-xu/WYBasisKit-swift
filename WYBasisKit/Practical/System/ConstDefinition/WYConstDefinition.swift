@@ -69,18 +69,13 @@ public func wy_print(_ messages: Any..., file: String = #file, function: String 
     #endif
 }
 
-/// 获取app包路径
-public let wy_bundlePath: String = Bundle.main.bundlePath
-
-/// 获取app资源目录路径
-public let wy_appResourcePath: String = Bundle.main.resourcePath!
-
 /// 获取app包的readme.txt文件
 public let wy_readmePath: String = Bundle.main.path(forResource: "readme", ofType: "txt")!
 
 /// 项目名字
 public let wy_projectName: String = Bundle.main.infoDictionary!["CFBundleName"] as! String
 
+/// 商店应用名
 public let wy_appStoreName: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as! String
 
 /// 应用标识
@@ -91,6 +86,3 @@ public let wy_appStoreVersion: String = Bundle.main.infoDictionary!["CFBundleSho
 
 /// 应用构建版本号
 public let wy_appBuildVersion: String = Bundle.main.infoDictionary!["CFBundleVersion"] as! String
-
-/// 获取当前语言
-public let wy_currentLanguage: String = NSLocale.preferredLanguages.first!

@@ -72,6 +72,7 @@
 		AAEE9003265B9558003B1748 /* WYNetworkServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAEE9001265B9558003B1748 /* WYNetworkServer.swift */; };
 		AAF09E7426DA2E420063102C /* UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF09E7326DA2E410063102C /* UICollectionView.swift */; };
 		AAF09E7E26DA573C0063102C /* WYRefresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF09E7D26DA573C0063102C /* WYRefresh.swift */; };
+		DC1AA72327AD481200D525D2 /* WYQRCodeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1AA72227AD481100D525D2 /* WYQRCodeController.swift */; };
 		DC3E0CE92727979D003CB61E /* WYTestRequestController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC3E0CE82727979D003CB61E /* WYTestRequestController.swift */; };
 		DC4D24BD271D55A1005FFE21 /* WYStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4D24BC271D55A1005FFE21 /* WYStorage.swift */; };
 		DC5BC14627745FC300B0D741 /* WYTestInterfaceOrientationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5BC14527745FC300B0D741 /* WYTestInterfaceOrientationController.swift */; };
@@ -152,6 +153,7 @@
 		AAF09E7326DA2E410063102C /* UICollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionView.swift; sourceTree = "<group>"; };
 		AAF09E7D26DA573C0063102C /* WYRefresh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYRefresh.swift; sourceTree = "<group>"; };
 		C6038257BCBDA65021463BC7 /* Pods_WYBasisKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WYBasisKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DC1AA72227AD481100D525D2 /* WYQRCodeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYQRCodeController.swift; sourceTree = "<group>"; };
 		DC3E0CE82727979D003CB61E /* WYTestRequestController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYTestRequestController.swift; sourceTree = "<group>"; };
 		DC4D24BC271D55A1005FFE21 /* WYStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYStorage.swift; sourceTree = "<group>"; };
 		DC5BC14527745FC300B0D741 /* WYTestInterfaceOrientationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYTestInterfaceOrientationController.swift; sourceTree = "<group>"; };
@@ -529,6 +531,7 @@
 				AA0B8848270989CB006F26C8 /* WYTestDownloadController.swift */,
 				DC3E0CE82727979D003CB61E /* WYTestRequestController.swift */,
 				DC5BC14527745FC300B0D741 /* WYTestInterfaceOrientationController.swift */,
+				DC1AA72227AD481100D525D2 /* WYQRCodeController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -802,6 +805,7 @@
 				AAC6B3932691705D00D90D15 /* WYTestTableViewHeaderView.swift in Sources */,
 				AAB7BDE726257F3600BD57EC /* WYBannerView.swift in Sources */,
 				1F99DCC8257DCFAE003D2408 /* WYPagingView.swift in Sources */,
+				DC1AA72327AD481200D525D2 /* WYQRCodeController.swift in Sources */,
 				AA771BE42568F834002C748B /* UITextField.swift in Sources */,
 				AAC6B38F26916E6E00D90D15 /* WYTableViewPlainController.swift in Sources */,
 				AA771BD72568F834002C748B /* UINavigationController.swift in Sources */,

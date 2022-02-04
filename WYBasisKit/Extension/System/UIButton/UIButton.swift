@@ -196,7 +196,7 @@ public extension UIButton {
             setImage(newValue, for: .normal)
         }
         get {
-            return image(for: .normal) ?? UIKit.UIImage.wy_image(from: .clear)
+            return image(for: .normal) ?? UIKit.UIImage.wy_createImage(from: .clear)
         }
     }
 
@@ -206,7 +206,7 @@ public extension UIButton {
             setImage(newValue, for: .highlighted)
         }
         get {
-            return image(for: .highlighted) ?? UIKit.UIImage.wy_image(from: .clear)
+            return image(for: .highlighted) ?? UIKit.UIImage.wy_createImage(from: .clear)
         }
     }
 
@@ -216,7 +216,7 @@ public extension UIButton {
             setImage(newValue, for: .selected)
         }
         get {
-            return image(for: .selected) ?? UIKit.UIImage.wy_image(from: .clear)
+            return image(for: .selected) ?? UIKit.UIImage.wy_createImage(from: .clear)
         }
     }
     
@@ -240,7 +240,6 @@ public extension UIButton {
         }
 
         get {
-
             return (titleLabel?.font)!
         }
     }
