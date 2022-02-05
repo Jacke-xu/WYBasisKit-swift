@@ -302,7 +302,7 @@ public extension String {
     /// 根据时间戳获取星座
     static func wy_constellation(from timestamp: String) -> String {
         
-        let timeInterval = TimeInterval(string: (timestamp.count >= 13 ? "\(timestamp.wy_substring(from: 0, to: 9))" : timestamp))
+        let timeInterval = Double(string: (timestamp.count >= 13 ? "\(timestamp.wy_substring(from: 0, to: 9))" : timestamp))
         let oneDay:Double = 86400
         let constellationDics = ["摩羯座": "12.22-1.19",
                                  "水瓶座": "1.20-2.18",
@@ -388,7 +388,8 @@ public extension String {
         }
         
         let timeStrArr = range.components(separatedBy: "-")
-        let dateYear = getCurrYear(date: Date(timeIntervalSince1970: TimeInterval(string: timestamp)))
+        
+        let dateYear = getCurrYear(date: Date(timeIntervalSince1970: Double(string: timestamp)))
         let startTimeStr = dateYear + timeStrArr.first!
         let endTimeStr = dateYear + timeStrArr.last!
         
