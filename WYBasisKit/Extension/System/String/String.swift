@@ -187,7 +187,7 @@ public extension String {
         
         if self.isEmpty {return ""}
         
-        let dateString: String = (self.count >= 13 ? "\(self.wy_substring(from: 0, to: 9))" : self)
+        let dateString: String = self.count <= 10 ? self : "\(((NumberFormatter().number(from: self)?.doubleValue ?? 0.0) / 1000))"
         
         let date: Date = Date(timeIntervalSince1970: Double(dateString)!)
         
@@ -203,15 +203,13 @@ public extension String {
         
         if self.isEmpty {return ""}
         
-        let dateString: String = (self.count >= 13 ? "\(self.wy_substring(from: 0, to: 9))" : self)
-        
         let format = DateFormatter()
         
         format.dateStyle = .medium
         format.timeStyle = .short
         format.dateFormat = sharedTimeFormat(dateFormat: dateFormat)
         
-        let date = format.date(from: dateString)
+        let date = format.date(from: self)
         
         return String(date!.timeIntervalSince1970)
     }
@@ -222,7 +220,7 @@ public extension String {
         // 当前时时间戳
         let currentTime = Date().timeIntervalSince1970
         // 传入的时间
-        let computingTime = (self.count >= 13) ? ((NSInteger(self) ?? 0) / 1000) : (NSInteger(self) ?? 0)
+        let computingTime = (self.count <= 10) ? (NSInteger(self) ?? 0) : ((NSInteger(self) ?? 0) / 1000)
         // 距离当前的时间差
         let timeDifference = NSInteger(currentTime) - computingTime
         // 秒转分钟
@@ -275,7 +273,7 @@ public extension String {
     /**
      *  汉字转拼音
      *  @param tone: 是否需要保留音调
-     *  @param interval: 是否需要去除空格
+     *  @param interval: 拼音之间是否需要用空格间隔开
      */
     func wy_phoneticTransform(tone: Bool = false, interval: Bool = false) -> String {
         
@@ -301,8 +299,9 @@ public extension String {
     
     /// 根据时间戳获取星座
     static func wy_constellation(from timestamp: String) -> String {
+
+        let timeInterval: TimeInterval = timestamp.count <= 10 ? (NumberFormatter().number(from: timestamp)?.doubleValue ?? 0.0) : ((NumberFormatter().number(from: timestamp)?.doubleValue ?? 0.0) / 1000)
         
-        let timeInterval = Double(string: (timestamp.count >= 13 ? "\(timestamp.wy_substring(from: 0, to: 9))" : timestamp))
         let oneDay:Double = 86400
         let constellationDics = ["摩羯座": "12.22-1.19",
                                  "水瓶座": "1.20-2.18",
@@ -316,13 +315,13 @@ public extension String {
                                  "天秤座": "9.23-10.23",
                                  "天蝎座": "10.24-11.22",
                                  "射手座": "11.23-12.21"]
-        
+
         let currConstellation = constellationDics.filter {
-            
-            let timeRange = constellationDivision(timestamp: (timestamp.count >= 13 ? "\(timestamp.wy_substring(from: 0, to: 9))" : timestamp), range: $1)
+
+            let timeRange = constellationDivision(timestamp: timestamp, range: $1)
             let startTime = timeRange.0
             let endTime = timeRange.1 + oneDay
-            
+
             return timeInterval > startTime && timeInterval < endTime
         }
         return currConstellation.first?.key ?? "摩羯座"
@@ -342,8 +341,11 @@ public extension String {
         targetString.replaceOccurrences(of: "+", with: "", options: .literal, range: NSMakeRange(0, targetString.length))
         return targetString.removingPercentEncoding ?? self
     }
+}
+
+private extension String {
     
-    private func sharedTimeFormat(dateFormat: WYTimeFormat) -> String {
+    func sharedTimeFormat(dateFormat: WYTimeFormat) -> String {
         
         switch dateFormat {
         case .HM:
@@ -364,38 +366,40 @@ public extension String {
     }
     
     /// 获取星座开始、结束时间
-    private static func constellationDivision(timestamp: String, range: String) -> (TimeInterval, TimeInterval) {
-        
+    static func constellationDivision(timestamp: String, range: String) -> (TimeInterval, TimeInterval) {
+
         /// 获取当前年份
         func getCurrYear(date:Date) -> String {
-            
+
             let dm = DateFormatter()
             dm.dateFormat = "yyyy."
             let currYear = dm.string(from: date)
             return currYear
         }
-        
+
         /// 日期转换当前时间戳
         func toTimeInterval(dateStr: String) -> TimeInterval? {
-            
+
             let dm = DateFormatter()
             dm.dateFormat = "yyyy.MM.dd"
-            
+
             let date = dm.date(from: dateStr)
             let interval = date?.timeIntervalSince1970
-            
+
             return interval
         }
-        
+
         let timeStrArr = range.components(separatedBy: "-")
         
-        let dateYear = getCurrYear(date: Date(timeIntervalSince1970: Double(string: timestamp)))
+        let timeInterval: TimeInterval = timestamp.count <= 10 ? (NumberFormatter().number(from: timestamp)?.doubleValue ?? 0.0) : ((NumberFormatter().number(from: timestamp)?.doubleValue ?? 0.0) / 1000)
+        
+        let dateYear = getCurrYear(date: Date(timeIntervalSince1970: timeInterval))
         let startTimeStr = dateYear + timeStrArr.first!
         let endTimeStr = dateYear + timeStrArr.last!
-        
+
         let startTime = toTimeInterval(dateStr: startTimeStr)!
         let endTime = toTimeInterval(dateStr: endTimeStr)!
-        
+
         return (startTime, endTime)
     }
 }

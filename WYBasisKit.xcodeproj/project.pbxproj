@@ -12,7 +12,6 @@
 		1F2468A025B13DFB00E02F78 /* WYAlignmentFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F24689E25B13DFB00E02F78 /* WYAlignmentFlowLayout.swift */; };
 		1F2468A825B17B6C00E02F78 /* WYTestRichTextController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2468A725B17B6C00E02F78 /* WYTestRichTextController.swift */; };
 		1F2723302588869200E78AE0 /* WYTestBannerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F27232F2588869200E78AE0 /* WYTestBannerController.swift */; };
-		1F3CEEB325773CE200955712 /* Foundation+JSONLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F3CEEB225773CE200955712 /* Foundation+JSONLog.m */; };
 		1F4A0E49256B4A52002E932D /* WYNetworkConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4A0E48256B4A52002E932D /* WYNetworkConfig.swift */; };
 		1F4A73DD25C25FA300ED1FCF /* WYMultilevelTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4A73DC25C25FA300ED1FCF /* WYMultilevelTableViewController.swift */; };
 		1F5C3E4D25787E7D00E0DBFF /* WYTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5C3E4C25787E7D00E0DBFF /* WYTabBarController.swift */; };
@@ -76,6 +75,7 @@
 		DC3E0CE92727979D003CB61E /* WYTestRequestController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC3E0CE82727979D003CB61E /* WYTestRequestController.swift */; };
 		DC4D24BD271D55A1005FFE21 /* WYStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4D24BC271D55A1005FFE21 /* WYStorage.swift */; };
 		DC5BC14627745FC300B0D741 /* WYTestInterfaceOrientationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5BC14527745FC300B0D741 /* WYTestInterfaceOrientationController.swift */; };
+		DCB90A7827AE3A8A001DCA82 /* Foundation+JSONLog.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB90A7727AE3A8A001DCA82 /* Foundation+JSONLog.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -84,7 +84,6 @@
 		1F24689E25B13DFB00E02F78 /* WYAlignmentFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYAlignmentFlowLayout.swift; sourceTree = "<group>"; };
 		1F2468A725B17B6C00E02F78 /* WYTestRichTextController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYTestRichTextController.swift; sourceTree = "<group>"; };
 		1F27232F2588869200E78AE0 /* WYTestBannerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYTestBannerController.swift; sourceTree = "<group>"; };
-		1F3CEEB225773CE200955712 /* Foundation+JSONLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Foundation+JSONLog.m"; sourceTree = "<group>"; };
 		1F4A0E48256B4A52002E932D /* WYNetworkConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYNetworkConfig.swift; sourceTree = "<group>"; };
 		1F4A73DC25C25FA300ED1FCF /* WYMultilevelTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYMultilevelTableViewController.swift; sourceTree = "<group>"; };
 		1F5C3E4C25787E7D00E0DBFF /* WYTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYTabBarController.swift; sourceTree = "<group>"; };
@@ -157,6 +156,7 @@
 		DC3E0CE82727979D003CB61E /* WYTestRequestController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYTestRequestController.swift; sourceTree = "<group>"; };
 		DC4D24BC271D55A1005FFE21 /* WYStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYStorage.swift; sourceTree = "<group>"; };
 		DC5BC14527745FC300B0D741 /* WYTestInterfaceOrientationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYTestInterfaceOrientationController.swift; sourceTree = "<group>"; };
+		DCB90A7727AE3A8A001DCA82 /* Foundation+JSONLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Foundation+JSONLog.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -195,14 +195,6 @@
 				1FA6B68A25CD1B3400005170 /* WYWaterfallParagraphLayout.swift */,
 			);
 			path = FlowLayout;
-			sourceTree = "<group>";
-		};
-		1F3CEEB125773CA500955712 /* CNLog */ = {
-			isa = PBXGroup;
-			children = (
-				1F3CEEB225773CE200955712 /* Foundation+JSONLog.m */,
-			);
-			path = CNLog;
 			sourceTree = "<group>";
 		};
 		1F5C3E5F2578B60C00E0DBFF /* UIApplication */ = {
@@ -631,10 +623,18 @@
 			path = Storage;
 			sourceTree = "<group>";
 		};
+		DCB90A7927AE3AA1001DCA82 /* CNLog */ = {
+			isa = PBXGroup;
+			children = (
+				DCB90A7727AE3A8A001DCA82 /* Foundation+JSONLog.m */,
+			);
+			path = CNLog;
+			sourceTree = "<group>";
+		};
 		DCEAC21E26F30D6700E8F69A /* System */ = {
 			isa = PBXGroup;
 			children = (
-				1F3CEEB125773CA500955712 /* CNLog */,
+				DCB90A7927AE3AA1001DCA82 /* CNLog */,
 				AAB2712626B571F300771549 /* Timer */,
 				AA771BA52568F834002C748B /* Biometric */,
 				AA771BA72568F834002C748B /* Authorize */,
@@ -678,7 +678,7 @@
 				TargetAttributes = {
 					AA484EAE24FA262100B39D60 = {
 						CreatedOnToolsVersion = 11.6;
-						LastSwiftMigration = 1220;
+						LastSwiftMigration = 1320;
 					};
 				};
 			};
@@ -786,7 +786,6 @@
 				1F2468A025B13DFB00E02F78 /* WYAlignmentFlowLayout.swift in Sources */,
 				AA771BDA2568F834002C748B /* NumberFormatter.swift in Sources */,
 				AAC6B39126916E9F00D90D15 /* WYTableViewGroupedController.swift in Sources */,
-				1F3CEEB325773CE200955712 /* Foundation+JSONLog.m in Sources */,
 				AA771BD22568F834002C748B /* UIAlertController.swift in Sources */,
 				1F5C3E5625787ED300E0DBFF /* WYRightController.swift in Sources */,
 				AA327F032569179F00CF5CBE /* WYBasisKitConfig.swift in Sources */,
@@ -808,6 +807,7 @@
 				DC1AA72327AD481200D525D2 /* WYQRCodeController.swift in Sources */,
 				AA771BE42568F834002C748B /* UITextField.swift in Sources */,
 				AAC6B38F26916E6E00D90D15 /* WYTableViewPlainController.swift in Sources */,
+				DCB90A7827AE3A8A001DCA82 /* Foundation+JSONLog.m in Sources */,
 				AA771BD72568F834002C748B /* UINavigationController.swift in Sources */,
 				1F2468A825B17B6C00E02F78 /* WYTestRichTextController.swift in Sources */,
 				AA484EB324FA262100B39D60 /* AppDelegate.swift in Sources */,

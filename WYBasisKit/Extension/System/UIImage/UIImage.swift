@@ -126,9 +126,29 @@ public extension UIImage {
         if waterImage == nil {
             return originalImage
         }else {
-            //把logo镶嵌到生成的二维码图片上，注意尺寸不要太大（最大不超过二维码图片的%30），太大会造成扫不出来
+            // 把logo镶嵌到生成的二维码图片上，注意尺寸不要太大（最大不超过二维码图片的%30），太大会造成扫不出来
             return originalImage.wy_mosaic(image: waterImage!)
         }
+    }
+    
+    /**
+    *  获取二维码信息(必须要真机环境才能获取到相关信息)
+    */
+    func wy_recognitionQRCode() -> [String] {
+        
+        // 创建过滤器
+        let detector = CIDetector(ofType: CIDetectorTypeQRCode, context: nil, options: nil)
+
+        // 获取CIImage
+        guard let ciImage = CIImage(image: self) else { return [] }
+
+        // 识别二维码
+        guard let features = detector?.features(in: ciImage) else { return [] }
+
+        // 获取二维码信息
+        let resultArr: [String] = features.compactMap { (($0) as! CIQRCodeFeature).messageString ?? "" }
+        
+        return resultArr
     }
     
     /**

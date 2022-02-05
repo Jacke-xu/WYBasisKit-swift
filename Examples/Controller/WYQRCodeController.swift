@@ -17,42 +17,22 @@ class WYQRCodeController: UIViewController {
         
         view.backgroundColor = .white
         
-        //let qrData = try! JSONSerialization.data(withJSONObject: ["url1": "www.baidu.com", "url2": "www.apple.com"], options: [JSONSerialization.WritingOptions.prettyPrinted])
-        let qrData = "哈哈😄".data(using: .utf8)!
-        
+        let qrData = try! JSONSerialization.data(withJSONObject: ["简书": "http://events.jianshu.io/p/88f00643076b", "GitHub": "https://github.com/Jacke-xu/WYBasisKit-swift"], options: [JSONSerialization.WritingOptions.prettyPrinted])
+        //let qrData = "WYBasisKit".data(using: .utf8)!
+
         let imageView = UIImageView(image: UIImage.wy_createQrCode(with: qrData, size: CGSize(width: 350, height: 350), waterImage: UIImage.wy_named("WYBasisKit_60*60")))
         view.addSubview(imageView)
         imageView.snp.makeConstraints { make in
             make.center.equalToSuperview()
         }
-        
-        // 获取二维码信息
-        guard let infoArr = recognitionQRCode(qrCodeImage: imageView.image!) else {return}
+
+        // 获取二维码信息(必须要真机环境才能获取到相关信息)
+        guard let infoArr = imageView.image?.wy_recognitionQRCode() else {return}
         wy_print("二维码信息 = \(infoArr)")
     }
     
-    /* *  @param qrCodeImage 二维码的图片
-       *  @return 结果的数组 */
-    fileprivate func recognitionQRCode(qrCodeImage: UIImage) -> [String]? {
-        
-        //1. 创建过滤器
-        let detector = CIDetector(ofType: CIDetectorTypeQRCode, context: nil, options: nil)
-
-        //2. 获取CIImage
-        guard let ciImage = CIImage(image: qrCodeImage) else { return nil }
-
-        //3. 识别二维码
-        guard let features = detector?.features(in: ciImage) else { return nil }
-
-        //4. 遍历数组, 获取信息
-        var resultArr = [String]()
-        for feature in features {
-            
-            //resultArr.append(feature.type)
-            resultArr.append((feature as! CIQRCodeFeature).messageString ?? "")
-        }
-        
-        return resultArr
+    deinit {
+        wy_print("WYQRCodeController release")
     }
 
     /*
