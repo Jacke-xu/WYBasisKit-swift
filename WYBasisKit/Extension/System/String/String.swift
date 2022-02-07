@@ -182,7 +182,7 @@ public extension String {
         }
     }
     
-    /// 时间戳转字符串
+    /// 时间戳转年月日格式
     func  wy_timestampConvertDate(dateFormat: WYTimeFormat) -> String {
         
         if self.isEmpty {return ""}
@@ -198,7 +198,7 @@ public extension String {
         return formatter.string(from: date as Date)
     }
     
-    /// 字符串转时间戳
+    /// 年月日格式转时间戳
     func wy_dateStrConvertTimestamp(dateFormat: WYTimeFormat) -> String {
         
         if self.isEmpty {return ""}
@@ -214,7 +214,7 @@ public extension String {
         return String(date!.timeIntervalSince1970)
     }
     
-    /// 时间戳距离现在的时间
+    /// 时间戳距离现在的间隔时间
     func wy_dateDifferenceWithNowTimer(dateFormat: WYTimeFormat) -> String {
         
         // 当前时时间戳
@@ -303,18 +303,18 @@ public extension String {
         let timeInterval: TimeInterval = timestamp.count <= 10 ? (NumberFormatter().number(from: timestamp)?.doubleValue ?? 0.0) : ((NumberFormatter().number(from: timestamp)?.doubleValue ?? 0.0) / 1000)
         
         let oneDay:Double = 86400
-        let constellationDics = ["摩羯座": "12.22-1.19",
-                                 "水瓶座": "1.20-2.18",
-                                 "双鱼座": "2.19-3.20",
-                                 "白羊座": "3.21-4.19",
-                                 "金牛座": "4.20-5.20",
-                                 "双子座": "5.21-6.21",
-                                 "巨蟹座": "6.22-7.22",
-                                 "狮子座": "7.23-8.22",
-                                 "处女座": "8.23-9.22",
-                                 "天秤座": "9.23-10.23",
-                                 "天蝎座": "10.24-11.22",
-                                 "射手座": "11.23-12.21"]
+        let constellationDics = [WYLocalizedString("摩羯座"): "12.22-1.19",
+                                 WYLocalizedString("水瓶座"): "1.20-2.18",
+                                 WYLocalizedString("双鱼座"): "2.19-3.20",
+                                 WYLocalizedString("白羊座"): "3.21-4.19",
+                                 WYLocalizedString("金牛座"): "4.20-5.20",
+                                 WYLocalizedString("双子座"): "5.21-6.21",
+                                 WYLocalizedString("巨蟹座"): "6.22-7.22",
+                                 WYLocalizedString("狮子座"): "7.23-8.22",
+                                 WYLocalizedString("处女座"): "8.23-9.22",
+                                 WYLocalizedString("天秤座"): "9.23-10.23",
+                                 WYLocalizedString("天蝎座"): "10.24-11.22",
+                                 WYLocalizedString("射手座"): "11.23-12.21"]
 
         let currConstellation = constellationDics.filter {
 
@@ -324,7 +324,7 @@ public extension String {
 
             return timeInterval > startTime && timeInterval < endTime
         }
-        return currConstellation.first?.key ?? "摩羯座"
+        return currConstellation.first?.key ?? WYLocalizedString("摩羯座")
     }
     
     /// Encode
