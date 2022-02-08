@@ -25,9 +25,6 @@ public struct WYBasisKitConfig {
     /// 设置默认图片加载的Bundle名(例如：ImageSource.bundle 设置bundleName为 ImageSource 即可)
     public static var bundleName: String = ""
     
-    /// 设置默认的国家码
-    public static var countryCode: String = "86"
-    
     /// Debug模式下是否打印日志
     public static var debugModeLog: Bool = true
 }

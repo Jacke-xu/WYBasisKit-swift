@@ -31,6 +31,23 @@ extension UIViewController: ViewControllerHandlerProtocol {
 
 public extension UIViewController {
     
+    /// 获取当前正在显示的控制器
+    class func wy_currentController(windowController: UIViewController? = (UIApplication.shared.delegate?.window)??.rootViewController) -> UIViewController? {
+        
+        if let navigationController = windowController as? UINavigationController {
+            return wy_currentController(windowController: navigationController.visibleViewController)
+            
+        }else if let tabBarController = windowController as? UITabBarController {
+            return wy_currentController(windowController: tabBarController.selectedViewController)
+            
+        }else if let presentedController = windowController?.presentedViewController {
+            return wy_currentController(windowController: presentedController)
+            
+        }else {
+            return windowController
+        }
+    }
+    
     /** 从导航控制器栈中查找ViewController，没有时返回nil */
     func wy_findViewController(className: String) -> UIViewController? {
         

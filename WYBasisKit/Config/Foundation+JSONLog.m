@@ -11,14 +11,13 @@
  直接将这个文件拖到工程中即可生效。
  */
 
-//DEBUG模式生效
+// DEBUG模式生效
 #ifdef DEBUG
 
 #import <Foundation/Foundation.h>
 #import <objc/runtime.h>
 
 #pragma mark - 方法交换
-
 static inline void wy_swizzleSelector(Class class, SEL originalSelector, SEL swizzledSelector) {
     
     Method originalMethod = class_getInstanceMethod(class, originalSelector);
@@ -40,9 +39,8 @@ static inline void wy_swizzleSelector(Class class, SEL originalSelector, SEL swi
 
 
 #pragma mark - NSObject分类
-
 @implementation NSObject (JSONLog)
-//将obj转换成json字符串。如果失败则返回nil.
+// 将obj转换成json字符串。如果失败则返回nil.
 - (NSString *)wy_convertToJsonString {
     
     //先判断是否能转化为JSON格式
@@ -57,24 +55,25 @@ static inline void wy_swizzleSelector(Class class, SEL originalSelector, SEL swi
 
 
 #pragma mark - NSDictionary分类
-
 @implementation NSDictionary (JSONLog)
 
-//用此方法交换系统的 descriptionWithLocale: 方法。该方法在代码打印的时候调用。
+// 用此方法交换系统的 descriptionWithLocale: 方法。该方法在代码打印的时候调用。
 - (NSString *)wy_jsonlog_descriptionWithLocale:(id)locale{
     
     NSString *result = [self wy_convertToJsonString];//转换成JSON格式字符串
     if (!result) return [self wy_jsonlog_descriptionWithLocale:locale];//如果无法转换，就使用原先的格式
     return result;
 }
-//用此方法交换系统的 descriptionWithLocale:indent:方法。功能同上。
+
+// 用此方法交换系统的 descriptionWithLocale:indent:方法。功能同上。
 - (NSString *)wy_jsonlog_descriptionWithLocale:(id)locale indent:(NSUInteger)level {
     
     NSString *result = [self wy_convertToJsonString];
     if (!result) return [self wy_jsonlog_descriptionWithLocale:locale indent:level];
     return result;
 }
-//用此方法交换系统的 debugDescription 方法。该方法在控制台使用po打印的时候调用。
+
+// 用此方法交换系统的 debugDescription 方法。该方法在控制台使用po打印的时候调用。
 - (NSString *)wy_jsonlog_debugDescription{
     
     NSString *result = [self wy_convertToJsonString];
@@ -82,7 +81,7 @@ static inline void wy_swizzleSelector(Class class, SEL originalSelector, SEL swi
     return result;
 }
 
-//在load方法中完成方法交换
+// 在load方法中完成方法交换
 + (void)load {
     
     //方法交换
@@ -98,26 +97,26 @@ static inline void wy_swizzleSelector(Class class, SEL originalSelector, SEL swi
 
 @end
 
-
 #pragma mark - NSArray分类
-
 @implementation NSArray (JSONLog)
-
-//用此方法交换系统的 descriptionWithLocale: 方法。该方法在代码打印的时候调用。
+ 
+// 用此方法交换系统的 descriptionWithLocale: 方法。该方法在代码打印的时候调用。
 - (NSString *)wy_jsonlog_descriptionWithLocale:(id)locale{
     
     NSString *result = [self wy_convertToJsonString];
     if (!result) return [self wy_jsonlog_descriptionWithLocale:locale];
     return result;
 }
-//用此方法交换系统的 descriptionWithLocale:indent:方法。功能同上。
+
+// 用此方法交换系统的 descriptionWithLocale:indent:方法。功能同上。
 - (NSString *)wy_jsonlog_descriptionWithLocale:(id)locale indent:(NSUInteger)level {
     
     NSString *result = [self wy_convertToJsonString];
     if (!result) return [self wy_jsonlog_descriptionWithLocale:locale indent:level];
     return result;
 }
-//用此方法交换系统的 debugDescription 方法。该方法在控制台使用po打印的时候调用。
+
+// 用此方法交换系统的 debugDescription 方法。该方法在控制台使用po打印的时候调用。
 - (NSString *)wy_jsonlog_debugDescription{
     
     NSString *result = [self wy_convertToJsonString];
@@ -139,6 +138,5 @@ static inline void wy_swizzleSelector(Class class, SEL originalSelector, SEL swi
 }
 
 @end
-
 
 #endif

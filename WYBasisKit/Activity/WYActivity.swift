@@ -365,7 +365,7 @@ private class WYActivityInfoView: UIView {
             let offsetx = (contentView.frame.size.width - contentLabel.frame.size.width - wy_screenWidth(20)) / 2
             var offsety = (contentView.frame.size.height - contentLabel.frame.size.height - wy_screenWidth(20)) / 2
 
-            let tabbarOffset = wy_currentController()?.tabBarController?.tabBar.isHidden ?? true ? 0 : wy_tabBarHeight
+            let tabbarOffset = UIViewController.wy_currentController()?.tabBarController?.tabBar.isHidden ?? true ? 0 : wy_tabBarHeight
 
             if position == .middle {
                 offsety = (contentView.frame.size.height - contentLabel.frame.size.height - wy_screenWidth(20) - tabbarOffset) / 2
@@ -639,7 +639,7 @@ private extension WYActivity {
     static func sharedContentView(_ window: UIView? = nil) -> UIView? {
 
         guard let contentView = window else {
-            return wy_currentController()?.view ?? nil
+            return UIViewController.wy_currentController()?.view ?? nil
         }
         return contentView
     }
@@ -649,7 +649,7 @@ private extension WYActivity {
         guard offset == nil else {
             return offset ?? 0
         }
-        guard let controller: UIViewController = wy_currentController() else {
+        guard let controller: UIViewController = UIViewController.wy_currentController() else {
             return offset ?? 0
         }
         if (window == controller.view) && (controller.navigationController != nil) {

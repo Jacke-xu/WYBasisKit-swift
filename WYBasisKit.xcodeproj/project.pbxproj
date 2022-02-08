@@ -40,8 +40,6 @@
 		AA771BD52568F834002C748B /* UIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA771BA02568F834002C748B /* UIDevice.swift */; };
 		AA771BD62568F834002C748B /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA771BA22568F834002C748B /* UIViewController.swift */; };
 		AA771BD72568F834002C748B /* UINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA771BA42568F834002C748B /* UINavigationController.swift */; };
-		AA771BD82568F834002C748B /* WYBiometric.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA771BA62568F834002C748B /* WYBiometric.swift */; };
-		AA771BD92568F834002C748B /* WYAuthorize.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA771BA82568F834002C748B /* WYAuthorize.swift */; };
 		AA771BDA2568F834002C748B /* NumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA771BAA2568F834002C748B /* NumberFormatter.swift */; };
 		AA771BDB2568F834002C748B /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA771BAC2568F834002C748B /* String.swift */; };
 		AA771BDC2568F834002C748B /* NSObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA771BAE2568F834002C748B /* NSObject.swift */; };
@@ -50,7 +48,6 @@
 		AA771BE22568F834002C748B /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA771BBA2568F834002C748B /* UIView.swift */; };
 		AA771BE32568F834002C748B /* UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA771BBD2568F834002C748B /* UITableView.swift */; };
 		AA771BE42568F834002C748B /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA771BBF2568F834002C748B /* UITextField.swift */; };
-		AA771BE82568F834002C748B /* WYConstDefinition.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA771BC52568F834002C748B /* WYConstDefinition.swift */; };
 		AA771BEA2568F834002C748B /* WYScrollText.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA771BC92568F834002C748B /* WYScrollText.swift */; };
 		AA771BEB2568F834002C748B /* WYBoolJudge.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA771BCB2568F834002C748B /* WYBoolJudge.swift */; };
 		AA9CF8232584B47B008A7DE1 /* WYLeftControllerHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9CF8222584B47B008A7DE1 /* WYLeftControllerHeaderView.swift */; };
@@ -59,7 +56,6 @@
 		AA9CF8302584C456008A7DE1 /* WYTestVisualController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9CF82F2584C456008A7DE1 /* WYTestVisualController.swift */; };
 		AAA9E5E726DB3D0F009C064B /* WYActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA9E5E626DB3D0F009C064B /* WYActivity.swift */; };
 		AAA9E5E926DB6569009C064B /* WYActivity.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AAA9E5E826DB6569009C064B /* WYActivity.bundle */; };
-		AAB2712826B571F300771549 /* WYTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB2712726B571F300771549 /* WYTimer.swift */; };
 		AAB7BDE726257F3600BD57EC /* WYBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB7BDE626257F3600BD57EC /* WYBannerView.swift */; };
 		AAC3825A25A1874500B2D41C /* WYBannerView.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AAC3825925A1874500B2D41C /* WYBannerView.bundle */; };
 		AAC6B38F26916E6E00D90D15 /* WYTableViewPlainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC6B38E26916E6E00D90D15 /* WYTableViewPlainController.swift */; };
@@ -75,6 +71,7 @@
 		DC3E0CE92727979D003CB61E /* WYTestRequestController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC3E0CE82727979D003CB61E /* WYTestRequestController.swift */; };
 		DC4D24BD271D55A1005FFE21 /* WYStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4D24BC271D55A1005FFE21 /* WYStorage.swift */; };
 		DC5BC14627745FC300B0D741 /* WYTestInterfaceOrientationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5BC14527745FC300B0D741 /* WYTestInterfaceOrientationController.swift */; };
+		DC6C85F427B2110400571E41 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6C85F327B2110400571E41 /* Timer.swift */; };
 		DCB90A7827AE3A8A001DCA82 /* Foundation+JSONLog.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB90A7727AE3A8A001DCA82 /* Foundation+JSONLog.m */; };
 /* End PBXBuildFile section */
 
@@ -118,8 +115,6 @@
 		AA771BA02568F834002C748B /* UIDevice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIDevice.swift; sourceTree = "<group>"; };
 		AA771BA22568F834002C748B /* UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		AA771BA42568F834002C748B /* UINavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UINavigationController.swift; sourceTree = "<group>"; };
-		AA771BA62568F834002C748B /* WYBiometric.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYBiometric.swift; sourceTree = "<group>"; };
-		AA771BA82568F834002C748B /* WYAuthorize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYAuthorize.swift; sourceTree = "<group>"; };
 		AA771BAA2568F834002C748B /* NumberFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberFormatter.swift; sourceTree = "<group>"; };
 		AA771BAC2568F834002C748B /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		AA771BAE2568F834002C748B /* NSObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSObject.swift; sourceTree = "<group>"; };
@@ -128,7 +123,6 @@
 		AA771BBA2568F834002C748B /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		AA771BBD2568F834002C748B /* UITableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITableView.swift; sourceTree = "<group>"; };
 		AA771BBF2568F834002C748B /* UITextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
-		AA771BC52568F834002C748B /* WYConstDefinition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYConstDefinition.swift; sourceTree = "<group>"; };
 		AA771BC92568F834002C748B /* WYScrollText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYScrollText.swift; sourceTree = "<group>"; };
 		AA771BCB2568F834002C748B /* WYBoolJudge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYBoolJudge.swift; sourceTree = "<group>"; };
 		AA771C1E25691483002C748B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
@@ -139,7 +133,6 @@
 		AA9CF82F2584C456008A7DE1 /* WYTestVisualController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYTestVisualController.swift; sourceTree = "<group>"; };
 		AAA9E5E626DB3D0F009C064B /* WYActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYActivity.swift; sourceTree = "<group>"; };
 		AAA9E5E826DB6569009C064B /* WYActivity.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = WYActivity.bundle; sourceTree = "<group>"; };
-		AAB2712726B571F300771549 /* WYTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYTimer.swift; sourceTree = "<group>"; };
 		AAB7BDE626257F3600BD57EC /* WYBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYBannerView.swift; sourceTree = "<group>"; };
 		AAC3825925A1874500B2D41C /* WYBannerView.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = WYBannerView.bundle; sourceTree = "<group>"; };
 		AAC6B38E26916E6E00D90D15 /* WYTableViewPlainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYTableViewPlainController.swift; sourceTree = "<group>"; };
@@ -156,6 +149,7 @@
 		DC3E0CE82727979D003CB61E /* WYTestRequestController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYTestRequestController.swift; sourceTree = "<group>"; };
 		DC4D24BC271D55A1005FFE21 /* WYStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYStorage.swift; sourceTree = "<group>"; };
 		DC5BC14527745FC300B0D741 /* WYTestInterfaceOrientationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYTestInterfaceOrientationController.swift; sourceTree = "<group>"; };
+		DC6C85F327B2110400571E41 /* Timer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
 		DCB90A7727AE3A8A001DCA82 /* Foundation+JSONLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Foundation+JSONLog.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -282,7 +276,6 @@
 				AAA9E5E126DB3B68009C064B /* Activity */,
 				DC4D24C7271FF756005FFE21 /* Storage */,
 				AA771B922568F834002C748B /* Practical */,
-				AA771BF62568F91F002C748B /* Extension */,
 				AAE2E0F726AD7F740077B770 /* Localizable */,
 				AA771BC02568F834002C748B /* Networking */,
 				1F24689725B13D9D00E02F78 /* Other */,
@@ -293,7 +286,8 @@
 		AA771B922568F834002C748B /* Practical */ = {
 			isa = PBXGroup;
 			children = (
-				DCEAC21E26F30D6700E8F69A /* System */,
+				AA771BF62568F91F002C748B /* Extension */,
+				AAF09E6E26DA27C70063102C /* Refresh */,
 				AA771BCA2568F834002C748B /* BoolJudge */,
 			);
 			path = Practical;
@@ -361,22 +355,6 @@
 				AA771BA42568F834002C748B /* UINavigationController.swift */,
 			);
 			path = UINavigationController;
-			sourceTree = "<group>";
-		};
-		AA771BA52568F834002C748B /* Biometric */ = {
-			isa = PBXGroup;
-			children = (
-				AA771BA62568F834002C748B /* WYBiometric.swift */,
-			);
-			path = Biometric;
-			sourceTree = "<group>";
-		};
-		AA771BA72568F834002C748B /* Authorize */ = {
-			isa = PBXGroup;
-			children = (
-				AA771BA82568F834002C748B /* WYAuthorize.swift */,
-			);
-			path = Authorize;
 			sourceTree = "<group>";
 		};
 		AA771BA92568F834002C748B /* NumberFormatter */ = {
@@ -464,15 +442,6 @@
 			path = Networking;
 			sourceTree = "<group>";
 		};
-		AA771BC42568F834002C748B /* ConstDefinition */ = {
-			isa = PBXGroup;
-			children = (
-				AA771BC52568F834002C748B /* WYConstDefinition.swift */,
-				1F952EF725807ACE00F03251 /* WYConstMethod.swift */,
-			);
-			path = ConstDefinition;
-			sourceTree = "<group>";
-		};
 		AA771BC82568F834002C748B /* ScrollText */ = {
 			isa = PBXGroup;
 			children = (
@@ -492,8 +461,26 @@
 		AA771BF62568F91F002C748B /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				AAF09E7626DA3B250063102C /* System */,
-				AAF09E6E26DA27C70063102C /* Refresh */,
+				AAB2712626B571F300771549 /* Timer */,
+				AAE02B18267C61B400EF6D36 /* CALayer */,
+				AA771BB82568F834002C748B /* UIView */,
+				AA771BB62568F834002C748B /* UIButton */,
+				AA771BB22568F834002C748B /* UILabel */,
+				AA771BAB2568F834002C748B /* String */,
+				AA771B9D2568F834002C748B /* UIFont */,
+				AA771B972568F834002C748B /* UIColor */,
+				AA771B932568F834002C748B /* UIImage */,
+				AA771B9F2568F834002C748B /* UIDevice */,
+				AA771BAD2568F834002C748B /* NSObject */,
+				AA771BBE2568F834002C748B /* UITextField */,
+				1F5C3E5F2578B60C00E0DBFF /* UIApplication */,
+				AA771BBC2568F834002C748B /* UITableView */,
+				AAF09E7226DA2DEC0063102C /* UICollectionView */,
+				AA771BA92568F834002C748B /* NumberFormatter */,
+				AA771BA12568F834002C748B /* UIViewController */,
+				AA771B992568F834002C748B /* UIAlertController */,
+				AA771B952568F834002C748B /* NSAttributedString */,
+				AA771BA32568F834002C748B /* UINavigationController */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -502,6 +489,8 @@
 			isa = PBXGroup;
 			children = (
 				AA327F022569179F00CF5CBE /* WYBasisKitConfig.swift */,
+				1F952EF725807ACE00F03251 /* WYConstMethod.swift */,
+				DCB90A7727AE3A8A001DCA82 /* Foundation+JSONLog.m */,
 			);
 			path = Config;
 			sourceTree = "<group>";
@@ -551,7 +540,7 @@
 		AAB2712626B571F300771549 /* Timer */ = {
 			isa = PBXGroup;
 			children = (
-				AAB2712726B571F300771549 /* WYTimer.swift */,
+				DC6C85F327B2110400571E41 /* Timer.swift */,
 			);
 			path = Timer;
 			sourceTree = "<group>";
@@ -589,58 +578,12 @@
 			path = UICollectionView;
 			sourceTree = "<group>";
 		};
-		AAF09E7626DA3B250063102C /* System */ = {
-			isa = PBXGroup;
-			children = (
-				AAE02B18267C61B400EF6D36 /* CALayer */,
-				AA771BB82568F834002C748B /* UIView */,
-				AA771BB62568F834002C748B /* UIButton */,
-				AA771BB22568F834002C748B /* UILabel */,
-				AA771BAB2568F834002C748B /* String */,
-				AA771B9D2568F834002C748B /* UIFont */,
-				AA771B972568F834002C748B /* UIColor */,
-				AA771B932568F834002C748B /* UIImage */,
-				AA771B9F2568F834002C748B /* UIDevice */,
-				AA771BAD2568F834002C748B /* NSObject */,
-				AA771BBE2568F834002C748B /* UITextField */,
-				1F5C3E5F2578B60C00E0DBFF /* UIApplication */,
-				AA771BBC2568F834002C748B /* UITableView */,
-				AAF09E7226DA2DEC0063102C /* UICollectionView */,
-				AA771BA92568F834002C748B /* NumberFormatter */,
-				AA771BA12568F834002C748B /* UIViewController */,
-				AA771B992568F834002C748B /* UIAlertController */,
-				AA771B952568F834002C748B /* NSAttributedString */,
-				AA771BA32568F834002C748B /* UINavigationController */,
-			);
-			path = System;
-			sourceTree = "<group>";
-		};
 		DC4D24C7271FF756005FFE21 /* Storage */ = {
 			isa = PBXGroup;
 			children = (
 				DC4D24BC271D55A1005FFE21 /* WYStorage.swift */,
 			);
 			path = Storage;
-			sourceTree = "<group>";
-		};
-		DCB90A7927AE3AA1001DCA82 /* CNLog */ = {
-			isa = PBXGroup;
-			children = (
-				DCB90A7727AE3A8A001DCA82 /* Foundation+JSONLog.m */,
-			);
-			path = CNLog;
-			sourceTree = "<group>";
-		};
-		DCEAC21E26F30D6700E8F69A /* System */ = {
-			isa = PBXGroup;
-			children = (
-				DCB90A7927AE3AA1001DCA82 /* CNLog */,
-				AAB2712626B571F300771549 /* Timer */,
-				AA771BA52568F834002C748B /* Biometric */,
-				AA771BA72568F834002C748B /* Authorize */,
-				AA771BC42568F834002C748B /* ConstDefinition */,
-			);
-			path = System;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -767,14 +710,13 @@
 				1F4A0E49256B4A52002E932D /* WYNetworkConfig.swift in Sources */,
 				AA771BDE2568F834002C748B /* UILabel.swift in Sources */,
 				AA771BD42568F834002C748B /* UIFont.swift in Sources */,
+				DC6C85F427B2110400571E41 /* Timer.swift in Sources */,
 				AAC6B3952691706E00D90D15 /* WYTestTableViewFooterView.swift in Sources */,
 				AA771BD02568F834002C748B /* NSAttributedString.swift in Sources */,
 				1F5C3E5325787EC500E0DBFF /* WYCenterController.swift in Sources */,
 				1F5C3E5025787EB400E0DBFF /* WYLeftController.swift in Sources */,
 				AA771BD62568F834002C748B /* UIViewController.swift in Sources */,
-				AA771BE82568F834002C748B /* WYConstDefinition.swift in Sources */,
 				DC5BC14627745FC300B0D741 /* WYTestInterfaceOrientationController.swift in Sources */,
-				AA771BD92568F834002C748B /* WYAuthorize.swift in Sources */,
 				AAE02B1A267C61E000EF6D36 /* CALayer.swift in Sources */,
 				AA771BEA2568F834002C748B /* WYScrollText.swift in Sources */,
 				AA771BDC2568F834002C748B /* NSObject.swift in Sources */,
@@ -793,7 +735,6 @@
 				AAEE9002265B9558003B1748 /* WYNetworkManager.swift in Sources */,
 				AAA9E5E726DB3D0F009C064B /* WYActivity.swift in Sources */,
 				1F5C3E942578CD5400E0DBFF /* WYLocalizableManager.swift in Sources */,
-				AAB2712826B571F300771549 /* WYTimer.swift in Sources */,
 				DC4D24BD271D55A1005FFE21 /* WYStorage.swift in Sources */,
 				AA771BE22568F834002C748B /* UIView.swift in Sources */,
 				AA9CF8302584C456008A7DE1 /* WYTestVisualController.swift in Sources */,
@@ -818,7 +759,6 @@
 				AA771BCF2568F834002C748B /* UIImage.swift in Sources */,
 				AAF09E7E26DA573C0063102C /* WYRefresh.swift in Sources */,
 				AA9CF82A2584B97C008A7DE1 /* WYTestDarkNightModeController.swift in Sources */,
-				AA771BD82568F834002C748B /* WYBiometric.swift in Sources */,
 				1F9717FE25B55CB600CA7A33 /* WYWaterfallsFlowLayout.swift in Sources */,
 				AA9CF82D2584C262008A7DE1 /* WYTestAnimationController.swift in Sources */,
 				1F5C3E4D25787E7D00E0DBFF /* WYTabBarController.swift in Sources */,

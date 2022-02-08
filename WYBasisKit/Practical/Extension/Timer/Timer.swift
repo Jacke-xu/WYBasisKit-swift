@@ -1,12 +1,16 @@
 //
-//  WYTimer.swift
+//  Timer.swift
 //  WYBasisKit
 //
-//  Created by Jacke·xu on 2020/8/29.
-//  Copyright © 2020 Jacke·xu. All rights reserved.
+//  Created by Miraitowa on 2022/2/8.
+//  Copyright © 2022 Jacke·xu. All rights reserved.
 //
 
 import UIKit
+
+public extension Timer {
+    
+}
 
 public class WYTimer {
     
@@ -112,14 +116,14 @@ public class WYTimer {
         
         if (timer != nil) {
             
-            UserDefaults.standard.set(Date(), forKey: "stopRunTime")
+            UserDefaults.standard.set(Date(), forKey: "wy_stopRunTime")
             UserDefaults.standard.synchronize()
         }
     }
     
     @objc private func wy_didBecomeActive() {
         
-        let lastRunTime = UserDefaults.standard.object(forKey: "stopRunTime")
+        let lastRunTime = UserDefaults.standard.object(forKey: "wy_stopRunTime")
         if ((lastRunTime != nil) && (timer != nil)) {
             
             let stopRunTime = lastRunTime as! Date
@@ -128,7 +132,7 @@ public class WYTimer {
             
             totalSeconds -= different
             
-            UserDefaults.standard.removeObject(forKey: "stopRunTime")
+            UserDefaults.standard.removeObject(forKey: "wy_stopRunTime")
             UserDefaults.standard.synchronize()
             
             if totalSeconds > 0 {

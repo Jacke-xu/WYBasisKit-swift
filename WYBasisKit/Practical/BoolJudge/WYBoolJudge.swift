@@ -20,15 +20,28 @@ public struct WYBoolJudge {
     }
     
     /// 检测手机号合法性
-    public static func wy_isValidPhoneNumber(_ phoneNumber: String, _ countryCode: String = WYBasisKitConfig.countryCode) -> Bool {
+    public static func wy_isValidPhoneNumber(_ phoneNumber: String, _ countryCode: String = "86") -> Bool {
         
         if phoneNumber.isEmpty || countryCode.isEmpty {
             return false
         }
         
+        /**
+         *  使用正则表达式替换自定字符
+         *  @param appointSymbol: 要替换的字符
+         *  @param replacement: 替换成什么字符
+         *  @param object: 需要处理的字符
+         */
+        func wy_replace(appointSymbol: String ,replacement: String, object: String) -> String {
+            let regex = try! NSRegularExpression(pattern: "[\(appointSymbol)]", options: [])
+            return regex.stringByReplacingMatches(in: object, options: [],
+                                                  range: NSMakeRange(0, object.count),
+                                                  withTemplate: replacement)
+        }
+        
         let phoneCode: String = phoneNumber
         let phoneUtil = NBPhoneNumberUtil()
-        let new_countryCode: NSNumber = NSNumber(value: Int((countryCode.wy_replace(appointSymbol: "+", replacement: "")))!)
+        let new_countryCode: NSNumber = NSNumber(value: Int((wy_replace(appointSymbol: "+", replacement: "", object: countryCode)))!)
         
         do {
             let nb_phoneNumber: NBPhoneNumber = try phoneUtil.parse(phoneCode, defaultRegion: phoneUtil.getRegionCode(forCountryCode: new_countryCode))
