@@ -61,7 +61,8 @@ public enum WYNetworkStatus {
 public enum WYMappingKey {
     case message, code, data
 }
-/// 网络请求解析模型
+
+/// 网络请求解析对象
 public struct WYResponse: HandyJSON {
     
     public var message: String? = ""
