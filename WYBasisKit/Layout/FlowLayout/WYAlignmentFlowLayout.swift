@@ -8,7 +8,7 @@
 
 import UIKit
 
-/// UICollectionFlowLayoutAlignment
+/// 瀑布流对齐方式
 public enum WYFlowLayoutAlignment {
     
     /// 左对齐
@@ -34,6 +34,15 @@ public class WYAlignmentFlowLayout: UICollectionViewFlowLayout {
     
     /** delegate */
     public weak var delegate: WYAlignmentFlowLayoutDelegate?
+    
+    /// 最大能显示的宽度，默认屏幕宽度
+    public var flowLayoutMaxWidth: CGFloat = UIScreen.main.bounds.size.width
+    
+    /// 换行显示，即当控件所需宽度超过 flowLayoutMaxWidth 时，最多能显示几行, 默认只显示一行, 传入0时表示无限换行
+    public var flowLayoutNumberOfLines: NSInteger = 1;
+    
+    /// 每换一行新增的高度， 默认0
+    public var flowLayoutWrapHeight: CGFloat = 0
     
     /// 在居中对齐的时候需要知道这行所有cell的宽度总和
     private(set) var wy_cellTotalWidth: CGFloat = 0.0
@@ -95,7 +104,7 @@ public class WYAlignmentFlowLayout: UICollectionViewFlowLayout {
                 let attributes = layoutAttributes[index]
                 var nowFrame = attributes.frame
                 nowFrame.origin.x = nowWidth - nowFrame.size.width
-                attributes.frame = nowFrame
+                attributes.frame = calculateWrapHeight(attributes: &nowFrame)
                 nowWidth = nowWidth - nowFrame.size.width - minimumInteritemSpacing
             }
             break
@@ -104,10 +113,25 @@ public class WYAlignmentFlowLayout: UICollectionViewFlowLayout {
             for attributes in layoutAttributes {
                 var nowFrame = attributes.frame
                 nowFrame.origin.x = nowWidth
-                attributes.frame = nowFrame
+                attributes.frame = calculateWrapHeight(attributes: &nowFrame)
                 nowWidth += nowFrame.size.width + minimumInteritemSpacing
             }
             break
         }
+    }
+    
+    /// 调整换行显示时的高度
+    private func calculateWrapHeight(attributes: inout CGRect) -> CGRect {
+        
+        if attributes.size.width > flowLayoutMaxWidth {
+            if flowLayoutNumberOfLines == 1 {
+                attributes.size.width = flowLayoutMaxWidth
+            }else {
+                let numberOfLines: NSInteger = (flowLayoutNumberOfLines == 0) ? NSInteger(ceil(Double(attributes.size.width) / Double(flowLayoutMaxWidth))) : flowLayoutNumberOfLines
+                
+                attributes.size.height = attributes.size.height + (flowLayoutWrapHeight + CGFloat(numberOfLines - 1))
+            }
+        }
+        return attributes
     }
 }
