@@ -66,54 +66,6 @@ public extension String {
         return CGSize(width: ceil(stringSize.width), height: ceil(stringSize.height))
     }
     
-    /// 获取每行显示的字符串
-    func wy_stringPerLine(font: UIFont, controlWidth: CGFloat, wordsSpacing: CGFloat = 0) -> [String] {
-        
-        if self.isEmpty {
-            return []
-        }
-        
-        let myFont = CTFontCreateUIFontForLanguage(.system, font.pointSize, font.fontName as CFString)
-        
-        let attStr = NSMutableAttributedString(string: self)
-        
-        attStr.addAttribute(kCTFontAttributeName as NSAttributedString.Key, value: myFont as Any, range: NSMakeRange(0, attStr.length))
-        
-        let selfStr: NSString = attStr.string as NSString
-        attStr.addAttributes([NSAttributedString.Key.kern: NSNumber(value: Double(wordsSpacing))], range: selfStr.range(of: attStr.string))
-        
-        let frameSetter: CTFramesetter = CTFramesetterCreateWithAttributedString(attStr)
-        
-        let path: CGMutablePath = CGMutablePath()
-        
-        path.addRect(CGRect(x: 0, y: 0, width: controlWidth, height: CGFloat.greatestFiniteMagnitude))
-        
-        let frame: CTFrame = CTFramesetterCreateFrame(frameSetter, CFRangeMake(0, 0), path, nil)
-        
-        let lines = CTFrameGetLines(frame) as Array
-        
-        var linesArray = [String]()
-        
-        for line in lines {
-            let lineRef: CTLine = line as! CTLine
-            let lineRange: CFRange = CTLineGetStringRange(lineRef)
-            let range: NSRange = NSMakeRange(lineRange.location, lineRange.length)
-            
-            let prefixIndex = self.index(self.startIndex, offsetBy: range.location)
-            let suffixIndex = self.index(self.startIndex, offsetBy: range.location + range.length - 1)
-            let subStr = String(self[prefixIndex...suffixIndex])
-            
-            linesArray.append(subStr)
-        }
-        
-        return linesArray
-    }
-    
-    /// 判断字符串显示完毕需要几行
-    func wy_numberOfRows(font: UIFont, controlWidth: CGFloat, wordsSpacing: CGFloat = 0) -> NSInteger {
-        return wy_stringPerLine(font: font, controlWidth: controlWidth, wordsSpacing: wordsSpacing).count
-    }
-    
     /// 判断字符串包含某个字符串
     func wy_stringContains(find: String) -> Bool{
         return self.range(of: find) != nil

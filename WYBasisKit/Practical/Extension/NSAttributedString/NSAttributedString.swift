@@ -145,21 +145,57 @@ extension NSAttributedString {
     
     /// 计算富文本宽度
     func wy_calculateWidth(controlHeight: CGFloat) -> CGFloat {
-        
         return wy_calculateSize(controlSize: CGSize(width: .greatestFiniteMagnitude, height: controlHeight)).width
     }
     
     /// 计算富文本高度
     func wy_calculateHeight(controlWidth: CGFloat) -> CGFloat {
-        
         return wy_calculateSize(controlSize: CGSize(width: controlWidth, height: .greatestFiniteMagnitude)).height
     }
     
     /// 计算富文本宽高
     func wy_calculateSize(controlSize: CGSize) -> CGSize {
-        
         let attributedSize = boundingRect(with: controlSize, options: [.truncatesLastVisibleLine, .usesLineFragmentOrigin, .usesFontLeading], context: nil)
         
         return CGSize(width: ceil(attributedSize.width), height: ceil(attributedSize.height))
+    }
+    
+    /// 获取每行显示的字符串(为了计算准确，尽量将使用到的属性如字间距、缩进、换行模式、字体等设置到调用本方法的attributedString对象中来, 没有用到的直接忽略)
+    func wy_stringPerLine(controlWidth: CGFloat) -> [String] {
+        
+        if self.string.isEmpty {
+            return []
+        }
+        
+        let frameSetter: CTFramesetter = CTFramesetterCreateWithAttributedString(self)
+        
+        let path: CGMutablePath = CGMutablePath()
+        
+        path.addRect(CGRect(x: 0, y: 0, width: controlWidth, height: CGFloat.greatestFiniteMagnitude))
+        
+        let frame: CTFrame = CTFramesetterCreateFrame(frameSetter, CFRangeMake(0, 0), path, nil)
+        
+        let lines = CTFrameGetLines(frame) as Array
+        
+        var linesArray = [String]()
+        
+        for line in lines {
+            let lineRef: CTLine = line as! CTLine
+            let lineRange: CFRange = CTLineGetStringRange(lineRef)
+            let range: NSRange = NSMakeRange(lineRange.location, lineRange.length)
+            
+            let prefixIndex = self.string.index(self.string.startIndex, offsetBy: range.location)
+            let suffixIndex = self.string.index(self.string.startIndex, offsetBy: range.location + range.length - 1)
+            let subStr = String(self.string[prefixIndex...suffixIndex])
+            
+            linesArray.append(subStr)
+        }
+        
+        return linesArray
+    }
+    
+    /// 判断字符串显示完毕需要几行(为了计算准确，尽量将使用到的属性如字间距、缩进、换行模式、字体等设置到调用本方法的attributedString对象中来, 没有用到的直接忽略)
+    func wy_numberOfRows(controlWidth: CGFloat) -> NSInteger {
+        return wy_stringPerLine(controlWidth: controlWidth).count
     }
 }

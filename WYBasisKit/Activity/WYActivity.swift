@@ -717,9 +717,7 @@ private extension WYActivity {
         guard contentLabel.attributedText?.string.isEmpty == false else {
             return 0
         }
-        let textfont: UIFont = contentLabel.attributedText?.attribute(NSAttributedString.Key.font, at: 0, effectiveRange: nil) as? UIFont ?? defaultFont
-
-        let numberOfLines: NSInteger = contentLabel.attributedText?.string.wy_numberOfRows(font: textfont, controlWidth: (controlWidth > 0 ? controlWidth : contentLabel.frame.size.width), wordsSpacing: 1) ?? 1
+        let numberOfLines: NSInteger = contentLabel.attributedText?.wy_numberOfRows(controlWidth: (controlWidth > 0 ? controlWidth : contentLabel.frame.size.width)) ?? 1
 
         return numberOfLines
     }

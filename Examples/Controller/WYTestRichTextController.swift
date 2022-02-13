@@ -13,7 +13,7 @@ class WYTestRichTextController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .white
+        view.backgroundColor = .wy_random
         
         // Do any additional setup after loading the view.
         let label = UILabel()
@@ -59,7 +59,7 @@ class WYTestRichTextController: UIViewController {
             make.bottom.equalToSuperview().offset(-150)
         }
         
-        wy_print("每行显示的分别是 \(String(describing: label.text?.wy_stringPerLine(font: label.font, controlWidth: wy_screenWidth))), 一共 \(String(describing: label.text?.wy_numberOfRows(font: label.font, controlWidth: wy_screenWidth))) 行")
+        wy_print("每行显示的分别是 \(String(describing: label.attributedText?.wy_stringPerLine(controlWidth: wy_screenWidth))), 一共 \(String(describing: label.attributedText?.wy_numberOfRows(controlWidth: wy_screenWidth))) 行")
     }
     
     deinit {
