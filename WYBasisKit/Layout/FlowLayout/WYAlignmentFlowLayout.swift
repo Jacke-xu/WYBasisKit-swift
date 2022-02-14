@@ -28,7 +28,7 @@ public enum WYFlowLayoutAlignment {
 }
 
 public class WYAlignmentFlowLayout: UICollectionViewFlowLayout {
-
+    
     /// cell对齐方式
     public var wy_layoutAlignment: WYFlowLayoutAlignment = .center
     
@@ -45,7 +45,10 @@ public class WYAlignmentFlowLayout: UICollectionViewFlowLayout {
     public var flowLayoutWrapHeight: CGFloat = 0
     
     /// 在居中对齐的时候需要知道这行所有cell的宽度总和
-    private(set) var wy_cellTotalWidth: CGFloat = 0.0
+    private var wy_cellTotalWidth: CGFloat = 0.0
+    
+    /// 记录换行新增的高度
+    private var wy_cellAddHeight: CGFloat = 0.0
     
     public convenience init(_ layoutAlignment: WYFlowLayoutAlignment, delegate: WYAlignmentFlowLayoutDelegate? = nil){
         self.init()
@@ -64,7 +67,7 @@ public class WYAlignmentFlowLayout: UICollectionViewFlowLayout {
             let currentAttr = layoutAttributes[index]
             let previousAttr = index == 0 ? nil : layoutAttributes[index-1]
             let nextAttr = index + 1 == layoutAttributes.count ?
-                nil : layoutAttributes[index+1]
+            nil : layoutAttributes[index+1]
             
             layoutAttributes_t.append(currentAttr)
             wy_cellTotalWidth += currentAttr.frame.size.width
@@ -74,6 +77,7 @@ public class WYAlignmentFlowLayout: UICollectionViewFlowLayout {
             let nextY:CGFloat = nextAttr == nil ? 0 : nextAttr!.frame.maxY
             
             if currentY != previousY && currentY != nextY {
+                // 如果当前cell是单独一行
                 if ((currentAttr.representedElementKind == UICollectionView.elementKindSectionHeader) || (currentAttr.representedElementKind == UICollectionView.elementKindSectionFooter)) {
                     layoutAttributes_t.removeAll()
                     wy_cellTotalWidth = 0.0
@@ -83,12 +87,18 @@ public class WYAlignmentFlowLayout: UICollectionViewFlowLayout {
                     wy_cellTotalWidth = 0.0
                 }
             }else if currentY != nextY {
+                // 如果下一个cell在本行，这开始调整frame位置
                 updateCellAttributes(layoutAttributes: layoutAttributes_t)
                 layoutAttributes_t.removeAll()
                 wy_cellTotalWidth = 0.0
                 numberOfLines += 1
                 delegate?.alignmentFlowLayout?(self, numberOfLines: numberOfLines)
             }
+            
+            // 从新计算下一个cell的原点
+            var nextlayoutAttributesFrame: CGRect = nextAttr?.frame ?? .zero
+            nextlayoutAttributesFrame.origin.y = nextlayoutAttributesFrame.origin.y + wy_cellAddHeight
+            nextAttr?.frame = nextlayoutAttributesFrame;
         }
         return layoutAttributes
     }
@@ -124,13 +134,19 @@ public class WYAlignmentFlowLayout: UICollectionViewFlowLayout {
     private func calculateWrapHeight(attributes: inout CGRect) -> CGRect {
         
         if attributes.size.width > flowLayoutMaxWidth {
-            if flowLayoutNumberOfLines == 1 {
-                attributes.size.width = flowLayoutMaxWidth
-            }else {
-                let numberOfLines: NSInteger = (flowLayoutNumberOfLines == 0) ? NSInteger(ceil(Double(attributes.size.width) / Double(flowLayoutMaxWidth))) : flowLayoutNumberOfLines
+            if flowLayoutNumberOfLines != 1 {
                 
-                attributes.size.height = attributes.size.height + (flowLayoutWrapHeight + CGFloat(numberOfLines - 1))
+                let maxNumberOfLines: NSInteger = NSInteger(ceil(Double(attributes.size.width) / Double(flowLayoutMaxWidth)))
+                
+                let numberOfLines: NSInteger = (flowLayoutNumberOfLines == 0) ? maxNumberOfLines : ((maxNumberOfLines > flowLayoutNumberOfLines) ? flowLayoutNumberOfLines : maxNumberOfLines)
+                
+                let addHeight: CGFloat = (flowLayoutWrapHeight * CGFloat(numberOfLines - 1))
+                
+                attributes.size.height = attributes.size.height + addHeight
+                
+                wy_cellAddHeight = wy_cellAddHeight + addHeight
             }
+            attributes.size.width = flowLayoutMaxWidth
         }
         return attributes
     }
