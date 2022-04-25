@@ -90,6 +90,8 @@
 		DC94950328151D3E005AE3F7 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC94950228151D3E005AE3F7 /* CoreServices.framework */; };
 		DC94950628152FAD005AE3F7 /* Bool.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC94950528152FAD005AE3F7 /* Bool.swift */; };
 		DC94975528164339005AE3F7 /* Pods_WYBasisKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03E27E8906E5FB4F134A5419 /* Pods_WYBasisKit.framework */; };
+		DC94977328169103005AE3F7 /* WYLivePlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC94977128169103005AE3F7 /* WYLivePlayer.swift */; };
+		DC94977428169103005AE3F7 /* IJKMediaFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC94977228169103005AE3F7 /* IJKMediaFramework.framework */; };
 		DCB90A7827AE3A8A001DCA82 /* Foundation+JSONLog.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB90A7727AE3A8A001DCA82 /* Foundation+JSONLog.m */; };
 /* End PBXBuildFile section */
 
@@ -188,6 +190,8 @@
 		DC94950228151D3E005AE3F7 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
 		DC94950528152FAD005AE3F7 /* Bool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bool.swift; sourceTree = "<group>"; };
 		DC94974D2816366A005AE3F7 /* Pods_WYBasisKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_WYBasisKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DC94977128169103005AE3F7 /* WYLivePlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYLivePlayer.swift; sourceTree = "<group>"; };
+		DC94977228169103005AE3F7 /* IJKMediaFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = IJKMediaFramework.framework; sourceTree = "<group>"; };
 		DCB90A7727AE3A8A001DCA82 /* Foundation+JSONLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Foundation+JSONLog.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -199,6 +203,7 @@
 				DC94975528164339005AE3F7 /* Pods_WYBasisKit.framework in Frameworks */,
 				DC94950328151D3E005AE3F7 /* CoreServices.framework in Frameworks */,
 				DC9494FC281107E8005AE3F7 /* VideoToolbox.framework in Frameworks */,
+				DC94977428169103005AE3F7 /* IJKMediaFramework.framework in Frameworks */,
 				DC9494FA281107D7005AE3F7 /* QuartzCore.framework in Frameworks */,
 				DC9494F8281107CC005AE3F7 /* OpenGLES.framework in Frameworks */,
 				DC9494F4281107B3005AE3F7 /* MediaPlayer.framework in Frameworks */,
@@ -346,6 +351,7 @@
 				AAA9E5E126DB3B68009C064B /* Activity */,
 				DC4D24C7271FF756005FFE21 /* Storage */,
 				AA771BF62568F91F002C748B /* Extension */,
+				DC94977028169103005AE3F7 /* LivePlayer */,
 				AAE2E0F726AD7F740077B770 /* Localizable */,
 				AA771BC02568F834002C748B /* Networking */,
 				1F24689725B13D9D00E02F78 /* Other */,
@@ -642,6 +648,15 @@
 			path = Bool;
 			sourceTree = "<group>";
 		};
+		DC94977028169103005AE3F7 /* LivePlayer */ = {
+			isa = PBXGroup;
+			children = (
+				DC94977128169103005AE3F7 /* WYLivePlayer.swift */,
+				DC94977228169103005AE3F7 /* IJKMediaFramework.framework */,
+			);
+			path = LivePlayer;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -807,6 +822,7 @@
 				DC1AA72327AD481200D525D2 /* WYQRCodeController.swift in Sources */,
 				AA771BE42568F834002C748B /* UITextField.swift in Sources */,
 				DC94950628152FAD005AE3F7 /* Bool.swift in Sources */,
+				DC94977328169103005AE3F7 /* WYLivePlayer.swift in Sources */,
 				AAC6B38F26916E6E00D90D15 /* WYTableViewPlainController.swift in Sources */,
 				DCB90A7827AE3A8A001DCA82 /* Foundation+JSONLog.m in Sources */,
 				AA771BD72568F834002C748B /* UINavigationController.swift in Sources */,
