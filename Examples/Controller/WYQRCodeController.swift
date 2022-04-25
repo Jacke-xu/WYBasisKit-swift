@@ -2,7 +2,7 @@
 //  WYQRCodeController.swift
 //  WYBasisKit
 //
-//  Created by Miraitowa on 2022/2/4.
+//  Created by jacke·xu on 2022/2/4.
 //  Copyright © 2022 Jacke·xu. All rights reserved.
 //
 

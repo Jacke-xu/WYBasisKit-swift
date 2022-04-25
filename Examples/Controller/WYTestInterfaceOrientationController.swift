@@ -2,7 +2,7 @@
 //  WYTestInterfaceOrientationController.swift
 //  WYBasisKit
 //
-//  Created by Miraitowa on 2021/12/23.
+//  Created by jacke·xu on 2021/12/23.
 //  Copyright © 2021 Jacke·xu. All rights reserved.
 //
 

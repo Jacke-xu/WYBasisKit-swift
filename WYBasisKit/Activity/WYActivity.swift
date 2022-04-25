@@ -74,13 +74,9 @@ public struct WYActivityConfig {
     public static var loadingTextFont: UIFont = .boldSystemFont(ofSize: 15)
     public var loadingTextFont: UIFont = loadingTextFont
 
-    /// 设置Loading提示窗口动图
-    public static var loadingImages: [UIImage] = defaultLoadingImages()
-    public var loadingImages: [UIImage] = loadingImages
-
-    /// 设置Loading提示窗口 WYActivityAnimation.gifImage 每一帧动画的间隔时间
-    public static var gifImageDuration: TimeInterval = 0.4
-    public var gifImageDuration: TimeInterval = gifImageDuration
+    /// 设置Loading提示窗口动图信息
+    public static var gifInfo: WYGifInfo = defaultGifInfo()
+    public var gifInfo: WYGifInfo = gifInfo
 
     /// 设置Loading提示窗口 indicator 的颜色
     public static var indicatorColor: UIColor = .white
@@ -101,16 +97,16 @@ public struct WYActivityConfig {
     public static let info: WYActivityConfig = WYActivityConfig(infoBackgroundColor: infoBackgroundColor, infoTextColor: infoTextColor, infoTextFont: infoTextFont)
 
     /// Loading提示窗口默认配置
-    public static let loading: WYActivityConfig = WYActivityConfig(loadingBackgroundColor: loadingBackgroundColor, loadingTextColor: loadingTextColor, loadingTextFont: loadingTextFont, loadingImages: loadingImages, gifImageDuration: gifImageDuration, indicatorColor: indicatorColor, loadingNumberOfLines: loadingNumberOfLines, animationSize: animationSize)
+    public static let loading: WYActivityConfig = WYActivityConfig(loadingBackgroundColor: loadingBackgroundColor, loadingTextColor: loadingTextColor, loadingTextFont: loadingTextFont, gifInfo: gifInfo, indicatorColor: indicatorColor, loadingNumberOfLines: loadingNumberOfLines, animationSize: animationSize)
 
     /// 获取Loading提示窗口默认动图
-    private static func defaultLoadingImages() -> [UIImage] {
+    private static func defaultGifInfo() -> WYGifInfo {
 
         var defaultImages: [UIImage] = []
         for index in 0..<5 {
             defaultImages.append(UIImage.wy_named("loading" + "\(index + 1)", inBundle: "WYActivity", subdirectory: "LoadingState"))
         }
-        return defaultImages
+        return WYGifInfo(animationImages: defaultImages, animationDuration: 0.4)
     }
 }
 
@@ -509,8 +505,9 @@ private class WYActivityLoadingView: UIView {
 
             initialLayout(subContro: imageView, contentView: contentView, subControSize: config.animationSize)
 
-            imageView.animationDuration = config.gifImageDuration
-            imageView.animationImages = config.loadingImages
+            imageView.animationDuration = config.gifInfo.animationDuration
+            imageView.animationImages = config.gifInfo.animationImages
+            imageView.animationRepeatCount = 0
             imageView.startAnimating()
 
             break

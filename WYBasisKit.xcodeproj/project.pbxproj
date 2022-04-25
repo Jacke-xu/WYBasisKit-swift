@@ -24,7 +24,6 @@
 		1F9717FE25B55CB600CA7A33 /* WYWaterfallsFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9717FD25B55CB600CA7A33 /* WYWaterfallsFlowLayout.swift */; };
 		1F99DCC8257DCFAE003D2408 /* WYPagingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F99DCC7257DCFAE003D2408 /* WYPagingView.swift */; };
 		1FA6B68B25CD1B3400005170 /* WYWaterfallParagraphLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA6B68A25CD1B3400005170 /* WYWaterfallParagraphLayout.swift */; };
-		278FF4A8C0F49629ADC8E0FB /* Pods_WYBasisKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6038257BCBDA65021463BC7 /* Pods_WYBasisKit.framework */; };
 		AA0B8849270989CB006F26C8 /* WYTestDownloadController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0B8848270989CB006F26C8 /* WYTestDownloadController.swift */; };
 		AA2827B426BFCF7A00EB9DBC /* WYLocalizable.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AA2827B326BFCF7A00EB9DBC /* WYLocalizable.bundle */; };
 		AA327F032569179F00CF5CBE /* WYBasisKitConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA327F022569179F00CF5CBE /* WYBasisKitConfig.swift */; };
@@ -49,7 +48,6 @@
 		AA771BE32568F834002C748B /* UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA771BBD2568F834002C748B /* UITableView.swift */; };
 		AA771BE42568F834002C748B /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA771BBF2568F834002C748B /* UITextField.swift */; };
 		AA771BEA2568F834002C748B /* WYScrollText.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA771BC92568F834002C748B /* WYScrollText.swift */; };
-		AA771BEB2568F834002C748B /* WYBoolJudge.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA771BCB2568F834002C748B /* WYBoolJudge.swift */; };
 		AA9CF8232584B47B008A7DE1 /* WYLeftControllerHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9CF8222584B47B008A7DE1 /* WYLeftControllerHeaderView.swift */; };
 		AA9CF82A2584B97C008A7DE1 /* WYTestDarkNightModeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9CF8292584B97C008A7DE1 /* WYTestDarkNightModeController.swift */; };
 		AA9CF82D2584C262008A7DE1 /* WYTestAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9CF82C2584C262008A7DE1 /* WYTestAnimationController.swift */; };
@@ -66,16 +64,37 @@
 		AAEE9002265B9558003B1748 /* WYNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAEE9000265B9558003B1748 /* WYNetworkManager.swift */; };
 		AAEE9003265B9558003B1748 /* WYNetworkServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAEE9001265B9558003B1748 /* WYNetworkServer.swift */; };
 		AAF09E7426DA2E420063102C /* UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF09E7326DA2E410063102C /* UICollectionView.swift */; };
-		AAF09E7E26DA573C0063102C /* WYRefresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF09E7D26DA573C0063102C /* WYRefresh.swift */; };
 		DC1AA72327AD481200D525D2 /* WYQRCodeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1AA72227AD481100D525D2 /* WYQRCodeController.swift */; };
+		DC26165227FE9AB000C485C1 /* WYParseGifController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC26165127FE9AB000C485C1 /* WYParseGifController.swift */; };
+		DC26165527FE9C2D00C485C1 /* 动图1.gif in Resources */ = {isa = PBXBuildFile; fileRef = DC26165327FE9C2D00C485C1 /* 动图1.gif */; };
+		DC26165627FE9C2D00C485C1 /* 动图2.gif in Resources */ = {isa = PBXBuildFile; fileRef = DC26165427FE9C2D00C485C1 /* 动图2.gif */; };
 		DC3E0CE92727979D003CB61E /* WYTestRequestController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC3E0CE82727979D003CB61E /* WYTestRequestController.swift */; };
 		DC4D24BD271D55A1005FFE21 /* WYStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4D24BC271D55A1005FFE21 /* WYStorage.swift */; };
 		DC5BC14627745FC300B0D741 /* WYTestInterfaceOrientationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5BC14527745FC300B0D741 /* WYTestInterfaceOrientationController.swift */; };
-		DC6C85F427B2110400571E41 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6C85F327B2110400571E41 /* Timer.swift */; };
+		DC71E7ED2807C59500F070B0 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC71E7EC2807C59500F070B0 /* Timer.swift */; };
+		DC71E7EF2807EDED00F070B0 /* WYFlowLayoutAlignmentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC71E7EE2807EDED00F070B0 /* WYFlowLayoutAlignmentController.swift */; };
+		DC9494E0281102C0005AE3F7 /* WYTestLiveStreamingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9494DF281102C0005AE3F7 /* WYTestLiveStreamingController.swift */; };
+		DC9494E228110746005AE3F7 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = DC9494E128110746005AE3F7 /* libc++.tbd */; };
+		DC9494E428110753005AE3F7 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = DC9494E328110753005AE3F7 /* libz.tbd */; };
+		DC9494E628110760005AE3F7 /* libbz2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = DC9494E528110760005AE3F7 /* libbz2.tbd */; };
+		DC9494E828110770005AE3F7 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC9494E728110770005AE3F7 /* AudioToolbox.framework */; };
+		DC9494EA2811077A005AE3F7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC9494E92811077A005AE3F7 /* UIKit.framework */; };
+		DC9494EC28110785005AE3F7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC9494EB28110785005AE3F7 /* CoreGraphics.framework */; };
+		DC9494EE2811078F005AE3F7 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC9494ED2811078F005AE3F7 /* AVFoundation.framework */; };
+		DC9494F02811079A005AE3F7 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC9494EF2811079A005AE3F7 /* CoreMedia.framework */; };
+		DC9494F2281107A8005AE3F7 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC9494F1281107A8005AE3F7 /* CoreVideo.framework */; };
+		DC9494F4281107B3005AE3F7 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC9494F3281107B3005AE3F7 /* MediaPlayer.framework */; };
+		DC9494F8281107CC005AE3F7 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC9494F7281107CC005AE3F7 /* OpenGLES.framework */; };
+		DC9494FA281107D7005AE3F7 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC9494F9281107D7005AE3F7 /* QuartzCore.framework */; };
+		DC9494FC281107E8005AE3F7 /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC9494FB281107E8005AE3F7 /* VideoToolbox.framework */; };
+		DC94950328151D3E005AE3F7 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC94950228151D3E005AE3F7 /* CoreServices.framework */; };
+		DC94950628152FAD005AE3F7 /* Bool.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC94950528152FAD005AE3F7 /* Bool.swift */; };
+		DC94975528164339005AE3F7 /* Pods_WYBasisKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03E27E8906E5FB4F134A5419 /* Pods_WYBasisKit.framework */; };
 		DCB90A7827AE3A8A001DCA82 /* Foundation+JSONLog.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB90A7727AE3A8A001DCA82 /* Foundation+JSONLog.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		03E27E8906E5FB4F134A5419 /* Pods_WYBasisKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WYBasisKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F04CF5925820501002B8B11 /* WYTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYTestView.swift; sourceTree = "<group>"; };
 		1F24689925B13DB700E02F78 /* WYProtocolManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYProtocolManager.swift; sourceTree = "<group>"; };
 		1F24689E25B13DFB00E02F78 /* WYAlignmentFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYAlignmentFlowLayout.swift; sourceTree = "<group>"; };
@@ -124,7 +143,6 @@
 		AA771BBD2568F834002C748B /* UITableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITableView.swift; sourceTree = "<group>"; };
 		AA771BBF2568F834002C748B /* UITextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
 		AA771BC92568F834002C748B /* WYScrollText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYScrollText.swift; sourceTree = "<group>"; };
-		AA771BCB2568F834002C748B /* WYBoolJudge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYBoolJudge.swift; sourceTree = "<group>"; };
 		AA771C1E25691483002C748B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		AA771C2B25691494002C748B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		AA9CF8222584B47B008A7DE1 /* WYLeftControllerHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYLeftControllerHeaderView.swift; sourceTree = "<group>"; };
@@ -143,13 +161,33 @@
 		AAEE9000265B9558003B1748 /* WYNetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYNetworkManager.swift; sourceTree = "<group>"; };
 		AAEE9001265B9558003B1748 /* WYNetworkServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYNetworkServer.swift; sourceTree = "<group>"; };
 		AAF09E7326DA2E410063102C /* UICollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionView.swift; sourceTree = "<group>"; };
-		AAF09E7D26DA573C0063102C /* WYRefresh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYRefresh.swift; sourceTree = "<group>"; };
-		C6038257BCBDA65021463BC7 /* Pods_WYBasisKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WYBasisKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC1AA72227AD481100D525D2 /* WYQRCodeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYQRCodeController.swift; sourceTree = "<group>"; };
+		DC26165127FE9AB000C485C1 /* WYParseGifController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYParseGifController.swift; sourceTree = "<group>"; };
+		DC26165327FE9C2D00C485C1 /* 动图1.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "动图1.gif"; sourceTree = "<group>"; };
+		DC26165427FE9C2D00C485C1 /* 动图2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "动图2.gif"; sourceTree = "<group>"; };
 		DC3E0CE82727979D003CB61E /* WYTestRequestController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYTestRequestController.swift; sourceTree = "<group>"; };
 		DC4D24BC271D55A1005FFE21 /* WYStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYStorage.swift; sourceTree = "<group>"; };
 		DC5BC14527745FC300B0D741 /* WYTestInterfaceOrientationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYTestInterfaceOrientationController.swift; sourceTree = "<group>"; };
-		DC6C85F327B2110400571E41 /* Timer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
+		DC71E7EC2807C59500F070B0 /* Timer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
+		DC71E7EE2807EDED00F070B0 /* WYFlowLayoutAlignmentController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYFlowLayoutAlignmentController.swift; sourceTree = "<group>"; };
+		DC9494DF281102C0005AE3F7 /* WYTestLiveStreamingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYTestLiveStreamingController.swift; sourceTree = "<group>"; };
+		DC9494E128110746005AE3F7 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		DC9494E328110753005AE3F7 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		DC9494E528110760005AE3F7 /* libbz2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libbz2.tbd; path = usr/lib/libbz2.tbd; sourceTree = SDKROOT; };
+		DC9494E728110770005AE3F7 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		DC9494E92811077A005AE3F7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		DC9494EB28110785005AE3F7 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		DC9494ED2811078F005AE3F7 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		DC9494EF2811079A005AE3F7 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		DC9494F1281107A8005AE3F7 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		DC9494F3281107B3005AE3F7 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		DC9494F5281107C1005AE3F7 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		DC9494F7281107CC005AE3F7 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		DC9494F9281107D7005AE3F7 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		DC9494FB281107E8005AE3F7 /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
+		DC94950228151D3E005AE3F7 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
+		DC94950528152FAD005AE3F7 /* Bool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bool.swift; sourceTree = "<group>"; };
+		DC94974D2816366A005AE3F7 /* Pods_WYBasisKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_WYBasisKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCB90A7727AE3A8A001DCA82 /* Foundation+JSONLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Foundation+JSONLog.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -158,7 +196,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				278FF4A8C0F49629ADC8E0FB /* Pods_WYBasisKit.framework in Frameworks */,
+				DC94975528164339005AE3F7 /* Pods_WYBasisKit.framework in Frameworks */,
+				DC94950328151D3E005AE3F7 /* CoreServices.framework in Frameworks */,
+				DC9494FC281107E8005AE3F7 /* VideoToolbox.framework in Frameworks */,
+				DC9494FA281107D7005AE3F7 /* QuartzCore.framework in Frameworks */,
+				DC9494F8281107CC005AE3F7 /* OpenGLES.framework in Frameworks */,
+				DC9494F4281107B3005AE3F7 /* MediaPlayer.framework in Frameworks */,
+				DC9494F2281107A8005AE3F7 /* CoreVideo.framework in Frameworks */,
+				DC9494F02811079A005AE3F7 /* CoreMedia.framework in Frameworks */,
+				DC9494EE2811078F005AE3F7 /* AVFoundation.framework in Frameworks */,
+				DC9494EC28110785005AE3F7 /* CoreGraphics.framework in Frameworks */,
+				DC9494EA2811077A005AE3F7 /* UIKit.framework in Frameworks */,
+				DC9494E828110770005AE3F7 /* AudioToolbox.framework in Frameworks */,
+				DC9494E628110760005AE3F7 /* libbz2.tbd in Frameworks */,
+				DC9494E428110753005AE3F7 /* libz.tbd in Frameworks */,
+				DC9494E228110746005AE3F7 /* libc++.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -228,7 +280,23 @@
 		94F8A53F1CB5643B124486A8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				C6038257BCBDA65021463BC7 /* Pods_WYBasisKit.framework */,
+				DC94974D2816366A005AE3F7 /* Pods_WYBasisKit.framework */,
+				DC94950228151D3E005AE3F7 /* CoreServices.framework */,
+				DC9494FB281107E8005AE3F7 /* VideoToolbox.framework */,
+				DC9494F9281107D7005AE3F7 /* QuartzCore.framework */,
+				DC9494F7281107CC005AE3F7 /* OpenGLES.framework */,
+				DC9494F5281107C1005AE3F7 /* MobileCoreServices.framework */,
+				DC9494F3281107B3005AE3F7 /* MediaPlayer.framework */,
+				DC9494F1281107A8005AE3F7 /* CoreVideo.framework */,
+				DC9494EF2811079A005AE3F7 /* CoreMedia.framework */,
+				DC9494ED2811078F005AE3F7 /* AVFoundation.framework */,
+				DC9494EB28110785005AE3F7 /* CoreGraphics.framework */,
+				DC9494E92811077A005AE3F7 /* UIKit.framework */,
+				DC9494E728110770005AE3F7 /* AudioToolbox.framework */,
+				DC9494E528110760005AE3F7 /* libbz2.tbd */,
+				DC9494E328110753005AE3F7 /* libz.tbd */,
+				DC9494E128110746005AE3F7 /* libc++.tbd */,
+				03E27E8906E5FB4F134A5419 /* Pods_WYBasisKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -259,6 +327,8 @@
 				AA9CF8252584B74F008A7DE1 /* Controller */,
 				AA484EB224FA262100B39D60 /* AppDelegate.swift */,
 				1F5C3E4C25787E7D00E0DBFF /* WYTabBarController.swift */,
+				DC26165327FE9C2D00C485C1 /* 动图1.gif */,
+				DC26165427FE9C2D00C485C1 /* 动图2.gif */,
 				AA484EB824FA262100B39D60 /* Main.storyboard */,
 				AA484EBB24FA262500B39D60 /* Assets.xcassets */,
 				AA484EBD24FA262500B39D60 /* LaunchScreen.storyboard */,
@@ -275,22 +345,12 @@
 				AA771BB12568F834002C748B /* Layout */,
 				AAA9E5E126DB3B68009C064B /* Activity */,
 				DC4D24C7271FF756005FFE21 /* Storage */,
-				AA771B922568F834002C748B /* Practical */,
+				AA771BF62568F91F002C748B /* Extension */,
 				AAE2E0F726AD7F740077B770 /* Localizable */,
 				AA771BC02568F834002C748B /* Networking */,
 				1F24689725B13D9D00E02F78 /* Other */,
 			);
 			path = WYBasisKit;
-			sourceTree = "<group>";
-		};
-		AA771B922568F834002C748B /* Practical */ = {
-			isa = PBXGroup;
-			children = (
-				AA771BF62568F91F002C748B /* Extension */,
-				AAF09E6E26DA27C70063102C /* Refresh */,
-				AA771BCA2568F834002C748B /* BoolJudge */,
-			);
-			path = Practical;
 			sourceTree = "<group>";
 		};
 		AA771B932568F834002C748B /* UIImage */ = {
@@ -450,17 +510,10 @@
 			path = ScrollText;
 			sourceTree = "<group>";
 		};
-		AA771BCA2568F834002C748B /* BoolJudge */ = {
-			isa = PBXGroup;
-			children = (
-				AA771BCB2568F834002C748B /* WYBoolJudge.swift */,
-			);
-			path = BoolJudge;
-			sourceTree = "<group>";
-		};
 		AA771BF62568F91F002C748B /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				DC94950428152F9B005AE3F7 /* Bool */,
 				AAB2712626B571F300771549 /* Timer */,
 				AAE02B18267C61B400EF6D36 /* CALayer */,
 				AA771BB82568F834002C748B /* UIView */,
@@ -513,6 +566,9 @@
 				DC3E0CE82727979D003CB61E /* WYTestRequestController.swift */,
 				DC5BC14527745FC300B0D741 /* WYTestInterfaceOrientationController.swift */,
 				DC1AA72227AD481100D525D2 /* WYQRCodeController.swift */,
+				DC26165127FE9AB000C485C1 /* WYParseGifController.swift */,
+				DC71E7EE2807EDED00F070B0 /* WYFlowLayoutAlignmentController.swift */,
+				DC9494DF281102C0005AE3F7 /* WYTestLiveStreamingController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -540,7 +596,7 @@
 		AAB2712626B571F300771549 /* Timer */ = {
 			isa = PBXGroup;
 			children = (
-				DC6C85F327B2110400571E41 /* Timer.swift */,
+				DC71E7EC2807C59500F070B0 /* Timer.swift */,
 			);
 			path = Timer;
 			sourceTree = "<group>";
@@ -562,14 +618,6 @@
 			path = Localizable;
 			sourceTree = "<group>";
 		};
-		AAF09E6E26DA27C70063102C /* Refresh */ = {
-			isa = PBXGroup;
-			children = (
-				AAF09E7D26DA573C0063102C /* WYRefresh.swift */,
-			);
-			path = Refresh;
-			sourceTree = "<group>";
-		};
 		AAF09E7226DA2DEC0063102C /* UICollectionView */ = {
 			isa = PBXGroup;
 			children = (
@@ -586,6 +634,14 @@
 			path = Storage;
 			sourceTree = "<group>";
 		};
+		DC94950428152F9B005AE3F7 /* Bool */ = {
+			isa = PBXGroup;
+			children = (
+				DC94950528152FAD005AE3F7 /* Bool.swift */,
+			);
+			path = Bool;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -597,7 +653,7 @@
 				AA484EAB24FA262100B39D60 /* Sources */,
 				AA484EAC24FA262100B39D60 /* Frameworks */,
 				AA484EAD24FA262100B39D60 /* Resources */,
-				FABA86DA11D91221339EA8AD /* [CP] Embed Pods Frameworks */,
+				51682631C6DCD65DFDBF3B33 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -651,6 +707,8 @@
 			files = (
 				AAA9E5E926DB6569009C064B /* WYActivity.bundle in Resources */,
 				AA484EBF24FA262500B39D60 /* LaunchScreen.storyboard in Resources */,
+				DC26165527FE9C2D00C485C1 /* 动图1.gif in Resources */,
+				DC26165627FE9C2D00C485C1 /* 动图2.gif in Resources */,
 				AA484EBC24FA262500B39D60 /* Assets.xcassets in Resources */,
 				AAC3825A25A1874500B2D41C /* WYBannerView.bundle in Resources */,
 				AA484EBA24FA262100B39D60 /* Main.storyboard in Resources */,
@@ -661,6 +719,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		51682631C6DCD65DFDBF3B33 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-WYBasisKit/Pods-WYBasisKit-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-WYBasisKit/Pods-WYBasisKit-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-WYBasisKit/Pods-WYBasisKit-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		628FE432824F2B641BF911FF /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -683,23 +758,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		FABA86DA11D91221339EA8AD /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-WYBasisKit/Pods-WYBasisKit-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-WYBasisKit/Pods-WYBasisKit-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-WYBasisKit/Pods-WYBasisKit-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -710,7 +768,6 @@
 				1F4A0E49256B4A52002E932D /* WYNetworkConfig.swift in Sources */,
 				AA771BDE2568F834002C748B /* UILabel.swift in Sources */,
 				AA771BD42568F834002C748B /* UIFont.swift in Sources */,
-				DC6C85F427B2110400571E41 /* Timer.swift in Sources */,
 				AAC6B3952691706E00D90D15 /* WYTestTableViewFooterView.swift in Sources */,
 				AA771BD02568F834002C748B /* NSAttributedString.swift in Sources */,
 				1F5C3E5325787EC500E0DBFF /* WYCenterController.swift in Sources */,
@@ -741,23 +798,24 @@
 				AAF09E7426DA2E420063102C /* UICollectionView.swift in Sources */,
 				1F04CF5A25820501002B8B11 /* WYTestView.swift in Sources */,
 				AA771BD12568F834002C748B /* UIColor.swift in Sources */,
+				DC71E7EF2807EDED00F070B0 /* WYFlowLayoutAlignmentController.swift in Sources */,
 				AA9CF8232584B47B008A7DE1 /* WYLeftControllerHeaderView.swift in Sources */,
 				AAC6B3932691705D00D90D15 /* WYTestTableViewHeaderView.swift in Sources */,
+				DC71E7ED2807C59500F070B0 /* Timer.swift in Sources */,
 				AAB7BDE726257F3600BD57EC /* WYBannerView.swift in Sources */,
 				1F99DCC8257DCFAE003D2408 /* WYPagingView.swift in Sources */,
 				DC1AA72327AD481200D525D2 /* WYQRCodeController.swift in Sources */,
 				AA771BE42568F834002C748B /* UITextField.swift in Sources */,
+				DC94950628152FAD005AE3F7 /* Bool.swift in Sources */,
 				AAC6B38F26916E6E00D90D15 /* WYTableViewPlainController.swift in Sources */,
 				DCB90A7827AE3A8A001DCA82 /* Foundation+JSONLog.m in Sources */,
 				AA771BD72568F834002C748B /* UINavigationController.swift in Sources */,
 				1F2468A825B17B6C00E02F78 /* WYTestRichTextController.swift in Sources */,
 				AA484EB324FA262100B39D60 /* AppDelegate.swift in Sources */,
 				AA0B8849270989CB006F26C8 /* WYTestDownloadController.swift in Sources */,
-				AA771BEB2568F834002C748B /* WYBoolJudge.swift in Sources */,
 				1FA6B68B25CD1B3400005170 /* WYWaterfallParagraphLayout.swift in Sources */,
 				1F952EF825807ACE00F03251 /* WYConstMethod.swift in Sources */,
 				AA771BCF2568F834002C748B /* UIImage.swift in Sources */,
-				AAF09E7E26DA573C0063102C /* WYRefresh.swift in Sources */,
 				AA9CF82A2584B97C008A7DE1 /* WYTestDarkNightModeController.swift in Sources */,
 				1F9717FE25B55CB600CA7A33 /* WYWaterfallsFlowLayout.swift in Sources */,
 				AA9CF82D2584C262008A7DE1 /* WYTestAnimationController.swift in Sources */,
@@ -765,6 +823,8 @@
 				AA771BDB2568F834002C748B /* String.swift in Sources */,
 				AAEE9003265B9558003B1748 /* WYNetworkServer.swift in Sources */,
 				1F24689A25B13DB700E02F78 /* WYProtocolManager.swift in Sources */,
+				DC26165227FE9AB000C485C1 /* WYParseGifController.swift in Sources */,
+				DC9494E0281102C0005AE3F7 /* WYTestLiveStreamingController.swift in Sources */,
 				AA771BE02568F834002C748B /* UIButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -920,8 +980,15 @@
 				CODE_SIGN_ENTITLEMENTS = WYBasisKit/WYBasisKit.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3J5533TZC2;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/WYBasisKit/Other/LivePlayer",
+					"$(PROJECT_DIR)/WYBasisKit/LivePlayer",
+					"$(PROJECT_DIR)/WYBasisKit",
+					"$(PROJECT_DIR)/WYBasisKit/LivePlayer/IJKMediaFramework",
+				);
 				INFOPLIST_FILE = Examples/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -930,6 +997,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_OPTIMIZE_OBJECT_LIFETIME = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -944,8 +1012,15 @@
 				CODE_SIGN_ENTITLEMENTS = WYBasisKit/WYBasisKit.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3J5533TZC2;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/WYBasisKit/Other/LivePlayer",
+					"$(PROJECT_DIR)/WYBasisKit/LivePlayer",
+					"$(PROJECT_DIR)/WYBasisKit",
+					"$(PROJECT_DIR)/WYBasisKit/LivePlayer/IJKMediaFramework",
+				);
 				INFOPLIST_FILE = Examples/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -953,6 +1028,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Jacke-xu.WYBasisKit";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = NO;
+				SWIFT_OPTIMIZE_OBJECT_LIFETIME = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

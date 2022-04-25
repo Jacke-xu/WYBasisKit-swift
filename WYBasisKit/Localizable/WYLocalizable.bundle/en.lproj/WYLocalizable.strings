@@ -20,6 +20,9 @@
 "去授权" = "To authorize";
 "App没有访问相册的权限，现在去授权?" = "The app does not have permission to access the album, now go to authorize?";
 "App没有访问相机的权限，现在去授权?" = "The app does not have permission to access the camera. Do you want to authorize it now?";
+"App没有访问麦克风的权限，现在去授权?" = "App does not have permission to access the microphone, go to authorize now?"
+"App没有访问位置的权限，现在去授权?" = "App does not have permission to access location, go to authorize now?"
+"App没有访问通讯录的权限，现在去授权?" = "App does not have permission to access the address book, now go to authorize?"
 "继续连接" = "Continue";
 "取消连接" = "Cancel";
 "数据请求失败" = "Data request failed";

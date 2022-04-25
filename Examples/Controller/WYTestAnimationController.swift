@@ -20,25 +20,38 @@ class WYTestAnimationController: UIViewController {
         button.titleLabel?.numberOfLines = 0
         button.wy_setBackgroundColor(.orange, forState: .normal)
         view.addSubview(button)
-        button.addTarget(self, action: #selector(clickButton(sender:)), for: .touchUpInside)
         button.snp.makeConstraints { (make) in
-
             make.centerX.equalToSuperview()
             make.top.equalToSuperview().offset(100)
             make.size.equalTo(CGSize(width: 100, height: 100))
+        }
+        button.wy_addHandler(interval: 2, target: self, action: #selector(clickButton(sender:)))
+        
+        let testButton = UIButton(type: .custom)
+        testButton.backgroundColor = .wy_random
+        view.addSubview(testButton)
+        testButton.snp.makeConstraints { make in
+            make.centerX.bottom.equalToSuperview()
+            make.size.equalTo(button)
+        }
+        testButton.wy_addHandler(interval: 1) { _ in
+            wy_print("点击了按钮")
         }
     }
     
     @objc func clickButton(sender: UIButton) {
 
         /// 约束控件实现动画的关键是在animate方法中调用父视图的layoutIfNeeded方法
-        UIView.animate(withDuration: 2) {
+        UIView.animate(withDuration: 1) {
 
             sender.snp.updateConstraints { (make) in
-
                 make.top.equalToSuperview().offset(350)
             }
             sender.superview!.layoutIfNeeded()
+        }completion: { _ in
+            sender.snp.updateConstraints { (make) in
+                make.top.equalToSuperview().offset(100)
+            }
         }
     }
 

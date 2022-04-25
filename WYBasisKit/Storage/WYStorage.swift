@@ -138,7 +138,6 @@ public struct WYStorage {
     public static func takeOutData(forKey key: String, path: String = createDirectory(directory: .cachesDirectory, subDirectory: "WYBasisKit/Memory").path) -> WYStorageData {
         
         guard (key.count > 0) && (path.count > 0) else {
-            
             return WYStorageData(path: URL(fileURLWithPath: path), error: "\(path) 路径不存在或者该路径下没有查找到相关资源")
         }
         
@@ -236,7 +235,6 @@ public struct WYStorage {
         let isExists: Bool = FileManager.default.fileExists(atPath: savePath.path)
         
         if !isExists {
-            
             guard let _ = try? FileManager.default.createDirectory(at: savePath, withIntermediateDirectories: true, attributes: nil) else {
                 fatalError("创建 \(savePath) 路径失败")
             }

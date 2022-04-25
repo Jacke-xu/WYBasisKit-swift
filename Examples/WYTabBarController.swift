@@ -74,17 +74,6 @@ class WYTabBarController: UITabBarController {
         nav.wy_returnButtonColor = .orange
         nav.wy_returnButtonTitle = ""
         nav.wy_hiddenBottomLine()
-        
-        if #available(iOS 15.0, *) {
-
-            let appearnce = UINavigationBarAppearance()
-            appearnce.configureWithOpaqueBackground()
-            appearnce.backgroundColor = nav.wy_backgroundColor
-            appearnce.titleTextAttributes = [NSAttributedString.Key.font: nav.wy_titleFont, NSAttributedString.Key.foregroundColor: nav.wy_titleColor]
-            UINavigationBar.appearance().standardAppearance = appearnce
-            UINavigationBar.appearance().scrollEdgeAppearance = appearnce
-
-        } else {}
     }
     
     

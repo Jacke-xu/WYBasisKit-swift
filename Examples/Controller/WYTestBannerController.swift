@@ -16,33 +16,31 @@ class WYTestBannerController: UIViewController {
         // Do any additional setup after loading the view.
         view.backgroundColor = .white
         
-        let net_images = ["https://p.qqan.com/up/2021-7/16261459342701887.jpg",
-                      "https://p.qqan.com/up/2021-7/16261459347670454.jpg",
-                      "https://p.qqan.com/up/2021-7/16261459345506147.jpg",
-                      "https://p.qqan.com/up/2021-7/16261459348844893.jpg",
-                      "https://p.qqan.com/up/2021-7/16261459344331708.jpg",
-                      "https://p.qqan.com/up/2021-7/16261459343183637.jpg",
-                      "https://p.qqan.com/up/2021-7/16261459349940230.jpg",
-                      "https://p.qqan.com/up/2021-7/16261459352807355.jpg",
-                      "https://p.qqan.com/up/2021-7/16261459353902692.jpg"]
-
-        let local_images = [UIImage.wy_named("banner_1"),
-                            UIImage.wy_named("banner_2"),
-                            UIImage.wy_named("banner_3"),
-                            UIImage.wy_named("banner_4"),
-                            UIImage.wy_named("banner_5"),
-                            UIImage.wy_named("banner_6"),
-                            UIImage.wy_named("banner_7"),
-                            UIImage.wy_named("banner_8"),
-                            UIImage.wy_named("banner_9")]
-
         let bannerView = WYBannerView()
-        bannerView.bannerBackgroundColor = .purple
-        bannerView.reload(images: local_images, describes: ["banner_0", "banner_1", "banner_2", "banner_3", "banner_4", "banner_5", "banner_6", "banner_7", "banner_8"])
+        bannerView.backgroundColor = .white
+        bannerView.delegate = self
+        bannerView.reload(images: [UIImage(named: "banner_1")!, UIImage(named: "banner_2")!, UIImage(named: "banner_3")!, UIImage(named: "banner_4")!, UIImage(named: "banner_5")!, UIImage(named: "banner_6")!, UIImage(named: "banner_7")!, UIImage(named: "banner_8")!, UIImage(named: "banner_9")!], describes: ["banner_1", "banner_2", "banner_3", "banner_4", "banner_5", "banner_6", "banner_7", "banner_8", "banner_9"])
+        //bannerView.updatePageControl(defaultColor: .purple, currentColor: .green)
+        //bannerView.updatePageControl(defaultImage: UIImage(named: "banner_dot_default")!, currentImage: UIImage(named: "banner_dot_current")!)
+        //bannerView.pageControlHideForSingle = false
+        //bannerView.scrollForSinglePage = true
+        //bannerView.imageContentMode = .scaleAspectFit
+        //bannerView.unlimitedCarousel = false
+        //bannerView.automaticCarousel = false
+        //bannerView.describeViewPosition = CGRect(x: 50, y: 50, width: 100, height: 20)
+        //bannerView.placeholderDescribe = "测试"
         view.addSubview(bannerView)
         bannerView.snp.makeConstraints { make in
-            make.left.centerY.right.equalToSuperview()
-            make.height.equalTo(600)
+            make.center.equalToSuperview()
+            make.size.equalTo(CGSize(width: 300, height: 600))
+        }
+        
+        bannerView.didClick { index in
+           //wy_print("Block监听，点击了第 \(index+1) 张图片")
+        }
+        
+        bannerView.didScroll { offset, index in
+            //wy_print("Block监听，滑动Banner到第 \(index+1) 张图片了， offset = \(offset)")
         }
     }
     
@@ -60,12 +58,12 @@ class WYTestBannerController: UIViewController {
 }
 
 extension WYTestBannerController: WYBannerViewDelegate {
-
-    func didClick(_ bannerView: WYBannerView, _ index: NSInteger) {
-        wy_print("index = \(index)")
+    
+    func didClick(_ bannerView: WYBannerView, _ index: Int) {
+        //wy_print("代理监听，点击了第 \(index+1) 张图片")
     }
-
-    func didScroll(_ bannerView: WYBannerView, _ offset: CGPoint, _ index: NSInteger) {
-        wy_print("index = \(index), offset = \(offset)")
+    
+    func didScroll(_ bannerView: WYBannerView, _ offset: CGFloat, _ index: Int) {
+        //wy_print("代理监听，滑动Banner到第 \(index+1) 张图片了， offset = \(offset)")
     }
 }
