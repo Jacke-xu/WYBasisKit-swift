@@ -1,4 +1,1 @@
-IJKMediaFramework.framework filter=lfs diff=lfs merge=lfs -text
-WYBasisKit/LivePlayer/IJKMediaFramework.framework filter=lfs diff=lfs merge=lfs -text
-[[:space:]]WYBasisKit/LivePlayer/IJKMediaFramework.framework filter=lfs diff=lfs merge=lfs -text
 *.framework filter=lfs diff=lfs merge=lfs -text
