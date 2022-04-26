@@ -1,3 +1,32 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:e0d1ec8cd8968926303dc101b0ea07fc16cc979c5a6303c3413d21eadbb5565b
-size 1143
+/*
+ * IJKMPMoviePlayerController.h
+ *
+ * Copyright (c) 2013 Bilibili
+ * Copyright (c) 2013 Zhang Rui <bbcallen@gmail.com>
+ *
+ * This file is part of ijkPlayer.
+ *
+ * ijkPlayer is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ *
+ * ijkPlayer is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with ijkPlayer; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
+ */
+
+#import "IJKMediaPlayback.h"
+#import <MediaPlayer/MediaPlayer.h>
+
+@interface IJKMPMoviePlayerController : MPMoviePlayerController <IJKMediaPlayback>
+
+- (id)initWithContentURL:(NSURL *)aUrl;
+- (id)initWithContentURLString:(NSString *)aUrl;
+
+@end
