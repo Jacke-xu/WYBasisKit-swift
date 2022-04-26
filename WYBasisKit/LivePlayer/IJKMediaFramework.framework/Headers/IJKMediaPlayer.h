@@ -21,16 +21,6 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
  */
 
-#import "IJKMediaPlayback.h"
-#import "IJKMPMoviePlayerController.h"
-
-#import "IJKFFOptions.h"
-#import "IJKFFMoviePlayerController.h"
-
-#import "IJKAVMoviePlayerController.h"
-
-#import "IJKMediaModule.h"
-
 /*
  支持RTMP/RTMPS/RTMPT/RTMPE/RTSP/HLS/HTTP(S)-FLV/KMP  等网络协议
  支持录屏
@@ -143,3 +133,13 @@
      return self.savedVideoPath;
  }
  */
+
+#import "IJKMediaPlayback.h"
+#import "IJKMPMoviePlayerController.h"
+
+#import "IJKFFOptions.h"
+#import "IJKFFMoviePlayerController.h"
+
+#import "IJKAVMoviePlayerController.h"
+
+#import "IJKMediaModule.h"
