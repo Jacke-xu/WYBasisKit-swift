@@ -1,7 +1,7 @@
 Pod::Spec.new do |livePlayer|
 
   livePlayer.name         = 'WYLivePlayerLite'
-  livePlayer.version      = '1.0.0'
+  livePlayer.version      = '1.2.0'
   livePlayer.summary      = '基于IJKPlayer编译封装的直播播放器，支持RTMP/RTMPS/RTMPT/RTMPE/RTSP/HLS/HTTP(S)-FLV/KMP  等网络协议， 支持录屏功能'
   livePlayer.description  = <<-DESC
                           依赖库

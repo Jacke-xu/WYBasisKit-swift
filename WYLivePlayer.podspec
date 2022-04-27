@@ -1,10 +1,11 @@
 Pod::Spec.new do |livePlayer|
 
   livePlayer.name         = 'WYLivePlayer'
-  livePlayer.version      = '1.0.0'
+  livePlayer.version      = '1.2.0'
   livePlayer.summary      = '基于IJKPlayer编译封装的直播播放器，支持RTMP/RTMPS/RTMPT/RTMPE/RTSP/HLS/HTTP(S)-FLV/KMP  等网络协议， 支持录屏功能'
   livePlayer.description  = <<-DESC
-                          依赖库
+                          支持arm64 和 x86_64
+                          需要如下依赖库
                           libc++.tbd
                           libz.tbd
                           libbz2.tbd
@@ -21,7 +22,7 @@ Pod::Spec.new do |livePlayer|
                           VideoToolbox.framework
                    DESC
 
-  livePlayer.homepage     = 'https://github.com/Jacke-xu/WYBasisKit-swift/blob/master/WYBasisKit/LivePlayer/WYLivePlayer.zip'
+  livePlayer.homepage     = 'https://github.com/Jacke-xu/WYBasisKit-swift'
   livePlayer.license      = { :type => 'MIT', :file => 'License.md' }
   livePlayer.author             = { 'Jacke-xu' => 'mobileAppDvlp@icloud.com' }
   livePlayer.ios.deployment_target = '12.0'
