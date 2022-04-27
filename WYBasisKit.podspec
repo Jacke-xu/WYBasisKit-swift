@@ -64,7 +64,7 @@ Pod::Spec.new do |kit|
     end
 
     kit.subspec 'LivePlayer' do |livePlayer|
-       #livePlayer.source = { :http => 'https://liteav.sdk.qcloud.com/download/releases/8.7/TXLiteAVSDK_Professional_iOS_8.7.10102_SDK.zip' }
+       livePlayer.source = { :http => 'https://github.com/Jacke-xu/WYBasisKit-swift/blob/master/WYBasisKit/LivePlayer/WYLivePlayer.zip?raw=true' }
        livePlayer.source_files = 'WYBasisKit/LivePlayer/WYLivePlayer/WYLivePlayer.swift'
        livePlayer.preserve_paths = 'IJKMediaFramework.framework'
        livePlayer.dependency 'SnapKit'
@@ -75,7 +75,7 @@ Pod::Spec.new do |kit|
     end
 
     kit.subspec 'LivePlayerLite' do |livePlayer|
-       #livePlayer.source = { :http => 'https://liteav.sdk.qcloud.com/download/releases/8.7/TXLiteAVSDK_Professional_iOS_8.7.10102_SDK.zip' }
+       livePlayer.source = { :http => 'https://github.com/Jacke-xu/WYBasisKit-swift/blob/master/WYBasisKit/LivePlayer/WYLivePlayerLite.zip?raw=true' }
        livePlayer.source_files = 'WYBasisKit/LivePlayer/WYLivePlayerLite/WYLivePlayer.swift'
        livePlayer.preserve_paths = 'IJKMediaFramework.framework'
        livePlayer.dependency 'SnapKit'
