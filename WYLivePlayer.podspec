@@ -2,9 +2,18 @@ Pod::Spec.new do |livePlayer|
 
   livePlayer.name         = 'WYLivePlayer'
   livePlayer.version      = '1.2.0'
-  livePlayer.summary      = '基于IJKPlayer编译封装的直播播放器，支持RTMP/RTMPS/RTMPT/RTMPE/RTSP/HLS/HTTP(S)-FLV/KMP  等网络协议， 支持录屏功能'
+  livePlayer.summary      = '基于IJKPlayer编译封装的直播播放器，支持RTMP/RTMPS/RTMPT/RTMPE/RTSP/HLS/HTTP(S)-FLV/KMP  等网络协议， 支持录屏功能, 支持arm64 和 x86_64'
   livePlayer.description  = <<-DESC
-                          支持arm64 和 x86_64
+
+                          集成注意事项：
+                          1.使用cocoapods官方源
+                          source 'https://github.com/CocoaPods/Specs.git'
+                          pod 'WYLivePlayer'
+
+                          2.指定 podspec 文件路径
+                          source 'https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git'
+                          pod 'WYLivePlayer', :podspec => 'https://raw.githubusercontent.com/Jacke-xu/WYBasisKit-swift/master/WYLivePlayer.podspec'
+                          
                           需要如下依赖库
                           libc++.tbd
                           libz.tbd
