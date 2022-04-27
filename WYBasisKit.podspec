@@ -64,10 +64,23 @@ Pod::Spec.new do |kit|
     end
 
     kit.subspec 'LivePlayer' do |livePlayer|
-       livePlayer.source_files = 'WYBasisKit/LivePlayer/WYLivePlayer.swift'
+       #livePlayer.source = { :http => 'https://liteav.sdk.qcloud.com/download/releases/8.7/TXLiteAVSDK_Professional_iOS_8.7.10102_SDK.zip' }
+       livePlayer.source_files = 'WYBasisKit/LivePlayer/WYLivePlayer/WYLivePlayer.swift'
+       livePlayer.preserve_paths = 'IJKMediaFramework.framework'
        livePlayer.dependency 'SnapKit'
        livePlayer.dependency 'Kingfisher'
-       livePlayer.vendored_frameworks = 'WYBasisKit/LivePlayer/IJKMediaFramework.framework'
+       livePlayer.vendored_frameworks = 'WYBasisKit/LivePlayer/WYLivePlayer/IJKMediaFramework.framework'
+       livePlayer.libraries = 'c++', 'z', 'bz2'
+       livePlayer.frameworks = 'UIKit', 'AudioToolbox', 'CoreGraphics', 'AVFoundation', 'CoreMedia', 'CoreVideo', 'MediaPlayer', 'CoreServices', 'OpenGLES', 'QuartzCore', 'VideoToolbox'
+    end
+
+    kit.subspec 'LivePlayerLite' do |livePlayer|
+       #livePlayer.source = { :http => 'https://liteav.sdk.qcloud.com/download/releases/8.7/TXLiteAVSDK_Professional_iOS_8.7.10102_SDK.zip' }
+       livePlayer.source_files = 'WYBasisKit/LivePlayer/WYLivePlayerLite/WYLivePlayer.swift'
+       livePlayer.preserve_paths = 'IJKMediaFramework.framework'
+       livePlayer.dependency 'SnapKit'
+       livePlayer.dependency 'Kingfisher'
+       livePlayer.vendored_frameworks = 'WYBasisKit/LivePlayer/WYLivePlayerLite/IJKMediaFramework.framework'
        livePlayer.libraries = 'c++', 'z', 'bz2'
        livePlayer.frameworks = 'UIKit', 'AudioToolbox', 'CoreGraphics', 'AVFoundation', 'CoreMedia', 'CoreVideo', 'MediaPlayer', 'CoreServices', 'OpenGLES', 'QuartzCore', 'VideoToolbox'
     end

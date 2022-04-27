@@ -89,9 +89,11 @@
 		DC9494FC281107E8005AE3F7 /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC9494FB281107E8005AE3F7 /* VideoToolbox.framework */; };
 		DC94950328151D3E005AE3F7 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC94950228151D3E005AE3F7 /* CoreServices.framework */; };
 		DC94950628152FAD005AE3F7 /* Bool.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC94950528152FAD005AE3F7 /* Bool.swift */; };
-		DC94975528164339005AE3F7 /* Pods_WYBasisKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03E27E8906E5FB4F134A5419 /* Pods_WYBasisKit.framework */; };
 		DC94977328169103005AE3F7 /* WYLivePlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC94977128169103005AE3F7 /* WYLivePlayer.swift */; };
-		DC94977428169103005AE3F7 /* IJKMediaFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC94977228169103005AE3F7 /* IJKMediaFramework.framework */; };
+		DC9497A52818FCF3005AE3F7 /* Pods_WYBasisKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC9497A42818FCF3005AE3F7 /* Pods_WYBasisKit.framework */; };
+		DC9497AC28190163005AE3F7 /* WYLivePlayerLite.zip in Resources */ = {isa = PBXBuildFile; fileRef = DC9497AA28190163005AE3F7 /* WYLivePlayerLite.zip */; };
+		DC9497AD28190163005AE3F7 /* WYLivePlayer.zip in Resources */ = {isa = PBXBuildFile; fileRef = DC9497AB28190163005AE3F7 /* WYLivePlayer.zip */; };
+		DC9497AF281905E7005AE3F7 /* IJKMediaFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC9497AE281905E7005AE3F7 /* IJKMediaFramework.framework */; };
 		DCB90A7827AE3A8A001DCA82 /* Foundation+JSONLog.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB90A7727AE3A8A001DCA82 /* Foundation+JSONLog.m */; };
 /* End PBXBuildFile section */
 
@@ -191,7 +193,10 @@
 		DC94950528152FAD005AE3F7 /* Bool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bool.swift; sourceTree = "<group>"; };
 		DC94974D2816366A005AE3F7 /* Pods_WYBasisKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_WYBasisKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC94977128169103005AE3F7 /* WYLivePlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYLivePlayer.swift; sourceTree = "<group>"; };
-		DC94977228169103005AE3F7 /* IJKMediaFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = IJKMediaFramework.framework; sourceTree = "<group>"; };
+		DC9497A42818FCF3005AE3F7 /* Pods_WYBasisKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_WYBasisKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DC9497AA28190163005AE3F7 /* WYLivePlayerLite.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = WYLivePlayerLite.zip; sourceTree = "<group>"; };
+		DC9497AB28190163005AE3F7 /* WYLivePlayer.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = WYLivePlayer.zip; sourceTree = "<group>"; };
+		DC9497AE281905E7005AE3F7 /* IJKMediaFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = IJKMediaFramework.framework; sourceTree = "<group>"; };
 		DCB90A7727AE3A8A001DCA82 /* Foundation+JSONLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Foundation+JSONLog.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -200,10 +205,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DC94975528164339005AE3F7 /* Pods_WYBasisKit.framework in Frameworks */,
+				DC9497A52818FCF3005AE3F7 /* Pods_WYBasisKit.framework in Frameworks */,
 				DC94950328151D3E005AE3F7 /* CoreServices.framework in Frameworks */,
 				DC9494FC281107E8005AE3F7 /* VideoToolbox.framework in Frameworks */,
-				DC94977428169103005AE3F7 /* IJKMediaFramework.framework in Frameworks */,
+				DC9497AF281905E7005AE3F7 /* IJKMediaFramework.framework in Frameworks */,
 				DC9494FA281107D7005AE3F7 /* QuartzCore.framework in Frameworks */,
 				DC9494F8281107CC005AE3F7 /* OpenGLES.framework in Frameworks */,
 				DC9494F4281107B3005AE3F7 /* MediaPlayer.framework in Frameworks */,
@@ -285,6 +290,7 @@
 		94F8A53F1CB5643B124486A8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DC9497A42818FCF3005AE3F7 /* Pods_WYBasisKit.framework */,
 				DC94974D2816366A005AE3F7 /* Pods_WYBasisKit.framework */,
 				DC94950228151D3E005AE3F7 /* CoreServices.framework */,
 				DC9494FB281107E8005AE3F7 /* VideoToolbox.framework */,
@@ -652,7 +658,9 @@
 			isa = PBXGroup;
 			children = (
 				DC94977128169103005AE3F7 /* WYLivePlayer.swift */,
-				DC94977228169103005AE3F7 /* IJKMediaFramework.framework */,
+				DC9497AE281905E7005AE3F7 /* IJKMediaFramework.framework */,
+				DC9497AB28190163005AE3F7 /* WYLivePlayer.zip */,
+				DC9497AA28190163005AE3F7 /* WYLivePlayerLite.zip */,
 			);
 			path = LivePlayer;
 			sourceTree = "<group>";
@@ -727,6 +735,8 @@
 				AA484EBC24FA262500B39D60 /* Assets.xcassets in Resources */,
 				AAC3825A25A1874500B2D41C /* WYBannerView.bundle in Resources */,
 				AA484EBA24FA262100B39D60 /* Main.storyboard in Resources */,
+				DC9497AC28190163005AE3F7 /* WYLivePlayerLite.zip in Resources */,
+				DC9497AD28190163005AE3F7 /* WYLivePlayer.zip in Resources */,
 				AA2827B426BFCF7A00EB9DBC /* WYLocalizable.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1002,6 +1012,7 @@
 					"$(PROJECT_DIR)/WYBasisKit/LivePlayer",
 					"$(PROJECT_DIR)/WYBasisKit",
 					"$(PROJECT_DIR)/WYBasisKit/LivePlayer/IJKMediaFramework",
+					"$(PROJECT_DIR)/WYBasisKit/LivePlayer/IJKMediaFramework/arm64+x86_64",
 				);
 				INFOPLIST_FILE = Examples/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -1034,6 +1045,7 @@
 					"$(PROJECT_DIR)/WYBasisKit/LivePlayer",
 					"$(PROJECT_DIR)/WYBasisKit",
 					"$(PROJECT_DIR)/WYBasisKit/LivePlayer/IJKMediaFramework",
+					"$(PROJECT_DIR)/WYBasisKit/LivePlayer/IJKMediaFramework/arm64+x86_64",
 				);
 				INFOPLIST_FILE = Examples/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
