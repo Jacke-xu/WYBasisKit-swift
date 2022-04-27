@@ -29,7 +29,6 @@ Pod::Spec.new do |livePlayer|
   livePlayer.swift_versions = '5.0'
   livePlayer.requires_arc = true
   livePlayer.source_files = 'WYLivePlayer/WYLivePlayer.swift'
-  livePlayer.preserve_paths = 'IJKMediaFramework.framework'
   livePlayer.dependency 'SnapKit'
   livePlayer.dependency 'Kingfisher'
   livePlayer.vendored_frameworks = 'WYLivePlayer/IJKMediaFramework.framework'
