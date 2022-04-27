@@ -8,11 +8,11 @@ Pod::Spec.new do |livePlayer|
                           集成注意事项：
                           1.使用cocoapods官方源
                           source 'https://github.com/CocoaPods/Specs.git'
-                          pod 'WYLivePlayer'
+                          pod 'WYLivePlayerLite'
 
                           2.指定 podspec 文件路径
                           source 'https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git'
-                          pod 'WYLivePlayer', :podspec => 'https://raw.githubusercontent.com/Jacke-xu/WYBasisKit-swift/master/WYLivePlayerLite.podspec'
+                          pod 'WYLivePlayerLite', :podspec => 'https://raw.githubusercontent.com/Jacke-xu/WYBasisKit-swift/master/WYLivePlayerLite.podspec'
 
                           依赖库
                           libc++.tbd
