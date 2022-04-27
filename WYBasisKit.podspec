@@ -63,28 +63,6 @@ Pod::Spec.new do |kit|
        storage.frameworks = 'Foundation', 'UIKit'
     end
 
-    kit.subspec 'LivePlayer' do |livePlayer|
-       livePlayer.source = { :http => 'https://github.com/Jacke-xu/WYBasisKit-swift/blob/master/WYBasisKit/LivePlayer/WYLivePlayer.zip?raw=true' }
-       livePlayer.source_files = 'WYBasisKit/LivePlayer/WYLivePlayer/WYLivePlayer.swift'
-       livePlayer.preserve_paths = 'IJKMediaFramework.framework'
-       livePlayer.dependency 'SnapKit'
-       livePlayer.dependency 'Kingfisher'
-       livePlayer.vendored_frameworks = 'WYBasisKit/LivePlayer/WYLivePlayer/IJKMediaFramework.framework'
-       livePlayer.libraries = 'c++', 'z', 'bz2'
-       livePlayer.frameworks = 'UIKit', 'AudioToolbox', 'CoreGraphics', 'AVFoundation', 'CoreMedia', 'CoreVideo', 'MediaPlayer', 'CoreServices', 'OpenGLES', 'QuartzCore', 'VideoToolbox'
-    end
-
-    kit.subspec 'LivePlayerLite' do |livePlayer|
-       livePlayer.source = { :http => 'https://github.com/Jacke-xu/WYBasisKit-swift/blob/master/WYBasisKit/LivePlayer/WYLivePlayerLite.zip?raw=true' }
-       livePlayer.source_files = 'WYBasisKit/LivePlayer/WYLivePlayerLite/WYLivePlayer.swift'
-       livePlayer.preserve_paths = 'IJKMediaFramework.framework'
-       livePlayer.dependency 'SnapKit'
-       livePlayer.dependency 'Kingfisher'
-       livePlayer.vendored_frameworks = 'WYBasisKit/LivePlayer/WYLivePlayerLite/IJKMediaFramework.framework'
-       livePlayer.libraries = 'c++', 'z', 'bz2'
-       livePlayer.frameworks = 'UIKit', 'AudioToolbox', 'CoreGraphics', 'AVFoundation', 'CoreMedia', 'CoreVideo', 'MediaPlayer', 'CoreServices', 'OpenGLES', 'QuartzCore', 'VideoToolbox'
-    end
-
     kit.subspec 'Layout' do |layout|
 
         layout.subspec 'FlowLayout' do |flowLayout|
