@@ -19,9 +19,6 @@ public struct WYBasisKitConfig {
     /// 设置字号适配的最大比率数
     public static var maxFontRatio: CGFloat = 1.0
     
-    /// 设置tableView或collectionView上拉加载更多时每次请求的数据量
-    public static var pageSize: NSInteger = 10
-    
     /// 设置默认图片加载的Bundle名(例如：ImageSource.bundle 设置bundleName为 ImageSource 即可)
     public static var bundleName: String = ""
     

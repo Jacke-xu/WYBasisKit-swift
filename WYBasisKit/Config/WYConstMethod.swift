@@ -196,7 +196,6 @@ public let wy_appBuildVersion: String = Bundle.main.infoDictionary!["CFBundleVer
 public func wy_print(_ messages: Any..., file: String = #file, function: String = #function, line: Int = #line) {
     #if DEBUG
     if WYBasisKitConfig.debugModeLog == true {
-        
         let timeFormatter = DateFormatter()
         timeFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         let time = timeFormatter.string(from: Date())

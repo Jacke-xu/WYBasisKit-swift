@@ -83,13 +83,15 @@ class WYTestLiveStreamingController: UIViewController {
         // http://devimages.apple.com/iphone/samples/bipbop/bipbopall.m3u8
         
         player.delegate = self
-        player.play(with: "http://devimages.apple.com.edgekey.net/streaming/examples/bipbop_4x3/gear2/prog_index.m3u8")
+        player.looping = 1
         player.backgroundColor = .black
         view.addSubview(player)
         player.snp.makeConstraints { make in
             make.left.right.centerY.equalToSuperview()
             make.height.equalTo(300)
         }
+        player.play(with: "http://devimages.apple.com/iphone/samples/bipbop/bipbopall.m3u8")
+        WYActivity.showLoading(in: view)
         
         /**
         let options: IJKFFOptions = IJKFFOptions.byDefault()
@@ -190,10 +192,10 @@ extension WYTestLiveStreamingController: WYLivePlayerDelegate {
             wy_print("可以播放了")
         case .playing:
             wy_print("正在播放")
-            WYActivity.dismissLoading(in: player)
+            WYActivity.dismissLoading(in: view)
         case .buffering:
             wy_print("缓冲中")
-            WYActivity.showLoading(in: player, delay: 1)
+            WYActivity.showLoading(in: view)
         case .playable:
             wy_print("缓冲结束")
         case .paused:

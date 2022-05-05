@@ -64,14 +64,14 @@ public extension Timer {
         }
     }
     
-    /// 取消计时器
+    /// 取消某一组计时器
     class func wy_cancel(_ alias: [String]) {
         for index in 0..<alias.count {
             wy_cancel(alias[index])
         }
     }
     
-    /// 取消计时器
+    /// 取消某一个计时器
     class func wy_cancel(_ alias: String) {
         
         if wy_timerContainer.keys.contains(alias) == true {

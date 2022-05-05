@@ -12,11 +12,11 @@ import UIKit
 public extension NSMutableAttributedString {
     
     /**
-
-    *  需要修改的字符颜色数组及量程，由字典组成  key = 颜色   value = 量程或需要修改的字符串
-    *  例：NSArray *colorsOfRanges = @[@{color:@[@"0",@"1"]},@{color:@[@"1",@"2"]}]
-    *  或：NSArray *colorsOfRanges = @[@{color:str},@{color:str}]
-    */
+     
+     *  需要修改的字符颜色数组及量程，由字典组成  key = 颜色   value = 量程或需要修改的字符串
+     *  例：NSArray *colorsOfRanges = @[@{color:@[@"0",@"1"]},@{color:@[@"1",@"2"]}]
+     *  或：NSArray *colorsOfRanges = @[@{color:str},@{color:str}]
+     */
     @discardableResult
     func wy_colorsOfRanges(colorsOfRanges: Array<Dictionary<UIColor, Any>>) -> NSMutableAttributedString {
         
@@ -44,11 +44,11 @@ public extension NSMutableAttributedString {
     }
     
     /**
-
-    *  需要修改的字符字体数组及量程，由字典组成  key = 颜色   value = 量程或需要修改的字符串
-    *  例：NSArray *fontsOfRanges = @[@{font:@[@"0",@"1"]},@{font:@[@"1",@"2"]}]
-    *  或：NSArray *fontsOfRanges = @[@{font:str},@{font:str}]
-    */
+     
+     *  需要修改的字符字体数组及量程，由字典组成  key = 颜色   value = 量程或需要修改的字符串
+     *  例：NSArray *fontsOfRanges = @[@{font:@[@"0",@"1"]},@{font:@[@"1",@"2"]}]
+     *  或：NSArray *fontsOfRanges = @[@{font:str},@{font:str}]
+     */
     @discardableResult
     func wy_fontsOfRanges(fontsOfRanges: Array<Dictionary<UIFont, Any>>) -> NSMutableAttributedString {
         for dic: Dictionary in fontsOfRanges {
@@ -100,7 +100,7 @@ public extension NSMutableAttributedString {
     /// 文本添加下滑线
     @discardableResult
     func wy_underline(color: UIColor, string: String? = nil) -> NSMutableAttributedString {
-         
+        
         let selfStr: NSString = self.string as NSString
         addAttribute(NSAttributedString.Key.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: selfStr.range(of: string == nil ? self.string : string!))
         addAttribute(NSAttributedString.Key.underlineColor, value: color, range: selfStr.range(of: string == nil ? self.string : string!))
@@ -111,7 +111,7 @@ public extension NSMutableAttributedString {
     /// 文本添加删除线
     @discardableResult
     func wy_strikethrough(color: UIColor, string: String? = nil) -> NSMutableAttributedString {
-         
+        
         let selfStr: NSString = self.string as NSString
         addAttribute(NSAttributedString.Key.strikethroughStyle, value: NSUnderlineStyle.single.rawValue, range: selfStr.range(of: string == nil ? self.string : string!))
         addAttribute(NSAttributedString.Key.strikethroughColor, value: color, range: selfStr.range(of: string == nil ? self.string : string!))
@@ -120,11 +120,11 @@ public extension NSMutableAttributedString {
     }
     
     /**
-    *  文本添加内边距
-    *  @param firstLineHeadIndent  首行左边距
-    *  @param headIndent  第二行及以后的左边距(换行符\n除外)
-    *  @param tailIndent  尾部右边距
-    */
+     *  文本添加内边距
+     *  @param firstLineHeadIndent  首行左边距
+     *  @param headIndent  第二行及以后的左边距(换行符\n除外)
+     *  @param tailIndent  尾部右边距
+     */
     @discardableResult
     func wy_innerMargin(firstLineHeadIndent: CGFloat = 0, headIndent: CGFloat = 0, tailIndent: CGFloat = 0, alignment: NSTextAlignment = .justified) -> NSMutableAttributedString {
         
@@ -142,6 +142,44 @@ public extension NSMutableAttributedString {
 }
 
 extension NSAttributedString {
+    
+    /// 获取某段文字的frame
+    func wy_calculateFrame(range: NSRange, controlSize: CGSize, numberOfLines: Int = 0, lineBreakMode: NSLineBreakMode = .byWordWrapping) -> CGRect {
+        
+        let textStorage: NSTextStorage = NSTextStorage(attributedString: self)
+        let layoutManager: NSLayoutManager = NSLayoutManager()
+        textStorage.addLayoutManager(layoutManager)
+        let textContainer: NSTextContainer = NSTextContainer(size: controlSize)
+        textContainer.lineFragmentPadding = 0
+        textContainer.lineBreakMode = lineBreakMode
+        textContainer.maximumNumberOfLines = numberOfLines
+        layoutManager.addTextContainer(textContainer)
+        
+        var glyphRange: NSRange = NSRange()
+        layoutManager.characterRange(forGlyphRange: range, actualGlyphRange: &glyphRange)
+        return layoutManager.boundingRect(forGlyphRange: glyphRange, in: textContainer)
+    }
+    
+    /// 获取某段文字的frame
+    func wy_calculateFrame(subString: String, controlSize: CGSize, numberOfLines: Int = 0, lineBreakMode: NSLineBreakMode = .byWordWrapping) -> CGRect {
+        
+        guard subString.isEmpty == false else {
+            return CGRect.zero
+        }
+        
+        let textStorage: NSTextStorage = NSTextStorage(attributedString: self)
+        let layoutManager: NSLayoutManager = NSLayoutManager()
+        textStorage.addLayoutManager(layoutManager)
+        let textContainer: NSTextContainer = NSTextContainer(size: controlSize)
+        textContainer.lineFragmentPadding = 0
+        textContainer.lineBreakMode = lineBreakMode
+        textContainer.maximumNumberOfLines = numberOfLines
+        layoutManager.addTextContainer(textContainer)
+        
+        var glyphRange: NSRange = NSRange()
+        layoutManager.characterRange(forGlyphRange: (string as NSString).range(of: subString), actualGlyphRange: &glyphRange)
+        return layoutManager.boundingRect(forGlyphRange: glyphRange, in: textContainer)
+    }
     
     /// 计算富文本宽度
     func wy_calculateWidth(controlHeight: CGFloat) -> CGFloat {
@@ -175,23 +213,17 @@ extension NSAttributedString {
         
         let frame: CTFrame = CTFramesetterCreateFrame(frameSetter, CFRangeMake(0, 0), path, nil)
         
-        let lines = CTFrameGetLines(frame) as Array
+        var strings = [String]()
         
-        var linesArray = [String]()
-        
-        for line in lines {
-            let lineRef: CTLine = line as! CTLine
-            let lineRange: CFRange = CTLineGetStringRange(lineRef)
-            let range: NSRange = NSMakeRange(lineRange.location, lineRange.length)
-            
-            let prefixIndex = self.string.index(self.string.startIndex, offsetBy: range.location)
-            let suffixIndex = self.string.index(self.string.startIndex, offsetBy: range.location + range.length - 1)
-            let subStr = String(self.string[prefixIndex...suffixIndex])
-            
-            linesArray.append(subStr)
+        if let lines = CTFrameGetLines(frame) as? [CTLine] {
+            lines.forEach({
+                let linerange = CTLineGetStringRange($0)
+                let range = NSMakeRange(linerange.location, linerange.length)
+                let string = (self.string as NSString).substring(with: range)
+                strings.append(string)
+            })
         }
-        
-        return linesArray
+        return strings
     }
     
     /// 判断字符串显示完毕需要几行(为了计算准确，尽量将使用到的属性如字间距、缩进、换行模式、字体等设置到调用本方法的attributedString对象中来, 没有用到的直接忽略)

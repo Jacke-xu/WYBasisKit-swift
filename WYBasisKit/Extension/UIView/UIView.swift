@@ -25,13 +25,9 @@ public extension UIView {
     
     /** View所属的UIViewController */
     var wy_belongsViewController: UIViewController? {
-        
         for view in sequence(first: self.superview, next: { $0?.superview }) {
-            
             if let responder = view?.next {
-                
                 if responder.isKind(of: UIViewController.self) {
-                    
                     if responder.isKind(of: UINavigationController.self) {
                         return (responder as? UINavigationController)?.topViewController
                     }else {
@@ -45,7 +41,6 @@ public extension UIView {
     
     /** view.width */
     var wy_width: CGFloat {
-        
         set {
             var frame: CGRect = self.frame
             frame.size.width = newValue
@@ -58,13 +53,11 @@ public extension UIView {
     
     /** view.height */
     var wy_height: CGFloat {
-        
         set {
             var frame: CGRect = self.frame
             frame.size.height = newValue
             self.frame = frame
         }
-        
         get {
             return self.frame.size.height
         }
@@ -72,13 +65,11 @@ public extension UIView {
     
     /** view.origin.x */
     var wy_left: CGFloat {
-        
         set {
             var frame: CGRect = self.frame
             frame.origin.x = newValue
             self.frame = frame
         }
-        
         get {
             return self.frame.origin.x
         }
@@ -86,13 +77,11 @@ public extension UIView {
     
     /** view.origin.x + view.width */
     var wy_right: CGFloat {
-        
         set {
             var frame: CGRect = self.frame
             frame.origin.x = newValue - frame.size.width
             self.frame = frame
         }
-        
         get {
             return self.frame.origin.x + self.frame.size.width
         }
@@ -100,13 +89,11 @@ public extension UIView {
     
     /** view.origin.y */
     var wy_top: CGFloat {
-        
         set {
             var frame: CGRect = self.frame
             frame.origin.y = newValue
             self.frame = frame
         }
-        
         get {
             return self.frame.origin.y
         }
@@ -114,13 +101,11 @@ public extension UIView {
     
     /** view.origin.y + view.height */
     var wy_bottom: CGFloat {
-        
         set {
             var frame: CGRect = self.frame
             frame.origin.y = newValue - frame.size.height
             self.frame = frame
         }
-        
         get {
             return self.frame.origin.y + self.frame.size.height
         }
@@ -128,13 +113,11 @@ public extension UIView {
     
     /** view.center.x */
     var wy_centerx: CGFloat {
-        
         set {
             var frame: CGRect = self.frame
             frame.origin.x = newValue - (self.frame.size.width / 2.0)
             self.frame = frame
         }
-        
         get {
             return self.frame.origin.x + (self.frame.size.width / 2.0)
         }
@@ -142,13 +125,11 @@ public extension UIView {
     
     /** view.center.y */
     var wy_centery: CGFloat {
-        
         set {
             var frame: CGRect = self.frame
             frame.origin.y = newValue - (self.frame.size.height / 2.0)
             self.frame = frame
         }
-        
         get {
             return self.frame.origin.y + (self.frame.size.height / 2.0)
         }
@@ -156,13 +137,11 @@ public extension UIView {
     
     /** view.origin */
     var wy_origin: CGPoint {
-        
         set {
             var frame: CGRect = self.frame
             frame.origin = newValue
             self.frame = frame
         }
-        
         get {
             return self.frame.origin
         }
@@ -170,13 +149,11 @@ public extension UIView {
     
     /** view.size */
     var wy_size: CGSize {
-        
         set {
             var frame: CGRect = self.frame
             frame.size = newValue
             self.frame = frame
         }
-        
         get {
             return self.frame.size
         }
@@ -184,12 +161,15 @@ public extension UIView {
     
     /// 移除所有子控件
     func wy_removeAllSubviews() {
-        
-        while !subviews.isEmpty {
-            
-            let view = subviews[0]
-            view.removeFromSuperview()
+        if subviews.isEmpty == false {
+            subviews.forEach({$0.removeFromSuperview()})
         }
+    }
+    
+    /// 移除自身及所有子控件
+    func wy_removeFromSuperview() {
+        wy_removeAllSubviews()
+        removeFromSuperview()
     }
     
     /// 添加手势点击事件
@@ -209,7 +189,6 @@ public extension UIView {
     }
     
     @objc private func wy_keyboardHide() {
-        
         endEditing(true)
     }
 }
@@ -217,19 +196,19 @@ public extension UIView {
 public extension UIView {
     
     /**
-    * 设置圆角、边框、阴影、渐变
-    * @param rectCorner        要圆角的位置，默认4角圆角
-    * @param cornerRadius      圆角半径， 默认0
-    * @param borderColor       边框颜色，默认透明
-    * @param borderWidth       边框宽度， 默认0
-    * @param shadowColor       阴影颜色， 默认透明
-    * @param shadowRadius      阴影半径， 默认0
-    * @param shadowOpacity     阴影透明度，默认值是0.5，取值范围0~1
-    * @param shadowOffset      阴影偏移度，默认CGSize.zero (width : 为正数时，向右偏移，为负数时，向左偏移，height : 为正数时，向下偏移，为负数时，向上偏移)
-    * @param gradualColors     渐变色数组，默认为空 (设置渐变色时不能设置背景色，会有影响)
-    * @param gradientDirection 渐变色方向，默认从左到右
-    * @param viewBounds        设置圆角时，会去获取视图的Bounds属性，如果此时获取不到，则需要传入该参数，默认为 nil，如果传入该参数，会使用传入的bounds
-    */
+     * 设置圆角、边框、阴影、渐变
+     * @param rectCorner        要圆角的位置，默认4角圆角
+     * @param cornerRadius      圆角半径， 默认0
+     * @param borderColor       边框颜色，默认透明
+     * @param borderWidth       边框宽度， 默认0
+     * @param shadowColor       阴影颜色， 默认透明
+     * @param shadowRadius      阴影半径， 默认0
+     * @param shadowOpacity     阴影透明度，默认值是0.5，取值范围0~1
+     * @param shadowOffset      阴影偏移度，默认CGSize.zero (width : 为正数时，向右偏移，为负数时，向左偏移，height : 为正数时，向下偏移，为负数时，向上偏移)
+     * @param gradualColors     渐变色数组，默认为空 (设置渐变色时不能设置背景色，会有影响)
+     * @param gradientDirection 渐变色方向，默认从左到右
+     * @param viewBounds        设置圆角时，会去获取视图的Bounds属性，如果此时获取不到，则需要传入该参数，默认为 nil，如果传入该参数，会使用传入的bounds
+     */
     func wy_add(rectCorner: UIRectCorner? = nil, cornerRadius: CGFloat? = nil, borderColor: UIColor? = nil, borderWidth: CGFloat? = nil, shadowColor: UIColor? = nil, shadowRadius: CGFloat? = nil, shadowOpacity: CGFloat? = nil, shadowOffset: CGSize? = nil, gradualColors: [UIColor]? = nil, gradientDirection: WYGradientDirection? = nil, viewBounds: CGRect? = nil) {
         
         DispatchQueue.main.async {
@@ -275,7 +254,6 @@ public extension UIView {
     /// 使用链式编程设置圆角、边框、阴影(调用方式类似SnapKit， 也可直接.语法)
     @discardableResult
     func wy_makeVisual(visualView: (UIView) -> Void) -> UIView {
-
         visualView(self)
         return wy_showVisual()
     }
@@ -339,15 +317,13 @@ public extension UIView {
     /// 渐变色数组(设置渐变色时不能设置背景色，会有影响)
     @discardableResult
     func wy_gradualColors(_ colors: [UIColor]) -> UIView {
-
         privateGradualColors = colors
         return self
     }
-
+    
     /// 渐变色方向 默认从左到右
     @discardableResult
     func wy_gradientDirection(_ direction: WYGradientDirection) -> UIView {
-
         privateGradientDirection = direction
         return self
     }
@@ -392,10 +368,9 @@ public extension UIView {
             shadowBackgroundView?.removeFromSuperview()
             shadowBackgroundView = nil
         }
-
+        
         // 圆角、边框、渐变
         if layer.sublayers?.isEmpty == false {
-            
             for sublayer in layer.sublayers! {
                 if ((sublayer.name == WYAssociatedKeys.boardLayer) || (sublayer.name == WYAssociatedKeys.gradientLayer)) {
                     sublayer.removeFromSuperlayer()
@@ -416,7 +391,7 @@ public extension UIView {
         privateGradualColors = nil
         privateGradientDirection = .leftToRight
         shadowBackgroundView = nil
-
+        
         layer.cornerRadius   = 0.0
         layer.borderWidth    = 0.0
         layer.borderColor    = UIColor.clear.cgColor
@@ -433,9 +408,7 @@ public extension UIView {
     private func wy_addShadow() {
         
         DispatchQueue.main.async {
-            
             var shadowView = self
-            
             // 同时存在阴影和圆角
             if (((self.privateShadowOpacity > 0) && (self.privateConrnerRadius > 0)) || (self.privateBezierPath != nil)) {
                 
@@ -450,21 +423,20 @@ public extension UIView {
                 shadowView.translatesAutoresizingMaskIntoConstraints = false
                 self.superview?.insertSubview(shadowView, belowSubview: self)
                 self.superview?.addConstraints([
-                                                NSLayoutConstraint(item: shadowView, attribute: NSLayoutConstraint.Attribute.top, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self, attribute: NSLayoutConstraint.Attribute.top, multiplier: 1.0, constant: 0),
-                                                NSLayoutConstraint(item: shadowView, attribute: NSLayoutConstraint.Attribute.left, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self, attribute: NSLayoutConstraint.Attribute.left, multiplier: 1.0, constant: 0),
-                                                NSLayoutConstraint(item: shadowView, attribute: NSLayoutConstraint.Attribute.right, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self, attribute: NSLayoutConstraint.Attribute.right, multiplier: 1.0, constant: 0),
-                                                NSLayoutConstraint(item: shadowView, attribute: NSLayoutConstraint.Attribute.bottom, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self, attribute: NSLayoutConstraint.Attribute.bottom, multiplier: 1.0, constant: 0)])
-
+                    NSLayoutConstraint(item: shadowView, attribute: NSLayoutConstraint.Attribute.top, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self, attribute: NSLayoutConstraint.Attribute.top, multiplier: 1.0, constant: 0),
+                    NSLayoutConstraint(item: shadowView, attribute: NSLayoutConstraint.Attribute.left, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self, attribute: NSLayoutConstraint.Attribute.left, multiplier: 1.0, constant: 0),
+                    NSLayoutConstraint(item: shadowView, attribute: NSLayoutConstraint.Attribute.right, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self, attribute: NSLayoutConstraint.Attribute.right, multiplier: 1.0, constant: 0),
+                    NSLayoutConstraint(item: shadowView, attribute: NSLayoutConstraint.Attribute.bottom, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self, attribute: NSLayoutConstraint.Attribute.bottom, multiplier: 1.0, constant: 0)])
+                
                 self.shadowBackgroundView = shadowView
             }
             
             // 圆角
             if ((self.privateConrnerRadius > 0) || (self.privateBezierPath != nil)) {
-                
                 let shadowPath: UIBezierPath = self.wy_sharedBezierPath()
                 shadowView.layer.shadowPath = shadowPath.cgPath
             }
-
+            
             // 阴影
             shadowView.layer.shadowOpacity = Float(self.privateShadowOpacity)
             shadowView.layer.shadowRadius  = self.privateShadowRadius
@@ -475,9 +447,7 @@ public extension UIView {
     
     /// 添加圆角和边框
     private func wy_addBorderAndRadius() {
-        
         DispatchQueue.main.async {
-            
             // 圆角或阴影或自定义曲线
             if ((self.privateConrnerRadius > 0) || (self.privateShadowOpacity > 0) || (self.privateBezierPath != nil)) {
                 
@@ -490,7 +460,7 @@ public extension UIView {
                     maskLayer.path = path.cgPath
                     self.layer.mask = maskLayer
                 }
-      
+                
                 // 边框
                 if ((self.privateBorderWidth > 0) || (self.privateBezierPath != nil)) {
                     
@@ -514,7 +484,7 @@ public extension UIView {
                     shapeLayer.lineJoin = .miter
                     self.layer.addSublayer(shapeLayer)
                 }
-
+                
             }else {
                 
                 // 只有边框
@@ -533,9 +503,7 @@ public extension UIView {
     
     /// 添加渐变色
     private func wy_addGradual() {
-        
         DispatchQueue.main.async {
-            
             guard self.privateGradualColors?.isEmpty == false else {
                 return
             }
@@ -582,7 +550,6 @@ public extension UIView {
         if privateViewBounds.equalTo(.zero) == false {
             return privateViewBounds
         }else {
-            
             if (superview != nil) {
                 superview?.layoutIfNeeded()
             }
@@ -595,7 +562,6 @@ public extension UIView {
     }
     
     private func wy_sharedBezierPath() -> UIBezierPath {
-        
         if privateBezierPath != nil {
             return privateBezierPath!
             
@@ -605,21 +571,16 @@ public extension UIView {
     }
     
     private var privateRectCorner: UIRectCorner {
-        
         set(newValue) {
-
             objc_setAssociatedObject(self, WYAssociatedKeys.privateRectCorner, newValue.rawValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
         get {
-            
             return UIRectCorner.init(rawValue: objc_getAssociatedObject(self, WYAssociatedKeys.privateRectCorner) as? UInt ?? UInt(UIRectCorner.allCorners.rawValue))
         }
     }
     
     private var privateConrnerRadius: CGFloat {
-        
         set(newValue) {
-            
             objc_setAssociatedObject(self, WYAssociatedKeys.privateConrnerRadius, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
         get {
@@ -628,9 +589,7 @@ public extension UIView {
     }
     
     private var privateBorderColor: UIColor {
-        
         set(newValue) {
-            
             objc_setAssociatedObject(self, WYAssociatedKeys.privateBorderColor, newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)
         }
         get {
@@ -639,9 +598,7 @@ public extension UIView {
     }
     
     private var privateBorderWidth: CGFloat {
-        
         set(newValue) {
-            
             objc_setAssociatedObject(self, WYAssociatedKeys.privateBorderWidth, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
         get {
@@ -650,9 +607,7 @@ public extension UIView {
     }
     
     private var privateShadowColor: UIColor {
-        
         set(newValue) {
-            
             objc_setAssociatedObject(self, WYAssociatedKeys.privateShadowColor, newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)
         }
         get {
@@ -661,21 +616,16 @@ public extension UIView {
     }
     
     private var privateShadowOffset: CGSize {
-        
         set(newValue) {
-            
             objc_setAssociatedObject(self, WYAssociatedKeys.privateShadowOffset, NSCoder.string(for: newValue), .OBJC_ASSOCIATION_COPY_NONATOMIC)
         }
         get {
-            
             return NSCoder.cgSize(for: objc_getAssociatedObject(self, WYAssociatedKeys.privateShadowOffset) as? String ?? (NSCoder.string(for: CGSize.zero)))
         }
     }
     
     private var privateShadowRadius: CGFloat {
-        
         set(newValue) {
-            
             objc_setAssociatedObject(self, WYAssociatedKeys.privateShadowRadius, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
         get {
@@ -684,9 +634,7 @@ public extension UIView {
     }
     
     private var privateShadowOpacity: CGFloat {
-        
         set(newValue) {
-            
             objc_setAssociatedObject(self, WYAssociatedKeys.privateShadowOpacity, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
         get {
@@ -695,21 +643,16 @@ public extension UIView {
     }
     
     private var privateGradientDirection: WYGradientDirection {
-        
         set(newValue) {
-
             objc_setAssociatedObject(self, WYAssociatedKeys.privateGradientDirection, newValue.rawValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
         get {
-            
             return WYGradientDirection.init(rawValue: objc_getAssociatedObject(self, WYAssociatedKeys.privateGradientDirection) as? UInt ?? WYGradientDirection.leftToRight.rawValue) ?? .leftToRight
         }
     }
     
     private var privateGradualColors: [UIColor]? {
-        
         set(newValue) {
-            
             objc_setAssociatedObject(self, WYAssociatedKeys.privateGradualColors, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
         get {
@@ -718,21 +661,16 @@ public extension UIView {
     }
     
     private var privateViewBounds: CGRect {
-        
         set(newValue) {
-            
             objc_setAssociatedObject(self, WYAssociatedKeys.privateViewBounds, NSCoder.string(for: newValue), .OBJC_ASSOCIATION_COPY_NONATOMIC)
         }
         get {
-            
             return NSCoder.cgRect(for: objc_getAssociatedObject(self, WYAssociatedKeys.privateViewBounds) as? String ?? (NSCoder.string(for: CGRect.zero)))
         }
     }
     
     private var privateBezierPath: UIBezierPath? {
-        
         set(newValue) {
-            
             objc_setAssociatedObject(self, WYAssociatedKeys.privateBezierPath, newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)
         }
         get {
@@ -741,9 +679,7 @@ public extension UIView {
     }
     
     private var shadowBackgroundView: UIView? {
-        
         set(newValue) {
-            
             objc_setAssociatedObject(self, WYAssociatedKeys.shadowBackgroundView, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
         get {
@@ -752,7 +688,6 @@ public extension UIView {
     }
     
     private struct WYAssociatedKeys {
-        
         static let privateRectCorner = UnsafeRawPointer(bitPattern: "privateRectCorner".hashValue)!
         static let privateConrnerRadius = UnsafeRawPointer(bitPattern: "privateConrnerRadius".hashValue)!
         static let privateBorderColor = UnsafeRawPointer(bitPattern: "privateBorderColor".hashValue)!

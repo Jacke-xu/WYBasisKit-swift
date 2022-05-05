@@ -73,7 +73,7 @@ public extension UILabel {
     func wy_addRichText(strings: [String], delegate: WYRichTextDelegate) {
         
         DispatchQueue.main.async {
-            self.self.superview?.layoutIfNeeded()
+            self.superview?.layoutIfNeeded()
             self.wy_richTextRanges(strings: strings)
             self.wy_richTextDelegate = delegate
         }

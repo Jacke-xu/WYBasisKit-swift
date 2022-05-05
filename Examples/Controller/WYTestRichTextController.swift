@@ -60,6 +60,14 @@ class WYTestRichTextController: UIViewController {
         }
         
         wy_print("每行显示的分别是 \(String(describing: label.attributedText?.wy_stringPerLine(controlWidth: wy_screenWidth))), 一共 \(String(describing: label.attributedText?.wy_numberOfRows(controlWidth: wy_screenWidth))) 行")
+        
+        label.layoutIfNeeded()
+        let subFrame = attribute.wy_calculateFrame(range: NSMakeRange(attribute.string.count - 2, 1), controlSize: label.frame.size)
+        wy_print("\(subFrame), labelFrame = \(label.frame)")
+        
+        let lineView = UIView(frame: CGRect(x: subFrame.origin.x, y: subFrame.origin.y, width: subFrame.size.width, height: subFrame.size.height))
+        lineView.backgroundColor = .white.withAlphaComponent(0.2)
+        label.addSubview(lineView)
     }
     
     deinit {

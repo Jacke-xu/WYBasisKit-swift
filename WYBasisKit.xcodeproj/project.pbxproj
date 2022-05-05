@@ -24,6 +24,7 @@
 		1F9717FE25B55CB600CA7A33 /* WYWaterfallsFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9717FD25B55CB600CA7A33 /* WYWaterfallsFlowLayout.swift */; };
 		1F99DCC8257DCFAE003D2408 /* WYPagingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F99DCC7257DCFAE003D2408 /* WYPagingView.swift */; };
 		1FA6B68B25CD1B3400005170 /* WYWaterfallParagraphLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA6B68A25CD1B3400005170 /* WYWaterfallParagraphLayout.swift */; };
+		904441D8B816D3C4C7050CBD /* Pods_WYBasisKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC9497A42818FCF3005AE3F7 /* Pods_WYBasisKit.framework */; };
 		AA0B8849270989CB006F26C8 /* WYTestDownloadController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0B8848270989CB006F26C8 /* WYTestDownloadController.swift */; };
 		AA2827B426BFCF7A00EB9DBC /* WYLocalizable.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AA2827B326BFCF7A00EB9DBC /* WYLocalizable.bundle */; };
 		AA327F032569179F00CF5CBE /* WYBasisKitConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA327F022569179F00CF5CBE /* WYBasisKitConfig.swift */; };
@@ -90,11 +91,10 @@
 		DC94950328151D3E005AE3F7 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC94950228151D3E005AE3F7 /* CoreServices.framework */; };
 		DC94950628152FAD005AE3F7 /* Bool.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC94950528152FAD005AE3F7 /* Bool.swift */; };
 		DC94977328169103005AE3F7 /* WYLivePlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC94977128169103005AE3F7 /* WYLivePlayer.swift */; };
-		DC9497A52818FCF3005AE3F7 /* Pods_WYBasisKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC9497A42818FCF3005AE3F7 /* Pods_WYBasisKit.framework */; };
-		DC9497AC28190163005AE3F7 /* WYLivePlayerLite.zip in Resources */ = {isa = PBXBuildFile; fileRef = DC9497AA28190163005AE3F7 /* WYLivePlayerLite.zip */; };
-		DC9497AD28190163005AE3F7 /* WYLivePlayer.zip in Resources */ = {isa = PBXBuildFile; fileRef = DC9497AB28190163005AE3F7 /* WYLivePlayer.zip */; };
-		DC9497AF281905E7005AE3F7 /* IJKMediaFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC9497AE281905E7005AE3F7 /* IJKMediaFramework.framework */; };
 		DCB90A7827AE3A8A001DCA82 /* Foundation+JSONLog.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB90A7727AE3A8A001DCA82 /* Foundation+JSONLog.m */; };
+		DCCE5F8D2823BD0000607758 /* IJKMediaFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCCE5F8C2823BD0000607758 /* IJKMediaFramework.framework */; };
+		DCCE5F902823CC3F00607758 /* WYLivePlayerLite.zip in Resources */ = {isa = PBXBuildFile; fileRef = DCCE5F8E2823CC3F00607758 /* WYLivePlayerLite.zip */; };
+		DCCE5F912823CC3F00607758 /* WYLivePlayer.zip in Resources */ = {isa = PBXBuildFile; fileRef = DCCE5F8F2823CC3F00607758 /* WYLivePlayer.zip */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -194,10 +194,10 @@
 		DC94974D2816366A005AE3F7 /* Pods_WYBasisKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_WYBasisKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC94977128169103005AE3F7 /* WYLivePlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYLivePlayer.swift; sourceTree = "<group>"; };
 		DC9497A42818FCF3005AE3F7 /* Pods_WYBasisKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_WYBasisKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		DC9497AA28190163005AE3F7 /* WYLivePlayerLite.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = WYLivePlayerLite.zip; sourceTree = "<group>"; };
-		DC9497AB28190163005AE3F7 /* WYLivePlayer.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = WYLivePlayer.zip; sourceTree = "<group>"; };
-		DC9497AE281905E7005AE3F7 /* IJKMediaFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = IJKMediaFramework.framework; sourceTree = "<group>"; };
 		DCB90A7727AE3A8A001DCA82 /* Foundation+JSONLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Foundation+JSONLog.m"; sourceTree = "<group>"; };
+		DCCE5F8C2823BD0000607758 /* IJKMediaFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = IJKMediaFramework.framework; sourceTree = "<group>"; };
+		DCCE5F8E2823CC3F00607758 /* WYLivePlayerLite.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = WYLivePlayerLite.zip; sourceTree = "<group>"; };
+		DCCE5F8F2823CC3F00607758 /* WYLivePlayer.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = WYLivePlayer.zip; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -205,11 +205,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DC9497A52818FCF3005AE3F7 /* Pods_WYBasisKit.framework in Frameworks */,
 				DC94950328151D3E005AE3F7 /* CoreServices.framework in Frameworks */,
 				DC9494FC281107E8005AE3F7 /* VideoToolbox.framework in Frameworks */,
-				DC9497AF281905E7005AE3F7 /* IJKMediaFramework.framework in Frameworks */,
 				DC9494FA281107D7005AE3F7 /* QuartzCore.framework in Frameworks */,
+				DCCE5F8D2823BD0000607758 /* IJKMediaFramework.framework in Frameworks */,
 				DC9494F8281107CC005AE3F7 /* OpenGLES.framework in Frameworks */,
 				DC9494F4281107B3005AE3F7 /* MediaPlayer.framework in Frameworks */,
 				DC9494F2281107A8005AE3F7 /* CoreVideo.framework in Frameworks */,
@@ -221,6 +220,7 @@
 				DC9494E628110760005AE3F7 /* libbz2.tbd in Frameworks */,
 				DC9494E428110753005AE3F7 /* libz.tbd in Frameworks */,
 				DC9494E228110746005AE3F7 /* libc++.tbd in Frameworks */,
+				904441D8B816D3C4C7050CBD /* Pods_WYBasisKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -658,9 +658,9 @@
 			isa = PBXGroup;
 			children = (
 				DC94977128169103005AE3F7 /* WYLivePlayer.swift */,
-				DC9497AE281905E7005AE3F7 /* IJKMediaFramework.framework */,
-				DC9497AB28190163005AE3F7 /* WYLivePlayer.zip */,
-				DC9497AA28190163005AE3F7 /* WYLivePlayerLite.zip */,
+				DCCE5F8C2823BD0000607758 /* IJKMediaFramework.framework */,
+				DCCE5F8F2823CC3F00607758 /* WYLivePlayer.zip */,
+				DCCE5F8E2823CC3F00607758 /* WYLivePlayerLite.zip */,
 			);
 			path = LivePlayer;
 			sourceTree = "<group>";
@@ -735,8 +735,8 @@
 				AA484EBC24FA262500B39D60 /* Assets.xcassets in Resources */,
 				AAC3825A25A1874500B2D41C /* WYBannerView.bundle in Resources */,
 				AA484EBA24FA262100B39D60 /* Main.storyboard in Resources */,
-				DC9497AC28190163005AE3F7 /* WYLivePlayerLite.zip in Resources */,
-				DC9497AD28190163005AE3F7 /* WYLivePlayer.zip in Resources */,
+				DCCE5F902823CC3F00607758 /* WYLivePlayerLite.zip in Resources */,
+				DCCE5F912823CC3F00607758 /* WYLivePlayer.zip in Resources */,
 				AA2827B426BFCF7A00EB9DBC /* WYLocalizable.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1013,6 +1013,7 @@
 					"$(PROJECT_DIR)/WYBasisKit",
 					"$(PROJECT_DIR)/WYBasisKit/LivePlayer/IJKMediaFramework",
 					"$(PROJECT_DIR)/WYBasisKit/LivePlayer/IJKMediaFramework/arm64+x86_64",
+					"$(PROJECT_DIR)/WYBasisKit/LivePlayer/WYLivePlayerLite",
 				);
 				INFOPLIST_FILE = Examples/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -1046,6 +1047,7 @@
 					"$(PROJECT_DIR)/WYBasisKit",
 					"$(PROJECT_DIR)/WYBasisKit/LivePlayer/IJKMediaFramework",
 					"$(PROJECT_DIR)/WYBasisKit/LivePlayer/IJKMediaFramework/arm64+x86_64",
+					"$(PROJECT_DIR)/WYBasisKit/LivePlayer/WYLivePlayerLite",
 				);
 				INFOPLIST_FILE = Examples/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;

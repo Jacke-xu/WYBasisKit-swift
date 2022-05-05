@@ -25,7 +25,6 @@ public class WYPagingView: UIView {
      * @param handler 点击或滚动事件的block
      */
     public func itemDidScroll(handler: @escaping ((_ pagingIndex: NSInteger) -> Void)) {
-        
         actionHandler = handler
     }
 
