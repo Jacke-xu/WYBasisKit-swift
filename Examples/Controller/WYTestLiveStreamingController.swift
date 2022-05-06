@@ -90,8 +90,9 @@ class WYTestLiveStreamingController: UIViewController {
             make.left.right.centerY.equalToSuperview()
             make.height.equalTo(300)
         }
+        player.layoutIfNeeded()
         player.play(with: "http://devimages.apple.com/iphone/samples/bipbop/bipbopall.m3u8")
-        WYActivity.showLoading(in: view)
+        WYActivity.showLoading(in: player)
         
         /**
         let options: IJKFFOptions = IJKFFOptions.byDefault()
@@ -162,6 +163,7 @@ class WYTestLiveStreamingController: UIViewController {
     
     @objc func url(sender: UIButton) {
         player.play(with: "http://devimages.apple.com.edgekey.net/streaming/examples/bipbop_4x3/gear2/prog_index.m3u8")
+        WYActivity.showLoading(in: player)
     }
     
     deinit {
@@ -188,16 +190,18 @@ extension WYTestLiveStreamingController: WYLivePlayerDelegate {
             wy_print("未知状态")
         case .rendered:
             wy_print("第一帧渲染完成")
+            WYActivity.dismissLoading(in: player)
         case .ready:
             wy_print("可以播放了")
         case .playing:
             wy_print("正在播放")
-            WYActivity.dismissLoading(in: view)
+            WYActivity.dismissLoading(in: player)
         case .buffering:
             wy_print("缓冲中")
-            WYActivity.showLoading(in: view)
+            WYActivity.showLoading(in: player)
         case .playable:
             wy_print("缓冲结束")
+            WYActivity.dismissLoading(in: player)
         case .paused:
             wy_print("播放暂停")
         case .interrupted:
@@ -208,8 +212,10 @@ extension WYTestLiveStreamingController: WYLivePlayerDelegate {
             wy_print("快退")
         case .stopped:
             wy_print("停止播放")
+            WYActivity.dismissLoading(in: player)
         case .ended:
             wy_print("播放完毕")
+            WYActivity.dismissLoading(in: player)
         case .userExited:
             wy_print("用户中断播放")
         case .error:

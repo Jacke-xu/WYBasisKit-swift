@@ -26,7 +26,7 @@ Pod::Spec.new do |livePlayer|
                           CoreVideo.framework
                           MediaPlayer.framework
                           CoreServices.framework
-                          OpenGLES.framework
+                          Metal.framework
                           QuartzCore.framework
                           VideoToolbox.framework
                    DESC
@@ -43,5 +43,5 @@ Pod::Spec.new do |livePlayer|
   livePlayer.dependency 'Kingfisher'
   livePlayer.vendored_frameworks = 'WYLivePlayerLite/IJKMediaFramework.framework'
   livePlayer.libraries = 'c++', 'z', 'bz2'
-  livePlayer.frameworks = 'UIKit', 'AudioToolbox', 'CoreGraphics', 'AVFoundation', 'CoreMedia', 'CoreVideo', 'MediaPlayer', 'CoreServices', 'OpenGLES', 'QuartzCore', 'VideoToolbox'
+  livePlayer.frameworks = 'UIKit', 'AudioToolbox', 'CoreGraphics', 'AVFoundation', 'CoreMedia', 'CoreVideo', 'MediaPlayer', 'CoreServices', 'Metal', 'QuartzCore', 'VideoToolbox'
 end

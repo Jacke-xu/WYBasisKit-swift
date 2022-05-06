@@ -85,7 +85,6 @@
 		DC9494F02811079A005AE3F7 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC9494EF2811079A005AE3F7 /* CoreMedia.framework */; };
 		DC9494F2281107A8005AE3F7 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC9494F1281107A8005AE3F7 /* CoreVideo.framework */; };
 		DC9494F4281107B3005AE3F7 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC9494F3281107B3005AE3F7 /* MediaPlayer.framework */; };
-		DC9494F8281107CC005AE3F7 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC9494F7281107CC005AE3F7 /* OpenGLES.framework */; };
 		DC9494FA281107D7005AE3F7 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC9494F9281107D7005AE3F7 /* QuartzCore.framework */; };
 		DC9494FC281107E8005AE3F7 /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC9494FB281107E8005AE3F7 /* VideoToolbox.framework */; };
 		DC94950328151D3E005AE3F7 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC94950228151D3E005AE3F7 /* CoreServices.framework */; };
@@ -95,6 +94,7 @@
 		DCCE5F8D2823BD0000607758 /* IJKMediaFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCCE5F8C2823BD0000607758 /* IJKMediaFramework.framework */; };
 		DCCE5F902823CC3F00607758 /* WYLivePlayerLite.zip in Resources */ = {isa = PBXBuildFile; fileRef = DCCE5F8E2823CC3F00607758 /* WYLivePlayerLite.zip */; };
 		DCCE5F912823CC3F00607758 /* WYLivePlayer.zip in Resources */ = {isa = PBXBuildFile; fileRef = DCCE5F8F2823CC3F00607758 /* WYLivePlayer.zip */; };
+		DCCE5FCF2824B79100607758 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCCE5FCE2824B79000607758 /* Metal.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -198,6 +198,7 @@
 		DCCE5F8C2823BD0000607758 /* IJKMediaFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = IJKMediaFramework.framework; sourceTree = "<group>"; };
 		DCCE5F8E2823CC3F00607758 /* WYLivePlayerLite.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = WYLivePlayerLite.zip; sourceTree = "<group>"; };
 		DCCE5F8F2823CC3F00607758 /* WYLivePlayer.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = WYLivePlayer.zip; sourceTree = "<group>"; };
+		DCCE5FCE2824B79000607758 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -205,11 +206,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DCCE5FCF2824B79100607758 /* Metal.framework in Frameworks */,
 				DC94950328151D3E005AE3F7 /* CoreServices.framework in Frameworks */,
 				DC9494FC281107E8005AE3F7 /* VideoToolbox.framework in Frameworks */,
 				DC9494FA281107D7005AE3F7 /* QuartzCore.framework in Frameworks */,
 				DCCE5F8D2823BD0000607758 /* IJKMediaFramework.framework in Frameworks */,
-				DC9494F8281107CC005AE3F7 /* OpenGLES.framework in Frameworks */,
 				DC9494F4281107B3005AE3F7 /* MediaPlayer.framework in Frameworks */,
 				DC9494F2281107A8005AE3F7 /* CoreVideo.framework in Frameworks */,
 				DC9494F02811079A005AE3F7 /* CoreMedia.framework in Frameworks */,
@@ -290,6 +291,7 @@
 		94F8A53F1CB5643B124486A8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DCCE5FCE2824B79000607758 /* Metal.framework */,
 				DC9497A42818FCF3005AE3F7 /* Pods_WYBasisKit.framework */,
 				DC94974D2816366A005AE3F7 /* Pods_WYBasisKit.framework */,
 				DC94950228151D3E005AE3F7 /* CoreServices.framework */,
@@ -695,7 +697,7 @@
 			attributes = {
 				CLASSPREFIX = WY;
 				LastSwiftUpdateCheck = 1160;
-				LastUpgradeCheck = 1160;
+				LastUpgradeCheck = 1330;
 				ORGANIZATIONNAME = "Jacke·xu";
 				TargetAttributes = {
 					AA484EAE24FA262100B39D60 = {
@@ -908,6 +910,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -932,7 +935,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -969,6 +972,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -987,7 +991,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -1008,12 +1012,8 @@
 				DEVELOPMENT_TEAM = 3J5533TZC2;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/WYBasisKit/Other/LivePlayer",
 					"$(PROJECT_DIR)/WYBasisKit/LivePlayer",
 					"$(PROJECT_DIR)/WYBasisKit",
-					"$(PROJECT_DIR)/WYBasisKit/LivePlayer/IJKMediaFramework",
-					"$(PROJECT_DIR)/WYBasisKit/LivePlayer/IJKMediaFramework/arm64+x86_64",
-					"$(PROJECT_DIR)/WYBasisKit/LivePlayer/WYLivePlayerLite",
 				);
 				INFOPLIST_FILE = Examples/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -1042,12 +1042,8 @@
 				DEVELOPMENT_TEAM = 3J5533TZC2;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/WYBasisKit/Other/LivePlayer",
 					"$(PROJECT_DIR)/WYBasisKit/LivePlayer",
 					"$(PROJECT_DIR)/WYBasisKit",
-					"$(PROJECT_DIR)/WYBasisKit/LivePlayer/IJKMediaFramework",
-					"$(PROJECT_DIR)/WYBasisKit/LivePlayer/IJKMediaFramework/arm64+x86_64",
-					"$(PROJECT_DIR)/WYBasisKit/LivePlayer/WYLivePlayerLite",
 				);
 				INFOPLIST_FILE = Examples/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
