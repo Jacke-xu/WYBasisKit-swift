@@ -91,7 +91,8 @@ class WYTestLiveStreamingController: UIViewController {
             make.height.equalTo(300)
         }
         player.layoutIfNeeded()
-        player.play(with: "http://devimages.apple.com/iphone/samples/bipbop/bipbopall.m3u8")
+        player.play(with: "rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mp4")
+        //player.play(with: "http://devimages.apple.com/iphone/samples/bipbop/bipbopall.m3u8")
         WYActivity.showLoading(in: player)
         
         /**
@@ -162,7 +163,7 @@ class WYTestLiveStreamingController: UIViewController {
     }
     
     @objc func url(sender: UIButton) {
-        player.play(with: "http://devimages.apple.com.edgekey.net/streaming/examples/bipbop_4x3/gear2/prog_index.m3u8")
+        player.play(with: "https://files.cochat.lenovo.com/download/dbb26a06-4604-3d2b-bb2c-6293989e63a7/55deb281e01b27194daf6da391fdfe83.mp4")
         WYActivity.showLoading(in: player)
     }
     
