@@ -91,7 +91,17 @@ class WYTestLiveStreamingController: UIViewController {
             make.height.equalTo(300)
         }
         player.layoutIfNeeded()
+        
+//        let videoPath: String = Bundle.main.path(forResource: "mpeg4_local", ofType: "mp4") ?? ""
+//        let videoUrl = URL(fileURLWithPath: videoPath)
+//        player.play(with: videoUrl.absoluteString)
+        
+//        let videoPath: String = Bundle.main.path(forResource: "1650855755919", ofType: "mp4") ?? ""
+//        let videoUrl = URL(fileURLWithPath: videoPath)
+//        player.play(with: videoUrl.absoluteString)
+        
         player.play(with: "rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mp4")
+        
         //player.play(with: "http://devimages.apple.com/iphone/samples/bipbop/bipbopall.m3u8")
         WYActivity.showLoading(in: player)
         
@@ -205,22 +215,25 @@ extension WYTestLiveStreamingController: WYLivePlayerDelegate {
             WYActivity.dismissLoading(in: player)
         case .paused:
             wy_print("播放暂停")
+            WYActivity.dismissLoading(in: player)
         case .interrupted:
             wy_print("播放被中断")
+            WYActivity.dismissLoading(in: player)
         case .seekingForward:
             wy_print("快进")
+            WYActivity.dismissLoading(in: player)
         case .seekingBackward:
             wy_print("快退")
-        case .stopped:
-            wy_print("停止播放")
             WYActivity.dismissLoading(in: player)
         case .ended:
             wy_print("播放完毕")
             WYActivity.dismissLoading(in: player)
         case .userExited:
             wy_print("用户中断播放")
+            WYActivity.dismissLoading(in: player)
         case .error:
             wy_print("播放出现异常")
+            WYActivity.dismissLoading(in: player)
         }
     }
 }

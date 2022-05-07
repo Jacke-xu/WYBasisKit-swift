@@ -13,22 +13,6 @@ Pod::Spec.new do |livePlayer|
                           2.指定 podspec 文件路径
                           source 'https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git'
                           pod 'WYLivePlayerLite', :podspec => 'https://raw.githubusercontent.com/Jacke-xu/WYBasisKit-swift/master/WYLivePlayerLite.podspec'
-
-                          依赖库
-                          libc++.tbd
-                          libz.tbd
-                          libbz2.tbd
-                          AudioToolbox.framework
-                          UIKit.framework
-                          CoreGraphics.framework
-                          AVFoundation.framework
-                          CoreMedia.framework
-                          CoreVideo.framework
-                          MediaPlayer.framework
-                          CoreServices.framework
-                          Metal.framework
-                          QuartzCore.framework
-                          VideoToolbox.framework
                    DESC
 
   livePlayer.homepage     = 'https://github.com/Jacke-xu/WYBasisKit-swift'

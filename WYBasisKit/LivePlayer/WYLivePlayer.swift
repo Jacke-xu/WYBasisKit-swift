@@ -33,8 +33,6 @@ import IJKMediaFramework
     case seekingForward
     /// 快退
     case seekingBackward
-    /// 停止播放
-    case stopped
     /// 播放完毕
     case ended
     /// 用户中断播放
@@ -74,6 +72,9 @@ public class WYLivePlayer: UIImageView {
     
     /// 播放画面显示模式
     public var scalingMode: IJKMPMovieScalingMode = .aspectFill
+    
+    /// 播放器状态
+    public private(set) var state: WYLivePlayerState = .unknown
     
     /// 是否需要静音
     public func muted(_ mute: Bool) {
@@ -180,6 +181,7 @@ public class WYLivePlayer: UIImageView {
             options?.setPlayerOptionIntValue(25, forKey: "min-frames")
             options?.setPlayerOptionIntValue(1, forKey: "start-on-prepared")
             options?.setPlayerOptionIntValue(8, forKey: "skip_frame")
+            options?.setFormatOptionIntValue(1, forKey: "dns_cache_clear")
         }
         ijkPlayer = IJKFFMoviePlayerController(contentURL: URL(string: url), with: options)
         ijkPlayer?.shouldAutoplay = true
@@ -208,9 +210,9 @@ public class WYLivePlayer: UIImageView {
         if let reason: IJKMPMovieFinishReason = notification.userInfo?[IJKMPMoviePlayerPlaybackDidFinishReasonUserInfoKey] as? IJKMPMovieFinishReason {
             switch reason {
             case .playbackEnded:
-                delegate?.livePlayerDidChangeState?(self, .ended)
+                callback(with: .ended)
             case .playbackError:
-                delegate?.livePlayerDidChangeState?(self, .error)
+                callback(with: .error)
                 
                 if failReplayNumber < failReplay {
                     failReplayNumber += 1
@@ -219,7 +221,7 @@ public class WYLivePlayer: UIImageView {
                     releasePlayer()
                 }
             case .userExited:
-                delegate?.livePlayerDidChangeState?(self, .userExited)
+                callback(with: .userExited)
             default:
                 break
             }
@@ -232,40 +234,48 @@ public class WYLivePlayer: UIImageView {
         
         switch player.playbackState {
         case .playing:
-            delegate?.livePlayerDidChangeState?(self, .playing)
+            callback(with: .playing)
         case .paused:
-            delegate?.livePlayerDidChangeState?(self, .paused)
+            callback(with: .paused)
         case .interrupted:
-            delegate?.livePlayerDidChangeState?(self, .interrupted)
+            callback(with: .interrupted)
         case .seekingForward:
-            delegate?.livePlayerDidChangeState?(self, .seekingForward)
+            callback(with: .seekingForward)
         case .seekingBackward:
-            delegate?.livePlayerDidChangeState?(self, .seekingBackward)
+            callback(with: .seekingBackward)
         case .stopped:
-            delegate?.livePlayerDidChangeState?(self, .stopped)
+            callback(with: .ended)
         default:
             break
         }
     }
     
     @objc private func ijkPlayerLoadStateDidChange(notification: Notification) {
-        
+
         guard let player = ijkPlayer else { return }
         
         switch player.loadState {
         case .playable:
-            delegate?.livePlayerDidChangeState?(self, .playable)
+            callback(with: .playable)
         case .playthroughOK:
-            delegate?.livePlayerDidChangeState?(self, .ready)
+            callback(with: .ready)
         case .stalled:
-            delegate?.livePlayerDidChangeState?(self, .buffering)
+            callback(with: .buffering)
         default:
-            delegate?.livePlayerDidChangeState?(self, .unknown)
+            callback(with: .unknown)
         }
     }
     
     @objc private func ijkPlayerLoadStateDidRendered(notification: Notification) {
-        delegate?.livePlayerDidChangeState?(self, .rendered)
+        callback(with: .rendered)
+    }
+    
+    private func callback(with currentState: WYLivePlayerState) {
+        guard currentState != state else {
+            return
+        }
+        state = currentState
+        delegate?.livePlayerDidChangeState?(self, state)
     }
     
     deinit {
