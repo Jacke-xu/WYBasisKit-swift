@@ -4,4 +4,5 @@ ${BUILT_PRODUCTS_DIR}/HandyJSON/HandyJSON.framework
 ${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework
 ${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework
 ${BUILT_PRODUCTS_DIR}/Moya/Moya.framework
+${PODS_ROOT}/Reveal-24/res/RevealServer.framework
 ${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework
