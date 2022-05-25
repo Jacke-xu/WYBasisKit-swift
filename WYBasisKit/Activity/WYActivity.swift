@@ -29,7 +29,7 @@ public enum WYActivityAnimation {
     case indicator
     
     /// 图片帧
-    case gifImage
+    case gif
 }
 
 public struct WYActivityConfig {
@@ -75,7 +75,7 @@ public struct WYActivityConfig {
     public var loadingTextFont: UIFont = loadingTextFont
 
     /// 设置Loading提示窗口动图信息
-    public static var gifInfo: WYGifInfo = defaultGifInfo()
+    public static var gifInfo: WYGifInfo = UIImage.wy_gifParse("colourdot", inBundle: "WYActivity", subdirectory: "Colourdot")!
     public var gifInfo: WYGifInfo = gifInfo
 
     /// 设置Loading提示窗口 indicator 的颜色
@@ -89,25 +89,24 @@ public struct WYActivityConfig {
     /// 设置Loading提示窗口动画控件的Size
     public static var animationSize: CGSize = CGSize(width: wy_screenWidth(60), height: wy_screenWidth(60))
     public var animationSize: CGSize = animationSize
+}
 
+public extension WYActivityConfig {
+    
     /// 滚动信息提示窗口默认配置
-    public static let scroll: WYActivityConfig = WYActivityConfig(scrollInfoBackgroundColor: scrollInfoBackgroundColor, movingSpeed: movingSpeed, scrollInfoTextColor: scrollInfoTextColor, scrollInfoTextFont: scrollInfoTextFont)
+    static let scroll: WYActivityConfig = WYActivityConfig(scrollInfoBackgroundColor: scrollInfoBackgroundColor, movingSpeed: movingSpeed, scrollInfoTextColor: scrollInfoTextColor, scrollInfoTextFont: scrollInfoTextFont)
 
     /// 信息提示窗口默认配置
-    public static let info: WYActivityConfig = WYActivityConfig(infoBackgroundColor: infoBackgroundColor, infoTextColor: infoTextColor, infoTextFont: infoTextFont)
-
-    /// Loading提示窗口默认配置
-    public static let loading: WYActivityConfig = WYActivityConfig(loadingBackgroundColor: loadingBackgroundColor, loadingTextColor: loadingTextColor, loadingTextFont: loadingTextFont, gifInfo: gifInfo, indicatorColor: indicatorColor, loadingNumberOfLines: loadingNumberOfLines, animationSize: animationSize)
-
-    /// 获取Loading提示窗口默认动图
-    private static func defaultGifInfo() -> WYGifInfo {
-
-        var defaultImages: [UIImage] = []
-        for index in 0..<5 {
-            defaultImages.append(UIImage.wy_named("loading" + "\(index + 1)", inBundle: "WYActivity", subdirectory: "LoadingState"))
-        }
-        return WYGifInfo(animationImages: defaultImages, animationDuration: 0.4)
-    }
+    static let info: WYActivityConfig = WYActivityConfig(infoBackgroundColor: infoBackgroundColor, infoTextColor: infoTextColor, infoTextFont: infoTextFont)
+    
+    /// indicator Loading提示窗口配置
+    static let indicator: WYActivityConfig = WYActivityConfig(loadingBackgroundColor: loadingBackgroundColor, loadingTextColor: loadingTextColor, loadingTextFont: loadingTextFont, indicatorColor: indicatorColor, loadingNumberOfLines: loadingNumberOfLines, animationSize: animationSize)
+    
+    /// 彩点 Loading提示窗口配置
+    static let colourdot: WYActivityConfig = WYActivityConfig(loadingBackgroundColor: .clear, loadingTextColor: loadingTextColor, loadingTextFont: loadingTextFont, gifInfo: gifInfo, indicatorColor: indicatorColor, loadingNumberOfLines: loadingNumberOfLines, animationSize: animationSize)
+    
+    /// 自行车 Loading提示窗口配置
+    static let bike: WYActivityConfig = WYActivityConfig(loadingBackgroundColor: loadingBackgroundColor, loadingTextColor: loadingTextColor, loadingTextFont: loadingTextFont, gifInfo: UIImage.wy_gifParse("bike", inBundle: "WYActivity", subdirectory: "Bike")!, indicatorColor: indicatorColor, loadingNumberOfLines: loadingNumberOfLines, animationSize: animationSize)
 }
 
 public struct WYActivity {
@@ -169,7 +168,7 @@ public struct WYActivity {
      *  @param config             信息提示窗口配置选项
      *
      */
-    public static func showLoading(_ content: Any? = nil, in contentView: UIView, userInteraction: Bool = true, animation: WYActivityAnimation = .indicator, delay: TimeInterval = 0, config: WYActivityConfig = .loading) {
+    public static func showLoading(_ content: Any? = nil, in contentView: UIView, userInteraction: Bool = true, animation: WYActivityAnimation = .indicator, delay: TimeInterval = 0, config: WYActivityConfig = .indicator) {
         
         WYActivityLoadingView.showContent(content, in: contentView, userInteraction: userInteraction, animation: animation, delay: delay, config: config)
     }
@@ -501,7 +500,7 @@ private class WYActivityLoadingView: UIView {
             indicator.startAnimating()
 
             break
-        case .gifImage:
+        case .gif:
 
             initialLayout(subContro: imageView, contentView: contentView, subControSize: config.animationSize)
 
@@ -565,7 +564,7 @@ private class WYActivityLoadingView: UIView {
                 indicator.wy_left = indicator.wy_left + wy_screenWidth(2)
 
                 break
-            case .gifImage:
+            case .gif:
 
                 finishLayout(subContro: imageView, contentView: contentView)
 
