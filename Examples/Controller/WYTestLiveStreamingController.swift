@@ -84,7 +84,7 @@ class WYTestLiveStreamingController: UIViewController {
         
         player.delegate = self
         player.looping = 1
-        player.backgroundColor = .black
+        player.backgroundColor = .white
         view.addSubview(player)
         player.snp.makeConstraints { make in
             make.left.right.centerY.equalToSuperview()
@@ -100,10 +100,13 @@ class WYTestLiveStreamingController: UIViewController {
 //        let videoUrl = URL(fileURLWithPath: videoPath)
 //        player.play(with: videoUrl.absoluteString)
         
-        player.play(with: "rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mp4")
+//        player.play(with: "rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mp4")
         
-        //player.play(with: "http://devimages.apple.com/iphone/samples/bipbop/bipbopall.m3u8")
-        WYActivity.showLoading(in: player)
+//        player.play(with: "http://devimages.apple.com/iphone/samples/bipbop/bipbopall.m3u8")
+        
+        player.play(with: "http://39.134.65.162/PLTV/88888888/224/3221225611/index.m3u8")
+        
+        WYActivity.showLoading(in: player, animation: .gif, config: .concise)
         
         /**
         let options: IJKFFOptions = IJKFFOptions.byDefault()
@@ -174,7 +177,7 @@ class WYTestLiveStreamingController: UIViewController {
     
     @objc func url(sender: UIButton) {
         player.play(with: "https://files.cochat.lenovo.com/download/dbb26a06-4604-3d2b-bb2c-6293989e63a7/55deb281e01b27194daf6da391fdfe83.mp4")
-        WYActivity.showLoading(in: player)
+        WYActivity.showLoading(in: player, animation: .gif, config: .concise)
     }
     
     deinit {
@@ -209,7 +212,7 @@ extension WYTestLiveStreamingController: WYLivePlayerDelegate {
             WYActivity.dismissLoading(in: player)
         case .buffering:
             wy_print("缓冲中")
-            WYActivity.showLoading(in: player)
+            WYActivity.showLoading(in: player, animation: .gif, config: .concise)
         case .playable:
             wy_print("缓冲结束")
             WYActivity.dismissLoading(in: player)

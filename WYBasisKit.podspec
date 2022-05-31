@@ -1,7 +1,7 @@
 Pod::Spec.new do |kit|
 
   kit.name         = 'WYBasisKit'
-  kit.version      = '1.2.0'
+  kit.version      = '1.2.1'
   kit.summary      = 'WYBasisKit 不仅可以帮助开发者快速构建一个工程，还有基于常用网络框架和系统API而封装的各种实用方法、扩展，开发者只需简单的调用API就可以快速实现相应功能， 大幅提高开发效率。'
   kit.description  = <<-DESC
                          Localizable: 国际化解决方案
@@ -9,7 +9,6 @@ Pod::Spec.new do |kit|
                          Networking: 网络请求解决方案
                          Activity: loading指示器
                          Storage: 本地存储
-                         LivePlayer: 直播播放器
                          Layout: 布局相关
                    DESC
 

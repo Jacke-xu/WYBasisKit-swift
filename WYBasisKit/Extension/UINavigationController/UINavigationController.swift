@@ -38,7 +38,6 @@ public extension UINavigationController {
     var wy_backgroundImage: UIImage {
         
         set(newValue) {
-            
             self.navigationBar.setBackgroundImage(newValue, for: .default)
         }
         get {
@@ -131,12 +130,12 @@ public extension UINavigationController {
     /// 返回按钮图片
     var wy_returnButtonImage: UIImage {
         set(newValue) {
-            
-            self.navigationBar.backIndicatorTransitionMaskImage = newValue
+            if #available(iOS 15.0, *) {
+                self.navigationBar.backIndicatorTransitionMaskImage = newValue
+            }
             self.navigationBar.backIndicatorImage = newValue
         }
         get {
-            
             return self.navigationBar.backIndicatorImage ?? UIImage.wy_createImage(from: .white)
         }
     }
@@ -145,20 +144,19 @@ public extension UINavigationController {
     var wy_returnButtonColor: UIColor {
         
         set(newValue) {
-            
             self.navigationBar.tintColor = newValue
         }
         get {
-            
             return self.navigationBar.tintColor
         }
     }
     
-    /// 返回按钮文本
+    /// 返回按钮文本(仅在创建UINavigationController时设置全局样式，如在UITabBarController中初始化子控制器时设置)
     var wy_returnButtonTitle: String {
 
-        /// 直接在导航栏的代理方法中全局设置
-        set {}
+        set {
+            topViewController?.navigationItem.backBarButtonItem?.title = newValue
+        }
 
         get {
             return topViewController?.navigationItem.backBarButtonItem?.title ?? ""

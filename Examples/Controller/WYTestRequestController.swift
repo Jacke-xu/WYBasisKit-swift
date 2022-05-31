@@ -34,7 +34,7 @@ class WYTestRequestController: UIViewController {
     
         let delay: TimeInterval = ((storageData.isInvalid == false) && (storageData.userData != nil)) ? 2 : 0
         
-        WYActivity.showLoading("加载中...", in: view, delay: delay)
+        WYActivity.showLoading("加载中", in: view, delay: delay)
         WYNetworkManager.request(method: .get, path: "networRequest", config: config) { result in
             
             switch result {
