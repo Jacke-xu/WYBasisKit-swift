@@ -260,7 +260,7 @@ public extension UIImage {
      *  @param bundle                从哪个bundle文件内查找，如果为空，则直接在本地路径下查找
      *
      */
-    class func wy_named(_ imageName: String, inBundle bundle: WYSourceBundle? = nil) -> UIImage {
+    class func wy_find(_ imageName: String, inBundle bundle: WYSourceBundle? = nil) -> UIImage {
         
         if imageName.isEmpty {
             

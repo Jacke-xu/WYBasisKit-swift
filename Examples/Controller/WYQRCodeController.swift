@@ -20,7 +20,7 @@ class WYQRCodeController: UIViewController {
         let qrData = try! JSONSerialization.data(withJSONObject: ["简书": "http://events.jianshu.io/p/88f00643076b", "GitHub": "https://github.com/Jacke-xu/WYBasisKit-swift"], options: [JSONSerialization.WritingOptions.prettyPrinted])
         //let qrData = "WYBasisKit".data(using: .utf8)!
 
-        let imageView = UIImageView(image: UIImage.wy_createQrCode(with: qrData, size: CGSize(width: 350, height: 350), waterImage: UIImage.wy_named("WYBasisKit_60*60")))
+        let imageView = UIImageView(image: UIImage.wy_createQrCode(with: qrData, size: CGSize(width: 350, height: 350), waterImage: UIImage.wy_find("WYBasisKit_60*60")))
         view.addSubview(imageView)
         imageView.snp.makeConstraints { make in
             make.center.equalToSuperview()

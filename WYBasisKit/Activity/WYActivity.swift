@@ -110,7 +110,7 @@ public extension WYActivityConfig {
         
         var defaultImages: [UIImage] = []
         for index in 0..<8 {
-            defaultImages.append(UIImage.wy_named("indicator0" + "\(index + 1)", inBundle: WYSourceBundle(bundleName: "WYActivity", subdirectory: "Indicator")))
+            defaultImages.append(UIImage.wy_find("indicator0" + "\(index + 1)", inBundle: WYSourceBundle(bundleName: "WYActivity", subdirectory: "Indicator")))
         }
         return WYGifInfo(animationImages: defaultImages, animationDuration: 0.8)
     }

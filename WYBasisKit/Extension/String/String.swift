@@ -341,7 +341,7 @@ public extension String {
                         
                         // 获取表情对应的图片名
                         if let imageName: String = emojiTable[emojiStr] {
-                            let image: UIImage = UIImage.wy_named(imageName, inBundle: sourceBundle)
+                            let image: UIImage = UIImage.wy_find(imageName, inBundle: sourceBundle)
                             
                             // 创建一个NSTextAttachment
                             let attachment = NSTextAttachment()
