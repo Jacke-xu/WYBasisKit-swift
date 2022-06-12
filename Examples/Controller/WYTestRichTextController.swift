@@ -13,7 +13,7 @@ class WYTestRichTextController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .wy_random
+        view.backgroundColor = .white
         
         // Do any additional setup after loading the view.
         let label = UILabel()
@@ -39,10 +39,23 @@ class WYTestRichTextController: UIViewController {
             make.left.right.centerY.equalToSuperview()
         }
         
+        let emojiLabel = UILabel()
+        emojiLabel.font = .systemFont(ofSize: 18)
+        emojiLabel.numberOfLines = 0
+        emojiLabel.backgroundColor = .white
+        emojiLabel.textColor = .black
+        emojiLabel.attributedText = "Hello，这是一个测试表情匹配的UILabel，现在开始匹配 玫瑰[玫瑰] 色[色] 嘻嘻[嘻嘻] 三个表情，看见了吗，他可以用在即时通讯等需要表情匹配的地方".wy_convertEmojiAttributed(textColor: emojiLabel.textColor, textFont: emojiLabel.font, emojiTable: ["[玫瑰]":"meigui","[色]":"se","[嘻嘻]":"xixi"])
+        view.addSubview(emojiLabel)
+        emojiLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(label.snp.bottom).offset(20)
+            make.centerX.equalToSuperview()
+            make.width.equalTo(wy_screenWidth - 30)
+        }
+        
         let marginLabel = UILabel()
         marginLabel.text = "测试内边距"
         marginLabel.font = .systemFont(ofSize: 18)
-        marginLabel.backgroundColor = .green
+        marginLabel.backgroundColor = .purple
         marginLabel.textColor = .orange
         
         let attrText = NSMutableAttributedString(string: marginLabel.text!)
@@ -54,6 +67,7 @@ class WYTestRichTextController: UIViewController {
         
         marginLabel.sizeToFit()
         marginLabel.snp.makeConstraints { (make) in
+            
             make.centerX.equalToSuperview()
             make.width.equalTo(marginLabel.wy_width + 10)
             make.bottom.equalToSuperview().offset(-150)

@@ -9,6 +9,15 @@
 import Foundation
 import UIKit
 
+public struct WYSourceBundle {
+    
+    /// 从哪个bundle文件内查找，如果bundleName对应的bundle不存在，则直接在本地路径下查找
+    public let bundleName: String
+    
+    /// bundleName.bundle下面的子文件夹路径，如果子文件夹有多层，就用/即那个开(如果要获取资源是放在bundle文件下面的子文件夹中，则需要传入该路径，例如ImageSource.bundle下面有个叫apple的子文件夹，则subdirectory应该传入 apple)
+    public let subdirectory: String
+}
+
 public extension UIImage {
     
     /// 截取指定View快照
@@ -248,12 +257,10 @@ public extension UIImage {
      *
      *  @param imageName             要加载的图片名
      *
-     *  @param bundleName            从哪个bundle文件内查找，如果为空，则直接在本地路径下查找
-     *
-     *  @param subdirectory         bundleName.bundle下面的子文件夹目录(如果图片是放在bundle文件下面的子文件夹中，则需要传入该路径，例如ImageSource.bundle下面有个叫apple的子文件夹，则subdirectory应该传入 apple )
+     *  @param bundle                从哪个bundle文件内查找，如果为空，则直接在本地路径下查找
      *
      */
-    class func wy_named(_ imageName: String, inBundle bundleName: String = WYBasisKitConfig.bundleName, subdirectory: String = "") -> UIImage {
+    class func wy_named(_ imageName: String, inBundle bundle: WYSourceBundle? = nil) -> UIImage {
         
         if imageName.isEmpty {
             
@@ -261,7 +268,22 @@ public extension UIImage {
             return wy_createImage(from: UIColor(red: CGFloat(arc4random()%256)/255.0, green: CGFloat(arc4random()%256)/255.0, blue: CGFloat(arc4random()%256)/255.0, alpha: 1.0))
         }
         
-        if bundleName.isEmpty {
+        if let imageBundle: WYSourceBundle = bundle {
+            
+            var subdirectoryPath = imageBundle.subdirectory
+            if  (imageBundle.subdirectory.isEmpty == false) && (imageBundle.subdirectory.hasPrefix("/") == false) {
+                subdirectoryPath = "/" + imageBundle.subdirectory
+            }
+            
+            let resourcePath = (((Bundle(for: WYLocalizableClass.self).path(forResource: imageBundle.bundleName, ofType: "bundle")) ?? (Bundle.main.path(forResource: imageBundle.bundleName, ofType: "bundle"))) ?? "").appending(subdirectoryPath)
+            
+            guard let contentImage = UIImage(named: imageName, in: Bundle(path: resourcePath), compatibleWith: nil) else {
+                
+                wy_print("在 \(imageBundle.bundleName).bundle\(imageBundle.subdirectory) 中没有找到 \(imageName) 这张图片，已默认创建一张随机颜色图片供您使用")
+                return wy_createImage(from: UIColor(red: CGFloat(arc4random()%256)/255.0, green: CGFloat(arc4random()%256)/255.0, blue: CGFloat(arc4random()%256)/255.0, alpha: 1.0))
+            }
+            return contentImage
+        }else {
             
             guard let image = UIImage(named: imageName) else {
                 
@@ -276,22 +298,6 @@ public extension UIImage {
                 return contentImage
             }
             return image
-            
-        }else {
-            
-            var subdirectoryPath = subdirectory
-            if  (subdirectory.isEmpty == false) && (subdirectory.hasPrefix("/") == false) {
-                subdirectoryPath = "/" + subdirectory
-            }
-            
-            let resourcePath = (((Bundle(for: WYLocalizableClass.self).path(forResource: bundleName, ofType: "bundle")) ?? (Bundle.main.path(forResource: bundleName, ofType: "bundle"))) ?? "").appending(subdirectoryPath)
-            
-            guard let contentImage = UIImage(named: imageName, in: Bundle(path: resourcePath), compatibleWith: nil) else {
-                
-                wy_print("在 \(bundleName).bundle\(subdirectory) 中没有找到 \(imageName) 这张图片，已默认创建一张随机颜色图片供您使用")
-                return wy_createImage(from: UIColor(red: CGFloat(arc4random()%256)/255.0, green: CGFloat(arc4random()%256)/255.0, blue: CGFloat(arc4random()%256)/255.0, alpha: 1.0))
-            }
-            return contentImage
         }
     }
     
@@ -300,13 +306,11 @@ public extension UIImage {
      *
      *  @param gifName  要解析的Gif图
      *
-     *  @param bundleName            从哪个bundle文件内查找，如果为空，则直接在本地路径下查找
-     *
-     *  @param subdirectory         bundleName.bundle下面的子文件夹目录(如果图片是放在bundle文件下面的子文件夹中，则需要传入该路径，例如ImageSource.bundle下面有个叫apple的子文件夹，则subdirectory应该传入 apple )
+     *  @param bundle   从哪个bundle文件内查找，如果为空，则直接在本地路径下查找
      *
      *  @return Gif 图片解析结果
      */
-    class func wy_gifParse(_ gifName: String, inBundle bundleName: String = WYBasisKitConfig.bundleName, subdirectory: String = "") -> WYGifInfo? {
+    class func wy_gifParse(_ gifName: String, inBundle bundle: WYSourceBundle? = nil) -> WYGifInfo? {
         
         guard gifName.isEmpty == false else {
             return nil
@@ -316,18 +320,17 @@ public extension UIImage {
         
         var contentPath: String = ""
         
-        if bundleName.isEmpty {
+        if let sourceBundle: WYSourceBundle = bundle {
             
-            contentPath = ((Bundle(for: WYLocalizableClass.self).path(forResource: gifImageName, ofType: nil)) ?? (Bundle.main.path(forResource: gifImageName, ofType: nil))) ?? ""
-            
-        }else {
-            
-            var subdirectoryPath = subdirectory
-            if  (subdirectory.isEmpty == false) && (subdirectory.hasPrefix("/") == false) {
-                subdirectoryPath = "/" + subdirectory
+            var subdirectoryPath = sourceBundle.subdirectory
+            if  (sourceBundle.subdirectory.isEmpty == false) && (sourceBundle.subdirectory.hasPrefix("/") == false) {
+                subdirectoryPath = "/" + sourceBundle.subdirectory
             }
             
-            contentPath = ((((Bundle(for: WYLocalizableClass.self).path(forResource: bundleName, ofType: "bundle")) ?? (Bundle.main.path(forResource: bundleName, ofType: "bundle"))) ?? "").appending(subdirectoryPath)) + "/" + gifImageName
+            contentPath = ((((Bundle(for: WYLocalizableClass.self).path(forResource: sourceBundle.bundleName, ofType: "bundle")) ?? (Bundle.main.path(forResource: sourceBundle.bundleName, ofType: "bundle"))) ?? "").appending(subdirectoryPath)) + "/" + gifImageName
+            
+        }else {
+            contentPath = ((Bundle(for: WYLocalizableClass.self).path(forResource: gifImageName, ofType: nil)) ?? (Bundle.main.path(forResource: gifImageName, ofType: nil))) ?? ""
         }
         
         guard let contentData = NSData(contentsOfFile: contentPath) else {

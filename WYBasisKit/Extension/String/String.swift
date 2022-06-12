@@ -257,7 +257,7 @@ public extension String {
     
     /// 根据时间戳获取星座
     static func wy_constellation(from timestamp: String) -> String {
-
+        
         let timeInterval: TimeInterval = timestamp.count <= 10 ? (NumberFormatter().number(from: timestamp)?.doubleValue ?? 0.0) : ((NumberFormatter().number(from: timestamp)?.doubleValue ?? 0.0) / 1000)
         
         let oneDay:Double = 86400
@@ -273,13 +273,13 @@ public extension String {
                                  WYLocalizedString("天秤座"): "9.23-10.23",
                                  WYLocalizedString("天蝎座"): "10.24-11.22",
                                  WYLocalizedString("射手座"): "11.23-12.21"]
-
+        
         let currConstellation = constellationDics.filter {
-
+            
             let timeRange = constellationDivision(timestamp: timestamp, range: $1)
             let startTime = timeRange.0
             let endTime = timeRange.1 + oneDay
-
+            
             return timeInterval > startTime && timeInterval < endTime
         }
         return currConstellation.first?.key ?? WYLocalizedString("摩羯座")
@@ -300,7 +300,69 @@ public extension String {
         return targetString.removingPercentEncoding ?? self
     }
     
-    /// 去除字符串中特殊字符
+    /**
+     *  根据传入的表情字符串生成富文本，例如字符串 "哈哈[哈哈]" 会生成 "哈哈😄"
+     *  @param textColor     富文本的字体颜色
+     *  @param textFont      富文本的字体
+     *  @param emojiTable    表情解析对照表，如 ["哈哈]": "哈哈表情对应的图片名", [嘿嘿]: "嘿嘿表情对应的图片名"]
+     *  @param bundle        从哪个bundle文件内查找图片资源，如果为空，则直接在本地路径下查找
+     *  @param pattern       正则匹配规则, 默认匹配1到3位, 如 [哈] [哈哈] [哈哈哈] 这种
+     */
+    func wy_convertEmojiAttributed(textColor: UIColor, textFont: UIFont, emojiTable: [String: String], sourceBundle: WYSourceBundle? = nil, pattern: String = "\\[.{1,3}\\]") -> NSMutableAttributedString {
+        
+        let emojiString: String = self
+        
+        // 字体、颜色
+        let textAttributes = [NSAttributedString.Key.font: textFont, NSAttributedString.Key.foregroundColor: textColor]
+        
+        // 获取字体的行高，作为表情的高度
+        let attachmentHeight = textFont.lineHeight
+        
+        // 通过 emojiString 获得 NSMutableAttributedString
+        let attributedString = NSMutableAttributedString(string: emojiString, attributes: textAttributes)
+        
+        var regex: NSRegularExpression?
+        do {
+            regex = try NSRegularExpression(pattern: pattern, options: .caseInsensitive)
+        } catch let error {
+            wy_print(error.localizedDescription)
+        }
+        
+        // 获取到匹配正则的数据
+        if let matches = regex?.matches(in: emojiString, options: .withoutAnchoringBounds, range: NSMakeRange(0, attributedString.string.count)) {
+            if matches.count > 0 {
+                // 遍历符合的数据进行解析
+                for i in 0..<matches.count {
+                    let result = matches[matches.count-i-1]
+                    let range = result.range
+                    let emojiStr = (emojiString as NSString).substring(with: range)
+                    // 符合的数据是否为表情
+                    if emojiTable.keys.contains(emojiStr) {
+                        
+                        // 获取表情对应的图片名
+                        if let imageName: String = emojiTable[emojiStr] {
+                            let image: UIImage = UIImage.wy_named(imageName, inBundle: sourceBundle)
+                            
+                            // 创建一个NSTextAttachment
+                            let attachment = NSTextAttachment()
+                            attachment.image  = image
+                            
+                            let attachmentWidth = attachmentHeight * (image.size.width / image.size.height)
+                            
+                            attachment.bounds = CGRect(x: 0, y: (textFont.capHeight - textFont.lineHeight)/2, width: attachmentWidth, height: attachmentHeight)
+                            
+                            // 通过NSTextAttachment生成一个NSAttributedString
+                            let replace = NSAttributedString(attachment: attachment)
+                            
+                            // 替换表情字符串
+                            attributedString.replaceCharacters(in: range, with: replace)
+                        }
+                    }
+                }
+            }
+        }
+        return attributedString
+    }
 }
 
 private extension String {
@@ -327,28 +389,28 @@ private extension String {
     
     /// 获取星座开始、结束时间
     static func constellationDivision(timestamp: String, range: String) -> (TimeInterval, TimeInterval) {
-
+        
         /// 获取当前年份
         func getCurrYear(date:Date) -> String {
-
+            
             let dm = DateFormatter()
             dm.dateFormat = "yyyy."
             let currYear = dm.string(from: date)
             return currYear
         }
-
+        
         /// 日期转换当前时间戳
         func toTimeInterval(dateStr: String) -> TimeInterval? {
-
+            
             let dm = DateFormatter()
             dm.dateFormat = "yyyy.MM.dd"
-
+            
             let date = dm.date(from: dateStr)
             let interval = date?.timeIntervalSince1970
-
+            
             return interval
         }
-
+        
         let timeStrArr = range.components(separatedBy: "-")
         
         let timeInterval: TimeInterval = timestamp.count <= 10 ? (NumberFormatter().number(from: timestamp)?.doubleValue ?? 0.0) : ((NumberFormatter().number(from: timestamp)?.doubleValue ?? 0.0) / 1000)
@@ -356,10 +418,10 @@ private extension String {
         let dateYear = getCurrYear(date: Date(timeIntervalSince1970: timeInterval))
         let startTimeStr = dateYear + timeStrArr.first!
         let endTimeStr = dateYear + timeStrArr.last!
-
+        
         let startTime = toTimeInterval(dateStr: startTimeStr)!
         let endTime = toTimeInterval(dateStr: endTimeStr)!
-
+        
         return (startTime, endTime)
     }
 }

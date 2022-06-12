@@ -15,6 +15,7 @@
 			dependencies = (
 			);
 			name = "Reveal-24";
+			productName = "Reveal-24";
 		};
 /* End PBXAggregateTarget section */
 
@@ -487,7 +488,7 @@
 		9C7CF73E0722F2F01D91372E847C85E1 /* ImageContext.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ImageContext.swift; path = Sources/SwiftUI/ImageContext.swift; sourceTree = "<group>"; };
 		9CE1C145662C6FFD1D85EFAD651D6D28 /* Filter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Filter.swift; path = Sources/Image/Filter.swift; sourceTree = "<group>"; };
 		9D11EC55FA62E428ED4908AC69075121 /* Endpoint.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Endpoint.swift; path = Sources/Moya/Endpoint.swift; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9D9412CC5F0596508195B6FA466EF0E0 /* URL+Moya.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "URL+Moya.swift"; path = "Sources/Moya/URL+Moya.swift"; sourceTree = "<group>"; };
 		9F0201B19F999CBA5B5B657F5A5CA364 /* ConstraintItem.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintItem.swift; path = Sources/ConstraintItem.swift; sourceTree = "<group>"; };
 		9F57C13DC954DB8A7DCBB996958BBCF2 /* ImageDataProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ImageDataProvider.swift; path = Sources/General/ImageSource/ImageDataProvider.swift; sourceTree = "<group>"; };
@@ -562,7 +563,7 @@
 		CC8ECF800B0E9A3AD6B9F453E032BDD5 /* HandyJSON-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "HandyJSON-Info.plist"; sourceTree = "<group>"; };
 		CCD4F386159F87641729CF4A42BA3223 /* RedirectHandler.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RedirectHandler.swift; path = Source/RedirectHandler.swift; sourceTree = "<group>"; };
 		CD4B952E0241219598EBBD9C75AFAA23 /* URLRequest+Encoding.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "URLRequest+Encoding.swift"; path = "Sources/Moya/URLRequest+Encoding.swift"; sourceTree = "<group>"; };
-		CD54121DDA84872534168702B5F92950 /* HandyJSON */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = HandyJSON; path = HandyJSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD54121DDA84872534168702B5F92950 /* HandyJSON.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HandyJSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE40CAB7DC3D679B39615F649C7F4199 /* Placeholder.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Placeholder.swift; path = Sources/Image/Placeholder.swift; sourceTree = "<group>"; };
 		D18B7766C5A107C14220E14052B25BD4 /* ParameterEncoding.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ParameterEncoding.swift; path = Source/ParameterEncoding.swift; sourceTree = "<group>"; };
 		D19A40E0AFCEAE912C13A58A661937D4 /* EnumType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = EnumType.swift; path = Source/EnumType.swift; sourceTree = "<group>"; };
@@ -684,7 +685,6 @@
 				316427D52B1B5BE27A06CD82BCAC43A1 /* Core */,
 				4089356A2823C2E66F0F0798ABA7BEF7 /* Support Files */,
 			);
-			name = Moya;
 			path = Moya;
 			sourceTree = "<group>";
 		};
@@ -692,7 +692,7 @@
 			isa = PBXGroup;
 			children = (
 				5D797E9A5C5782CE845840781FA1CC81 /* Alamofire */,
-				CD54121DDA84872534168702B5F92950 /* HandyJSON */,
+				CD54121DDA84872534168702B5F92950 /* HandyJSON.framework */,
 				A8E950A16D00F649C54FFB30F81D7842 /* IQKeyboardManagerSwift */,
 				C3F44C782D64D7EB20B61CE3844EBFAD /* Kingfisher */,
 				3756A9BBE41ABEE8DCBF5BCA6972C4DA /* Moya */,
@@ -744,7 +744,6 @@
 				4A125150D51F39F2470A8A0FF9C9B0DC /* UILayoutSupport+Extensions.swift */,
 				B22C96E2DAF003C6C228E8BB6F0C06A4 /* Support Files */,
 			);
-			name = SnapKit;
 			path = SnapKit;
 			sourceTree = "<group>";
 		};
@@ -803,7 +802,6 @@
 				59D3DC1600E9450B9E7D8D2AE570198D /* Validation.swift */,
 				9E7D4CB6403BEA605BF55083E54D29AA /* Support Files */,
 			);
-			name = Alamofire;
 			path = Alamofire;
 			sourceTree = "<group>";
 		};
@@ -972,7 +970,6 @@
 				1F95E904F227A903D29B4DBEBC2FFF4B /* IQUIViewController+Additions.swift */,
 				8A955B4631F364C53FFE705F1351C040 /* Support Files */,
 			);
-			name = IQKeyboardManagerSwift;
 			path = IQKeyboardManagerSwift;
 			sourceTree = "<group>";
 		};
@@ -1068,7 +1065,6 @@
 				B72CCF08F3B7242DD1F83D410B98EB30 /* WKInterfaceImage+Kingfisher.swift */,
 				D8240BB5556B051C08F66865DC9F900C /* Support Files */,
 			);
-			name = Kingfisher;
 			path = Kingfisher;
 			sourceTree = "<group>";
 		};
@@ -1136,7 +1132,6 @@
 				417474CCAC6B12D95CAF9DE622A2EF23 /* URLTransform.swift */,
 				D105A3FF61E09620611B4589453E4D72 /* Support Files */,
 			);
-			name = HandyJSON;
 			path = HandyJSON;
 			sourceTree = "<group>";
 		};
@@ -1156,7 +1151,6 @@
 				574E7F8DAE095036DA356A307D4AD82C /* Frameworks */,
 				DDAC6BC27165B6450B74D5093FE12B83 /* Support Files */,
 			);
-			name = "Reveal-24";
 			path = "Reveal-24";
 			sourceTree = "<group>";
 		};
@@ -1238,7 +1232,7 @@
 			);
 			name = HandyJSON;
 			productName = HandyJSON;
-			productReference = CD54121DDA84872534168702B5F92950 /* HandyJSON */;
+			productReference = CD54121DDA84872534168702B5F92950 /* HandyJSON.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		17F9141D333DA1A7BE5937F227221070 /* Moya */ = {
@@ -2017,7 +2011,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/HandyJSON/HandyJSON-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/HandyJSON/HandyJSON-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2408,7 +2402,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/HandyJSON/HandyJSON-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/HandyJSON/HandyJSON-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

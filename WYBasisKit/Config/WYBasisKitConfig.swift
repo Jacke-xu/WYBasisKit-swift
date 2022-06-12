@@ -19,9 +19,6 @@ public struct WYBasisKitConfig {
     /// 设置字号适配的最大比率数
     public static var maxFontRatio: CGFloat = 1.0
     
-    /// 设置默认图片加载的Bundle名(例如：ImageSource.bundle 设置bundleName为 ImageSource 即可)
-    public static var bundleName: String = ""
-    
     /// Debug模式下是否打印日志
     public static var debugModeLog: Bool = true
 }
