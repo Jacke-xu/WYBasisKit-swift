@@ -184,7 +184,7 @@ public class WYLivePlayer: UIImageView {
             options?.setFormatOptionIntValue(1, forKey: "dns_cache_clear")
         }
         ijkPlayer = IJKFFMoviePlayerController(contentURL: URL(string: url), with: options)
-        ijkPlayer?.shouldAutoplay = true
+        ijkPlayer?.shouldAutoplay = shouldAutoplay
         ijkPlayer?.scalingMode = scalingMode
         addSubview((ijkPlayer?.view)!)
         ijkPlayer?.view.snp.makeConstraints({ make in

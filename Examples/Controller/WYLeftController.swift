@@ -51,6 +51,8 @@ class WYLeftController: UIViewController {
         
         navigationItem.title = WYLocalizedString("各种测试样例", "Various test examples")
         tableView.backgroundColor = UIColor.wy_dynamic(.white, .black)
+        
+        WYProtocolManager.shared.add(delegate: self)
     }
     
 
@@ -135,5 +137,16 @@ extension WYLeftController: UITableViewDelegate, UITableViewDataSource {
         tableView.deselectRow(at: indexPath, animated: true)
         let className: String = controller[indexPath.section][indexPath.row]
         wy_showViewController(className: className)
+    }
+}
+
+extension WYLeftController: WYProtocoDelegate {
+    
+    func test() {
+        wy_print("按钮开始向下移动")
+    }
+    
+    func test2() {
+        wy_print("按钮开始归位")
     }
 }

@@ -40,15 +40,17 @@ class WYTestAnimationController: UIViewController {
     }
     
     @objc func clickButton(sender: UIButton) {
+        
+        WYProtocolManager.shared.test()
 
         /// 约束控件实现动画的关键是在animate方法中调用父视图的layoutIfNeeded方法
         UIView.animate(withDuration: 1) {
-
             sender.snp.updateConstraints { (make) in
                 make.top.equalToSuperview().offset(350)
             }
             sender.superview!.layoutIfNeeded()
         }completion: { _ in
+            WYProtocolManager.shared.test2()
             sender.snp.updateConstraints { (make) in
                 make.top.equalToSuperview().offset(100)
             }

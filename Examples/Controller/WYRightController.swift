@@ -17,6 +17,8 @@ class WYRightController: UIViewController {
         
         view.backgroundColor = .white
         
+        WYProtocolManager.shared.add(delegate: self)
+        
         var controllerAry: [UIViewController] = []
         var titleAry: [String] = []
         var simageAry: [UIImage] = []
@@ -82,5 +84,16 @@ extension WYRightController: WYPagingViewDelegate {
     func itemDidScroll(_ pagingIndex: NSInteger) {
         
         //wy_print("pagingIndex = \(pagingIndex)")
+    }
+}
+
+extension WYRightController: WYProtocoDelegate {
+    
+    func test() {
+        wy_print("按钮开始向下移动")
+    }
+    
+    func test2() {
+        wy_print("按钮开始归位")
     }
 }

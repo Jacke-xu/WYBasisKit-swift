@@ -7,8 +7,9 @@
 
 import Foundation
 
-@objc protocol WYProtocoDelegate: NSObjectProtocol {
+@objc protocol WYProtocoDelegate {
     @objc optional func test()
+    @objc optional func test2()
 }
 
 public struct WYProtocolManager {
@@ -19,6 +20,10 @@ public struct WYProtocolManager {
     
     func test() {
         invoke { $0.test!() }
+    }
+    
+    func test2() {
+        invoke { $0.test2!() }
     }
     
     func add(delegate: WYProtocoDelegate) {
