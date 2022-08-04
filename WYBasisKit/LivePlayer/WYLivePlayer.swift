@@ -61,8 +61,8 @@ public class WYLivePlayer: UIImageView {
     /// 播放器状态回调代理
     public weak var delegate: WYLivePlayerDelegate?
     
-    /// 循环播放的次数(点播流有效)
-    public var looping: Int64 = Int64(INT_MAX)
+    /// 循环播放的次数，为0表示无限次循环(点播流有效)
+    public var looping: Int64 = 0
     
     /// 播放失败后重试次数，默认2次
     public var failReplay: Int = 2
@@ -75,6 +75,44 @@ public class WYLivePlayer: UIImageView {
     
     /// 播放器状态
     public private(set) var state: WYLivePlayerState = .unknown
+    
+    /// 当前时间点的缩略图
+    public var thumbnailImageAtCurrentTime: UIImage? {
+        return ijkPlayer?.thumbnailImageAtCurrentTime()
+    }
+    
+    /**
+     * 开始播放
+     * @param url 要播放的流地址
+     * @param background 视屏背景图(支持UIImage、URL、String)
+     */
+    public func play(with url: String, background: Any? = nil, placeholderImage: UIImage? = nil) {
+        
+        image = nil
+        isUserInteractionEnabled = true
+        
+        if mediaUrl != url {
+            failReplayNumber = 0
+        }
+        
+        releasePlayer()
+        createPlayer(with: url)
+        ijkPlayer?.prepareToPlay()
+        
+        mediaUrl = url
+        
+        if let imageUrl: URL = background as? URL {
+            kf.setImage(with: URL(string: (imageUrl.absoluteString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")), placeholder: placeholderImage)
+        }
+        
+        if let imageString: String = background as? String {
+            kf.setImage(with: URL(string: (imageString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")), placeholder: placeholderImage)
+        }
+        
+        if let backgroundImage: UIImage = background as? UIImage {
+            image = backgroundImage
+        }
+    }
     
     /// 是否需要静音
     public func muted(_ mute: Bool) {
@@ -124,39 +162,6 @@ public class WYLivePlayer: UIImageView {
         ijkPlayer?.shutdown()
         ijkPlayer?.view.removeFromSuperview()
         ijkPlayer = nil
-    }
-    
-    /**
-     * 开始播放
-     * @param url 要播放的流地址
-     * @param background 视屏背景图(支持UIImage、URL、String)
-     */
-    public func play(with url: String, background: Any? = nil, placeholderImage: UIImage? = nil) {
-        
-        image = nil
-        isUserInteractionEnabled = true
-        
-        if mediaUrl != url {
-            failReplayNumber = 0
-        }
-        
-        releasePlayer()
-        createPlayer(with: url)
-        ijkPlayer?.prepareToPlay()
-        
-        mediaUrl = url
-        
-        if let imageUrl: URL = background as? URL {
-            kf.setImage(with: URL(string: (imageUrl.absoluteString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")), placeholder: placeholderImage)
-        }
-        
-        if let imageString: String = background as? String {
-            kf.setImage(with: URL(string: (imageString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")), placeholder: placeholderImage)
-        }
-        
-        if let backgroundImage: UIImage = background as? UIImage {
-            image = backgroundImage
-        }
     }
     
     /// 当前已重试失败次数
@@ -251,7 +256,6 @@ public class WYLivePlayer: UIImageView {
     }
     
     @objc private func ijkPlayerLoadStateDidChange(notification: Notification) {
-
         guard let player = ijkPlayer else { return }
         
         switch player.loadState {

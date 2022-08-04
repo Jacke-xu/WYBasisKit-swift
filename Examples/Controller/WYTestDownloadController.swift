@@ -60,7 +60,7 @@ class WYTestDownloadController: UIViewController {
 
                 let imagePath: String = assetObj?.assetPath ?? ""
                 let image = UIImage(contentsOfFile: imagePath)
-                downloadImageView.image = image
+                downloadImageView.image = image?.wy_blur(20)
 
                 let diskCachePath = assetObj?.diskPath ?? ""
 
@@ -101,7 +101,6 @@ class WYTestDownloadController: UIViewController {
         }
     }
     
-
     /*
     // MARK: - Navigation
 

@@ -9,6 +9,16 @@
 import Foundation
 import UIKit
 
+/// 动图格式类型
+public enum WYAnimatedImageStyle {
+    
+    /// 普通 GIF 图片
+    case GIF
+    
+    /// APNG 图片
+    case APNG
+}
+
 public struct WYSourceBundle {
     
     /// 从哪个bundle文件内查找，如果bundleName对应的bundle不存在，则直接在本地路径下查找
@@ -175,22 +185,21 @@ public extension UIImage {
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
-        return newImage!
+        return newImage ?? UIImage.wy_createImage(from: .white)
     }
     
     /**
      *  将图片切割成圆形
      *
-     *  @param iconImage     要切割的图片
      *  @param borderWidth   边框的宽度
      *  @param borderColor   边框的颜色
      *
-     *  @return 切割好的头像
+     *  @return 切割好的图片
      */
-    class func wy_captureCircle(iconImage: UIImage, borderWidth: CGFloat, borderColor: UIColor) -> UIImage {
+    func wy_captureCircle(borderWidth: CGFloat, borderColor: UIColor) -> UIImage {
         
-        var imageW = iconImage.size.width + borderWidth * 2
-        var imageH = iconImage.size.height + borderWidth * 2;
+        var imageW = self.size.width + borderWidth * 2
+        var imageH = self.size.height + borderWidth * 2;
         imageW = min(imageH, imageW)
         imageH = imageW
         let imageSize = CGSize(width: imageW, height: imageH)
@@ -211,11 +220,32 @@ public extension UIImage {
         //切割
         ctx?.clip()
         //画图片
-        iconImage.draw(in: CGRect(x: borderWidth, y: borderWidth, width: iconImage.size.width, height: iconImage.size.height))
+        self.draw(in: CGRect(x: borderWidth, y: borderWidth, width: self.size.width, height: self.size.height))
         //从上下文中取出图片
         let newImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
         
+        return newImage
+    }
+    
+    /**
+     *  给图片加上高斯模糊效果
+     *  @param blurLevel   模糊半径值（越大越模糊）
+     *  @return 高斯模糊好的图片
+     */
+    func wy_blur(_ blurLevel: CGFloat) -> UIImage {
+        let context = CIContext (options:  nil )
+        let  inputImage = CIImage (image: self)
+        // 使用高斯模糊滤镜
+        let  filter  =  CIFilter (name:  "CIGaussianBlur" )!
+        filter.setValue(inputImage, forKey:kCIInputImageKey)
+        // 设置模糊半径值（越大越模糊）
+        filter.setValue(blurLevel, forKey: kCIInputRadiusKey)
+        let  outputCIImage =  filter.outputImage!
+        let  rect =  CGRect (origin:  CGPoint .zero, size: self.size)
+        let  cgImage = context.createCGImage(outputCIImage, from: rect)
+        // 显示生成的模糊图片
+        let newImage =  UIImage (cgImage: cgImage!)
         return newImage
     }
     
@@ -302,21 +332,26 @@ public extension UIImage {
     }
     
     /**
-     *  解析 Gif 图片
+     *  解析 Gif 或者 APNG 图片
      *
-     *  @param gifName  要解析的Gif图
+     *  @param style      要解析的图片的格式(仅支持 Gif 或者 APNG 格式)
      *
-     *  @param bundle   从哪个bundle文件内查找，如果为空，则直接在本地路径下查找
+     *  @param imageName  要解析的 Gif 或者 APNG 图
      *
-     *  @return Gif 图片解析结果
+     *  @param bundle     从哪个bundle文件内查找，如果为空，则直接在本地路径下查找
+     *
+     *  @return Gif       图片解析结果
      */
-    class func wy_gifParse(_ gifName: String, inBundle bundle: WYSourceBundle? = nil) -> WYGifInfo? {
+    
+    class func wy_animatedParse(_ style: WYAnimatedImageStyle = .GIF, name imageName: String, inBundle bundle: WYSourceBundle? = nil) -> WYGifInfo? {
         
-        guard gifName.isEmpty == false else {
+        guard imageName.isEmpty == false else {
             return nil
         }
         
-        let gifImageName: String = gifName.hasSuffix(".gif") ? gifName : (gifName + ".gif")
+        let suffix: String = (style == .GIF) ? ".gif" : ".png"
+        
+        let animatedImageName: String = imageName.hasSuffix(suffix) ? imageName : (imageName + suffix)
         
         var contentPath: String = ""
         
@@ -327,10 +362,10 @@ public extension UIImage {
                 subdirectoryPath = "/" + sourceBundle.subdirectory
             }
             
-            contentPath = ((((Bundle(for: WYLocalizableClass.self).path(forResource: sourceBundle.bundleName, ofType: "bundle")) ?? (Bundle.main.path(forResource: sourceBundle.bundleName, ofType: "bundle"))) ?? "").appending(subdirectoryPath)) + "/" + gifImageName
+            contentPath = ((((Bundle(for: WYLocalizableClass.self).path(forResource: sourceBundle.bundleName, ofType: "bundle")) ?? (Bundle.main.path(forResource: sourceBundle.bundleName, ofType: "bundle"))) ?? "").appending(subdirectoryPath)) + "/" + animatedImageName
             
         }else {
-            contentPath = ((Bundle(for: WYLocalizableClass.self).path(forResource: gifImageName, ofType: nil)) ?? (Bundle.main.path(forResource: gifImageName, ofType: nil))) ?? ""
+            contentPath = ((Bundle(for: WYLocalizableClass.self).path(forResource: animatedImageName, ofType: nil)) ?? (Bundle.main.path(forResource: animatedImageName, ofType: nil))) ?? ""
         }
         
         guard let contentData = NSData(contentsOfFile: contentPath) else {
@@ -353,21 +388,31 @@ public extension UIImage {
                 continue
             }
 
-            guard let gifDic = properties[kCGImagePropertyGIFDictionary] as? NSDictionary else {
+            var pngDic: NSDictionary? = nil
+            if let gifDic = properties[kCGImagePropertyGIFDictionary] as? NSDictionary {
+                pngDic = gifDic
+            }
+            
+            if (pngDic == nil) {
+                pngDic = properties[kCGImagePropertyPNGDictionary] as? NSDictionary
+            }
+            
+            guard let animatedDic = pngDic else {
                 continue
             }
             
-            guard let duration = gifDic[kCGImagePropertyGIFDelayTime] as? NSNumber else {
+            guard let duration = animatedDic[kCGImagePropertyGIFDelayTime] as? NSNumber else {
                 continue
             }
+            
             // 将播放时间累加
             totalDuration += duration.doubleValue
             // 获取到所有的image
             let image = UIImage(cgImage: cgImage)
             images.append(image)
         }
-        
-        return WYGifInfo(animationImages: images, animationDuration: totalDuration)
+   
+        return WYGifInfo(animationImages: images, animationDuration: totalDuration, animatedImage: UIImage.animatedImage(with: images, duration: totalDuration))
     }
 }
 
@@ -379,6 +424,9 @@ public struct WYGifInfo {
     
     /// 轮询时长
     var animationDuration: CGFloat = 0.0
+    
+    /// 可以直接显示的动图
+    var animatedImage: UIImage? = nil
 }
 
 private class WYLocalizableClass {}

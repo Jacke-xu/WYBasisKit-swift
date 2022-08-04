@@ -97,6 +97,8 @@
 		DCCE5FCF2824B79100607758 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCCE5FCE2824B79000607758 /* Metal.framework */; };
 		DCCE5FD72826208B00607758 /* mpeg4_local.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = DCCE5FD62826208B00607758 /* mpeg4_local.mp4 */; };
 		DCCE5FD928262F7300607758 /* 1650855755919.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = DCCE5FD828262F7300607758 /* 1650855755919.mp4 */; };
+		DCF17BB0287813A800DA0839 /* apng格式图片2.png in Resources */ = {isa = PBXBuildFile; fileRef = DCF17BAE287813A800DA0839 /* apng格式图片2.png */; };
+		DCF17BB1287813A900DA0839 /* apng格式图片1.png in Resources */ = {isa = PBXBuildFile; fileRef = DCF17BAF287813A800DA0839 /* apng格式图片1.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -203,6 +205,8 @@
 		DCCE5FCE2824B79000607758 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
 		DCCE5FD62826208B00607758 /* mpeg4_local.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = mpeg4_local.mp4; sourceTree = "<group>"; };
 		DCCE5FD828262F7300607758 /* 1650855755919.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 1650855755919.mp4; sourceTree = "<group>"; };
+		DCF17BAE287813A800DA0839 /* apng格式图片2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "apng格式图片2.png"; sourceTree = "<group>"; };
+		DCF17BAF287813A800DA0839 /* apng格式图片1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "apng格式图片1.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -346,6 +350,8 @@
 				1F5C3E4C25787E7D00E0DBFF /* WYTabBarController.swift */,
 				DC26165327FE9C2D00C485C1 /* 动图1.gif */,
 				DC26165427FE9C2D00C485C1 /* 动图2.gif */,
+				DCF17BAF287813A800DA0839 /* apng格式图片1.png */,
+				DCF17BAE287813A800DA0839 /* apng格式图片2.png */,
 				DCCE5FD828262F7300607758 /* 1650855755919.mp4 */,
 				DCCE5FD62826208B00607758 /* mpeg4_local.mp4 */,
 				AA484EB824FA262100B39D60 /* Main.storyboard */,
@@ -739,9 +745,11 @@
 				AAA9E5E926DB6569009C064B /* WYActivity.bundle in Resources */,
 				AA484EBF24FA262500B39D60 /* LaunchScreen.storyboard in Resources */,
 				DCCE5FD928262F7300607758 /* 1650855755919.mp4 in Resources */,
+				DCF17BB0287813A800DA0839 /* apng格式图片2.png in Resources */,
 				DC26165527FE9C2D00C485C1 /* 动图1.gif in Resources */,
 				DCCE5FD72826208B00607758 /* mpeg4_local.mp4 in Resources */,
 				DC26165627FE9C2D00C485C1 /* 动图2.gif in Resources */,
+				DCF17BB1287813A900DA0839 /* apng格式图片1.png in Resources */,
 				AA484EBC24FA262500B39D60 /* Assets.xcassets in Resources */,
 				AAC3825A25A1874500B2D41C /* WYBannerView.bundle in Resources */,
 				AA484EBA24FA262100B39D60 /* Main.storyboard in Resources */,
