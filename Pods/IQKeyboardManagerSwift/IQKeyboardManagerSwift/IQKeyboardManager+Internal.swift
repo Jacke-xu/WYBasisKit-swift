@@ -95,7 +95,7 @@ internal extension IQKeyboardManager {
                 //Special Controllers
                 if isEnabled {
 
-                    let classNameString = NSStringFromClass(type(of: textFieldViewController.self))
+                    let classNameString: String = "\(type(of: textFieldViewController.self))"
 
                     //_UIAlertControllerTextFieldViewController
                     if classNameString.contains("UIAlertController"), classNameString.hasSuffix("TextFieldViewController") {
@@ -129,13 +129,13 @@ internal extension IQKeyboardManager {
 
             //If found any toolbar disabled classes then return.
             if disabledToolbarClasses.contains(where: { textFieldViewController.isKind(of: $0) }) {
-                enableToolbar = true
+                enableToolbar = false
             }
 
             //Special Controllers
             if enableToolbar {
 
-                let classNameString = NSStringFromClass(type(of: textFieldViewController.self))
+                let classNameString: String = "\(type(of: textFieldViewController.self))"
 
                 //_UIAlertControllerTextFieldViewController
                 if classNameString.contains("UIAlertController"), classNameString.hasSuffix("TextFieldViewController") {
@@ -179,7 +179,7 @@ internal extension IQKeyboardManager {
                 //Special Controllers
                 if shouldResign {
 
-                    let classNameString = NSStringFromClass(type(of: textFieldViewController.self))
+                    let classNameString: String = "\(type(of: textFieldViewController.self))"
 
                     //_UIAlertControllerTextFieldViewController
                     if classNameString.contains("UIAlertController"), classNameString.hasSuffix("TextFieldViewController") {

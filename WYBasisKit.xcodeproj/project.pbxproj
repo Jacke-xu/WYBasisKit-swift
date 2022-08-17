@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		02561E71263AA6E506E07E1E /* Pods_WYBasisKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC6A316428A34D6400B0C0A6 /* Pods_WYBasisKit.framework */; };
 		1F04CF5A25820501002B8B11 /* WYTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F04CF5925820501002B8B11 /* WYTestView.swift */; };
 		1F24689A25B13DB700E02F78 /* WYProtocolManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F24689925B13DB700E02F78 /* WYProtocolManager.swift */; };
 		1F2468A025B13DFB00E02F78 /* WYAlignmentFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F24689E25B13DFB00E02F78 /* WYAlignmentFlowLayout.swift */; };
@@ -24,7 +25,6 @@
 		1F9717FE25B55CB600CA7A33 /* WYWaterfallsFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9717FD25B55CB600CA7A33 /* WYWaterfallsFlowLayout.swift */; };
 		1F99DCC8257DCFAE003D2408 /* WYPagingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F99DCC7257DCFAE003D2408 /* WYPagingView.swift */; };
 		1FA6B68B25CD1B3400005170 /* WYWaterfallParagraphLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA6B68A25CD1B3400005170 /* WYWaterfallParagraphLayout.swift */; };
-		904441D8B816D3C4C7050CBD /* Pods_WYBasisKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC9497A42818FCF3005AE3F7 /* Pods_WYBasisKit.framework */; };
 		AA0B8849270989CB006F26C8 /* WYTestDownloadController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0B8848270989CB006F26C8 /* WYTestDownloadController.swift */; };
 		AA2827B426BFCF7A00EB9DBC /* WYLocalizable.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AA2827B326BFCF7A00EB9DBC /* WYLocalizable.bundle */; };
 		AA327F032569179F00CF5CBE /* WYBasisKitConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA327F022569179F00CF5CBE /* WYBasisKitConfig.swift */; };
@@ -176,6 +176,7 @@
 		DC3E0CE82727979D003CB61E /* WYTestRequestController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYTestRequestController.swift; sourceTree = "<group>"; };
 		DC4D24BC271D55A1005FFE21 /* WYStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYStorage.swift; sourceTree = "<group>"; };
 		DC5BC14527745FC300B0D741 /* WYTestInterfaceOrientationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYTestInterfaceOrientationController.swift; sourceTree = "<group>"; };
+		DC6A316428A34D6400B0C0A6 /* Pods_WYBasisKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_WYBasisKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC71E7EC2807C59500F070B0 /* Timer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
 		DC71E7EE2807EDED00F070B0 /* WYFlowLayoutAlignmentController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYFlowLayoutAlignmentController.swift; sourceTree = "<group>"; };
 		DC9494DF281102C0005AE3F7 /* WYTestLiveStreamingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYTestLiveStreamingController.swift; sourceTree = "<group>"; };
@@ -198,6 +199,8 @@
 		DC94974D2816366A005AE3F7 /* Pods_WYBasisKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_WYBasisKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC94977128169103005AE3F7 /* WYLivePlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYLivePlayer.swift; sourceTree = "<group>"; };
 		DC9497A42818FCF3005AE3F7 /* Pods_WYBasisKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_WYBasisKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DC99C58428A34C9D0050EE8F /* Pods_WYBasisKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_WYBasisKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DC99C58828A34CB90050EE8F /* Pods_WYBasisKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_WYBasisKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCB90A7727AE3A8A001DCA82 /* Foundation+JSONLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Foundation+JSONLog.m"; sourceTree = "<group>"; };
 		DCCE5F8C2823BD0000607758 /* IJKMediaFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = IJKMediaFramework.framework; sourceTree = "<group>"; };
 		DCCE5F8E2823CC3F00607758 /* WYLivePlayerLite.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = WYLivePlayerLite.zip; sourceTree = "<group>"; };
@@ -229,7 +232,7 @@
 				DC9494E628110760005AE3F7 /* libbz2.tbd in Frameworks */,
 				DC9494E428110753005AE3F7 /* libz.tbd in Frameworks */,
 				DC9494E228110746005AE3F7 /* libc++.tbd in Frameworks */,
-				904441D8B816D3C4C7050CBD /* Pods_WYBasisKit.framework in Frameworks */,
+				02561E71263AA6E506E07E1E /* Pods_WYBasisKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -299,6 +302,9 @@
 		94F8A53F1CB5643B124486A8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DC6A316428A34D6400B0C0A6 /* Pods_WYBasisKit.framework */,
+				DC99C58828A34CB90050EE8F /* Pods_WYBasisKit.framework */,
+				DC99C58428A34C9D0050EE8F /* Pods_WYBasisKit.framework */,
 				DCCE5FCE2824B79000607758 /* Metal.framework */,
 				DC9497A42818FCF3005AE3F7 /* Pods_WYBasisKit.framework */,
 				DC94974D2816366A005AE3F7 /* Pods_WYBasisKit.framework */,
@@ -1021,11 +1027,13 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 95FF853B47A9BDC19CFD8BF0 /* Pods-WYBasisKit.debug.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = WYBasisKit/WYBasisKit.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3J5533TZC2;
+				DEVELOPMENT_TEAM = JX362P6GEC;
+				EXCLUDED_ARCHS = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/WYBasisKit/LivePlayer",
@@ -1051,11 +1059,13 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 75FD4F7DFBF58D8B82417F4D /* Pods-WYBasisKit.release.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = WYBasisKit/WYBasisKit.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3J5533TZC2;
+				DEVELOPMENT_TEAM = JX362P6GEC;
+				EXCLUDED_ARCHS = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/WYBasisKit/LivePlayer",

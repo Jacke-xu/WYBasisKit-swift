@@ -25,7 +25,7 @@ import UIKit
 
 /** @abstract UITextView with placeholder support   */
 @available(iOSApplicationExtension, unavailable)
-open class IQTextView: UITextView {
+@objc open class IQTextView: UITextView {
 
     @objc required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -67,6 +67,7 @@ open class IQTextView: UITextView {
         label.font = self.font
         label.textAlignment = self.textAlignment
         label.backgroundColor = UIColor.clear
+        label.isAccessibilityElement = false
         #if swift(>=5.1)
         label.textColor = UIColor.systemGray
         #else

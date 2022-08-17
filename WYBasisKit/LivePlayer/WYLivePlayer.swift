@@ -85,8 +85,9 @@ public class WYLivePlayer: UIImageView {
      * 开始播放
      * @param url 要播放的流地址
      * @param background 视屏背景图(支持UIImage、URL、String)
+     * @param placeholder 视屏背景图占位图
      */
-    public func play(with url: String, background: Any? = nil, placeholderImage: UIImage? = nil) {
+    public func play(with url: String, background: Any? = nil, placeholder: UIImage? = nil) {
         
         image = nil
         isUserInteractionEnabled = true
@@ -102,11 +103,11 @@ public class WYLivePlayer: UIImageView {
         mediaUrl = url
         
         if let imageUrl: URL = background as? URL {
-            kf.setImage(with: URL(string: (imageUrl.absoluteString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")), placeholder: placeholderImage)
+            kf.setImage(with: URL(string: (imageUrl.absoluteString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")), placeholder: placeholder)
         }
         
         if let imageString: String = background as? String {
-            kf.setImage(with: URL(string: (imageString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")), placeholder: placeholderImage)
+            kf.setImage(with: URL(string: (imageString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")), placeholder: placeholder)
         }
         
         if let backgroundImage: UIImage = background as? UIImage {
