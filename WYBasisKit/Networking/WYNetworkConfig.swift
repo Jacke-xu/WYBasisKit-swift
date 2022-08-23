@@ -12,7 +12,7 @@ import Alamofire
 /// 网络请求验证方式
 public enum WYNetworkRequestStyle {
     
-    /// HTTP和CAHTTPS(无需额外配置  CAHTTPS：向正规CA机构购买的HTTPS服务)
+    /// HTTP和CAHTTPS(无需额外配置  CAHTTPS：即向正规CA机构购买的HTTPS服务)
     case httpOrCAHttps
     /// HTTPS单向验证，客户端验证服务器(自建证书，需要将一个服务端的cer文件放进工程目录，并调用WYNetworkConfig.httpsConfig对应方法配置cer文件名)
     case httpsSingle

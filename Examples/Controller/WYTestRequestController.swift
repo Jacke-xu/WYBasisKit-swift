@@ -30,7 +30,7 @@ class WYTestRequestController: UIViewController {
         //config.originObject = true
         //config.mapper = [.code: "ret"]
         
-        let storageData: WYStorageData = WYStorage.takeOutData(forKey: cacheKey, path: (config.requestCache?.cachePath.path) ?? "")
+        let storageData: WYStorageData = WYStorage.takeOut(forKey: cacheKey, path: (config.requestCache?.cachePath.path) ?? "")
     
         let delay: TimeInterval = ((storageData.isInvalid == false) && (storageData.userData != nil)) ? 2 : 0
         

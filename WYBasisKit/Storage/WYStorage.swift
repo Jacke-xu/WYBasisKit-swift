@@ -96,7 +96,7 @@ public struct WYStorage {
     
     /// 根据传入的Key将数据缓存到本地
     @discardableResult
-    public static func storageData(forKey key: String, data: Data, durable: WYStorageDurable = .unlimited, path: URL = createDirectory(directory: .cachesDirectory, subDirectory: "WYBasisKit/Memory")) -> WYStorageData {
+    public static func storage(forKey key: String, data: Data, durable: WYStorageDurable = .unlimited, path: URL = createDirectory(directory: .cachesDirectory, subDirectory: "WYBasisKit/Memory")) -> WYStorageData {
         
         var storageData: WYStorageData = WYStorageData(userData: data, durable: interval(with: durable), isInvalid: false)
         
@@ -135,7 +135,7 @@ public struct WYStorage {
     }
     
     /// 根据Key获取对应的缓存数据
-    public static func takeOutData(forKey key: String, path: String = createDirectory(directory: .cachesDirectory, subDirectory: "WYBasisKit/Memory").path) -> WYStorageData {
+    public static func takeOut(forKey key: String, path: String = createDirectory(directory: .cachesDirectory, subDirectory: "WYBasisKit/Memory").path) -> WYStorageData {
         
         guard (key.count > 0) && (path.count > 0) else {
             return WYStorageData(path: URL(fileURLWithPath: path), error: "\(path) 路径不存在或者该路径下没有查找到相关资源")

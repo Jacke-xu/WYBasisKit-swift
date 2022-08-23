@@ -387,7 +387,7 @@ extension WYNetworkManager {
             
             if config.requestCache!.cacheKey.count > 0 {
                 
-                let storageData = WYStorage.takeOutData(forKey: config.requestCache!.cacheKey, path: config.requestCache!.cachePath.path)
+                let storageData = WYStorage.takeOut(forKey: config.requestCache!.cacheKey, path: config.requestCache!.cachePath.path)
                 
                 if (storageData.error == nil) && (handler != nil) && (storageData.userData != nil)  {
                     
@@ -452,7 +452,7 @@ extension WYNetworkManager {
                             
                             if (config.requestCache != nil) && (config.requestCache!.cacheKey.count > 0) {
                                 
-                                storage = WYStorage.storageData(forKey: config.requestCache!.cacheKey, data: response.data, durable: config.requestCache!.storageDurable, path: (config.requestCache?.cachePath)!)
+                                storage = WYStorage.storage(forKey: config.requestCache!.cacheKey, data: response.data, durable: config.requestCache!.storageDurable, path: (config.requestCache?.cachePath)!)
                             }
                             
                             showDebugModeLog(target: target, response: response)
@@ -470,7 +470,7 @@ extension WYNetworkManager {
                                         
                                         if let storageData: Data = responseData?.data?.data(using: .utf8) {
                                             
-                                            storage = WYStorage.storageData(forKey: config.requestCache!.cacheKey, data: storageData, durable: config.requestCache!.storageDurable, path: (config.requestCache?.cachePath)!)
+                                            storage = WYStorage.storage(forKey: config.requestCache!.cacheKey, data: storageData, durable: config.requestCache!.storageDurable, path: (config.requestCache?.cachePath)!)
                                         }
                                     }
                                     

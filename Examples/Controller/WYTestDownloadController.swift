@@ -15,7 +15,7 @@ class WYTestDownloadController: UIViewController {
 
         // Do any additional setup after loading the view.
         
-        let memoryData = WYStorage.takeOutData(forKey: "AAAAA")
+        let memoryData = WYStorage.takeOut(forKey: "AAAAA")
         var localImage: UIImage? = nil
         if memoryData.userData != nil {
             localImage = UIImage(data: memoryData.userData!)
@@ -66,7 +66,7 @@ class WYTestDownloadController: UIViewController {
 
                 let asset: String = (assetObj?.assetName ?? "") + "." + (assetObj?.mimeType ?? "")
 
-                let memoryData: WYStorageData = WYStorage.storageData(forKey: "AAAAA", data: image!.jpegData(compressionQuality: 1.0)!, durable: .minute(1))
+                let memoryData: WYStorageData = WYStorage.storage(forKey: "AAAAA", data: image!.jpegData(compressionQuality: 1.0)!, durable: .minute(1))
                 if memoryData.error == nil {
                     wy_print("缓存成功 = \(memoryData)")
                     localImageView.image = UIImage(data: memoryData.userData!)
