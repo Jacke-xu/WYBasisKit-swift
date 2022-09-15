@@ -22,18 +22,26 @@ class WYTestRichTextController: UIViewController {
         let attribute = NSMutableAttributedString(string: str)
         
         attribute.addAttribute(NSAttributedString.Key.font, value: UIFont.systemFont(ofSize: 20), range: NSMakeRange(0, str.count))
-        attribute.wy_colorsOfRanges(colorsOfRanges: [[UIColor.blue: "勇猛刚强"], [UIColor.orange: "仁爱温良者戒于无断"], [UIColor.purple: "安舒"]])
+        attribute.wy_colorsOfRanges(colorsOfRanges: [[UIColor.blue: "勇猛刚强"], [UIColor.orange: "仁爱温良者戒于无断"], [UIColor.purple: "安舒"], [UIColor.magenta: "必审己之所当戒而齐之以义，然后中和之化应，而巧伪之徒不敢比周而望进。"]])
         attribute.wy_lineSpacing(lineSpacing: 5, string: attribute.string)
         
         label.attributedText = attribute
         label.textAlignment = NSTextAlignment.center
         label.wy_clickEffectColor = .green
-        label.wy_addRichText(strings: ["勇猛刚强", "仁爱温良者戒于无断", "安舒"]) { [weak self] (string, range, index) in
+        label.wy_addRichText(strings: ["勇猛刚强", "仁爱温良者戒于无断", "安舒", "必审己之所当戒而齐之以义，然后中和之化应，而巧伪之徒不敢比周而望进。"]) { [weak self] (string, range, index) in
             //wy_print("string = \(string), range = \(range), index = \(index)")
             
-            WYActivity.showInfo("string = \(string), range = \(range), index = \(index)", in: self?.view, position: .middle)
+            if string == "勇猛刚强" {
+                WYActivity.showInfo("string = \(string), range = \(range), index = \(index)", in: self?.view, position: .middle)
+            }
+            if string == "仁爱温良者戒于无断" {
+                WYActivity.showInfo("string = \(string), range = \(range), index = \(index)", in: self?.view, position: .top)
+            }
+            if string == "安舒" {
+                WYActivity.showInfo("string = \(string), range = \(range), index = \(index)", in: self?.view, position: .bottom)
+            }
         }
-        label.wy_addRichText(strings: ["勇猛刚强", "仁爱温良者戒于无断", "安舒"], delegate: self)
+        label.wy_addRichText(strings: ["勇猛刚强", "仁爱温良者戒于无断", "安舒", "必审己之所当戒而齐之以义，然后中和之化应，而巧伪之徒不敢比周而望进。"], delegate: self)
         view.addSubview(label)
         label.snp.makeConstraints { (make) in
             make.left.right.centerY.equalToSuperview()
@@ -106,6 +114,9 @@ extension WYTestRichTextController: WYRichTextDelegate {
     func wy_didClick(richText: String, range: NSRange, index: NSInteger) {
         
         //wy_print("string = \(richText), range = \(range), index = \(index)")
-        WYActivity.showInfo("string = \(richText), range = \(range), index = \(index)", in: self.view, position: .middle)
+        //WYActivity.showInfo("string = \(richText), range = \(range), index = \(index)", in: self.view, position: .middle)
+        if (richText == "必审己之所当戒而齐之以义，然后中和之化应，而巧伪之徒不敢比周而望进。") {
+            WYActivity.showScrollInfo("必审己之所当戒而齐之以义，然后中和之化应，而巧伪之徒不敢比周而望进。")
+        }
     }
 }
