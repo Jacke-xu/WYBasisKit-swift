@@ -81,7 +81,7 @@ public extension UINavigationController {
                 
             }else {
                 
-                return .systemFont(ofSize: wy_fontSize(16))
+                return .systemFont(ofSize: wy_fontSize(16, WYBasisKitConfig.defaultScreenPixels))
             }
         }
     }

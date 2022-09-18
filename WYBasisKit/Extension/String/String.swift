@@ -217,15 +217,8 @@ public extension String {
     }
     
     /// 从字符串中提取数字
-    var wy_extractNumbers: String {
-        
-        let scanner = Scanner(string: self)
-        scanner.scanUpToCharacters(from: CharacterSet.decimalDigits, into: nil)
-        var number :Int = 0
-        
-        scanner.scanInt(&number)
-        
-        return String(number)
+    var wy_extractNumbers: [String] {
+        return self.components(separatedBy: NSCharacterSet.decimalDigits.inverted).compactMap({$0.count > 0 ? $0 : nil})
     }
     
     /**

@@ -12,21 +12,21 @@ public extension UIFont {
     
     /// 根据屏幕比率自动调整字号大小
     var wy_adjust : UIFont {
-        return UIFont.init(name: self.fontName, size: wy_fontSize(self.pointSize))!
+        return UIFont(name: self.fontName, size: wy_fontSize(self.pointSize, WYBasisKitConfig.defaultScreenPixels))!
     }
     
     /// 根据屏幕比率自动调整字号大小
     class func wy_systemFont(ofSize fontSize: CGFloat) -> UIFont {
-        return .systemFont(ofSize: wy_fontSize(fontSize))
+        return .systemFont(ofSize: wy_fontSize(fontSize, WYBasisKitConfig.defaultScreenPixels))
     }
     
     /// 根据屏幕比率自动调整字号大小
     class func wy_boldSystemFont(ofSize fontSize: CGFloat) -> UIFont {
-        return .boldSystemFont(ofSize: wy_fontSize(fontSize))
+        return .boldSystemFont(ofSize: wy_fontSize(fontSize, WYBasisKitConfig.defaultScreenPixels))
     }
     
     /// 根据屏幕比率自动调整字号大小
     class func wy_italicSystemFont(ofSize fontSize: CGFloat) -> UIFont {
-        return .italicSystemFont(ofSize: wy_fontSize(fontSize))
+        return .italicSystemFont(ofSize: wy_fontSize(fontSize, WYBasisKitConfig.defaultScreenPixels))
     }
 }

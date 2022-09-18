@@ -21,7 +21,6 @@
 		1F5C3E5625787ED300E0DBFF /* WYRightController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5C3E5525787ED300E0DBFF /* WYRightController.swift */; };
 		1F5C3E612578B61B00E0DBFF /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5C3E602578B61B00E0DBFF /* UIApplication.swift */; };
 		1F5C3E942578CD5400E0DBFF /* WYLocalizableManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5C3E932578CD5400E0DBFF /* WYLocalizableManager.swift */; };
-		1F952EF825807ACE00F03251 /* WYConstMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F952EF725807ACE00F03251 /* WYConstMethod.swift */; };
 		1F9717FE25B55CB600CA7A33 /* WYWaterfallsFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9717FD25B55CB600CA7A33 /* WYWaterfallsFlowLayout.swift */; };
 		1F99DCC8257DCFAE003D2408 /* WYPagingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F99DCC7257DCFAE003D2408 /* WYPagingView.swift */; };
 		1FA6B68B25CD1B3400005170 /* WYWaterfallParagraphLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA6B68A25CD1B3400005170 /* WYWaterfallParagraphLayout.swift */; };
@@ -117,7 +116,6 @@
 		1F5C3E602578B61B00E0DBFF /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
 		1F5C3E932578CD5400E0DBFF /* WYLocalizableManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYLocalizableManager.swift; sourceTree = "<group>"; };
 		1F6AA1C325A6D56F00AADEE3 /* WYBasisKit.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WYBasisKit.entitlements; sourceTree = "<group>"; };
-		1F952EF725807ACE00F03251 /* WYConstMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYConstMethod.swift; sourceTree = "<group>"; };
 		1F9717FD25B55CB600CA7A33 /* WYWaterfallsFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYWaterfallsFlowLayout.swift; sourceTree = "<group>"; };
 		1F99DCC7257DCFAE003D2408 /* WYPagingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYPagingView.swift; sourceTree = "<group>"; };
 		1FA6B68A25CD1B3400005170 /* WYWaterfallParagraphLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYWaterfallParagraphLayout.swift; sourceTree = "<group>"; };
@@ -574,7 +572,6 @@
 			isa = PBXGroup;
 			children = (
 				AA327F022569179F00CF5CBE /* WYBasisKitConfig.swift */,
-				1F952EF725807ACE00F03251 /* WYConstMethod.swift */,
 				DCB90A7727AE3A8A001DCA82 /* Foundation+JSONLog.m */,
 			);
 			path = Config;
@@ -864,7 +861,6 @@
 				AA484EB324FA262100B39D60 /* AppDelegate.swift in Sources */,
 				AA0B8849270989CB006F26C8 /* WYTestDownloadController.swift in Sources */,
 				1FA6B68B25CD1B3400005170 /* WYWaterfallParagraphLayout.swift in Sources */,
-				1F952EF825807ACE00F03251 /* WYConstMethod.swift in Sources */,
 				AA771BCF2568F834002C748B /* UIImage.swift in Sources */,
 				AA9CF82A2584B97C008A7DE1 /* WYTestDarkNightModeController.swift in Sources */,
 				1F9717FE25B55CB600CA7A33 /* WYWaterfallsFlowLayout.swift in Sources */,
@@ -1032,6 +1028,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = WYBasisKit/WYBasisKit.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = JX362P6GEC;
 				EXCLUDED_ARCHS = "";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1040,11 +1037,14 @@
 					"$(PROJECT_DIR)/WYBasisKit",
 				);
 				INFOPLIST_FILE = Examples/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				INFOPLIST_KEY_CFBundleDisplayName = WYBasisKit;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.2.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Jacke-xu.WYBasisKit";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = NO;
@@ -1064,6 +1064,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = WYBasisKit/WYBasisKit.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = JX362P6GEC;
 				EXCLUDED_ARCHS = "";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1072,11 +1073,14 @@
 					"$(PROJECT_DIR)/WYBasisKit",
 				);
 				INFOPLIST_FILE = Examples/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				INFOPLIST_KEY_CFBundleDisplayName = WYBasisKit;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.2.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Jacke-xu.WYBasisKit";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = NO;

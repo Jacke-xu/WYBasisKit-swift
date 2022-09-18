@@ -403,8 +403,6 @@ extension WYNetworkManager {
             }
         }
         
-        // 开启状态栏动画
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         WYTargetProvider.request(target, callbackQueue: config.callbackQueue) { (progressResponse) in
             
             if handler != nil {
@@ -516,8 +514,6 @@ extension WYNetworkManager {
             if (handler != nil) {
                 handler!(.success(response))
             }
-            // 关闭状态栏动画
-            UIApplication.shared.isNetworkActivityIndicatorVisible = false
         }
     }
     
@@ -529,8 +525,6 @@ extension WYNetworkManager {
                 
                 handler!(.error(error))
             }
-            // 关闭状态栏动画
-            UIApplication.shared.isNetworkActivityIndicatorVisible = false
             
             guard debugModeLog == true else { return }
             

@@ -87,7 +87,7 @@ public struct WYActivityConfig {
     public var loadingNumberOfLines: NSInteger = loadingNumberOfLines
     
     /// 设置Loading提示窗口动画控件的Size
-    public static var animationSize: CGSize = CGSize(width: wy_screenWidth(45), height: wy_screenWidth(45))
+    public static var animationSize: CGSize = CGSize(width: wy_screenWidth(45, WYBasisKitConfig.defaultScreenPixels), height: wy_screenWidth(45, WYBasisKitConfig.defaultScreenPixels))
     public var animationSize: CGSize = animationSize
 }
 
@@ -238,11 +238,11 @@ private class WYActivityScrollInfoView: UIView {
     @objc func refreshScrollInfo() {
         contentLabel.frame.origin.x = contentLabel.frame.origin.x - movingSpeed
         if contentLabel.frame.size.width < self.frame.size.width {
-            if contentLabel.frame.origin.x <= wy_screenWidth(5) {
+            if contentLabel.frame.origin.x <= wy_screenWidth(5, WYBasisKitConfig.defaultScreenPixels) {
                 stopScroll()
             }
         }else {
-            if (contentLabel.frame.origin.x + contentLabel.frame.size.width) <= (self.frame.size.width - wy_screenWidth(10)) {
+            if (contentLabel.frame.origin.x + contentLabel.frame.size.width) <= (self.frame.size.width - wy_screenWidth(10, WYBasisKitConfig.defaultScreenPixels)) {
                 stopScroll()
                 self.superview?.wy_scrollInfoView = nil
             }
@@ -302,7 +302,7 @@ private class WYActivityInfoView: UIView {
         contentLabel.attributedText = attributedText
         
         self.backgroundColor = config.infoBackgroundColor
-        self.wy_add(rectCorner: .allCorners, cornerRadius: wy_screenWidth(10))
+        self.wy_add(rectCorner: .allCorners, cornerRadius: wy_screenWidth(10, WYBasisKitConfig.defaultScreenPixels))
         contentView.addSubview(self)
         
         layoutActivity(contentView: contentView, position: position, offset: offset, config: config)
@@ -312,9 +312,9 @@ private class WYActivityInfoView: UIView {
     
     func layoutActivity(contentView: UIView, position: WYActivityPosition, offset: CGFloat, config: WYActivityConfig) {
         
-        let controlWidth: CGFloat = contentView.frame.size.width - [wy_screenWidth(40), wy_screenWidth(120), wy_screenWidth(120)][position.rawValue]
+        let controlWidth: CGFloat = contentView.frame.size.width - [wy_screenWidth(40, WYBasisKitConfig.defaultScreenPixels), wy_screenWidth(120, WYBasisKitConfig.defaultScreenPixels), wy_screenWidth(120, WYBasisKitConfig.defaultScreenPixels)][position.rawValue]
         
-        contentLabel.frame = CGRect(x: wy_screenWidth(10), y: wy_screenWidth(10), width: controlWidth - wy_screenWidth(20), height: wy_screenWidth(10))
+        contentLabel.frame = CGRect(x: wy_screenWidth(10, WYBasisKitConfig.defaultScreenPixels), y: wy_screenWidth(10, WYBasisKitConfig.defaultScreenPixels), width: controlWidth - wy_screenWidth(20, WYBasisKitConfig.defaultScreenPixels), height: wy_screenWidth(10, WYBasisKitConfig.defaultScreenPixels))
         contentLabel.sizeToFit()
         
         swipeGesture.direction = [.up, .left, .down][position.rawValue]
@@ -331,13 +331,13 @@ private class WYActivityInfoView: UIView {
     
     func showAnimate(contentView: UIView, position: WYActivityPosition, offset: CGFloat, config: WYActivityConfig) {
         
-        let controlWidth: CGFloat = contentView.frame.size.width - [wy_screenWidth(40), wy_screenWidth(120), wy_screenWidth(120)][position.rawValue]
+        let controlWidth: CGFloat = contentView.frame.size.width - [wy_screenWidth(40, WYBasisKitConfig.defaultScreenPixels), wy_screenWidth(120, WYBasisKitConfig.defaultScreenPixels), wy_screenWidth(120, WYBasisKitConfig.defaultScreenPixels)][position.rawValue]
         
         switch position {
         case .top:
             
             contentLabel.textAlignment = .left
-            let controlHeight: CGFloat = contentLabel.frame.size.height + wy_screenWidth(20)
+            let controlHeight: CGFloat = contentLabel.frame.size.height + wy_screenWidth(20, WYBasisKitConfig.defaultScreenPixels)
             
             dismissOffset = -controlHeight
             
@@ -345,7 +345,7 @@ private class WYActivityInfoView: UIView {
             
             UIView.animate(withDuration: 0.5) {
                 
-                self.frame = CGRect(x: (contentView.frame.size.width - controlWidth) / 2, y: offset + wy_screenWidth(10), width: controlWidth, height: controlHeight)
+                self.frame = CGRect(x: (contentView.frame.size.width - controlWidth) / 2, y: offset + wy_screenWidth(10, WYBasisKitConfig.defaultScreenPixels), width: controlWidth, height: controlHeight)
                 
             } completion: { _ in
                 
@@ -359,24 +359,24 @@ private class WYActivityInfoView: UIView {
             
             contentLabel.textAlignment = .center
             
-            let contentSize = WYActivity.sharedLayoutSize(contentView: contentView, contentLabel: contentLabel, minimux: wy_screenWidth(80), maxWidth: (contentView.frame.size.width - wy_screenWidth(120)), defaultFont: config.infoTextFont)
+            let contentSize = WYActivity.sharedLayoutSize(contentView: contentView, contentLabel: contentLabel, minimux: wy_screenWidth(80, WYBasisKitConfig.defaultScreenPixels), maxWidth: (contentView.frame.size.width - wy_screenWidth(120, WYBasisKitConfig.defaultScreenPixels)), defaultFont: config.infoTextFont)
             
-            contentLabel.frame = CGRect(x: wy_screenWidth(10), y: wy_screenWidth(10), width: contentSize.width, height: contentSize.height)
+            contentLabel.frame = CGRect(x: wy_screenWidth(10, WYBasisKitConfig.defaultScreenPixels), y: wy_screenWidth(10, WYBasisKitConfig.defaultScreenPixels), width: contentSize.width, height: contentSize.height)
             contentLabel.sizeToFit()
             
-            let offsetx = (contentView.frame.size.width - contentLabel.frame.size.width - wy_screenWidth(20)) / 2
-            var offsety = (contentView.frame.size.height - contentLabel.frame.size.height - wy_screenWidth(20)) / 2
+            let offsetx = (contentView.frame.size.width - contentLabel.frame.size.width - wy_screenWidth(20, WYBasisKitConfig.defaultScreenPixels)) / 2
+            var offsety = (contentView.frame.size.height - contentLabel.frame.size.height - wy_screenWidth(20, WYBasisKitConfig.defaultScreenPixels)) / 2
             
             let tabbarOffset = UIViewController.wy_currentController()?.tabBarController?.tabBar.isHidden ?? true ? 0 : wy_tabBarHeight
             
             if position == .middle {
-                offsety = (contentView.frame.size.height - contentLabel.frame.size.height - wy_screenWidth(20) - tabbarOffset) / 2
+                offsety = (contentView.frame.size.height - contentLabel.frame.size.height - wy_screenWidth(20, WYBasisKitConfig.defaultScreenPixels) - tabbarOffset) / 2
             }else {
-                offsety = contentView.frame.size.height - contentLabel.frame.size.height - wy_screenWidth(80) - tabbarOffset
+                offsety = contentView.frame.size.height - contentLabel.frame.size.height - wy_screenWidth(80, WYBasisKitConfig.defaultScreenPixels) - tabbarOffset
                 
                 dismissOffset = contentView.frame.size.height
             }
-            self.frame = CGRect(x: offsetx, y: offsety, width: contentLabel.frame.size.width + wy_screenWidth(20), height: contentLabel.frame.size.height + wy_screenWidth(20))
+            self.frame = CGRect(x: offsetx, y: offsety, width: contentLabel.frame.size.width + wy_screenWidth(20, WYBasisKitConfig.defaultScreenPixels), height: contentLabel.frame.size.height + wy_screenWidth(20, WYBasisKitConfig.defaultScreenPixels))
             
             self.alpha = 0
             UIView.animate(withDuration: 0.5) {
@@ -467,7 +467,12 @@ private class WYActivityLoadingView: UIView {
     
     lazy var indicator: UIActivityIndicatorView = {
         
-        let activity = UIActivityIndicatorView(style: .whiteLarge)
+        let activity: UIActivityIndicatorView!
+        if #available(iOS 13.0, *) {
+            activity = UIActivityIndicatorView(style: .large)
+        }else {
+            activity = UIActivityIndicatorView(style: .whiteLarge)
+        }
         addSubview(activity)
         return activity
     }()
@@ -489,7 +494,7 @@ private class WYActivityLoadingView: UIView {
         
         loadingView.layoutActivity(content: content, contentView: contentView, animation: animation, delay: delay, config: config)
         
-        loadingView.wy_add(rectCorner: .allCorners, cornerRadius: wy_screenWidth(10))
+        loadingView.wy_add(rectCorner: .allCorners, cornerRadius: wy_screenWidth(10, WYBasisKitConfig.defaultScreenPixels))
         
         contentView.wy_loadingView = loadingView
     }
@@ -543,12 +548,12 @@ private class WYActivityLoadingView: UIView {
             if config.loadingNumberOfLines > 0 {
                 
                 textMaximum = (frame.size.width * 1.5) + (CGFloat(config.loadingNumberOfLines) * textlabel.frame.size.height)
-                if (textMaximum > (contentView.frame.size.width - wy_screenWidth(120))) {
-                    textMaximum = (contentView.frame.size.width - wy_screenWidth(120))
+                if (textMaximum > (contentView.frame.size.width - wy_screenWidth(120, WYBasisKitConfig.defaultScreenPixels))) {
+                    textMaximum = (contentView.frame.size.width - wy_screenWidth(120, WYBasisKitConfig.defaultScreenPixels))
                 }
                 
             }else {
-                textMaximum = (contentView.frame.size.width - wy_screenWidth(120))
+                textMaximum = (contentView.frame.size.width - wy_screenWidth(120, WYBasisKitConfig.defaultScreenPixels))
             }
             textlabel.wy_width = WYActivity.sharedLayoutSize(contentView: contentView, contentLabel: textlabel, minimux: textMinimux, maxWidth: textMaximum, defaultFont: config.loadingTextFont).width
             
@@ -556,11 +561,11 @@ private class WYActivityLoadingView: UIView {
             
             let controWidth = textlabel.frame.size.width < textMinimux ? textMinimux : textlabel.frame.size.width
             
-            var controSize = CGSize(width: controWidth + (wy_screenWidth(10) * 2), height: frame.size.height + textlabel.frame.size.height)
+            var controSize = CGSize(width: controWidth + (wy_screenWidth(10, WYBasisKitConfig.defaultScreenPixels) * 2), height: frame.size.height + textlabel.frame.size.height)
             
             if controSize.width < controSize.height {
                 controSize.width = controSize.height
-                textlabel.wy_width = controSize.width - (wy_screenWidth(10) * 2)
+                textlabel.wy_width = controSize.width - (wy_screenWidth(10, WYBasisKitConfig.defaultScreenPixels) * 2)
                 textlabel.sizeToFit()
                 controSize.height = frame.size.height + textlabel.frame.size.height
             }
@@ -614,7 +619,7 @@ private class WYActivityLoadingView: UIView {
     
     private func textLayout(subContro: UIView, contentView: UIView) {
         
-        subContro.frame = CGRect(x: wy_screenWidth(10), y: wy_screenWidth(5), width: frame.size.width - (wy_screenWidth(10) * 2), height: subContro.frame.size.height)
+        subContro.frame = CGRect(x: wy_screenWidth(10, WYBasisKitConfig.defaultScreenPixels), y: wy_screenWidth(5, WYBasisKitConfig.defaultScreenPixels), width: frame.size.width - (wy_screenWidth(10, WYBasisKitConfig.defaultScreenPixels) * 2), height: subContro.frame.size.height)
         
         textlabel.frame = CGRect(x: (frame.size.width - textlabel.frame.size.width) / 2, y: subContro.wy_bottom, width: textlabel.frame.size.width, height: textlabel.frame.size.height)
     }
@@ -675,7 +680,7 @@ private extension WYActivity {
             attributed?.wy_colorsOfRanges(colorsOfRanges: [[textColor: attributed?.string as Any]])
             attributed?.wy_fontsOfRanges(fontsOfRanges: [[textFont: attributed?.string as Any]])
             attributed?.wy_wordsSpacing(wordsSpacing: 1)
-            attributed?.wy_lineSpacing(lineSpacing: wy_screenWidth(5), string: attributed?.string, alignment: alignment)
+            attributed?.wy_lineSpacing(lineSpacing: wy_screenWidth(5, WYBasisKitConfig.defaultScreenPixels), string: attributed?.string, alignment: alignment)
         }else {
             attributed = NSMutableAttributedString(attributedString: content as? NSAttributedString ?? NSAttributedString())
         }

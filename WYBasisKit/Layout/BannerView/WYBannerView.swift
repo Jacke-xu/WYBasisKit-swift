@@ -240,7 +240,7 @@ extension WYBannerView {
                 describeView = UILabel()
                 describeView?.lineBreakMode = .byTruncatingTail
                 describeView?.textAlignment = .center
-                describeView?.font = .systemFont(ofSize: wy_screenWidth(15))
+                describeView?.font = .systemFont(ofSize: wy_screenWidth(15, WYBasisKitConfig.defaultScreenPixels))
                 describeView?.textColor = .white
                 describeView?.numberOfLines = 1
                 describeView?.backgroundColor = .clear
@@ -250,7 +250,7 @@ extension WYBannerView {
                 nextView?.addSubview(nextDescribeView!)
                 
                 if describeViewPosition == .zero {
-                    describeViewPosition = CGRect(x: wy_screenWidth(20), y: wy_height - describeView!.font.lineHeight - wy_screenWidth(30), width: wy_width - (wy_screenWidth(20) * 2), height: describeView!.font.lineHeight)
+                    describeViewPosition = CGRect(x: wy_screenWidth(20, WYBasisKitConfig.defaultScreenPixels), y: wy_height - describeView!.font.lineHeight - wy_screenWidth(30, WYBasisKitConfig.defaultScreenPixels), width: wy_width - (wy_screenWidth(20, WYBasisKitConfig.defaultScreenPixels) * 2), height: describeView!.font.lineHeight)
                 }else {
                     describeViewPosition = CGRect(x: describeViewPosition.origin.x, y: describeViewPosition.origin.y, width: describeViewPosition.size.width, height: describeViewPosition.size.height)
                 }

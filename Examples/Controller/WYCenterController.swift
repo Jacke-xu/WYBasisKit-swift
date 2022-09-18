@@ -23,9 +23,9 @@ class WYCenterController: UIViewController {
         testView2.frame = CGRect(x: 10, y: 100, width: wy_screenWidth-60, height: 200)
         testView.addSubview(testView2)
         
-        testView.layer.addSublayer(CALayer.drawDashLine(direction: .leftToRight, bounds: CGRect(x: wy_screenWidth(10), y: 100, width: wy_screenWidth(315), height: wy_screenWidth(2.5)), color: .orange))
+        testView.layer.addSublayer(CALayer.drawDashLine(direction: .leftToRight, bounds: CGRect(x: wy_screenWidth(10, WYBasisKitConfig.defaultScreenPixels), y: 100, width: wy_screenWidth(315, WYBasisKitConfig.defaultScreenPixels), height: wy_screenWidth(2.5, WYBasisKitConfig.defaultScreenPixels)), color: .orange))
         
-        testView.layer.addSublayer(CALayer.drawDashLine(direction: .topToBottom, bounds: CGRect(x: wy_screenWidth(10), y: 100, width: wy_screenWidth(2.5), height: wy_screenWidth(190)), color: .black))
+        testView.layer.addSublayer(CALayer.drawDashLine(direction: .topToBottom, bounds: CGRect(x: wy_screenWidth(10, WYBasisKitConfig.defaultScreenPixels), y: 100, width: wy_screenWidth(2.5, WYBasisKitConfig.defaultScreenPixels), height: wy_screenWidth(190, WYBasisKitConfig.defaultScreenPixels)), color: .black))
         
         view.layer.addSublayer(CALayer.drawDashLine(direction: .leftToRight, bounds: CGRect(x: 20, y: 200, width: wy_screenWidth-40, height: 2.5), color: .orange))
         

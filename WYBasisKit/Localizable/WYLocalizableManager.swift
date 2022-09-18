@@ -91,11 +91,6 @@ public struct WYLocalizableManager {
         }
     }
     
-    /// 获取各个国家语言标识符列表(如简体中文 = zh-Hans)
-    public static func isoLanguageCodes() -> [String] {
-        return Locale.isoLanguageCodes
-    }
-    
     /// 切换语言(如果reload为True，需要给 Storyboard 设置 Name 和 Identifier，默认从 Main.Storyboard 重启)
     public static func switchLanguage(language: WYLanguage, reload: Bool = true, name: String = "Main", identifier: String = "rootViewController", handler:(() -> Void)? = nil) {
         

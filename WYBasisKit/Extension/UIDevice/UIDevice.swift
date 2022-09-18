@@ -6,17 +6,6 @@
 //  Copyright © 2020 Jacke·xu. All rights reserved.
 //
 
-/**
- * 可编译通过的小数点写法 ⒈ ⒉ ⒊ ⒋ ⒌ ⒍ ⒎ ⒏ ⒐ ⒑ ⒒ ⒓ ⒔ ⒕ ⒖ ⒗
- * 参考文库 http://www,xueui,cn/design/142395,html
- */
-
-/**
- * 设备型号identifier
- * 参考文库 https://www,theiphonewiki,com/wiki/Models
- */
-
-
 import UIKit
 import Photos
 import CoreMotion
@@ -135,42 +124,6 @@ public extension UIDevice {
     /// uuid 注意其实uuid并不是唯一不变的
     var wy_uuid: String {
         return identifierForVendor?.uuidString ?? ""
-    }
-    
-    /// 获取手机卡对应的运营商
-    var wy_supplier: String  {
-        
-        let info = CTTelephonyNetworkInfo()
-        var supplier:String = ""
-        if #available(iOS 12.0, *) {
-            if let carriers = info.serviceSubscriberCellularProviders {
-                if carriers.keys.count == 0 {
-                    return WYLocalizedString("无手机卡")
-                } else { //获取运营商信息
-                    var firstSupplier = ""
-                    var secondSupplier = ""
-                    for (index, carrier) in carriers.values.enumerated() {
-                        //查看运营商信息 通过CTCarrier类
-                        if index == 0 {
-                            firstSupplier = carrier.carrierName ?? ""
-                        } else {
-                            secondSupplier = carrier.carrierName ?? ""
-                        }
-                    }
-                    supplier = (firstSupplier.isEmpty ? "" : firstSupplier) + (secondSupplier.isEmpty ? "" : ("," + secondSupplier))
-                    
-                    return supplier.isEmpty ? WYLocalizedString("无手机卡") : supplier
-                }
-            } else{
-                return WYLocalizedString("无手机卡")
-            }
-        } else {
-            if let carrier = info.subscriberCellularProvider {
-                return carrier.carrierName ?? WYLocalizedString("无手机卡")
-            } else{
-                return WYLocalizedString("无手机卡")
-            }
-        }
     }
     
     /// 获取运营商IP地址
@@ -294,11 +247,12 @@ public extension UIDevice {
     
     /// 是否是齐刘海手机
     var wy_isFullScreen: Bool {
-        
-        guard #available(iOS 11.0, *) else {
-            return false
+        if #available(iOS 15.0, *) {
+            let window = UIApplication.shared.connectedScenes.map({ $0 as? UIWindowScene }).compactMap({ $0 }).first?.windows.first
+            return (window?.safeAreaInsets ?? UIEdgeInsets.zero) != UIEdgeInsets.zero
+        } else {
+            return UIApplication.shared.windows.first?.safeAreaInsets != UIEdgeInsets.zero
         }
-        return UIApplication.shared.windows.first?.safeAreaInsets != UIEdgeInsets.zero
     }
     
     /// 是否是传入的分辨率
@@ -308,8 +262,17 @@ public extension UIDevice {
     
     /// 是否是竖屏模式
     var wy_verticalScreen: Bool {
-        let orientation = UIApplication.shared.statusBarOrientation
-        if orientation == UIInterfaceOrientation.portrait || orientation == UIInterfaceOrientation.portraitUpsideDown {
+        
+        var orientation: UIInterfaceOrientation = .portrait
+        if #available(iOS 13.0, *) {
+            let window = UIApplication.shared.connectedScenes.map({ $0 as? UIWindowScene }).compactMap({ $0 }).first?.windows.first
+            orientation = (window?.windowScene?.interfaceOrientation) ?? .portrait
+        }else {
+            orientation = UIApplication.shared.statusBarOrientation
+        }
+        
+        if (orientation == UIInterfaceOrientation.portrait) ||
+            (orientation == UIInterfaceOrientation.portraitUpsideDown) {
             return true
         } else {
             return false
@@ -318,8 +281,17 @@ public extension UIDevice {
     
     /// 是否是横屏模式
     var wy_horizontalScreen: Bool {
-        let orientation = UIApplication.shared.statusBarOrientation
-        if orientation == UIInterfaceOrientation.landscapeLeft || orientation == UIInterfaceOrientation.landscapeRight {
+        
+        var orientation: UIInterfaceOrientation = .portrait
+        if #available(iOS 13.0, *) {
+            let window = UIApplication.shared.connectedScenes.map({ $0 as? UIWindowScene }).compactMap({ $0 }).first?.windows.first
+            orientation = (window?.windowScene?.interfaceOrientation) ?? .portrait
+        }else {
+            orientation = UIApplication.shared.statusBarOrientation
+        }
+        
+        if (orientation == UIInterfaceOrientation.landscapeLeft) ||
+            (orientation == UIInterfaceOrientation.landscapeRight) {
             return true
         } else {
             return false
@@ -338,25 +310,25 @@ public extension UIDevice {
                 stopMotionManager()
                 wy_currentInterfaceOrientation = .portrait
                 UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation")
-                UIViewController.attemptRotationToDeviceOrientation()
+                UIDevice.current.wy_attemptRotationToDeviceOrientation()
                 break
             case .landscapeLeft:
                 stopMotionManager()
                 wy_currentInterfaceOrientation = .landscapeLeft
                 UIDevice.current.setValue(UIInterfaceOrientation.landscapeLeft.rawValue, forKey: "orientation")
-                UIViewController.attemptRotationToDeviceOrientation()
+                UIDevice.current.wy_attemptRotationToDeviceOrientation()
                 break
             case .landscapeRight:
                 stopMotionManager()
                 wy_currentInterfaceOrientation = .landscapeRight
                 UIDevice.current.setValue(UIInterfaceOrientation.landscapeRight.rawValue, forKey: "orientation")
-                UIViewController.attemptRotationToDeviceOrientation()
+                UIDevice.current.wy_attemptRotationToDeviceOrientation()
                 break
             case .portraitUpsideDown:
                 stopMotionManager()
                 wy_currentInterfaceOrientation = .portraitUpsideDown
                 UIDevice.current.setValue(UIInterfaceOrientation.portraitUpsideDown.rawValue, forKey: "orientation")
-                UIViewController.attemptRotationToDeviceOrientation()
+                UIDevice.current.wy_attemptRotationToDeviceOrientation()
                 break
             default:
                 rotateScreenOrientationDynamically(newValue)
@@ -368,7 +340,7 @@ public extension UIDevice {
         }
     }
     
-    /// 获取当前屏幕方向(只会出现 portrait、landscapeLeft、landscapeRight、portraitUpsideDown 四种情况)
+    /// 获取当前设备屏幕方向(只会出现 portrait、landscapeLeft、landscapeRight、portraitUpsideDown 四种情况)
     private(set) var wy_currentInterfaceOrientation: UIInterfaceOrientationMask {
         set(newValue) {
             
@@ -753,6 +725,15 @@ private extension UIDevice {
         }
     }
     
+    // 旋转屏幕
+    func wy_attemptRotationToDeviceOrientation() {
+        if #available(iOS 16.0, *) {
+            UIViewController.wy_currentController()?.setNeedsUpdateOfSupportedInterfaceOrientations()
+        }else {
+            UIViewController.attemptRotationToDeviceOrientation()
+        }
+    }
+    
     func rotateScreenOrientationDynamically(_ orientation: UIInterfaceOrientationMask) {
         
         if motionManager == nil {
@@ -784,14 +765,15 @@ private extension UIDevice {
                             self?.wy_currentInterfaceOrientation = .portraitUpsideDown
                             
                             UIDevice.current.setValue(UIInterfaceOrientation.portraitUpsideDown.rawValue, forKey: "orientation")
-                            UIViewController.attemptRotationToDeviceOrientation()
+                            UIDevice.current.wy_attemptRotationToDeviceOrientation()
+                            
                             
                         } else {
                             
                             self?.wy_currentInterfaceOrientation = .portrait
                             
                             UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation")
-                            UIViewController.attemptRotationToDeviceOrientation()
+                            UIDevice.current.wy_attemptRotationToDeviceOrientation()
                         }
                         
                     }else {
@@ -801,14 +783,14 @@ private extension UIDevice {
                             self?.wy_currentInterfaceOrientation = .landscapeLeft
                             
                             UIDevice.current.setValue(UIInterfaceOrientation.landscapeLeft.rawValue, forKey: "orientation")
-                            UIViewController.attemptRotationToDeviceOrientation()
+                            UIDevice.current.wy_attemptRotationToDeviceOrientation()
                             
                         } else{
                             
                             self?.wy_currentInterfaceOrientation = .landscapeRight
                             
                             UIDevice.current.setValue(UIInterfaceOrientation.landscapeRight.rawValue, forKey: "orientation")
-                            UIViewController.attemptRotationToDeviceOrientation()
+                            UIDevice.current.wy_attemptRotationToDeviceOrientation()
                         }
                     }
                 }

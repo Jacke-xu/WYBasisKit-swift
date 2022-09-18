@@ -118,7 +118,7 @@ extension WYMultilevelTableViewController: UITableViewDelegate, UITableViewDataS
         let cell = tableView.dequeueReusableCell(withIdentifier: "UITableViewCell", for: indexPath)
         
         cell.textLabel?.textColor = UIColor.wy_dynamic(.black, .white)
-        cell.textLabel?.font = .systemFont(ofSize: wy_fontSize(15))
+        cell.textLabel?.font = .systemFont(ofSize: wy_fontSize(15, WYBasisKitConfig.defaultScreenPixels))
         cell.textLabel?.text = sharedLevelName(model: dataSource[indexPath.row])
         
         return cell
