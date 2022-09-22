@@ -293,6 +293,11 @@ public extension String {
         return targetString.removingPercentEncoding ?? self
     }
     
+    /// 字符串去除特殊字符
+    func wy_specialCharactersEncoding(_ characterSet: CharacterSet = .urlQueryAllowed) -> String {
+        self.addingPercentEncoding(withAllowedCharacters: characterSet) ?? ""
+    }
+    
     /**
      *  根据传入的表情字符串生成富文本，例如字符串 "哈哈[哈哈]" 会生成 "哈哈😄"
      *  @param textColor     富文本的字体颜色

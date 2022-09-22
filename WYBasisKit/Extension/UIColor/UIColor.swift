@@ -41,12 +41,12 @@ public extension UIColor {
         // blue
         range.location = 4
         let blueStr = colorStr.substring(with: range)
-        var R: UInt32 = 0x0
-        var G: UInt32 = 0x0
-        var B: UInt32 = 0x0
-        Scanner.init(string: redStr).scanHexInt32(&R)
-        Scanner.init(string: greenStr).scanHexInt32(&G)
-        Scanner.init(string: blueStr).scanHexInt32(&B)
+        var R: UInt64 = 0x0
+        var G: UInt64 = 0x0
+        var B: UInt64 = 0x0
+        Scanner(string: redStr).scanHexInt64(&R)
+        Scanner(string: greenStr).scanHexInt64(&G)
+        Scanner(string: blueStr).scanHexInt64(&B)
         return UIColor(red: CGFloat(R)/255.0, green: CGFloat(G)/255.0, blue: CGFloat(B)/255.0, alpha: CGFloat(alpha))
     }
     

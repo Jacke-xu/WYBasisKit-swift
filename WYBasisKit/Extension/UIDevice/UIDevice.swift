@@ -238,13 +238,6 @@ public extension UIDevice {
         return ByteCountFormatter.string(fromByteCount: totalDiskSpaceInBytes - freeDiskSpaceInBytes, countStyle: ByteCountFormatter.CountStyle.decimal)
     }
     
-    
-    
-    /// 是否使用3x图片
-    var wy_use3xAsset: Bool {
-        return UIScreen.main.currentMode!.size.width / UIScreen.main.bounds.size.width >= 3 ? true : false
-    }
-    
     /// 是否是齐刘海手机
     var wy_isFullScreen: Bool {
         if #available(iOS 15.0, *) {
@@ -309,26 +302,22 @@ public extension UIDevice {
             case .portrait:
                 stopMotionManager()
                 wy_currentInterfaceOrientation = .portrait
-                UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation")
-                UIDevice.current.wy_attemptRotationToDeviceOrientation()
+                wy_rotateScreenTo(.portrait)
                 break
             case .landscapeLeft:
                 stopMotionManager()
                 wy_currentInterfaceOrientation = .landscapeLeft
-                UIDevice.current.setValue(UIInterfaceOrientation.landscapeLeft.rawValue, forKey: "orientation")
-                UIDevice.current.wy_attemptRotationToDeviceOrientation()
+                wy_rotateScreenTo(.landscapeLeft)
                 break
             case .landscapeRight:
                 stopMotionManager()
                 wy_currentInterfaceOrientation = .landscapeRight
-                UIDevice.current.setValue(UIInterfaceOrientation.landscapeRight.rawValue, forKey: "orientation")
-                UIDevice.current.wy_attemptRotationToDeviceOrientation()
+                wy_rotateScreenTo(.landscapeRight)
                 break
             case .portraitUpsideDown:
                 stopMotionManager()
                 wy_currentInterfaceOrientation = .portraitUpsideDown
-                UIDevice.current.setValue(UIInterfaceOrientation.portraitUpsideDown.rawValue, forKey: "orientation")
-                UIDevice.current.wy_attemptRotationToDeviceOrientation()
+                wy_rotateScreenTo(.portraitUpsideDown)
                 break
             default:
                 rotateScreenOrientationDynamically(newValue)
@@ -725,11 +714,23 @@ private extension UIDevice {
         }
     }
     
-    // 旋转屏幕
-    func wy_attemptRotationToDeviceOrientation() {
+    // 旋转屏幕到指定方向
+    private func wy_rotateScreenTo(_ orientation: UIInterfaceOrientation) {
         if #available(iOS 16.0, *) {
-            UIViewController.wy_currentController()?.setNeedsUpdateOfSupportedInterfaceOrientations()
+            
+            let window = UIApplication.shared.connectedScenes.map({ $0 as? UIWindowScene }).compactMap({ $0 }).first?.windows.first
+            
+            if let windowScene: UIWindowScene = window?.windowScene {
+                windowScene.requestGeometryUpdate(UIWindowScene.GeometryPreferences.iOS(interfaceOrientations: wy_currentInterfaceOrientation))
+                UIViewController.wy_currentController()?.setNeedsUpdateOfSupportedInterfaceOrientations()
+                windowScene.requestGeometryUpdate(UIWindowScene.GeometryPreferences.iOS(interfaceOrientations: wy_currentInterfaceOrientation)) { error in
+                    wy_print("旋转屏幕方向出错啦： \(error.localizedDescription)")
+                }
+            }else {
+                wy_print("旋转屏幕方向出错啦")
+            }
         }else {
+            UIDevice.current.setValue(orientation.rawValue, forKey: "orientation")
             UIViewController.attemptRotationToDeviceOrientation()
         }
     }
@@ -763,17 +764,12 @@ private extension UIDevice {
                             }
                             
                             self?.wy_currentInterfaceOrientation = .portraitUpsideDown
-                            
-                            UIDevice.current.setValue(UIInterfaceOrientation.portraitUpsideDown.rawValue, forKey: "orientation")
-                            UIDevice.current.wy_attemptRotationToDeviceOrientation()
-                            
+                            UIDevice.current.wy_rotateScreenTo(.portraitUpsideDown)
                             
                         } else {
                             
                             self?.wy_currentInterfaceOrientation = .portrait
-                            
-                            UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation")
-                            UIDevice.current.wy_attemptRotationToDeviceOrientation()
+                            UIDevice.current.wy_rotateScreenTo(.portrait)
                         }
                         
                     }else {
@@ -781,16 +777,12 @@ private extension UIDevice {
                         if x >= 0 {
                             
                             self?.wy_currentInterfaceOrientation = .landscapeLeft
-                            
-                            UIDevice.current.setValue(UIInterfaceOrientation.landscapeLeft.rawValue, forKey: "orientation")
-                            UIDevice.current.wy_attemptRotationToDeviceOrientation()
+                            UIDevice.current.wy_rotateScreenTo(.landscapeLeft)
                             
                         } else{
                             
                             self?.wy_currentInterfaceOrientation = .landscapeRight
-                            
-                            UIDevice.current.setValue(UIInterfaceOrientation.landscapeRight.rawValue, forKey: "orientation")
-                            UIDevice.current.wy_attemptRotationToDeviceOrientation()
+                            UIDevice.current.wy_rotateScreenTo(.landscapeRight)
                         }
                     }
                 }

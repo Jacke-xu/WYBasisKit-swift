@@ -1,7 +1,7 @@
 Pod::Spec.new do |kit|
 
   kit.name         = 'WYBasisKit'
-  kit.version      = '1.2.2'
+  kit.version      = '1.2.3'
   kit.summary      = 'WYBasisKit 不仅可以帮助开发者快速构建一个工程，还有基于常用网络框架和系统API而封装的各种实用方法、扩展，开发者只需简单的调用API就可以快速实现相应功能， 大幅提高开发效率。'
   kit.description  = <<-DESC
                          Localizable: 国际化解决方案
@@ -51,7 +51,7 @@ Pod::Spec.new do |kit|
     end
 
     kit.subspec 'Activity' do |activity|
-       activity.source_files = 'WYBasisKit/Activity/WYActivity.swift', 'WYBasisKit/Extension/UIView/UIView.swift', 'WYBasisKit/Extension/UIViewController/UIViewController.swift', 'WYBasisKit/Extension/NSAttributedString/NSAttributedString.swift', 'WYBasisKit/Extension/String/String.swift', 'WYBasisKit/Extension/UIImage/UIImage.swift', 'WYBasisKit/Config/WYBasisKitConfig.swift', 'WYBasisKit/Config/WYConstMethod.swift'
+       activity.source_files = 'WYBasisKit/Activity/WYActivity.swift', 'WYBasisKit/Extension/UIView/UIView.swift', 'WYBasisKit/Extension/UIViewController/UIViewController.swift', 'WYBasisKit/Extension/NSAttributedString/NSAttributedString.swift', 'WYBasisKit/Extension/String/String.swift', 'WYBasisKit/Extension/UIImage/UIImage.swift', 'WYBasisKit/Config/WYBasisKitConfig.swift'
        activity.frameworks = 'Foundation', 'UIKit'
        activity.resource = 'WYBasisKit/Activity/WYActivity.bundle', 'WYBasisKit/Localizable/WYLocalizable.bundle'
        activity.dependency 'WYBasisKit/Localizable'
@@ -83,7 +83,7 @@ Pod::Spec.new do |kit|
         end
 
         layout.subspec 'ScrollText' do |scrollText|
-          scrollText.source_files = 'WYBasisKit/Layout/ScrollText/**/*', 'WYBasisKit/Config/WYBasisKitConfig.swift', 'WYBasisKit/Config/WYConstMethod.swift'
+          scrollText.source_files = 'WYBasisKit/Layout/ScrollText/**/*', 'WYBasisKit/Config/WYBasisKitConfig.swift'
           scrollText.frameworks = 'Foundation', 'UIKit'
           scrollText.resource = 'WYBasisKit/Localizable/WYLocalizable.bundle'
           scrollText.dependency 'WYBasisKit/Localizable'
@@ -91,13 +91,13 @@ Pod::Spec.new do |kit|
        end
 
         layout.subspec 'PagingView' do |pagingView|
-          pagingView.source_files = 'WYBasisKit/Layout/PagingView/**/*', 'WYBasisKit/Extension/UIView/**/*', 'WYBasisKit/Extension/UIButton/**/*', 'WYBasisKit/Extension/UIColor/**/*', 'WYBasisKit/Extension/UIImage/**/*', 'WYBasisKit/Config/WYBasisKitConfig.swift', 'WYBasisKit/Config/WYConstMethod.swift'
+          pagingView.source_files = 'WYBasisKit/Layout/PagingView/**/*', 'WYBasisKit/Extension/UIView/**/*', 'WYBasisKit/Extension/UIButton/**/*', 'WYBasisKit/Extension/UIColor/**/*', 'WYBasisKit/Extension/UIImage/**/*', 'WYBasisKit/Config/WYBasisKitConfig.swift'
           pagingView.frameworks = 'Foundation', 'UIKit'
           pagingView.dependency 'SnapKit'
        end
 
         layout.subspec 'BannerView' do |bannerView|
-          bannerView.source_files = 'WYBasisKit/Layout/BannerView/WYBannerView.swift', 'WYBasisKit/Extension/UIView/**/*', 'WYBasisKit/Config/WYBasisKitConfig.swift', 'WYBasisKit/Config/WYConstMethod.swift'
+          bannerView.source_files = 'WYBasisKit/Layout/BannerView/WYBannerView.swift', 'WYBasisKit/Extension/UIView/**/*', 'WYBasisKit/Config/WYBasisKitConfig.swift'
           bannerView.frameworks = 'Foundation', 'UIKit'
           bannerView.resource = 'WYBasisKit/Layout/BannerView/WYBannerView.bundle', 'WYBasisKit/Localizable/WYLocalizable.bundle'
           bannerView.dependency 'WYBasisKit/Localizable'
