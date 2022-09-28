@@ -140,8 +140,34 @@ public extension String {
         }
     }
     
+    /// 秒 转 时分秒（00:00:00）格式
+    func wy_secondConvertDate(check: Bool) -> String {
+        let totalSeconds: Int = Int(Double(string: self))
+        var hours = 0
+        var minutes = 0
+        var seconds = 0
+        var hoursText = ""
+        var minutesText = ""
+        var secondsText = ""
+        
+        hours = totalSeconds / 3600
+        hoursText = hours > 9 ? "\(hours)" : "0\(hours)"
+        
+        minutes = totalSeconds % 3600 / 60
+        minutesText = minutes > 9 ? "\(minutes)" : "0\(minutes)"
+        
+        seconds = totalSeconds % 3600 % 60
+        secondsText = seconds > 9 ? "\(seconds)" : "0\(seconds)"
+        
+        if ((check == true) && (hours <= 0)) {
+            return "\(minutesText):\(secondsText)"
+        }else {
+            return "\(hoursText):\(minutesText):\(secondsText)"
+        }
+    }
+    
     /// 时间戳转年月日格式
-    func  wy_timestampConvertDate(dateFormat: WYTimeFormat) -> String {
+    func  wy_timestampConvertDate(_ dateFormat: WYTimeFormat) -> String {
         
         if self.isEmpty {return ""}
         
@@ -157,7 +183,7 @@ public extension String {
     }
     
     /// 年月日格式转时间戳
-    func wy_dateStrConvertTimestamp(dateFormat: WYTimeFormat) -> String {
+    func wy_dateStrConvertTimestamp(_ dateFormat: WYTimeFormat) -> String {
         
         if self.isEmpty {return ""}
         
@@ -173,7 +199,7 @@ public extension String {
     }
     
     /// 时间戳距离现在的间隔时间
-    func wy_dateDifferenceWithNowTimer(dateFormat: WYTimeFormat) -> String {
+    func wy_dateDifferenceWithNowTimer(_ dateFormat: WYTimeFormat) -> String {
         
         // 当前时时间戳
         let currentTime = Date().timeIntervalSince1970
@@ -213,7 +239,7 @@ public extension String {
         if years < 3 {
             return "\(years)" + WYLocalizedString("年前")
         }
-        return wy_timestampConvertDate(dateFormat: dateFormat)
+        return wy_timestampConvertDate(dateFormat)
     }
     
     /// 从字符串中提取数字
