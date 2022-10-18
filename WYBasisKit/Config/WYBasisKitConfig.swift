@@ -22,6 +22,8 @@ public enum WYScreenPixels {
     case 𝟰𝟭𝟰ｘ𝟴𝟵𝟲
     case 𝟯𝟵𝟬ｘ𝟴𝟰𝟰
     case 𝟰𝟮𝟴ｘ𝟵𝟮𝟲
+    case 𝟯𝟵𝟯ｘ𝟴𝟱𝟮
+    case 𝟰𝟯𝟬ｘ𝟵𝟯𝟮
     case customize
 }
 
@@ -113,6 +115,10 @@ public func wy_screenRatioBase(fromWidth: Bool, pixels: WYScreenPixels) -> CGFlo
         return (fromWidth ? 390.0 : 844.0)
     case .𝟰𝟮𝟴ｘ𝟵𝟮𝟲:
         return (fromWidth ? 428.0 : 926.0)
+    case .𝟯𝟵𝟯ｘ𝟴𝟱𝟮:
+        return (fromWidth ? 393.0 : 852.0)
+    case .𝟰𝟯𝟬ｘ𝟵𝟯𝟮:
+        return (fromWidth ? 430.0 : 932.0)
     case .customize:
         return (fromWidth ? WYBasisKitConfig.screenWidthRatioBase : WYBasisKitConfig.screenHeightRatioBase)
     }
