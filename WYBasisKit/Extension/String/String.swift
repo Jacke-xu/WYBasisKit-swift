@@ -142,7 +142,7 @@ public extension String {
     
     /// 秒 转 时分秒（00:00:00）格式
     func wy_secondConvertDate(check: Bool) -> String {
-        let totalSeconds: Int = Int(Double(string: self))
+        let totalSeconds: Int = Int((self as NSString).doubleValue)
         var hours = 0
         var minutes = 0
         var seconds = 0

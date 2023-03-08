@@ -41,6 +41,9 @@ public struct WYBasisKitConfig {
     /// 设置字号适配的最大比率数
     public static var maxFontRatio: CGFloat = 1.25
     
+    /// 设置国际化时需要加载的自定义本地化语言读取表
+    public static var localizableTable: String?
+    
     /// Debug模式下是否打印日志
     public static var debugModeLog: Bool = true
 }
@@ -291,7 +294,7 @@ public func wy_print(_ messages: Any..., file: String = #file, function: String 
     #if DEBUG
     if WYBasisKitConfig.debugModeLog == true {
         let timeFormatter = DateFormatter()
-        timeFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        timeFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss.SSS"
         let time = timeFormatter.string(from: Date())
         let message = messages.compactMap { "\($0)" }.joined(separator: " ")
         print("\n【\((file as NSString).lastPathComponent) ——> \(function) ——> line:\(line) ——> time:\(time)】\n\n \(message)\n\n\n")

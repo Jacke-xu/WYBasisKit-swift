@@ -29,6 +29,7 @@ Pod::Spec.new do |kit|
     kit.subspec 'Localizable' do |localizable|
        localizable.source_files = 'WYBasisKit/Localizable/WYLocalizableManager.swift'
        localizable.frameworks = 'Foundation', 'UIKit'
+       localizable.dependency 'WYBasisKit/Config'
     end
 
     kit.subspec 'Extension' do |extension|

@@ -60,7 +60,7 @@ public func WYLocalizedString(_ chinese: String = "", _ english: String = "") ->
 public struct WYLocalizableManager {
     
     /// 设置本地化语言读取表(如果有Bundle，则要求Bundle名与表名一致，否则会读取失败)，不设置默认则使用默认WYLocalizable
-    public static var localizableTable: String = "WYLocalizable"
+    public static var localizableTable: String = WYBasisKitConfig.localizableTable ?? "WYLocalizable"
     
     private static var bundle: Bundle? = localizableBundle()
     
