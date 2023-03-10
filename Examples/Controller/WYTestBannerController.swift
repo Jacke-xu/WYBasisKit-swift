@@ -19,16 +19,18 @@ class WYTestBannerController: UIViewController {
         let bannerView = WYBannerView()
         bannerView.backgroundColor = .white
         bannerView.delegate = self
+        
+//        bannerView.updatePageControl(defaultColor: .purple, currentColor: .green)
+//        bannerView.updatePageControl(defaultImage: UIImage(named: "banner_dot_default")!, currentImage: UIImage(named: "banner_dot_current")!)
+//        bannerView.pageControlHideForSingle = false
+//        bannerView.scrollForSinglePage = true
+//        bannerView.imageContentMode = .scaleAspectFit
+//        bannerView.unlimitedCarousel = false
+//        bannerView.automaticCarousel = false
+//        bannerView.describeViewPosition = CGRect(x: 50, y: 50, width: 100, height: 20)
+//        bannerView.placeholderDescribe = "测试"
+        
         bannerView.reload(images: [UIImage(named: "banner_1")!, UIImage(named: "banner_2")!, UIImage(named: "banner_3")!, UIImage(named: "banner_4")!, UIImage(named: "banner_5")!, UIImage(named: "banner_6")!, UIImage(named: "banner_7")!, UIImage(named: "banner_8")!, UIImage(named: "banner_9")!], describes: ["banner_1", "banner_2", "banner_3", "banner_4", "banner_5", "banner_6", "banner_7", "banner_8", "banner_9"])
-        //bannerView.updatePageControl(defaultColor: .purple, currentColor: .green)
-        //bannerView.updatePageControl(defaultImage: UIImage(named: "banner_dot_default")!, currentImage: UIImage(named: "banner_dot_current")!)
-        //bannerView.pageControlHideForSingle = false
-        //bannerView.scrollForSinglePage = true
-        //bannerView.imageContentMode = .scaleAspectFit
-        //bannerView.unlimitedCarousel = false
-        //bannerView.automaticCarousel = false
-        //bannerView.describeViewPosition = CGRect(x: 50, y: 50, width: 100, height: 20)
-        //bannerView.placeholderDescribe = "测试"
         view.addSubview(bannerView)
         bannerView.snp.makeConstraints { make in
             make.center.equalToSuperview()
