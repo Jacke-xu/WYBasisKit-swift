@@ -114,6 +114,13 @@ public struct WYProgress {
     
     /// 本地化描述
     public var description: String = ""
+    
+    public init(progress: Double = 0, completedUnit: Int64 = 0, totalUnit: Int64 = 0, description: String = "") {
+        self.progress = progress
+        self.completedUnit = completedUnit
+        self.totalUnit = totalUnit
+        self.description = description
+    }
 }
 
 public struct WYSuccess {
@@ -129,6 +136,13 @@ public struct WYSuccess {
     
     /// 是否是缓存数据
     public var isCache: Bool = false
+    
+    public init(origin: String = "", parse: String = "", storage: WYStorageData? = nil, isCache: Bool = false) {
+        self.origin = origin
+        self.parse = parse
+        self.storage = storage
+        self.isCache = isCache
+    }
 }
 
 public struct WYError {
@@ -138,6 +152,11 @@ public struct WYError {
     
     /// 详细错误描述
     public var describe: String = ""
+    
+    public init(code: String = "", describe: String = "") {
+        self.code = code
+        self.describe = describe
+    }
 }
 
 public struct WYDownloadModel: HandyJSON {
@@ -228,6 +247,17 @@ public struct WYFileModel {
     
     /// 上传的资源URL路径
     public var fileUrl: String = ""
+    
+    public init(mimeType: String = "", fileName: String = "", folderName: String = "file", compressionQuality: CGFloat = 1.0, fileType: WYFileType = .image, image: UIImage? = nil, data: Data? = nil, fileUrl: String = "") {
+        self._mimeType = mimeType
+        self.fileName = fileName
+        self.folderName = folderName
+        self._compressionQuality = compressionQuality
+        self.fileType = fileType
+        self.image = image
+        self.data = data
+        self.fileUrl = fileUrl
+    }
 }
 
 public struct WYNetworkManager {

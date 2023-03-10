@@ -74,6 +74,18 @@ public struct WYHttpsConfig {
     
     /// 获取一个默认config
     public static let `default`: WYHttpsConfig = WYHttpsConfig()
+    
+    public init(trustManager: ServerTrustManager? = nil, sessionDelegate: SessionDelegate? = nil, serverCer: String = serverCer, clientP12: String = clientP12, clientP12Password: String = clientP12Password, verifyStrategy: WYHttpsVerifyStrategy = verifyStrategy, defaultValidation: Bool = defaultValidation, validateDomain: Bool = validateDomain, allHostsMustBeEvaluated: Bool = allHostsMustBeEvaluated) {
+        self.trustManager = trustManager
+        self.sessionDelegate = sessionDelegate
+        self.serverCer = serverCer
+        self.clientP12 = clientP12
+        self.clientP12Password = clientP12Password
+        self.verifyStrategy = verifyStrategy
+        self.defaultValidation = defaultValidation
+        self.validateDomain = validateDomain
+        self.allHostsMustBeEvaluated = allHostsMustBeEvaluated
+    }
 }
 
 /// 网络请求数据缓存相关配置
@@ -90,6 +102,12 @@ public struct WYNetworkRequestCache {
     /// 数据缓存有效期
     public static var storageDurable: WYStorageDurable = .day(1)
     public var storageDurable: WYStorageDurable = storageDurable
+    
+    public init(cacheKey: String = cacheKey, cachePath: URL = cachePath, storageDurable: WYStorageDurable = storageDurable) {
+        self.cacheKey = cacheKey
+        self.cachePath = cachePath
+        self.storageDurable = storageDurable
+    }
 }
 
 /// 网络请求相关配置
@@ -165,4 +183,24 @@ public struct WYNetworkConfig {
     
     /// 获取一个默认config
     public static let `default`: WYNetworkConfig = WYNetworkConfig()
+    
+    public init(requestStyle: WYNetworkRequestStyle = requestStyle, httpsConfig: WYHttpsConfig = httpsConfig, taskMethod: WYTaskMethod = taskMethod, timeoutInterval: TimeInterval = timeoutInterval, domain: String = domain, header: [String : String]? = nil, specialCharacters: [String] = specialCharacters, originObject: Bool = originObject, requestCache: WYNetworkRequestCache? = nil, downloadSavePath: URL = downloadSavePath, removeSameNameFile: Bool = removeSameNameFile, callbackQueue: DispatchQueue? = nil, mapper: [WYMappingKey : String] = mapper, serverRequestSuccessCode: String = serverRequestSuccessCode, networkServerFailCode: String = networkServerFailCode, unpackServerFailCode: String = unpackServerFailCode, debugModeLog: Bool = debugModeLog) {
+        self.requestStyle = requestStyle
+        self.httpsConfig = httpsConfig
+        self.taskMethod = taskMethod
+        self.timeoutInterval = timeoutInterval
+        self.domain = domain
+        self.header = header
+        self.specialCharacters = specialCharacters
+        self.originObject = originObject
+        self.requestCache = requestCache
+        self.downloadSavePath = downloadSavePath
+        self.removeSameNameFile = removeSameNameFile
+        self.callbackQueue = callbackQueue
+        self.mapper = mapper
+        self.serverRequestSuccessCode = serverRequestSuccessCode
+        self.networkServerFailCode = networkServerFailCode
+        self.unpackServerFailCode = unpackServerFailCode
+        self.debugModeLog = debugModeLog
+    }
 }

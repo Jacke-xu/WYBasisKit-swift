@@ -32,78 +32,85 @@ public enum WYActivityAnimation {
     case gif
 }
 
-public struct WYActivityConfig {
+/// 滚动信息提示窗口默认配置项
+public struct WYScrollInfoConfig {
     
     /// 设置滚动信息提示窗口的默认背景色
-    public static var scrollInfoBackgroundColor: UIColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.8)
-    public var scrollInfoBackgroundColor: UIColor = scrollInfoBackgroundColor
-    
-    /// 设置信息提示窗口的默认背景色
-    public static var infoBackgroundColor: UIColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.8)
-    public var infoBackgroundColor: UIColor = infoBackgroundColor
-    
-    /// 设置Loading提示窗口的默认背景色
-    public static var loadingBackgroundColor: UIColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.8)
-    public var loadingBackgroundColor: UIColor = loadingBackgroundColor
+    public static var backgroundColor: UIColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.8)
+    public var backgroundColor: UIColor = backgroundColor
     
     /// 设置滚动信息提示窗口的移动速度
     public static var movingSpeed: CGFloat = 1.2
     public var movingSpeed: CGFloat = movingSpeed
     
     /// 设置滚动信息提示窗口文本控件的默认颜色
-    public static var scrollInfoTextColor: UIColor = .white
-    public var scrollInfoTextColor: UIColor = scrollInfoTextColor
-    
-    /// 设置信息提示窗口文本控件的默认颜色
-    public static var infoTextColor: UIColor = .white
-    public var infoTextColor: UIColor = infoTextColor
-    
-    /// 设置Loading提示窗口文本控件的默认颜色
-    public static var loadingTextColor: UIColor = .white
-    public var loadingTextColor: UIColor = loadingTextColor
+    public static var textColor: UIColor = .white
+    public var textColor: UIColor = textColor
     
     /// 设置滚动信息提示窗口文本控件的默认字体、字号
-    public static var scrollInfoTextFont: UIFont = .systemFont(ofSize: 15)
-    public var scrollInfoTextFont: UIFont = scrollInfoTextFont
+    public static var textFont: UIFont = .systemFont(ofSize: 15)
+    public var textFont: UIFont = textFont
+    
+    public init(backgroundColor: UIColor = backgroundColor, movingSpeed: CGFloat = movingSpeed, textColor: UIColor = textColor, textFont: UIFont = textFont) {
+        self.backgroundColor = backgroundColor
+        self.movingSpeed = movingSpeed
+        self.textColor = textColor
+        self.textFont = textFont
+    }
+}
+
+/// 信息提示窗口默认配置项
+public struct WYMessageInfoConfig {
+    
+    /// 设置信息提示窗口的默认背景色
+    public static var backgroundColor: UIColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.8)
+    public var backgroundColor: UIColor = backgroundColor
+    
+    /// 设置信息提示窗口文本控件的默认颜色
+    public static var textColor: UIColor = .white
+    public var textColor: UIColor = textColor
     
     /// 设置信息提示窗口文本控件的默认字体、字号
-    public static var infoTextFont: UIFont = .systemFont(ofSize: 15)
-    public var infoTextFont: UIFont = infoTextFont
+    public static var textFont: UIFont = .systemFont(ofSize: 15)
+    public var textFont: UIFont = textFont
+    
+    public init(backgroundColor: UIColor = backgroundColor, textColor: UIColor = textColor, textFont: UIFont = textFont) {
+        self.backgroundColor = backgroundColor
+        self.textColor = textColor
+        self.textFont = textFont
+    }
+}
+
+/// Loading提示窗口配置项
+public struct WYLoadingConfig {
+    
+    /// 设置Loading提示窗口的默认背景色
+    public static var backgroundColor: UIColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.8)
+    public var backgroundColor: UIColor = backgroundColor
+    
+    /// 设置Loading提示窗口文本控件的默认颜色
+    public static var textColor: UIColor = .white
+    public var textColor: UIColor = textColor
     
     /// 设置Loading提示窗口文本控件的默认字体、字号
-    public static var loadingTextFont: UIFont = .boldSystemFont(ofSize: 15)
-    public var loadingTextFont: UIFont = loadingTextFont
-    
-    /// 设置Loading提示窗口动图信息
-    public static var gifInfo: WYGifInfo = defaultGifInfo()
-    public var gifInfo: WYGifInfo = gifInfo
+    public static var textFont: UIFont = .boldSystemFont(ofSize: 15)
+    public var textFont: UIFont = textFont
     
     /// 设置Loading提示窗口 indicator 的颜色
     public static var indicatorColor: UIColor = .white
     public var indicatorColor: UIColor = indicatorColor
     
     /// 设置Loading提示窗口文本最多可显示几行
-    public static var loadingNumberOfLines: NSInteger = 2
-    public var loadingNumberOfLines: NSInteger = loadingNumberOfLines
+    public static var numberOfLines: NSInteger = 2
+    public var numberOfLines: NSInteger = numberOfLines
     
     /// 设置Loading提示窗口动画控件的Size
     public static var animationSize: CGSize = CGSize(width: wy_screenWidth(45, WYBasisKitConfig.defaultScreenPixels), height: wy_screenWidth(45, WYBasisKitConfig.defaultScreenPixels))
     public var animationSize: CGSize = animationSize
-}
-
-public extension WYActivityConfig {
     
-    /// 滚动信息提示窗口默认配置
-    static let scroll: WYActivityConfig = WYActivityConfig(scrollInfoBackgroundColor: scrollInfoBackgroundColor, movingSpeed: movingSpeed, scrollInfoTextColor: scrollInfoTextColor, scrollInfoTextFont: scrollInfoTextFont)
-    
-    /// 信息提示窗口默认配置
-    static let info: WYActivityConfig = WYActivityConfig(infoBackgroundColor: infoBackgroundColor, infoTextColor: infoTextColor, infoTextFont: infoTextFont)
-    
-    /// 默认Loading提示窗口配置
-    static let `default`: WYActivityConfig = WYActivityConfig(loadingBackgroundColor: loadingBackgroundColor, loadingTextColor: loadingTextColor, loadingTextFont: loadingTextFont, indicatorColor: indicatorColor, loadingNumberOfLines: loadingNumberOfLines, animationSize: animationSize)
-    
-    /// 透明Loading提示窗口配置(适用于没有显示文本的自定义Gif Loading提示窗)
-    static let concise: WYActivityConfig = WYActivityConfig(loadingBackgroundColor: .clear, animationSize: animationSize)
+    /// 设置Loading提示窗口动图信息
+    public static var gifInfo: WYGifInfo = defaultGifInfo()
+    public var gifInfo: WYGifInfo = gifInfo
     
     /// 获取Loading提示窗口默认Gif图
     private static func defaultGifInfo() -> WYGifInfo {
@@ -114,6 +121,32 @@ public extension WYActivityConfig {
         }
         return WYGifInfo(animationImages: defaultImages, animationDuration: 0.8)
     }
+    
+    public init(backgroundColor: UIColor = backgroundColor, textColor: UIColor = textColor, textFont: UIFont = textFont, indicatorColor: UIColor = indicatorColor, numberOfLines: NSInteger = numberOfLines, animationSize: CGSize = animationSize, gifInfo: WYGifInfo = gifInfo) {
+        self.backgroundColor = backgroundColor
+        self.textColor = textColor
+        self.textFont = textFont
+        self.indicatorColor = indicatorColor
+        self.numberOfLines = numberOfLines
+        self.animationSize = animationSize
+        self.gifInfo = gifInfo
+    }
+}
+
+
+public struct WYActivityConfig {
+    
+    /// 滚动信息提示窗口默认配置
+    public static let scroll: WYScrollInfoConfig = WYScrollInfoConfig()
+    
+    /// 信息提示窗口默认配置
+    public static let info: WYMessageInfoConfig = WYMessageInfoConfig()
+    
+    /// 默认Loading提示窗口配置
+    public static let `default`: WYLoadingConfig = WYLoadingConfig()
+    
+    /// 透明Loading提示窗口配置(适用于没有显示文本的自定义Gif Loading提示窗)
+    public static let concise: WYLoadingConfig = WYLoadingConfig(backgroundColor: .clear)
 }
 
 public struct WYActivity {
@@ -130,7 +163,7 @@ public struct WYActivity {
      *  @param config             信息提示窗口配置选项
      *
      */
-    public static func showScrollInfo(_ content: Any, in contentView: UIView? = nil, offset: CGFloat? = nil, config: WYActivityConfig = .scroll) {
+    public static func showScrollInfo(_ content: Any, in contentView: UIView? = nil, offset: CGFloat? = nil, config: WYScrollInfoConfig = WYActivityConfig.scroll) {
         
         guard let windowView = sharedContentView(contentView) else {
             return
@@ -151,7 +184,7 @@ public struct WYActivity {
      *
      *  @param config             信息提示窗口配置选项
      */
-    public static func showInfo(_ content: Any, in contentView: UIView? = nil, position: WYActivityPosition = .middle, offset: CGFloat? = nil, config: WYActivityConfig = .info) {
+    public static func showInfo(_ content: Any, in contentView: UIView? = nil, position: WYActivityPosition = .middle, offset: CGFloat? = nil, config: WYMessageInfoConfig = WYActivityConfig.info) {
         
         guard let windowView = sharedContentView(contentView) else {
             return
@@ -175,7 +208,7 @@ public struct WYActivity {
      *  @param config             信息提示窗口配置选项
      *
      */
-    public static func showLoading(_ content: Any? = nil, in contentView: UIView, userInteraction: Bool = true, animation: WYActivityAnimation = .indicator, delay: TimeInterval = 0, config: WYActivityConfig = .default) {
+    public static func showLoading(_ content: Any? = nil, in contentView: UIView, userInteraction: Bool = true, animation: WYActivityAnimation = .indicator, delay: TimeInterval = 0, config: WYLoadingConfig = WYActivityConfig.default) {
         
         WYActivityLoadingView.showContent(content, in: contentView, userInteraction: userInteraction, animation: animation, delay: delay, config: config)
     }
@@ -209,17 +242,17 @@ private class WYActivityScrollInfoView: UIView {
     
     var movingSpeed: CGFloat = 0.0
     
-    func showContent(_ content: Any, in contentView: UIView, offset: CGFloat, config: WYActivityConfig) {
+    func showContent(_ content: Any, in contentView: UIView, offset: CGFloat, config: WYScrollInfoConfig) {
         
         if contentView.wy_scrollInfoView != nil {
             contentView.wy_scrollInfoView?.stopScroll(initial: true)
         }
         
-        let attributedText = WYActivity.sharedContentAttributed(content: content, textColor: config.scrollInfoTextColor, textFont: config.scrollInfoTextFont)
+        let attributedText = WYActivity.sharedContentAttributed(content: content, textColor: config.textColor, textFont: config.textFont)
         
         let contentSize: CGSize = attributedText.wy_calculateSize(controlSize: CGSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude))
         
-        self.backgroundColor = config.scrollInfoBackgroundColor
+        self.backgroundColor = config.backgroundColor
         
         self.frame = CGRect(x: 0, y: offset, width: contentView.frame.size.width, height: contentSize.height + 10)
         contentView.addSubview(self)
@@ -291,17 +324,17 @@ private class WYActivityInfoView: UIView {
     
     var dismissOffset: CGFloat = 0
     
-    func showContent(_ content: Any, in contentView: UIView, position: WYActivityPosition, offset: CGFloat, config: WYActivityConfig) {
+    func showContent(_ content: Any, in contentView: UIView, position: WYActivityPosition, offset: CGFloat, config: WYMessageInfoConfig) {
         
         if contentView.wy_infoView != nil {
             contentView.wy_infoView?.removeActivity()
         }
         
-        let attributedText = WYActivity.sharedContentAttributed(content: content, textColor: config.infoTextColor, textFont: config.infoTextFont)
+        let attributedText = WYActivity.sharedContentAttributed(content: content, textColor: config.textColor, textFont: config.textFont)
         
         contentLabel.attributedText = attributedText
         
-        self.backgroundColor = config.infoBackgroundColor
+        self.backgroundColor = config.backgroundColor
         self.wy_add(rectCorner: .allCorners, cornerRadius: wy_screenWidth(10, WYBasisKitConfig.defaultScreenPixels))
         contentView.addSubview(self)
         
@@ -310,7 +343,7 @@ private class WYActivityInfoView: UIView {
         contentView.wy_infoView = self
     }
     
-    func layoutActivity(contentView: UIView, position: WYActivityPosition, offset: CGFloat, config: WYActivityConfig) {
+    func layoutActivity(contentView: UIView, position: WYActivityPosition, offset: CGFloat, config: WYMessageInfoConfig) {
         
         let controlWidth: CGFloat = contentView.frame.size.width - [wy_screenWidth(40, WYBasisKitConfig.defaultScreenPixels), wy_screenWidth(120, WYBasisKitConfig.defaultScreenPixels), wy_screenWidth(120, WYBasisKitConfig.defaultScreenPixels)][position.rawValue]
         
@@ -329,7 +362,7 @@ private class WYActivityInfoView: UIView {
         showAnimate(contentView: contentView, position: position, offset: offset, config: config)
     }
     
-    func showAnimate(contentView: UIView, position: WYActivityPosition, offset: CGFloat, config: WYActivityConfig) {
+    func showAnimate(contentView: UIView, position: WYActivityPosition, offset: CGFloat, config: WYMessageInfoConfig) {
         
         let controlWidth: CGFloat = contentView.frame.size.width - [wy_screenWidth(40, WYBasisKitConfig.defaultScreenPixels), wy_screenWidth(120, WYBasisKitConfig.defaultScreenPixels), wy_screenWidth(120, WYBasisKitConfig.defaultScreenPixels)][position.rawValue]
         
@@ -359,7 +392,7 @@ private class WYActivityInfoView: UIView {
             
             contentLabel.textAlignment = .center
             
-            let contentSize = WYActivity.sharedLayoutSize(contentView: contentView, contentLabel: contentLabel, minimux: wy_screenWidth(80, WYBasisKitConfig.defaultScreenPixels), maxWidth: (contentView.frame.size.width - wy_screenWidth(120, WYBasisKitConfig.defaultScreenPixels)), defaultFont: config.infoTextFont)
+            let contentSize = WYActivity.sharedLayoutSize(contentView: contentView, contentLabel: contentLabel, minimux: wy_screenWidth(80, WYBasisKitConfig.defaultScreenPixels), maxWidth: (contentView.frame.size.width - wy_screenWidth(120, WYBasisKitConfig.defaultScreenPixels)), defaultFont: config.textFont)
             
             contentLabel.frame = CGRect(x: wy_screenWidth(10, WYBasisKitConfig.defaultScreenPixels), y: wy_screenWidth(10, WYBasisKitConfig.defaultScreenPixels), width: contentSize.width, height: contentSize.height)
             contentLabel.sizeToFit()
@@ -431,8 +464,8 @@ private class WYActivityInfoView: UIView {
         }
     }
     
-    func sharedTimeInterval(config: WYActivityConfig) -> TimeInterval {
-        return 1.5 + Double((WYActivity.textNumberOfLines(contentLabel: contentLabel, defaultFont: config.infoTextFont) - 1) * 1)
+    func sharedTimeInterval(config: WYMessageInfoConfig) -> TimeInterval {
+        return 1.5 + Double((WYActivity.textNumberOfLines(contentLabel: contentLabel, defaultFont: config.textFont) - 1) * 1)
     }
     
     func removeActivity() {
@@ -477,7 +510,7 @@ private class WYActivityLoadingView: UIView {
         return activity
     }()
     
-    class func showContent(_ content: Any?, in contentView: UIView, userInteraction: Bool = true, animation: WYActivityAnimation, delay: TimeInterval, config: WYActivityConfig) {
+    class func showContent(_ content: Any?, in contentView: UIView, userInteraction: Bool = true, animation: WYActivityAnimation, delay: TimeInterval, config: WYLoadingConfig) {
         
         if contentView.wy_loadingView != nil {
             contentView.wy_loadingView?.removeActivity()
@@ -485,7 +518,7 @@ private class WYActivityLoadingView: UIView {
         
         let loadingView = WYActivityLoadingView()
         loadingView.isHidden = true
-        loadingView.backgroundColor = config.loadingBackgroundColor
+        loadingView.backgroundColor = config.backgroundColor
         contentView.addSubview(loadingView)
         
         loadingView.interactionEnabled = contentView.isUserInteractionEnabled
@@ -499,7 +532,7 @@ private class WYActivityLoadingView: UIView {
         contentView.wy_loadingView = loadingView
     }
     
-    func layoutActivity(content: Any?, contentView: UIView, animation: WYActivityAnimation, delay: TimeInterval, config: WYActivityConfig) {
+    func layoutActivity(content: Any?, contentView: UIView, animation: WYActivityAnimation, delay: TimeInterval, config: WYLoadingConfig) {
         
         switch animation {
         case .indicator:
@@ -535,9 +568,9 @@ private class WYActivityLoadingView: UIView {
                 return
             }
             
-            let attributedText = WYActivity.sharedContentAttributed(content: content!, textColor: config.loadingTextColor, textFont: config.loadingTextFont, alignment: .center)
+            let attributedText = WYActivity.sharedContentAttributed(content: content!, textColor: config.textColor, textFont: config.textFont, alignment: .center)
             
-            textlabel.numberOfLines = config.loadingNumberOfLines
+            textlabel.numberOfLines = config.numberOfLines
             
             textlabel.attributedText = attributedText
             
@@ -545,9 +578,9 @@ private class WYActivityLoadingView: UIView {
             
             let textMinimux: CGFloat = frame.size.width
             var textMaximum: CGFloat = 0
-            if config.loadingNumberOfLines > 0 {
+            if config.numberOfLines > 0 {
                 
-                textMaximum = (frame.size.width * 1.5) + (CGFloat(config.loadingNumberOfLines) * textlabel.frame.size.height)
+                textMaximum = (frame.size.width * 1.5) + (CGFloat(config.numberOfLines) * textlabel.frame.size.height)
                 if (textMaximum > (contentView.frame.size.width - wy_screenWidth(120, WYBasisKitConfig.defaultScreenPixels))) {
                     textMaximum = (contentView.frame.size.width - wy_screenWidth(120, WYBasisKitConfig.defaultScreenPixels))
                 }
@@ -555,7 +588,7 @@ private class WYActivityLoadingView: UIView {
             }else {
                 textMaximum = (contentView.frame.size.width - wy_screenWidth(120, WYBasisKitConfig.defaultScreenPixels))
             }
-            textlabel.wy_width = WYActivity.sharedLayoutSize(contentView: contentView, contentLabel: textlabel, minimux: textMinimux, maxWidth: textMaximum, defaultFont: config.loadingTextFont).width
+            textlabel.wy_width = WYActivity.sharedLayoutSize(contentView: contentView, contentLabel: textlabel, minimux: textMinimux, maxWidth: textMaximum, defaultFont: config.textFont).width
             
             textlabel.sizeToFit()
             

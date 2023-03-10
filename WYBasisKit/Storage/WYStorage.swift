@@ -54,6 +54,15 @@ public struct WYStorageData: Codable {
     
     /// 报错提示
     var error: String?
+    
+    public init(userData: Data? = nil, durable: TimeInterval? = nil, storageDate: TimeInterval? = nil, isInvalid: Bool? = nil, path: URL? = nil, error: String? = nil) {
+        self.userData = userData
+        self.durable = durable
+        self.storageDate = storageDate
+        self.isInvalid = isInvalid
+        self.path = path
+        self.error = error
+    }
 }
 
 /// 缓存相关设置

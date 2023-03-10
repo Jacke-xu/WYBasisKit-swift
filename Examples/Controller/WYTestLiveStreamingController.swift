@@ -106,7 +106,7 @@ class WYTestLiveStreamingController: UIViewController {
         
         player.play(with: "http://39.134.65.162/PLTV/88888888/224/3221225611/index.m3u8")
         
-        WYActivity.showLoading(in: player, animation: .gif, config: .concise)
+        WYActivity.showLoading(in: player, animation: .gif, config: WYActivityConfig.concise)
         
         /**
         let options: IJKFFOptions = IJKFFOptions.byDefault()
@@ -177,7 +177,7 @@ class WYTestLiveStreamingController: UIViewController {
     
     @objc func url(sender: UIButton) {
         player.play(with: "https://files.cochat.lenovo.com/download/dbb26a06-4604-3d2b-bb2c-6293989e63a7/55deb281e01b27194daf6da391fdfe83.mp4")
-        WYActivity.showLoading(in: player, animation: .gif, config: .concise)
+        WYActivity.showLoading(in: player, animation: .gif, config: WYActivityConfig.concise)
     }
     
     deinit {
@@ -212,7 +212,7 @@ extension WYTestLiveStreamingController: WYLivePlayerDelegate {
             WYActivity.dismissLoading(in: player)
         case .buffering:
             wy_print("缓冲中")
-            WYActivity.showLoading(in: player, animation: .gif, config: .concise)
+            WYActivity.showLoading(in: player, animation: .gif, config: WYActivityConfig.concise)
         case .playable:
             wy_print("缓冲结束")
             WYActivity.dismissLoading(in: player)
