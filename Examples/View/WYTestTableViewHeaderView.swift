@@ -19,7 +19,7 @@ class WYTestTableViewHeaderView: UITableViewHeaderFooterView {
         
         titleView.frame = CGRect(x: 20, y: 0, width: wy_screenWidth - 20, height: 30)
         titleView.textColor = .white
-        titleView.font = .wy_systemFont(ofSize: 14)
+        titleView.font = .systemFont(ofSize: wy_screenWidth(14))
         contentView.addSubview(titleView)
     }
     

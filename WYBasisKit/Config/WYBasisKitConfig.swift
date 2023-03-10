@@ -102,7 +102,7 @@ public let wy_screenWidth: CGFloat = UIScreen.main.bounds.size.width
 public let wy_screenHeight: CGFloat = UIScreen.main.bounds.size.height
 
 /// 屏幕宽度或者高度比率基数
-public func wy_screenRatioBase(fromWidth: Bool, pixels: WYScreenPixels) -> CGFloat {
+public func wy_screenRatioBase(fromWidth: Bool, pixels: WYScreenPixels = WYBasisKitConfig.defaultScreenPixels) -> CGFloat {
     switch pixels {
     case .𝟯𝟮𝟬ｘ𝟱𝟲𝟴:
         return (fromWidth ? 320.0 : 568.0)
@@ -128,27 +128,27 @@ public func wy_screenRatioBase(fromWidth: Bool, pixels: WYScreenPixels) -> CGFlo
 }
 
 /// 屏幕宽度比率
-public func wy_screenWidthRatio(_ pixels: WYScreenPixels) -> CGFloat {
+public func wy_screenWidthRatio(_ pixels: WYScreenPixels = WYBasisKitConfig.defaultScreenPixels) -> CGFloat {
     return (wy_screenWidth / wy_screenRatioBase(fromWidth: true, pixels: pixels))
 }
 
 /// 屏幕高度比率
-public func wy_screenHeightRatio(_ pixels: WYScreenPixels) -> CGFloat {
+public func wy_screenHeightRatio(_ pixels: WYScreenPixels = WYBasisKitConfig.defaultScreenPixels) -> CGFloat {
     return (wy_screenHeight / wy_screenRatioBase(fromWidth: false, pixels: pixels))
 }
 
 /// 屏幕宽度比率转换
-public func wy_screenWidth(_ ratioValue: CGFloat, _ pixels: WYScreenPixels) -> CGFloat {
+public func wy_screenWidth(_ ratioValue: CGFloat, _ pixels: WYScreenPixels = WYBasisKitConfig.defaultScreenPixels) -> CGFloat {
     return round(ratioValue*wy_screenWidthRatio(pixels))
 }
 
 /// 屏幕高度比率转换
-public func wy_screenHeight(_ ratioValue: CGFloat, _ pixels: WYScreenPixels) -> CGFloat {
+public func wy_screenHeight(_ ratioValue: CGFloat, _ pixels: WYScreenPixels = WYBasisKitConfig.defaultScreenPixels) -> CGFloat {
     return round(ratioValue*wy_screenHeightRatio(pixels))
 }
 
 /// 字号比率转换
-public func wy_fontSize(_ ratioValue: CGFloat, _ pixels: WYScreenPixels) -> CGFloat {
+public func wy_fontSize(_ ratioValue: CGFloat, _ pixels: WYScreenPixels = WYBasisKitConfig.defaultScreenPixels) -> CGFloat {
     if wy_screenWidthRatio(pixels) > WYBasisKitConfig.maxFontRatio {
         return ratioValue * WYBasisKitConfig.maxFontRatio
     }else {
