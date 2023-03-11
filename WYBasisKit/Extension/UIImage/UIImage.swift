@@ -425,13 +425,13 @@ public extension UIImage {
 public struct WYGifInfo {
     
     /// 解析后得到的图片数组
-    var animationImages: [UIImage]? = nil
+    public var animationImages: [UIImage]? = nil
     
     /// 轮询时长
-    var animationDuration: CGFloat = 0.0
+    public var animationDuration: CGFloat = 0.0
     
     /// 可以直接显示的动图
-    var animatedImage: UIImage? = nil
+    public var animatedImage: UIImage? = nil
     
     public init(animationImages: [UIImage]? = nil, animationDuration: CGFloat, animatedImage: UIImage? = nil) {
         self.animationImages = animationImages
