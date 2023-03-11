@@ -314,7 +314,7 @@ public extension UIImage {
             
             guard let contentImage = UIImage(named: imageName, in: Bundle(path: resourcePath), compatibleWith: nil) else {
                 
-                wy_print("在 \(imageBundle.bundleName).bundle\(imageBundle.subdirectory) 中没有找到 \(imageName) 这张图片，已默认创建一张随机颜色图片供您使用")
+                wy_print("在 \(imageBundle.bundleName).bundle/\(imageBundle.subdirectory) 中没有找到 \(imageName) 这张图片，已默认创建一张随机颜色图片供您使用")
                 return wy_createImage(from: UIColor(red: CGFloat(arc4random()%256)/255.0, green: CGFloat(arc4random()%256)/255.0, blue: CGFloat(arc4random()%256)/255.0, alpha: 1.0))
             }
             return contentImage
