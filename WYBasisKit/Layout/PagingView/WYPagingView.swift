@@ -55,8 +55,8 @@ public class WYPagingView: UIView {
     /// 分页控制器底部背景色 默认白色
     public var bar_pagingContro_content_color: UIColor = .white
     
-    /// 分页控制器背景色 默认白色
-    public var bar_pagingContro_bg_color: UIColor = .white
+    /// 分页控制器背景色
+    public var bar_pagingContro_bg_color: UIColor? = nil
     
     /// 分页控制器是否需要弹跳效果
     public var bar_pagingContro_bounce: Bool = true
@@ -424,7 +424,9 @@ extension WYPagingView {
                 superController.addChild(controllers[index])
                 
                 let controllerView = controllers[index].view
-                controllerView?.backgroundColor = bar_pagingContro_bg_color
+                if let controller_bg_color: UIColor = bar_pagingContro_bg_color {
+                    controllerView?.backgroundColor = controller_bg_color
+                }
                 scrollView!.addSubview(controllerView!)
                 controllerView!.snp.makeConstraints({ (make) in
 
@@ -457,6 +459,7 @@ extension WYPagingView {
             
             barScroll = UIScrollView()
             barScroll!.showsHorizontalScrollIndicator = false
+            barScroll!.showsVerticalScrollIndicator = false
             barScroll!.backgroundColor = bar_bg_defaultColor
             barScroll!.bounces = bar_pagingContro_bounce
             addSubview(barScroll!)
@@ -466,7 +469,7 @@ extension WYPagingView {
             }
             objc_setAssociatedObject(self, WYAssociatedKeys.barScrollView, barScroll, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
-        barScroll!.contentSize = CGSize(width: barScroll!.contentSize.width, height: 0)
+        barScroll!.contentSize = CGSize(width: barScroll!.contentSize.width, height: bar_Height)
         
         return barScroll!
     }
