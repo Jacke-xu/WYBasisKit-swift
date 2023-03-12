@@ -153,12 +153,10 @@ private extension Timer {
     private class func wy_existTimer(_ alias: String) ->Bool {
         
         guard wy_timerContainer.keys.contains(alias) == true else {
-            wy_print("\(alias) 计时器不存在，请调用 beginTimer 方法启用计时器")
             return false
         }
         
         guard wy_timerContainer[alias]?.timer != nil else {
-            wy_print("\(alias) 计时器不存在，请调用 beginTimer 方法启用计时器")
             return false
         }
         

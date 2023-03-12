@@ -38,22 +38,22 @@ public enum WYStorageDurable {
 public struct WYStorageData: Codable {
     
     /// 存储的数据
-    var userData: Data?
+    public var userData: Data?
     
     /// 存储有效时长(秒)
-    var durable: TimeInterval?
+    public var durable: TimeInterval?
     
     /// 存入时间戳
-    var storageDate: TimeInterval?
+    public var storageDate: TimeInterval?
     
     /// 是否超时过期
-    var isInvalid: Bool?
+    public var isInvalid: Bool?
     
     /// 缓存路径
-    var path: URL?
+    public var path: URL?
     
     /// 报错提示
-    var error: String?
+    public var error: String?
     
     public init(userData: Data? = nil, durable: TimeInterval? = nil, storageDate: TimeInterval? = nil, isInvalid: Bool? = nil, path: URL? = nil, error: String? = nil) {
         self.userData = userData

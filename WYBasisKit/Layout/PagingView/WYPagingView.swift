@@ -90,9 +90,15 @@ public class WYPagingView: UIView {
 
     /// 分页栏底部分隔带背景色 默认<#F2F2F2>
     public var bar_dividingStripColor: UIColor = .wy_hex("#F2F2F2")
+    
+    /// 分页栏底部分隔带背景图 默认为空
+    public var bar_dividingStripImage: UIImage? = nil
 
     /// 滑动线条背景色 默认<#2D3952>
     public var bar_scrollLineColor: UIColor = .wy_hex("#2D3952")
+    
+    /// 滑动线条背景图 默认为空
+    public var bar_scrollLineImage: UIImage? = nil
 
     /// 滑动线条宽度 默认25像素
     public var bar_scrollLineWidth: CGFloat = wy_screenWidth(25, WYBasisKitConfig.defaultScreenPixels)
@@ -373,8 +379,11 @@ extension WYPagingView {
                 controllerScrollView.contentOffset = CGPoint(x: self.frame.size.width * CGFloat(bar_selectedIndex), y: 0)
 
                 /// 底部分隔带
-                let dividingView = UIView()
+                let dividingView = UIImageView()
                 dividingView.backgroundColor = bar_dividingStripColor
+                if let dividingStripImage: UIImage = bar_dividingStripImage {
+                    dividingView.image = dividingStripImage
+                }
                 addSubview(dividingView)
                 dividingView.snp.makeConstraints { (make) in
 
@@ -462,15 +471,18 @@ extension WYPagingView {
         return barScroll!
     }
     
-    var barScrollLine: UIView {
+    var barScrollLine: UIImageView {
         
-        var scrollLine: UIView? = objc_getAssociatedObject(self, WYAssociatedKeys.barScrollLine) as? UIView
+        var scrollLine: UIImageView? = objc_getAssociatedObject(self, WYAssociatedKeys.barScrollLine) as? UIImageView
         
         if scrollLine == nil {
             
-            scrollLine = UIView()
+            scrollLine = UIImageView()
             scrollLine!.backgroundColor = (controllers.count > 1) ? bar_scrollLineColor : .clear
             barScrollView.addSubview(scrollLine!)
+            if let scrollLineImage: UIImage = bar_scrollLineImage{
+                scrollLine?.image = scrollLineImage
+            }
             
             scrollLine!.snp.makeConstraints { (make) in
                 make.left.equalToSuperview()

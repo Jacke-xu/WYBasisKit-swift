@@ -35,7 +35,10 @@ class WYTestRequestController: UIViewController {
         let delay: TimeInterval = ((storageData.isInvalid == false) && (storageData.userData != nil)) ? 2 : 0
         
         WYActivity.showLoading("加载中", in: view, delay: delay)
-        WYNetworkManager.request(method: .get, path: "networRequest", config: config) { result in
+        
+        WYNetworkManager.request(method: .get, path: "networRequest", config: config) {[weak self] result in
+            
+            guard self != nil else {return}
             
             switch result {
                 
@@ -46,7 +49,7 @@ class WYTestRequestController: UIViewController {
                 textView.text = (config.originObject ? success.origin : success.parse)
                 
                 if success.isCache == false {
-                    WYActivity.dismissLoading(in: self.view)
+                    WYActivity.dismissLoading(in: self!.view)
                 }
                 
                 if success.storage != nil {
@@ -56,7 +59,7 @@ class WYTestRequestController: UIViewController {
                 
             case .error(let error):
                 wy_print("\(error)")
-                WYActivity.dismissLoading(in: self.view)
+                WYActivity.dismissLoading(in: self!.view)
                 WYActivity.showInfo(error.describe)
                 break
                 

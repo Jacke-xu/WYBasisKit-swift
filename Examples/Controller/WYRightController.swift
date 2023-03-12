@@ -50,10 +50,12 @@ class WYRightController: UIViewController {
         pagingView.bar_item_bg_selectedColor = .green
         pagingView.bar_selectedIndex = 2
         //pagingView.bar_scrollLineBottomOffset = 0
-        pagingView.bar_scrollLineColor = .orange
+        //pagingView.bar_scrollLineColor = .orange
+        pagingView.bar_scrollLineImage = UIImage.wy_createImage(from: .wy_random)
 //        pagingView.buttonPosition = .imageTop_titleBottom
 //        pagingView.barButton_dividingOffset = 20
-        pagingView.bar_dividingStripColor = .purple
+//        pagingView.bar_dividingStripColor = .clear
+        pagingView.bar_dividingStripImage = UIImage.wy_createImage(from: .wy_random)
 //        pagingView.bar_item_height = 50
 //        pagingView.bar_item_width = 80
         pagingView.bar_item_cornerRadius = 5
