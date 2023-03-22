@@ -40,7 +40,7 @@ public enum WYLanguage: RawRepresentable {
         case .english:
             return "en"
         case .other:
-            let userLanguage: String = (UserDefaults.standard.value(forKey: WYBasisKitLanguage) as? String) ?? (Bundle.main.preferredLocalizations.first ?? "")
+            let userLanguage: String = (UserDefaults.standard.value(forKey: WYBasisKitLanguage) as? String) ?? WYLocalizableManager.currentSystemLanguage()
             return userLanguage
         }
     }
@@ -64,22 +64,23 @@ public struct WYLocalizableManager {
     
     private static var bundle: Bundle? = localizableBundle()
     
-    /// 当前语言
+    /// 当前正在使用的语言
     public static func currentLanguage() -> WYLanguage {
         
         var preferredLanguage: String = UserDefaults.standard.value(forKey: WYBasisKit_preferred_language) as? String ?? ""
-        if Bundle.main.preferredLocalizations.first! != preferredLanguage {
+        let currentSystemLanguage: String = currentSystemLanguage()
+        if currentSystemLanguage != preferredLanguage {
             
-            UserDefaults.standard.set(Bundle.main.preferredLocalizations.first!, forKey: WYBasisKit_preferred_language)
+            UserDefaults.standard.set(currentSystemLanguage, forKey: WYBasisKit_preferred_language)
             
-            UserDefaults.standard.set(Bundle.main.preferredLocalizations.first!, forKey: WYBasisKitLanguage)
+            UserDefaults.standard.set(currentSystemLanguage, forKey: WYBasisKitLanguage)
             
             UserDefaults.standard.synchronize()
             
-            preferredLanguage = Bundle.main.preferredLocalizations.first!
+            preferredLanguage = currentSystemLanguage
             
         }else {
-            preferredLanguage = (UserDefaults.standard.value(forKey: WYBasisKitLanguage) as? String) ?? (Bundle.main.preferredLocalizations.first!)
+            preferredLanguage = (UserDefaults.standard.value(forKey: WYBasisKitLanguage) as? String) ?? currentSystemLanguage
         }
         switch preferredLanguage {
         case "zh-Hans":
@@ -91,7 +92,30 @@ public struct WYLocalizableManager {
         }
     }
     
-    /// 切换语言(如果reload为True，需要给 Storyboard 设置 Name 和 Identifier，默认从 Main.Storyboard 重启)
+    /// 获取当前系统语言
+    public static func currentSystemLanguage() -> String {
+        
+        let appleLanguages: [String] = (UserDefaults.standard.object(forKey: "AppleLanguages") as! [String])
+        let countryCode: String = (Locale.current as NSLocale).object(forKey: NSLocale.Key.countryCode) as? String ?? ""
+        var appleLanguage: String = appleLanguages.first!.replacingOccurrences(of: "-" + countryCode, with: "")
+        if appleLanguage.hasPrefix("en") {
+            appleLanguage = "en"
+        }
+        return appleLanguage
+    }
+    
+    /**
+     *  切换本地语言
+     *
+     *  @param language  准备切换的目标语言
+     *
+     *  @param reload  是否重新加载App
+     *
+     *  @param name  Storyboard文件的名字，默认Main(一般不需要修改，使用默认的就好)
+     *
+     *  @param identifier  Storyboard文件的Identifier
+     *
+     */
     public static func switchLanguage(language: WYLanguage, reload: Bool = true, name: String = "Main", identifier: String = "rootViewController", handler:(() -> Void)? = nil) {
         
         guard language.rawValue != currentLanguage().rawValue else {

@@ -224,6 +224,8 @@ extension WYBannerView {
                 scrollview.contentOffset = CGPoint(x: wy_width, y: 0)
                 addSubview(scrollview)
                 
+                UIScrollView.appearance().contentInsetAdjustmentBehavior = .never
+                
                 currentIndex = 0
                 nextIndex = 0
                 
@@ -446,8 +448,14 @@ extension WYBannerView {
         updatDescribeViewStyle()
     }
     
-    @objc private func nextImage() {
+    /// 切换下一张图片
+    @objc public func nextImage() {
         scrollView.setContentOffset(CGPoint(x: wy_width*2, y: 0), animated: true)
+    }
+    
+    /// 切换上一张图片
+    @objc public func lastImage() {
+        scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
     }
     
     /// 停止滚动

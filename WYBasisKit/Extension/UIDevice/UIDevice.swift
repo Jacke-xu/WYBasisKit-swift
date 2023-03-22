@@ -242,9 +242,9 @@ public extension UIDevice {
     var wy_isFullScreen: Bool {
         if #available(iOS 15.0, *) {
             let window = UIApplication.shared.connectedScenes.map({ $0 as? UIWindowScene }).compactMap({ $0 }).first?.windows.first
-            return (window?.safeAreaInsets ?? UIEdgeInsets.zero) != UIEdgeInsets.zero
+            return (window?.safeAreaInsets ?? UIEdgeInsets.zero).bottom != 0
         } else {
-            return UIApplication.shared.windows.first?.safeAreaInsets != UIEdgeInsets.zero
+            return (UIApplication.shared.windows.first?.safeAreaInsets)?.bottom != 0
         }
     }
     

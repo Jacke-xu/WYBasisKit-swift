@@ -418,6 +418,8 @@ extension WYPagingView {
                 make.left.bottom.width.equalToSuperview()
             }
             
+            UIScrollView.appearance().contentInsetAdjustmentBehavior = .never
+            
             var lastView: UIView? = nil
             for index in 0..<controllers.count {
                 
