@@ -24,7 +24,7 @@ public struct WYSourceBundle {
     /// 从哪个bundle文件内查找，如果bundleName对应的bundle不存在，则直接在本地路径下查找
     public let bundleName: String
     
-    /// bundleName.bundle下面的子文件夹路径，如果子文件夹有多层，就用/即那个开(如果要获取资源是放在bundle文件下面的子文件夹中，则需要传入该路径，例如ImageSource.bundle下面有个叫apple的子文件夹，则subdirectory应该传入 apple)
+    /// bundleName.bundle下面的子文件夹路径，如果子文件夹有多层，就用/隔开(如果要获取资源是放在bundle文件下面的子文件夹中，则需要传入该路径，例如ImageSource.bundle下面有个叫apple的子文件夹，则subdirectory应该传入 apple)
     public let subdirectory: String
     
     public init(bundleName: String = "", subdirectory: String = "") {
@@ -36,7 +36,7 @@ public struct WYSourceBundle {
 public extension UIImage {
     
     /// 截取指定View快照
-    class func wy_screenshot(_ view: UIView) -> UIImage! {
+    class func wy_screenshot(_ view: UIView) -> UIImage {
         
         // 设置屏幕倍率可以保证截图的质量
         let scale: CGFloat = UIScreen.main.scale
@@ -49,20 +49,20 @@ public extension UIImage {
         
         UIGraphicsEndImageContext()
         
-        return image
+        return image!
     }
     
     /// 根据颜色创建图片
-    class func wy_createImage(from color: UIColor) -> UIImage! {
+    class func wy_createImage(from color: UIColor, size: CGSize = CGSize(width: 1, height: 1)) -> UIImage {
         
-        let rect = CGRect(x: 0, y: 0, width: 1, height: 1)
+        let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
         UIGraphicsBeginImageContext(rect.size)
         let context = UIGraphicsGetCurrentContext()
         context!.setFillColor(color.cgColor)
         context!.fill(rect)
-        let image = UIGraphicsGetImageFromCurrentImageContext()
+        let image = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
-        return image!
+        return image
     }
     
     /// 生成渐变图片
