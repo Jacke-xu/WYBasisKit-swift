@@ -122,7 +122,10 @@ public class WYPagingView: UIView {
     public var bar_selectedIndex: NSInteger = 0
     
     /// 控制器是否需要左右滑动(默认支持)
-    public var canScroll: Bool = true
+    public var canScrollController: Bool = true
+    
+    /// 分页栏是否需要左右滑动(默认支持)
+    public var canScrollBar: Bool = true
     
     /// 传入的控制器数组
     public private(set) var controllers: [UIViewController] = []
@@ -410,7 +413,7 @@ extension WYPagingView {
             scrollView = UIScrollView()
             scrollView!.delegate = self
             scrollView!.isPagingEnabled = true
-            scrollView!.isScrollEnabled = canScroll
+            scrollView!.isScrollEnabled = canScrollController
             scrollView!.showsHorizontalScrollIndicator = false
             scrollView!.showsVerticalScrollIndicator = false
             scrollView!.backgroundColor = bar_pagingContro_content_color
@@ -467,6 +470,7 @@ extension WYPagingView {
             barScroll!.showsVerticalScrollIndicator = false
             barScroll!.backgroundColor = bar_bg_defaultColor
             barScroll!.bounces = bar_pagingContro_bounce
+            barScroll!.isScrollEnabled = canScrollBar
             addSubview(barScroll!)
             barScroll!.snp.makeConstraints { (make) in
                 make.top.left.width.equalToSuperview()
