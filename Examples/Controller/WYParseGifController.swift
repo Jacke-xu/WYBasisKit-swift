@@ -2,8 +2,8 @@
 //  WYParseGifController.swift
 //  WYBasisKit
 //
-//  Created by jacke·xu on 2022/4/7.
-//  Copyright © 2022 Jacke·xu. All rights reserved.
+//  Created by 官人 on 2022/4/7.
+//  Copyright © 2022 官人. All rights reserved.
 //
 
 import UIKit

@@ -2,8 +2,8 @@
 //  Foundation+JSONLog.m
 //  WYBasisKit
 //
-//  Created by  Jacke·xu on 2018/10/18.
-//  Copyright © 2018年 Jacke·xu. All rights reserved.
+//  Created by  官人 on 2018/10/18.
+//  Copyright © 2018年 官人. All rights reserved.
 //
 
 /*

@@ -3,7 +3,7 @@
 //  WYBasisKit
 //
 //  Created by Miraitowa on 2022/4/24.
-//  Copyright © 2022 Jacke·xu. All rights reserved.
+//  Copyright © 2022 官人. All rights reserved.
 //
 
 import Foundation

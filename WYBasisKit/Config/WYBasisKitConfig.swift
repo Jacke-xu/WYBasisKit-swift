@@ -2,7 +2,7 @@
 //  WYBasisKitConfig.swift
 //  WYBasisKit
 //
-//  Created by jacke·xu on 2020/11/21.
+//  Created by 官人 on 2020/11/21.
 //  Copyright © 2020 jacke-xu. All rights reserved.
 //
 

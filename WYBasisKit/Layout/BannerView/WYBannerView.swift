@@ -2,8 +2,8 @@
 //  WYBannerView.swift
 //  WYBasisKit
 //
-//  Created by Jacke·xu on 2021/4/13.
-//  Copyright © 2021 Jacke·xu. All rights reserved.
+//  Created by 官人 on 2021/4/13.
+//  Copyright © 2021 官人. All rights reserved.
 //
 import UIKit
 import Kingfisher
@@ -85,6 +85,9 @@ public class WYBannerView: UIView {
     
     /// 只有一张图片时，是否需要支持滑动，默认false
     public var scrollForSinglePage: Bool = false
+    
+    /// 多张图片时，是否需要支持滑动，默认true
+    public var scrollForMultiPage: Bool = true
     
     /// 只有一张图片时，是否需要隐藏PageControl，默认True
     public var pageControlHideForSingle: Bool = true
@@ -184,6 +187,16 @@ public class WYBannerView: UIView {
         timer = nil
     }
     
+    /// 切换下一张图片
+    @objc public func nextImage() {
+        scrollView.setContentOffset(CGPoint(x: wy_width*2, y: 0), animated: true)
+    }
+    
+    /// 切换上一张图片
+    @objc public func lastImage() {
+        scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+    }
+    
     deinit {
         stopTimer()
     }
@@ -202,7 +215,7 @@ extension WYBannerView {
     
     public override func layoutSubviews() {
         super.layoutSubviews()
-        scrollView.isScrollEnabled = imageSource.count > 1 ? true : scrollForSinglePage
+        scrollView.isScrollEnabled = imageSource.count > 1 ? scrollForMultiPage : scrollForSinglePage
         pageControl.superview?.bringSubviewToFront(pageControl)
     }
     
@@ -446,16 +459,6 @@ extension WYBannerView {
         textView?.text = (describe?.isEmpty ?? true) ? placeholderDescribe : describe
         
         updatDescribeViewStyle()
-    }
-    
-    /// 切换下一张图片
-    @objc public func nextImage() {
-        scrollView.setContentOffset(CGPoint(x: wy_width*2, y: 0), animated: true)
-    }
-    
-    /// 切换上一张图片
-    @objc public func lastImage() {
-        scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
     }
     
     /// 停止滚动

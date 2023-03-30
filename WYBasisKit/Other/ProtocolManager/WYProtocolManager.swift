@@ -2,7 +2,7 @@
 //  WYProtocolManager.swift
 //  WYBasisKit
 //
-//  Created by Jacke·xu on 2020/11/6.
+//  Created by 官人 on 2020/11/6.
 //
 
 import Foundation

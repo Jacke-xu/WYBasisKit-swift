@@ -2,8 +2,8 @@
 //  WYScrollText.swift
 //  WYBasisKit
 //
-//  Created by Jacke·xu on 2020/11/1.
-//  Copyright © 2020 Jacke·xu. All rights reserved.
+//  Created by 官人 on 2020/11/1.
+//  Copyright © 2020 官人. All rights reserved.
 //
 
 import SnapKit
