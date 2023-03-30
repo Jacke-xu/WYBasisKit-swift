@@ -1,12 +1,13 @@
 PODS:
-  - Alamofire (5.6.2)
+  - Alamofire (5.6.4)
   - HandyJSON (5.0.2)
-  - IQKeyboardManagerSwift (6.5.10)
-  - Kingfisher (7.3.2)
+  - IQKeyboardManagerSwift (6.5.11)
+  - Kingfisher (7.6.2)
   - Moya (15.0.0):
     - Moya/Core (= 15.0.0)
   - Moya/Core (15.0.0):
     - Alamofire (~> 5.0)
+  - ReachabilitySwift (5.0.0)
   - SnapKit (5.6.0)
 
 DEPENDENCIES:
@@ -14,6 +15,7 @@ DEPENDENCIES:
   - IQKeyboardManagerSwift
   - Kingfisher
   - Moya
+  - ReachabilitySwift
   - SnapKit
 
 SPEC REPOS:
@@ -23,16 +25,18 @@ SPEC REPOS:
     - IQKeyboardManagerSwift
     - Kingfisher
     - Moya
+    - ReachabilitySwift
     - SnapKit
 
 SPEC CHECKSUMS:
-  Alamofire: d368e1ff8a298e6dde360e35a3e68e6c610e7204
+  Alamofire: 4e95d97098eacb88856099c4fc79b526a299e48c
   HandyJSON: 9e4e236f5d2dbefad5155a77417bbea438201c03
-  IQKeyboardManagerSwift: 52962c76ab33532f15ad9f3ff4e5715eda5335bb
-  Kingfisher: 0086ad83719761ba9b2cdaf6ef4d5b4878cbae23
+  IQKeyboardManagerSwift: c7955c0bdbf7b2eb29bb7daaa44e3d90f55a9a85
+  Kingfisher: 6c5449c6450c5239166510ba04afe374a98afc4f
   Moya: 138f0573e53411fb3dc17016add0b748dfbd78ee
+  ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
 
-PODFILE CHECKSUM: 92835c6a0a444ee6280c01bf1824dfca261a7579
+PODFILE CHECKSUM: 9a2615f228d1f243ac26f554fb227bcaf9a92f09
 
 COCOAPODS: 1.11.3
