@@ -9,7 +9,7 @@
 import UIKit
 
 /// UITableView注册类型
-public enum WYTableViewRegisterType {
+public enum WYTableViewRegisterStyle {
     
     /// 注册Cell
     case cell
@@ -83,8 +83,15 @@ public extension UITableView {
         }
     }
     
+    /// 批量注册UITableView的Cell或HeaderFooterView
+    func wy_register(_ classNames: [String], _ styles: [WYTableViewRegisterStyle]) {
+        for index in 0..<classNames.count {
+            wy_register(classNames[index], styles[index])
+        }
+    }
+    
     /// 注册UITableView的Cell或HeaderFooterView
-    func wy_register(_ className: String, _ type: WYTableViewRegisterType) {
+    func wy_register(_ className: String, _ style: WYTableViewRegisterStyle) {
         
         guard className.isEmpty == false else {
             fatalError("调用注册方法前必须创建与 \(className) 对应的类文件")
@@ -92,7 +99,7 @@ public extension UITableView {
         
         let registerClass = (className == "UITableViewCell") ? className : (wy_projectName + "." + className)
         
-        switch type {
+        switch style {
         case .cell:
             guard let cellClass = NSClassFromString(registerClass) as? UITableViewCell.Type else {
                 wy_print("注册 \(className) 失败")

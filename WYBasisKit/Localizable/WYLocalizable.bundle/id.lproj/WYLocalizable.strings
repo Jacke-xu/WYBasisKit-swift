@@ -1,0 +1,103 @@
+/*
+  WYLocalizable.strings
+  WYBasisKit
+
+  Created by 官人 on 2020/11/21.
+  Copyright © 2020 官人. All rights reserved.
+*/
+
+"WYLocalizable_01" = "Dapat.";
+
+"WYLocalizable_02" = "sandi";
+
+"WYLocalizable_03" = "batalkan";
+
+"WYLocalizable_04" = "hapus";
+
+"WYLocalizable_05" = "Biometri tidak tersedia";
+
+"WYLocalizable_06" = "Pengenalan biometrik telah dikunci, mengunci layar dan sukses membuka perangkat. Setelah membuka ulang halaman ini, dapat dibuka kembali";
+
+"WYLocalizable_07" = "Sistem mengganggu pengenalan ini";
+
+"WYLocalizable_08" = "Silakan tetapkan sandi membuka sebelum memungkinkan pengenalan biometrik";
+
+"WYLocalizable_09" = "Silakan aktifkan/tetapkan fungsi biometris dalam pengaturan perangkat";
+
+"WYLocalizable_10" = "Silakan masukkan kata sandi untuk memverifikasi biometri";
+
+"WYLocalizable_11" = "Belum ada pesan";
+
+"WYLocalizable_12" = "Otorisasi";
+
+"WYLocalizable_13" = "Aplikasi tidak memiliki izin untuk mengakses album. Mengijinkan sekarang?";
+
+"WYLocalizable_14" = "Aplikasi tidak memiliki akses ke kamera. Mengijinkan sekarang?";
+
+"WYLocalizable_15" = "Aplikasi tidak memiliki akses ke mikrofon. Mengijinkan sekarang?";
+
+"WYLocalizable_16" = "Aplikasi tidak memiliki izin untuk mengakses lokasi. Mengijinkan sekarang?";
+
+"WYLocalizable_17" = "Aplikasi tidak memiliki izin untuk mengakses buku alamat. Mengijinkan sekarang?";
+
+"WYLocalizable_18" = "Teruskan menghubungkan";
+
+"WYLocalizable_19" = "Batalkan Sambungan";
+
+"WYLocalizable_20" = "Permintaan data gagal";
+
+"WYLocalizable_21" = "Kode status abnormal";
+
+"WYLocalizable_22" = "Jaringan tidak dikenal, mungkin ada risiko keamanan. Apakah Anda ingin melanjutkan?";
+
+"WYLocalizable_23" = "Untuk ditetapkan";
+
+"WYLocalizable_24" = "Koneksi jaringan tidak aman dibatalkan";
+
+"WYLocalizable_25" = "Tidak ada koneksi jaringan, tolong periksa pengaturan jaringan Anda";
+
+"WYLocalizable_26" = "Anda menggunakan WiFi untuk menghubungkan internet";
+
+"WYLocalizable_27" = "Anda menggunakan jaringan ponsel sel untuk jaringan";
+
+"WYLocalizable_28" = "Jaringan tidak tersedia, silakan konfirmasi bahwa lingkungan jaringan atau ijin koneksi jaringan Anda telah ditetapkan dengan benar";
+
+"WYLocalizable_29" = "Verifikasi kode data respon gagal";
+
+"WYLocalizable_30" = "hanya";
+
+"WYLocalizable_31" = "%@Minut yang lalu";
+
+"WYLocalizable_32" = "%@Jam yang lalu";
+
+"WYLocalizable_33" = "%@Days ago";
+
+"WYLocalizable_34" = "%@Month ago";
+
+"WYLocalizable_35" = "%@Tahun yang lalu";
+
+"WYLocalizable_36" = "Tidak ada kartu telepon";
+
+"WYLocalizable_37" = "Capricornus";
+
+"WYLocalizable_38" = "akurius";
+
+"WYLocalizable_39" = "Pisces";
+
+"WYLocalizable_40" = "Aries";
+
+"WYLocalizable_41" = "Taurus";
+
+"WYLocalizable_42" = "Gemini";
+
+"WYLocalizable_43" = "Kancer";
+
+"WYLocalizable_44" = "leo";
+
+"WYLocalizable_45" = "Virgo";
+
+"WYLocalizable_46" = "lira";
+
+"WYLocalizable_47" = "scorpio";
+
+"WYLocalizable_48" = "Sagittarius";

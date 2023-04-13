@@ -90,7 +90,7 @@ public extension UIAlertController {
         
         if ((style == .actionSheet) && (actionSheetNeedCancel == true)) {
             
-            alertController.wy_addAlertAction(actionStr: WYLocalizedString("取消"), actionStyle: .cancel, alertController: alertController, textFieldPlaceholders: textFieldPlaceholders, handler: nil)
+            alertController.wy_addAlertAction(actionStr: WYLocalized("WYLocalizable_03", table: WYBasisKitConfig.kitLocalizableTable), actionStyle: .cancel, alertController: alertController, textFieldPlaceholders: textFieldPlaceholders, handler: nil)
         }
         
         alertController.modalPresentationStyle = .fullScreen
@@ -136,7 +136,7 @@ public extension UIAlertController {
         
         var actionStyle: UIAlertAction.Style! = UIAlertAction.Style.default
         switch actionStr {
-        case WYLocalizedString("删除"):
+        case WYLocalized("WYLocalizable_04", table: WYBasisKitConfig.kitLocalizableTable):
             actionStyle = UIAlertAction.Style.destructive
         default:
             actionStyle = UIAlertAction.Style.default
@@ -146,7 +146,7 @@ public extension UIAlertController {
     
     private func wy_sharedSecureTextEntry(placeholder: String!) -> Bool {
         
-        return placeholder.range(of: WYLocalizedString("密码"), options: .caseInsensitive) != nil
+        return placeholder.range(of: WYLocalized("WYLocalizable_02", table: WYBasisKitConfig.kitLocalizableTable), options: .caseInsensitive) != nil
     }
     
     private class func wy_sharedGenericString<T>(object: T?) -> String {

@@ -63,7 +63,7 @@ public extension String {
         let string = self as NSString
         let stringSize: CGSize! = string.boundingRect(with: controlSize, options: NSStringDrawingOptions(rawValue: NSStringDrawingOptions.truncatesLastVisibleLine.rawValue | NSStringDrawingOptions.usesLineFragmentOrigin.rawValue | NSStringDrawingOptions.usesFontLeading.rawValue), attributes: attributes, context: nil).size
         
-        return CGSize(width: ceil(stringSize.width), height: ceil(stringSize.height))
+        return CGSize(width: stringSize.width, height: stringSize.height)
     }
     
     /// 判断字符串包含某个字符串
@@ -126,6 +126,97 @@ public extension String {
         }else {
             return self.replacingOccurrences(of: appointSymbol, with: replacement)
         }
+    }
+    
+    /// 字符串去除特殊字符
+    func wy_specialCharactersEncoding(_ characterSet: CharacterSet = .urlQueryAllowed) -> String {
+        return self.addingPercentEncoding(withAllowedCharacters: characterSet) ?? ""
+    }
+    
+    /// 字符串去除Emoji表情
+    func wy_replaceEmoji(_ replacement: String = "") -> String {
+        return self.unicodeScalars
+            .filter { !$0.properties.isEmojiPresentation}
+            .reduce(replacement) { $0 + String($1) }
+    }
+    
+    /**
+     *  根据传入的表情字符串生成富文本，例如字符串 "哈哈[哈哈]" 会生成 "哈哈😄"
+     *  @param textColor     富文本的字体颜色
+     *  @param textFont      富文本的字体
+     *  @param emojiTable    表情解析对照表，如 ["哈哈]": "哈哈表情对应的图片名", [嘿嘿]: "嘿嘿表情对应的图片名"]
+     *  @param bundle        从哪个bundle文件内查找图片资源，如果为空，则直接在本地路径下查找
+     *  @param pattern       正则匹配规则, 默认匹配1到3位, 如 [哈] [哈哈] [哈哈哈] 这种
+     */
+    func wy_convertEmojiAttributed(textColor: UIColor, textFont: UIFont, emojiTable: [String: String], sourceBundle: WYSourceBundle? = nil, pattern: String = "\\[.{1,3}\\]") -> NSMutableAttributedString {
+        
+        let emojiString: String = self
+        
+        // 字体、颜色
+        let textAttributes = [NSAttributedString.Key.font: textFont, NSAttributedString.Key.foregroundColor: textColor]
+        
+        // 获取字体的行高，作为表情的高度
+        let attachmentHeight = textFont.lineHeight
+        
+        // 通过 emojiString 获得 NSMutableAttributedString
+        let attributedString = NSMutableAttributedString(string: emojiString, attributes: textAttributes)
+        
+        var regex: NSRegularExpression?
+        do {
+            regex = try NSRegularExpression(pattern: pattern, options: .caseInsensitive)
+        } catch let error {
+            wy_print(error.localizedDescription)
+        }
+        
+        // 获取到匹配正则的数据
+        if let matches = regex?.matches(in: emojiString, options: .withoutAnchoringBounds, range: NSMakeRange(0, attributedString.string.count)) {
+            if matches.count > 0 {
+                // 遍历符合的数据进行解析
+                for i in 0..<matches.count {
+                    let result = matches[matches.count-i-1]
+                    let range = result.range
+                    let emojiStr = (emojiString as NSString).substring(with: range)
+                    // 符合的数据是否为表情
+                    if emojiTable.keys.contains(emojiStr) {
+                        
+                        // 获取表情对应的图片名
+                        if let imageName: String = emojiTable[emojiStr] {
+                            let image: UIImage = UIImage.wy_find(imageName, inBundle: sourceBundle)
+                            
+                            // 创建一个NSTextAttachment
+                            let attachment = NSTextAttachment()
+                            attachment.image  = image
+                            
+                            let attachmentWidth = attachmentHeight * (image.size.width / image.size.height)
+                            
+                            attachment.bounds = CGRect(x: 0, y: (textFont.capHeight - textFont.lineHeight)/2, width: attachmentWidth, height: attachmentHeight)
+                            
+                            // 通过NSTextAttachment生成一个NSAttributedString
+                            let replace = NSAttributedString(attachment: attachment)
+                            
+                            // 替换表情字符串
+                            attributedString.replaceCharacters(in: range, with: replace)
+                        }
+                    }
+                }
+            }
+        }
+        return attributedString
+    }
+    
+    /// Encode
+    func wy_encoded(escape: String = "?!@#$^&%*+,:;='\"`<>()[]{}/\\| ") -> String {
+        
+        let characterSet = NSCharacterSet(charactersIn: escape).inverted
+        return self.addingPercentEncoding(withAllowedCharacters: characterSet) ?? self
+    }
+    
+    /// Decode
+    func wy_decoded() -> String {
+        
+        let targetString: NSMutableString = NSMutableString(string: self)
+        targetString.replaceOccurrences(of: "+", with: "", options: .literal, range: NSMakeRange(0, targetString.length))
+        return targetString.removingPercentEncoding ?? self
     }
     
     /// 获取设备时间戳
@@ -210,34 +301,34 @@ public extension String {
         // 秒转分钟
         let second = timeDifference / 60
         if (second <= 0) {
-            return WYLocalizedString("刚刚")
+            return WYLocalized("WYLocalizable_30", table: WYBasisKitConfig.kitLocalizableTable)
         }
         if second < 60 {
-            return "\(second)" + WYLocalizedString("分钟前")
+            return String(format: WYLocalized("WYLocalizable_31", table: WYBasisKitConfig.kitLocalizableTable), "\(second)")
         }
         
         // 秒转小时
         let hours = timeDifference / 3600
         if hours < 24 {
-            return "\(hours)" + WYLocalizedString("小时前")
+            return String(format: WYLocalized("WYLocalizable_32", table: WYBasisKitConfig.kitLocalizableTable), "\(hours)")
         }
         
         // 秒转天数
         let days = timeDifference / 3600 / 24
         if days < 30 {
-            return "\(days)" + WYLocalizedString("天前")
+            return String(format: WYLocalized("WYLocalizable_33", table: WYBasisKitConfig.kitLocalizableTable), "\(days)")
         }
         
         // 秒转月
         let months = timeDifference / 3600 / 24 / 30
         if months < 12 {
-            return "\(months)" + WYLocalizedString("月前")
+            return String(format: WYLocalized("WYLocalizable_34", table: WYBasisKitConfig.kitLocalizableTable), "\(months)")
         }
         
         // 秒转年
         let years = timeDifference / 3600 / 24 / 30 / 12
         if years < 3 {
-            return "\(years)" + WYLocalizedString("年前")
+            return String(format: WYLocalized("WYLocalizable_35", table: WYBasisKitConfig.kitLocalizableTable), "\(years)")
         }
         return wy_timestampConvertDate(dateFormat)
     }
@@ -280,18 +371,18 @@ public extension String {
         let timeInterval: TimeInterval = timestamp.count <= 10 ? (NumberFormatter().number(from: timestamp)?.doubleValue ?? 0.0) : ((NumberFormatter().number(from: timestamp)?.doubleValue ?? 0.0) / 1000)
         
         let oneDay:Double = 86400
-        let constellationDics = [WYLocalizedString("摩羯座"): "12.22-1.19",
-                                 WYLocalizedString("水瓶座"): "1.20-2.18",
-                                 WYLocalizedString("双鱼座"): "2.19-3.20",
-                                 WYLocalizedString("白羊座"): "3.21-4.19",
-                                 WYLocalizedString("金牛座"): "4.20-5.20",
-                                 WYLocalizedString("双子座"): "5.21-6.21",
-                                 WYLocalizedString("巨蟹座"): "6.22-7.22",
-                                 WYLocalizedString("狮子座"): "7.23-8.22",
-                                 WYLocalizedString("处女座"): "8.23-9.22",
-                                 WYLocalizedString("天秤座"): "9.23-10.23",
-                                 WYLocalizedString("天蝎座"): "10.24-11.22",
-                                 WYLocalizedString("射手座"): "11.23-12.21"]
+        let constellationDics = [WYLocalized("WYLocalizable_37", table: WYBasisKitConfig.kitLocalizableTable): "12.22-1.19",
+                                 WYLocalized("WYLocalizable_38", table: WYBasisKitConfig.kitLocalizableTable): "1.20-2.18",
+                                 WYLocalized("WYLocalizable_39", table: WYBasisKitConfig.kitLocalizableTable): "2.19-3.20",
+                                 WYLocalized("WYLocalizable_40", table: WYBasisKitConfig.kitLocalizableTable): "3.21-4.19",
+                                 WYLocalized("WYLocalizable_41", table: WYBasisKitConfig.kitLocalizableTable): "4.20-5.20",
+                                 WYLocalized("WYLocalizable_42", table: WYBasisKitConfig.kitLocalizableTable): "5.21-6.21",
+                                 WYLocalized("WYLocalizable_43", table: WYBasisKitConfig.kitLocalizableTable): "6.22-7.22",
+                                 WYLocalized("WYLocalizable_44", table: WYBasisKitConfig.kitLocalizableTable): "7.23-8.22",
+                                 WYLocalized("WYLocalizable_45", table: WYBasisKitConfig.kitLocalizableTable): "8.23-9.22",
+                                 WYLocalized("WYLocalizable_46", table: WYBasisKitConfig.kitLocalizableTable): "9.23-10.23",
+                                 WYLocalized("WYLocalizable_47", table: WYBasisKitConfig.kitLocalizableTable): "10.24-11.22",
+                                 WYLocalized("WYLocalizable_48", table: WYBasisKitConfig.kitLocalizableTable): "11.23-12.21"]
         
         let currConstellation = constellationDics.filter {
             
@@ -301,91 +392,7 @@ public extension String {
             
             return timeInterval > startTime && timeInterval < endTime
         }
-        return currConstellation.first?.key ?? WYLocalizedString("摩羯座")
-    }
-    
-    /// Encode
-    func wy_encoded(escape: String = "?!@#$^&%*+,:;='\"`<>()[]{}/\\| ") -> String {
-        
-        let characterSet = NSCharacterSet(charactersIn: escape).inverted
-        return self.addingPercentEncoding(withAllowedCharacters: characterSet) ?? self
-    }
-    
-    /// Decode
-    func wy_decoded() -> String {
-        
-        let targetString: NSMutableString = NSMutableString(string: self)
-        targetString.replaceOccurrences(of: "+", with: "", options: .literal, range: NSMakeRange(0, targetString.length))
-        return targetString.removingPercentEncoding ?? self
-    }
-    
-    /// 字符串去除特殊字符
-    func wy_specialCharactersEncoding(_ characterSet: CharacterSet = .urlQueryAllowed) -> String {
-        self.addingPercentEncoding(withAllowedCharacters: characterSet) ?? ""
-    }
-    
-    /**
-     *  根据传入的表情字符串生成富文本，例如字符串 "哈哈[哈哈]" 会生成 "哈哈😄"
-     *  @param textColor     富文本的字体颜色
-     *  @param textFont      富文本的字体
-     *  @param emojiTable    表情解析对照表，如 ["哈哈]": "哈哈表情对应的图片名", [嘿嘿]: "嘿嘿表情对应的图片名"]
-     *  @param bundle        从哪个bundle文件内查找图片资源，如果为空，则直接在本地路径下查找
-     *  @param pattern       正则匹配规则, 默认匹配1到3位, 如 [哈] [哈哈] [哈哈哈] 这种
-     */
-    func wy_convertEmojiAttributed(textColor: UIColor, textFont: UIFont, emojiTable: [String: String], sourceBundle: WYSourceBundle? = nil, pattern: String = "\\[.{1,3}\\]") -> NSMutableAttributedString {
-        
-        let emojiString: String = self
-        
-        // 字体、颜色
-        let textAttributes = [NSAttributedString.Key.font: textFont, NSAttributedString.Key.foregroundColor: textColor]
-        
-        // 获取字体的行高，作为表情的高度
-        let attachmentHeight = textFont.lineHeight
-        
-        // 通过 emojiString 获得 NSMutableAttributedString
-        let attributedString = NSMutableAttributedString(string: emojiString, attributes: textAttributes)
-        
-        var regex: NSRegularExpression?
-        do {
-            regex = try NSRegularExpression(pattern: pattern, options: .caseInsensitive)
-        } catch let error {
-            wy_print(error.localizedDescription)
-        }
-        
-        // 获取到匹配正则的数据
-        if let matches = regex?.matches(in: emojiString, options: .withoutAnchoringBounds, range: NSMakeRange(0, attributedString.string.count)) {
-            if matches.count > 0 {
-                // 遍历符合的数据进行解析
-                for i in 0..<matches.count {
-                    let result = matches[matches.count-i-1]
-                    let range = result.range
-                    let emojiStr = (emojiString as NSString).substring(with: range)
-                    // 符合的数据是否为表情
-                    if emojiTable.keys.contains(emojiStr) {
-                        
-                        // 获取表情对应的图片名
-                        if let imageName: String = emojiTable[emojiStr] {
-                            let image: UIImage = UIImage.wy_find(imageName, inBundle: sourceBundle)
-                            
-                            // 创建一个NSTextAttachment
-                            let attachment = NSTextAttachment()
-                            attachment.image  = image
-                            
-                            let attachmentWidth = attachmentHeight * (image.size.width / image.size.height)
-                            
-                            attachment.bounds = CGRect(x: 0, y: (textFont.capHeight - textFont.lineHeight)/2, width: attachmentWidth, height: attachmentHeight)
-                            
-                            // 通过NSTextAttachment生成一个NSAttributedString
-                            let replace = NSAttributedString(attachment: attachment)
-                            
-                            // 替换表情字符串
-                            attributedString.replaceCharacters(in: range, with: replace)
-                        }
-                    }
-                }
-            }
-        }
-        return attributedString
+        return currConstellation.first?.key ?? WYLocalized("WYLocalizable_37", table: WYBasisKitConfig.kitLocalizableTable)
     }
 }
 

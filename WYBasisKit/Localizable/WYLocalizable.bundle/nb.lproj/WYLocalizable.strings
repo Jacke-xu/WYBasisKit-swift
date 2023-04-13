@@ -1,0 +1,103 @@
+/*
+  WYLocalizable.strings
+  WYBasisKit
+
+  Created by 官人 on 2020/11/21.
+  Copyright © 2020 官人. All rights reserved.
+*/
+
+"WYLocalizable_01" = "fikk det";
+
+"WYLocalizable_02" = "passord";
+
+"WYLocalizable_03" = "avbryt";
+
+"WYLocalizable_04" = "slett";
+
+"WYLocalizable_05" = "Biometri er ikke tilgjengelig";
+
+"WYLocalizable_06" = "Biometrisk gjenkjenning er låst, lås skjermen og lås enheten fullført. Etter å åpne denne siden på nytt kan den åpnes på nytt";
+
+"WYLocalizable_07" = "Systemet avbrytte denne gjenkjennelsen";
+
+"WYLocalizable_08" = "Sett opp lås passordet før biometrisk gjenkjenning er slått på";
+
+"WYLocalizable_09" = "Slå på/sett biometrisk funksjon i enhetsinnstillinger";
+
+"WYLocalizable_10" = "Oppgi et passord for å verifisere biometrier";
+
+"WYLocalizable_11" = "Ingen melding enno";
+
+"WYLocalizable_12" = "Godkjenning";
+
+"WYLocalizable_13" = "Programmet har ikke tilgang til album. Autentiser nå?";
+
+"WYLocalizable_14" = "Programmet har ikke tilgang til kameraet. Autentiser nå?";
+
+"WYLocalizable_15" = "Programmet har ikke tilgang til mikrofonen. Autentiser nå?";
+
+"WYLocalizable_16" = "Programmet har ikke tilgang til plasseringa. Autentiser nå?";
+
+"WYLocalizable_17" = "Programmet har ikke tilgang til adresseboka. Autentiser nå?";
+
+"WYLocalizable_18" = "Fortsett tilkobling";
+
+"WYLocalizable_19" = "Avbryt tilkobling";
+
+"WYLocalizable_20" = "Data- førespurnaden mislyktes";
+
+"WYLocalizable_21" = "Abnormal status code";
+
+"WYLocalizable_22" = "Ukjent nettverk, kan det være sikkerhetssrisikoer. Vil du fortsette?";
+
+"WYLocalizable_23" = "For å sette";
+
+"WYLocalizable_24" = "Avbrutt usikkert nettverkstilkobling";
+
+"WYLocalizable_25" = "Ingen nettverkstilkobling, sjekk nettverksinnstillingene dine";
+
+"WYLocalizable_26" = "Du bruker WiFi for å koble til Internett";
+
+"WYLocalizable_27" = "Du bruker en mobil nettverk for nettverk";
+
+"WYLocalizable_28" = "Ikke tilgjengelig nettverk, bekrefter at nettverksmiljøet eller nettverkstilkoblingsrettigheter ditt er satt riktig";
+
+"WYLocalizable_29" = "Klarte ikke å verifisere svarkoden";
+
+"WYLocalizable_30" = "bare";
+
+"WYLocalizable_31" = "%@minutter siden";
+
+"WYLocalizable_32" = "%@timer siden";
+
+"WYLocalizable_33" = "%@Dager siden";
+
+"WYLocalizable_34" = "%@Måneder siden";
+
+"WYLocalizable_35" = "%@år siden";
+
+"WYLocalizable_36" = "Ingen telefonkort";
+
+"WYLocalizable_37" = "Capricornus";
+
+"WYLocalizable_38" = "akvarius";
+
+"WYLocalizable_39" = "Pisker";
+
+"WYLocalizable_40" = "Aries";
+
+"WYLocalizable_41" = "Taurus";
+
+"WYLocalizable_42" = "Gemini";
+
+"WYLocalizable_43" = "Kreft";
+
+"WYLocalizable_44" = "leo";
+
+"WYLocalizable_45" = "VirgoName";
+
+"WYLocalizable_46" = "libra";
+
+"WYLocalizable_47" = "scorpio";
+
+"WYLocalizable_48" = "Sagittarius";

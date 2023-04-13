@@ -1,0 +1,103 @@
+/*
+  WYLocalizable.strings
+  WYBasisKit
+
+  Created by 官人 on 2020/11/21.
+  Copyright © 2020 官人. All rights reserved.
+*/
+
+"WYLocalizable_01" = "Mam to";
+
+"WYLocalizable_02" = "hasło";
+
+"WYLocalizable_03" = "anuluj";
+
+"WYLocalizable_04" = "usunąć";
+
+"WYLocalizable_05" = "Biometria niedostępna";
+
+"WYLocalizable_06" = "Rozpoznawanie biometryczne zostało zablokowane, blokuj ekran i pomyślnie odblokuj urządzenie. Po ponownym otwarciu tej strony można ją ponownie otworzyć.";
+
+"WYLocalizable_07" = "System przerwał to rozpoznawanie.";
+
+"WYLocalizable_08" = "Proszę ustawić hasło odblokowania przed włączeniem rozpoznawania biometrycznego";
+
+"WYLocalizable_09" = "Proszę włączyć/ustawić funkcję biometryczną w ustawieniach urządzenia";
+
+"WYLocalizable_10" = "Proszę wprowadzić hasło do weryfikacji biometrii";
+
+"WYLocalizable_11" = "Jeszcze brak wiadomości";
+
+"WYLocalizable_12" = "Wyłączenie autoryzacji";
+
+"WYLocalizable_13" = "Aplikacja nie ma uprawnień do dostępu do albumu. Autoryzuj teraz?";
+
+"WYLocalizable_14" = "Aplikacja nie ma dostępu do kamery. Autoryzuj teraz?";
+
+"WYLocalizable_15" = "Aplikacja nie ma dostępu do mikrofonu. Autoryzuj teraz?";
+
+"WYLocalizable_16" = "Aplikacja nie ma uprawnień do dostępu do lokalizacji.";
+
+"WYLocalizable_17" = "Aplikacja nie ma uprawnień do dostępu do książki adresowej.";
+
+"WYLocalizable_18" = "Kontynuuj połączenie";
+
+"WYLocalizable_19" = "Anuluj połączenie";
+
+"WYLocalizable_20" = "Żądanie danych nie powiodło się";
+
+"WYLocalizable_21" = "Nieprawidłowy kod stanu";
+
+"WYLocalizable_22" = "Nieznana sieć, może istnieć zagrożenie dla bezpieczeństwa. Czy chcesz kontynuować?";
+
+"WYLocalizable_23" = "Aby ustawić";
+
+"WYLocalizable_24" = "Niezabezpieczone połączenie sieciowe anulowane";
+
+"WYLocalizable_25" = "Brak połączenia sieciowego, sprawdź ustawienia sieci";
+
+"WYLocalizable_26" = "Używasz WiFi, aby połączyć się z Internetem";
+
+"WYLocalizable_27" = "Korzystasz z komórkowej sieci komórkowej do tworzenia sieci";
+
+"WYLocalizable_28" = "Niedostępna sieć, proszę potwierdzić, że Twoje środowisko sieciowe lub uprawnienia do połączenia sieciowego zostały ustawione poprawnie";
+
+"WYLocalizable_29" = "Dane dotyczące odpowiedzi nie powiodła się weryfikacja kodu";
+
+"WYLocalizable_30" = "po prostu";
+
+"WYLocalizable_31" = "%@Minutes ago";
+
+"WYLocalizable_32" = "%@Hours ago";
+
+"WYLocalizable_33" = "%@dni temu";
+
+"WYLocalizable_34" = "%@Month ago";
+
+"WYLocalizable_35" = "%@Lata temu";
+
+"WYLocalizable_36" = "Brak karty telefonicznej";
+
+"WYLocalizable_37" = "Koziorożec";
+
+"WYLocalizable_38" = "akwarium";
+
+"WYLocalizable_39" = "Ryby";
+
+"WYLocalizable_40" = "Baran";
+
+"WYLocalizable_41" = "Byk";
+
+"WYLocalizable_42" = "Bliźnięta";
+
+"WYLocalizable_43" = "Nowotwory";
+
+"WYLocalizable_44" = "leo";
+
+"WYLocalizable_45" = "Panna";
+
+"WYLocalizable_46" = "waga";
+
+"WYLocalizable_47" = "Skorpion";
+
+"WYLocalizable_48" = "Strzelec";

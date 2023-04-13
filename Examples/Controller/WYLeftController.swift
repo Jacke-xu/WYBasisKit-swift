@@ -10,19 +10,19 @@ import UIKit
 
 class WYLeftController: UIViewController {
     
-    let cellHeaders: [String] = [WYLocalizedString("暗夜/白昼模式", "Dark night/day mode"),
-                                 WYLocalizedString("约束view添加动画", "Constrain the view to add animation"),
-                                 WYLocalizedString("边框、圆角、阴影、渐变", "Borders, rounded corners, shadows, gradients"),
+    let cellHeaders: [String] = [WYLocalized("暗夜/白昼模式", "Dark night/day mode"),
+                                 WYLocalized("约束view添加动画", "Constrain the view to add animation"),
+                                 WYLocalized("边框、圆角、阴影、渐变", "Borders, rounded corners, shadows, gradients"),
                                  "Banner",
                                  "RichText",
-                                 "无限层折叠TableView", "测试tableView", "测试下载", "测试网络请求", "测试屏幕旋转", "测试二维码", "加载Gif图", "瀑布流", "直播、点播播放器"]
+                                 "无限层折叠TableView", "测试tableView", "测试下载", "测试网络请求", "测试屏幕旋转", "测试二维码", "加载Gif图", "瀑布流", "直播、点播播放器", "IM即时通讯"]
 
-    let cellTitles: [[String]] = [[WYLocalizedString("暗夜/白昼模式", "Dark night/day mode")],
-                                  [WYLocalizedString("约束view添加动画", "Constrain the view to add animation")],
-                                  [WYLocalizedString("边框、圆角、阴影、渐变", "Borders, rounded corners, shadows, gradients")],
+    let cellTitles: [[String]] = [[WYLocalized("暗夜/白昼模式", "Dark night/day mode")],
+                                  [WYLocalized("约束view添加动画", "Constrain the view to add animation")],
+                                  [WYLocalized("边框、圆角、阴影、渐变", "Borders, rounded corners, shadows, gradients")],
                                   ["Banner"],
                                   ["RichText"],
-                                  ["无限层折叠TableView"],["测试tableView.plain模式", "测试tableView.grouped模式"], ["下载"], ["网络请求"], ["屏幕旋转"], ["二维码"], ["Gif"], ["瀑布流"], ["直播、点播播放器"]]
+                                  ["无限层折叠TableView"],["测试tableView.plain模式", "测试tableView.grouped模式"], ["下载"], ["网络请求"], ["屏幕旋转"], ["二维码"], ["Gif"], ["瀑布流"], ["直播、点播播放器"], ["IM即时通讯"]]
 
     let controller: [[String]] = [["WYTestDarkNightModeController"],
                                 ["WYTestAnimationController"],
@@ -30,7 +30,7 @@ class WYLeftController: UIViewController {
                                 ["WYTestBannerController"],
                                 ["WYTestRichTextController"],
                                 ["WYMultilevelTableViewController"],["WYTableViewPlainController", "WYTableViewGroupedController"], ["WYTestDownloadController"],["WYTestRequestController"],
-                                  ["WYTestInterfaceOrientationController"], ["WYQRCodeController"], ["WYParseGifController"], ["WYFlowLayoutAlignmentController"], ["WYTestLiveStreamingController"]]
+                                  ["WYTestInterfaceOrientationController"], ["WYQRCodeController"], ["WYParseGifController"], ["WYFlowLayoutAlignmentController"], ["WYTestLiveStreamingController"], ["WYTestChatController"]]
 
     lazy var tableView: UITableView = {
 
@@ -38,7 +38,8 @@ class WYLeftController: UIViewController {
         tableview.wy_register("UITableViewCell", .cell)
         tableview.wy_register("WYLeftControllerHeaderView", .headerFooterView)
         tableview.snp.makeConstraints { (make) in
-            make.left.top.right.equalToSuperview()
+            make.top.equalToSuperview().offset(wy_navViewHeight)
+            make.left.right.equalToSuperview()
             make.bottom.equalToSuperview().offset(-wy_tabBarHeight)
         }
         return tableview
@@ -49,7 +50,7 @@ class WYLeftController: UIViewController {
 
         // Do any additional setup after loading the view.
         
-        navigationItem.title = WYLocalizedString("各种测试样例", "Various test examples")
+        navigationItem.title = WYLocalized("各种测试样例", "Various test examples")
         tableView.backgroundColor = UIColor.wy_dynamic(.white, .black)
         
         WYProtocolManager.shared.add(delegate: self)
@@ -102,7 +103,7 @@ extension WYLeftController: UITableViewDelegate, UITableViewDataSource {
                 let contentView = UIView()
 
                 let content = UILabel()
-                content.text = WYLocalizedString("最后一个分区", "Last partition")
+                content.text = WYLocalized("最后一个分区", "Last partition")
                 content.textAlignment = .right
                 contentView.addSubview(content)
                 content.snp.makeConstraints { (make) in

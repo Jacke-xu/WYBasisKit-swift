@@ -1,0 +1,103 @@
+/*
+  WYLocalizable.strings
+  WYBasisKit
+
+  Created by 官人 on 2020/11/21.
+  Copyright © 2020 官人. All rights reserved.
+*/
+
+"WYLocalizable_01" = "Entendido";
+
+"WYLocalizable_02" = "senha";
+
+"WYLocalizable_03" = "cancelar";
+
+"WYLocalizable_04" = "apagar";
+
+"WYLocalizable_05" = "Biometria não disponível";
+
+"WYLocalizable_06" = "O reconhecimento biométrico foi bloqueado, bloqueie a tela e desbloqueie com sucesso o dispositivo.";
+
+"WYLocalizable_07" = "O sistema interrompeu este reconhecimento";
+
+"WYLocalizable_08" = "Defina a senha de desbloqueio antes de ativar o reconhecimento biométrico";
+
+"WYLocalizable_09" = "Ative/defina a função biométrica nas configurações do dispositivo";
+
+"WYLocalizable_10" = "Insira uma senha para verificar a biometria";
+
+"WYLocalizable_11" = "Ainda não há mensagem";
+
+"WYLocalizable_12" = "Desautorização";
+
+"WYLocalizable_13" = "O aplicativo não tem permissão para acessar o álbum. Autorizar agora?";
+
+"WYLocalizable_14" = "O aplicativo não tem acesso à câmera. Autorizar agora?";
+
+"WYLocalizable_15" = "O aplicativo não tem acesso ao microfone. Autorizar agora?";
+
+"WYLocalizable_16" = "O aplicativo não tem permissão para acessar o local. Autorizar agora?";
+
+"WYLocalizable_17" = "O aplicativo não tem permissão para acessar o catálogo de endereços. Autorizar agora?";
+
+"WYLocalizable_18" = "Continuar a ligar";
+
+"WYLocalizable_19" = "Cancelar a Ligação";
+
+"WYLocalizable_20" = "O pedido de dados falhou";
+
+"WYLocalizable_21" = "Código de estado anormal";
+
+"WYLocalizable_22" = "Rede desconhecida, pode haver riscos de segurança. Deseja continuar?";
+
+"WYLocalizable_23" = "Para definir";
+
+"WYLocalizable_24" = "Ligação de rede insegura cancelada";
+
+"WYLocalizable_25" = "Sem conexão de rede, verifique suas configurações de rede";
+
+"WYLocalizable_26" = "Você está usando Wi-Fi para se conectar à internet";
+
+"WYLocalizable_27" = "Você está usando uma rede móvel celular para rede";
+
+"WYLocalizable_28" = "Rede indisponível, confirme se o seu ambiente de rede ou permissões de conexão de rede foram definidas corretamente";
+
+"WYLocalizable_29" = "Dados de resposta Falha na verificação do código";
+
+"WYLocalizable_30" = "apenas";
+
+"WYLocalizable_31" = "%@Minutes ago";
+
+"WYLocalizable_32" = "%@Hours ago";
+
+"WYLocalizable_33" = "%@Days ago";
+
+"WYLocalizable_34" = "%@Month ago";
+
+"WYLocalizable_35" = "%@Years ago";
+
+"WYLocalizable_36" = "Sem cartão telefónico";
+
+"WYLocalizable_37" = "Capricornus";
+
+"WYLocalizable_38" = "aquarius";
+
+"WYLocalizable_39" = "Peixes";
+
+"WYLocalizable_40" = "Áries";
+
+"WYLocalizable_41" = "Touro";
+
+"WYLocalizable_42" = "Gémeos";
+
+"WYLocalizable_43" = "Cancro";
+
+"WYLocalizable_44" = "leo";
+
+"WYLocalizable_45" = "Virgem";
+
+"WYLocalizable_46" = "libra";
+
+"WYLocalizable_47" = "escorpião";
+
+"WYLocalizable_48" = "Sagitário";

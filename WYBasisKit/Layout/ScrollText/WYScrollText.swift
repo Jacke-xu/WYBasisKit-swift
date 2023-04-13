@@ -23,7 +23,7 @@ public class WYScrollText: UIView {
         actionHandler = handler
     }
     /// 占位文本
-    public var placeholder: String = WYLocalizedString("暂无消息")
+    public var placeholder: String = WYLocalized("WYLocalizable_11", table: WYBasisKitConfig.kitLocalizableTable)
     /// 文本颜色
     public var textColor: UIColor = .black
     /// 文本字体

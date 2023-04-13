@@ -9,7 +9,7 @@
 import UIKit
 
 /// UICollectionView注册类型
-public enum WYCollectionViewRegisterType {
+public enum WYCollectionViewRegisterStyle {
     
     /// 注册Cell
     case cell
@@ -83,8 +83,15 @@ public extension UICollectionView {
         return collectionview
     }
     
+    /// 批量注册UICollectionView的Cell或Header/FooterView
+    func wy_register(_ classNames: [String], _ styles: [WYCollectionViewRegisterStyle]) {
+        for index in 0..<classNames.count {
+            wy_register(classNames[index], styles[index])
+        }
+    }
+    
     /// 注册UICollectionView的Cell或Header/FooterView
-    func wy_register(_ className: String, _ type: WYCollectionViewRegisterType) {
+    func wy_register(_ className: String, _ style: WYCollectionViewRegisterStyle) {
         
         guard className.isEmpty == false else {
             fatalError("调用注册方法前必须创建与 \(className) 对应的类文件")
@@ -92,7 +99,7 @@ public extension UICollectionView {
         
         let registerClass = (className == "UICollectionViewCell") ? className : (wy_projectName + "." + className)
         
-        switch type {
+        switch style {
         case .cell:
             guard let cellClass = NSClassFromString(registerClass) as? UICollectionViewCell.Type else {
                 wy_print("注册 \(className) 失败")

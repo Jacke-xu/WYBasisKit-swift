@@ -6,6 +6,45 @@
 //  Copyright © 2020 官人. All rights reserved.
 //
 
+/*
+ *
+ 
+ 通讯录
+ NSContactsUsageDescription (XXX想访问您的通讯录，允许吗？)
+
+ 麦克风
+ NSMicrophoneUsageDescription (XXX想使用您的麦克风，允许吗？)
+
+ 相册
+ NSPhotoLibraryUsageDescription (XXX想访问您的相册，允许吗？)
+
+ 相机
+ NSCameraUsageDescription (XXX想使用您的相机，允许吗？)
+
+ 地理位置（一直开启）
+ NSLocationAlwaysUsageDescription (XXX想使用您的地理位置，允许吗？)
+
+ 地理位置（使用时开启）
+ NSLocationWhenInUseUsageDescription (XXX想使用您的地理位置，允许吗？)
+
+ 蓝牙权限
+ Bluetooth Peripheral Usage Description (XXX想使用您的蓝牙，允许吗？)
+
+ 语音转文字权限
+ Speech Recognition Usage Description (XXX请求语音转文字权限，允许吗？)
+
+ 日历权限
+ Calendars Usage Description (XXX想使用您的日历，允许吗？)
+
+ 健康应用(更新)
+ Health Update Usage Description (XXX想更新您的HealthKit，允许吗？)
+
+ 健康应用(读取)
+ Health Share Usage Description (XXX想访问您的HealthKit，允许吗？)
+ 
+ *
+ */
+
 import UIKit
 import Photos
 import CoreMotion
@@ -13,6 +52,18 @@ import AVFoundation
 import CoreTelephony
 import LocalAuthentication
 import Contacts
+
+/// 相机权限KEY
+let cameraKey: String = "NSCameraUsageDescription"
+
+/// 麦克风权限KEY
+let microphoneKey: String = "NSMicrophoneUsageDescription"
+
+/// 相册权限KEY
+let photoLibraryKey: String = "NSPhotoLibraryUsageDescription"
+
+/// 通讯录权限KEY
+let contactsKey: String = "NSContactsUsageDescription"
 
 /// 生物识别模式
 public enum WYBiometricMode {
@@ -344,30 +395,37 @@ public extension UIDevice {
     /// 判断相机权限
     func wy_authorizeCameraAccess(showAlert: Bool = true, handler:((_ authorized: Bool) -> Void)?) {
         
-        let authStatus = AVCaptureDevice.authorizationStatus(for: .video)
-        
-        switch authStatus {
-        case .notDetermined:
-            /// 用户尚未授权(弹出授权提示)
-            PHPhotoLibrary.requestAuthorization {[weak self] (status) in
-                DispatchQueue.main.async {
-                    if status == .authorized {
-                        /// 用户授权访问
-                        handler?(true)
-                    }else {
-                        /// App无权访问相机 用户已明确拒绝
-                        self?.wy_showAuthorizeAlert(show: showAlert, message: WYLocalizedString("App没有访问相机的权限，现在去授权?"))
-                        handler?(false)
+        if let _ = Bundle(for: WYLocalizableClass.self).infoDictionary?[cameraKey] as? String {
+            
+            let authStatus = AVCaptureDevice.authorizationStatus(for: .video)
+            
+            switch authStatus {
+            case .notDetermined:
+                /// 用户尚未授权(弹出授权提示)
+                PHPhotoLibrary.requestAuthorization {[weak self] (status) in
+                    DispatchQueue.main.async {
+                        if status == .authorized {
+                            /// 用户授权访问
+                            handler?(true)
+                        }else {
+                            /// App无权访问相机 用户已明确拒绝
+                            self?.wy_showAuthorizeAlert(show: showAlert, message: WYLocalized("WYLocalizable_14", table: WYBasisKitConfig.kitLocalizableTable))
+                            handler?(false)
+                        }
                     }
                 }
+                
+            case .authorized:
+                /// 可以访问
+                handler?(true)
+            default:
+                /// App无权访问相机 用户已明确拒绝
+                wy_showAuthorizeAlert(show: showAlert, message: WYLocalized("WYLocalizable_14", table: WYBasisKitConfig.kitLocalizableTable))
+                handler?(false)
             }
             
-        case .authorized:
-            /// 可以访问
-            handler?(true)
-        default:
-            /// App无权访问相机 用户已明确拒绝
-            wy_showAuthorizeAlert(show: showAlert, message: WYLocalizedString("App没有访问相机的权限，现在去授权?"))
+        }else {
+            wy_print("请先在Info.plist中添加key：\(cameraKey)")
             handler?(false)
         }
     }
@@ -375,43 +433,55 @@ public extension UIDevice {
     /// 判断相册权限
     func wy_authorizeAlbumAccess(showAlert: Bool = true, handler:((_ authorized: Bool, _ limited: Bool) -> Void)?) {
         
-        if #available(iOS 14, *) {
-            let requiredAccessLevel: PHAccessLevel = .readWrite
-            PHPhotoLibrary.requestAuthorization(for: requiredAccessLevel) { [weak self] (authStatus) in
-                DispatchQueue.main.async {
-                    self?.wy_checkAlbumAccess(showAlert: showAlert, authStatus: authStatus, handler: handler)
+        if let _ = Bundle(for: WYLocalizableClass.self).infoDictionary?[photoLibraryKey] as? String {
+            if #available(iOS 14, *) {
+                let requiredAccessLevel: PHAccessLevel = .readWrite
+                PHPhotoLibrary.requestAuthorization(for: requiredAccessLevel) { [weak self] (authStatus) in
+                    DispatchQueue.main.async {
+                        self?.wy_checkAlbumAccess(showAlert: showAlert, authStatus: authStatus, handler: handler)
+                    }
                 }
+                
+            }else {
+                wy_checkAlbumAccess(showAlert: showAlert, authStatus: PHPhotoLibrary.authorizationStatus(), handler: handler)
             }
-            
         }else {
-            wy_checkAlbumAccess(showAlert: showAlert, authStatus: PHPhotoLibrary.authorizationStatus(), handler: handler)
+            wy_print("请先在Info.plist中添加key：\(photoLibraryKey)")
+            handler?(false, false)
         }
     }
     
     /// 判断通讯录权限并获取通讯录
     func wy_authorizeAddressBookAccess(showAlert: Bool = true, keysToFetch: [String] = [CNContactFamilyNameKey, CNContactGivenNameKey, CNContactOrganizationNameKey, CNContactPhoneNumbersKey, CNContactNicknameKey], handler:((_ authorized: Bool, _ userInfo: [CNContact]?) -> Void)?) {
         
-        let authStatus = CNContactStore.authorizationStatus(for: .contacts)
-        let contactStore = CNContactStore()
-        switch authStatus {
-        case .notDetermined:
-            contactStore.requestAccess(for: .contacts) { [weak self] granted, error in
-                DispatchQueue.main.async {
-                    if granted {
-                        self?.wy_openContact(contactStore: contactStore, keysToFetch: keysToFetch, handler: handler)
-                    }else {
-                        /// App无权访问通讯录 用户已明确拒绝
-                        self?.wy_showAuthorizeAlert(show: showAlert, message: WYLocalizedString("App没有访问通讯录的权限，现在去授权?"))
-                        handler?(false, nil)
-                    }
-                 }
+        if let _ = Bundle(for: WYLocalizableClass.self).infoDictionary?[contactsKey] as? String {
+            
+            let authStatus = CNContactStore.authorizationStatus(for: .contacts)
+            let contactStore = CNContactStore()
+            switch authStatus {
+            case .notDetermined:
+                contactStore.requestAccess(for: .contacts) { [weak self] granted, error in
+                    DispatchQueue.main.async {
+                        if granted {
+                            self?.wy_openContact(contactStore: contactStore, keysToFetch: keysToFetch, handler: handler)
+                        }else {
+                            /// App无权访问通讯录 用户已明确拒绝
+                            self?.wy_showAuthorizeAlert(show: showAlert, message: WYLocalized("WYLocalizable_17", table: WYBasisKitConfig.kitLocalizableTable))
+                            handler?(false, nil)
+                        }
+                     }
+                }
+            case .authorized:
+                /// 可以访问
+                wy_openContact(contactStore: contactStore, keysToFetch: keysToFetch, handler: handler)
+            default:
+                /// App无权访问通讯录 用户已明确拒绝
+                wy_showAuthorizeAlert(show: showAlert, message: WYLocalized("WYLocalizable_17", table: WYBasisKitConfig.kitLocalizableTable))
+                handler?(false, nil)
             }
-        case .authorized:
-            /// 可以访问
-            wy_openContact(contactStore: contactStore, keysToFetch: keysToFetch, handler: handler)
-        default:
-            /// App无权访问通讯录 用户已明确拒绝
-            wy_showAuthorizeAlert(show: showAlert, message: WYLocalizedString("App没有访问通讯录的权限，现在去授权?"))
+            
+        }else {
+            wy_print("请先在Info.plist中添加key：\(contactsKey)")
             handler?(false, nil)
         }
     }
@@ -419,29 +489,36 @@ public extension UIDevice {
     /// 判断麦克风权限
     func wy_authorizeMicrophoneAccess(showAlert: Bool = true, handler:((_ authorized: Bool) -> Void)?) {
         
-        let authStatus = AVCaptureDevice.authorizationStatus(for: .audio)
-        
-        switch authStatus {
-        case .notDetermined:
-            AVCaptureDevice.requestAccess(for: .audio) {[weak self] authorized in
-                DispatchQueue.main.async {
-                    if authorized {
-                        /// 用户授权访问
-                        handler?(true)
-                    }else {
-                        /// App无权访问麦克风 用户已明确拒绝
-                        self?.wy_showAuthorizeAlert(show: showAlert, message: WYLocalizedString("App没有访问麦克风的权限，现在去授权?"))
-                        handler?(false)
+        if let _ = Bundle(for: WYLocalizableClass.self).infoDictionary?[microphoneKey] as? String {
+            
+            let authStatus = AVCaptureDevice.authorizationStatus(for: .audio)
+            
+            switch authStatus {
+            case .notDetermined:
+                AVCaptureDevice.requestAccess(for: .audio) {[weak self] authorized in
+                    DispatchQueue.main.async {
+                        if authorized {
+                            /// 用户授权访问
+                            handler?(true)
+                        }else {
+                            /// App无权访问麦克风 用户已明确拒绝
+                            self?.wy_showAuthorizeAlert(show: showAlert, message: WYLocalized("WYLocalizable_15", table: WYBasisKitConfig.kitLocalizableTable))
+                            handler?(false)
+                        }
                     }
                 }
+                
+            case .authorized:
+                /// 可以访问
+                handler?(true)
+            default:
+                /// App无权访问麦克风 用户已明确拒绝
+                wy_showAuthorizeAlert(show: showAlert, message: WYLocalized("WYLocalizable_15", table: WYBasisKitConfig.kitLocalizableTable))
+                handler?(false)
             }
             
-        case .authorized:
-            /// 可以访问
-            handler?(true)
-        default:
-            /// App无权访问麦克风 用户已明确拒绝
-            wy_showAuthorizeAlert(show: showAlert, message: WYLocalizedString("App没有访问麦克风的权限，现在去授权?"))
+        }else {
+            wy_print("请先在Info.plist中添加key：\(microphoneKey)")
             handler?(false)
         }
     }
@@ -531,7 +608,7 @@ public extension UIDevice {
                         // 生物识别不可用
                         DispatchQueue.main.async {
                             
-                            handler!(false, false, WYLocalizedString("生物识别不可用"))
+                            handler!(false, false, WYLocalized("WYLocalizable_05", table: WYBasisKitConfig.kitLocalizableTable))
                         }
                         return
                     }
@@ -551,7 +628,7 @@ public extension UIDevice {
                                     }else {
                                         
                                         // 生物识别已被锁定，锁屏并成功解锁iPhone后可重新打开本页面开启
-                                        handler!(false, false, WYLocalizedString("生物识别已被锁定，锁屏并成功解锁设备后重新打开本页面即可重新开启"))
+                                        handler!(false, false, WYLocalized("WYLocalizable_06", table: WYBasisKitConfig.kitLocalizableTable))
                                     }
                                 }
                             }
@@ -572,35 +649,35 @@ public extension UIDevice {
                         // 系统取消
                         DispatchQueue.main.async {
                             
-                            handler!(false, false, WYLocalizedString("系统中断了本次识别"))
+                            handler!(false, false, WYLocalized("WYLocalizable_07", table: WYBasisKitConfig.kitLocalizableTable))
                         }
                     case .passcodeNotSet:
                         
                         // 用户未设置解锁密码
                         DispatchQueue.main.async {
                             
-                            handler!(false, false, WYLocalizedString("开启生物识别前请设置解锁密码"))
+                            handler!(false, false, WYLocalized("WYLocalizable_08", table: WYBasisKitConfig.kitLocalizableTable))
                         }
                     case .touchIDNotAvailable:
                         
                         // 生物识别不可用
                         DispatchQueue.main.async {
                             
-                            handler!(false, false, WYLocalizedString("生物识别不可用"))
+                            handler!(false, false, WYLocalized("WYLocalizable_05", table: WYBasisKitConfig.kitLocalizableTable))
                         }
                     case .touchIDNotEnrolled:
                         
                         // 未设置生物识别
                         DispatchQueue.main.async {
                             
-                            handler!(false, false, WYLocalizedString("请在设备设置中开启/设置生物识别功能"))
+                            handler!(false, false, WYLocalized("WYLocalizable_09", table: WYBasisKitConfig.kitLocalizableTable))
                         }
                     case .touchIDLockout:
                         
                         // 生物识别已被锁定，锁屏并成功解锁iPhone后可重新打开本页面开启
                         DispatchQueue.main.async {
                             
-                            handler!(false, false, WYLocalizedString("生物识别已被锁定，锁屏并成功解锁设备后重新打开本页面即可重新开启"))
+                            handler!(false, false, WYLocalized("WYLocalizable_06", table: WYBasisKitConfig.kitLocalizableTable))
                         }
                     default:break
                     }
@@ -612,7 +689,7 @@ public extension UIDevice {
             // 生物识别已被锁定，锁屏并成功解锁iPhone后可重新打开本页面开启
             DispatchQueue.main.async {
                 
-                handler!(false, false, WYLocalizedString("生物识别已被锁定，锁屏并成功解锁设备后重新打开本页面即可重新开启"))
+                handler!(false, false, WYLocalized("WYLocalizable_06", table: WYBasisKitConfig.kitLocalizableTable))
             }
         }
     }
@@ -625,7 +702,7 @@ public extension UIDevice {
         if passwordContent.canEvaluatePolicy(.deviceOwnerAuthentication, error: &error){
             
             // 输入密码开启生物识别
-            passwordContent.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: WYLocalizedString("请输入密码验证生物识别")) { (success, err) in
+            passwordContent.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: WYLocalized("WYLocalizable_10", table: WYBasisKitConfig.kitLocalizableTable)) { (success, err) in
                 if success {
                     handler!(true)
                 }else{
@@ -641,54 +718,66 @@ private extension UIDevice {
     // 获取通讯录
     func wy_openContact(contactStore: CNContactStore, keysToFetch: [String], handler:((_ authorized: Bool, _ userInfo: [CNContact]?) -> Void)?) {
         
-        contactStore.requestAccess(for: .contacts) {(granted, error) in
-            if (granted) && (error == nil) {
-                
-                let request = CNContactFetchRequest(keysToFetch: keysToFetch as [CNKeyDescriptor])
-                do {
-                    var contacts: [CNContact] = []
-                    // 需要传入一个CNContactFetchRequest
-                    try contactStore.enumerateContacts(with: request, usingBlock: {(contact : CNContact, stop : UnsafeMutablePointer) -> Void in
-                        contacts.append(contact)
-                    })
-                    handler?(true, contacts)
-                } catch {
+        if let _ = Bundle(for: WYLocalizableClass.self).infoDictionary?[contactsKey] as? String {
+            
+            contactStore.requestAccess(for: .contacts) {(granted, error) in
+                if (granted) && (error == nil) {
+                    
+                    let request = CNContactFetchRequest(keysToFetch: keysToFetch as [CNKeyDescriptor])
+                    do {
+                        var contacts: [CNContact] = []
+                        // 需要传入一个CNContactFetchRequest
+                        try contactStore.enumerateContacts(with: request, usingBlock: {(contact : CNContact, stop : UnsafeMutablePointer) -> Void in
+                            contacts.append(contact)
+                        })
+                        handler?(true, contacts)
+                    } catch {
+                        handler?(true, nil)
+                    }
+                } else {
                     handler?(true, nil)
                 }
-            } else {
-                handler?(true, nil)
             }
+            
+        }else {
+            handler?(false, nil)
         }
     }
     
     // 检查相册权限
     func wy_checkAlbumAccess(showAlert: Bool, authStatus: PHAuthorizationStatus, handler:((_ authorized: Bool, _ limited: Bool) -> Void)?) {
         
-        switch authStatus {
-        case .notDetermined:
-            /// 用户尚未授权(弹出授权提示)
-            PHPhotoLibrary.requestAuthorization {[weak self] (status) in
-                
-                if status == .authorized {
-                    /// 用户授权访问
-                    handler?(true, false)
-                }else {
+        if let _ = Bundle(for: WYLocalizableClass.self).infoDictionary?[photoLibraryKey] as? String {
+            
+            switch authStatus {
+            case .notDetermined:
+                /// 用户尚未授权(弹出授权提示)
+                PHPhotoLibrary.requestAuthorization {[weak self] (status) in
                     
-                    /// App无权访问照片库 用户已明确拒绝
-                    self?.wy_showAuthorizeAlert(show: showAlert, message: WYLocalizedString("App没有访问相册的权限，现在去授权?"))
-                    handler?(false, false)
+                    if status == .authorized {
+                        /// 用户授权访问
+                        handler?(true, false)
+                    }else {
+                        
+                        /// App无权访问照片库 用户已明确拒绝
+                        self?.wy_showAuthorizeAlert(show: showAlert, message: WYLocalized("WYLocalizable_13", table: WYBasisKitConfig.kitLocalizableTable))
+                        handler?(false, false)
+                    }
                 }
+                
+            case .authorized:
+                /// 可以访问
+                handler?(true, false)
+            case .limited:
+                /// 部分可访问
+                handler?(true, true)
+            default:
+                /// App无权访问相册 用户已明确拒绝
+                wy_showAuthorizeAlert(show: showAlert, message: WYLocalized("WYLocalizable_13", table: WYBasisKitConfig.kitLocalizableTable))
+                handler?(false, false)
             }
             
-        case .authorized:
-            /// 可以访问
-            handler?(true, false)
-        case .limited:
-            /// 部分可访问
-            handler?(true, true)
-        default:
-            /// App无权访问相册 用户已明确拒绝
-            wy_showAuthorizeAlert(show: showAlert, message: WYLocalizedString("App没有访问相册的权限，现在去授权?"))
+        }else {
             handler?(false, false)
         }
     }
@@ -698,11 +787,11 @@ private extension UIDevice {
         
         if show {
             
-            UIAlertController.wy_show(message: message, actions: [WYLocalizedString("取消"), WYLocalizedString("去授权")]) { (actionStr, _) in
+            UIAlertController.wy_show(message: message, actions: [WYLocalized("WYLocalizable_03", table: WYBasisKitConfig.kitLocalizableTable), WYLocalized("WYLocalizable_12", table: WYBasisKitConfig.kitLocalizableTable)]) { (actionStr, _) in
                 
                 DispatchQueue.main.async {
                     
-                    if actionStr == WYLocalizedString("去授权") {
+                    if actionStr == WYLocalized("WYLocalizable_12", table: WYBasisKitConfig.kitLocalizableTable) {
                         
                         let settingUrl = URL(string: UIApplication.openSettingsURLString)
                         if let url = settingUrl, UIApplication.shared.canOpenURL(url) {
@@ -824,3 +913,5 @@ private extension UIDevice {
         static let privateCurrentInterfaceOrientation = UnsafeRawPointer(bitPattern: "privateCurrentInterfaceOrientation".hashValue)!
     }
 }
+
+private class WYLocalizableClass {}

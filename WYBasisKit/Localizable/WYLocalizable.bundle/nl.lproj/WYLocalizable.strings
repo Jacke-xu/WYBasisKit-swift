@@ -1,0 +1,103 @@
+/*
+  WYLocalizable.strings
+  WYBasisKit
+
+  Created by 官人 on 2020/11/21.
+  Copyright © 2020 官人. All rights reserved.
+*/
+
+"WYLocalizable_01" = "Begrepen";
+
+"WYLocalizable_02" = "wachtwoord";
+
+"WYLocalizable_03" = "annuleren";
+
+"WYLocalizable_04" = "verwijderen";
+
+"WYLocalizable_05" = "Biometrie niet beschikbaar";
+
+"WYLocalizable_06" = "Biometrische herkenning is vergrendeld, vergrendel het scherm en ontgrendel het apparaat met succes. Na het heropenen van deze pagina kan het opnieuw worden geopend";
+
+"WYLocalizable_07" = "Het systeem onderbrak deze herkenning";
+
+"WYLocalizable_08" = "Stel het ontgrendelingswachtwoord in voordat u biometrische herkenning inschakelt";
+
+"WYLocalizable_09" = "Activeer/stel biometrische functie in in apparaatinstellingen";
+
+"WYLocalizable_10" = "Voer een wachtwoord in om biometrie te verifiëren";
+
+"WYLocalizable_11" = "Nog geen bericht";
+
+"WYLocalizable_12" = "Ontautorisatie";
+
+"WYLocalizable_13" = "De app heeft geen toegang tot het album. Nu autoriseren?";
+
+"WYLocalizable_14" = "De app heeft geen toegang tot de camera. Nu autoriseren?";
+
+"WYLocalizable_15" = "De app heeft geen toegang tot de microfoon. Nu autoriseren?";
+
+"WYLocalizable_16" = "De app heeft geen toegang tot de locatie. Nu autoriseren?";
+
+"WYLocalizable_17" = "De app heeft geen toegang tot het adresboek. Nu autoriseren?";
+
+"WYLocalizable_18" = "Verbinding voortzetten";
+
+"WYLocalizable_19" = "Verbinding annuleren";
+
+"WYLocalizable_20" = "Gegevensaanvraag mislukt";
+
+"WYLocalizable_21" = "Abnormale statuscode";
+
+"WYLocalizable_22" = "Onbekend netwerk, er kunnen beveiligingsrisico's zijn. Wilt u doorgaan?";
+
+"WYLocalizable_23" = "Te instellen";
+
+"WYLocalizable_24" = "Onveilige netwerkverbinding geannuleerd";
+
+"WYLocalizable_25" = "Geen netwerkverbinding, controleer uw netwerkinstellingen";
+
+"WYLocalizable_26" = "U gebruikt WiFi om verbinding te maken met het internet";
+
+"WYLocalizable_27" = "U gebruikt een mobiel netwerk voor netwerken";
+
+"WYLocalizable_28" = "Niet beschikbaar netwerk, controleer of uw netwerkomgeving of netwerkverbindingsrechten correct zijn ingesteld";
+
+"WYLocalizable_29" = "Responsegegevens Code verificatie mislukt";
+
+"WYLocalizable_30" = "gewoon";
+
+"WYLocalizable_31" = "%@Minutes ago";
+
+"WYLocalizable_32" = "%@Hours ago";
+
+"WYLocalizable_33" = "%@Days ago";
+
+"WYLocalizable_34" = "%@Month ago";
+
+"WYLocalizable_35" = "%@Years ago";
+
+"WYLocalizable_36" = "Geen telefoonkaart";
+
+"WYLocalizable_37" = "Steenbok";
+
+"WYLocalizable_38" = "aquarius";
+
+"WYLocalizable_39" = "Vissen";
+
+"WYLocalizable_40" = "Ram";
+
+"WYLocalizable_41" = "Stier";
+
+"WYLocalizable_42" = "Tweelingen";
+
+"WYLocalizable_43" = "Kanker";
+
+"WYLocalizable_44" = "leo";
+
+"WYLocalizable_45" = "Maagd";
+
+"WYLocalizable_46" = "libra";
+
+"WYLocalizable_47" = "schorpioen";
+
+"WYLocalizable_48" = "Boogschutter";

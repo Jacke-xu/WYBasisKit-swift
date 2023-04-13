@@ -1,0 +1,103 @@
+/*
+  WYLocalizable.strings
+  WYBasisKit
+
+  Created by 官人 on 2020/11/21.
+  Copyright © 2020 官人. All rights reserved.
+*/
+
+"WYLocalizable_01" = "Зрозумів.";
+
+"WYLocalizable_02" = "пароль";
+
+"WYLocalizable_03" = "скасувати";
+
+"WYLocalizable_04" = "вилучити";
+
+"WYLocalizable_05" = "Біометрика недоступна";
+
+"WYLocalizable_06" = "Біометричне розпізнавання було замкнено, замкнено екран і успішно відкрито пристрій. Після відкриття цієї сторінки його можна відкрити знову.";
+
+"WYLocalizable_07" = "Система перервала цей розпізнавання";
+
+"WYLocalizable_08" = "Будь ласка, встановіть пароль розблокування, перш ніж увімкнути біометричне розпізнавання";
+
+"WYLocalizable_09" = "Будь ласка, увімкніть/встановіть біометричну функцію у параметрах пристрою";
+
+"WYLocalizable_10" = "Будь ласка, введіть пароль для перевірки біометрики";
+
+"WYLocalizable_11" = "Поки не було повідомлень";
+
+"WYLocalizable_12" = "Деавторизація";
+
+"WYLocalizable_13" = "У програмі немає прав доступу до альбому. Зараз дозволити?";
+
+"WYLocalizable_14" = "У програмі немає доступу до фотоапарата. Зараз дозволити?";
+
+"WYLocalizable_15" = "У програмі немає доступу до мікрофону. Зараз дозволити?";
+
+"WYLocalizable_16" = "У програмі немає прав доступу до адреси. Зараз дозволити?";
+
+"WYLocalizable_17" = "У програмі немає прав доступу до адресної книги. Зараз дозволити?";
+
+"WYLocalizable_18" = "Продовжити з’ єднання";
+
+"WYLocalizable_19" = "Скасувати з’ єднання";
+
+"WYLocalizable_20" = "Запит даних зазнав невдачі";
+
+"WYLocalizable_21" = "Ненормальний код стану";
+
+"WYLocalizable_22" = "Невідома мережа, може бути ризик безпеки. Хочете продовжити?";
+
+"WYLocalizable_23" = "Встановити";
+
+"WYLocalizable_24" = "Небезпечне з’ єднання з мережею скасовано";
+
+"WYLocalizable_25" = "Немає мережевого з’ єднання, будь ласка, перевірте ваші параметри мережі";
+
+"WYLocalizable_26" = "Ви використовуєте WiFi для з’ єднання з Інтернетом";
+
+"WYLocalizable_27" = "Ви використовуєте клітинну мобільну мережу для мережевого зв'язку";
+
+"WYLocalizable_28" = "Недоступна мережа, будь ласка, підтвердите, що ваше мережеве середовище або права на з’ єднання було правильно встановлено";
+
+"WYLocalizable_29" = "Спроба перевірки коду даних відповіді зазнала невдачі";
+
+"WYLocalizable_30" = "просто";
+
+"WYLocalizable_31" = "%@Minutes ago";
+
+"WYLocalizable_32" = "%@Hours ago";
+
+"WYLocalizable_33" = "%@Days ago";
+
+"WYLocalizable_34" = "%@Month ago";
+
+"WYLocalizable_35" = "%@Years ago";
+
+"WYLocalizable_36" = "Без телефонної картки";
+
+"WYLocalizable_37" = "Каприкорн";
+
+"WYLocalizable_38" = "акваріус";
+
+"WYLocalizable_39" = "Піски";
+
+"WYLocalizable_40" = "Aries";
+
+"WYLocalizable_41" = "Таурус";
+
+"WYLocalizable_42" = "Gemini";
+
+"WYLocalizable_43" = "Рак";
+
+"WYLocalizable_44" = "leo";
+
+"WYLocalizable_45" = "Вірго";
+
+"WYLocalizable_46" = "лібарunit synonyms for matching user input";
+
+"WYLocalizable_47" = "scorpio";
+
+"WYLocalizable_48" = "Sagittarius";

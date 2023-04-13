@@ -3,7 +3,7 @@
 //  WYBasisKit
 //
 //  Created by 官人 on 2020/11/21.
-//  Copyright © 2020 jacke-xu. All rights reserved.
+//  Copyright © 2020 官人. All rights reserved.
 //
 
 /**
@@ -14,35 +14,52 @@
 import UIKit
 
 /// 屏幕分辨率
-public enum WYScreenPixels {
-    case 𝟯𝟮𝟬ｘ𝟱𝟲𝟴
-    case 𝟯𝟳𝟱ｘ𝟲𝟲𝟳
-    case 𝟰𝟭𝟰ｘ𝟳𝟯𝟲
-    case 𝟯𝟳𝟱ｘ𝟴𝟭𝟮
-    case 𝟰𝟭𝟰ｘ𝟴𝟵𝟲
-    case 𝟯𝟵𝟬ｘ𝟴𝟰𝟰
-    case 𝟰𝟮𝟴ｘ𝟵𝟮𝟲
-    case 𝟯𝟵𝟯ｘ𝟴𝟱𝟮
-    case 𝟰𝟯𝟬ｘ𝟵𝟯𝟮
-    case customize
+public struct WYScreenPixels {
+    /// 屏幕宽
+    public var width: Double
+    /// 屏幕高
+    public var height: Double
+    
+    public init(width: Double, height: Double) {
+        self.width = width
+        self.height = height
+    }
+}
+
+/// 最大最小分辨比率
+public struct WYRatio {
+    
+    /// 最小比率
+    public var min: Double
+
+    /// 最大比率
+    public var max: Double
+    
+    public init(min: Double, max: Double) {
+        self.min = min
+        self.max = max
+    }
 }
 
 public struct WYBasisKitConfig {
     
     /// 设置默认屏幕分辨率
-    public static var defaultScreenPixels: WYScreenPixels = .𝟯𝟵𝟬ｘ𝟴𝟰𝟰
+    public static var defaultScreenPixels: WYScreenPixels = WYScreenPixels(width: 390, height: 844)
     
-    /// 设置自定义屏幕宽度比基数
-    public static var screenWidthRatioBase: CGFloat = wy_screenRatioBase(fromWidth: true, pixels: defaultScreenPixels)
+    /// 设置字号适配的最大最小比率数
+    public static var fontRatio: WYRatio = WYRatio(min: 0.5, max: 1.5)
     
-    /// 设置自定义屏幕高度比基数
-    public static var screenHeightRatioBase: CGFloat = wy_screenRatioBase(fromWidth: false, pixels: defaultScreenPixels)
+    /// 设置屏幕分辨率宽度比最大最小比率数
+    public static var screenWidthRatio: WYRatio = WYRatio(min: 0.5, max: 1.5)
     
-    /// 设置字号适配的最大比率数
-    public static var maxFontRatio: CGFloat = 1.25
+    /// 设置屏幕分辨率高度比最大最小比率数
+    public static var screenHeightRatio: WYRatio = WYRatio(min: 0.5, max: 1.5)
     
-    /// 设置国际化时需要加载的自定义本地化语言读取表
-    public static var localizableTable: String?
+    /// 设置国际化语言读取表(如果有Bundle，则要求Bundle名与表名一致，否则会读取失败)
+    public static var localizableTable: String = ""
+    
+    /// 设置WYBasisKit内部国际化语言读取表，设置后需自己将WYLocalizable表中的国际化文本写入自定义的表中(如果有Bundle，则要求Bundle名与表名一致，否则会读取失败)，默认使用自带的表：WYLocalizable
+    public static var kitLocalizableTable: String = "WYLocalizable"
     
     /// Debug模式下是否打印日志
     public static var debugModeLog: Bool = true
@@ -101,40 +118,28 @@ public let wy_screenWidth: CGFloat = UIScreen.main.bounds.size.width
 /// 屏幕高
 public let wy_screenHeight: CGFloat = UIScreen.main.bounds.size.height
 
-/// 屏幕宽度或者高度比率基数
-public func wy_screenRatioBase(fromWidth: Bool, pixels: WYScreenPixels = WYBasisKitConfig.defaultScreenPixels) -> CGFloat {
-    switch pixels {
-    case .𝟯𝟮𝟬ｘ𝟱𝟲𝟴:
-        return (fromWidth ? 320.0 : 568.0)
-    case .𝟯𝟳𝟱ｘ𝟲𝟲𝟳:
-        return (fromWidth ? 375.0 : 667.0)
-    case .𝟰𝟭𝟰ｘ𝟳𝟯𝟲:
-        return (fromWidth ? 414.0 : 736.0)
-    case .𝟯𝟳𝟱ｘ𝟴𝟭𝟮:
-        return (fromWidth ? 375.0 : 812.0)
-    case .𝟰𝟭𝟰ｘ𝟴𝟵𝟲:
-        return (fromWidth ? 414.0 : 896.0)
-    case .𝟯𝟵𝟬ｘ𝟴𝟰𝟰:
-        return (fromWidth ? 390.0 : 844.0)
-    case .𝟰𝟮𝟴ｘ𝟵𝟮𝟲:
-        return (fromWidth ? 428.0 : 926.0)
-    case .𝟯𝟵𝟯ｘ𝟴𝟱𝟮:
-        return (fromWidth ? 393.0 : 852.0)
-    case .𝟰𝟯𝟬ｘ𝟵𝟯𝟮:
-        return (fromWidth ? 430.0 : 932.0)
-    case .customize:
-        return (fromWidth ? WYBasisKitConfig.screenWidthRatioBase : WYBasisKitConfig.screenHeightRatioBase)
-    }
-}
-
 /// 屏幕宽度比率
 public func wy_screenWidthRatio(_ pixels: WYScreenPixels = WYBasisKitConfig.defaultScreenPixels) -> CGFloat {
-    return (wy_screenWidth / wy_screenRatioBase(fromWidth: true, pixels: pixels))
+    let widthRatio = (wy_screenWidth / pixels.width)
+    if widthRatio < WYBasisKitConfig.screenWidthRatio.min {
+        return WYBasisKitConfig.screenWidthRatio.min
+    }else if widthRatio > WYBasisKitConfig.screenWidthRatio.max {
+        return WYBasisKitConfig.screenWidthRatio.max
+    }else {
+        return widthRatio
+    }
 }
 
 /// 屏幕高度比率
 public func wy_screenHeightRatio(_ pixels: WYScreenPixels = WYBasisKitConfig.defaultScreenPixels) -> CGFloat {
-    return (wy_screenHeight / wy_screenRatioBase(fromWidth: false, pixels: pixels))
+    let heightRatio = (wy_screenHeight / pixels.height)
+    if heightRatio < WYBasisKitConfig.screenHeightRatio.min {
+        return WYBasisKitConfig.screenHeightRatio.min
+    }else if heightRatio > WYBasisKitConfig.screenHeightRatio.max {
+        return WYBasisKitConfig.screenHeightRatio.max
+    }else {
+        return heightRatio
+    }
 }
 
 /// 屏幕宽度比率转换
@@ -149,8 +154,10 @@ public func wy_screenHeight(_ ratioValue: CGFloat, _ pixels: WYScreenPixels = WY
 
 /// 字号比率转换
 public func wy_fontSize(_ ratioValue: CGFloat, _ pixels: WYScreenPixels = WYBasisKitConfig.defaultScreenPixels) -> CGFloat {
-    if wy_screenWidthRatio(pixels) > WYBasisKitConfig.maxFontRatio {
-        return ratioValue * WYBasisKitConfig.maxFontRatio
+    if wy_screenWidthRatio(pixels) > WYBasisKitConfig.fontRatio.max {
+        return ratioValue * WYBasisKitConfig.fontRatio.max
+    }else if wy_screenWidthRatio(pixels) < WYBasisKitConfig.fontRatio.min {
+        return ratioValue * WYBasisKitConfig.fontRatio.min
     }else {
         return ratioValue * wy_screenWidthRatio(pixels)
     }
@@ -243,7 +250,7 @@ public func wy_randomString(minimux: NSInteger = 1, maximum: NSInteger = 100) ->
     
     let startIndex = contentString.index(contentString.startIndex, offsetBy: 0)
     let endIndex = contentString.index(contentString.startIndex, offsetBy: wy_randomInteger(minimux: minimux, maximum: maximum) - (minimux > 0 ? 1 : 0))
-    
+
     return String(contentString[startIndex...endIndex])
 }
 

@@ -51,7 +51,7 @@ class WYTableViewGroupedController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        navigationItem.title = WYLocalizedString("测试tableview Grouped模式", "Test tableview Grouped mode")
+        navigationItem.title = WYLocalized("测试tableview Grouped模式", "Test tableview Grouped mode")
         tableView.backgroundColor = UIColor.wy_dynamic(.white, .black)
     }
     

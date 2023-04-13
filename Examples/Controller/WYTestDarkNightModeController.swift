@@ -34,7 +34,7 @@ class WYTestDarkNightModeController: UIViewController {
     
     @objc func clickButton(sender: UIButton) {
 
-        if WYLocalizableManager.currentLanguage() == .chinese {
+        if WYLocalizableManager.currentLanguage() == .zh_Hans {
 
             WYLocalizableManager.switchLanguage(language: .english) {
 
@@ -51,7 +51,7 @@ class WYTestDarkNightModeController: UIViewController {
 
         }else {
 
-            WYLocalizableManager.switchLanguage(language: .chinese) {
+            WYLocalizableManager.switchLanguage(language: .zh_Hans) {
 
                 DispatchQueue.main.async(execute: {
 
