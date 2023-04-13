@@ -1,4 +1,4 @@
-Pod:Spec.new do |kit|
+Pod::Spec.new do |kit|
 
   kit.name         = 'WYBasisKit'
   kit.version      = '1.2.8'

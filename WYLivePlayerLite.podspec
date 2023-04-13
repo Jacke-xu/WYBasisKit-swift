@@ -1,4 +1,4 @@
-Pod:Spec.new do |livePlayer|
+Pod::Spec.new do |livePlayer|
 
   livePlayer.name         = 'WYLivePlayerLite'
   livePlayer.version      = '1.0.0'
