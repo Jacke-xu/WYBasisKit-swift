@@ -1,212 +1,109 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
-<dict>
-	<key>[吓]</key>
+<array>
 	<string>[吓]</string>
-	<key>[鼓掌]</key>
 	<string>[鼓掌]</string>
-	<key>[嘟]</key>
 	<string>[嘟]</string>
-	<key>[生气]</key>
 	<string>[生气]</string>
-	<key>[郁闷]</key>
 	<string>[郁闷]</string>
-	<key>[口罩]</key>
 	<string>[口罩]</string>
-	<key>[斜眼]</key>
 	<string>[斜眼]</string>
-	<key>[绿帽]</key>
 	<string>[绿帽]</string>
-	<key>[给力]</key>
 	<string>[给力]</string>
-	<key>[喝彩]</key>
 	<string>[喝彩]</string>
-	<key>[黄狗]</key>
 	<string>[黄狗]</string>
-	<key>[吃瓜]</key>
 	<string>[吃瓜]</string>
-	<key>[无奈]</key>
 	<string>[无奈]</string>
-	<key>[拇指]</key>
 	<string>[拇指]</string>
-	<key>[吐舌]</key>
 	<string>[吐舌]</string>
-	<key>[脸红]</key>
 	<string>[脸红]</string>
-	<key>[雷]</key>
 	<string>[雷]</string>
-	<key>[开心]</key>
 	<string>[开心]</string>
-	<key>[打脸]</key>
 	<string>[打脸]</string>
-	<key>[抽烟]</key>
 	<string>[抽烟]</string>
-	<key>[鬼脸]</key>
 	<string>[鬼脸]</string>
-	<key>[赞]</key>
 	<string>[赞]</string>
-	<key>[眼泪]</key>
 	<string>[眼泪]</string>
-	<key>[差评]</key>
 	<string>[差评]</string>
-	<key>[黄瓜]</key>
 	<string>[黄瓜]</string>
-	<key>[抱抱]</key>
 	<string>[抱抱]</string>
-	<key>[汗]</key>
 	<string>[汗]</string>
-	<key>[见钱]</key>
 	<string>[见钱]</string>
-	<key>[哭]</key>
 	<string>[哭]</string>
-	<key>[互粉]</key>
 	<string>[互粉]</string>
-	<key>[搞定]</key>
 	<string>[搞定]</string>
-	<key>[思考]</key>
 	<string>[思考]</string>
-	<key>[摸头]</key>
 	<string>[摸头]</string>
-	<key>[喜欢]</key>
 	<string>[喜欢]</string>
-	<key>[卖萌]</key>
 	<string>[卖萌]</string>
-	<key>[加油]</key>
 	<string>[加油]</string>
-	<key>[瞪眼]</key>
 	<string>[瞪眼]</string>
-	<key>[无语]</key>
 	<string>[无语]</string>
-	<key>[捂嘴]</key>
 	<string>[捂嘴]</string>
-	<key>[害怕]</key>
 	<string>[害怕]</string>
-	<key>[纠结]</key>
 	<string>[纠结]</string>
-	<key>[嘴]</key>
 	<string>[嘴]</string>
-	<key>[指点]</key>
 	<string>[指点]</string>
-	<key>[威武]</key>
 	<string>[威武]</string>
-	<key>[大吐]</key>
 	<string>[大吐]</string>
-	<key>[狗]</key>
 	<string>[狗]</string>
-	<key>[脸黑]</key>
 	<string>[脸黑]</string>
-	<key>[蓝狗]</key>
 	<string>[蓝狗]</string>
-	<key>[大叫]</key>
 	<string>[大叫]</string>
-	<key>[高兴]</key>
 	<string>[高兴]</string>
-	<key>[关注]</key>
 	<string>[关注]</string>
-	<key>[粉]</key>
 	<string>[粉]</string>
-	<key>[大笑]</key>
 	<string>[大笑]</string>
-	<key>[666]</key>
 	<string>[666]</string>
-	<key>[疼]</key>
 	<string>[疼]</string>
-	<key>[想哭]</key>
 	<string>[想哭]</string>
-	<key>[伤心]</key>
 	<string>[伤心]</string>
-	<key>[耳机]</key>
 	<string>[耳机]</string>
-	<key>[拒绝]</key>
 	<string>[拒绝]</string>
-	<key>[18禁]</key>
 	<string>[18禁]</string>
-	<key>[吐血]</key>
 	<string>[吐血]</string>
-	<key>[灰狗]</key>
 	<string>[灰狗]</string>
-	<key>[露牙]</key>
 	<string>[露牙]</string>
-	<key>[生日]</key>
 	<string>[生日]</string>
-	<key>[笑哭]</key>
 	<string>[笑哭]</string>
-	<key>[唇]</key>
 	<string>[唇]</string>
-	<key>[拜托]</key>
 	<string>[拜托]</string>
-	<key>[呲牙]</key>
 	<string>[呲牙]</string>
-	<key>[调皮]</key>
 	<string>[调皮]</string>
-	<key>[再见]</key>
 	<string>[再见]</string>
-	<key>[敲打]</key>
 	<string>[敲打]</string>
-	<key>[擦汗]</key>
 	<string>[擦汗]</string>
-	<key>[玫瑰]</key>
 	<string>[玫瑰]</string>
-	<key>[嘘]</key>
 	<string>[嘘]</string>
-	<key>[酷]</key>
 	<string>[酷]</string>
-	<key>[便便]</key>
 	<string>[便便]</string>
-	<key>[菜刀]</key>
 	<string>[菜刀]</string>
-	<key>[色]</key>
 	<string>[色]</string>
-	<key>[害羞]</key>
 	<string>[害羞]</string>
-	<key>[得意]</key>
 	<string>[得意]</string>
-	<key>[吐]</key>
 	<string>[吐]</string>
-	<key>[微笑]</key>
 	<string>[微笑]</string>
-	<key>[发怒]</key>
 	<string>[发怒]</string>
-	<key>[尴尬]</key>
 	<string>[尴尬]</string>
-	<key>[惊恐]</key>
 	<string>[惊恐]</string>
-	<key>[爱心]</key>
 	<string>[爱心]</string>
-	<key>[疑问]</key>
 	<string>[疑问]</string>
-	<key>[睡]</key>
 	<string>[睡]</string>
-	<key>[亲]</key>
 	<string>[亲]</string>
-	<key>[衰]</key>
 	<string>[衰]</string>
-	<key>[阴险]</key>
 	<string>[阴险]</string>
-	<key>[发呆]</key>
 	<string>[发呆]</string>
-	<key>[飞吻]</key>
 	<string>[飞吻]</string>
-	<key>[晕]</key>
 	<string>[晕]</string>
-	<key>[握手]</key>
 	<string>[握手]</string>
-	<key>[胜利]</key>
 	<string>[胜利]</string>
-	<key>[啤酒]</key>
 	<string>[啤酒]</string>
-	<key>[心碎]</key>
 	<string>[心碎]</string>
-	<key>[礼物]</key>
 	<string>[礼物]</string>
-	<key>[困]</key>
 	<string>[困]</string>
-	<key>[抠鼻]</key>
 	<string>[抠鼻]</string>
-	<key>[哈欠]</key>
 	<string>[哈欠]</string>
-	<key>[闭嘴]</key>
 	<string>[闭嘴]</string>
-</dict>
+</array>
 </plist>

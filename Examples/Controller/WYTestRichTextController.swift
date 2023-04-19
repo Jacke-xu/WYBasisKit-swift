@@ -52,7 +52,7 @@ class WYTestRichTextController: UIViewController {
         emojiLabel.numberOfLines = 0
         emojiLabel.backgroundColor = .white
         emojiLabel.textColor = .black
-        emojiLabel.attributedText = "Hello，这是一个测试表情匹配的UILabel，现在开始匹配 玫瑰[玫瑰] 色[色] 嘻嘻[嘻嘻] 三个表情，看见了吗，他可以用在即时通讯等需要表情匹配的地方".wy_convertEmojiAttributed(textColor: emojiLabel.textColor, textFont: emojiLabel.font, emojiTable: ["[玫瑰]":"meigui","[色]":"se","[嘻嘻]":"xixi"])
+        emojiLabel.attributedText = NSMutableAttributedString.wy_convertEmojiAttributed(emojiString: "Hello，这是一个测试表情匹配的UILabel，现在开始匹配 玫瑰[玫瑰] 色[色] 嘻嘻[嘻嘻] 三个表情，看见了吗，他可以用在即时通讯等需要表情匹配的地方", textColor: emojiLabel.textColor, textFont: emojiLabel.font, emojiTable: ["[玫瑰]","[色]","[嘻嘻]"])
         view.addSubview(emojiLabel)
         emojiLabel.snp.makeConstraints { (make) in
             make.top.equalTo(label.snp.bottom).offset(20)

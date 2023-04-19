@@ -69,6 +69,8 @@
 		DC26165627FE9C2D00C485C1 /* 动图2.gif in Resources */ = {isa = PBXBuildFile; fileRef = DC26165427FE9C2D00C485C1 /* 动图2.gif */; };
 		DC3E0CE92727979D003CB61E /* WYTestRequestController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC3E0CE82727979D003CB61E /* WYTestRequestController.swift */; };
 		DC4D24BD271D55A1005FFE21 /* WYStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4D24BC271D55A1005FFE21 /* WYStorage.swift */; };
+		DC4F86D829E8004600D6DCA9 /* WYEmojiViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4F86D729E8004600D6DCA9 /* WYEmojiViewCell.swift */; };
+		DC4F86DA29E8006500D6DCA9 /* WYEmojiHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4F86D929E8006500D6DCA9 /* WYEmojiHeaderView.swift */; };
 		DC5BC14627745FC300B0D741 /* WYTestInterfaceOrientationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5BC14527745FC300B0D741 /* WYTestInterfaceOrientationController.swift */; };
 		DC71E7ED2807C59500F070B0 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC71E7EC2807C59500F070B0 /* Timer.swift */; };
 		DC71E7EF2807EDED00F070B0 /* WYFlowLayoutAlignmentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC71E7EE2807EDED00F070B0 /* WYFlowLayoutAlignmentController.swift */; };
@@ -281,6 +283,8 @@
 		DC26165427FE9C2D00C485C1 /* 动图2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "动图2.gif"; sourceTree = "<group>"; };
 		DC3E0CE82727979D003CB61E /* WYTestRequestController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYTestRequestController.swift; sourceTree = "<group>"; };
 		DC4D24BC271D55A1005FFE21 /* WYStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYStorage.swift; sourceTree = "<group>"; };
+		DC4F86D729E8004600D6DCA9 /* WYEmojiViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYEmojiViewCell.swift; sourceTree = "<group>"; };
+		DC4F86D929E8006500D6DCA9 /* WYEmojiHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYEmojiHeaderView.swift; sourceTree = "<group>"; };
 		DC5BC14527745FC300B0D741 /* WYTestInterfaceOrientationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYTestInterfaceOrientationController.swift; sourceTree = "<group>"; };
 		DC6A316428A34D6400B0C0A6 /* Pods_WYBasisKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_WYBasisKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC71E7EC2807C59500F070B0 /* Timer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
@@ -1067,6 +1071,8 @@
 				DCF45C8C29D5746800E7136C /* WYChatInputView.swift */,
 				DCF1D25629DAD3C20047E2F1 /* WYChatEmojiView.swift */,
 				DCF1D25829DAD3E70047E2F1 /* WYChatMoreView.swift */,
+				DC4F86D729E8004600D6DCA9 /* WYEmojiViewCell.swift */,
+				DC4F86D929E8006500D6DCA9 /* WYEmojiHeaderView.swift */,
 			);
 			path = ChatView;
 			sourceTree = "<group>";
@@ -1334,6 +1340,7 @@
 				1F4A0E49256B4A52002E932D /* WYNetworkConfig.swift in Sources */,
 				AA771BDE2568F834002C748B /* UILabel.swift in Sources */,
 				AAC6B3952691706E00D90D15 /* WYTestTableViewFooterView.swift in Sources */,
+				DC4F86D829E8004600D6DCA9 /* WYEmojiViewCell.swift in Sources */,
 				AA771BD02568F834002C748B /* NSAttributedString.swift in Sources */,
 				1F5C3E5325787EC500E0DBFF /* WYCenterController.swift in Sources */,
 				1F5C3E5025787EB400E0DBFF /* WYLeftController.swift in Sources */,
@@ -1372,6 +1379,7 @@
 				AAC6B3932691705D00D90D15 /* WYTestTableViewHeaderView.swift in Sources */,
 				DC71E7ED2807C59500F070B0 /* Timer.swift in Sources */,
 				DCF45C8829D56DC700E7136C /* WYChatView.swift in Sources */,
+				DC4F86DA29E8006500D6DCA9 /* WYEmojiHeaderView.swift in Sources */,
 				AAB7BDE726257F3600BD57EC /* WYBannerView.swift in Sources */,
 				1F99DCC8257DCFAE003D2408 /* WYPagingView.swift in Sources */,
 				DCF45C8F29D5767600E7136C /* WYTestChatController.swift in Sources */,

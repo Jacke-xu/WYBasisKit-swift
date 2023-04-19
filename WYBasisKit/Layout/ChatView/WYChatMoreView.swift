@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WYChatMoreView: UIView {
+public class WYChatMoreView: UIView {
 
     /*
     // Only override draw() if you perform custom drawing.
@@ -18,4 +18,9 @@ class WYChatMoreView: UIView {
     }
     */
 
+}
+
+public struct WYMoreViewConfig {
+    
+    public init() {}
 }

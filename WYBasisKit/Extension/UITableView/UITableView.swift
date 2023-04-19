@@ -102,7 +102,6 @@ public extension UITableView {
         switch style {
         case .cell:
             guard let cellClass = NSClassFromString(registerClass) as? UITableViewCell.Type else {
-                wy_print("注册 \(className) 失败")
                 return
             }
             register(cellClass.self, forCellReuseIdentifier: className)
@@ -110,7 +109,6 @@ public extension UITableView {
 
         case .headerFooterView:
             guard let headerFooterViewClass = NSClassFromString(registerClass) as? UITableViewHeaderFooterView.Type else {
-                wy_print("注册 \(className) 失败")
                 return
             }
             register(headerFooterViewClass.self, forHeaderFooterViewReuseIdentifier: className)

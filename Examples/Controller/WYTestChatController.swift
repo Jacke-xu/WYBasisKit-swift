@@ -16,6 +16,15 @@ class WYTestChatController: UIViewController {
         // Do any additional setup after loading the view.
         view.backgroundColor = .white
         
+        let resourcePath = (((Bundle(for: WYTestChatController.self).path(forResource: "Emoji", ofType: "plist")) ?? (Bundle.main.path(forResource: "Emoji", ofType: "plist"))) ?? "")
+        
+        inputBarConfig.textButtomImage = UIImage(named: "text")!
+        inputBarConfig.voiceButtonImage = UIImage(named: "voice")!
+        inputBarConfig.emojiButtomImage = UIImage(named: "xiaolian")!
+        inputBarConfig.moreButtomImage = UIImage(named: "jia")!
+        
+        emojiViewConfig.emojiSource = try! NSArray(contentsOf: URL(string: "file://".appending(resourcePath))!, error: ()) as! [String]
+        
         let chatView = WYChatView()
         view.addSubview(chatView)
         chatView.snp.makeConstraints { make in

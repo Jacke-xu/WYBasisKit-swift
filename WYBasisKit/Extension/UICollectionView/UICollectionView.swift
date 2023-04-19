@@ -50,9 +50,10 @@ public extension UICollectionView {
      *  创建一个UICollectionView
      *  @param frame: collectionView的frame, 如果是约束布局，请直接使用默认值：.zero
      *  @param scrollDirection: 滚动方向
-     *  @param sectionInset: 分区 上、左、下、右 的间距(该设置仅适用于一个分区的情况，多个分区请调用相关代理进行针对性设置)
-     *  @param minimumLineSpacing: item 上下间距
-     *  @param minimumInteritemSpacing: item 左右间距
+     *  @param sectionInset: 分区 上、左、下、右 的间距(该设置仅适用于一个分区或者每个分区sectionInset都相同的情况，多个分区请调用相关代理进行针对性设置)
+     *  @param minimumLineSpacing: item 上下行间距
+     *  @param minimumInteritemSpacing: item 左右列间距
+     *  @param itemSize: item 大小(该设置仅适用于一个分区或者每个分区itemSize都相同的情况，多个分区请调用相关代理进行针对性设置)
      *  @param delegate: delegate
      *  @param dataSource: dataSource
      *  @param backgroundColor: 背景色
@@ -63,6 +64,7 @@ public extension UICollectionView {
                          sectionInset: UIEdgeInsets = .zero,
                          minimumLineSpacing: CGFloat = 0,
                          minimumInteritemSpacing: CGFloat = 0,
+                         itemSize: CGSize? = nil,
                          delegate: UICollectionViewDelegate,
                          dataSource: UICollectionViewDataSource,
                          backgroundColor: UIColor = .white,
@@ -73,6 +75,9 @@ public extension UICollectionView {
         flowLayout.sectionInset = sectionInset
         flowLayout.minimumLineSpacing = minimumLineSpacing
         flowLayout.minimumInteritemSpacing = minimumInteritemSpacing
+        if let itemSize = itemSize {
+            flowLayout.itemSize = itemSize
+        }
         
         let collectionview = UICollectionView(frame: frame, collectionViewLayout: flowLayout)
         collectionview.delegate = delegate
@@ -102,7 +107,6 @@ public extension UICollectionView {
         switch style {
         case .cell:
             guard let cellClass = NSClassFromString(registerClass) as? UICollectionViewCell.Type else {
-                wy_print("注册 \(className) 失败")
                 return
             }
             register(cellClass.self, forCellWithReuseIdentifier: className)
@@ -110,7 +114,6 @@ public extension UICollectionView {
             
         case .headerView:
             guard let headerViewClass = NSClassFromString(registerClass) as? UICollectionReusableView.Type else {
-                wy_print("注册 \(className) 失败")
                 return
             }
             register(headerViewClass.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: className)
@@ -118,7 +121,6 @@ public extension UICollectionView {
             
         case .footerView:
             guard let footerViewClass = NSClassFromString(registerClass) as? UICollectionReusableView.Type else {
-                wy_print("注册 \(className) 失败")
                 return
             }
             register(footerViewClass.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: className)

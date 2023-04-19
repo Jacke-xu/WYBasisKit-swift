@@ -139,6 +139,94 @@ public extension NSMutableAttributedString {
         
         return self
     }
+    
+    /**
+     *  根据传入的表情字符串生成富文本，例如字符串 "哈哈[哈哈]" 会生成 "哈哈😄"
+     *  @param emojiString   待转换的表情字符串
+     *  @param textColor     富文本的字体颜色
+     *  @param textFont      富文本的字体
+     *  @param emojiTable    表情解析对照表，如 ["哈哈](哈哈表情对应的图片名)", [嘿嘿(嘿嘿表情对应的图片名)]]
+     *  @param bundle        从哪个bundle文件内查找图片资源，如果为空，则直接在本地路径下查找
+     *  @param pattern       正则匹配规则, 默认匹配1到3位, 如 [哈] [哈哈] [哈哈哈] 这种
+     */
+    class func wy_convertEmojiAttributed(emojiString: String, textColor: UIColor, textFont: UIFont, emojiTable: [String], sourceBundle: WYSourceBundle? = nil, pattern: String = "\\[.{1,3}\\]") -> NSMutableAttributedString {
+        
+        // 字体、颜色
+        let textAttributes = [NSAttributedString.Key.font: textFont, NSAttributedString.Key.foregroundColor: textColor]
+        
+        // 获取字体的行高，作为表情的高度
+        let attachmentHeight = textFont.lineHeight
+        
+        // 通过 emojiString 获得 NSMutableAttributedString
+        let attributedString = NSMutableAttributedString(string: emojiString, attributes: textAttributes)
+        
+        var regex: NSRegularExpression?
+        do {
+            regex = try NSRegularExpression(pattern: pattern, options: .caseInsensitive)
+        } catch let error {
+            wy_print(error.localizedDescription)
+        }
+        
+        // 获取到匹配正则的数据
+        if let matches = regex?.matches(in: emojiString, options: .withoutAnchoringBounds, range: NSMakeRange(0, attributedString.string.utf16.count)) {
+            if matches.count > 0 {
+                // 遍历符合的数据进行解析
+                for i in 0..<matches.count {
+                    let result = matches[matches.count-i-1]
+                    let range = result.range
+                    let emojiStr = (emojiString as NSString).substring(with: range)
+                    // 符合的数据是否为表情
+                    if emojiTable.contains(emojiStr) {
+                        
+                        // 获取表情对应的图片名
+                        let image: UIImage = UIImage.wy_find(emojiStr, inBundle: sourceBundle)
+                        
+                        // 创建一个NSTextAttachment
+                        let attachment = WYTextAttachment()
+                        attachment.image  = image
+                        attachment.imageName = emojiStr
+                        
+                        let attachmentWidth = attachmentHeight * (image.size.width / image.size.height)
+                        
+                        attachment.bounds = CGRect(x: 0, y: (textFont.capHeight - textFont.lineHeight)/2, width: attachmentWidth, height: attachmentHeight)
+                        
+                        // 通过NSTextAttachment生成一个NSAttributedString
+                        let replace = NSAttributedString(attachment: attachment)
+                        
+                        // 替换表情字符串
+                        attributedString.replaceCharacters(in: range, with: replace)
+                    }
+                }
+            }
+        }
+        return attributedString
+    }
+    
+    /**
+     *  将表情富文本生成对应的富文本字符串，例如表情富文本 "哈哈😄" 会生成 "哈哈[哈哈]"
+     *  @param textColor     富文本的字体颜色
+     *  @param textFont      富文本的字体
+     */
+    func wy_convertEmojiAttributedString(textColor: UIColor, textFont: UIFont) -> NSMutableAttributedString {
+        
+        let attributed: NSAttributedString = self
+        
+        let mutableString: NSMutableString = NSMutableString(string: attributed.string)
+        attributed.enumerateAttribute(NSAttributedString.Key.attachment, in: NSMakeRange(0, attributed.string.utf16.count), options: NSAttributedString.EnumerationOptions.reverse) { value, range, stop in
+            
+            if value is WYTextAttachment {
+                // 拿到文本附件
+                let attachment: WYTextAttachment = value as! WYTextAttachment
+                let string: String = String(format: "%@", attachment.imageName)
+                // 替换成图片表情的标识
+                mutableString.replaceCharacters(in: range, with: string)
+            }
+        }
+        
+        // 字体、颜色
+        let textAttributes = [NSAttributedString.Key.font: textFont, NSAttributedString.Key.foregroundColor: textColor]
+        return NSMutableAttributedString(string: mutableString.copy() as! String, attributes: textAttributes)
+    }
 }
 
 extension NSAttributedString {
@@ -230,4 +318,8 @@ extension NSAttributedString {
     func wy_numberOfRows(controlWidth: CGFloat) -> NSInteger {
         return wy_stringPerLine(controlWidth: controlWidth).count
     }
+}
+
+public class WYTextAttachment: NSTextAttachment {
+    public var imageName: String = ""
 }
