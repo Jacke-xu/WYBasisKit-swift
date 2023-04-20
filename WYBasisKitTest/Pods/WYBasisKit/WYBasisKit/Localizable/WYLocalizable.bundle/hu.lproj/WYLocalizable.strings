@@ -1,0 +1,103 @@
+/*
+  WYLocalizable.strings
+  WYBasisKit
+
+  Created by 官人 on 2020/11/21.
+  Copyright © 2020 官人. All rights reserved.
+*/
+
+"WYLocalizable_01" = "megvan";
+
+"WYLocalizable_02" = "jelszó";
+
+"WYLocalizable_03" = "törlés";
+
+"WYLocalizable_04" = "törlés";
+
+"WYLocalizable_05" = "Biometria nem áll rendelkezésre";
+
+"WYLocalizable_06" = "A biometrikus felismerés zárolása, a képernyő zárolása és a készülék sikeres feloldása után újra megnyitható.";
+
+"WYLocalizable_07" = "A rendszer megszakította ezt az felismerést";
+
+"WYLocalizable_08" = "Kérjük, állítsa be a feloldási jelszót a biometrikus felismerés engedélyezése előtt";
+
+"WYLocalizable_09" = "Kérjük, engedélyezze/állítsa be a biometrikus funkciót a készülék beállításaiban";
+
+"WYLocalizable_10" = "Kérjük, adjon meg egy jelszót a biometrikus adatok ellenőrzéséhez";
+
+"WYLocalizable_11" = "Még nincs üzenet.";
+
+"WYLocalizable_12" = "Engedélyezés visszavonása";
+
+"WYLocalizable_13" = "Az alkalmazás nem rendelkezik engedéllyel az albumhoz való hozzáféréshez.";
+
+"WYLocalizable_14" = "Az alkalmazás nem fér hozzá a kamerához.";
+
+"WYLocalizable_15" = "Az alkalmazásnak nincs hozzáférése a mikrofonhoz.";
+
+"WYLocalizable_16" = "Az alkalmazás nem rendelkezik engedéllyel a helyhez való hozzáféréshez.";
+
+"WYLocalizable_17" = "Az alkalmazás nem rendelkezik engedéllyel a címjegyzékhez való hozzáféréshez.";
+
+"WYLocalizable_18" = "Csatlakozás folytatása";
+
+"WYLocalizable_19" = "Kapcsolat törlése";
+
+"WYLocalizable_20" = "Adatkérés sikertelen";
+
+"WYLocalizable_21" = "Kóros állapotkód";
+
+"WYLocalizable_22" = "Ismeretlen hálózat, biztonsági kockázatok lehetnek.";
+
+"WYLocalizable_23" = "Beállítás";
+
+"WYLocalizable_24" = "Nem biztonságos hálózati kapcsolat megszűnt";
+
+"WYLocalizable_25" = "Nincs hálózati kapcsolat, kérjük ellenőrizze a hálózati beállításokat";
+
+"WYLocalizable_26" = "Wi-Fi-t használ az internethez való csatlakozáshoz";
+
+"WYLocalizable_27" = "Mobilhálózatot használ a hálózathoz";
+
+"WYLocalizable_28" = "Nem elérhető hálózat, kérjük, ellenőrizze, hogy a hálózati környezet vagy a hálózati kapcsolat engedélyei helyesen vannak-e beállítva";
+
+"WYLocalizable_29" = "Válaszadatok A kód ellenőrzése nem sikerült";
+
+"WYLocalizable_30" = "csak";
+
+"WYLocalizable_31" = "%@Minutes ago";
+
+"WYLocalizable_32" = "%@Hours ago";
+
+"WYLocalizable_33" = "%@Days ago";
+
+"WYLocalizable_34" = "%@Month ago";
+
+"WYLocalizable_35" = "%@Years ago";
+
+"WYLocalizable_36" = "Nincs telefonkártya";
+
+"WYLocalizable_37" = "Capricornus";
+
+"WYLocalizable_38" = "aquarius";
+
+"WYLocalizable_39" = "Halak";
+
+"WYLocalizable_40" = "Kos";
+
+"WYLocalizable_41" = "Taurus";
+
+"WYLocalizable_42" = "Ikrek";
+
+"WYLocalizable_43" = "Rák";
+
+"WYLocalizable_44" = "leo";
+
+"WYLocalizable_45" = "Szűz";
+
+"WYLocalizable_46" = "libra";
+
+"WYLocalizable_47" = "skorpió";
+
+"WYLocalizable_48" = "Nyilas";

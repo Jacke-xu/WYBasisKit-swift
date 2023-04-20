@@ -1,0 +1,103 @@
+/*
+  WYLocalizable.strings
+  WYBasisKit
+
+  Created by 官人 on 2020/11/21.
+  Copyright © 2020 官人. All rights reserved.
+*/
+
+"WYLocalizable_01" = "Sain sen";
+
+"WYLocalizable_02" = "salasana";
+
+"WYLocalizable_03" = "peruuta";
+
+"WYLocalizable_04" = "Poista";
+
+"WYLocalizable_05" = "Biometriikkaa ei ole saatavilla";
+
+"WYLocalizable_06" = "Biometrinen tunnistus on lukittu, lukitse näyttö ja lukitse laitteen lukitus onnistuneesti. Tämän sivun avaamisen jälkeen se voidaan avata uudelleen.";
+
+"WYLocalizable_07" = "Järjestelmä keskeytti tämän tunnustamisen";
+
+"WYLocalizable_08" = "Aseta lukituksen salasana ennen biometrisen tunnistuksen käyttöönottoa";
+
+"WYLocalizable_09" = "Ota käyttöön/aseta biometrinen toiminto laitteen asetuksissa";
+
+"WYLocalizable_10" = "Anna salasana biometristen tietojen tarkistamiseksi";
+
+"WYLocalizable_11" = "Ei viestiä vielä";
+
+"WYLocalizable_12" = "Luvan poistaminen";
+
+"WYLocalizable_13" = "Sovelluksella ei ole oikeutta käyttää albumia. Hyväksytkö nyt?";
+
+"WYLocalizable_14" = "Sovelluksella ei ole pääsyä kameraan.";
+
+"WYLocalizable_15" = "Sovelluksella ei ole pääsyä mikrofoniin. Hyväksytkö nyt?";
+
+"WYLocalizable_16" = "Sovelluksella ei ole oikeutta käyttää sijaintia. Hyväksytkö nyt?";
+
+"WYLocalizable_17" = "Sovelluksella ei ole oikeutta käyttää osoitekirjaa. Hyväksytkö nyt?";
+
+"WYLocalizable_18" = "Jatka yhdistämistä";
+
+"WYLocalizable_19" = "Peruuta yhteys";
+
+"WYLocalizable_20" = "Tietopyyntö epäonnistui";
+
+"WYLocalizable_21" = "Epänormaalin tilan koodi";
+
+"WYLocalizable_22" = "Tuntematon verkko voi aiheuttaa turvallisuusriskejä.";
+
+"WYLocalizable_23" = "Asetettava";
+
+"WYLocalizable_24" = "Epäturvallinen verkkoyhteys peruttu";
+
+"WYLocalizable_25" = "Ei verkkoyhteyttä, tarkista verkkoasetukset";
+
+"WYLocalizable_26" = "Käytät WiFi:tä muodostaaksesi yhteyden internetiin";
+
+"WYLocalizable_27" = "Käytät matkapuhelinverkkoa verkottumiseen";
+
+"WYLocalizable_28" = "Verkko ei ole käytettävissä, varmista, että verkkoympäristösi tai verkkoyhteyden käyttöoikeudet on määritetty oikein";
+
+"WYLocalizable_29" = "Vastaustiedot Koodin tarkistus epäonnistui";
+
+"WYLocalizable_30" = "vain";
+
+"WYLocalizable_31" = "%@Minutes ago";
+
+"WYLocalizable_32" = "%@Hours ago";
+
+"WYLocalizable_33" = "%@Days ago";
+
+"WYLocalizable_34" = "%@Month ago";
+
+"WYLocalizable_35" = "%@Years ago";
+
+"WYLocalizable_36" = "Ei puhelinkorttia";
+
+"WYLocalizable_37" = "Kauris";
+
+"WYLocalizable_38" = "aquarius";
+
+"WYLocalizable_39" = "Kalat";
+
+"WYLocalizable_40" = "Oinas";
+
+"WYLocalizable_41" = "Härkä";
+
+"WYLocalizable_42" = "Kaksoset";
+
+"WYLocalizable_43" = "Syöpä";
+
+"WYLocalizable_44" = "leo";
+
+"WYLocalizable_45" = "Neitsyt";
+
+"WYLocalizable_46" = "libra";
+
+"WYLocalizable_47" = "skorpioni";
+
+"WYLocalizable_48" = "Jousimies";

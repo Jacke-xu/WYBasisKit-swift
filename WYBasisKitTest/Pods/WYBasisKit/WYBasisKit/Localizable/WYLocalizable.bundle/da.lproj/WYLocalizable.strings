@@ -1,0 +1,103 @@
+/* 
+  WYLocalizable.strings
+  WYBasisKit
+
+  Created by 官人 on 2020/11/21.
+  Copyright © 2020 官人. All rights reserved.
+*/
+
+"WYLocalizable_01" = "fik det";
+
+"WYLocalizable_02" = "adgangskode";
+
+"WYLocalizable_03" = "annullér";
+
+"WYLocalizable_04" = "slet";
+
+"WYLocalizable_05" = "Biometri ikke tilgængelig";
+
+"WYLocalizable_06" = "Biometrisk genkendelse er blevet låst, låser skærmen og låser enheden op igen.";
+
+"WYLocalizable_07" = "Systemet afbrød denne anerkendelse";
+
+"WYLocalizable_08" = "Indstil adgangskoden til låsning, før biometrisk genkendelse aktiveres";
+
+"WYLocalizable_09" = "Aktivér/indstil biometrisk funktion i enhedsindstillinger";
+
+"WYLocalizable_10" = "Indtast venligst en adgangskode for at bekræfte biometri";
+
+"WYLocalizable_11" = "Ingen besked endnu";
+
+"WYLocalizable_12" = "Afskaffelse af godkendelse";
+
+"WYLocalizable_13" = "Appen har ikke tilladelse til at få adgang til albummet. Godkend nu?";
+
+"WYLocalizable_14" = "Appen har ikke adgang til kameraet.";
+
+"WYLocalizable_15" = "Appen har ikke adgang til mikrofonen.";
+
+"WYLocalizable_16" = "Appen har ikke tilladelse til at få adgang til placeringen.";
+
+"WYLocalizable_17" = "Appen har ikke tilladelse til at få adgang til adressebogen.";
+
+"WYLocalizable_18" = "Fortsæt forbindelsen";
+
+"WYLocalizable_19" = "Annullér forbindelse";
+
+"WYLocalizable_20" = "Dataanmodning mislykkedes";
+
+"WYLocalizable_21" = "Unormal statuskode";
+
+"WYLocalizable_22" = "Ukendt netværk, der kan være sikkerhedsrisici.";
+
+"WYLocalizable_23" = "For at indstille";
+
+"WYLocalizable_24" = "Usikker netværksforbindelse annulleret";
+
+"WYLocalizable_25" = "Ingen netværksforbindelse, tjek venligst dine netværksindstillinger";
+
+"WYLocalizable_26" = "Du bruger WiFi til at oprette forbindelse til internettet";
+
+"WYLocalizable_27" = "Du bruger et mobilnetværk til netværk";
+
+"WYLocalizable_28" = "Ikke tilgængeligt netværk, bekræft venligst, at dit netværksmiljø eller netværksforbindelsestilladelser er indstillet korrekt";
+
+"WYLocalizable_29" = "Responsdata Kodekoverifikation mislykkedes";
+
+"WYLocalizable_30" = "bare";
+
+"WYLocalizable_31" = "%@Minutes ago";
+
+"WYLocalizable_32" = "%@Hours ago";
+
+"WYLocalizable_33" = "%@Days ago";
+
+"WYLocalizable_34" = "%@Month ago";
+
+"WYLocalizable_35" = "%@Years ago";
+
+"WYLocalizable_36" = "Intet telefonkort";
+
+"WYLocalizable_37" = "Stenbuk";
+
+"WYLocalizable_38" = "aquarius";
+
+"WYLocalizable_39" = "Fiske";
+
+"WYLocalizable_40" = "Vædderen";
+
+"WYLocalizable_41" = "Taurus";
+
+"WYLocalizable_42" = "Gemini";
+
+"WYLocalizable_43" = "Kræft";
+
+"WYLocalizable_44" = "leo";
+
+"WYLocalizable_45" = "Jomfru";
+
+"WYLocalizable_46" = "libra";
+
+"WYLocalizable_47" = "skorpio";
+
+"WYLocalizable_48" = "Skytten";

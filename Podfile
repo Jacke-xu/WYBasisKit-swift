@@ -9,8 +9,6 @@ target 'WYBasisKit' do
   pod 'HandyJSON'
   pod 'Kingfisher'
   pod 'Moya'
-  pod 'ReachabilitySwift'
-  pod 'IQKeyboardManagerSwift'
 end
 
 post_install do |installer|

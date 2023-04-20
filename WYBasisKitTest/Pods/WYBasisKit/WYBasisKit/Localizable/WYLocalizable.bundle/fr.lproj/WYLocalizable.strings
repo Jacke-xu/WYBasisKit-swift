@@ -1,0 +1,103 @@
+/*
+  WYLocalizable.strings
+  WYBasisKit
+
+  Created by 官人 on 2020/11/21.
+  Copyright © 2020 官人. All rights reserved.
+*/
+
+"WYLocalizable_01" = "Savoir.";
+
+"WYLocalizable_02" = "Mot de passe";
+
+"WYLocalizable_03" = "Annulation";
+
+"WYLocalizable_04" = "Supprimer";
+
+"WYLocalizable_05" = "Biométrie non disponible";
+
+"WYLocalizable_06" = "La biométrie a été verrouillée, Verrouillez l'écran et Rouvrez cette page après avoir déverrouillé l'appareil avec succès";
+
+"WYLocalizable_07" = "Le système a interrompu cette identification";
+
+"WYLocalizable_08" = "Définissez un mot de passe de déverrouillage avant d'activer la biométrie";
+
+"WYLocalizable_09" = "Veuillez Activer / définir la fonction biométrique dans les paramètres de l'appareil";
+
+"WYLocalizable_10" = "Veuillez entrer un mot de passe vérification biométrique";
+
+"WYLocalizable_11" = "Pas de message pour le moment";
+
+"WYLocalizable_12" = "Aller autoriser";
+
+"WYLocalizable_13" = "L'APP n'a pas accès à l'album, allez - vous l'autoriser maintenant?";
+
+"WYLocalizable_14" = "L'APP n'a pas accès à la caméra, allez - vous autoriser maintenant?";
+
+"WYLocalizable_15" = "L'APP n'a pas accès au Microphone, allez - vous autoriser maintenant?";
+
+"WYLocalizable_16" = "L'APP n'a pas accès à l'emplacement, allez - vous autoriser maintenant?";
+
+"WYLocalizable_17" = "L'APP n'a pas accès aux contacts, allez - vous autoriser maintenant?";
+
+"WYLocalizable_18" = "Continuer la connexion";
+
+"WYLocalizable_19" = "Annuler la connexion";
+
+"WYLocalizable_20" = "La demande de données a échoué";
+
+"WYLocalizable_21" = "Anomalie du Code d'état";
+
+"WYLocalizable_22" = "Réseau inconnu, risque de sécurité possible, continue - t - il?";
+
+"WYLocalizable_23" = "Aller à la configuration";
+
+"WYLocalizable_24" = "Connexion réseau non sécurisée annulée";
+
+"WYLocalizable_25" = "Pas de connexion réseau, vérifiez vos paramètres réseau";
+
+"WYLocalizable_26" = "Vous utilisez le réseau WiFi";
+
+"WYLocalizable_27" = "Vous utilisez le réseau mobile cellulaire";
+
+"WYLocalizable_28" = "Réseau indisponible, vérifiez que votre environnement réseau ou vos autorisations de connexion réseau sont correctement configurés";
+
+"WYLocalizable_29" = "Échec du contrôle de code de données de réponse";
+
+"WYLocalizable_30" = "Juste après";
+
+"WYLocalizable_31" = "%@il y a quelques minutes";
+
+"WYLocalizable_32" = "%@il y a quelques heures";
+
+"WYLocalizable_33" = "%@il y a quelques jours";
+
+"WYLocalizable_34" = "%@il y a un mois";
+
+"WYLocalizable_35" = "%@il y a des années";
+
+"WYLocalizable_36" = "Pas de carte de téléphone portable";
+
+"WYLocalizable_37" = "Capricorne";
+
+"WYLocalizable_38" = "Siège de la bouteille d'eau";
+
+"WYLocalizable_39" = "Poissons";
+
+"WYLocalizable_40" = "Bélier";
+
+"WYLocalizable_41" = "Taureau";
+
+"WYLocalizable_42" = "Gémeaux";
+
+"WYLocalizable_43" = "Cancer";
+
+"WYLocalizable_44" = "Lion";
+
+"WYLocalizable_45" = "Vierge";
+
+"WYLocalizable_46" = "Balance";
+
+"WYLocalizable_47" = "Scorpion";
+
+"WYLocalizable_48" = "Sagittaire";

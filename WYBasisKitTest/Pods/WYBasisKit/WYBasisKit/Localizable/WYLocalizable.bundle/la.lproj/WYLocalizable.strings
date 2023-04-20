@@ -1,0 +1,103 @@
+/*
+  WYLocalizable.strings
+  WYBasisKit
+
+  Created by 官人 on 2020/11/21.
+  Copyright © 2020 官人. All rights reserved.
+*/
+
+"WYLocalizable_01" = "got it";
+
+"WYLocalizable_02" = "contrasignum";
+
+"WYLocalizable_03" = "annulla";
+
+"WYLocalizable_04" = "dele";
+
+"WYLocalizable_05" = "Biometrics non disponibile";
+
+"WYLocalizable_06" = "Recognitio biometrica clausus est, clausus est schermum et dispositivum successfully discoluere. Post rediaperire hunc paginam, potest rediaperire";
+
+"WYLocalizable_07" = "Sistema hoc cognoscentiam interrupta";
+
+"WYLocalizable_08" = "Configura contrasignum desbloquere, quaeso, antequam cognosceret biometricum";
+
+"WYLocalizable_09" = "Abilite/constitue functionem biometricam in optimis dispositivi";
+
+"WYLocalizable_10" = "Enter a password to verify biometrics";
+
+"WYLocalizable_11" = "Nullum nuntium";
+
+"WYLocalizable_12" = "Authorization";
+
+"WYLocalizable_13" = "Applicatio non habet permissionem ad albamum accessere. Authorise nunc?";
+
+"WYLocalizable_14" = "Aplicatio aplicationis non habet accessum ad instrumentum photographicum. Authorise nunc?";
+
+"WYLocalizable_15" = "Applicatio non habet accessum ad microphonum. Authorise nunc?";
+
+"WYLocalizable_16" = "Applicatio non habet permissionem ad locum accessere. Authorisare nunc?";
+
+"WYLocalizable_17" = "Aplicatio aplicationis non habet permissionem accedere ad librum adressa. Authorise nunc?";
+
+"WYLocalizable_18" = "Continue connecting";
+
+"WYLocalizable_19" = "Cancella connexionem";
+
+"WYLocalizable_20" = "Data request failed";
+
+"WYLocalizable_21" = "Codice status abnormale";
+
+"WYLocalizable_22" = "Unknown network, may be security risks. Would you like to continue?";
+
+"WYLocalizable_23" = "CategoryName";
+
+"WYLocalizable_24" = "Connexio retis non secura annullata";
+
+"WYLocalizable_25" = "Nullum connexium rete, obsecro configurationes rete vestras";
+
+"WYLocalizable_26" = "WiFi utilis ad internet connect are";
+
+"WYLocalizable_27" = "Retem mobilem cellulam ad netopus utilizatis";
+
+"WYLocalizable_28" = "Unavailable network, please confirm that your network environment or network connection permissions have been set correctly";
+
+"WYLocalizable_29" = "Verificatio datorum respondentiae";
+
+"WYLocalizable_30" = "simpliciter";
+
+"WYLocalizable_31" = "%@Minutos abhinc";
+
+"WYLocalizable_32" = "%@horas abhinc";
+
+"WYLocalizable_33" = "%@dies abhinc";
+
+"WYLocalizable_34" = "%@mense abhinc";
+
+"WYLocalizable_35" = "%@annos abhinc";
+
+"WYLocalizable_36" = "Non est carta telephonica";
+
+"WYLocalizable_37" = "Capricornus";
+
+"WYLocalizable_38" = "aquarius";
+
+"WYLocalizable_39" = "Pisces";
+
+"WYLocalizable_40" = "Aries";
+
+"WYLocalizable_41" = "Taurus";
+
+"WYLocalizable_42" = "Gemini";
+
+"WYLocalizable_43" = "Cancer";
+
+"WYLocalizable_44" = "paper size";
+
+"WYLocalizable_45" = "Virgo";
+
+"WYLocalizable_46" = "libra";
+
+"WYLocalizable_47" = "paper size";
+
+"WYLocalizable_48" = "Sagittarius";

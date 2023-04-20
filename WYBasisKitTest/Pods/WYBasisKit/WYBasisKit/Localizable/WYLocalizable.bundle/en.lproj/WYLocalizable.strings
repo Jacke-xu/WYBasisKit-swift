@@ -1,0 +1,103 @@
+/* 
+  WYLocalizable.strings
+  WYBasisKit
+
+  Created by 官人 on 2020/11/21.
+  Copyright © 2020 官人. All rights reserved.
+*/
+
+"WYLocalizable_01" = "Knew";
+
+"WYLocalizable_02" = "Password";
+
+"WYLocalizable_03" = "Cancel";
+
+"WYLocalizable_04" = "Delete";
+
+"WYLocalizable_05" = "Biometrics is not available";
+
+"WYLocalizable_06" = "The biometrics has been locked. After the screen is locked and the device is successfully unlocked, reopen this page to reopen it";
+
+"WYLocalizable_07" = "The system interrupted this recognition";
+
+"WYLocalizable_08" = "Please set an unlock password before turning on biometrics";
+
+"YLocalizable_09" = "Please turn on/set up the biometric function in the device settings";
+
+"WYLocalizable_10" = "Please enter your password to verify biometrics";
+
+"WYLocalizable_11" = "Not has message";
+
+"WYLocalizable_12" = "To authorize";
+
+"WYLocalizable_13" = "The app does not have permission to access the album, now go to authorize?";
+
+"WYLocalizable_14" = "The app does not have permission to access the camera. Do you want to authorize it now?";
+
+"WYLocalizable_15" = "App does not have permission to access the microphone, go to authorize now?";
+
+"WYLocalizable_16" = "App does not have permission to access location, go to authorize now?";
+
+"WYLocalizable_17" = "App does not have permission to access the address book, now go to authorize?";
+
+"WYLocalizable_18" = "Continue";
+
+"WYLocalizable_19" = "Cancel";
+
+"WYLocalizable_20" = "Data request failed";
+
+"WYLocalizable_21" = "Abnormal status code";
+
+"WYLocalizable_22" = "Unknown network may have security risks. Do you want to continue?";
+
+"WYLocalizable_23" = "Go to set";
+
+"WYLocalizable_24" = "Insecure network connection has been cancelled";
+
+"WYLocalizable_25" = "No network connection, please check your network settings";
+
+"WYLocalizable_26" = "You are using Wifi to connect to the Internet";
+
+"WYLocalizable_27" = "You are using a cellular mobile network to connect to the Internet";
+
+"WYLocalizable_28" = "Unavailable network, please confirm that your network environment or network connection permissions have been correctly set";
+
+"WYLocalizable_29" = "Response data code verification failed";
+
+"WYLocalizable_30" = "Just now";
+
+"WYLocalizable_31" = "%@minutes ago";
+
+"WYLocalizable_32" = "%@hours ago";
+
+"WYLocalizable_33" = "%@days ago";
+
+"WYLocalizable_34" = "%@months ago";
+
+"WYLocalizable_35" = "%@years ago";
+
+"WYLocalizable_36" = "No SIM card";
+
+"WYLocalizable_37" = "Capricornus";
+
+"WYLocalizable_38" = "Aquarius";
+
+"WYLocalizable_39" = "Pisces";
+
+"WYLocalizable_40" = "Aries";
+
+"WYLocalizable_41" = "Taurus";
+
+"WYLocalizable_42" = "Gemini";
+
+"WYLocalizable_43" = "Cancer";
+
+"WYLocalizable_44" = "Leo";
+
+"WYLocalizable_45" = "Virgo";
+
+"WYLocalizable_46" = "Libra";
+
+"WYLocalizable_47" = "Scorpio";
+
+"WYLocalizable_48" = "Sagittarius";

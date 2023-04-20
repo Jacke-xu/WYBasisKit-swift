@@ -1,0 +1,103 @@
+/*
+  WYLocalizable.strings
+  WYBasisKit
+
+  Created by 官人 on 2020/11/21.
+  Copyright © 2020 官人. All rights reserved.
+*/
+
+"WYLocalizable_01" = "Hab's";
+
+"WYLocalizable_02" = "Passwort";
+
+"WYLocalizable_03" = "Abbrechen";
+
+"WYLocalizable_04" = "löschen";
+
+"WYLocalizable_05" = "Biometrie nicht verfügbar";
+
+"WYLocalizable_06" = "Die biometrische Erkennung wurde gesperrt, der Bildschirm gesperrt und das Gerät erfolgreich entsperrt.";
+
+"WYLocalizable_07" = "Das System unterbrach diese Erkennung";
+
+"WYLocalizable_08" = "Bitte legen Sie das Entsperrpasswort fest, bevor Sie die biometrische Erkennung aktivieren";
+
+"WYLocalizable_09" = "Bitte aktivieren/einstellen Sie biometrische Funktion in den Geräteeinstellungen";
+
+"WYLocalizable_10" = "Bitte geben Sie ein Passwort ein, um die Biometrie zu überprüfen";
+
+"WYLocalizable_11" = "Noch keine Nachricht";
+
+"WYLocalizable_12" = "Deautorisierung";
+
+"WYLocalizable_13" = "Die App hat keine Berechtigung, auf das Album zuzugreifen. Jetzt autorisieren?";
+
+"WYLocalizable_14" = "Die App hat keinen Zugriff auf die Kamera. Jetzt autorisieren?";
+
+"WYLocalizable_15" = "Die App hat keinen Zugriff auf das Mikrofon. Jetzt autorisieren?";
+
+"WYLocalizable_16" = "Die App hat keine Berechtigung, auf den Standort zuzugreifen. Jetzt autorisieren?";
+
+"WYLocalizable_17" = "Die App hat keine Berechtigung zum Zugriff auf das Adressbuch. Jetzt autorisieren?";
+
+"WYLocalizable_18" = "Verbindung fortsetzen";
+
+"WYLocalizable_19" = "Verbindung abbrechen";
+
+"WYLocalizable_20" = "Datenanfrage fehlgeschlagen";
+
+"WYLocalizable_21" = "Anormaler Statuscode";
+
+"WYLocalizable_22" = "Unbekanntes Netzwerk, es kann Sicherheitsrisiken geben. Möchten Sie fortfahren?";
+
+"WYLocalizable_23" = "Zu setzen";
+
+"WYLocalizable_24" = "Unsichere Netzwerkverbindung abgebrochen";
+
+"WYLocalizable_25" = "Keine Netzwerkverbindung, bitte überprüfen Sie Ihre Netzwerkeinstellungen";
+
+"WYLocalizable_26" = "Sie verwenden WLAN, um sich mit dem Internet zu verbinden";
+
+"WYLocalizable_27" = "Sie verwenden ein Mobilfunknetz für die Vernetzung";
+
+"WYLocalizable_28" = "Nicht verfügbares Netzwerk, bestätigen Sie bitte, dass Ihre Netzwerkumgebung oder Netzwerkverbindungsberechtigungen korrekt eingestellt wurden";
+
+"WYLocalizable_29" = "Antwortdaten Codeüberprüfung fehlgeschlagen";
+
+"WYLocalizable_30" = "nur";
+
+"WYLocalizable_31" = "%@Minutes ago";
+
+"WYLocalizable_32" = "%@Hours ago";
+
+"WYLocalizable_33" = "%@Tage ago";
+
+"WYLocalizable_34" = "%@Month ago";
+
+"WYLocalizable_35" = "%@Years ago";
+
+"WYLocalizable_36" = "Keine Telefonkarte";
+
+"WYLocalizable_37" = "Steinbock";
+
+"WYLocalizable_38" = "Aquarius";
+
+"WYLocalizable_39" = "Fische";
+
+"WYLocalizable_40" = "Widder";
+
+"WYLocalizable_41" = "Stier";
+
+"WYLocalizable_42" = "Zwillinge";
+
+"WYLocalizable_43" = "Krebs";
+
+"WYLocalizable_44" = "leo";
+
+"WYLocalizable_45" = "Jungfrau";
+
+"WYLocalizable_46" = "Libra";
+
+"WYLocalizable_47" = "Skorpion";
+
+"WYLocalizable_48" = "Schütze";

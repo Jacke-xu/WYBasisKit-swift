@@ -1,0 +1,1275 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4A027019DE606531773A44D7 /* Pods_WYBasisKitTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3961A58ED9E18016F754F2FB /* Pods_WYBasisKitTest.framework */; };
+		DCFEBFE929EFDE2F001AE8E7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFEBFE829EFDE2F001AE8E7 /* AppDelegate.swift */; };
+		DCFEBFF029EFDE2F001AE8E7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DCFEBFEE29EFDE2F001AE8E7 /* Main.storyboard */; };
+		DCFEBFF229EFDE30001AE8E7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DCFEBFF129EFDE30001AE8E7 /* Assets.xcassets */; };
+		DCFEBFF529EFDE30001AE8E7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DCFEBFF329EFDE30001AE8E7 /* LaunchScreen.storyboard */; };
+		DCFEC00029EFDE30001AE8E7 /* WYBasisKitTestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFEBFFF29EFDE30001AE8E7 /* WYBasisKitTestTests.swift */; };
+		DCFEC00A29EFDE30001AE8E7 /* WYBasisKitTestUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFEC00929EFDE30001AE8E7 /* WYBasisKitTestUITests.swift */; };
+		DCFEC00C29EFDE30001AE8E7 /* WYBasisKitTestUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFEC00B29EFDE30001AE8E7 /* WYBasisKitTestUITestsLaunchTests.swift */; };
+		DCFEC01D29EFE496001AE8E7 /* WYTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFEC01C29EFE496001AE8E7 /* WYTabBarController.swift */; };
+		DCFEC08E29EFE52B001AE8E7 /* apng格式图片2.png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC01F29EFE52B001AE8E7 /* apng格式图片2.png */; };
+		DCFEC08F29EFE52B001AE8E7 /* 动图1.gif in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC02029EFE52B001AE8E7 /* 动图1.gif */; };
+		DCFEC09029EFE52B001AE8E7 /* 动图2.gif in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC02129EFE52B001AE8E7 /* 动图2.gif */; };
+		DCFEC09129EFE52B001AE8E7 /* 1650855755919.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC02229EFE52B001AE8E7 /* 1650855755919.mp4 */; };
+		DCFEC09229EFE52B001AE8E7 /* mpeg4_local.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC02329EFE52B001AE8E7 /* mpeg4_local.mp4 */; };
+		DCFEC09329EFE52B001AE8E7 /* Emoji.plist in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC02429EFE52B001AE8E7 /* Emoji.plist */; };
+		DCFEC09429EFE52B001AE8E7 /* [微笑].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC02629EFE52B001AE8E7 /* [微笑].png */; };
+		DCFEC09529EFE52B001AE8E7 /* [拜托].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC02729EFE52B001AE8E7 /* [拜托].png */; };
+		DCFEC09629EFE52B001AE8E7 /* [爱心].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC02829EFE52B001AE8E7 /* [爱心].png */; };
+		DCFEC09729EFE52B001AE8E7 /* [唇].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC02929EFE52B001AE8E7 /* [唇].png */; };
+		DCFEC09829EFE52B001AE8E7 /* [再见].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC02A29EFE52B001AE8E7 /* [再见].png */; };
+		DCFEC09929EFE52B001AE8E7 /* [笑哭].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC02B29EFE52B001AE8E7 /* [笑哭].png */; };
+		DCFEC09A29EFE52B001AE8E7 /* [生日].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC02C29EFE52B001AE8E7 /* [生日].png */; };
+		DCFEC09B29EFE52B001AE8E7 /* [露牙].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC02D29EFE52B001AE8E7 /* [露牙].png */; };
+		DCFEC09C29EFE52B001AE8E7 /* [灰狗].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC02E29EFE52B001AE8E7 /* [灰狗].png */; };
+		DCFEC09D29EFE52B001AE8E7 /* [吐血].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC02F29EFE52B001AE8E7 /* [吐血].png */; };
+		DCFEC09E29EFE52B001AE8E7 /* [18禁].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC03029EFE52B001AE8E7 /* [18禁].png */; };
+		DCFEC09F29EFE52B001AE8E7 /* [啤酒].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC03129EFE52B001AE8E7 /* [啤酒].png */; };
+		DCFEC0A029EFE52B001AE8E7 /* [拒绝].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC03229EFE52B001AE8E7 /* [拒绝].png */; };
+		DCFEC0A129EFE52B001AE8E7 /* [酷].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC03329EFE52B001AE8E7 /* [酷].png */; };
+		DCFEC0A229EFE52B001AE8E7 /* [睡].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC03429EFE52B001AE8E7 /* [睡].png */; };
+		DCFEC0A329EFE52B001AE8E7 /* [便便].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC03529EFE52B001AE8E7 /* [便便].png */; };
+		DCFEC0A429EFE52B001AE8E7 /* [耳机].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC03629EFE52B001AE8E7 /* [耳机].png */; };
+		DCFEC0A529EFE52B001AE8E7 /* [哈欠].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC03729EFE52B001AE8E7 /* [哈欠].png */; };
+		DCFEC0A629EFE52B001AE8E7 /* [菜刀].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC03829EFE52B001AE8E7 /* [菜刀].png */; };
+		DCFEC0A729EFE52B001AE8E7 /* [呲牙].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC03929EFE52B001AE8E7 /* [呲牙].png */; };
+		DCFEC0A829EFE52B001AE8E7 /* [伤心].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC03A29EFE52B001AE8E7 /* [伤心].png */; };
+		DCFEC0A929EFE52B001AE8E7 /* [鼓掌].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC03B29EFE52B001AE8E7 /* [鼓掌].png */; };
+		DCFEC0AA29EFE52B001AE8E7 /* [想哭].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC03C29EFE52B001AE8E7 /* [想哭].png */; };
+		DCFEC0AB29EFE52B001AE8E7 /* [疼].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC03D29EFE52B001AE8E7 /* [疼].png */; };
+		DCFEC0AC29EFE52B001AE8E7 /* [666].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC03E29EFE52B001AE8E7 /* [666].png */; };
+		DCFEC0AD29EFE52B001AE8E7 /* [大笑].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC03F29EFE52B001AE8E7 /* [大笑].png */; };
+		DCFEC0AE29EFE52B001AE8E7 /* [粉].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC04029EFE52B001AE8E7 /* [粉].png */; };
+		DCFEC0AF29EFE52B001AE8E7 /* [惊恐].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC04129EFE52B001AE8E7 /* [惊恐].png */; };
+		DCFEC0B029EFE52B001AE8E7 /* [关注].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC04229EFE52B001AE8E7 /* [关注].png */; };
+		DCFEC0B129EFE52B001AE8E7 /* [高兴].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC04329EFE52B001AE8E7 /* [高兴].png */; };
+		DCFEC0B229EFE52B001AE8E7 /* [大叫].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC04429EFE52B001AE8E7 /* [大叫].png */; };
+		DCFEC0B329EFE52B001AE8E7 /* [衰].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC04529EFE52B001AE8E7 /* [衰].png */; };
+		DCFEC0B429EFE52B001AE8E7 /* [蓝狗].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC04629EFE52B001AE8E7 /* [蓝狗].png */; };
+		DCFEC0B529EFE52B001AE8E7 /* [晕].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC04729EFE52B001AE8E7 /* [晕].png */; };
+		DCFEC0B629EFE52B001AE8E7 /* [脸黑].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC04829EFE52B001AE8E7 /* [脸黑].png */; };
+		DCFEC0B729EFE52B001AE8E7 /* [狗].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC04929EFE52B001AE8E7 /* [狗].png */; };
+		DCFEC0B829EFE52B001AE8E7 /* [大吐].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC04A29EFE52B001AE8E7 /* [大吐].png */; };
+		DCFEC0B929EFE52B001AE8E7 /* [调皮].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC04B29EFE52B001AE8E7 /* [调皮].png */; };
+		DCFEC0BA29EFE52B001AE8E7 /* [玫瑰].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC04C29EFE52B001AE8E7 /* [玫瑰].png */; };
+		DCFEC0BB29EFE52B001AE8E7 /* [威武].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC04D29EFE52B001AE8E7 /* [威武].png */; };
+		DCFEC0BC29EFE52B001AE8E7 /* [指点].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC04E29EFE52B001AE8E7 /* [指点].png */; };
+		DCFEC0BD29EFE52B001AE8E7 /* [胜利].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC04F29EFE52B001AE8E7 /* [胜利].png */; };
+		DCFEC0BE29EFE52C001AE8E7 /* [飞吻].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC05029EFE52B001AE8E7 /* [飞吻].png */; };
+		DCFEC0BF29EFE52C001AE8E7 /* [嘴].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC05129EFE52B001AE8E7 /* [嘴].png */; };
+		DCFEC0C029EFE52C001AE8E7 /* [纠结].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC05229EFE52B001AE8E7 /* [纠结].png */; };
+		DCFEC0C129EFE52C001AE8E7 /* [吓].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC05329EFE52B001AE8E7 /* [吓].png */; };
+		DCFEC0C229EFE52C001AE8E7 /* [害怕].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC05429EFE52B001AE8E7 /* [害怕].png */; };
+		DCFEC0C329EFE52C001AE8E7 /* [捂嘴].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC05529EFE52B001AE8E7 /* [捂嘴].png */; };
+		DCFEC0C429EFE52C001AE8E7 /* [无语].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC05629EFE52B001AE8E7 /* [无语].png */; };
+		DCFEC0C529EFE52C001AE8E7 /* [瞪眼].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC05729EFE52B001AE8E7 /* [瞪眼].png */; };
+		DCFEC0C629EFE52C001AE8E7 /* [困].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC05829EFE52B001AE8E7 /* [困].png */; };
+		DCFEC0C729EFE52C001AE8E7 /* [加油].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC05929EFE52B001AE8E7 /* [加油].png */; };
+		DCFEC0C829EFE52C001AE8E7 /* [吐].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC05A29EFE52B001AE8E7 /* [吐].png */; };
+		DCFEC0C929EFE52C001AE8E7 /* [卖萌].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC05B29EFE52B001AE8E7 /* [卖萌].png */; };
+		DCFEC0CA29EFE52C001AE8E7 /* [喜欢].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC05C29EFE52B001AE8E7 /* [喜欢].png */; };
+		DCFEC0CB29EFE52C001AE8E7 /* [发怒].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC05D29EFE52B001AE8E7 /* [发怒].png */; };
+		DCFEC0CC29EFE52C001AE8E7 /* [摸头].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC05E29EFE52B001AE8E7 /* [摸头].png */; };
+		DCFEC0CD29EFE52C001AE8E7 /* [嘘].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC05F29EFE52B001AE8E7 /* [嘘].png */; };
+		DCFEC0CE29EFE52C001AE8E7 /* [握手].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC06029EFE52B001AE8E7 /* [握手].png */; };
+		DCFEC0CF29EFE52C001AE8E7 /* [思考].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC06129EFE52B001AE8E7 /* [思考].png */; };
+		DCFEC0D029EFE52C001AE8E7 /* [搞定].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC06229EFE52B001AE8E7 /* [搞定].png */; };
+		DCFEC0D129EFE52C001AE8E7 /* [互粉].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC06329EFE52B001AE8E7 /* [互粉].png */; };
+		DCFEC0D229EFE52C001AE8E7 /* [哭].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC06429EFE52B001AE8E7 /* [哭].png */; };
+		DCFEC0D329EFE52C001AE8E7 /* [敲打].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC06529EFE52B001AE8E7 /* [敲打].png */; };
+		DCFEC0D429EFE52C001AE8E7 /* [见钱].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC06629EFE52B001AE8E7 /* [见钱].png */; };
+		DCFEC0D529EFE52C001AE8E7 /* [礼物].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC06729EFE52B001AE8E7 /* [礼物].png */; };
+		DCFEC0D629EFE52C001AE8E7 /* [汗].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC06829EFE52B001AE8E7 /* [汗].png */; };
+		DCFEC0D729EFE52C001AE8E7 /* [抱抱].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC06929EFE52B001AE8E7 /* [抱抱].png */; };
+		DCFEC0D829EFE52C001AE8E7 /* [得意].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC06A29EFE52B001AE8E7 /* [得意].png */; };
+		DCFEC0D929EFE52C001AE8E7 /* [擦汗].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC06B29EFE52B001AE8E7 /* [擦汗].png */; };
+		DCFEC0DA29EFE52C001AE8E7 /* [色].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC06C29EFE52B001AE8E7 /* [色].png */; };
+		DCFEC0DB29EFE52C001AE8E7 /* [害羞].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC06D29EFE52B001AE8E7 /* [害羞].png */; };
+		DCFEC0DC29EFE52C001AE8E7 /* [黄瓜].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC06E29EFE52B001AE8E7 /* [黄瓜].png */; };
+		DCFEC0DD29EFE52C001AE8E7 /* [差评].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC06F29EFE52B001AE8E7 /* [差评].png */; };
+		DCFEC0DE29EFE52C001AE8E7 /* [心碎].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC07029EFE52B001AE8E7 /* [心碎].png */; };
+		DCFEC0DF29EFE52C001AE8E7 /* [眼泪].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC07129EFE52B001AE8E7 /* [眼泪].png */; };
+		DCFEC0E029EFE52C001AE8E7 /* [赞].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC07229EFE52B001AE8E7 /* [赞].png */; };
+		DCFEC0E129EFE52C001AE8E7 /* [鬼脸].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC07329EFE52B001AE8E7 /* [鬼脸].png */; };
+		DCFEC0E229EFE52C001AE8E7 /* [抽烟].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC07429EFE52B001AE8E7 /* [抽烟].png */; };
+		DCFEC0E329EFE52C001AE8E7 /* [发呆].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC07529EFE52B001AE8E7 /* [发呆].png */; };
+		DCFEC0E429EFE52C001AE8E7 /* [尴尬].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC07629EFE52B001AE8E7 /* [尴尬].png */; };
+		DCFEC0E529EFE52C001AE8E7 /* [打脸].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC07729EFE52B001AE8E7 /* [打脸].png */; };
+		DCFEC0E629EFE52C001AE8E7 /* [开心].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC07829EFE52B001AE8E7 /* [开心].png */; };
+		DCFEC0E729EFE52C001AE8E7 /* [雷].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC07929EFE52B001AE8E7 /* [雷].png */; };
+		DCFEC0E829EFE52C001AE8E7 /* [脸红].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC07A29EFE52B001AE8E7 /* [脸红].png */; };
+		DCFEC0E929EFE52C001AE8E7 /* [吐舌].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC07B29EFE52B001AE8E7 /* [吐舌].png */; };
+		DCFEC0EA29EFE52C001AE8E7 /* [亲].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC07C29EFE52B001AE8E7 /* [亲].png */; };
+		DCFEC0EB29EFE52C001AE8E7 /* [拇指].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC07D29EFE52B001AE8E7 /* [拇指].png */; };
+		DCFEC0EC29EFE52C001AE8E7 /* [无奈].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC07E29EFE52B001AE8E7 /* [无奈].png */; };
+		DCFEC0ED29EFE52C001AE8E7 /* [吃瓜].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC07F29EFE52B001AE8E7 /* [吃瓜].png */; };
+		DCFEC0EE29EFE52C001AE8E7 /* [黄狗].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC08029EFE52B001AE8E7 /* [黄狗].png */; };
+		DCFEC0EF29EFE52C001AE8E7 /* [闭嘴].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC08129EFE52B001AE8E7 /* [闭嘴].png */; };
+		DCFEC0F029EFE52C001AE8E7 /* [喝彩].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC08229EFE52B001AE8E7 /* [喝彩].png */; };
+		DCFEC0F129EFE52C001AE8E7 /* [阴险].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC08329EFE52B001AE8E7 /* [阴险].png */; };
+		DCFEC0F229EFE52C001AE8E7 /* [给力].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC08429EFE52B001AE8E7 /* [给力].png */; };
+		DCFEC0F329EFE52C001AE8E7 /* [绿帽].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC08529EFE52B001AE8E7 /* [绿帽].png */; };
+		DCFEC0F429EFE52C001AE8E7 /* [斜眼].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC08629EFE52B001AE8E7 /* [斜眼].png */; };
+		DCFEC0F529EFE52C001AE8E7 /* [口罩].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC08729EFE52B001AE8E7 /* [口罩].png */; };
+		DCFEC0F629EFE52C001AE8E7 /* [疑问].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC08829EFE52B001AE8E7 /* [疑问].png */; };
+		DCFEC0F729EFE52C001AE8E7 /* [郁闷].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC08929EFE52B001AE8E7 /* [郁闷].png */; };
+		DCFEC0F829EFE52C001AE8E7 /* [生气].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC08A29EFE52B001AE8E7 /* [生气].png */; };
+		DCFEC0F929EFE52C001AE8E7 /* [抠鼻].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC08B29EFE52B001AE8E7 /* [抠鼻].png */; };
+		DCFEC0FA29EFE52C001AE8E7 /* [嘟].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC08C29EFE52B001AE8E7 /* [嘟].png */; };
+		DCFEC0FB29EFE52C001AE8E7 /* apng格式图片1.png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC08D29EFE52B001AE8E7 /* apng格式图片1.png */; };
+		DCFEC11929EFED62001AE8E7 /* WYTestTableViewHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFEC10029EFED62001AE8E7 /* WYTestTableViewHeaderView.swift */; };
+		DCFEC11A29EFED62001AE8E7 /* WYLeftControllerHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFEC10129EFED62001AE8E7 /* WYLeftControllerHeaderView.swift */; };
+		DCFEC11B29EFED62001AE8E7 /* WYTestTableViewFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFEC10229EFED62001AE8E7 /* WYTestTableViewFooterView.swift */; };
+		DCFEC11C29EFED62001AE8E7 /* WYTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFEC10329EFED62001AE8E7 /* WYTestView.swift */; };
+		DCFEC11D29EFED62001AE8E7 /* WYTestBannerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFEC10529EFED62001AE8E7 /* WYTestBannerController.swift */; };
+		DCFEC11E29EFED62001AE8E7 /* WYParseGifController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFEC10629EFED62001AE8E7 /* WYParseGifController.swift */; };
+		DCFEC11F29EFED62001AE8E7 /* WYTestChatController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFEC10729EFED62001AE8E7 /* WYTestChatController.swift */; };
+		DCFEC12029EFED62001AE8E7 /* WYTableViewPlainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFEC10829EFED62001AE8E7 /* WYTableViewPlainController.swift */; };
+		DCFEC12129EFED62001AE8E7 /* WYQRCodeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFEC10929EFED62001AE8E7 /* WYQRCodeController.swift */; };
+		DCFEC12229EFED62001AE8E7 /* WYTestRichTextController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFEC10A29EFED62001AE8E7 /* WYTestRichTextController.swift */; };
+		DCFEC12329EFED62001AE8E7 /* WYTestIpaController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFEC10B29EFED62001AE8E7 /* WYTestIpaController.swift */; };
+		DCFEC12429EFED62001AE8E7 /* WYTestVisualController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFEC10C29EFED62001AE8E7 /* WYTestVisualController.swift */; };
+		DCFEC12529EFED62001AE8E7 /* WYCenterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFEC10D29EFED62001AE8E7 /* WYCenterController.swift */; };
+		DCFEC12629EFED62001AE8E7 /* WYTestRequestController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFEC10E29EFED62001AE8E7 /* WYTestRequestController.swift */; };
+		DCFEC12729EFED62001AE8E7 /* WYTableViewGroupedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFEC10F29EFED62001AE8E7 /* WYTableViewGroupedController.swift */; };
+		DCFEC12829EFED62001AE8E7 /* WYTestAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFEC11029EFED62001AE8E7 /* WYTestAnimationController.swift */; };
+		DCFEC12929EFED62001AE8E7 /* WYTestLiveStreamingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFEC11129EFED62001AE8E7 /* WYTestLiveStreamingController.swift */; };
+		DCFEC12A29EFED62001AE8E7 /* WYLeftController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFEC11229EFED62001AE8E7 /* WYLeftController.swift */; };
+		DCFEC12B29EFED62001AE8E7 /* WYTestDownloadController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFEC11329EFED62001AE8E7 /* WYTestDownloadController.swift */; };
+		DCFEC12C29EFED62001AE8E7 /* WYMultilevelTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFEC11429EFED62001AE8E7 /* WYMultilevelTableViewController.swift */; };
+		DCFEC12D29EFED62001AE8E7 /* WYFlowLayoutAlignmentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFEC11529EFED62001AE8E7 /* WYFlowLayoutAlignmentController.swift */; };
+		DCFEC12E29EFED62001AE8E7 /* WYTestInterfaceOrientationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFEC11629EFED62001AE8E7 /* WYTestInterfaceOrientationController.swift */; };
+		DCFEC12F29EFED62001AE8E7 /* WYRightController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFEC11729EFED62001AE8E7 /* WYRightController.swift */; };
+		DCFEC13029EFED62001AE8E7 /* WYTestDarkNightModeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFEC11829EFED62001AE8E7 /* WYTestDarkNightModeController.swift */; };
+		DCFEC13329F0D05C001AE8E7 /* WYProtocolManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFEC13229F0D05C001AE8E7 /* WYProtocolManager.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		DCFEBFFC29EFDE30001AE8E7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DCFEBFDD29EFDE2F001AE8E7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DCFEBFE429EFDE2F001AE8E7;
+			remoteInfo = WYBasisKitTest;
+		};
+		DCFEC00629EFDE30001AE8E7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DCFEBFDD29EFDE2F001AE8E7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DCFEBFE429EFDE2F001AE8E7;
+			remoteInfo = WYBasisKitTest;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		3961A58ED9E18016F754F2FB /* Pods_WYBasisKitTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WYBasisKitTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3A628127A2EA1456F04DE740 /* Pods-WYBasisKitTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WYBasisKitTest.release.xcconfig"; path = "Target Support Files/Pods-WYBasisKitTest/Pods-WYBasisKitTest.release.xcconfig"; sourceTree = "<group>"; };
+		865E1EDDAF0233568A70050C /* Pods-WYBasisKitTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WYBasisKitTest.debug.xcconfig"; path = "Target Support Files/Pods-WYBasisKitTest/Pods-WYBasisKitTest.debug.xcconfig"; sourceTree = "<group>"; };
+		DCFEBFE529EFDE2F001AE8E7 /* WYBasisKitTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WYBasisKitTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DCFEBFE829EFDE2F001AE8E7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		DCFEBFEF29EFDE2F001AE8E7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		DCFEBFF129EFDE30001AE8E7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		DCFEBFF429EFDE30001AE8E7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		DCFEBFF629EFDE30001AE8E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DCFEBFFB29EFDE30001AE8E7 /* WYBasisKitTestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WYBasisKitTestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DCFEBFFF29EFDE30001AE8E7 /* WYBasisKitTestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYBasisKitTestTests.swift; sourceTree = "<group>"; };
+		DCFEC00529EFDE30001AE8E7 /* WYBasisKitTestUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WYBasisKitTestUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DCFEC00929EFDE30001AE8E7 /* WYBasisKitTestUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYBasisKitTestUITests.swift; sourceTree = "<group>"; };
+		DCFEC00B29EFDE30001AE8E7 /* WYBasisKitTestUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYBasisKitTestUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		DCFEC01829EFE448001AE8E7 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		DCFEC01929EFE449001AE8E7 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		DCFEC01A29EFE44D001AE8E7 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
+		DCFEC01B29EFE44D001AE8E7 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		DCFEC01C29EFE496001AE8E7 /* WYTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYTabBarController.swift; sourceTree = "<group>"; };
+		DCFEC01F29EFE52B001AE8E7 /* apng格式图片2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "apng格式图片2.png"; sourceTree = "<group>"; };
+		DCFEC02029EFE52B001AE8E7 /* 动图1.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "动图1.gif"; sourceTree = "<group>"; };
+		DCFEC02129EFE52B001AE8E7 /* 动图2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "动图2.gif"; sourceTree = "<group>"; };
+		DCFEC02229EFE52B001AE8E7 /* 1650855755919.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 1650855755919.mp4; sourceTree = "<group>"; };
+		DCFEC02329EFE52B001AE8E7 /* mpeg4_local.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = mpeg4_local.mp4; sourceTree = "<group>"; };
+		DCFEC02429EFE52B001AE8E7 /* Emoji.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Emoji.plist; sourceTree = "<group>"; };
+		DCFEC02629EFE52B001AE8E7 /* [微笑].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[微笑].png"; sourceTree = "<group>"; };
+		DCFEC02729EFE52B001AE8E7 /* [拜托].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[拜托].png"; sourceTree = "<group>"; };
+		DCFEC02829EFE52B001AE8E7 /* [爱心].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[爱心].png"; sourceTree = "<group>"; };
+		DCFEC02929EFE52B001AE8E7 /* [唇].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[唇].png"; sourceTree = "<group>"; };
+		DCFEC02A29EFE52B001AE8E7 /* [再见].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[再见].png"; sourceTree = "<group>"; };
+		DCFEC02B29EFE52B001AE8E7 /* [笑哭].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[笑哭].png"; sourceTree = "<group>"; };
+		DCFEC02C29EFE52B001AE8E7 /* [生日].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[生日].png"; sourceTree = "<group>"; };
+		DCFEC02D29EFE52B001AE8E7 /* [露牙].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[露牙].png"; sourceTree = "<group>"; };
+		DCFEC02E29EFE52B001AE8E7 /* [灰狗].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[灰狗].png"; sourceTree = "<group>"; };
+		DCFEC02F29EFE52B001AE8E7 /* [吐血].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[吐血].png"; sourceTree = "<group>"; };
+		DCFEC03029EFE52B001AE8E7 /* [18禁].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[18禁].png"; sourceTree = "<group>"; };
+		DCFEC03129EFE52B001AE8E7 /* [啤酒].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[啤酒].png"; sourceTree = "<group>"; };
+		DCFEC03229EFE52B001AE8E7 /* [拒绝].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[拒绝].png"; sourceTree = "<group>"; };
+		DCFEC03329EFE52B001AE8E7 /* [酷].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[酷].png"; sourceTree = "<group>"; };
+		DCFEC03429EFE52B001AE8E7 /* [睡].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[睡].png"; sourceTree = "<group>"; };
+		DCFEC03529EFE52B001AE8E7 /* [便便].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[便便].png"; sourceTree = "<group>"; };
+		DCFEC03629EFE52B001AE8E7 /* [耳机].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[耳机].png"; sourceTree = "<group>"; };
+		DCFEC03729EFE52B001AE8E7 /* [哈欠].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[哈欠].png"; sourceTree = "<group>"; };
+		DCFEC03829EFE52B001AE8E7 /* [菜刀].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[菜刀].png"; sourceTree = "<group>"; };
+		DCFEC03929EFE52B001AE8E7 /* [呲牙].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[呲牙].png"; sourceTree = "<group>"; };
+		DCFEC03A29EFE52B001AE8E7 /* [伤心].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[伤心].png"; sourceTree = "<group>"; };
+		DCFEC03B29EFE52B001AE8E7 /* [鼓掌].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[鼓掌].png"; sourceTree = "<group>"; };
+		DCFEC03C29EFE52B001AE8E7 /* [想哭].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[想哭].png"; sourceTree = "<group>"; };
+		DCFEC03D29EFE52B001AE8E7 /* [疼].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[疼].png"; sourceTree = "<group>"; };
+		DCFEC03E29EFE52B001AE8E7 /* [666].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[666].png"; sourceTree = "<group>"; };
+		DCFEC03F29EFE52B001AE8E7 /* [大笑].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[大笑].png"; sourceTree = "<group>"; };
+		DCFEC04029EFE52B001AE8E7 /* [粉].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[粉].png"; sourceTree = "<group>"; };
+		DCFEC04129EFE52B001AE8E7 /* [惊恐].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[惊恐].png"; sourceTree = "<group>"; };
+		DCFEC04229EFE52B001AE8E7 /* [关注].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[关注].png"; sourceTree = "<group>"; };
+		DCFEC04329EFE52B001AE8E7 /* [高兴].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[高兴].png"; sourceTree = "<group>"; };
+		DCFEC04429EFE52B001AE8E7 /* [大叫].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[大叫].png"; sourceTree = "<group>"; };
+		DCFEC04529EFE52B001AE8E7 /* [衰].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[衰].png"; sourceTree = "<group>"; };
+		DCFEC04629EFE52B001AE8E7 /* [蓝狗].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[蓝狗].png"; sourceTree = "<group>"; };
+		DCFEC04729EFE52B001AE8E7 /* [晕].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[晕].png"; sourceTree = "<group>"; };
+		DCFEC04829EFE52B001AE8E7 /* [脸黑].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[脸黑].png"; sourceTree = "<group>"; };
+		DCFEC04929EFE52B001AE8E7 /* [狗].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[狗].png"; sourceTree = "<group>"; };
+		DCFEC04A29EFE52B001AE8E7 /* [大吐].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[大吐].png"; sourceTree = "<group>"; };
+		DCFEC04B29EFE52B001AE8E7 /* [调皮].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[调皮].png"; sourceTree = "<group>"; };
+		DCFEC04C29EFE52B001AE8E7 /* [玫瑰].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[玫瑰].png"; sourceTree = "<group>"; };
+		DCFEC04D29EFE52B001AE8E7 /* [威武].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[威武].png"; sourceTree = "<group>"; };
+		DCFEC04E29EFE52B001AE8E7 /* [指点].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[指点].png"; sourceTree = "<group>"; };
+		DCFEC04F29EFE52B001AE8E7 /* [胜利].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[胜利].png"; sourceTree = "<group>"; };
+		DCFEC05029EFE52B001AE8E7 /* [飞吻].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[飞吻].png"; sourceTree = "<group>"; };
+		DCFEC05129EFE52B001AE8E7 /* [嘴].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[嘴].png"; sourceTree = "<group>"; };
+		DCFEC05229EFE52B001AE8E7 /* [纠结].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[纠结].png"; sourceTree = "<group>"; };
+		DCFEC05329EFE52B001AE8E7 /* [吓].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[吓].png"; sourceTree = "<group>"; };
+		DCFEC05429EFE52B001AE8E7 /* [害怕].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[害怕].png"; sourceTree = "<group>"; };
+		DCFEC05529EFE52B001AE8E7 /* [捂嘴].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[捂嘴].png"; sourceTree = "<group>"; };
+		DCFEC05629EFE52B001AE8E7 /* [无语].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[无语].png"; sourceTree = "<group>"; };
+		DCFEC05729EFE52B001AE8E7 /* [瞪眼].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[瞪眼].png"; sourceTree = "<group>"; };
+		DCFEC05829EFE52B001AE8E7 /* [困].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[困].png"; sourceTree = "<group>"; };
+		DCFEC05929EFE52B001AE8E7 /* [加油].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[加油].png"; sourceTree = "<group>"; };
+		DCFEC05A29EFE52B001AE8E7 /* [吐].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[吐].png"; sourceTree = "<group>"; };
+		DCFEC05B29EFE52B001AE8E7 /* [卖萌].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[卖萌].png"; sourceTree = "<group>"; };
+		DCFEC05C29EFE52B001AE8E7 /* [喜欢].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[喜欢].png"; sourceTree = "<group>"; };
+		DCFEC05D29EFE52B001AE8E7 /* [发怒].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[发怒].png"; sourceTree = "<group>"; };
+		DCFEC05E29EFE52B001AE8E7 /* [摸头].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[摸头].png"; sourceTree = "<group>"; };
+		DCFEC05F29EFE52B001AE8E7 /* [嘘].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[嘘].png"; sourceTree = "<group>"; };
+		DCFEC06029EFE52B001AE8E7 /* [握手].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[握手].png"; sourceTree = "<group>"; };
+		DCFEC06129EFE52B001AE8E7 /* [思考].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[思考].png"; sourceTree = "<group>"; };
+		DCFEC06229EFE52B001AE8E7 /* [搞定].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[搞定].png"; sourceTree = "<group>"; };
+		DCFEC06329EFE52B001AE8E7 /* [互粉].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[互粉].png"; sourceTree = "<group>"; };
+		DCFEC06429EFE52B001AE8E7 /* [哭].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[哭].png"; sourceTree = "<group>"; };
+		DCFEC06529EFE52B001AE8E7 /* [敲打].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[敲打].png"; sourceTree = "<group>"; };
+		DCFEC06629EFE52B001AE8E7 /* [见钱].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[见钱].png"; sourceTree = "<group>"; };
+		DCFEC06729EFE52B001AE8E7 /* [礼物].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[礼物].png"; sourceTree = "<group>"; };
+		DCFEC06829EFE52B001AE8E7 /* [汗].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[汗].png"; sourceTree = "<group>"; };
+		DCFEC06929EFE52B001AE8E7 /* [抱抱].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[抱抱].png"; sourceTree = "<group>"; };
+		DCFEC06A29EFE52B001AE8E7 /* [得意].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[得意].png"; sourceTree = "<group>"; };
+		DCFEC06B29EFE52B001AE8E7 /* [擦汗].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[擦汗].png"; sourceTree = "<group>"; };
+		DCFEC06C29EFE52B001AE8E7 /* [色].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[色].png"; sourceTree = "<group>"; };
+		DCFEC06D29EFE52B001AE8E7 /* [害羞].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[害羞].png"; sourceTree = "<group>"; };
+		DCFEC06E29EFE52B001AE8E7 /* [黄瓜].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[黄瓜].png"; sourceTree = "<group>"; };
+		DCFEC06F29EFE52B001AE8E7 /* [差评].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[差评].png"; sourceTree = "<group>"; };
+		DCFEC07029EFE52B001AE8E7 /* [心碎].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[心碎].png"; sourceTree = "<group>"; };
+		DCFEC07129EFE52B001AE8E7 /* [眼泪].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[眼泪].png"; sourceTree = "<group>"; };
+		DCFEC07229EFE52B001AE8E7 /* [赞].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[赞].png"; sourceTree = "<group>"; };
+		DCFEC07329EFE52B001AE8E7 /* [鬼脸].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[鬼脸].png"; sourceTree = "<group>"; };
+		DCFEC07429EFE52B001AE8E7 /* [抽烟].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[抽烟].png"; sourceTree = "<group>"; };
+		DCFEC07529EFE52B001AE8E7 /* [发呆].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[发呆].png"; sourceTree = "<group>"; };
+		DCFEC07629EFE52B001AE8E7 /* [尴尬].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[尴尬].png"; sourceTree = "<group>"; };
+		DCFEC07729EFE52B001AE8E7 /* [打脸].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[打脸].png"; sourceTree = "<group>"; };
+		DCFEC07829EFE52B001AE8E7 /* [开心].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[开心].png"; sourceTree = "<group>"; };
+		DCFEC07929EFE52B001AE8E7 /* [雷].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[雷].png"; sourceTree = "<group>"; };
+		DCFEC07A29EFE52B001AE8E7 /* [脸红].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[脸红].png"; sourceTree = "<group>"; };
+		DCFEC07B29EFE52B001AE8E7 /* [吐舌].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[吐舌].png"; sourceTree = "<group>"; };
+		DCFEC07C29EFE52B001AE8E7 /* [亲].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[亲].png"; sourceTree = "<group>"; };
+		DCFEC07D29EFE52B001AE8E7 /* [拇指].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[拇指].png"; sourceTree = "<group>"; };
+		DCFEC07E29EFE52B001AE8E7 /* [无奈].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[无奈].png"; sourceTree = "<group>"; };
+		DCFEC07F29EFE52B001AE8E7 /* [吃瓜].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[吃瓜].png"; sourceTree = "<group>"; };
+		DCFEC08029EFE52B001AE8E7 /* [黄狗].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[黄狗].png"; sourceTree = "<group>"; };
+		DCFEC08129EFE52B001AE8E7 /* [闭嘴].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[闭嘴].png"; sourceTree = "<group>"; };
+		DCFEC08229EFE52B001AE8E7 /* [喝彩].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[喝彩].png"; sourceTree = "<group>"; };
+		DCFEC08329EFE52B001AE8E7 /* [阴险].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[阴险].png"; sourceTree = "<group>"; };
+		DCFEC08429EFE52B001AE8E7 /* [给力].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[给力].png"; sourceTree = "<group>"; };
+		DCFEC08529EFE52B001AE8E7 /* [绿帽].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[绿帽].png"; sourceTree = "<group>"; };
+		DCFEC08629EFE52B001AE8E7 /* [斜眼].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[斜眼].png"; sourceTree = "<group>"; };
+		DCFEC08729EFE52B001AE8E7 /* [口罩].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[口罩].png"; sourceTree = "<group>"; };
+		DCFEC08829EFE52B001AE8E7 /* [疑问].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[疑问].png"; sourceTree = "<group>"; };
+		DCFEC08929EFE52B001AE8E7 /* [郁闷].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[郁闷].png"; sourceTree = "<group>"; };
+		DCFEC08A29EFE52B001AE8E7 /* [生气].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[生气].png"; sourceTree = "<group>"; };
+		DCFEC08B29EFE52B001AE8E7 /* [抠鼻].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[抠鼻].png"; sourceTree = "<group>"; };
+		DCFEC08C29EFE52B001AE8E7 /* [嘟].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "[嘟].png"; sourceTree = "<group>"; };
+		DCFEC08D29EFE52B001AE8E7 /* apng格式图片1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "apng格式图片1.png"; sourceTree = "<group>"; };
+		DCFEC10029EFED62001AE8E7 /* WYTestTableViewHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYTestTableViewHeaderView.swift; sourceTree = "<group>"; };
+		DCFEC10129EFED62001AE8E7 /* WYLeftControllerHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYLeftControllerHeaderView.swift; sourceTree = "<group>"; };
+		DCFEC10229EFED62001AE8E7 /* WYTestTableViewFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYTestTableViewFooterView.swift; sourceTree = "<group>"; };
+		DCFEC10329EFED62001AE8E7 /* WYTestView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYTestView.swift; sourceTree = "<group>"; };
+		DCFEC10529EFED62001AE8E7 /* WYTestBannerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYTestBannerController.swift; sourceTree = "<group>"; };
+		DCFEC10629EFED62001AE8E7 /* WYParseGifController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYParseGifController.swift; sourceTree = "<group>"; };
+		DCFEC10729EFED62001AE8E7 /* WYTestChatController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYTestChatController.swift; sourceTree = "<group>"; };
+		DCFEC10829EFED62001AE8E7 /* WYTableViewPlainController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYTableViewPlainController.swift; sourceTree = "<group>"; };
+		DCFEC10929EFED62001AE8E7 /* WYQRCodeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYQRCodeController.swift; sourceTree = "<group>"; };
+		DCFEC10A29EFED62001AE8E7 /* WYTestRichTextController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYTestRichTextController.swift; sourceTree = "<group>"; };
+		DCFEC10B29EFED62001AE8E7 /* WYTestIpaController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYTestIpaController.swift; sourceTree = "<group>"; };
+		DCFEC10C29EFED62001AE8E7 /* WYTestVisualController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYTestVisualController.swift; sourceTree = "<group>"; };
+		DCFEC10D29EFED62001AE8E7 /* WYCenterController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYCenterController.swift; sourceTree = "<group>"; };
+		DCFEC10E29EFED62001AE8E7 /* WYTestRequestController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYTestRequestController.swift; sourceTree = "<group>"; };
+		DCFEC10F29EFED62001AE8E7 /* WYTableViewGroupedController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYTableViewGroupedController.swift; sourceTree = "<group>"; };
+		DCFEC11029EFED62001AE8E7 /* WYTestAnimationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYTestAnimationController.swift; sourceTree = "<group>"; };
+		DCFEC11129EFED62001AE8E7 /* WYTestLiveStreamingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYTestLiveStreamingController.swift; sourceTree = "<group>"; };
+		DCFEC11229EFED62001AE8E7 /* WYLeftController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYLeftController.swift; sourceTree = "<group>"; };
+		DCFEC11329EFED62001AE8E7 /* WYTestDownloadController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYTestDownloadController.swift; sourceTree = "<group>"; };
+		DCFEC11429EFED62001AE8E7 /* WYMultilevelTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYMultilevelTableViewController.swift; sourceTree = "<group>"; };
+		DCFEC11529EFED62001AE8E7 /* WYFlowLayoutAlignmentController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYFlowLayoutAlignmentController.swift; sourceTree = "<group>"; };
+		DCFEC11629EFED62001AE8E7 /* WYTestInterfaceOrientationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYTestInterfaceOrientationController.swift; sourceTree = "<group>"; };
+		DCFEC11729EFED62001AE8E7 /* WYRightController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYRightController.swift; sourceTree = "<group>"; };
+		DCFEC11829EFED62001AE8E7 /* WYTestDarkNightModeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYTestDarkNightModeController.swift; sourceTree = "<group>"; };
+		DCFEC13229F0D05C001AE8E7 /* WYProtocolManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYProtocolManager.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DCFEBFE229EFDE2F001AE8E7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4A027019DE606531773A44D7 /* Pods_WYBasisKitTest.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DCFEBFF829EFDE30001AE8E7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DCFEC00229EFDE30001AE8E7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		28F3FAA1AF7DD7074EB3F250 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3961A58ED9E18016F754F2FB /* Pods_WYBasisKitTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6A2E34580CAEDDBB0D711CD1 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				865E1EDDAF0233568A70050C /* Pods-WYBasisKitTest.debug.xcconfig */,
+				3A628127A2EA1456F04DE740 /* Pods-WYBasisKitTest.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		DCFEBFDC29EFDE2F001AE8E7 = {
+			isa = PBXGroup;
+			children = (
+				DCFEBFE729EFDE2F001AE8E7 /* WYBasisKitTest */,
+				DCFEBFFE29EFDE30001AE8E7 /* WYBasisKitTestTests */,
+				DCFEC00829EFDE30001AE8E7 /* WYBasisKitTestUITests */,
+				DCFEBFE629EFDE2F001AE8E7 /* Products */,
+				6A2E34580CAEDDBB0D711CD1 /* Pods */,
+				28F3FAA1AF7DD7074EB3F250 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		DCFEBFE629EFDE2F001AE8E7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DCFEBFE529EFDE2F001AE8E7 /* WYBasisKitTest.app */,
+				DCFEBFFB29EFDE30001AE8E7 /* WYBasisKitTestTests.xctest */,
+				DCFEC00529EFDE30001AE8E7 /* WYBasisKitTestUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DCFEBFE729EFDE2F001AE8E7 /* WYBasisKitTest */ = {
+			isa = PBXGroup;
+			children = (
+				DCFEC13129F0D05C001AE8E7 /* ProtocolManager */,
+				DCFEC0FC29EFEAB8001AE8E7 /* Examples */,
+				DCFEC01E29EFE50F001AE8E7 /* Resource */,
+				DCFEBFE829EFDE2F001AE8E7 /* AppDelegate.swift */,
+				DCFEC01C29EFE496001AE8E7 /* WYTabBarController.swift */,
+				DCFEBFEE29EFDE2F001AE8E7 /* Main.storyboard */,
+				DCFEBFF129EFDE30001AE8E7 /* Assets.xcassets */,
+				DCFEBFF329EFDE30001AE8E7 /* LaunchScreen.storyboard */,
+				DCFEBFF629EFDE30001AE8E7 /* Info.plist */,
+			);
+			path = WYBasisKitTest;
+			sourceTree = "<group>";
+		};
+		DCFEBFFE29EFDE30001AE8E7 /* WYBasisKitTestTests */ = {
+			isa = PBXGroup;
+			children = (
+				DCFEBFFF29EFDE30001AE8E7 /* WYBasisKitTestTests.swift */,
+			);
+			path = WYBasisKitTestTests;
+			sourceTree = "<group>";
+		};
+		DCFEC00829EFDE30001AE8E7 /* WYBasisKitTestUITests */ = {
+			isa = PBXGroup;
+			children = (
+				DCFEC00929EFDE30001AE8E7 /* WYBasisKitTestUITests.swift */,
+				DCFEC00B29EFDE30001AE8E7 /* WYBasisKitTestUITestsLaunchTests.swift */,
+			);
+			path = WYBasisKitTestUITests;
+			sourceTree = "<group>";
+		};
+		DCFEC01E29EFE50F001AE8E7 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				DCFEC02229EFE52B001AE8E7 /* 1650855755919.mp4 */,
+				DCFEC02029EFE52B001AE8E7 /* 动图1.gif */,
+				DCFEC02129EFE52B001AE8E7 /* 动图2.gif */,
+				DCFEC08D29EFE52B001AE8E7 /* apng格式图片1.png */,
+				DCFEC01F29EFE52B001AE8E7 /* apng格式图片2.png */,
+				DCFEC02529EFE52B001AE8E7 /* Emoji */,
+				DCFEC02429EFE52B001AE8E7 /* Emoji.plist */,
+				DCFEC02329EFE52B001AE8E7 /* mpeg4_local.mp4 */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		DCFEC02529EFE52B001AE8E7 /* Emoji */ = {
+			isa = PBXGroup;
+			children = (
+				DCFEC02629EFE52B001AE8E7 /* [微笑].png */,
+				DCFEC02729EFE52B001AE8E7 /* [拜托].png */,
+				DCFEC02829EFE52B001AE8E7 /* [爱心].png */,
+				DCFEC02929EFE52B001AE8E7 /* [唇].png */,
+				DCFEC02A29EFE52B001AE8E7 /* [再见].png */,
+				DCFEC02B29EFE52B001AE8E7 /* [笑哭].png */,
+				DCFEC02C29EFE52B001AE8E7 /* [生日].png */,
+				DCFEC02D29EFE52B001AE8E7 /* [露牙].png */,
+				DCFEC02E29EFE52B001AE8E7 /* [灰狗].png */,
+				DCFEC02F29EFE52B001AE8E7 /* [吐血].png */,
+				DCFEC03029EFE52B001AE8E7 /* [18禁].png */,
+				DCFEC03129EFE52B001AE8E7 /* [啤酒].png */,
+				DCFEC03229EFE52B001AE8E7 /* [拒绝].png */,
+				DCFEC03329EFE52B001AE8E7 /* [酷].png */,
+				DCFEC03429EFE52B001AE8E7 /* [睡].png */,
+				DCFEC03529EFE52B001AE8E7 /* [便便].png */,
+				DCFEC03629EFE52B001AE8E7 /* [耳机].png */,
+				DCFEC03729EFE52B001AE8E7 /* [哈欠].png */,
+				DCFEC03829EFE52B001AE8E7 /* [菜刀].png */,
+				DCFEC03929EFE52B001AE8E7 /* [呲牙].png */,
+				DCFEC03A29EFE52B001AE8E7 /* [伤心].png */,
+				DCFEC03B29EFE52B001AE8E7 /* [鼓掌].png */,
+				DCFEC03C29EFE52B001AE8E7 /* [想哭].png */,
+				DCFEC03D29EFE52B001AE8E7 /* [疼].png */,
+				DCFEC03E29EFE52B001AE8E7 /* [666].png */,
+				DCFEC03F29EFE52B001AE8E7 /* [大笑].png */,
+				DCFEC04029EFE52B001AE8E7 /* [粉].png */,
+				DCFEC04129EFE52B001AE8E7 /* [惊恐].png */,
+				DCFEC04229EFE52B001AE8E7 /* [关注].png */,
+				DCFEC04329EFE52B001AE8E7 /* [高兴].png */,
+				DCFEC04429EFE52B001AE8E7 /* [大叫].png */,
+				DCFEC04529EFE52B001AE8E7 /* [衰].png */,
+				DCFEC04629EFE52B001AE8E7 /* [蓝狗].png */,
+				DCFEC04729EFE52B001AE8E7 /* [晕].png */,
+				DCFEC04829EFE52B001AE8E7 /* [脸黑].png */,
+				DCFEC04929EFE52B001AE8E7 /* [狗].png */,
+				DCFEC04A29EFE52B001AE8E7 /* [大吐].png */,
+				DCFEC04B29EFE52B001AE8E7 /* [调皮].png */,
+				DCFEC04C29EFE52B001AE8E7 /* [玫瑰].png */,
+				DCFEC04D29EFE52B001AE8E7 /* [威武].png */,
+				DCFEC04E29EFE52B001AE8E7 /* [指点].png */,
+				DCFEC04F29EFE52B001AE8E7 /* [胜利].png */,
+				DCFEC05029EFE52B001AE8E7 /* [飞吻].png */,
+				DCFEC05129EFE52B001AE8E7 /* [嘴].png */,
+				DCFEC05229EFE52B001AE8E7 /* [纠结].png */,
+				DCFEC05329EFE52B001AE8E7 /* [吓].png */,
+				DCFEC05429EFE52B001AE8E7 /* [害怕].png */,
+				DCFEC05529EFE52B001AE8E7 /* [捂嘴].png */,
+				DCFEC05629EFE52B001AE8E7 /* [无语].png */,
+				DCFEC05729EFE52B001AE8E7 /* [瞪眼].png */,
+				DCFEC05829EFE52B001AE8E7 /* [困].png */,
+				DCFEC05929EFE52B001AE8E7 /* [加油].png */,
+				DCFEC05A29EFE52B001AE8E7 /* [吐].png */,
+				DCFEC05B29EFE52B001AE8E7 /* [卖萌].png */,
+				DCFEC05C29EFE52B001AE8E7 /* [喜欢].png */,
+				DCFEC05D29EFE52B001AE8E7 /* [发怒].png */,
+				DCFEC05E29EFE52B001AE8E7 /* [摸头].png */,
+				DCFEC05F29EFE52B001AE8E7 /* [嘘].png */,
+				DCFEC06029EFE52B001AE8E7 /* [握手].png */,
+				DCFEC06129EFE52B001AE8E7 /* [思考].png */,
+				DCFEC06229EFE52B001AE8E7 /* [搞定].png */,
+				DCFEC06329EFE52B001AE8E7 /* [互粉].png */,
+				DCFEC06429EFE52B001AE8E7 /* [哭].png */,
+				DCFEC06529EFE52B001AE8E7 /* [敲打].png */,
+				DCFEC06629EFE52B001AE8E7 /* [见钱].png */,
+				DCFEC06729EFE52B001AE8E7 /* [礼物].png */,
+				DCFEC06829EFE52B001AE8E7 /* [汗].png */,
+				DCFEC06929EFE52B001AE8E7 /* [抱抱].png */,
+				DCFEC06A29EFE52B001AE8E7 /* [得意].png */,
+				DCFEC06B29EFE52B001AE8E7 /* [擦汗].png */,
+				DCFEC06C29EFE52B001AE8E7 /* [色].png */,
+				DCFEC06D29EFE52B001AE8E7 /* [害羞].png */,
+				DCFEC06E29EFE52B001AE8E7 /* [黄瓜].png */,
+				DCFEC06F29EFE52B001AE8E7 /* [差评].png */,
+				DCFEC07029EFE52B001AE8E7 /* [心碎].png */,
+				DCFEC07129EFE52B001AE8E7 /* [眼泪].png */,
+				DCFEC07229EFE52B001AE8E7 /* [赞].png */,
+				DCFEC07329EFE52B001AE8E7 /* [鬼脸].png */,
+				DCFEC07429EFE52B001AE8E7 /* [抽烟].png */,
+				DCFEC07529EFE52B001AE8E7 /* [发呆].png */,
+				DCFEC07629EFE52B001AE8E7 /* [尴尬].png */,
+				DCFEC07729EFE52B001AE8E7 /* [打脸].png */,
+				DCFEC07829EFE52B001AE8E7 /* [开心].png */,
+				DCFEC07929EFE52B001AE8E7 /* [雷].png */,
+				DCFEC07A29EFE52B001AE8E7 /* [脸红].png */,
+				DCFEC07B29EFE52B001AE8E7 /* [吐舌].png */,
+				DCFEC07C29EFE52B001AE8E7 /* [亲].png */,
+				DCFEC07D29EFE52B001AE8E7 /* [拇指].png */,
+				DCFEC07E29EFE52B001AE8E7 /* [无奈].png */,
+				DCFEC07F29EFE52B001AE8E7 /* [吃瓜].png */,
+				DCFEC08029EFE52B001AE8E7 /* [黄狗].png */,
+				DCFEC08129EFE52B001AE8E7 /* [闭嘴].png */,
+				DCFEC08229EFE52B001AE8E7 /* [喝彩].png */,
+				DCFEC08329EFE52B001AE8E7 /* [阴险].png */,
+				DCFEC08429EFE52B001AE8E7 /* [给力].png */,
+				DCFEC08529EFE52B001AE8E7 /* [绿帽].png */,
+				DCFEC08629EFE52B001AE8E7 /* [斜眼].png */,
+				DCFEC08729EFE52B001AE8E7 /* [口罩].png */,
+				DCFEC08829EFE52B001AE8E7 /* [疑问].png */,
+				DCFEC08929EFE52B001AE8E7 /* [郁闷].png */,
+				DCFEC08A29EFE52B001AE8E7 /* [生气].png */,
+				DCFEC08B29EFE52B001AE8E7 /* [抠鼻].png */,
+				DCFEC08C29EFE52B001AE8E7 /* [嘟].png */,
+			);
+			path = Emoji;
+			sourceTree = "<group>";
+		};
+		DCFEC0FC29EFEAB8001AE8E7 /* Examples */ = {
+			isa = PBXGroup;
+			children = (
+				DCFEC10429EFED62001AE8E7 /* Controller */,
+				DCFEC0FF29EFED62001AE8E7 /* View */,
+			);
+			path = Examples;
+			sourceTree = "<group>";
+		};
+		DCFEC0FF29EFED62001AE8E7 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DCFEC10029EFED62001AE8E7 /* WYTestTableViewHeaderView.swift */,
+				DCFEC10129EFED62001AE8E7 /* WYLeftControllerHeaderView.swift */,
+				DCFEC10229EFED62001AE8E7 /* WYTestTableViewFooterView.swift */,
+				DCFEC10329EFED62001AE8E7 /* WYTestView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		DCFEC10429EFED62001AE8E7 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				DCFEC11229EFED62001AE8E7 /* WYLeftController.swift */,
+				DCFEC10D29EFED62001AE8E7 /* WYCenterController.swift */,
+				DCFEC11729EFED62001AE8E7 /* WYRightController.swift */,
+				DCFEC10529EFED62001AE8E7 /* WYTestBannerController.swift */,
+				DCFEC10629EFED62001AE8E7 /* WYParseGifController.swift */,
+				DCFEC10729EFED62001AE8E7 /* WYTestChatController.swift */,
+				DCFEC10829EFED62001AE8E7 /* WYTableViewPlainController.swift */,
+				DCFEC10929EFED62001AE8E7 /* WYQRCodeController.swift */,
+				DCFEC10A29EFED62001AE8E7 /* WYTestRichTextController.swift */,
+				DCFEC10B29EFED62001AE8E7 /* WYTestIpaController.swift */,
+				DCFEC10C29EFED62001AE8E7 /* WYTestVisualController.swift */,
+				DCFEC10E29EFED62001AE8E7 /* WYTestRequestController.swift */,
+				DCFEC10F29EFED62001AE8E7 /* WYTableViewGroupedController.swift */,
+				DCFEC11029EFED62001AE8E7 /* WYTestAnimationController.swift */,
+				DCFEC11129EFED62001AE8E7 /* WYTestLiveStreamingController.swift */,
+				DCFEC11329EFED62001AE8E7 /* WYTestDownloadController.swift */,
+				DCFEC11429EFED62001AE8E7 /* WYMultilevelTableViewController.swift */,
+				DCFEC11529EFED62001AE8E7 /* WYFlowLayoutAlignmentController.swift */,
+				DCFEC11629EFED62001AE8E7 /* WYTestInterfaceOrientationController.swift */,
+				DCFEC11829EFED62001AE8E7 /* WYTestDarkNightModeController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		DCFEC13129F0D05C001AE8E7 /* ProtocolManager */ = {
+			isa = PBXGroup;
+			children = (
+				DCFEC13229F0D05C001AE8E7 /* WYProtocolManager.swift */,
+			);
+			path = ProtocolManager;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		DCFEBFE429EFDE2F001AE8E7 /* WYBasisKitTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DCFEC00F29EFDE30001AE8E7 /* Build configuration list for PBXNativeTarget "WYBasisKitTest" */;
+			buildPhases = (
+				FA4342521628B9CDEBA839DC /* [CP] Check Pods Manifest.lock */,
+				DCFEBFE129EFDE2F001AE8E7 /* Sources */,
+				DCFEBFE229EFDE2F001AE8E7 /* Frameworks */,
+				DCFEBFE329EFDE2F001AE8E7 /* Resources */,
+				832EB47AA80A8451563477BE /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WYBasisKitTest;
+			productName = WYBasisKitTest;
+			productReference = DCFEBFE529EFDE2F001AE8E7 /* WYBasisKitTest.app */;
+			productType = "com.apple.product-type.application";
+		};
+		DCFEBFFA29EFDE30001AE8E7 /* WYBasisKitTestTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DCFEC01229EFDE30001AE8E7 /* Build configuration list for PBXNativeTarget "WYBasisKitTestTests" */;
+			buildPhases = (
+				DCFEBFF729EFDE30001AE8E7 /* Sources */,
+				DCFEBFF829EFDE30001AE8E7 /* Frameworks */,
+				DCFEBFF929EFDE30001AE8E7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DCFEBFFD29EFDE30001AE8E7 /* PBXTargetDependency */,
+			);
+			name = WYBasisKitTestTests;
+			productName = WYBasisKitTestTests;
+			productReference = DCFEBFFB29EFDE30001AE8E7 /* WYBasisKitTestTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		DCFEC00429EFDE30001AE8E7 /* WYBasisKitTestUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DCFEC01529EFDE30001AE8E7 /* Build configuration list for PBXNativeTarget "WYBasisKitTestUITests" */;
+			buildPhases = (
+				DCFEC00129EFDE30001AE8E7 /* Sources */,
+				DCFEC00229EFDE30001AE8E7 /* Frameworks */,
+				DCFEC00329EFDE30001AE8E7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DCFEC00729EFDE30001AE8E7 /* PBXTargetDependency */,
+			);
+			name = WYBasisKitTestUITests;
+			productName = WYBasisKitTestUITests;
+			productReference = DCFEC00529EFDE30001AE8E7 /* WYBasisKitTestUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DCFEBFDD29EFDE2F001AE8E7 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1430;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					DCFEBFE429EFDE2F001AE8E7 = {
+						CreatedOnToolsVersion = 14.3;
+					};
+					DCFEBFFA29EFDE30001AE8E7 = {
+						CreatedOnToolsVersion = 14.3;
+						TestTargetID = DCFEBFE429EFDE2F001AE8E7;
+					};
+					DCFEC00429EFDE30001AE8E7 = {
+						CreatedOnToolsVersion = 14.3;
+						TestTargetID = DCFEBFE429EFDE2F001AE8E7;
+					};
+				};
+			};
+			buildConfigurationList = DCFEBFE029EFDE2F001AE8E7 /* Build configuration list for PBXProject "WYBasisKitTest" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+				"zh-Hans",
+				"zh-Hant",
+			);
+			mainGroup = DCFEBFDC29EFDE2F001AE8E7;
+			productRefGroup = DCFEBFE629EFDE2F001AE8E7 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DCFEBFE429EFDE2F001AE8E7 /* WYBasisKitTest */,
+				DCFEBFFA29EFDE30001AE8E7 /* WYBasisKitTestTests */,
+				DCFEC00429EFDE30001AE8E7 /* WYBasisKitTestUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		DCFEBFE329EFDE2F001AE8E7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DCFEC0E029EFE52C001AE8E7 /* [赞].png in Resources */,
+				DCFEC0DF29EFE52C001AE8E7 /* [眼泪].png in Resources */,
+				DCFEC0B529EFE52B001AE8E7 /* [晕].png in Resources */,
+				DCFEC0EB29EFE52C001AE8E7 /* [拇指].png in Resources */,
+				DCFEC0D429EFE52C001AE8E7 /* [见钱].png in Resources */,
+				DCFEC09429EFE52B001AE8E7 /* [微笑].png in Resources */,
+				DCFEC09329EFE52B001AE8E7 /* Emoji.plist in Resources */,
+				DCFEC09E29EFE52B001AE8E7 /* [18禁].png in Resources */,
+				DCFEC0C029EFE52C001AE8E7 /* [纠结].png in Resources */,
+				DCFEC0A229EFE52B001AE8E7 /* [睡].png in Resources */,
+				DCFEC0A529EFE52B001AE8E7 /* [哈欠].png in Resources */,
+				DCFEC0B329EFE52B001AE8E7 /* [衰].png in Resources */,
+				DCFEC0B229EFE52B001AE8E7 /* [大叫].png in Resources */,
+				DCFEC08E29EFE52B001AE8E7 /* apng格式图片2.png in Resources */,
+				DCFEC09729EFE52B001AE8E7 /* [唇].png in Resources */,
+				DCFEC0F229EFE52C001AE8E7 /* [给力].png in Resources */,
+				DCFEC0E329EFE52C001AE8E7 /* [发呆].png in Resources */,
+				DCFEC0D929EFE52C001AE8E7 /* [擦汗].png in Resources */,
+				DCFEC0A429EFE52B001AE8E7 /* [耳机].png in Resources */,
+				DCFEC09C29EFE52B001AE8E7 /* [灰狗].png in Resources */,
+				DCFEC0C129EFE52C001AE8E7 /* [吓].png in Resources */,
+				DCFEC0A129EFE52B001AE8E7 /* [酷].png in Resources */,
+				DCFEC0BF29EFE52C001AE8E7 /* [嘴].png in Resources */,
+				DCFEC0A829EFE52B001AE8E7 /* [伤心].png in Resources */,
+				DCFEBFF529EFDE30001AE8E7 /* LaunchScreen.storyboard in Resources */,
+				DCFEC0BC29EFE52B001AE8E7 /* [指点].png in Resources */,
+				DCFEC0BE29EFE52C001AE8E7 /* [飞吻].png in Resources */,
+				DCFEC0F129EFE52C001AE8E7 /* [阴险].png in Resources */,
+				DCFEC0CB29EFE52C001AE8E7 /* [发怒].png in Resources */,
+				DCFEC0AB29EFE52B001AE8E7 /* [疼].png in Resources */,
+				DCFEC0EF29EFE52C001AE8E7 /* [闭嘴].png in Resources */,
+				DCFEC09829EFE52B001AE8E7 /* [再见].png in Resources */,
+				DCFEC0B029EFE52B001AE8E7 /* [关注].png in Resources */,
+				DCFEC0B129EFE52B001AE8E7 /* [高兴].png in Resources */,
+				DCFEC0D029EFE52C001AE8E7 /* [搞定].png in Resources */,
+				DCFEC0E129EFE52C001AE8E7 /* [鬼脸].png in Resources */,
+				DCFEC0C729EFE52C001AE8E7 /* [加油].png in Resources */,
+				DCFEC0EE29EFE52C001AE8E7 /* [黄狗].png in Resources */,
+				DCFEC0A329EFE52B001AE8E7 /* [便便].png in Resources */,
+				DCFEC0A929EFE52B001AE8E7 /* [鼓掌].png in Resources */,
+				DCFEC0F829EFE52C001AE8E7 /* [生气].png in Resources */,
+				DCFEC0DC29EFE52C001AE8E7 /* [黄瓜].png in Resources */,
+				DCFEC0EA29EFE52C001AE8E7 /* [亲].png in Resources */,
+				DCFEC0DB29EFE52C001AE8E7 /* [害羞].png in Resources */,
+				DCFEC0B729EFE52B001AE8E7 /* [狗].png in Resources */,
+				DCFEC09529EFE52B001AE8E7 /* [拜托].png in Resources */,
+				DCFEC0F029EFE52C001AE8E7 /* [喝彩].png in Resources */,
+				DCFEC09A29EFE52B001AE8E7 /* [生日].png in Resources */,
+				DCFEC0A629EFE52B001AE8E7 /* [菜刀].png in Resources */,
+				DCFEC0FA29EFE52C001AE8E7 /* [嘟].png in Resources */,
+				DCFEC0B629EFE52B001AE8E7 /* [脸黑].png in Resources */,
+				DCFEC0E729EFE52C001AE8E7 /* [雷].png in Resources */,
+				DCFEC0DA29EFE52C001AE8E7 /* [色].png in Resources */,
+				DCFEC0A029EFE52B001AE8E7 /* [拒绝].png in Resources */,
+				DCFEC0AD29EFE52B001AE8E7 /* [大笑].png in Resources */,
+				DCFEC0CE29EFE52C001AE8E7 /* [握手].png in Resources */,
+				DCFEC0EC29EFE52C001AE8E7 /* [无奈].png in Resources */,
+				DCFEC0F529EFE52C001AE8E7 /* [口罩].png in Resources */,
+				DCFEC0E629EFE52C001AE8E7 /* [开心].png in Resources */,
+				DCFEC0AA29EFE52B001AE8E7 /* [想哭].png in Resources */,
+				DCFEC0F629EFE52C001AE8E7 /* [疑问].png in Resources */,
+				DCFEC0A729EFE52B001AE8E7 /* [呲牙].png in Resources */,
+				DCFEC0E229EFE52C001AE8E7 /* [抽烟].png in Resources */,
+				DCFEC0F429EFE52C001AE8E7 /* [斜眼].png in Resources */,
+				DCFEC0FB29EFE52C001AE8E7 /* apng格式图片1.png in Resources */,
+				DCFEC0C229EFE52C001AE8E7 /* [害怕].png in Resources */,
+				DCFEBFF229EFDE30001AE8E7 /* Assets.xcassets in Resources */,
+				DCFEC09029EFE52B001AE8E7 /* 动图2.gif in Resources */,
+				DCFEC0F729EFE52C001AE8E7 /* [郁闷].png in Resources */,
+				DCFEC0BD29EFE52B001AE8E7 /* [胜利].png in Resources */,
+				DCFEC0B829EFE52B001AE8E7 /* [大吐].png in Resources */,
+				DCFEC0E529EFE52C001AE8E7 /* [打脸].png in Resources */,
+				DCFEC0CF29EFE52C001AE8E7 /* [思考].png in Resources */,
+				DCFEC0AC29EFE52B001AE8E7 /* [666].png in Resources */,
+				DCFEC0D329EFE52C001AE8E7 /* [敲打].png in Resources */,
+				DCFEC0F929EFE52C001AE8E7 /* [抠鼻].png in Resources */,
+				DCFEC0CC29EFE52C001AE8E7 /* [摸头].png in Resources */,
+				DCFEC0D629EFE52C001AE8E7 /* [汗].png in Resources */,
+				DCFEC09629EFE52B001AE8E7 /* [爱心].png in Resources */,
+				DCFEC0C629EFE52C001AE8E7 /* [困].png in Resources */,
+				DCFEC0AE29EFE52B001AE8E7 /* [粉].png in Resources */,
+				DCFEC0BB29EFE52B001AE8E7 /* [威武].png in Resources */,
+				DCFEC0B929EFE52B001AE8E7 /* [调皮].png in Resources */,
+				DCFEC0D129EFE52C001AE8E7 /* [互粉].png in Resources */,
+				DCFEC0D729EFE52C001AE8E7 /* [抱抱].png in Resources */,
+				DCFEC0D529EFE52C001AE8E7 /* [礼物].png in Resources */,
+				DCFEC09F29EFE52B001AE8E7 /* [啤酒].png in Resources */,
+				DCFEC09B29EFE52B001AE8E7 /* [露牙].png in Resources */,
+				DCFEC0DE29EFE52C001AE8E7 /* [心碎].png in Resources */,
+				DCFEC0CA29EFE52C001AE8E7 /* [喜欢].png in Resources */,
+				DCFEC0DD29EFE52C001AE8E7 /* [差评].png in Resources */,
+				DCFEC0D829EFE52C001AE8E7 /* [得意].png in Resources */,
+				DCFEC0C929EFE52C001AE8E7 /* [卖萌].png in Resources */,
+				DCFEC0F329EFE52C001AE8E7 /* [绿帽].png in Resources */,
+				DCFEC0CD29EFE52C001AE8E7 /* [嘘].png in Resources */,
+				DCFEC09929EFE52B001AE8E7 /* [笑哭].png in Resources */,
+				DCFEC09D29EFE52B001AE8E7 /* [吐血].png in Resources */,
+				DCFEC08F29EFE52B001AE8E7 /* 动图1.gif in Resources */,
+				DCFEC0C429EFE52C001AE8E7 /* [无语].png in Resources */,
+				DCFEC0ED29EFE52C001AE8E7 /* [吃瓜].png in Resources */,
+				DCFEC0AF29EFE52B001AE8E7 /* [惊恐].png in Resources */,
+				DCFEC0E829EFE52C001AE8E7 /* [脸红].png in Resources */,
+				DCFEC0D229EFE52C001AE8E7 /* [哭].png in Resources */,
+				DCFEC09229EFE52B001AE8E7 /* mpeg4_local.mp4 in Resources */,
+				DCFEC0C329EFE52C001AE8E7 /* [捂嘴].png in Resources */,
+				DCFEC0C529EFE52C001AE8E7 /* [瞪眼].png in Resources */,
+				DCFEC0B429EFE52B001AE8E7 /* [蓝狗].png in Resources */,
+				DCFEC0E429EFE52C001AE8E7 /* [尴尬].png in Resources */,
+				DCFEC0E929EFE52C001AE8E7 /* [吐舌].png in Resources */,
+				DCFEC0C829EFE52C001AE8E7 /* [吐].png in Resources */,
+				DCFEC09129EFE52B001AE8E7 /* 1650855755919.mp4 in Resources */,
+				DCFEC0BA29EFE52B001AE8E7 /* [玫瑰].png in Resources */,
+				DCFEBFF029EFDE2F001AE8E7 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DCFEBFF929EFDE30001AE8E7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DCFEC00329EFDE30001AE8E7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		832EB47AA80A8451563477BE /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-WYBasisKitTest/Pods-WYBasisKitTest-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-WYBasisKitTest/Pods-WYBasisKitTest-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-WYBasisKitTest/Pods-WYBasisKitTest-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FA4342521628B9CDEBA839DC /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-WYBasisKitTest-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DCFEBFE129EFDE2F001AE8E7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DCFEC11C29EFED62001AE8E7 /* WYTestView.swift in Sources */,
+				DCFEC11E29EFED62001AE8E7 /* WYParseGifController.swift in Sources */,
+				DCFEC12429EFED62001AE8E7 /* WYTestVisualController.swift in Sources */,
+				DCFEC11D29EFED62001AE8E7 /* WYTestBannerController.swift in Sources */,
+				DCFEC12C29EFED62001AE8E7 /* WYMultilevelTableViewController.swift in Sources */,
+				DCFEC11929EFED62001AE8E7 /* WYTestTableViewHeaderView.swift in Sources */,
+				DCFEC12E29EFED62001AE8E7 /* WYTestInterfaceOrientationController.swift in Sources */,
+				DCFEC13329F0D05C001AE8E7 /* WYProtocolManager.swift in Sources */,
+				DCFEC12F29EFED62001AE8E7 /* WYRightController.swift in Sources */,
+				DCFEC11F29EFED62001AE8E7 /* WYTestChatController.swift in Sources */,
+				DCFEC11A29EFED62001AE8E7 /* WYLeftControllerHeaderView.swift in Sources */,
+				DCFEC12529EFED62001AE8E7 /* WYCenterController.swift in Sources */,
+				DCFEC12B29EFED62001AE8E7 /* WYTestDownloadController.swift in Sources */,
+				DCFEC11B29EFED62001AE8E7 /* WYTestTableViewFooterView.swift in Sources */,
+				DCFEC12629EFED62001AE8E7 /* WYTestRequestController.swift in Sources */,
+				DCFEBFE929EFDE2F001AE8E7 /* AppDelegate.swift in Sources */,
+				DCFEC12A29EFED62001AE8E7 /* WYLeftController.swift in Sources */,
+				DCFEC12929EFED62001AE8E7 /* WYTestLiveStreamingController.swift in Sources */,
+				DCFEC12729EFED62001AE8E7 /* WYTableViewGroupedController.swift in Sources */,
+				DCFEC12D29EFED62001AE8E7 /* WYFlowLayoutAlignmentController.swift in Sources */,
+				DCFEC12129EFED62001AE8E7 /* WYQRCodeController.swift in Sources */,
+				DCFEC12329EFED62001AE8E7 /* WYTestIpaController.swift in Sources */,
+				DCFEC12029EFED62001AE8E7 /* WYTableViewPlainController.swift in Sources */,
+				DCFEC13029EFED62001AE8E7 /* WYTestDarkNightModeController.swift in Sources */,
+				DCFEC12829EFED62001AE8E7 /* WYTestAnimationController.swift in Sources */,
+				DCFEC12229EFED62001AE8E7 /* WYTestRichTextController.swift in Sources */,
+				DCFEC01D29EFE496001AE8E7 /* WYTabBarController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DCFEBFF729EFDE30001AE8E7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DCFEC00029EFDE30001AE8E7 /* WYBasisKitTestTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DCFEC00129EFDE30001AE8E7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DCFEC00C29EFDE30001AE8E7 /* WYBasisKitTestUITestsLaunchTests.swift in Sources */,
+				DCFEC00A29EFDE30001AE8E7 /* WYBasisKitTestUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		DCFEBFFD29EFDE30001AE8E7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DCFEBFE429EFDE2F001AE8E7 /* WYBasisKitTest */;
+			targetProxy = DCFEBFFC29EFDE30001AE8E7 /* PBXContainerItemProxy */;
+		};
+		DCFEC00729EFDE30001AE8E7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DCFEBFE429EFDE2F001AE8E7 /* WYBasisKitTest */;
+			targetProxy = DCFEC00629EFDE30001AE8E7 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		DCFEBFEE29EFDE2F001AE8E7 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DCFEBFEF29EFDE2F001AE8E7 /* Base */,
+				DCFEC01829EFE448001AE8E7 /* zh-Hans */,
+				DCFEC01A29EFE44D001AE8E7 /* zh-Hant */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		DCFEBFF329EFDE30001AE8E7 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DCFEBFF429EFDE30001AE8E7 /* Base */,
+				DCFEC01929EFE449001AE8E7 /* zh-Hans */,
+				DCFEC01B29EFE44D001AE8E7 /* zh-Hant */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		DCFEC00D29EFDE30001AE8E7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		DCFEC00E29EFDE30001AE8E7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		DCFEC01029EFDE30001AE8E7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 865E1EDDAF0233568A70050C /* Pods-WYBasisKitTest.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3J5533TZC2;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = WYBasisKitTest/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.guanren.WYBasisKitTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		DCFEC01129EFDE30001AE8E7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3A628127A2EA1456F04DE740 /* Pods-WYBasisKitTest.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3J5533TZC2;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = WYBasisKitTest/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.guanren.WYBasisKitTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		DCFEC01329EFDE30001AE8E7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3J5533TZC2;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.guanren.WYBasisKitTest.WYBasisKitTestTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WYBasisKitTest.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/WYBasisKitTest";
+			};
+			name = Debug;
+		};
+		DCFEC01429EFDE30001AE8E7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3J5533TZC2;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.guanren.WYBasisKitTest.WYBasisKitTestTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WYBasisKitTest.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/WYBasisKitTest";
+			};
+			name = Release;
+		};
+		DCFEC01629EFDE30001AE8E7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3J5533TZC2;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.guanren.WYBasisKitTest.WYBasisKitTestUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = WYBasisKitTest;
+			};
+			name = Debug;
+		};
+		DCFEC01729EFDE30001AE8E7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3J5533TZC2;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.guanren.WYBasisKitTest.WYBasisKitTestUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = WYBasisKitTest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DCFEBFE029EFDE2F001AE8E7 /* Build configuration list for PBXProject "WYBasisKitTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DCFEC00D29EFDE30001AE8E7 /* Debug */,
+				DCFEC00E29EFDE30001AE8E7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DCFEC00F29EFDE30001AE8E7 /* Build configuration list for PBXNativeTarget "WYBasisKitTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DCFEC01029EFDE30001AE8E7 /* Debug */,
+				DCFEC01129EFDE30001AE8E7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DCFEC01229EFDE30001AE8E7 /* Build configuration list for PBXNativeTarget "WYBasisKitTestTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DCFEC01329EFDE30001AE8E7 /* Debug */,
+				DCFEC01429EFDE30001AE8E7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DCFEC01529EFDE30001AE8E7 /* Build configuration list for PBXNativeTarget "WYBasisKitTestUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DCFEC01629EFDE30001AE8E7 /* Debug */,
+				DCFEC01729EFDE30001AE8E7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = DCFEBFDD29EFDE2F001AE8E7 /* Project object */;
+}

@@ -1,0 +1,103 @@
+/*
+  WYLocalizable.strings
+  WYBasisKit
+
+  Created by 官人 on 2020/11/21.
+  Copyright © 2020 官人. All rights reserved.
+*/
+
+"WYLocalizable_01" = "ho capito";
+
+"WYLocalizable_02" = "password";
+
+"WYLocalizable_03" = "annulla";
+
+"WYLocalizable_04" = "elimina";
+
+"WYLocalizable_05" = "Biometrica non disponibile";
+
+"WYLocalizable_06" = "Il riconoscimento biometrico è stato bloccato, blocca lo schermo e sblocca correttamente il dispositivo.";
+
+"WYLocalizable_07" = "Il sistema ha interrotto questo riconoscimento";
+
+"WYLocalizable_08" = "Imposta la password di sblocco prima di attivare il riconoscimento biometrico";
+
+"WYLocalizable_09" = "Abilitare/impostare la funzione biometrica nelle impostazioni del dispositivo";
+
+"WYLocalizable_10" = "Inserisci una password per verificare la biometria";
+
+"WYLocalizable_11" = "Nessun messaggio ancora";
+
+"WYLocalizable_12" = "Disautorizzazione";
+
+"WYLocalizable_13" = "L'app non ha il permesso di accedere all'album. Autorizza ora?";
+
+"WYLocalizable_14" = "L'app non ha accesso alla fotocamera. Autorizza ora?";
+
+"WYLocalizable_15" = "L'app non ha accesso al microfono. Autorizza ora?";
+
+"WYLocalizable_16" = "L'app non ha il permesso di accedere alla posizione. Autorizza ora?";
+
+"WYLocalizable_17" = "L'app non ha il permesso di accedere alla rubrica. Autorizza ora?";
+
+"WYLocalizable_18" = "Continua la connessione";
+
+"WYLocalizable_19" = "Annulla connessione";
+
+"WYLocalizable_20" = "Richiesta dati non riuscita";
+
+"WYLocalizable_21" = "Codice di stato anomalo";
+
+"WYLocalizable_22" = "Rete sconosciuta, potrebbero esserci rischi per la sicurezza. Vuoi continuare?";
+
+"WYLocalizable_23" = "Da impostare";
+
+"WYLocalizable_24" = "Connessione di rete non sicura annullata";
+
+"WYLocalizable_25" = "Nessuna connessione di rete, controlla le impostazioni di rete";
+
+"WYLocalizable_26" = "Si utilizza il WiFi per connettersi a Internet";
+
+"WYLocalizable_27" = "Si utilizza una rete mobile cellulare per la rete";
+
+"WYLocalizable_28" = "Rete non disponibile, confermare che l'ambiente di rete o le autorizzazioni di connessione di rete sono state impostate correttamente";
+
+"WYLocalizable_29" = "Verifica del codice non riuscita";
+
+"WYLocalizable_30" = "solo";
+
+"WYLocalizable_31" = "%@Minuti fa";
+
+"WYLocalizable_32" = "%@Hours ago";
+
+"WYLocalizable_33" = "%@Giorni fa";
+
+"WYLocalizable_34" = "%@Month ago";
+
+"WYLocalizable_35" = "%@Anni fa";
+
+"WYLocalizable_36" = "Nessuna scheda telefonica";
+
+"WYLocalizable_37" = "Capricorno";
+
+"WYLocalizable_38" = "aquarius";
+
+"WYLocalizable_39" = "Pesci";
+
+"WYLocalizable_40" = "Ariete";
+
+"WYLocalizable_41" = "Toro";
+
+"WYLocalizable_42" = "Gemelli";
+
+"WYLocalizable_43" = "Cancro";
+
+"WYLocalizable_44" = "leo";
+
+"WYLocalizable_45" = "Vergine";
+
+"WYLocalizable_46" = "libra";
+
+"WYLocalizable_47" = "scorpione";
+
+"WYLocalizable_48" = "Sagittario";

@@ -1,0 +1,103 @@
+/*
+  WYLocalizable.strings
+  WYBasisKit
+
+  Created by 官人 on 2020/11/21.
+  Copyright © 2020 官人. All rights reserved.
+*/
+
+"WYLocalizable_01" = "Dapat.";
+
+"WYLocalizable_02" = "Katalaluan";
+
+"WYLocalizable_03" = "batalkan";
+
+"WYLocalizable_04" = "padam";
+
+"WYLocalizable_05" = "Biometrik tidak tersedia";
+
+"WYLocalizable_06" = "Pengenalan biometrik telah dikunci, kunci skrin dan berjaya membuka peranti. Selepas membuka semula halaman ini, ia boleh dibuka semula";
+
+"WYLocalizable_07" = "Sistem mengganggu pengenalan ini";
+
+"WYLocalizable_08" = "Sila tetapkan kata laluan buka sebelum benarkan pengenalan biometrik";
+
+"WYLocalizable_09" = "Sila benarkan/tetapkan fungsi biometrik dalam tetapan peranti";
+
+"WYLocalizable_10" = "Sila masukkan kata laluan untuk sahkan biometrik";
+
+"WYLocalizable_11" = "Tiada mesej lagi";
+
+"WYLocalizable_12" = "Pengesahan";
+
+"WYLocalizable_13" = "Aplikasi tidak mempunyai keizinan untuk mengakses album. Benarkan sekarang?";
+
+"WYLocalizable_14" = "Aplikasi tidak mempunyai akses ke kamera. Benarkan sekarang?";
+
+"WYLocalizable_15" = "Aplikasi tidak mempunyai akses ke mikrofon. Mengizinkan sekarang?";
+
+"WYLocalizable_16" = "Aplikasi tidak mempunyai keizinan untuk mengakses lokasi. Izinkan sekarang?";
+
+"WYLocalizable_17" = "Aplikasi tidak mempunyai keizinan untuk mengakses buku alamat. Benarkan sekarang?";
+
+"WYLocalizable_18" = "Teruskan sambung";
+
+"WYLocalizable_19" = "Batalkan Sambungan";
+
+"WYLocalizable_20" = "Permintaan data gagal";
+
+"WYLocalizable_21" = "Kod status tidak normal";
+
+"WYLocalizable_22" = "Rangkaian tidak diketahui, mungkin ada risiko keselamatan. Anda ingin teruskan?";
+
+"WYLocalizable_23" = "Untuk ditetapkan";
+
+"WYLocalizable_24" = "Sambungan rangkaian tidak selamat dibatalkan";
+
+"WYLocalizable_25" = "Tiada sambungan rangkaian, sila semak tetapan rangkaian anda";
+
+"WYLocalizable_26" = "Anda menggunakan WiFi untuk menyambung ke internet";
+
+"WYLocalizable_27" = "Anda menggunakan rangkaian bimbit sel untuk rangkaian";
+
+"WYLocalizable_28" = "Rangkaian tidak tersedia, sila sahkan bahawa persekitaran rangkaian anda atau kebenaran sambungan rangkaian telah ditetapkan dengan betul";
+
+"WYLocalizable_29" = "Pengesahan Kod Data Balasan gagal";
+
+"WYLocalizable_30" = "Hanya";
+
+"WYLocalizable_31" = "%@Minutes ago";
+
+"WYLocalizable_32" = "%@Hours ago";
+
+"WYLocalizable_33" = "%@Days ago";
+
+"WYLocalizable_34" = "%@Month ago";
+
+"WYLocalizable_35" = "%@Tahun yang lalu";
+
+"WYLocalizable_36" = "Tiada kad telefon";
+
+"WYLocalizable_37" = "Capricornus";
+
+"WYLocalizable_38" = "Aquarius";
+
+"WYLocalizable_39" = "Pisces";
+
+"WYLocalizable_40" = "Aries";
+
+"WYLocalizable_41" = "Taurus";
+
+"WYLocalizable_42" = "Gemini";
+
+"WYLocalizable_43" = "Kanker";
+
+"WYLocalizable_44" = "leo";
+
+"WYLocalizable_45" = "Virgo";
+
+"WYLocalizable_46" = "unit synonyms for matching user input";
+
+"WYLocalizable_47" = "Scorpio";
+
+"WYLocalizable_48" = "Sagittarius";

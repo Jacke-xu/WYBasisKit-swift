@@ -1,0 +1,103 @@
+/*
+  WYLocalizable.strings
+  WYBasisKit
+
+  Created by 官人 on 2020/11/21.
+  Copyright © 2020 官人. All rights reserved.
+*/
+
+"WYLocalizable_01" = "알았어";
+
+"WYLocalizable_02" = "암호";
+
+"WYLocalizable_03" = "취소";
+
+"WYLocalizable_04" = "삭제";
+
+"WYLocalizable_05" = "생체 인식 사용 불가";
+
+"WYLocalizable_06" = "생체 인식 잠김, 화면 잠금 및 장치 잠금 해제 성공 후 이 페이지를 다시 열면 다시 열 수 있습니다";
+
+"WYLocalizable_07" = "시스템이 이 인식을 중단했습니다.";
+
+"WYLocalizable_08" = "생체 인식 켜기 전에 잠금 해제 비밀번호를 설정하세요";
+
+"WYLocalizable_09" = "장치 설정에서 생체 인식 기능을 켜거나 설정하십시오.";
+
+"WYLocalizable_10" = "암호를 입력하여 생체 인식을 확인하십시오.";
+
+"WYLocalizable_11" = "아직 소식이 없다";
+
+"WYLocalizable_12" = "권한을 부여하다";
+
+"WYLocalizable_13" = "App은 앨범에 액세스할 수 없습니다. 지금 권한을 부여하시겠습니까?";
+
+"WYLocalizable_14" = "App은 카메라에 액세스할 수 없습니다. 지금 권한을 부여하시겠습니까?";
+
+"WYLocalizable_15" = "App은 마이크에 액세스할 수 없습니다. 지금 권한을 부여하시겠습니까?";
+
+"WYLocalizable_16" = "App에 위치 액세스 권한이 없습니다. 지금 권한을 부여하시겠습니까?";
+
+"WYLocalizable_17" = "App은 주소록에 접근할 수 있는 권한이 없습니다. 지금 가서 권한을 부여합니까?";
+
+"WYLocalizable_18" = "계속 연결";
+
+"WYLocalizable_19" = "연결 해제";
+
+"WYLocalizable_20" = "데이터 요청 실패";
+
+"WYLocalizable_21" = "상태 코드 예외";
+
+"WYLocalizable_22" = "알 수 없는 네트워크, 보안 위험이 있을 수 있습니다. 계속하시겠습니까?";
+
+"WYLocalizable_23" = "설정";
+
+"WYLocalizable_24" = "안전하지 않은 네트워크 연결이 취소됨";
+
+"WYLocalizable_25" = "네트워크 연결이 없습니다. 네트워크 설정을 확인하십시오.";
+
+"WYLocalizable_26" = "Wifi 네트워킹 사용 중";
+
+"WYLocalizable_27" = "셀룰러 모바일 네트워킹 사용 중";
+
+"WYLocalizable_28" = "사용할 수 없는 네트워크입니다. 네트워크 환경이나 네트워크 연결 권한이 올바르게 설정되었는지 확인하십시오.";
+
+"WYLocalizable_29" = "응답 데이터 Code 검증 실패";
+
+"WYLocalizable_30" = "방금";
+
+"WYLocalizable_31" = "%@분 전";
+
+"WYLocalizable_32" = "%@시간 전";
+
+"WYLocalizable_33" = "%@일 전";
+
+"WYLocalizable_34" = "%@월 전";
+
+"WYLocalizable_35" = "%@년 전";
+
+"WYLocalizable_36" = "휴대폰 카드 없음";
+
+"WYLocalizable_37" = "염소자리";
+
+"WYLocalizable_38" = "물병자리";
+
+"WYLocalizable_39" = "물고기자리";
+
+"WYLocalizable_40" = "양자리";
+
+"WYLocalizable_41" = "황소자리";
+
+"WYLocalizable_42" = "쌍둥이자리";
+
+"WYLocalizable_43" = "게자리";
+
+"WYLocalizable_44" = "사자자리";
+
+"WYLocalizable_45" = "처녀자리";
+
+"WYLocalizable_46" = "천칭자리";
+
+"WYLocalizable_47" = "전갈자리";
+
+"WYLocalizable_48" = "사수자리";

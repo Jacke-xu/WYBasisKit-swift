@@ -1,0 +1,103 @@
+/*
+  WYLocalizable.strings
+  WYBasisKit
+
+  Created by 官人 on 2020/11/21.
+  Copyright © 2020 官人. All rights reserved.
+*/
+
+"WYLocalizable_01" = "fick det";
+
+"WYLocalizable_02" = "lösenord";
+
+"WYLocalizable_03" = "avbryt";
+
+"WYLocalizable_04" = "ta bort";
+
+"WYLocalizable_05" = "Biometri saknas";
+
+"WYLocalizable_06" = "Biometrisk igenkänning har låsts, låst skärmen och låst upp enheten.";
+
+"WYLocalizable_07" = "Systemet avbröt denna igenkänning";
+
+"WYLocalizable_08" = "Ange låsningslösenordet innan biometrisk igenkänning aktiveras";
+
+"WYLocalizable_09" = "Aktivera/ställ in biometrisk funktion i enhetsinställningarna";
+
+"WYLocalizable_10" = "Ange ett lösenord för att verifiera biometri";
+
+"WYLocalizable_11" = "Inget meddelande än";
+
+"WYLocalizable_12" = "Avskaffande av auktorisation";
+
+"WYLocalizable_13" = "Appen har inte behörighet att komma åt albumet. Auktorisera nu?";
+
+"WYLocalizable_14" = "Appen har inte tillgång till kameran.";
+
+"WYLocalizable_15" = "Appen har inte tillgång till mikrofonen.";
+
+"WYLocalizable_16" = "Appen har inte behörighet att komma åt platsen. Auktorisera nu?";
+
+"WYLocalizable_17" = "Appen har inte behörighet att komma åt adressboken.";
+
+"WYLocalizable_18" = "Fortsätt ansluta";
+
+"WYLocalizable_19" = "Avbryt anslutning";
+
+"WYLocalizable_20" = "Databegäran misslyckades";
+
+"WYLocalizable_21" = "Onormal statuskod";
+
+"WYLocalizable_22" = "Okänt nätverk, det kan finnas säkerhetsrisker. Vill du fortsätta?";
+
+"WYLocalizable_23" = "Ställ in";
+
+"WYLocalizable_24" = "Osäker nätverksanslutning avbruten";
+
+"WYLocalizable_25" = "Ingen nätverksanslutning, kontrollera dina nätverksinställningar";
+
+"WYLocalizable_26" = "Du använder WiFi för att ansluta till internet";
+
+"WYLocalizable_27" = "Du använder ett mobilt mobilnätverk för nätverk";
+
+"WYLocalizable_28" = "Otillgängligt nätverk, bekräfta att din nätverksmiljö eller nätverksanslutningsbehörighet har ställts in korrekt";
+
+"WYLocalizable_29" = "Verifiering av svarsdata misslyckades";
+
+"WYLocalizable_30" = "bara";
+
+"WYLocalizable_31" = "%@Minutes ago";
+
+"WYLocalizable_32" = "%@Hours ago";
+
+"WYLocalizable_33" = "%@Days ago";
+
+"WYLocalizable_34" = "%@Month ago";
+
+"WYLocalizable_35" = "%@Years ago";
+
+"WYLocalizable_36" = "Inget telefonkort";
+
+"WYLocalizable_37" = "Stenbuken";
+
+"WYLocalizable_38" = "aquarius";
+
+"WYLocalizable_39" = "Fiskar";
+
+"WYLocalizable_40" = "Väduren";
+
+"WYLocalizable_41" = "Taurus";
+
+"WYLocalizable_42" = "Tvillingar";
+
+"WYLocalizable_43" = "Cancer";
+
+"WYLocalizable_44" = "leo";
+
+"WYLocalizable_45" = "Jungfrun";
+
+"WYLocalizable_46" = "libra";
+
+"WYLocalizable_47" = "skorpio";
+
+"WYLocalizable_48" = "Skytten";

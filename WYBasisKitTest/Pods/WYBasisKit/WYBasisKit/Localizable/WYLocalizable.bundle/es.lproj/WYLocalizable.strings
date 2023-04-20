@@ -1,0 +1,104 @@
+/*
+  WYLocalizable.strings
+  WYBasisKit
+
+  Created by 官人 on 2020/11/21.
+  Copyright © 2020 官人. All rights reserved.
+*/
+
+"WYLocalizable_01" = "Lo Tengo.";
+
+"WYLocalizable_02" = "Contraseña";
+
+"WYLocalizable_03" = "Cancelación";
+
+"WYLocalizable_04" = "Eliminar";
+
+"WYLocalizable_05" = "Biometría no disponible";
+
+"WYLocalizable_06" = "El biometría está bloqueado, se puede reabrir esta página después de bloquear la pantalla y desbloquear con éxito el dispositivo.";
+
+"WYLocalizable_07" = "El sistema interrumpió esta identificación";
+
+"WYLocalizable_08" = "Establezca la contraseña de desbloqueo antes de activar el biometría";
+
+"WYLocalizable_09" = "Abra / establezca la función biométrica en la configuración del dispositivo";
+
+"WYLocalizable_10" = "Introduzca la contraseña para verificar el biometría";
+
+"WYLocalizable_11" = "No hay noticias por el momento";
+
+"WYLocalizable_12" = "Ir a autorizar";
+
+"WYLocalizable_13" = "¿La aplicación no tiene acceso al álbum, ¿ ahora va a autorizar?";
+
+"WYLocalizable_14" = "¿La aplicación no tiene acceso a la cámara, ¿ ahora va a autorizar?";
+
+"WYLocalizable_15" = "¿La aplicación no tiene acceso al micrófono, ¿ ahora va a autorizar?";
+
+"WYLocalizable_16" = "¿La aplicación no tiene acceso a la ubicación, ¿ ahora va a autorizar?";
+
+"WYLocalizable_17" = "¿La aplicación no tiene acceso a la libreta de direcciones, ¿ ahora va a autorizar?";
+
+"WYLocalizable_18" = "Continuar conectándose";
+
+"WYLocalizable_19" = "Desconexión";
+
+"WYLocalizable_20" = "Falló la solicitud de datos";
+
+"WYLocalizable_21" = "Código de Estado anormal";
+
+"WYLocalizable_22" = "¿La red desconocida, que puede tener riesgos potenciales de seguridad, ¿ continúa?";
+
+"WYLocalizable_23" = "Ir a configurar";
+
+"WYLocalizable_24" = "Se ha cancelado la conexión insegura a la red";
+
+"WYLocalizable_25" = "No hay conexión a la red, compruebe la configuración de su red";
+
+"WYLocalizable_26" = "Está usando la red WIFI";
+
+"WYLocalizable_27" = "Está usando la red de redes móviles celulares para conectarse";
+
+"WYLocalizable_28" = "Redes no disponibles, confirme que su entorno de red o permisos de conexión a la red se han establecido correctamente";
+
+"WYLocalizable_29" = "Falló la verificación del Código de datos de respuesta";
+
+"WYLocalizable_30" = "Acaba de llegar";
+
+"WYLocalizable_31" = "%@hace minutos";
+
+"WYLocalizable_32" = "%@hace horas";
+
+"WYLocalizable_33" = "%@hace un día";
+
+"WYLocalizable_34" = "%@hace un mes";
+
+"WYLocalizable_35" = "%@hace años";
+
+"WYLocalizable_36" = "Sin tarjeta de teléfono móvil";
+
+"WYLocalizable_37" = "Capricornio";
+
+"WYLocalizable_38" = "Aquarius";
+
+"WYLocalizable_39" = "Piscis";
+
+"WYLocalizable_40" = "Aries";
+
+"WYLocalizable_41" = "Tauro";
+
+"WYLocalizable_42" = "Gemini";
+
+"WYLocalizable_43" = "Cáncer";
+
+"WYLocalizable_44" = "Leo";
+
+"WYLocalizable_45" = "Virgo";
+
+"WYLocalizable_46" = "Libra";
+
+"WYLocalizable_47" = "Escorpión";
+
+"WYLocalizable_48" = "Sagitario";
+

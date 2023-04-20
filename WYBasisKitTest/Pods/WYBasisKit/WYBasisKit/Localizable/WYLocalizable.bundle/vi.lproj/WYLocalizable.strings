@@ -1,0 +1,103 @@
+/*
+  WYLocalizable.strings
+  WYBasisKit
+
+  Created by 官人 on 2020/11/21.
+  Copyright © 2020 官人. All rights reserved.
+*/
+
+"WYLocalizable_01" = "Hiểu rồi.";
+
+"WYLocalizable_02" = "Mật khẩu";
+
+"WYLocalizable_03" = "Hủy bỏ";
+
+"WYLocalizable_04" = "Xoá";
+
+"WYLocalizable_05" = "Sinh trắc học không có sẵn";
+
+"WYLocalizable_06" = "Sinh trắc học đã bị khóa, mở lại trang này sau khi khóa màn hình và mở khóa thiết bị thành công";
+
+"WYLocalizable_07" = "Hệ thống đã ngắt nhận dạng.";
+
+"WYLocalizable_08" = "Đặt mật khẩu mở khóa trước khi bật sinh trắc học";
+
+"WYLocalizable_09" = "Vui lòng bật/thiết lập chức năng sinh trắc học trong cài đặt thiết bị";
+
+"WYLocalizable_10" = "Vui lòng nhập mật khẩu để xác minh sinh trắc học";
+
+"WYLocalizable_11" = "Không có tin tức gì.";
+
+"WYLocalizable_12" = "Đi ủy quyền";
+
+"WYLocalizable_13" = "App không có quyền truy cập album, bây giờ đi cấp phép?";
+
+"WYLocalizable_14" = "Ứng dụng không có quyền truy cập vào máy ảnh, bây giờ đi cấp phép?";
+
+"WYLocalizable_15" = "Ứng dụng không có quyền truy cập micrô, bây giờ ủy quyền?";
+
+"WYLocalizable_16" = "Ứng dụng không có quyền truy cập vào vị trí, bây giờ ủy quyền?";
+
+"WYLocalizable_17" = "App không có quyền truy cập vào sổ địa chỉ, bây giờ ủy quyền?";
+
+"WYLocalizable_18" = "Tiếp tục kết nối";
+
+"WYLocalizable_19" = "Hủy kết nối";
+
+"WYLocalizable_20" = "Yêu cầu dữ liệu không thành công";
+
+"WYLocalizable_21" = "Mã trạng thái bất thường";
+
+"WYLocalizable_22" = "Mạng không xác định, có thể tồn tại nguy cơ an ninh, có tiếp tục không?";
+
+"WYLocalizable_23" = "Bỏ cài đặt";
+
+"WYLocalizable_24" = "Hủy kết nối mạng không an toàn";
+
+"WYLocalizable_25" = "Không có kết nối mạng, vui lòng kiểm tra cài đặt mạng của bạn";
+
+"WYLocalizable_26" = "Bạn đang sử dụng mạng wifi";
+
+"WYLocalizable_27" = "Bạn đang sử dụng mạng di động di động";
+
+"WYLocalizable_28" = "Mạng không khả dụng, hãy đảm bảo rằng môi trường mạng hoặc quyền kết nối mạng của bạn đã được thiết lập chính xác";
+
+"WYLocalizable_29" = "Lỗi kiểm tra mã dữ liệu phản hồi";
+
+"WYLocalizable_30" = "Vừa mới";
+
+"WYLocalizable_31" = "%@phút trước";
+
+"WYLocalizable_32" = "%@giờ trước";
+
+"WYLocalizable_33" = "%@Ngày trước";
+
+"WYLocalizable_34" = "%@Tháng trước";
+
+"WYLocalizable_35" = "%@Năm trước";
+
+"WYLocalizable_36" = "Không có thẻ di động";
+
+"WYLocalizable_37" = "Ma Kết";
+
+"WYLocalizable_38" = "Bảo Bình";
+
+"WYLocalizable_39" = "Song Ngư";
+
+"WYLocalizable_40" = "Bạch Dương";
+
+"WYLocalizable_41" = "Kim Ngưu";
+
+"WYLocalizable_42" = "Song Tử";
+
+"WYLocalizable_43" = "ung thư";
+
+"WYLocalizable_44" = "Sư Tử";
+
+"WYLocalizable_45" = "Xử Nữ";
+
+"WYLocalizable_46" = "Thiên Bình";
+
+"WYLocalizable_47" = "Bọ Cạp";
+
+"WYLocalizable_48" = "Nhân Mã";

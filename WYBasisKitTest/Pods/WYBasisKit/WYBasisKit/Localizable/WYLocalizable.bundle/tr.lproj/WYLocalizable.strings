@@ -1,0 +1,103 @@
+/*
+  WYLocalizable.strings
+  WYBasisKit
+
+  Created by 官人 on 2020/11/21.
+  Copyright © 2020 官人. All rights reserved.
+*/
+
+"WYLocalizable_01" = "Anladım.";
+
+"WYLocalizable_02" = "parola";
+
+"WYLocalizable_03" = "iptal et";
+
+"WYLocalizable_04" = "Sil";
+
+"WYLocalizable_05" = "Biyometrik kullanılmaz";
+
+"WYLocalizable_06" = "Biometrik tanıma kilitlendi, ekranı kilitledi ve aygıtı başarıyla kilitledi. Bu sayfayı yeniden açtıktan sonra, yeniden açabilir.";
+
+"WYLocalizable_07" = "Sistem bu tanımayı kesti.";
+
+"WYLocalizable_08" = "Lütfen biyometrik tanımlamayı etkinleştirmeden önce kilitleme parolanı ayarlayın";
+
+"WYLocalizable_09" = "Lütfen cihaz ayarlarında biyometrik fonksiyonu etkinleştirin/ayarlayın";
+
+"WYLocalizable_10" = "Biometrik doğrulamak için bir parola girin lütfen";
+
+"WYLocalizable_11" = "Henüz mesaj yok";
+
+"WYLocalizable_12" = "Yetki Yetki";
+
+"WYLocalizable_13" = "Uygulama albüme erişime izni yok. Şimdi yetkili mi?";
+
+"WYLocalizable_14" = "Uygulama kamera erişimi yok. Şimdi yetkili mi?";
+
+"WYLocalizable_15" = "Uygulama mikrofona erişimi yok.Şimdi yetkili mi?";
+
+"WYLocalizable_16" = "Uygulama yerine erişmek için izni yok. Şimdi yetkili mi?";
+
+"WYLocalizable_17" = "Uygulama adres defterine erişime izni yok. Şimdi yetkili mi?";
+
+"WYLocalizable_18" = "Bağlantı devam et";
+
+"WYLocalizable_19" = "Bağlantını iptal et";
+
+"WYLocalizable_20" = "Veri istemesi başarısız oldu";
+
+"WYLocalizable_21" = "Normal durum kodu";
+
+"WYLocalizable_22" = "Bilinmeyen ağ, güvenlik riskleri olabilir. Devam etmek ister misiniz?";
+
+"WYLocalizable_23" = "Ayarlamak için";
+
+"WYLocalizable_24" = "Sağlam bağlantısı iptal edildi";
+
+"WYLocalizable_25" = "Ağ bağlantısı yok, lütfen ağ ayarlarınızı kontrol edin";
+
+"WYLocalizable_26" = "İnternet'e bağlanmak için WiFi kullanıyorsunuz";
+
+"WYLocalizable_27" = "Ağ çalışması için cep telefon a ğını kullanıyorsunuz.";
+
+"WYLocalizable_28" = "Mevcut ağ değil, lütfen ağ ortamınızın veya ağ bağlantı izninizin doğru ayarlandığını doğrulaştırın";
+
+"WYLocalizable_29" = "Cevap veri Kodu doğrulaması başarısız oldu";
+
+"WYLocalizable_30" = "Sadece";
+
+"WYLocalizable_31" = "%@dakika önce";
+
+"WYLocalizable_32" = "%@Saat önce";
+
+"WYLocalizable_33" = "%@Günler önce";
+
+"WYLocalizable_34" = "%@Ay önce";
+
+"WYLocalizable_35" = "%@Yıllar önce";
+
+"WYLocalizable_36" = "Telefon kartı yok";
+
+"WYLocalizable_37" = "Capricornus";
+
+"WYLocalizable_38" = "akvarius";
+
+"WYLocalizable_39" = "Pisces";
+
+"WYLocalizable_40" = "Aries";
+
+"WYLocalizable_41" = "Taurus";
+
+"WYLocalizable_42" = "Gemini";
+
+"WYLocalizable_43" = "Kanser";
+
+"WYLocalizable_44" = "leo";
+
+"WYLocalizable_45" = "Virgo";
+
+"WYLocalizable_46" = "libra";
+
+"WYLocalizable_47" = "scorpio";
+
+"WYLocalizable_48" = "Sagittarius";
