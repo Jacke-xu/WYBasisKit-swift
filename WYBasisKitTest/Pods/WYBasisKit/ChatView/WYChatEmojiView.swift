@@ -158,7 +158,7 @@ public class WYEmojiFuncAreaView: UIView {
     
     init() {
         super.init(frame: .zero)
-        backgroundColor = backgroundColor
+        backgroundColor = .clear
     }
     
     required init?(coder: NSCoder) {
@@ -235,5 +235,96 @@ public struct WYEmojiViewConfig {
 }
 
 public struct WYEmojiFuncAreaConfig {
+    
+    /// 删除按钮不可点击时边框颜色
+    public var deleteViewBorderColorWithUnenable: UIColor = .clear
+    
+    /// 发送按钮不可点击时边框颜色
+    public var sendViewBorderColorWithUnenable: UIColor = .clear
+    
+    /// 删除按钮可点击时边框颜色
+    public var deleteViewBorderColorWithEnable: UIColor = .clear
+    
+    /// 发送按钮可点击时边框颜色
+    public var sendViewBorderColorWithEnable: UIColor = .clear
+    
+    /// 删除按钮按压状态边框颜色
+    public var deleteViewBorderColorWithHighly: UIColor = .clear
+    
+    /// 发送按钮按压状态边框颜色
+    public var sendViewBorderColorWithHighly: UIColor = .clear
+    
+    /// 删除按钮和发送按钮的边框宽度
+    public var deleteViewAndSendViewBorderWidth: CGFloat = 1.0
+    
+    /// 删除按钮和发送按钮的圆角半径
+    public var deleteViewAndSendViewCornerRadius: CGFloat = wy_screenWidth(5)
+    
+    /// 删除按钮不可点击时背景色
+    public var deleteViewColorWithUnenable: UIColor = .white
+    
+    /// 发送按钮不可点击时背景色
+    public var sendViewColorWithUnenable: UIColor = .white
+    
+    /// 删除按钮可点击时背景色
+    public var deleteViewColorWithEnable: UIColor = .white
+    
+    /// 发送按钮可点击时背景色
+    public var sendViewColorWithEnable: UIColor = .white
+    
+    /// 删除按钮按压状态背景色
+    public var deleteViewColorWithHighly: UIColor = .white
+    
+    /// 发送按钮按压状态背景色
+    public var sendViewColorWithHighly: UIColor = .white
+    
+    /// 删除按钮不可点击时图片
+    public var deleteViewImageWithUnenable: UIImage = UIImage()
+    
+    /// 发送按钮不可点击时图片
+    public var sendViewImageWithUnenable: UIImage = UIImage()
+    
+    /// 删除按钮可点击时图片
+    public var deleteViewImageWithEnable: UIImage = UIImage()
+    
+    /// 发送按钮可点击时图片
+    public var sendViewImageWithEnable: UIImage = UIImage()
+    
+    /// 删除按钮按压状态图片
+    public var deleteViewImageWithHighly: UIImage = UIImage()
+    
+    /// 发送按钮按压状态图片
+    public var sendViewImageWithHighly: UIImage = UIImage()
+    
+    /// 删除按钮文本
+    public var deleteViewText: String = ""
+    
+    /// 发送按钮文本
+    public var sendViewText: String = WYLocalized("发送")
+    
+    /// 删除按钮字体字号
+    public var deleteViewFont: UIFont = .systemFont(ofSize: wy_screenWidth(15))
+    
+    /// 发送按钮字体字号
+    public var sendViewFont: UIFont = .systemFont(ofSize: wy_screenWidth(15))
+    
+    /// 删除按钮不可点击时文本颜色
+    public var deleteViewTextColorWithUnenable: UIColor = .clear
+    
+    /// 发送按钮不可点击时文本颜色
+    public var sendViewTextColorWithUnenable: UIColor = .wy_hex("#E5E5E5")
+    
+    /// 删除按钮可点击时文本颜色
+    public var deleteViewTextColorWithEnable: UIColor = .clear
+    
+    /// 发送按钮可点击时文本颜色
+    public var sendViewTextColorWithEnable: UIColor = .white
+    
+    /// 删除按钮按压状态文本颜色
+    public var deleteViewTextColorWithHighly: UIColor = .clear
+    
+    /// 发送按钮按压状态文本颜色
+    public var sendViewTextColorWithHighly: UIColor = .white
+    
     public init() {}
 }

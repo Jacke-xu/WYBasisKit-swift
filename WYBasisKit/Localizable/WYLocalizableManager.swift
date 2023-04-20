@@ -250,10 +250,6 @@ public func WYLocalized(_ key: String, table: String = WYBasisKitConfig.localiza
     return WYLocalizableManager.localized(key: key, table: table)
 }
 
-public func WYLocalized(_ chinese: String = "", _ other: String = "") -> String {
-    return (WYLocalizableManager.currentLanguage() == .zh_Hans) ? chinese : other
-}
-
 public struct WYLocalizableManager {
     
     private static var bundle: Bundle? = localizableBundle(table: WYBasisKitConfig.localizableTable)
