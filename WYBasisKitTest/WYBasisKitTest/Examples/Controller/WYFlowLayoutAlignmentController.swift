@@ -27,7 +27,7 @@ class WYFlowLayoutAlignmentCell: UICollectionViewCell {
         titleView.textColor = .orange
         titleView.font = .systemFont(ofSize: 15)
         titleView.numberOfLines = 0
-        titleView.lineBreakMode = .byTruncatingTail
+        titleView.lineBreakMode = .byCharWrapping
         bgview.addSubview(titleView)
         titleView.snp.makeConstraints { (make) in
             make.left.equalToSuperview().offset(10)
@@ -39,11 +39,14 @@ class WYFlowLayoutAlignmentCell: UICollectionViewCell {
     func reload(text: String) {
         let attributedText = NSMutableAttributedString(string: text)
         attributedText.wy_lineSpacing(lineSpacing: 3, alignment: .left)
+        attributedText.wy_fontsOfRanges(fontsOfRanges: [[titleView.font: text]])
         titleView.attributedText = attributedText
+        
+        wy_print("numberOfRows = \(titleView.attributedText!.wy_numberOfRows(controlWidth: wy_screenWidth - 40)), stringPerLine = \(titleView.attributedText!.wy_stringPerLine(controlWidth: wy_screenWidth - 40)))")
     }
     
     class func sharedWidth(text: String) -> CGFloat {
-        let textWidth = text.wy_calculateWidth(controlHeight: 30, controlFont: UIFont.systemFont(ofSize: 15), lineSpacing: 3, wordsSpacing: 0)
+        let textWidth = text.wy_calculateWidth(controlHeight: UIFont.systemFont(ofSize: 15).lineHeight, controlFont: UIFont.systemFont(ofSize: 15), lineSpacing: 3, wordsSpacing: 0)
         
         if ((textWidth + 20) > maxWith()) {
             return maxWith()
@@ -52,10 +55,10 @@ class WYFlowLayoutAlignmentCell: UICollectionViewCell {
     }
     
     class func sharedHeight(text: String) -> CGFloat {
-        let textWidth = text.wy_calculateWidth(controlHeight: 30, controlFont: UIFont.systemFont(ofSize: 15), lineSpacing: 3, wordsSpacing: 0)
+        let textWidth = text.wy_calculateWidth(controlHeight: UIFont.systemFont(ofSize: 15).lineHeight, controlFont: UIFont.systemFont(ofSize: 15), lineSpacing: 3, wordsSpacing: 0)
         
         if ((textWidth + 20) > maxWith()) {
-            let textHeight = text.wy_calculateHeight(controlWidth: maxWith(), controlFont: UIFont.systemFont(ofSize: 15), lineSpacing: 3, wordsSpacing: 0)
+            let textHeight = text.wy_calculateHeight(controlWidth: maxWith()-20, controlFont: UIFont.systemFont(ofSize: 15), lineSpacing: 3, wordsSpacing: 0)
             return textHeight + (30 - UIFont.systemFont(ofSize: 15).lineHeight)
         }
         return 30

@@ -17,7 +17,8 @@ class WYTableViewPlainController: UIViewController {
         tableview.wy_register("WYTestTableViewHeaderView", .headerFooterView)
         tableview.wy_register("WYTestTableViewFooterView", .headerFooterView)
         tableview.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
+            make.top.equalToSuperview().offset(wy_navViewHeight)
+            make.left.right.bottom.equalToSuperview()
         }
         return tableview
     }()

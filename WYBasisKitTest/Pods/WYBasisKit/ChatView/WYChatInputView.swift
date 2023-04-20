@@ -40,7 +40,7 @@ public class WYChatInputView: UIImageView {
     
     public weak var delegate: WYChatInputViewDelegate? = nil
     
-    init() {
+    public init() {
         super.init(frame: .zero)
         isUserInteractionEnabled = true
         backgroundColor = .clear
@@ -50,10 +50,11 @@ public class WYChatInputView: UIImageView {
         textVoiceContentView.setBackgroundImage(inputBarConfig.textViewBackgroundImage, for: .selected)
         textVoiceContentView.setBackgroundImage(inputBarConfig.voiceViewBackgroundImageForHighlighted, for: .highlighted)
         textVoiceContentView.wy_nTitle = inputBarConfig.voicePlaceholder
-        textVoiceContentView.wy_sTitle = ""
+        textVoiceContentView.wy_sTitle = inputBarConfig.voicePlaceholder
         textVoiceContentView.wy_hTitle = inputBarConfig.voicePlaceholder
         textVoiceContentView.wy_titleFont = inputBarConfig.voicePlaceholderFont
         textVoiceContentView.wy_title_nColor = inputBarConfig.voicePlaceholderColor
+        textVoiceContentView.wy_title_sColor = .clear
         textVoiceContentView.layer.cornerRadius = inputBarConfig.textViewCornerRadius
         textVoiceContentView.layer.borderWidth = inputBarConfig.textViewBorderWidth
         textVoiceContentView.layer.borderColor = inputBarConfig.textViewBorderColor.cgColor
@@ -222,7 +223,7 @@ public class WYChatInputView: UIImageView {
     }
     
     public func sharedEmojiAttributed(string: String) -> NSAttributedString {
-        let attributed: NSMutableAttributedString = NSMutableAttributedString.wy_convertEmojiAttributed(emojiString: string, textColor: inputBarConfig.textColor, textFont: inputBarConfig.textFont, emojiTable: emojiViewConfig.emojiSource)
+        let attributed: NSMutableAttributedString = NSMutableAttributedString.wy_convertEmojiAttributed(emojiString: string, textColor: inputBarConfig.textColor, textFont: inputBarConfig.textFont, emojiTable: emojiViewConfig.emojiSource, pattern: inputBarConfig.emojiPattern)
         attributed.wy_lineSpacing(lineSpacing: inputBarConfig.textLineSpacing, alignment: .left)
         
         return attributed
@@ -432,6 +433,9 @@ public struct WYInputBarConfig {
 
     /// 输入法自带的Emoji表情替换成什么字符(需要canInputEmoji为false才生效)
     public var emojiReplacement: String = ""
+    
+    /// 自定义表情转换时的正则匹配规则
+    public var emojiPattern: String = ""
     
     /// 文本切换按钮图片
     public var textButtomImage: UIImage = UIImage.wy_createImage(from: .wy_random)

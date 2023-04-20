@@ -283,7 +283,7 @@ public extension NSAttributedString {
     func wy_calculateSize(controlSize: CGSize) -> CGSize {
         let attributedSize = boundingRect(with: controlSize, options: [.truncatesLastVisibleLine, .usesLineFragmentOrigin, .usesFontLeading], context: nil)
         
-        return CGSize(width: attributedSize.width, height: attributedSize.height)
+        return CGSize(width: ceil(attributedSize.width), height: ceil(attributedSize.height))
     }
     
     /// 获取每行显示的字符串(为了计算准确，尽量将使用到的属性如字间距、缩进、换行模式、字体等设置到调用本方法的attributedString对象中来, 没有用到的直接忽略)

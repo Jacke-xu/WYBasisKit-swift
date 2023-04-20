@@ -22,6 +22,7 @@ class WYTestChatController: UIViewController {
         inputBarConfig.voiceButtonImage = UIImage(named: "voice")!
         inputBarConfig.emojiButtomImage = UIImage(named: "xiaolian")!
         inputBarConfig.moreButtomImage = UIImage(named: "jia")!
+        inputBarConfig.emojiPattern = "\\[.{1,3}\\]"
         
         emojiViewConfig.emojiSource = try! NSArray(contentsOf: URL(string: "file://".appending(resourcePath))!, error: ()) as! [String]
         

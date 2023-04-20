@@ -41,8 +41,8 @@ class WYTableViewGroupedController: UIViewController {
         tableview.wy_register("UITableViewCell", .cell)
         tableview.wy_register("WYGroupedHeaderView", .headerFooterView)
         tableview.snp.makeConstraints { (make) in
-            make.left.top.right.equalToSuperview()
-            make.bottom.equalToSuperview().offset(-wy_tabBarHeight)
+            make.top.equalToSuperview().offset(wy_navViewHeight)
+            make.left.right.bottom.equalToSuperview()
         }
         return tableview
     }()

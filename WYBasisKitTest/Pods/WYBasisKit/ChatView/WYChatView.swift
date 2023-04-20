@@ -25,12 +25,7 @@ public class WYChatView: UIView {
 
         let tableView = UITableView.wy_shared(style: .plain, separatorStyle: .singleLine, delegate: self, dataSource: self, superView: self)
         tableView.wy_swipeOrTapCollapseKeyboard()
-        tableView.wy_register(["UITableViewCell",
-                               "UITableViewCell",
-                               "UITableViewCell"], [
-                                .cell,
-                                .cell,
-                                .cell])
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "UITableViewCell")
         tableView.snp.makeConstraints { (make) in
             make.left.right.equalToSuperview()
             make.top.equalToSuperview().offset(wy_navViewHeight)
@@ -199,7 +194,7 @@ extension WYChatView: WYChatEmojiViewDelegate {
         chatInput.textView.insertText(emoji)
         chatInput.textViewDidChange(chatInput.textView)
         
-        let start: UITextPosition = chatInput.textView.position(from: chatInput.textView.beginningOfDocument, offset: cursorPosition + 1)!
+        let start: UITextPosition = chatInput.textView.position(from: chatInput.textView.beginningOfDocument, offset: cursorPosition + (inputBarConfig.emojiPattern.isEmpty ? emoji.utf16.count : 1))!
         let end: UITextPosition = chatInput.textView.position(from: start, offset: 0)!
 
         chatInput.textView.selectedTextRange = chatInput.textView.textRange(from: start, to: end)

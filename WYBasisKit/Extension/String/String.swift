@@ -59,11 +59,10 @@ public extension String {
         paragraphStyle.lineSpacing = lineSpacing
         let attributes = [NSAttributedString.Key.font: controlFont, NSAttributedString.Key.paragraphStyle: paragraphStyle, NSAttributedString.Key.kern: NSNumber(value: Double(wordsSpacing))]
         
-        
         let string = self as NSString
-        let stringSize: CGSize! = string.boundingRect(with: controlSize, options: NSStringDrawingOptions(rawValue: NSStringDrawingOptions.truncatesLastVisibleLine.rawValue | NSStringDrawingOptions.usesLineFragmentOrigin.rawValue | NSStringDrawingOptions.usesFontLeading.rawValue), attributes: attributes, context: nil).size
+        let stringSize: CGSize = string.boundingRect(with: controlSize, options: NSStringDrawingOptions(rawValue: NSStringDrawingOptions.truncatesLastVisibleLine.rawValue | NSStringDrawingOptions.usesLineFragmentOrigin.rawValue | NSStringDrawingOptions.usesFontLeading.rawValue), attributes: attributes, context: nil).size
         
-        return CGSize(width: stringSize.width, height: stringSize.height)
+        return CGSize(width: ceil(stringSize.width), height: ceil(stringSize.height))
     }
     
     /// 判断字符串包含某个字符串

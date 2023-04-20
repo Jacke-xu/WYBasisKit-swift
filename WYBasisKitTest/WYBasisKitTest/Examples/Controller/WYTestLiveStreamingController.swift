@@ -105,7 +105,7 @@ class WYTestLiveStreamingController: UIViewController {
         
 //        player.play(with: "http://devimages.apple.com/iphone/samples/bipbop/bipbopall.m3u8")
         
-        player.play(with: "http://39.134.65.162/PLTV/88888888/224/3221225611/index.m3u8")
+        player.play(with: "http://devimages.apple.com/iphone/samples/bipbop/bipbopall.m3u8")
         
         WYActivity.showLoading(in: player, animation: .gif, config: WYActivityConfig.concise)
         

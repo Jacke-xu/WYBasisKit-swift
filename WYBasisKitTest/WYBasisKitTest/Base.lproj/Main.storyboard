@@ -11,7 +11,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="WYTabBarController" customModule="WYBasisKitTest" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="rootViewController" id="BYZ-38-t0r" customClass="WYTabBarController" customModule="WYBasisKitTest" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ggE-8Z-vuv"/>
                         <viewControllerLayoutGuide type="bottom" id="FxF-J8-vEE"/>

@@ -40,7 +40,7 @@ public class WYChatInputView: UIImageView {
     
     public weak var delegate: WYChatInputViewDelegate? = nil
     
-    init() {
+    public init() {
         super.init(frame: .zero)
         isUserInteractionEnabled = true
         backgroundColor = .clear

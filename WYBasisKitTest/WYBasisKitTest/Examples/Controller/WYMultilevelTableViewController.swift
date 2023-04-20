@@ -23,8 +23,8 @@ class WYMultilevelTableViewController: UIViewController {
         let tableview = UITableView.wy_shared(style: .plain, separatorStyle: .singleLine, delegate: self, dataSource: self, superView: view)
         tableview.wy_register("UITableViewCell", .cell)
         tableview.snp.makeConstraints { (make) in
-            make.left.top.right.equalToSuperview()
-            make.bottom.equalToSuperview().offset(-wy_tabBarHeight)
+            make.top.equalToSuperview().offset(wy_navViewHeight)
+            make.left.right.bottom.equalToSuperview()
         }
         dataSource.append(WYMultilevelTable(superLevel: 0, level: 0))
 

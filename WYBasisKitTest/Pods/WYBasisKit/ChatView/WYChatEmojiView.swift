@@ -34,10 +34,11 @@ public class WYChatEmojiView: UIView {
         
         let emojiViewMinimumInteritemSpacing: CGFloat = (wy_screenWidth - emojiViewConfig.sectionInset.left - emojiViewConfig.sectionInset.right - (CGFloat(emojiViewConfig.minimumLineCount) * emojiViewConfig.itemSize.width)) / (CGFloat(emojiViewConfig.minimumLineCount) - 1.0)
         let collectionView = UICollectionView.wy_shared(scrollDirection: emojiViewConfig.scrollDirection, minimumLineSpacing: emojiViewConfig.minimumLineSpacing, minimumInteritemSpacing: emojiViewMinimumInteritemSpacing, itemSize: emojiViewConfig.itemSize, delegate: self, dataSource: self, superView: self)
-        collectionView.wy_register("WYEmojiViewCell", .cell)
-        collectionView.wy_register("WYEmojiHeaderView", .headerView)
-        collectionView.wy_register("UICollectionReusableView", .headerView)
-        collectionView.wy_register("UICollectionReusableView", .footerView)
+        
+        collectionView.register(WYEmojiViewCell.self, forCellWithReuseIdentifier: "WYEmojiViewCell")
+        collectionView.register(WYEmojiHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "WYEmojiHeaderView")
+        collectionView.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "UICollectionReusableView")
+        collectionView.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: "UICollectionReusableView")
         collectionView.isPagingEnabled = emojiViewConfig.isPagingEnabled
         collectionView.showsVerticalScrollIndicator = !collectionView.isPagingEnabled
         collectionView.showsHorizontalScrollIndicator = false
@@ -61,7 +62,7 @@ public class WYChatEmojiView: UIView {
         return dataSource
     }()
     
-    init() {
+    public init() {
         super.init(frame: .zero)
         self.collectionView.backgroundColor = emojiViewConfig.backgroundColor
     }
@@ -134,8 +135,11 @@ extension WYChatEmojiView: UICollectionViewDelegate, UICollectionViewDataSource,
     }
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell: WYEmojiViewCell  = collectionView.dequeueReusableCell(withReuseIdentifier: "WYEmojiViewCell", for: indexPath) as! WYEmojiViewCell
+        
+        let cell: WYEmojiViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "WYEmojiViewCell", for: indexPath) as! WYEmojiViewCell
+        
         cell.emojiView.image = UIImage.wy_find(dataSource[indexPath.section][indexPath.item])
+        
         return cell
     }
     

@@ -1483,10 +1483,10 @@
 		DCFEC13529F0D131001AE8E7 /* ChatView */ = {
 			isa = PBXGroup;
 			children = (
+				DCFEC13929F0D131001AE8E7 /* WYChatConfig.swift */,
 				DCFEC13629F0D131001AE8E7 /* WYChatView.swift */,
 				DCFEC13729F0D131001AE8E7 /* WYEmojiViewCell.swift */,
 				DCFEC13829F0D131001AE8E7 /* WYChatMoreView.swift */,
-				DCFEC13929F0D131001AE8E7 /* WYChatConfig.swift */,
 				DCFEC13A29F0D131001AE8E7 /* WYChatEmojiView.swift */,
 				DCFEC13B29F0D131001AE8E7 /* WYChatInputView.swift */,
 				DCFEC13C29F0D131001AE8E7 /* WYEmojiHeaderView.swift */,

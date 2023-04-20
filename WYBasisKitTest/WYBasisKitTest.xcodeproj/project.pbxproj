@@ -578,7 +578,6 @@
 				DCFEC11729EFED62001AE8E7 /* WYRightController.swift */,
 				DCFEC10529EFED62001AE8E7 /* WYTestBannerController.swift */,
 				DCFEC10629EFED62001AE8E7 /* WYParseGifController.swift */,
-				DCFEC10729EFED62001AE8E7 /* WYTestChatController.swift */,
 				DCFEC10829EFED62001AE8E7 /* WYTableViewPlainController.swift */,
 				DCFEC10929EFED62001AE8E7 /* WYQRCodeController.swift */,
 				DCFEC10A29EFED62001AE8E7 /* WYTestRichTextController.swift */,
@@ -593,6 +592,7 @@
 				DCFEC11529EFED62001AE8E7 /* WYFlowLayoutAlignmentController.swift */,
 				DCFEC11629EFED62001AE8E7 /* WYTestInterfaceOrientationController.swift */,
 				DCFEC11829EFED62001AE8E7 /* WYTestDarkNightModeController.swift */,
+				DCFEC10729EFED62001AE8E7 /* WYTestChatController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";

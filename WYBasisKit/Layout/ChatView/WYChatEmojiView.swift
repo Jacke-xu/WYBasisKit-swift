@@ -61,7 +61,7 @@ public class WYChatEmojiView: UIView {
         return dataSource
     }()
     
-    init() {
+    public init() {
         super.init(frame: .zero)
         self.collectionView.backgroundColor = emojiViewConfig.backgroundColor
     }
