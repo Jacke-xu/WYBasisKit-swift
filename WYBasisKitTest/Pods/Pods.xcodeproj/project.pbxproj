@@ -1176,7 +1176,6 @@
 		45BBDD6031EFD432E44129FEE1905109 /* WYBasisKit */ = {
 			isa = PBXGroup;
 			children = (
-				DCFEC13529F0D131001AE8E7 /* ChatView */,
 				7D7B5A8DDE20DCEB263E02DBD70DB36D /* Activity */,
 				DF1B01E9770DB557E683FC882FF390F6 /* Config */,
 				E6CEA2771D145770C195BFD68087584A /* Extension */,
@@ -1220,6 +1219,7 @@
 		5D6F93560328A06FB9CBC7061AD5A9A7 /* Layout */ = {
 			isa = PBXGroup;
 			children = (
+				DCFEC13529F0D131001AE8E7 /* ChatView */,
 				ED66B80EA05D927D2AD12F46F99B9B93 /* BannerView */,
 				5F3EDB42297E80692E726E6FE9E70DE4 /* FlowLayout */,
 				6324485D670267A79EBFC4EA254AF156 /* PagingView */,
@@ -1491,8 +1491,7 @@
 				DCFEC13B29F0D131001AE8E7 /* WYChatInputView.swift */,
 				DCFEC13C29F0D131001AE8E7 /* WYEmojiHeaderView.swift */,
 			);
-			name = ChatView;
-			path = WYBasisKit/ChatView;
+			path = ChatView;
 			sourceTree = "<group>";
 		};
 		DF1B01E9770DB557E683FC882FF390F6 /* Config */ = {
