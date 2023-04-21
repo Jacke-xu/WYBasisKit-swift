@@ -29,7 +29,9 @@ class WYTestChatController: UIViewController {
         let chatView = WYChatView()
         view.addSubview(chatView)
         chatView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.top.equalToSuperview().offset(wy_navViewHeight)
+            make.left.right.equalToSuperview()
+            make.bottom.equalToSuperview().offset(-wy_tabbarSafetyZone)
         }
     }
     

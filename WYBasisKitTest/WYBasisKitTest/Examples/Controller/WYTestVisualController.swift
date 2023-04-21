@@ -17,7 +17,7 @@ class WYTestVisualController: UIViewController {
         
         let button1 = UIButton(type: .custom)
         view.addSubview(button1)
-        button1.wy_setBackgroundColor(.orange, forState: .normal)
+        button1.wy_backgroundColor(.orange, forState: .normal)
         button1.titleLabel?.numberOfLines = 0
         button1.setTitle("frame控件", for: .normal)
         button1.wy_borderWidth(5).wy_borderColor(.yellow).wy_rectCorner([.bottomLeft, .topRight]).wy_cornerRadius(10).wy_shadowRadius(20).wy_shadowColor(.green).wy_shadowOpacity(0.5).wy_showVisual()

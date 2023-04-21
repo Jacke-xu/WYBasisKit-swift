@@ -16,8 +16,8 @@ class WYTestDarkNightModeController: UIViewController {
         // Do any additional setup after loading the view.
         
         let button = UIButton(type: .custom)
-        button.wy_setBackgroundColor(.orange, forState: .normal)
-        button.wy_setBackgroundColor(.green, forState: .selected)
+        button.wy_backgroundColor(.orange, forState: .normal)
+        button.wy_backgroundColor(.green, forState: .selected)
         button.titleLabel?.numberOfLines = 0
         button.setTitle("亮色/中文", for: .normal)
         button.setTitle("Dark night/English", for: .selected)

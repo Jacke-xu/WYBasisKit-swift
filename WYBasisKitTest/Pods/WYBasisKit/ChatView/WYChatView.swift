@@ -15,8 +15,7 @@ public class WYChatView: UIView {
         inputView.delegate = self
         addSubview(inputView)
         inputView.snp.makeConstraints { make in
-            make.left.right.equalToSuperview()
-            make.bottom.equalToSuperview().offset(-wy_tabbarSafetyZone)
+            make.left.right.bottom.equalToSuperview()
         }
         return inputView
     }()
@@ -27,8 +26,7 @@ public class WYChatView: UIView {
         tableView.wy_swipeOrTapCollapseKeyboard()
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "UITableViewCell")
         tableView.snp.makeConstraints { (make) in
-            make.left.right.equalToSuperview()
-            make.top.equalToSuperview().offset(wy_navViewHeight)
+            make.left.right.top.equalToSuperview()
             make.bottom.equalTo(chatInput.snp.top)
         }
         return tableView
@@ -37,6 +35,7 @@ public class WYChatView: UIView {
     public lazy var emojiView: WYChatEmojiView = {
         let emojiView: WYChatEmojiView = WYChatEmojiView()
         emojiView.delegate = self
+        emojiView.isHidden = true
         addSubview(emojiView)
         emojiView.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
@@ -48,7 +47,7 @@ public class WYChatView: UIView {
     
     public init() {
         super.init(frame: .zero)
-        self.tableView.backgroundColor = .purple
+        self.tableView.backgroundColor = .white
         if inputBarConfig.emojiTextButtonSize != CGSize.zero {
             self.emojiView.backgroundColor = .clear
         }
@@ -59,13 +58,13 @@ public class WYChatView: UIView {
     
     @objc private func keyboardWillShow(notification: Notification) {
         let keyboardRect = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
-        updateInputViewOffset(offsety: keyboardRect.size.height)
+        updateInputViewOffset(offsety: keyboardRect.size.height - wy_tabbarSafetyZone)
         updateEmojiViewConstraints(false)
     }
     
     @objc private func keyboardWillDismiss() {
         
-        let offsety: CGFloat = chatInput.emojiView.isSelected ? (wy_tabbarSafetyZone + emojiViewConfig.contentHeight) : wy_tabbarSafetyZone
+        let offsety: CGFloat = chatInput.emojiView.isSelected ? emojiViewConfig.contentHeight : 0
         updateInputViewOffset(offsety: offsety)
     }
     
@@ -86,17 +85,25 @@ public class WYChatView: UIView {
     
     private func updateEmojiViewConstraints(_ isEmoji: Bool) {
         
+        if (isEmoji == false) && (emojiView.isHidden == true) {
+            return
+        }
+        
+        emojiView.isHidden = false
+        
         if chatInput.textView.isFirstResponder == false {
             keyboardWillDismiss()
         }
         
         if inputBarConfig.emojiTextButtonSize != CGSize.zero {
-            let emojiOffset: CGFloat = isEmoji ? -wy_tabbarSafetyZone : emojiViewConfig.contentHeight
+            let emojiOffset: CGFloat = isEmoji ? 0 : emojiViewConfig.contentHeight
             UIView.animate(withDuration: 0.25) { [weak self] in
                 self?.emojiView.snp.updateConstraints { make in
                     make.bottom.equalToSuperview().offset(emojiOffset)
                 }
                 self?.emojiView.superview?.layoutIfNeeded()
+            }completion: {[weak self] _ in
+                self?.emojiView.isHidden = !isEmoji
             }
         }
     }
@@ -104,6 +111,7 @@ public class WYChatView: UIView {
     public func scrollViewDidScroll(_ scrollView: UIScrollView) {
         chatInput.emojiView.isSelected = false
         updateEmojiViewConstraints(false)
+        emojiView.isHidden = true
     }
     
     required init?(coder: NSCoder) {
@@ -127,7 +135,7 @@ public class WYChatView: UIView {
 extension WYChatView: UITableViewDelegate, UITableViewDataSource {
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return 20
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -166,6 +174,7 @@ extension WYChatView: WYChatInputViewDelegate {
         }else {
             wy_print("显示语音")
             updateEmojiViewConstraints(false)
+            emojiView.isHidden = true
         }
     }
     

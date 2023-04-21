@@ -221,7 +221,7 @@ public extension UIButton {
     }
     
     /** 设置按钮背景色 */
-    func wy_setBackgroundColor(_ color: UIColor, forState: UIControl.State) {
+    func wy_backgroundColor(_ color: UIColor, forState: UIControl.State) {
         
         UIGraphicsBeginImageContext(CGSize(width: 1, height: 1))
         UIGraphicsGetCurrentContext()!.setFillColor(color.cgColor)

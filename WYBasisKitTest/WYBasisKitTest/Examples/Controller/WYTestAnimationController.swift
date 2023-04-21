@@ -18,7 +18,7 @@ class WYTestAnimationController: UIViewController {
         let button = UIButton(type: .custom)
         button.setTitle("让约束支持动画", for: .normal)
         button.titleLabel?.numberOfLines = 0
-        button.wy_setBackgroundColor(.orange, forState: .normal)
+        button.wy_backgroundColor(.orange, forState: .normal)
         view.addSubview(button)
         button.snp.makeConstraints { (make) in
             make.centerX.equalToSuperview()

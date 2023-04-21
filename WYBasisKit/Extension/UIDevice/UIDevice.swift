@@ -810,11 +810,11 @@ private extension UIDevice {
             let window = UIApplication.shared.connectedScenes.map({ $0 as? UIWindowScene }).compactMap({ $0 }).first?.windows.first
             
             if let windowScene: UIWindowScene = window?.windowScene {
-                windowScene.requestGeometryUpdate(UIWindowScene.GeometryPreferences.iOS(interfaceOrientations: wy_currentInterfaceOrientation))
                 UIViewController.wy_currentController()?.setNeedsUpdateOfSupportedInterfaceOrientations()
                 windowScene.requestGeometryUpdate(UIWindowScene.GeometryPreferences.iOS(interfaceOrientations: wy_currentInterfaceOrientation)) { error in
                     wy_print("旋转屏幕方向出错啦： \(error.localizedDescription)")
                 }
+                
             }else {
                 wy_print("旋转屏幕方向出错啦")
             }

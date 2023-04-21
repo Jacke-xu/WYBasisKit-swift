@@ -156,9 +156,57 @@ extension WYChatEmojiView: UICollectionViewDelegate, UICollectionViewDataSource,
 
 public class WYEmojiFuncAreaView: UIView {
     
-    init() {
+    var sendView: UIButton!
+    var deleteView: UIButton!
+    
+    public init() {
         super.init(frame: .zero)
         backgroundColor = .clear
+        
+        let contentView: UIView = UIView()
+        contentView.backgroundColor = emojiViewConfig.backgroundColor
+        addSubview(contentView)
+        contentView.snp.makeConstraints { make in
+            make.left.right.bottom.equalToSuperview()
+            make.top.equalToSuperview().offset(emojiViewConfig.funcAreaConfig.sendViewAndDeleteViewTopOffset)
+        }
+        
+        sendView = createFuncButton(text: emojiViewConfig.funcAreaConfig.sendViewText, textColorWithUnenable: emojiViewConfig.funcAreaConfig.sendViewTextColorWithUnenable, textColorWithEnable: emojiViewConfig.funcAreaConfig.sendViewTextColorWithEnable, textColorWithHighly: emojiViewConfig.funcAreaConfig.sendViewTextColorWithHighly, backgroundColorWithUnenable: emojiViewConfig.funcAreaConfig.sendViewColorWithUnenable, backgroundColorWithEnable: emojiViewConfig.funcAreaConfig.sendViewColorWithEnable, backgroundColorWithHighly: emojiViewConfig.funcAreaConfig.sendViewColorWithHighly, iconWithUnenable: emojiViewConfig.funcAreaConfig.sendViewImageWithUnenable, iconWithEnable: emojiViewConfig.funcAreaConfig.sendViewImageWithEnable, iconWithHighly: emojiViewConfig.funcAreaConfig.sendViewImageWithHighly, selector: #selector(didClickSendView))
+        
+        deleteView = createFuncButton(text: emojiViewConfig.funcAreaConfig.deleteViewText, textColorWithUnenable: emojiViewConfig.funcAreaConfig.deleteViewTextColorWithUnenable, textColorWithEnable: emojiViewConfig.funcAreaConfig.deleteViewTextColorWithEnable, textColorWithHighly: emojiViewConfig.funcAreaConfig.deleteViewTextColorWithHighly, backgroundColorWithUnenable: emojiViewConfig.funcAreaConfig.deleteViewColorWithUnenable, backgroundColorWithEnable: emojiViewConfig.funcAreaConfig.deleteViewColorWithEnable, backgroundColorWithHighly: emojiViewConfig.funcAreaConfig.deleteViewColorWithHighly, iconWithUnenable: emojiViewConfig.funcAreaConfig.deleteViewImageWithUnenable, iconWithEnable: emojiViewConfig.funcAreaConfig.deleteViewImageWithEnable, iconWithHighly: emojiViewConfig.funcAreaConfig.deleteViewImageWithHighly, selector: #selector(didClickDeleteView))
+    }
+    
+    @objc func didClickSendView() {
+        
+    }
+    
+    @objc func didClickDeleteView() {
+        
+    }
+    
+    private func createFuncButton(text: String, textColorWithUnenable: UIColor, textColorWithEnable: UIColor, textColorWithHighly: UIColor, backgroundColorWithUnenable: UIColor, backgroundColorWithEnable: UIColor, backgroundColorWithHighly: UIColor, iconWithUnenable: UIImage, iconWithEnable: UIImage, iconWithHighly: UIImage, selector: Selector) -> UIButton {
+            
+        let button: UIButton = UIButton(type: .custom)
+        button.wy_sTitle = text
+        button.wy_nTitle = text
+        button.wy_hTitle = text
+        button.wy_title_sColor = textColorWithUnenable
+        button.wy_title_nColor = textColorWithEnable
+        button.wy_title_hColor = textColorWithHighly
+        button.wy_backgroundColor(backgroundColorWithUnenable, forState: .selected)
+        button.wy_backgroundColor(backgroundColorWithEnable, forState: .normal)
+        button.wy_backgroundColor(backgroundColorWithHighly, forState: .highlighted)
+        button.wy_sImage = iconWithUnenable
+        button.wy_nImage = iconWithEnable
+        button.wy_hImage = iconWithHighly
+        button.addTarget(self, action: selector, for: .touchUpInside)
+        
+        return button
+    }
+    
+    func updateFuncAreaStyle() {
+        sendView.isSelected = isUserInteractionEnabled
+        deleteView.isSelected = sendView.isSelected
     }
     
     required init?(coder: NSCoder) {
@@ -236,17 +284,23 @@ public struct WYEmojiViewConfig {
 
 public struct WYEmojiFuncAreaConfig {
     
-    /// 删除按钮不可点击时边框颜色
-    public var deleteViewBorderColorWithUnenable: UIColor = .clear
+    /// 整个功能区size
+    public var areaSize: CGSize = CGSize(width: wy_screenWidth(150), height: wy_screenWidth(90))
     
-    /// 发送按钮不可点击时边框颜色
-    public var sendViewBorderColorWithUnenable: UIColor = .clear
+    /// 发送按钮和删除按钮的size
+    public var sendViewAndDeleteViewSize: CGSize = CGSize(width: wy_screenWidth(50), height: wy_screenWidth(40))
     
-    /// 删除按钮可点击时边框颜色
-    public var deleteViewBorderColorWithEnable: UIColor = .clear
+    /// 发送按钮左侧和删除按钮右侧之间的间距
+    public var sendViewLeftOffsetWithDeleteView: CGFloat = wy_screenWidth(8)
     
-    /// 发送按钮可点击时边框颜色
-    public var sendViewBorderColorWithEnable: UIColor = .clear
+    /// 发送按钮距离功能区右侧间距
+    public var sendViewRightOffset: CGFloat = wy_screenWidth(10)
+    
+    /// 发送按钮和删除按钮距离功能区顶部的间距
+    public var sendViewAndDeleteViewTopOffset: CGFloat = wy_screenWidth(20)
+    
+    /// 删除按钮和发送按钮icon的size
+    public var deleteViewAndSendViewIconSize: CGSize = CGSize(width: wy_screenWidth(18), height: wy_screenWidth(15))
     
     /// 删除按钮按压状态边框颜色
     public var deleteViewBorderColorWithHighly: UIColor = .clear
@@ -259,6 +313,18 @@ public struct WYEmojiFuncAreaConfig {
     
     /// 删除按钮和发送按钮的圆角半径
     public var deleteViewAndSendViewCornerRadius: CGFloat = wy_screenWidth(5)
+    
+    /// 删除按钮不可点击时边框颜色
+    public var deleteViewBorderColorWithUnenable: UIColor = .clear
+    
+    /// 发送按钮不可点击时边框颜色
+    public var sendViewBorderColorWithUnenable: UIColor = .clear
+    
+    /// 删除按钮可点击时边框颜色
+    public var deleteViewBorderColorWithEnable: UIColor = .clear
+    
+    /// 发送按钮可点击时边框颜色
+    public var sendViewBorderColorWithEnable: UIColor = .clear
     
     /// 删除按钮不可点击时背景色
     public var deleteViewColorWithUnenable: UIColor = .white
