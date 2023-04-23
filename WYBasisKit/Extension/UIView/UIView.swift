@@ -253,7 +253,7 @@ public extension UIView {
     
     /// 使用链式编程设置圆角、边框、阴影(调用方式类似SnapKit， 也可直接.语法)
     @discardableResult
-    func wy_makeVisual(visualView: (UIView) -> Void) -> UIView {
+    func wy_makeVisual(_ visualView: (_ make: UIView) -> Void) -> UIView {
         visualView(self)
         return wy_showVisual()
     }

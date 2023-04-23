@@ -10,13 +10,15 @@ import UIKit
 
 class WYLeftController: UIViewController {
 
-    let cellTitles: [String] = ["暗夜/白昼模式",
+    let cellTitles: [String] = ["暗夜、白昼模式",
                                 "约束view添加动画",
-                                "边框、圆角、阴影、渐变","Banner",
+                                "边框、圆角、阴影、渐变",
+                                "ButtonEdgeInsets",
+                                "Banner",
                                 "RichText",
                                 "无限层折叠TableView",
-                                "测试tableView.plain模式",
-                                "测试tableView.grouped模式",
+                                "tableView.plain",
+                                "tableView.grouped",
                                 "下载",
                                 "网络请求",
                                 "屏幕旋转",
@@ -29,6 +31,7 @@ class WYLeftController: UIViewController {
     let controller: [String] = ["WYTestDarkNightModeController",
                                 "WYTestAnimationController",
                                 "WYTestVisualController",
+                                "WYTestButtonEdgeInsetsController",
                                 "WYTestBannerController",
                                 "WYTestRichTextController",
                                 "WYMultilevelTableViewController",

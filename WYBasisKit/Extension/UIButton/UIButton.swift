@@ -12,13 +12,13 @@ import UIKit
 public enum WYButtonPosition {
     
     /** 图片在左，文字在右，默认 */
-    case imageLeft_titleRight
+    case imageLeftTitleRight
     /** 图片在右，文字在左 */
-    case imageRight_titleLeft
+    case imageRightTitleLeft
     /** 图片在上，文字在下 */
-    case imageTop_titleBottom
+    case imageTopTitleBottom
     /** 图片在下，文字在上 */
-    case imageBottom_titleTop
+    case imageBottomTitleTop
 }
 
 public extension UIButton {
@@ -37,12 +37,12 @@ public extension UIButton {
     }
     
     /**
-     *  利用UIButton的titleEdgeInsets和imageEdgeInsets来实现文字和图片的自由排列
+     *  实现Button内部文字和图片的自由排列
      *  注意：这个方法需要在设置图片和文字之后才可以调用，且button的大小要大于 图片大小+文字大小+spacing
      *  什么都不设置默认为图片在左，文字在右，居中且挨着排列的
      *  @param spacing 图片和文字的间隔
      */
-    func wy_layouEdgeInsets(position: WYButtonPosition, spacing: CGFloat = 0) {
+    func wy_updateInsets(position: WYButtonPosition, spacing: CGFloat = 0) {
         
         DispatchQueue.main.async {
             
@@ -53,76 +53,70 @@ public extension UIButton {
             }
             self.superview?.layoutIfNeeded()
             
-            let imageWidth: CGFloat = (self.currentImage?.size.width) ?? 0
-            let imageHeight: CGFloat = (self.currentImage?.size.height) ?? 0
-            let textWidth: CGFloat = (self.wy_stringWidth(string: self.currentTitle ?? "",controlFont: self.titleLabel?.font ?? .systemFont(ofSize: 15)))
-            let textHeight: CGFloat = (self.titleLabel?.font.lineHeight) ?? 0
-            
-            // image中心移动的x距离
-            let imageOffsetX: CGFloat = (imageWidth + textWidth) / 2 - imageWidth / 2
-            // image中心移动的y距离
-            let imageOffsetY: CGFloat = imageHeight / 2 + spacing / 2
-            // 文字中心移动的x距离
-            let textOffsetX: CGFloat = (imageWidth + textWidth / 2) - (imageWidth + textWidth) / 2
-            // 文字中心移动的y距离
-            let textOffsetY: CGFloat = textHeight / 2 + spacing / 2
-            
+            let imageWidth: CGFloat = (self.imageView?.frame.size.width)!
+            let imageHeight: CGFloat = (self.imageView?.frame.size.height)!
+            let labelWidth: CGFloat = CGFloat(self.titleLabel!.intrinsicContentSize.width)
+            let labelHeight: CGFloat = CGFloat(self.titleLabel!.intrinsicContentSize.height)
+
             switch position {
                 
-            case .imageRight_titleLeft:
-                
-                self.imageEdgeInsets = UIEdgeInsets(top: 0, left: textWidth+spacing/2, bottom: 0, right: -(textWidth+spacing/2))
-                self.titleEdgeInsets = UIEdgeInsets(top: 0, left: -(imageWidth+spacing/2), bottom: 0, right: imageWidth+spacing/2)
-                
-                if (textWidth + imageWidth + spacing) > self.frame.size.width {
+            case .imageRightTitleLeft:
+
+                if #available(iOS 15.0, *) {
                     
-                    // 内容偏移x距离
-                    let contentOffsetx: CGFloat = spacing / 2
-                    self.contentEdgeInsets = UIEdgeInsets(top: 0, left: contentOffsetx, bottom: 0, right: contentOffsetx)
+                    var configuration: UIButton.Configuration = .plain()
+                    configuration.imagePlacement = .trailing
+                    configuration.imagePadding = spacing
+                    self.configuration = configuration
+                    
+                }else {
+                    self.imageEdgeInsets = UIEdgeInsets(top:0, left:labelWidth+spacing/2.0, bottom: 0, right: -labelWidth-spacing/2.0)
+                    self.titleEdgeInsets =  UIEdgeInsets(top:0, left:-imageWidth-spacing/2.0, bottom: 0, right:imageWidth+spacing/2.0)
                 }
                 break
                 
-            case .imageLeft_titleRight:
+            case .imageLeftTitleRight:
                 
-                self.imageEdgeInsets = UIEdgeInsets(top: 0, left: -spacing/2, bottom: 0, right: spacing/2)
-                self.titleEdgeInsets = UIEdgeInsets(top: 0, left: spacing/2, bottom: 0, right: -spacing/2)
-                
-                if (textWidth + imageWidth + spacing) > self.frame.size.width {
+                if #available(iOS 15.0, *) {
                     
-                    // 内容偏移x距离
-                    let contentOffsetx: CGFloat = spacing / 2
-                    self.contentEdgeInsets = UIEdgeInsets(top: 0, left: contentOffsetx, bottom: 0, right: contentOffsetx)
+                    var configuration: UIButton.Configuration = .plain()
+                    configuration.imagePlacement = .leading
+                    configuration.imagePadding = spacing
+                    self.configuration = configuration
+                    
+                }else {
+                    self.titleEdgeInsets = UIEdgeInsets(top:0, left:spacing/2.0, bottom: 0, right: -spacing/2.0)
+                    self.imageEdgeInsets = UIEdgeInsets(top:0, left:-spacing/2.0, bottom: 0, right:spacing/2.0)
                 }
                 break
                 
-            case .imageTop_titleBottom:
+            case .imageTopTitleBottom:
                 
-                self.imageEdgeInsets = UIEdgeInsets(top: -imageOffsetY, left: imageOffsetX, bottom: imageOffsetY, right: -imageOffsetX)
-                self.titleEdgeInsets = UIEdgeInsets(top: textOffsetY, left: -textOffsetX, bottom: -textOffsetY, right: textOffsetX)
-                
-                if (((textWidth + imageWidth + spacing) > self.frame.size.width) || ((textHeight + imageHeight + spacing) > self.frame.size.height)) {
+                if #available(iOS 15.0, *) {
                     
-                    // 内容偏移x距离
-                    let contentOffsetx: CGFloat = ([imageWidth, textWidth].min()!) / 2
-                    // 内容偏移y距离
-                    let contentOffsety: CGFloat = (([imageHeight, textHeight].min()!) / 2) + (spacing / 2)
-                    self.contentEdgeInsets = UIEdgeInsets(top: contentOffsety, left: -contentOffsetx, bottom: contentOffsety, right: -contentOffsetx)
+                    var configuration: UIButton.Configuration = .plain()
+                    configuration.imagePlacement = .top
+                    configuration.imagePadding = spacing
+                    self.configuration = configuration
+                    
+                }else {
+                    self.imageEdgeInsets = UIEdgeInsets(top: -labelHeight - spacing/2.0, left: 0, bottom: 0, right:  -labelWidth)
+                    self.titleEdgeInsets =  UIEdgeInsets(top:0, left: -imageWidth, bottom: -imageHeight-spacing/2.0, right: 0)
                 }
                 break
                 
-            case .imageBottom_titleTop:
+            case .imageBottomTitleTop:
                 
-                self.imageEdgeInsets = UIEdgeInsets(top: imageOffsetY, left: imageOffsetX, bottom: -imageOffsetY, right: -imageOffsetX)
-                self.titleEdgeInsets = UIEdgeInsets(top: -textOffsetY, left: -textOffsetX, bottom: textOffsetY, right: textOffsetX)
-                self.contentEdgeInsets = UIEdgeInsets(top: 0, left: -(imageWidth / 2), bottom: 0, right: -(imageWidth / 2))
-                
-                if (((textWidth + imageWidth + spacing) > self.frame.size.width) || ((textHeight + imageHeight + spacing) > self.frame.size.height)) {
+                if #available(iOS 15.0, *) {
                     
-                    // 内容偏移x距离
-                    let contentOffsetx: CGFloat = ([imageWidth, textWidth].min()!) / 2
-                    // 内容偏移y距离
-                    let contentOffsety: CGFloat = (([imageHeight, textHeight].min()!) / 2) + (spacing / 2)
-                    self.contentEdgeInsets = UIEdgeInsets(top: contentOffsety, left: -contentOffsetx, bottom: contentOffsety, right: -contentOffsetx)
+                    var configuration: UIButton.Configuration = .plain()
+                    configuration.imagePlacement = .bottom
+                    configuration.imagePadding = spacing
+                    self.configuration = configuration
+                    
+                }else {
+                    self.imageEdgeInsets = UIEdgeInsets(top:0, left:0, bottom: -labelHeight-spacing/2.0, right: -labelWidth)
+                    self.titleEdgeInsets =  UIEdgeInsets(top:-imageHeight-spacing/2.0, left:-imageWidth, bottom: 0, right: 0)
                 }
                 break
             }

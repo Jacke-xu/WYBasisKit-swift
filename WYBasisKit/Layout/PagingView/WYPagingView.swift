@@ -32,7 +32,7 @@ public class WYPagingView: UIView {
     public var bar_Height: CGFloat = wy_screenWidth(45, WYBasisKitConfig.defaultScreenPixels)
     
     /// 图片和文字显示模式
-    public var buttonPosition: WYButtonPosition = .imageTop_titleBottom
+    public var buttonPosition: WYButtonPosition = .imageTopTitleBottom
 
     /// 分页栏左起始点距离(第一个标题栏距离屏幕边界的距离) 默认0
     public var bar_originlLeftOffset: CGFloat = 0
@@ -286,7 +286,7 @@ extension WYPagingView {
         
         if(((defaultImages.count == controllers.count) || (selectedImages.count == controllers.count)) && (titles.count == controllers.count)) {
             
-            sender.wy_layouEdgeInsets(position: buttonPosition, spacing: barButton_dividingOffset)
+            sender.wy_updateInsets(position: buttonPosition, spacing: barButton_dividingOffset)
             
             sender.superview?.wy_rectCorner(.allCorners).wy_cornerRadius(bar_item_cornerRadius).wy_showVisual()
         }
