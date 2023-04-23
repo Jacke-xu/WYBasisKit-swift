@@ -23,19 +23,6 @@ public enum WYButtonPosition {
 
 public extension UIButton {
     
-    /// 返回一个计算好的字符串的宽度
-    private func wy_stringWidth(string: String, controlHeight: CGFloat = 0, controlFont: UIFont, lineSpacing: CGFloat = 0) -> CGFloat {
-        
-        let sharedControlHeight = (controlHeight == 0) ? controlFont.lineHeight : controlHeight
-        
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineSpacing = lineSpacing
-        let attributes = [NSAttributedString.Key.font: controlFont, NSAttributedString.Key.paragraphStyle: paragraphStyle]
-        let stringSize: CGSize! = string.boundingRect(with: CGSize(width: .greatestFiniteMagnitude, height: sharedControlHeight), options: NSStringDrawingOptions(rawValue: NSStringDrawingOptions.truncatesLastVisibleLine.rawValue | NSStringDrawingOptions.usesLineFragmentOrigin.rawValue | NSStringDrawingOptions.usesFontLeading.rawValue), attributes: attributes, context: nil).size
-        
-        return stringSize.width
-    }
-    
     /**
      *  实现Button内部文字和图片的自由排列
      *  注意：这个方法需要在设置图片和文字之后才可以调用，且button的大小要大于 图片大小+文字大小+spacing
