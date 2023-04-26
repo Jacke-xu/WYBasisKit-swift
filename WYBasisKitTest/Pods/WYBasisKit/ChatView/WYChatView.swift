@@ -162,6 +162,7 @@ extension WYChatView: WYChatInputViewDelegate {
     public func didClickEmojiTextView(_ isEmoji: Bool) {
         if isEmoji {
             wy_print("显示表情")
+            updateEmojiFuncAreaViewState()
         }else {
             wy_print("显示键盘")
         }
@@ -180,11 +181,22 @@ extension WYChatView: WYChatInputViewDelegate {
     
     public func textDidChanged(_ text: String) {
         chatInput.textView.attributedText = chatInput.sharedEmojiAttributed(string: text)
+        updateEmojiFuncAreaViewState()
+        
         wy_print("输入的文本：\(text)")
     }
     
     public func didClickKeyboardEvent(_ text: String) {
         wy_print("点击了键盘右下角按钮，最终文本内容是：\(text)")
+    }
+    
+    public func updateEmojiFuncAreaViewState() {
+        
+        let userInteractionEnabled: Bool = (chatInput.textView.attributedText.string.utf16.count > 0)
+        emojiView.funcAreaView.sendView.isUserInteractionEnabled = userInteractionEnabled
+        emojiView.funcAreaView.deleteView.isUserInteractionEnabled = userInteractionEnabled
+        emojiView.funcAreaView.sendView.isSelected = !userInteractionEnabled
+        emojiView.funcAreaView.deleteView.isSelected = !userInteractionEnabled
     }
 }
 

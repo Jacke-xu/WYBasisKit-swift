@@ -26,6 +26,12 @@ class WYTestChatController: UIViewController {
         
         emojiViewConfig.emojiSource = try! NSArray(contentsOf: URL(string: "file://".appending(resourcePath))!, error: ()) as! [String]
         
+        emojiViewConfig.funcAreaConfig.deleteViewImageWithUnenable = UIImage.wy_find("chatDeleteUnenable")
+        emojiViewConfig.funcAreaConfig.deleteViewImageWithEnable = UIImage.wy_find("chatDeleteEnable")
+        emojiViewConfig.funcAreaConfig.deleteViewImageWithHighly = UIImage.wy_find("chatDeleteEnable")
+        
+        emojiViewConfig.funcAreaConfig.deleteViewText = ""
+        
         let chatView = WYChatView()
         view.addSubview(chatView)
         chatView.snp.makeConstraints { make in

@@ -48,23 +48,82 @@ public class WYChatEmojiView: UIView {
         return collectionView
     }()
     
+    lazy var funcAreaView: WYEmojiFuncAreaView = {
+        let funcAreaView: WYEmojiFuncAreaView = WYEmojiFuncAreaView()
+        addSubview(funcAreaView)
+        funcAreaView.snp.makeConstraints { make in
+            make.size.equalTo(emojiViewConfig.funcAreaConfig.areaSize)
+            make.right.equalToSuperview().offset(-emojiViewConfig.funcAreaConfig.areaRightOffset)
+            make.bottom.equalToSuperview().offset(-emojiViewConfig.funcAreaConfig.areaBottomOffset)
+        }
+        return funcAreaView
+    }()
+    
     lazy private var recentlyEmoji: [String] = {
         let recentlyEmoji: [String] = UserDefaults.standard.array(forKey: emojiViewRecentlyCountKey) as? [String] ?? []
         return recentlyEmoji
     }()
+    
+    private var appendEmoji: [String] = []
     
     lazy private var dataSource: [[String]] = {
         var dataSource: [[String]] = []
         if (emojiViewConfig.showRecently == true) && (recentlyEmoji.isEmpty == false) {
             dataSource.append(recentlyEmoji)
         }
-        dataSource.append(emojiViewConfig.emojiSource)
+        
+        if emojiViewConfig.showFuncArea == true {
+            
+            let flowLayout: UICollectionViewFlowLayout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
+            
+            var leftx: CGFloat = emojiViewConfig.sectionInset.left
+            var line: Int = 0
+            for index: Int in 0..<emojiViewConfig.minimumLineCount {
+                leftx += emojiViewConfig.itemSize.width
+                if leftx > (self.wy_width - emojiViewConfig.funcAreaConfig.areaRightOffset - emojiViewConfig.funcAreaConfig.sendViewRightOffset - emojiViewConfig.funcAreaConfig.sendViewSize.width - emojiViewConfig.funcAreaConfig.deleteViewSize.width - emojiViewConfig.funcAreaConfig.sendViewLeftOffsetWithDeleteView) {
+                    break
+                }
+                leftx += flowLayout.minimumInteritemSpacing
+                line += 1
+            }
+            
+            var offsetCount: Int = 0
+            let residual: Int = (emojiViewConfig.emojiSource.count % emojiViewConfig.minimumLineCount)
+            
+            if residual > line {
+                offsetCount = (residual - line)
+            }
+            if residual == 0 {
+                offsetCount = (emojiViewConfig.minimumLineCount - line)
+            }
+            
+            var emojiSource: [String] = []
+            emojiSource.append(contentsOf: emojiViewConfig.emojiSource)
+            for _ in 0..<offsetCount {
+                let lastEmoji: String = emojiSource.last ?? ""
+                emojiSource.removeLast()
+                appendEmoji.append(lastEmoji)
+            }
+            dataSource.append(emojiSource)
+            if appendEmoji.isEmpty == false {
+                dataSource.append(appendEmoji)
+            }
+            
+        }else {
+            dataSource.append(emojiViewConfig.emojiSource)
+        }
         return dataSource
     }()
     
     public init() {
         super.init(frame: .zero)
         self.collectionView.backgroundColor = emojiViewConfig.backgroundColor
+        if emojiViewConfig.showFuncArea == true {
+            self.funcAreaView.gradualView.wy_makeVisual { make in
+                make.wy_gradualColors([emojiViewConfig.backgroundColor.withAlphaComponent(0), emojiViewConfig.backgroundColor])
+                make.wy_gradientDirection(.topToBottom)
+            }
+        }
     }
     
     public class func updateRecentlyEmoji(_ emoji: String) {
@@ -81,6 +140,19 @@ public class WYChatEmojiView: UIView {
         }
         UserDefaults.standard.setValue(Array(recentlyEmoji), forKey: emojiViewRecentlyCountKey)
         UserDefaults.standard.synchronize()
+    }
+    
+    private func sectionInset(_ section: Int) -> UIEdgeInsets {
+        
+        if appendEmoji.isEmpty == true {
+            return emojiViewConfig.sectionInset
+        }else {
+            if section == (dataSource.count - 1) {
+                return UIEdgeInsets(top: emojiViewConfig.minimumLineSpacing, left: emojiViewConfig.sectionInset.left, bottom: emojiViewConfig.sectionInset.bottom, right: emojiViewConfig.sectionInset.right)
+            }else {
+                return UIEdgeInsets(top: emojiViewConfig.sectionInset.top, left: emojiViewConfig.sectionInset.left, bottom: 0, right: emojiViewConfig.sectionInset.right)
+            }
+        }
     }
     
     required init?(coder: NSCoder) {
@@ -104,17 +176,23 @@ extension WYChatEmojiView: UICollectionViewDelegate, UICollectionViewDataSource,
     }
     
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        guard recentlyEmoji.isEmpty == false  else {
-            return emojiViewConfig.sectionInset
+        
+        if (recentlyEmoji.isEmpty == false) && (emojiViewConfig.showRecently == true) {
+            if (section == 0) {
+                return emojiViewConfig.recentlySectionInset
+            }else {
+                return sectionInset(section)
+            }
+        }else {
+            return sectionInset(section)
         }
-        return [emojiViewConfig.recentlySectionInset, emojiViewConfig.sectionInset][section]
     }
     
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        guard recentlyEmoji.isEmpty == false  else {
+        guard (recentlyEmoji.isEmpty == false) && (emojiViewConfig.showRecently == true)  else {
             return CGSize.zero
         }
-        return CGSize(width: wy_screenWidth, height: emojiViewConfig.headerHeight)
+        return CGSize(width: wy_width, height: (appendEmoji.isEmpty ? emojiViewConfig.headerHeight : (section == 1 ? emojiViewConfig.headerHeight : 0)))
     }
     
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -123,14 +201,15 @@ extension WYChatEmojiView: UICollectionViewDelegate, UICollectionViewDataSource,
     
     public func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
-        guard recentlyEmoji.isEmpty == false  else {
+        guard (recentlyEmoji.isEmpty == false) && (emojiViewConfig.showRecently == true)  else {
             return collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "UICollectionReusableView", for: indexPath)
         }
         
-        if kind == UICollectionView.elementKindSectionHeader {
+        if (kind == UICollectionView.elementKindSectionHeader) && (indexPath.section < 2) {
             let headerView: WYEmojiHeaderView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "WYEmojiHeaderView", for: indexPath) as! WYEmojiHeaderView
             headerView.textView.text = [emojiViewConfig.recentlyHeaderText, emojiViewConfig.totalHeaderText][indexPath.section]
         }
+        
         return collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "UICollectionReusableView", for: indexPath)
     }
     
@@ -144,7 +223,7 @@ extension WYChatEmojiView: UICollectionViewDelegate, UICollectionViewDataSource,
     }
     
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
-        return CGSize.zero
+        return .zero
     }
     
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -159,47 +238,56 @@ public class WYEmojiFuncAreaView: UIView {
     var sendView: UIButton!
     var deleteView: UIButton!
     
+    public let gradualView: UIView = UIView()
+    
     public init() {
         super.init(frame: .zero)
-        backgroundColor = .clear
         
+        addSubview(gradualView)
+        gradualView.snp.makeConstraints { make in
+            make.top.right.equalToSuperview()
+            make.height.equalTo(emojiViewConfig.funcAreaConfig.sendViewAndDeleteViewTopOffset)
+            make.left.equalToSuperview().offset(emojiViewConfig.funcAreaConfig.areaSize.width - emojiViewConfig.funcAreaConfig.sendViewRightOffset - emojiViewConfig.funcAreaConfig.sendViewSize.width - emojiViewConfig.funcAreaConfig.deleteViewSize.width - emojiViewConfig.funcAreaConfig.sendViewLeftOffsetWithDeleteView)
+        }
+
         let contentView: UIView = UIView()
         contentView.backgroundColor = emojiViewConfig.backgroundColor
         addSubview(contentView)
         contentView.snp.makeConstraints { make in
-            make.left.right.bottom.equalToSuperview()
+            make.right.bottom.equalToSuperview()
             make.top.equalToSuperview().offset(emojiViewConfig.funcAreaConfig.sendViewAndDeleteViewTopOffset)
+            make.left.equalTo(gradualView)
         }
-        
-        sendView = createFuncButton(text: emojiViewConfig.funcAreaConfig.sendViewText, textColorWithUnenable: emojiViewConfig.funcAreaConfig.sendViewTextColorWithUnenable, textColorWithEnable: emojiViewConfig.funcAreaConfig.sendViewTextColorWithEnable, textColorWithHighly: emojiViewConfig.funcAreaConfig.sendViewTextColorWithHighly, backgroundColorWithUnenable: emojiViewConfig.funcAreaConfig.sendViewColorWithUnenable, backgroundColorWithEnable: emojiViewConfig.funcAreaConfig.sendViewColorWithEnable, backgroundColorWithHighly: emojiViewConfig.funcAreaConfig.sendViewColorWithHighly, iconWithUnenable: emojiViewConfig.funcAreaConfig.sendViewImageWithUnenable, iconWithEnable: emojiViewConfig.funcAreaConfig.sendViewImageWithEnable, iconWithHighly: emojiViewConfig.funcAreaConfig.sendViewImageWithHighly, selector: #selector(didClickSendView))
+
+        sendView = createFuncButton(text: emojiViewConfig.funcAreaConfig.sendViewText, textColorWithUnenable: emojiViewConfig.funcAreaConfig.sendViewTextColorWithUnenable, textColorWithEnable: emojiViewConfig.funcAreaConfig.sendViewTextColorWithEnable, textColorWithHighly: emojiViewConfig.funcAreaConfig.sendViewTextColorWithHighly, backgroundImageWithUnenable: emojiViewConfig.funcAreaConfig.sendViewImageWithUnenable, backgroundImageWithEnable: emojiViewConfig.funcAreaConfig.sendViewImageWithEnable, backgroundImageWithHighly: emojiViewConfig.funcAreaConfig.sendViewImageWithHighly, selector: #selector(didClickSendView))
         sendView.wy_titleFont = emojiViewConfig.funcAreaConfig.sendViewFont
         contentView.addSubview(sendView)
         sendView.snp.makeConstraints { make in
-            make.size.equalTo(emojiViewConfig.funcAreaConfig.sendViewAndDeleteViewSize)
-            make.right.equalToSuperview().offset(emojiViewConfig.funcAreaConfig.sendViewRightOffset)
-            make.top.equalToSuperview().offset(emojiViewConfig.funcAreaConfig.sendViewAndDeleteViewTopOffset)
+            make.size.equalTo(emojiViewConfig.funcAreaConfig.sendViewSize)
+            make.right.equalToSuperview().offset(-emojiViewConfig.funcAreaConfig.sendViewRightOffset)
+            make.top.equalToSuperview()
         }
-        
-        deleteView = createFuncButton(text: emojiViewConfig.funcAreaConfig.deleteViewText, textColorWithUnenable: emojiViewConfig.funcAreaConfig.deleteViewTextColorWithUnenable, textColorWithEnable: emojiViewConfig.funcAreaConfig.deleteViewTextColorWithEnable, textColorWithHighly: emojiViewConfig.funcAreaConfig.deleteViewTextColorWithHighly, backgroundColorWithUnenable: emojiViewConfig.funcAreaConfig.deleteViewColorWithUnenable, backgroundColorWithEnable: emojiViewConfig.funcAreaConfig.deleteViewColorWithEnable, backgroundColorWithHighly: emojiViewConfig.funcAreaConfig.deleteViewColorWithHighly, iconWithUnenable: emojiViewConfig.funcAreaConfig.deleteViewImageWithUnenable, iconWithEnable: emojiViewConfig.funcAreaConfig.deleteViewImageWithEnable, iconWithHighly: emojiViewConfig.funcAreaConfig.deleteViewImageWithHighly, selector: #selector(didClickDeleteView))
+
+        deleteView = createFuncButton(text: emojiViewConfig.funcAreaConfig.deleteViewText, textColorWithUnenable: emojiViewConfig.funcAreaConfig.deleteViewTextColorWithUnenable, textColorWithEnable: emojiViewConfig.funcAreaConfig.deleteViewTextColorWithEnable, textColorWithHighly: emojiViewConfig.funcAreaConfig.deleteViewTextColorWithHighly, backgroundImageWithUnenable: emojiViewConfig.funcAreaConfig.deleteViewImageWithUnenable, backgroundImageWithEnable: emojiViewConfig.funcAreaConfig.deleteViewImageWithEnable, backgroundImageWithHighly: emojiViewConfig.funcAreaConfig.deleteViewImageWithHighly, selector: #selector(didClickDeleteView))
         deleteView.wy_titleFont = emojiViewConfig.funcAreaConfig.deleteViewFont
         contentView.addSubview(deleteView)
         deleteView.snp.makeConstraints { make in
-            make.size.equalTo(emojiViewConfig.funcAreaConfig.sendViewAndDeleteViewSize)
-            make.right.equalTo(sendView.snp.left).offset(emojiViewConfig.funcAreaConfig.sendViewLeftOffsetWithDeleteView)
-            make.top.equalToSuperview().offset(emojiViewConfig.funcAreaConfig.sendViewAndDeleteViewTopOffset)
+            make.size.equalTo(emojiViewConfig.funcAreaConfig.deleteViewSize)
+            make.right.equalTo(sendView.snp.left).offset(-emojiViewConfig.funcAreaConfig.sendViewLeftOffsetWithDeleteView)
+            make.top.equalToSuperview()
         }
     }
     
     @objc func didClickSendView() {
-        
+        wy_print("点击了功能区发送按钮")
     }
-    
+
     @objc func didClickDeleteView() {
-        
+        wy_print("点击了功能区删除按钮")
     }
-    
-    private func createFuncButton(text: String, textColorWithUnenable: UIColor, textColorWithEnable: UIColor, textColorWithHighly: UIColor, backgroundColorWithUnenable: UIColor, backgroundColorWithEnable: UIColor, backgroundColorWithHighly: UIColor, iconWithUnenable: UIImage, iconWithEnable: UIImage, iconWithHighly: UIImage, selector: Selector) -> UIButton {
-            
+
+    private func createFuncButton(text: String, textColorWithUnenable: UIColor, textColorWithEnable: UIColor, textColorWithHighly: UIColor, backgroundImageWithUnenable: UIImage, backgroundImageWithEnable: UIImage, backgroundImageWithHighly: UIImage, selector: Selector) -> UIButton {
+
         let button: UIButton = UIButton(type: .custom)
         button.wy_sTitle = text
         button.wy_nTitle = text
@@ -207,22 +295,23 @@ public class WYEmojiFuncAreaView: UIView {
         button.wy_title_sColor = textColorWithUnenable
         button.wy_title_nColor = textColorWithEnable
         button.wy_title_hColor = textColorWithHighly
-        button.wy_backgroundColor(backgroundColorWithUnenable, forState: .selected)
-        button.wy_backgroundColor(backgroundColorWithEnable, forState: .normal)
-        button.wy_backgroundColor(backgroundColorWithHighly, forState: .highlighted)
-        button.wy_sImage = iconWithUnenable
-        button.wy_nImage = iconWithEnable
-        button.wy_hImage = iconWithHighly
-        //deleteViewAndSendViewIconSize
+        button.setBackgroundImage(backgroundImageWithUnenable, for: .selected)
+        button.setBackgroundImage(backgroundImageWithEnable, for: .normal)
+        button.setBackgroundImage(backgroundImageWithHighly, for: .highlighted)
         button.wy_cornerRadius(emojiViewConfig.funcAreaConfig.deleteViewAndSendViewCornerRadius).wy_showVisual()
         button.addTarget(self, action: selector, for: .touchUpInside)
-        
+
         return button
     }
-    
+
     func updateFuncAreaStyle() {
         sendView.isSelected = isUserInteractionEnabled
         deleteView.isSelected = sendView.isSelected
+    }
+
+    public override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        let hitView: UIView? = super.hitTest(point, with: event)
+        return (hitView == gradualView) ? nil : hitView
     }
     
     required init?(coder: NSCoder) {
@@ -251,7 +340,7 @@ public struct WYEmojiViewConfig {
     public var showRecently: Bool = true
 
     /// 自定义Emoji控件最近使用的表情显示几个(表情默认显示7列)
-    public var recentlyCount: Int = 7
+    public var recentlyCount: Int = 8
 
     /// 自定义Emoji控件最近使用表情Header文本(设置后会显示一个Header，仅scrollDirection为vertical模式时生效)
     public var recentlyHeaderText: String = "最近使用"
@@ -275,13 +364,13 @@ public struct WYEmojiViewConfig {
     public var headerTextOffset: CGPoint = CGPoint(x: wy_screenWidth(15), y: wy_screenWidth(0))
 
     /// 自定义Emoji控件每行显示几个表情
-    public var minimumLineCount: Int = 7
+    public var minimumLineCount: Int = 8
 
     /// 自定义Emoji控件单元格的Size
-    public var itemSize: CGSize = CGSize(width: wy_screenWidth(36), height: wy_screenWidth(36))
+    public var itemSize: CGSize = CGSize(width: wy_screenWidth(30), height: wy_screenWidth(30))
 
-    /// 自定义Emoji控件的sectionInset
-    public var sectionInset: UIEdgeInsets = UIEdgeInsets(top: 0, left: wy_screenWidth(15), bottom: wy_screenWidth(15), right: wy_screenWidth(15))
+    /// 自定义Emoji控件全部表情的sectionInset
+    public var sectionInset: UIEdgeInsets = UIEdgeInsets(top: 0, left: wy_screenWidth(15), bottom: wy_screenWidth(20), right: wy_screenWidth(15))
 
     /// 自定义Emoji控件最近使用分区的sectionInset
     public var recentlySectionInset: UIEdgeInsets = UIEdgeInsets(top: wy_screenWidth(30), left: wy_screenWidth(15), bottom: wy_screenWidth(20), right: wy_screenWidth(15))
@@ -301,88 +390,76 @@ public struct WYEmojiViewConfig {
 public struct WYEmojiFuncAreaConfig {
     
     /// 整个功能区size
-    public var areaSize: CGSize = CGSize(width: wy_screenWidth(150), height: wy_screenWidth(90))
+    public var areaSize: CGSize = CGSize(width: wy_screenWidth(152), height: wy_screenWidth(90))
     
-    /// 发送按钮和删除按钮的size
-    public var sendViewAndDeleteViewSize: CGSize = CGSize(width: wy_screenWidth(50), height: wy_screenWidth(40))
+    /// 整个功能区距离emoji控件右侧的间距
+    public var areaRightOffset: CGFloat = wy_screenWidth(15)
+    
+    /// 整个功能区距离emoji控件底部的间距
+    public var areaBottomOffset: CGFloat = 0
+    
+    /// 发送按钮size
+    public var sendViewSize: CGSize = CGSize(width: wy_screenWidth(60), height: wy_screenWidth(50))
+    
+    /// 删除按钮size
+    public var deleteViewSize: CGSize = CGSize(width: wy_screenWidth(60), height: wy_screenWidth(50))
     
     /// 发送按钮左侧和删除按钮右侧之间的间距
     public var sendViewLeftOffsetWithDeleteView: CGFloat = wy_screenWidth(8)
     
     /// 发送按钮距离功能区右侧间距
-    public var sendViewRightOffset: CGFloat = wy_screenWidth(10)
+    public var sendViewRightOffset: CGFloat = 0
     
     /// 发送按钮和删除按钮距离功能区顶部的间距
-    public var sendViewAndDeleteViewTopOffset: CGFloat = wy_screenWidth(20)
-    
-    /// 删除按钮和发送按钮icon的size
-    public var deleteViewAndSendViewIconSize: CGSize = CGSize(width: wy_screenWidth(18), height: wy_screenWidth(15))
+    public var sendViewAndDeleteViewTopOffset: CGFloat = wy_screenWidth(30)
     
     /// 删除按钮和发送按钮的圆角半径
     public var deleteViewAndSendViewCornerRadius: CGFloat = wy_screenWidth(5)
     
-    /// 删除按钮不可点击时背景色
-    public var deleteViewColorWithUnenable: UIColor = .white
+    /// 删除按钮不可点击时背景图
+    public var deleteViewImageWithUnenable: UIImage = UIImage.wy_createImage(from: .white, size: CGSize(width: wy_screenWidth(60), height: wy_screenWidth(50)))
     
-    /// 发送按钮不可点击时背景色
-    public var sendViewColorWithUnenable: UIColor = .white
+    /// 发送按钮不可点击时背景图
+    public var sendViewImageWithUnenable: UIImage = UIImage.wy_createImage(from: .white, size: CGSize(width: wy_screenWidth(60), height: wy_screenWidth(50)))
     
-    /// 删除按钮可点击时背景色
-    public var deleteViewColorWithEnable: UIColor = .white
+    /// 删除按钮可点击时背景图
+    public var deleteViewImageWithEnable: UIImage = UIImage.wy_createImage(from: .white, size: CGSize(width: wy_screenWidth(60), height: wy_screenWidth(50)))
     
-    /// 发送按钮可点击时背景色
-    public var sendViewColorWithEnable: UIColor = .white
+    /// 发送按钮可点击时背景图
+    public var sendViewImageWithEnable: UIImage = UIImage.wy_createImage(from: .wy_rgb(64, 118, 246), size: CGSize(width: wy_screenWidth(60), height: wy_screenWidth(50)))
     
-    /// 删除按钮按压状态背景色
-    public var deleteViewColorWithHighly: UIColor = .white
+    /// 删除按钮按压状态背景图
+    public var deleteViewImageWithHighly: UIImage = UIImage.wy_createImage(from: .white, size: CGSize(width: wy_screenWidth(60), height: wy_screenWidth(50)))
     
-    /// 发送按钮按压状态背景色
-    public var sendViewColorWithHighly: UIColor = .white
-    
-    /// 删除按钮不可点击时图片
-    public var deleteViewImageWithUnenable: UIImage = UIImage()
-    
-    /// 发送按钮不可点击时图片
-    public var sendViewImageWithUnenable: UIImage = UIImage()
-    
-    /// 删除按钮可点击时图片
-    public var deleteViewImageWithEnable: UIImage = UIImage()
-    
-    /// 发送按钮可点击时图片
-    public var sendViewImageWithEnable: UIImage = UIImage()
-    
-    /// 删除按钮按压状态图片
-    public var deleteViewImageWithHighly: UIImage = UIImage()
-    
-    /// 发送按钮按压状态图片
-    public var sendViewImageWithHighly: UIImage = UIImage()
+    /// 发送按钮按压状态背景图
+    public var sendViewImageWithHighly: UIImage = UIImage.wy_createImage(from: .wy_rgb(64, 118, 246), size: CGSize(width: wy_screenWidth(60), height: wy_screenWidth(50)))
     
     /// 删除按钮文本
-    public var deleteViewText: String = ""
+    public var deleteViewText: String = WYLocalized("删除")
     
     /// 发送按钮文本
     public var sendViewText: String = WYLocalized("发送")
     
     /// 删除按钮字体字号
-    public var deleteViewFont: UIFont = .systemFont(ofSize: wy_screenWidth(15))
+    public var deleteViewFont: UIFont = .boldSystemFont(ofSize: wy_screenWidth(16.5))
     
     /// 发送按钮字体字号
-    public var sendViewFont: UIFont = .systemFont(ofSize: wy_screenWidth(15))
+    public var sendViewFont: UIFont = .boldSystemFont(ofSize: wy_screenWidth(16.5))
     
     /// 删除按钮不可点击时文本颜色
-    public var deleteViewTextColorWithUnenable: UIColor = .clear
+    public var deleteViewTextColorWithUnenable: UIColor = .wy_hex("#E5E5E5")
     
     /// 发送按钮不可点击时文本颜色
     public var sendViewTextColorWithUnenable: UIColor = .wy_hex("#E5E5E5")
     
     /// 删除按钮可点击时文本颜色
-    public var deleteViewTextColorWithEnable: UIColor = .clear
+    public var deleteViewTextColorWithEnable: UIColor = .blue
     
     /// 发送按钮可点击时文本颜色
     public var sendViewTextColorWithEnable: UIColor = .white
     
     /// 删除按钮按压状态文本颜色
-    public var deleteViewTextColorWithHighly: UIColor = .clear
+    public var deleteViewTextColorWithHighly: UIColor = .blue
     
     /// 发送按钮按压状态文本颜色
     public var sendViewTextColorWithHighly: UIColor = .white
