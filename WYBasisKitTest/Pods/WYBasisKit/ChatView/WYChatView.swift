@@ -32,7 +32,10 @@ public class WYChatView: UIView {
         return tableView
     }()
     
-    public lazy var emojiView: WYChatEmojiView = {
+    public lazy var emojiView: WYChatEmojiView? = {
+        guard inputBarConfig.emojiTextButtonSize != CGSize.zero else {
+            return nil
+        }
         let emojiView: WYChatEmojiView = WYChatEmojiView()
         emojiView.delegate = self
         emojiView.isHidden = true
@@ -48,9 +51,7 @@ public class WYChatView: UIView {
     public init() {
         super.init(frame: .zero)
         self.tableView.backgroundColor = .white
-        if inputBarConfig.emojiTextButtonSize != CGSize.zero {
-            self.emojiView.backgroundColor = .clear
-        }
+        self.emojiView?.backgroundColor = .clear
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDismiss), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -85,11 +86,11 @@ public class WYChatView: UIView {
     
     private func updateEmojiViewConstraints(_ isEmoji: Bool) {
         
-        if (isEmoji == false) && (emojiView.isHidden == true) {
+        if (isEmoji == false) && (emojiView?.isHidden == true) {
             return
         }
         
-        emojiView.isHidden = false
+        emojiView?.isHidden = false
         
         if chatInput.textView.isFirstResponder == false {
             keyboardWillDismiss()
@@ -98,12 +99,12 @@ public class WYChatView: UIView {
         if inputBarConfig.emojiTextButtonSize != CGSize.zero {
             let emojiOffset: CGFloat = isEmoji ? 0 : emojiViewConfig.contentHeight
             UIView.animate(withDuration: 0.25) { [weak self] in
-                self?.emojiView.snp.updateConstraints { make in
+                self?.emojiView?.snp.updateConstraints { make in
                     make.bottom.equalToSuperview().offset(emojiOffset)
                 }
-                self?.emojiView.superview?.layoutIfNeeded()
+                self?.emojiView?.superview?.layoutIfNeeded()
             }completion: {[weak self] _ in
-                self?.emojiView.isHidden = !isEmoji
+                self?.emojiView?.isHidden = !isEmoji
             }
         }
     }
@@ -111,7 +112,7 @@ public class WYChatView: UIView {
     public func scrollViewDidScroll(_ scrollView: UIScrollView) {
         chatInput.emojiView.isSelected = false
         updateEmojiViewConstraints(false)
-        emojiView.isHidden = true
+        emojiView?.isHidden = true
     }
     
     required init?(coder: NSCoder) {
@@ -175,28 +176,31 @@ extension WYChatView: WYChatInputViewDelegate {
         }else {
             wy_print("显示语音")
             updateEmojiViewConstraints(false)
-            emojiView.isHidden = true
+            emojiView?.isHidden = true
         }
     }
     
     public func textDidChanged(_ text: String) {
         chatInput.textView.attributedText = chatInput.sharedEmojiAttributed(string: text)
         updateEmojiFuncAreaViewState()
-        
         wy_print("输入的文本：\(text)")
     }
     
     public func didClickKeyboardEvent(_ text: String) {
-        wy_print("点击了键盘右下角按钮，最终文本内容是：\(text)")
+        emojiView?.updateRecentlyEmoji(chatInput.textView.attributedText)
+        chatInput.textView.text = ""
+        updateEmojiFuncAreaViewState()
+        chatInput.textViewDidChange(chatInput.textView)
+        wy_print("发送文本消息：\(text)")
     }
     
     public func updateEmojiFuncAreaViewState() {
         
         let userInteractionEnabled: Bool = (chatInput.textView.attributedText.string.utf16.count > 0)
-        emojiView.funcAreaView.sendView.isUserInteractionEnabled = userInteractionEnabled
-        emojiView.funcAreaView.deleteView.isUserInteractionEnabled = userInteractionEnabled
-        emojiView.funcAreaView.sendView.isSelected = !userInteractionEnabled
-        emojiView.funcAreaView.deleteView.isSelected = !userInteractionEnabled
+        emojiView?.funcAreaView?.sendView.isUserInteractionEnabled = userInteractionEnabled
+        emojiView?.funcAreaView?.deleteView.isUserInteractionEnabled = userInteractionEnabled
+        emojiView?.funcAreaView?.sendView.isSelected = !userInteractionEnabled
+        emojiView?.funcAreaView?.deleteView.isSelected = !userInteractionEnabled
     }
 }
 
@@ -226,10 +230,11 @@ extension WYChatView: WYChatEmojiViewDelegate {
     }
     
     public func didClickEmojiDeleteView() {
-        chatInput.didClickKeyboardDeteteView()
+        chatInput.textView.deleteBackward()
     }
     
     public func sendMessage() {
-        
+        let emojiText: String = NSMutableAttributedString(attributedString: chatInput.textView.attributedText).wy_convertEmojiAttributedString(textColor: inputBarConfig.textColor, textFont: inputBarConfig.textFont).string
+        didClickKeyboardEvent(wy_safe(emojiText))
     }
 }

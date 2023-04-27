@@ -185,6 +185,7 @@ public extension NSMutableAttributedString {
                         let attachment = WYTextAttachment()
                         attachment.image  = image
                         attachment.imageName = emojiStr
+                        attachment.imageRange = range
                         
                         let attachmentWidth = attachmentHeight * (image.size.width / image.size.height)
                         
@@ -322,4 +323,5 @@ public extension NSAttributedString {
 
 public class WYTextAttachment: NSTextAttachment {
     public var imageName: String = ""
+    public var imageRange: NSRange = NSMakeRange(0, 0)
 }

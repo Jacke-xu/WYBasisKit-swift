@@ -152,11 +152,6 @@ public class WYChatInputView: UIImageView {
         updateContentViewHeight()
     }
     
-    func didClickKeyboardDeteteView() {
-        let currentText: String = textView.attributedText.string
-        
-    }
-    
     @objc private func didClickTextVoiceView(sender: UIButton) {
         sender.isSelected = !sender.isSelected
         textVoiceContentView.isSelected = !sender.isSelected
@@ -363,14 +358,9 @@ extension WYChatInputView: UITextViewDelegate {
             let emojiText: String = NSMutableAttributedString(attributedString: textView.attributedText).wy_convertEmojiAttributedString(textColor: inputBarConfig.textColor, textFont: inputBarConfig.textFont).string
             
             if wy_safe(emojiText).wy_replace(appointSymbol: "\n", replacement: "").count > 0 {
-                textView.resignFirstResponder()
-                delegate?.didClickKeyboardEvent?(wy_safe(textView.attributedText.string))
+                delegate?.didClickKeyboardEvent?(wy_safe(emojiText))
             }
             return false
-        }
-        
-        if text == "" {
-            didClickKeyboardDeteteView()
         }
         
         let textContent = textView.attributedText.string + text

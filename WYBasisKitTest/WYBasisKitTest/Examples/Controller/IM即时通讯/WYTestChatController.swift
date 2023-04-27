@@ -18,9 +18,9 @@ class WYTestChatController: UIViewController {
         
         let resourcePath = (((Bundle(for: WYTestChatController.self).path(forResource: "Emoji", ofType: "plist")) ?? (Bundle.main.path(forResource: "Emoji", ofType: "plist"))) ?? "")
         
-        inputBarConfig.textButtomImage = UIImage(named: "text")!
+        inputBarConfig.textButtomImage = UIImage(named: "toggle_keyboard")!
         inputBarConfig.voiceButtonImage = UIImage(named: "voice")!
-        inputBarConfig.emojiButtomImage = UIImage(named: "xiaolian")!
+        inputBarConfig.emojiButtomImage = UIImage(named: "toggle_emoji")!
         inputBarConfig.moreButtomImage = UIImage(named: "jia")!
         inputBarConfig.emojiPattern = "\\[.{1,3}\\]"
         
@@ -32,6 +32,8 @@ class WYTestChatController: UIViewController {
         
         emojiViewConfig.funcAreaConfig.deleteViewText = ""
         
+        emojiViewConfig.previewConfig.backgroundImage = UIImage.wy_find("emoji-preview-bg")
+        
         let chatView = WYChatView()
         view.addSubview(chatView)
         chatView.snp.makeConstraints { make in
@@ -40,7 +42,6 @@ class WYTestChatController: UIViewController {
             make.bottom.equalToSuperview().offset(-wy_tabbarSafetyZone)
         }
     }
-    
 
     /*
     // MARK: - Navigation

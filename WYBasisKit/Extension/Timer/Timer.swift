@@ -35,16 +35,22 @@ public extension Timer {
         
         wy_timerContainer[alias]?.timer?.schedule(deadline: .now(), repeating: duration)
         wy_timerContainer[alias]?.timer?.setEventHandler(handler: {
-            self.wy_beginTimer(alias)
+            DispatchQueue.main.async {
+                self.wy_beginTimer(alias)
+            }
         })
         wy_timerContainer[alias]?.timer?.resume()
         
         NotificationCenter.default.addObserver(forName: UIApplication.didEnterBackgroundNotification, object: nil, queue: nil) { _ in
-            wy_timerDidEnterBackground(alias)
+            DispatchQueue.main.async {
+                wy_timerDidEnterBackground(alias)
+            }
         }
         
         NotificationCenter.default.addObserver(forName: UIApplication.didBecomeActiveNotification, object: nil, queue: nil) { _ in
-            wy_timerDidBecomeActive(alias)
+            DispatchQueue.main.async {
+                wy_timerDidBecomeActive(alias)
+            }
         }
     }
     
