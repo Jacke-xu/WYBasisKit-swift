@@ -8,10 +8,17 @@
 
 import UIKit
 
+@objc public protocol WYEmojiViewCellDelegate {
+    
+    /// 长按了表情预览控件(仅限WYEmojiPreviewStyle == other时才会回调)
+    @objc optional func willShowPreviewView(_ imageName: String, _ imageView: UIImageView)
+}
+
 public class WYEmojiViewCell: UICollectionViewCell {
     
-    private let emojiView: UIImageView = UIImageView()
+    weak var delegate: WYEmojiViewCellDelegate? = nil
     
+    private let emojiView: UIImageView = UIImageView()
     private var emojiString: String = ""
     public var emoji: String {
         
@@ -40,7 +47,12 @@ public class WYEmojiViewCell: UICollectionViewCell {
     
     @objc private func didLongPress(sender: UILongPressGestureRecognizer) {
         if sender.state == .began {
-            WYEmojiPreviewView.show(emoji: emoji, according: emojiView)
+            
+            WYEmojiPreviewView.show(emoji: emoji, according: emojiView) { [weak self] imageName, imageView in
+                DispatchQueue.main.async {
+                    self?.delegate?.willShowPreviewView?(imageName, imageView)
+                }
+            }
         }
         
         if (sender.state == .cancelled) || (sender.state == .ended) {

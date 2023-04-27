@@ -35,6 +35,7 @@ class WYTestChatController: UIViewController {
         emojiViewConfig.previewConfig.backgroundImage = UIImage.wy_find("emoji-preview-bg")
         
         let chatView = WYChatView()
+        chatView.delegate = self
         view.addSubview(chatView)
         chatView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(wy_navViewHeight)
@@ -53,4 +54,11 @@ class WYTestChatController: UIViewController {
     }
     */
 
+}
+
+extension WYTestChatController: WYChatViewDelegate {
+    
+    func willShowPreviewView(_ imageName: String, _ imageView: UIImageView) {
+        wy_print("imageName = \(imageName), imageView = \(imageView)")
+    }
 }

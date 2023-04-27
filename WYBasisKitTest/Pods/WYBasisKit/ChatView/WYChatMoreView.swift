@@ -8,6 +8,11 @@
 
 import UIKit
 
+public struct WYMoreViewConfig {
+    
+    public init() {}
+}
+
 public class WYChatMoreView: UIView {
 
     /*
@@ -18,9 +23,4 @@ public class WYChatMoreView: UIView {
     }
     */
 
-}
-
-public struct WYMoreViewConfig {
-    
-    public init() {}
 }

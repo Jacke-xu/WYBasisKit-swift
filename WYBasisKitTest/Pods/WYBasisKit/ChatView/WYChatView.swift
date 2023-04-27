@@ -8,7 +8,30 @@
 
 import UIKit
 
+@objc public protocol WYChatViewDelegate {
+    
+    /// 点击了 文本/语音按钮 切换按钮
+    @objc optional func didClickTextVoiceView(_ isText: Bool)
+    
+    /// 点击了 表情/文本 切换按钮
+    @objc optional func didClickEmojiTextView(_ isEmoji: Bool)
+    
+    /// 点击了 更多 按钮
+    @objc optional func didClickMoreView(_ isText: Bool)
+    
+    /// 输入框文本发生变化
+    @objc optional func textDidChanged(_ text: String)
+    
+    /// 点击了 发送 按钮
+    @objc optional func sendMessage(_ text: String)
+    
+    /// 将要显示表情预览控件(仅限WYEmojiPreviewStyle == other时才会回调)
+    @objc optional func willShowPreviewView(_ imageName: String, _ imageView: UIImageView)
+}
+
 public class WYChatView: UIView {
+    
+    public weak var delegate: WYChatViewDelegate? = nil
     
     public lazy var chatInput: WYChatInputView = {
         let inputView = WYChatInputView()
@@ -158,6 +181,7 @@ extension WYChatView: WYChatInputViewDelegate {
         }else {
             wy_print("显示更多")
         }
+        delegate?.didClickMoreView?(isText)
     }
     
     public func didClickEmojiTextView(_ isEmoji: Bool) {
@@ -168,6 +192,7 @@ extension WYChatView: WYChatInputViewDelegate {
             wy_print("显示键盘")
         }
         updateEmojiViewConstraints(isEmoji)
+        delegate?.didClickEmojiTextView?(isEmoji)
     }
     
     public func didClickTextVoiceView(_ isText: Bool) {
@@ -178,11 +203,13 @@ extension WYChatView: WYChatInputViewDelegate {
             updateEmojiViewConstraints(false)
             emojiView?.isHidden = true
         }
+        delegate?.didClickTextVoiceView?(isText)
     }
     
     public func textDidChanged(_ text: String) {
         chatInput.textView.attributedText = chatInput.sharedEmojiAttributed(string: text)
         updateEmojiFuncAreaViewState()
+        delegate?.textDidChanged?(text)
         wy_print("输入的文本：\(text)")
     }
     
@@ -191,6 +218,7 @@ extension WYChatView: WYChatInputViewDelegate {
         chatInput.textView.text = ""
         updateEmojiFuncAreaViewState()
         chatInput.textViewDidChange(chatInput.textView)
+        delegate?.sendMessage?(text)
         wy_print("发送文本消息：\(text)")
     }
     
@@ -225,8 +253,8 @@ extension WYChatView: WYChatEmojiViewDelegate {
         chatInput.textView.selectedTextRange = chatInput.textView.textRange(from: start, to: end)
     }
     
-    public func didLongPress(_ emojiView: WYChatEmojiView, _ emoji: String) {
-        
+    public func willShowPreviewView(_ imageName: String, _ imageView: UIImageView) {
+        delegate?.willShowPreviewView?(imageName, imageView)
     }
     
     public func didClickEmojiDeleteView() {

@@ -151,6 +151,8 @@
 		DCFEC13029EFED62001AE8E7 /* WYTestDarkNightModeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFEC11829EFED62001AE8E7 /* WYTestDarkNightModeController.swift */; };
 		DCFEC13329F0D05C001AE8E7 /* WYProtocolManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFEC13229F0D05C001AE8E7 /* WYProtocolManager.swift */; };
 		DCFEC14529F27E8E001AE8E7 /* WYTestButtonEdgeInsetsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFEC14429F27E8E001AE8E7 /* WYTestButtonEdgeInsetsController.swift */; };
+		DCFEC16029FA783D001AE8E7 /* apng[666].png in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC15E29FA783D001AE8E7 /* apng[666].png */; };
+		DCFEC16129FA783D001AE8E7 /* [666].gif in Resources */ = {isa = PBXBuildFile; fileRef = DCFEC15F29FA783D001AE8E7 /* [666].gif */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -325,6 +327,8 @@
 		DCFEC11829EFED62001AE8E7 /* WYTestDarkNightModeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYTestDarkNightModeController.swift; sourceTree = "<group>"; };
 		DCFEC13229F0D05C001AE8E7 /* WYProtocolManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYProtocolManager.swift; sourceTree = "<group>"; };
 		DCFEC14429F27E8E001AE8E7 /* WYTestButtonEdgeInsetsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYTestButtonEdgeInsetsController.swift; sourceTree = "<group>"; };
+		DCFEC15E29FA783D001AE8E7 /* apng[666].png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "apng[666].png"; sourceTree = "<group>"; };
+		DCFEC15F29FA783D001AE8E7 /* [666].gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "[666].gif"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -428,6 +432,8 @@
 		DCFEC01E29EFE50F001AE8E7 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				DCFEC15F29FA783D001AE8E7 /* [666].gif */,
+				DCFEC15E29FA783D001AE8E7 /* apng[666].png */,
 				DCFEC02229EFE52B001AE8E7 /* 1650855755919.mp4 */,
 				DCFEC02029EFE52B001AE8E7 /* 动图1.gif */,
 				DCFEC02129EFE52B001AE8E7 /* 动图2.gif */,
@@ -901,6 +907,7 @@
 				DCFEC0BC29EFE52B001AE8E7 /* [指点].png in Resources */,
 				DCFEC0BE29EFE52C001AE8E7 /* [飞吻].png in Resources */,
 				DCFEC0F129EFE52C001AE8E7 /* [阴险].png in Resources */,
+				DCFEC16029FA783D001AE8E7 /* apng[666].png in Resources */,
 				DCFEC0CB29EFE52C001AE8E7 /* [发怒].png in Resources */,
 				DCFEC0AB29EFE52B001AE8E7 /* [疼].png in Resources */,
 				DCFEC0EF29EFE52C001AE8E7 /* [闭嘴].png in Resources */,
@@ -942,6 +949,7 @@
 				DCFEBFF229EFDE30001AE8E7 /* Assets.xcassets in Resources */,
 				DCFEC09029EFE52B001AE8E7 /* 动图2.gif in Resources */,
 				DCFEC0F729EFE52C001AE8E7 /* [郁闷].png in Resources */,
+				DCFEC16129FA783D001AE8E7 /* [666].gif in Resources */,
 				DCFEC0BD29EFE52B001AE8E7 /* [胜利].png in Resources */,
 				DCFEC0B829EFE52B001AE8E7 /* [大吐].png in Resources */,
 				DCFEC0E529EFE52C001AE8E7 /* [打脸].png in Resources */,

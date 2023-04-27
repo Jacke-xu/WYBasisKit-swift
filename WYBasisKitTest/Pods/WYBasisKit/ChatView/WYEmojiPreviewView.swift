@@ -12,6 +12,9 @@ public struct WYEmojiPreviewConfig {
     /// Emoji表情是否需要支持长按预览详情
     public var show: Bool = true
     
+    /// 预览详情时图片展示类型
+    public var style: WYEmojiPreviewStyle = .default
+    
     /// 表情预览控件的背景图
     public var backgroundImage: UIImage = .wy_createImage(from: .white, size: CGSize(width: wy_screenWidth(100), height: wy_screenWidth(205)))
     
@@ -36,21 +39,47 @@ public struct WYEmojiPreviewConfig {
     public init() {}
 }
 
+public enum WYEmojiPreviewStyle {
+    
+    /// 默认静态图展示(png、jpg、jpeg等格式的静态图)
+    case `default`
+    /// gif格式图片展示
+    case gif
+    /// apng格式图片展示(为了防止文件名冲突，apng格式图片需要自行拼接为：apng[666].png样式格式)
+    case apng
+    /// 其他格式图片展示(需要自己实现相应代理后展示)
+    case other
+}
+
 private var previewView: WYEmojiPreviewView?
 public class WYEmojiPreviewView: UIImageView {
     
-    init(emoji: String, according: UIView) {
+    init(emoji: String, according: UIView, handler: @escaping ((_ imageName: String, _ imageView: UIImageView) -> Void)) {
         super.init(frame: .zero)
         isUserInteractionEnabled = true
         alpha = 0.0
         image = emojiViewConfig.previewConfig.backgroundImage
         
-        let emojiView: UIImageView = UIImageView(image: UIImage.wy_find(emoji))
+        let emojiView: UIImageView = UIImageView()
         addSubview(emojiView)
         emojiView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.size.equalTo(emojiViewConfig.previewConfig.emojiSize)
             make.top.equalToSuperview().offset(emojiViewConfig.previewConfig.emojiTopOffset)
+        }
+        switch emojiViewConfig.previewConfig.style {
+        case .default:
+            emojiView.image = UIImage.wy_find(emoji)
+            break
+        case .gif:
+            emojiView.image = UIImage.wy_animatedParse(.GIF, name: emoji)?.animatedImage
+            break
+        case .apng:
+            emojiView.image = UIImage.wy_animatedParse(.APNG, name: "apng"+emoji)?.animatedImage
+            break
+        case .other:
+            handler(emoji, emojiView)
+            break
         }
         
         let textView: UILabel = UILabel()
@@ -67,15 +96,15 @@ public class WYEmojiPreviewView: UIImageView {
         }
     }
     
-    public class func show(emoji: String, according: UIView) {
+    public class func show(emoji: String, according: UIView, handler: @escaping ((_ imageName: String, _ imageView: UIImageView) -> Void)) ->WYEmojiPreviewView?  {
         
         release()
         
         guard emojiViewConfig.previewConfig.show == true else {
-            return
+            return nil
         }
         
-        previewView = WYEmojiPreviewView(emoji: emoji, according: according)
+        previewView = WYEmojiPreviewView(emoji: emoji, according: according, handler: handler)
         UIViewController.wy_currentController()?.view.addSubview(previewView!)
         let offset: CGPoint = according.convert(according.frame.origin, to: previewView?.superview!)
         previewView?.snp.makeConstraints({ make in
@@ -83,7 +112,10 @@ public class WYEmojiPreviewView: UIImageView {
             make.top.equalToSuperview().offset(offset.y - emojiViewConfig.previewConfig.previewSize.height)
             make.left.equalToSuperview().offset(offset.x + (according.wy_width / 2) - (emojiViewConfig.previewConfig.previewSize.width / 2))
         })
+        
         previewView?.show()
+        
+        return previewView
     }
     
     private func show() {

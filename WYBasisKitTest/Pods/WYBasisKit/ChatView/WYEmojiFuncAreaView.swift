@@ -124,6 +124,10 @@ public class WYEmojiFuncAreaView: UIView {
             make.height.equalTo(emojiViewConfig.funcAreaConfig.sendViewAndDeleteViewTopOffset)
             make.left.equalToSuperview().offset(emojiViewConfig.funcAreaConfig.areaSize.width - emojiViewConfig.funcAreaConfig.sendViewRightOffset - emojiViewConfig.funcAreaConfig.sendViewSize.width - emojiViewConfig.funcAreaConfig.deleteViewSize.width - emojiViewConfig.funcAreaConfig.sendViewLeftOffsetWithDeleteView)
         }
+        gradualView.wy_makeVisual { make in
+            make.wy_gradualColors([emojiViewConfig.backgroundColor.withAlphaComponent(0),emojiViewConfig.backgroundColor.withAlphaComponent(0.3),emojiViewConfig.backgroundColor.withAlphaComponent(0.6),emojiViewConfig.backgroundColor.withAlphaComponent(0.8), emojiViewConfig.backgroundColor])
+            make.wy_gradientDirection(.topToBottom)
+        }
 
         let contentView: UIView = UIView()
         contentView.backgroundColor = emojiViewConfig.backgroundColor

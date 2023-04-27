@@ -11,9 +11,6 @@ private let emojiViewRecentlyCountKey: String = "emojiViewRecentlyCountKey"
 import UIKit
 
 public struct WYEmojiViewConfig {
-    
-    /// 自定义Emoji控件滚动方向
-    public var scrollDirection: UICollectionView.ScrollDirection = .vertical
 
     /// 自定义Emoji控件背景色
     public var backgroundColor: UIColor = .wy_hex("#ECECEC")
@@ -23,9 +20,6 @@ public struct WYEmojiViewConfig {
 
     /// 自定义Emoji数据源，示例：["[玫瑰](表情图片名)","[色](表情图片名)","[嘻嘻](表情图片名)"]
     public var emojiSource: [String] = []
-
-    /// 自定义Emoji控件是否需要翻页模式
-    public var isPagingEnabled: Bool = false
 
     /// 自定义Emoji控件是否需要显示最近使用的表情
     public var showRecently: Bool = true
@@ -83,8 +77,8 @@ public struct WYEmojiViewConfig {
     /// 监控Emoji点击事件
     @objc optional func didClick(_ emojiView: WYChatEmojiView, _ emoji: String)
     
-    /// 监控Emoji长按事件
-    @objc optional func didLongPress(_ emojiView: WYChatEmojiView, _ emoji: String)
+    /// 长按了表情预览控件(仅限WYEmojiPreviewStyle == other时才会回调)
+    @objc optional func willShowPreviewView(_ imageName: String, _ imageView: UIImageView)
     
     /// 点击了删除按钮
     @objc optional func didClickEmojiDeleteView()
@@ -101,13 +95,13 @@ public class WYChatEmojiView: UIView, WYEmojiFuncAreaViewDelegate {
     lazy var collectionView: UICollectionView = {
         
         let emojiViewMinimumInteritemSpacing: CGFloat = (wy_screenWidth - emojiViewConfig.sectionInset.left - emojiViewConfig.sectionInset.right - (CGFloat(emojiViewConfig.minimumLineCount) * emojiViewConfig.itemSize.width)) / (CGFloat(emojiViewConfig.minimumLineCount) - 1.0)
-        let collectionView = UICollectionView.wy_shared(scrollDirection: emojiViewConfig.scrollDirection, minimumLineSpacing: emojiViewConfig.minimumLineSpacing, minimumInteritemSpacing: emojiViewMinimumInteritemSpacing, itemSize: emojiViewConfig.itemSize, delegate: self, dataSource: self, superView: self)
+        let collectionView = UICollectionView.wy_shared(scrollDirection: .vertical, minimumLineSpacing: emojiViewConfig.minimumLineSpacing, minimumInteritemSpacing: emojiViewMinimumInteritemSpacing, itemSize: emojiViewConfig.itemSize, delegate: self, dataSource: self, superView: self)
         
         collectionView.register(WYEmojiViewCell.self, forCellWithReuseIdentifier: "WYEmojiViewCell")
         collectionView.register(WYEmojiHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "WYEmojiHeaderView")
         collectionView.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "UICollectionReusableView")
         collectionView.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: "UICollectionReusableView")
-        collectionView.isPagingEnabled = emojiViewConfig.isPagingEnabled
+        collectionView.isPagingEnabled = false
         collectionView.showsVerticalScrollIndicator = !collectionView.isPagingEnabled
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.snp.makeConstraints { (make) in
@@ -129,10 +123,6 @@ public class WYChatEmojiView: UIView, WYEmojiFuncAreaViewDelegate {
             make.size.equalTo(emojiViewConfig.funcAreaConfig.areaSize)
             make.right.equalToSuperview().offset(-emojiViewConfig.funcAreaConfig.areaRightOffset)
             make.bottom.equalToSuperview().offset(-emojiViewConfig.funcAreaConfig.areaBottomOffset)
-        }
-        funcAreaView.gradualView.wy_makeVisual { make in
-            make.wy_gradualColors([emojiViewConfig.backgroundColor.withAlphaComponent(0), emojiViewConfig.backgroundColor])
-            make.wy_gradientDirection(.topToBottom)
         }
         return funcAreaView
     }()
@@ -203,6 +193,7 @@ public class WYChatEmojiView: UIView, WYEmojiFuncAreaViewDelegate {
     public init() {
         super.init(frame: .zero)
         self.collectionView.backgroundColor = emojiViewConfig.backgroundColor
+        self.funcAreaView?.backgroundColor = .clear
     }
     
     public func updateRecentlyEmoji(_ attributedText: NSAttributedString) {
@@ -336,6 +327,7 @@ extension WYChatEmojiView: UICollectionViewDelegate, UICollectionViewDataSource,
         
         let cell: WYEmojiViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "WYEmojiViewCell", for: indexPath) as! WYEmojiViewCell
         cell.emoji = dataSource[indexPath.section][indexPath.item]
+        cell.delegate = self
         return cell
     }
     
@@ -347,5 +339,12 @@ extension WYChatEmojiView: UICollectionViewDelegate, UICollectionViewDataSource,
         collectionView.deselectItem(at: indexPath, animated: true)
         let emojiName: String = dataSource[indexPath.section][indexPath.item]
         delegate?.didClick?(self, emojiName)
+    }
+}
+
+extension WYChatEmojiView: WYEmojiViewCellDelegate {
+    
+    public func willShowPreviewView(_ imageName: String, _ imageView: UIImageView) {
+        delegate?.willShowPreviewView?(imageName, imageView)
     }
 }
