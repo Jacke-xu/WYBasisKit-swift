@@ -277,6 +277,8 @@
 		DCFEC14129F0D131001AE8E7 /* WYChatEmojiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFEC13A29F0D131001AE8E7 /* WYChatEmojiView.swift */; };
 		DCFEC14229F0D131001AE8E7 /* WYChatInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFEC13B29F0D131001AE8E7 /* WYChatInputView.swift */; };
 		DCFEC14329F0D131001AE8E7 /* WYEmojiHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFEC13C29F0D131001AE8E7 /* WYEmojiHeaderView.swift */; };
+		DCFEC15B29FA1AA3001AE8E7 /* WYEmojiFuncAreaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFEC15A29FA1AA3001AE8E7 /* WYEmojiFuncAreaView.swift */; };
+		DCFEC15D29FA1B4F001AE8E7 /* WYEmojiPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFEC15C29FA1B4F001AE8E7 /* WYEmojiPreviewView.swift */; };
 		DD72DC30CF19FFC81AB19CD0B074000D /* ImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E07A9FF33B7D8012BFAC37F87CE261 /* ImageDownloader.swift */; };
 		DD902FE8D6824681C929D028655AE121 /* RequestInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A60A9E23F0942E632FE6BBB7D870643 /* RequestInterceptor.swift */; };
 		DE532EF7D50A9CF68587DAD4C1A02BD7 /* FormatIndicatedCacheSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CD52A18D5B5DFD453388B288C78C11 /* FormatIndicatedCacheSerializer.swift */; };
@@ -767,6 +769,8 @@
 		DCFEC13A29F0D131001AE8E7 /* WYChatEmojiView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYChatEmojiView.swift; sourceTree = "<group>"; };
 		DCFEC13B29F0D131001AE8E7 /* WYChatInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYChatInputView.swift; sourceTree = "<group>"; };
 		DCFEC13C29F0D131001AE8E7 /* WYEmojiHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYEmojiHeaderView.swift; sourceTree = "<group>"; };
+		DCFEC15A29FA1AA3001AE8E7 /* WYEmojiFuncAreaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYEmojiFuncAreaView.swift; sourceTree = "<group>"; };
+		DCFEC15C29FA1B4F001AE8E7 /* WYEmojiPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYEmojiPreviewView.swift; sourceTree = "<group>"; };
 		DD420A12C6D5F0492853DB23BE850D04 /* HandyJSON.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = HandyJSON.h; path = Source/HandyJSON.h; sourceTree = "<group>"; };
 		DE05B15B6DC386032B5F7ED2FC4851E4 /* DateTransform.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DateTransform.swift; path = Source/DateTransform.swift; sourceTree = "<group>"; };
 		DFEE856810748B811C8F7F0BB2322663 /* ConstraintDirectionalInsetTarget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintDirectionalInsetTarget.swift; path = Sources/ConstraintDirectionalInsetTarget.swift; sourceTree = "<group>"; };
@@ -1490,6 +1494,8 @@
 				DCFEC13829F0D131001AE8E7 /* WYChatMoreView.swift */,
 				DCFEC13729F0D131001AE8E7 /* WYEmojiViewCell.swift */,
 				DCFEC13C29F0D131001AE8E7 /* WYEmojiHeaderView.swift */,
+				DCFEC15A29FA1AA3001AE8E7 /* WYEmojiFuncAreaView.swift */,
+				DCFEC15C29FA1B4F001AE8E7 /* WYEmojiPreviewView.swift */,
 			);
 			path = ChatView;
 			sourceTree = "<group>";
@@ -2217,9 +2223,11 @@
 				B7953E1005FBE828FC0D47C5B504E251 /* UIView.swift in Sources */,
 				2273FC04D15FF6ADC258D0278B5D9895 /* UIViewController.swift in Sources */,
 				E63075B5F7F483B9CC2127F315188FA4 /* WYActivity.swift in Sources */,
+				DCFEC15D29FA1B4F001AE8E7 /* WYEmojiPreviewView.swift in Sources */,
 				DCFEC13D29F0D131001AE8E7 /* WYChatView.swift in Sources */,
 				C87E293A7CB2C7959BB5E36C5C4E7A4D /* WYAlignmentFlowLayout.swift in Sources */,
 				DCFEC14329F0D131001AE8E7 /* WYEmojiHeaderView.swift in Sources */,
+				DCFEC15B29FA1AA3001AE8E7 /* WYEmojiFuncAreaView.swift in Sources */,
 				9C4597437DCD53B87C15989BA66DD301 /* WYBannerView.swift in Sources */,
 				0DB30CB879ACB62C41075B67C7335ED8 /* WYBasisKit-dummy.m in Sources */,
 				B6B74435E5C231C8BF4081E24399B4F5 /* WYBasisKitConfig.swift in Sources */,

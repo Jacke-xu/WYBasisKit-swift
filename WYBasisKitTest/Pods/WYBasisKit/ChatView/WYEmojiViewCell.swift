@@ -10,7 +10,20 @@ import UIKit
 
 public class WYEmojiViewCell: UICollectionViewCell {
     
-    public let emojiView: UIImageView = UIImageView()
+    private let emojiView: UIImageView = UIImageView()
+    
+    private var emojiString: String = ""
+    public var emoji: String {
+        
+        set {
+            emojiString = newValue
+            emojiView.image = UIImage.wy_find(newValue)
+        }
+        
+        get {
+            return emojiString
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -18,6 +31,20 @@ public class WYEmojiViewCell: UICollectionViewCell {
         contentView.addSubview(emojiView)
         emojiView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
+        }
+        
+        let longPress: UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(didLongPress(sender:)))
+        longPress.minimumPressDuration = 0.5
+        addGestureRecognizer(longPress)
+    }
+    
+    @objc private func didLongPress(sender: UILongPressGestureRecognizer) {
+        if sender.state == .began {
+            WYEmojiPreviewView.show(emoji: emoji, according: emojiView)
+        }
+        
+        if (sender.state == .cancelled) || (sender.state == .ended) {
+            WYEmojiPreviewView.dismiss()
         }
     }
     

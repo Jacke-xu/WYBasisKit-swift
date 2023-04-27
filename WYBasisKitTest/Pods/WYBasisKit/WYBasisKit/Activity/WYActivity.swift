@@ -571,7 +571,6 @@ private class WYActivityLoadingView: UIView {
             let attributedText = WYActivity.sharedContentAttributed(content: content!, textColor: config.textColor, textFont: config.textFont, alignment: .center)
             
             textlabel.numberOfLines = config.numberOfLines
-            
             textlabel.attributedText = attributedText
             
             textlabel.sizeToFit()
@@ -660,11 +659,10 @@ private class WYActivityLoadingView: UIView {
     func navViewHeight(contentView: UIView) -> CGFloat {
         
         var navHeight: CGFloat = 0
-        let controller: UIViewController? = contentView.wy_belongsViewController
+        let controller: UIViewController? = UIViewController.wy_currentController()
         if (contentView == controller?.view) && (controller?.navigationController != nil) {
             navHeight = wy_navViewHeight
         }
-        
         return navHeight
     }
     

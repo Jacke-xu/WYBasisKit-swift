@@ -1,0 +1,134 @@
+//
+//  WYEmojiPreviewView.swift
+//  WYBasisKit
+//
+//  Created by Miraitowa on 2023/4/27.
+//
+
+import UIKit
+
+public struct WYEmojiPreviewConfig {
+    
+    /// Emoji表情是否需要支持长按预览详情
+    public var show: Bool = true
+    
+    /// 表情预览控件的背景图
+    public var backgroundImage: UIImage = .wy_createImage(from: .white, size: CGSize(width: wy_screenWidth(100), height: wy_screenWidth(205)))
+    
+    /// 表情预览控件的size
+    public var previewSize: CGSize = CGSize(width: wy_screenWidth(80), height: wy_screenWidth(120))
+    
+    /// 表情预览控件内Emoji的size
+    public var emojiSize: CGSize = CGSize(width: wy_screenWidth(30), height: wy_screenWidth(30))
+    
+    /// Emoji距离表情预览控件顶部的间距
+    public var emojiTopOffset: CGFloat = wy_screenWidth(16)
+    
+    /// 表情预览控件内文本控件的字体、字号
+    public var textFont: UIFont = .systemFont(ofSize: wy_screenWidth(12))
+    
+    /// 表情预览控件内文本控件的字体颜色
+    public var textColor: UIColor = .wy_rgb(120, 120, 120)
+    
+    /// 表情预览控件内文本控件顶部距离Emoji控件底部的间距
+    public var textTopOffsetWithEmoji: CGFloat = wy_screenWidth(5)
+    
+    public init() {}
+}
+
+private var previewView: WYEmojiPreviewView?
+public class WYEmojiPreviewView: UIImageView {
+    
+    init(emoji: String, according: UIView) {
+        super.init(frame: .zero)
+        isUserInteractionEnabled = true
+        alpha = 0.0
+        image = emojiViewConfig.previewConfig.backgroundImage
+        
+        let emojiView: UIImageView = UIImageView(image: UIImage.wy_find(emoji))
+        addSubview(emojiView)
+        emojiView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.size.equalTo(emojiViewConfig.previewConfig.emojiSize)
+            make.top.equalToSuperview().offset(emojiViewConfig.previewConfig.emojiTopOffset)
+        }
+        
+        let textView: UILabel = UILabel()
+        textView.text = WYLocalized(emoji.wy_substring(from: 1, to: emoji.count - 2))
+        textView.textColor = emojiViewConfig.previewConfig.textColor
+        textView.font = emojiViewConfig.previewConfig.textFont
+        textView.textAlignment = .center
+        textView.adjustsFontSizeToFitWidth = true
+        addSubview(textView)
+        textView.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(wy_screenWidth(5))
+            make.right.equalToSuperview().offset(wy_screenWidth(-5))
+            make.top.equalTo(emojiView.snp.bottom).offset(emojiViewConfig.previewConfig.textTopOffsetWithEmoji)
+        }
+    }
+    
+    public class func show(emoji: String, according: UIView) {
+        
+        release()
+        
+        guard emojiViewConfig.previewConfig.show == true else {
+            return
+        }
+        
+        previewView = WYEmojiPreviewView(emoji: emoji, according: according)
+        UIViewController.wy_currentController()?.view.addSubview(previewView!)
+        let offset: CGPoint = according.convert(according.frame.origin, to: previewView?.superview!)
+        previewView?.snp.makeConstraints({ make in
+            make.size.equalTo(emojiViewConfig.previewConfig.previewSize)
+            make.top.equalToSuperview().offset(offset.y - emojiViewConfig.previewConfig.previewSize.height)
+            make.left.equalToSuperview().offset(offset.x + (according.wy_width / 2) - (emojiViewConfig.previewConfig.previewSize.width / 2))
+        })
+        previewView?.show()
+    }
+    
+    private func show() {
+        UIView.animate(withDuration: 0.25) {
+            previewView?.alpha = 1.0
+        }
+    }
+    
+    public class func dismiss() {
+        
+        guard previewView != nil else {
+            return
+        }
+        
+        UIView.animate(withDuration: 0.25) {
+            previewView?.alpha = 0.0
+        }completion: { _ in
+            release()
+        }
+    }
+    
+    private class func release() {
+        previewView?.wy_removeAllSubviews()
+        previewView?.removeFromSuperview()
+        previewView = nil
+    }
+    
+    public override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        let hitView: UIView? = super.hitTest(point, with: event)
+        if hitView != previewView {
+            WYEmojiPreviewView.dismiss()
+        }
+        return hitView
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    /*
+    // Only override draw() if you perform custom drawing.
+    // An empty implementation adversely affects performance during animation.
+    override func draw(_ rect: CGRect) {
+        // Drawing code
+    }
+    */
+
+}

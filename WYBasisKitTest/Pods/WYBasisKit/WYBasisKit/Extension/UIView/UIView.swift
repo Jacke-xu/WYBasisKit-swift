@@ -23,22 +23,6 @@ public enum WYGradientDirection: UInt {
 
 public extension UIView {
     
-    /** View所属的UIViewController */
-    var wy_belongsViewController: UIViewController? {
-        for view in sequence(first: self.superview, next: { $0?.superview }) {
-            if let responder = view?.next {
-                if responder.isKind(of: UIViewController.self) {
-                    if responder.isKind(of: UINavigationController.self) {
-                        return (responder as? UINavigationController)?.topViewController
-                    }else {
-                        return responder as? UIViewController
-                    }
-                }
-            }
-        }
-        return nil
-    }
-    
     /** view.width */
     var wy_width: CGFloat {
         set {
