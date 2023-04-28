@@ -45,7 +45,7 @@ public enum WYEmojiPreviewStyle {
     case `default`
     /// gif格式图片展示
     case gif
-    /// apng格式图片展示(为了防止文件名冲突，apng格式图片需要自行拼接为：apng[666].png样式格式)
+    /// apng格式图片展示(为了防止文件名冲突，apng格式图片需要自行拼接为：apng_[666].png样式格式)
     case apng
     /// 其他格式图片展示(需要自己实现相应代理后展示)
     case other
@@ -75,7 +75,7 @@ public class WYEmojiPreviewView: UIImageView {
             emojiView.image = UIImage.wy_animatedParse(.GIF, name: emoji)?.animatedImage
             break
         case .apng:
-            emojiView.image = UIImage.wy_animatedParse(.APNG, name: "apng"+emoji)?.animatedImage
+            emojiView.image = UIImage.wy_animatedParse(.APNG, name: "apng_"+emoji)?.animatedImage
             break
         case .other:
             handler(emoji, emojiView)

@@ -162,7 +162,7 @@ public class WYEmojiFuncAreaView: UIView {
         }
     }
 
-    private func createFuncButton(text: String, textColorWithUnenable: UIColor, textColorWithEnable: UIColor, textColorWithHighly: UIColor, backgroundImageWithUnenable: UIImage, backgroundImageWithEnable: UIImage, backgroundImageWithHighly: UIImage, target: Any?, selector: Selector) -> UIButton {
+    public func createFuncButton(text: String, textColorWithUnenable: UIColor, textColorWithEnable: UIColor, textColorWithHighly: UIColor, backgroundImageWithUnenable: UIImage, backgroundImageWithEnable: UIImage, backgroundImageWithHighly: UIImage, target: Any?, selector: Selector) -> UIButton {
 
         let button: UIButton = UIButton(type: .custom)
         button.wy_sTitle = text
@@ -180,12 +180,12 @@ public class WYEmojiFuncAreaView: UIView {
         return button
     }
 
-    func updateFuncAreaStyle() {
+    public func updateFuncAreaStyle() {
         sendView.isSelected = isUserInteractionEnabled
         deleteView.isSelected = sendView.isSelected
     }
     
-    @objc private func didLongPress(sender: UILongPressGestureRecognizer) {
+    @objc public func didLongPress(sender: UILongPressGestureRecognizer) {
         if sender.state == .began {
             cancelLongPressTimer()
             
@@ -204,15 +204,15 @@ public class WYEmojiFuncAreaView: UIView {
         }
     }
     
-    @objc func clickDeleteView() {
+    @objc public func clickDeleteView() {
         delegate?.didClickDeleteView?()
     }
     
-    @objc func clickSendView() {
+    @objc public func clickSendView() {
         delegate?.didClickSendView?()
     }
     
-    func cancelLongPressTimer() {
+    public func cancelLongPressTimer() {
         longPressTimer?.cancel()
         longPressTimer = nil
     }

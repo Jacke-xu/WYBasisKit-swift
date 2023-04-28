@@ -34,6 +34,15 @@ class WYTestChatController: UIViewController {
         
         emojiViewConfig.previewConfig.backgroundImage = UIImage.wy_find("emoji-preview-bg")
         
+        
+        emojiViewConfig.isPagingEnabled = true
+        emojiViewConfig.scrollDirection = .horizontal
+        emojiViewConfig.funcAreaConfig.show = false
+        emojiViewConfig.totalHeaderText = ""
+        emojiViewConfig.recentlyHeaderText = ""
+        emojiViewConfig.showRecently = false
+        
+        
         let chatView = WYChatView()
         chatView.delegate = self
         view.addSubview(chatView)
