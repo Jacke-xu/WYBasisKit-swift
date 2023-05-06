@@ -8,19 +8,6 @@
 
 import UIKit
 
-/// 瀑布流对齐方式
-public enum WYFlowLayoutAlignment {
-    
-    /// 左对齐
-    case left
-    
-    /// 居中对齐
-    case center
-    
-    /// 右对齐
-    case right
-}
-
 @objc public protocol WYAlignmentFlowLayoutDelegate {
     
     /** cell换行事件 */

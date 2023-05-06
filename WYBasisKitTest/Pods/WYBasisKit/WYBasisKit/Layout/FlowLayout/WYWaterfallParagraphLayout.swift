@@ -142,7 +142,13 @@ public extension WYWaterfallParagraphLayout {
         
         let headerOffset = sectionOffset + sectionInsets.top + headerSize.height
         
-        let itemOffsety: CGFloat = minColumnHeight + ((minColumnHeight != lastContentHeight) ? lineSpacing : 0) + ((indexPath.item < numberOfColumnsInSection) ? headerOffset : 0)
+        var itemOffsety: CGFloat = minColumnHeight + ((minColumnHeight != lastContentHeight) ? lineSpacing : 0) + ((indexPath.item < numberOfColumnsInSection) ? headerOffset : 0)
+        
+        if indexPath.item % (indexPath.item * numberOfColumnsInSection) < numberOfColumnsInSection {
+            itemOffsety += 3
+        }else {
+            itemOffsety -= 3
+        }
         
         contentHeight = (contentHeight < minColumnHeight) ? minColumnHeight : contentHeight
         

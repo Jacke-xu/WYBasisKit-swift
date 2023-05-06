@@ -46,6 +46,7 @@
 		AAEE9002265B9558003B1748 /* WYNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAEE9000265B9558003B1748 /* WYNetworkManager.swift */; };
 		AAEE9003265B9558003B1748 /* WYNetworkServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAEE9001265B9558003B1748 /* WYNetworkServer.swift */; };
 		AAF09E7426DA2E420063102C /* UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF09E7326DA2E410063102C /* UICollectionView.swift */; };
+		DC1A3E4729FBAC30008DF7A6 /* WYHorizontalFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1A3E4629FBAC30008DF7A6 /* WYHorizontalFlowLayout.swift */; };
 		DC4D24BD271D55A1005FFE21 /* WYStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4D24BC271D55A1005FFE21 /* WYStorage.swift */; };
 		DC4F86D829E8004600D6DCA9 /* WYEmojiViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4F86D729E8004600D6DCA9 /* WYEmojiViewCell.swift */; };
 		DC4F86DA29E8006500D6DCA9 /* WYEmojiHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4F86D929E8006500D6DCA9 /* WYEmojiHeaderView.swift */; };
@@ -123,6 +124,7 @@
 		AAEE9000265B9558003B1748 /* WYNetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYNetworkManager.swift; sourceTree = "<group>"; };
 		AAEE9001265B9558003B1748 /* WYNetworkServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYNetworkServer.swift; sourceTree = "<group>"; };
 		AAF09E7326DA2E410063102C /* UICollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionView.swift; sourceTree = "<group>"; };
+		DC1A3E4629FBAC30008DF7A6 /* WYHorizontalFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYHorizontalFlowLayout.swift; sourceTree = "<group>"; };
 		DC4D24BC271D55A1005FFE21 /* WYStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYStorage.swift; sourceTree = "<group>"; };
 		DC4F86D729E8004600D6DCA9 /* WYEmojiViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYEmojiViewCell.swift; sourceTree = "<group>"; };
 		DC4F86D929E8006500D6DCA9 /* WYEmojiHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYEmojiHeaderView.swift; sourceTree = "<group>"; };
@@ -208,6 +210,7 @@
 		1F24689C25B13DEF00E02F78 /* FlowLayout */ = {
 			isa = PBXGroup;
 			children = (
+				DC1A3E4629FBAC30008DF7A6 /* WYHorizontalFlowLayout.swift */,
 				1F24689E25B13DFB00E02F78 /* WYAlignmentFlowLayout.swift */,
 				1F9717FD25B55CB600CA7A33 /* WYWaterfallsFlowLayout.swift */,
 				1FA6B68A25CD1B3400005170 /* WYWaterfallParagraphLayout.swift */,
@@ -715,6 +718,7 @@
 				DC4F86D829E8004600D6DCA9 /* WYEmojiViewCell.swift in Sources */,
 				AA771BD02568F834002C748B /* NSAttributedString.swift in Sources */,
 				AA771BD62568F834002C748B /* UIViewController.swift in Sources */,
+				DC1A3E4729FBAC30008DF7A6 /* WYHorizontalFlowLayout.swift in Sources */,
 				AAE02B1A267C61E000EF6D36 /* CALayer.swift in Sources */,
 				AA771BEA2568F834002C748B /* WYScrollText.swift in Sources */,
 				AA771BDC2568F834002C748B /* NSObject.swift in Sources */,

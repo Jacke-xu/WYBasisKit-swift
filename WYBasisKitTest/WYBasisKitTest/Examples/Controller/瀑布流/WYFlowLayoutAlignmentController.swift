@@ -8,90 +8,45 @@
 
 import UIKit
 
-class WYFlowLayoutAlignmentCell: UICollectionViewCell {
-    
-    let bgview = UIView()
-    let titleView = UILabel()
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        contentView.backgroundColor = .clear
-        
-        bgview.backgroundColor = .wy_dynamic(.black, .white)
-        contentView.addSubview(bgview)
-        bgview.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
-
-        titleView.textColor = .orange
-        titleView.font = .systemFont(ofSize: 15)
-        titleView.numberOfLines = 0
-        titleView.lineBreakMode = .byCharWrapping
-        bgview.addSubview(titleView)
-        titleView.snp.makeConstraints { (make) in
-            make.left.equalToSuperview().offset(10)
-            make.right.equalToSuperview().offset(-10)
-            make.centerY.equalToSuperview()
-        }
-    }
-    
-    func reload(text: String) {
-        let attributedText = NSMutableAttributedString(string: text)
-        attributedText.wy_lineSpacing(lineSpacing: 3, alignment: .left)
-        attributedText.wy_fontsOfRanges(fontsOfRanges: [[titleView.font: text]])
-        titleView.attributedText = attributedText
-        
-        wy_print("numberOfRows = \(titleView.attributedText!.wy_numberOfRows(controlWidth: wy_screenWidth - 40)), stringPerLine = \(titleView.attributedText!.wy_stringPerLine(controlWidth: wy_screenWidth - 40)))")
-    }
-    
-    class func sharedWidth(text: String) -> CGFloat {
-        let textWidth = text.wy_calculateWidth(controlHeight: UIFont.systemFont(ofSize: 15).lineHeight, controlFont: UIFont.systemFont(ofSize: 15), lineSpacing: 3, wordsSpacing: 0)
-        
-        if ((textWidth + 20) > maxWith()) {
-            return maxWith()
-        }
-        return textWidth + 20
-    }
-    
-    class func sharedHeight(text: String) -> CGFloat {
-        let textWidth = text.wy_calculateWidth(controlHeight: UIFont.systemFont(ofSize: 15).lineHeight, controlFont: UIFont.systemFont(ofSize: 15), lineSpacing: 3, wordsSpacing: 0)
-        
-        if ((textWidth + 20) > maxWith()) {
-            let textHeight = text.wy_calculateHeight(controlWidth: maxWith()-20, controlFont: UIFont.systemFont(ofSize: 15), lineSpacing: 3, wordsSpacing: 0)
-            return textHeight + (30 - UIFont.systemFont(ofSize: 15).lineHeight)
-        }
-        return 30
-    }
-    
-    class func maxWith() ->CGFloat {
-        return wy_screenWidth - 20;
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-}
-
 class WYFlowLayoutAlignmentController: UIViewController {
     
-    let titles = ["1-关关", "2-关关雎鸠", "3-关关雎鸠，在河之洲。", "4-关关雎鸠", "5-关关雎鸠，在河", "6-悠哉", "7-钟鼓乐", "8-关关雎鸠，在河之洲。窈窕淑女，君子好逑。", "9-在河之洲。窈窕淑女，君子", "10-关关雎鸠，在河之洲。窈窕淑女，君子好逑。参差荇菜，左右流之。窈窕淑女，寤寐求之。求之不得，寤寐思服", "11-参差荇菜，左右采之。窈窕淑女，琴瑟友之。参差荇菜，左右芼之。窈窕淑女，钟鼓乐之", "12-窈窕淑女，君子", "13-窈窕淑女，君子好逑", "14-左右", "15-参差荇", "16-菜，左右采之。窈窕", "17-悠哉，辗转反侧。参", "18-君子好逑", "19-菜，左右流之。窈窕淑女，寤寐求之。求之不得，寤寐思服。悠哉悠哉，辗转反侧。参差荇菜，左右采之。窈窕淑女，琴瑟友之", "20-参差荇菜，左右流之", "21-关关雎鸠，在河之洲。窈窕淑女，君子好逑。参差荇菜，左右流之。窈窕淑女，寤寐求之。求之不得，寤寐思服。悠哉悠哉，辗转反侧。参差荇菜，左右采之。窈窕淑女，琴瑟友之。参差荇菜，左右芼之。窈窕淑女，钟鼓乐之。", "22-关关雎鸠，在河之洲。窈窕淑女，君子好逑。参差荇菜，左右流之。窈窕淑女，寤寐求之。求之不得，寤寐思服。悠哉悠哉，辗转反侧。参差荇菜", "23-关关雎鸠，在河之洲。窈窕淑女", "24-关关雎鸠，在河之洲。窈窕淑女，君子好逑。", "25-关关雎鸠，在河之洲。窈窕淑女，君子好逑。参差荇菜，左右流之。窈窕淑女，寤寐求之。求之不得，寤寐思服。悠哉悠哉，辗转反侧。参差荇菜，左右采之。窈窕淑女，琴瑟友之。参差荇菜，左右芼之。窈窕淑女，钟鼓乐之。"]
+    let headerSource: [String] = ["宽高相等"]
+    
+    let dataSource: [[String]] = [["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16"]]
+    
+    lazy var horizontal: UICollectionView = {
+
+        let flowLayout: WYCollectionViewFlowLayout = WYCollectionViewFlowLayout()
+        flowLayout.delegate = self
+        flowLayout.scrollDirection = .horizontal
+        let collectionView = UICollectionView.wy_shared(flowLayout: flowLayout, delegate: self, dataSource: self, superView: view)
+        collectionView.wy_register(["WidthAndHeightEqualCell"], [.cell])
+        //collectionView.isPagingEnabled = true
+        collectionView.snp.makeConstraints { make in
+            make.left.right.equalToSuperview()
+            make.top.equalToSuperview().offset(wy_navViewHeight)
+            make.height.equalTo(wy_screenWidth(235))
+        }
+        return collectionView
+    }()
+
+    lazy var vertical: UICollectionView = {
+        let collectionView = UICollectionView.wy_shared(flowLayout: WYCollectionViewFlowLayout(delegate: self), delegate: self, dataSource: self, superView: view)
+        collectionView.wy_register(["WidthAndHeightEqualCell"], [.cell])
+        collectionView.snp.makeConstraints { make in
+            make.left.right.bottom.equalToSuperview()
+            make.top.equalToSuperview().offset(wy_navViewHeight + wy_screenWidth(235))
+        }
+        return collectionView
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         view.backgroundColor = .white
-        
-        let flowLayout = WYAlignmentFlowLayout(.left, delegate: self)
-        flowLayout.scrollDirection = .vertical
-        flowLayout.minimumLineSpacing = 10
-        flowLayout.minimumInteritemSpacing = 10
-        flowLayout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-        let collctionView = UICollectionView.wy_shared(frame: CGRect(x: 0, y: wy_navViewHeight, width: wy_screenWidth, height: wy_screenWidth), flowLayout: flowLayout, delegate: self, dataSource: self, backgroundColor: .white, superView: view)
-        collctionView.wy_register("WYFlowLayoutAlignmentCell", .cell)
-        
-        collctionView.reloadData()
+        horizontal.backgroundColor = .wy_random
+        vertical.backgroundColor = .wy_random
     }
     
 
@@ -107,31 +62,79 @@ class WYFlowLayoutAlignmentController: UIViewController {
 
 }
 
-extension WYFlowLayoutAlignmentController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, WYAlignmentFlowLayoutDelegate {
+extension WYFlowLayoutAlignmentController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, WYCollectionViewFlowLayoutDelegate {
     
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return titles.count
+        return 99
     }
     
+    func wy_collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 35, height: 35)
+    }
+    
+    func wy_collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, numberOfLinesIn section: Int) -> Int {
+        return 5
+    }
+    
+    func wy_collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, numberOfColumnsIn section: Int) -> Int {
+        return 8
+    }
+    
+    func wy_collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 10
+    }
+    
+    func wy_collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 10
+    }
+    
+    func wy_collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+    }
+    
+    func wy_collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, flowLayoutAlignmentForSectionAt section: Int) -> WYFlowLayoutAlignment {
+        return .center
+    }
+    
+    func wy_collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, flowLayoutStyleForSectionAt section: Int) -> WYWaterfallsFlowLayoutStyle {
+        return .widthAndHeightEqual
+    }
+    
+    func wy_collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, horizontalScrollItemArrangementDirectionForSectionAt section: Int) -> Bool {
+        return true
+    }
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell: WYFlowLayoutAlignmentCell = collectionView.dequeueReusableCell(withReuseIdentifier: "WYFlowLayoutAlignmentCell", for: indexPath) as! WYFlowLayoutAlignmentCell
-        cell.reload(text: titles[indexPath.item])
         
+        let cell: WidthAndHeightEqualCell = collectionView.dequeueReusableCell(withReuseIdentifier: "WidthAndHeightEqualCell", for: indexPath) as! WidthAndHeightEqualCell
+        
+        cell.textView.text = "\(indexPath.item)"
+
         return cell
     }
+}
+
+class WidthAndHeightEqualCell: UICollectionViewCell {
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let cellWidth = WYFlowLayoutAlignmentCell.sharedWidth(text: titles[indexPath.item])
-        let textHeight = WYFlowLayoutAlignmentCell.sharedHeight(text: titles[indexPath.item])
-        return CGSize(width: cellWidth, height: textHeight)
+    let textView: UILabel = UILabel()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        contentView.backgroundColor = .wy_random
+        
+        textView.textColor = .white
+        textView.textAlignment = .center
+        contentView.addSubview(textView)
+        textView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
     }
     
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        cell.contentView.wy_clearVisual()
-        cell.contentView.wy_add(cornerRadius: 5)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        wy_print("点击了：\(titles[indexPath.item])")
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }

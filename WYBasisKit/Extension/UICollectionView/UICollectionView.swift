@@ -88,6 +88,31 @@ public extension UICollectionView {
         return collectionview
     }
     
+    /**
+     *  创建一个UICollectionView
+     *  @param flowLayout: 瀑布流配置
+     *  @param frame: collectionView的frame, 如果是约束布局，请直接使用默认值：.zero
+     *  @param delegate: delegate
+     *  @param dataSource: dataSource
+     *  @param backgroundColor: 背景色
+     *  @param superView: 父view
+     */
+    class func wy_shared(frame: CGRect = .zero,
+                         flowLayout: UICollectionViewFlowLayout,
+                         delegate: UICollectionViewDelegate,
+                         dataSource: UICollectionViewDataSource,
+                         backgroundColor: UIColor = .white,
+                         superView: UIView? = nil) -> UICollectionView {
+        
+        let collectionview = UICollectionView(frame: frame, collectionViewLayout: flowLayout)
+        collectionview.delegate = delegate
+        collectionview.dataSource = dataSource
+        collectionview.backgroundColor = backgroundColor
+        superView?.addSubview(collectionview)
+        
+        return collectionview
+    }
+    
     /// 批量注册UICollectionView的Cell或Header/FooterView
     func wy_register(_ classNames: [String], _ styles: [WYCollectionViewRegisterStyle]) {
         for index in 0..<classNames.count {

@@ -36,10 +36,10 @@ public struct WYEmojiViewConfig {
     /// 自定义Emoji控件最近使用的表情显示几个(表情默认显示8列，这里就默认设置8个)
     public var recentlyCount: Int = 8
 
-    /// 自定义Emoji控件最近使用表情Header文本(设置后会显示一个Header)
+    /// 自定义Emoji控件最近使用表情Header文本(设置后会显示一个Header, 仅限scrollDirection == .vertical时生效)
     public var recentlyHeaderText: String = "最近使用"
 
-    /// 自定义Emoji控件所有表情Header文本(设置后会显示一个Header)
+    /// 自定义Emoji控件所有表情Header文本(设置后会显示一个Header，仅限scrollDirection == .vertical时生效)
     public var totalHeaderText: String = "所有表情"
 
     /// 自定义Emoji控件Header文本字体、字号
@@ -104,7 +104,19 @@ public class WYChatEmojiView: UIView, WYEmojiFuncAreaViewDelegate {
     lazy var collectionView: UICollectionView = {
         
         let emojiViewMinimumInteritemSpacing: CGFloat = (wy_screenWidth - emojiViewConfig.sectionInset.left - emojiViewConfig.sectionInset.right - (CGFloat(emojiViewConfig.minimumLineCount) * emojiViewConfig.itemSize.width)) / (CGFloat(emojiViewConfig.minimumLineCount) - 1.0)
-        let collectionView = UICollectionView.wy_shared(scrollDirection: emojiViewConfig.scrollDirection, minimumLineSpacing: emojiViewConfig.minimumLineSpacing, minimumInteritemSpacing: emojiViewMinimumInteritemSpacing, itemSize: emojiViewConfig.itemSize, delegate: self, dataSource: self, superView: self)
+        
+        var collectionView: UICollectionView!
+        if emojiViewConfig.scrollDirection == .vertical {
+            collectionView = UICollectionView.wy_shared(scrollDirection: emojiViewConfig.scrollDirection, minimumLineSpacing: emojiViewConfig.minimumLineSpacing, minimumInteritemSpacing: emojiViewMinimumInteritemSpacing, itemSize: emojiViewConfig.itemSize, delegate: self, dataSource: self, superView: self)
+        }else {            
+//            let flowLayout: WYHorizontalFlowLayout = WYHorizontalFlowLayout()
+//            flowLayout.itemSize = emojiViewConfig.itemSize
+//            flowLayout.scrollDirection = emojiViewConfig.scrollDirection
+//            flowLayout.minimumLineSpacing = emojiViewConfig.minimumLineSpacing
+//            flowLayout.minimumInteritemSpacing = emojiViewMinimumInteritemSpacing
+//            flowLayout.itemSize = emojiViewConfig.itemSize
+//            collectionView = UICollectionView.wy_shared(flowLayout: flowLayout, delegate: self, dataSource: self, superView: self)
+        }
         
         collectionView.register(WYEmojiViewCell.self, forCellWithReuseIdentifier: "WYEmojiViewCell")
         collectionView.register(WYEmojiHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "WYEmojiHeaderView")

@@ -38,9 +38,9 @@ class WYTestChatController: UIViewController {
         emojiViewConfig.isPagingEnabled = true
         emojiViewConfig.scrollDirection = .horizontal
         emojiViewConfig.funcAreaConfig.show = false
-        emojiViewConfig.totalHeaderText = ""
-        emojiViewConfig.recentlyHeaderText = ""
-        emojiViewConfig.showRecently = false
+//        emojiViewConfig.totalHeaderText = ""
+//        emojiViewConfig.recentlyHeaderText = ""
+//        emojiViewConfig.showRecently = false
         
         
         let chatView = WYChatView()
