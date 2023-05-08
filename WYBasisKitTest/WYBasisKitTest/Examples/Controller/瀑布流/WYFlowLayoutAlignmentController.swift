@@ -21,7 +21,7 @@ class WYFlowLayoutAlignmentController: UIViewController {
         flowLayout.scrollDirection = .horizontal
         let collectionView = UICollectionView.wy_shared(flowLayout: flowLayout, delegate: self, dataSource: self, superView: view)
         collectionView.wy_register(["WidthAndHeightEqualCell"], [.cell])
-        //collectionView.isPagingEnabled = true
+        collectionView.isPagingEnabled = false
         collectionView.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
             make.top.equalToSuperview().offset(wy_navViewHeight)
@@ -69,7 +69,7 @@ extension WYFlowLayoutAlignmentController: UICollectionViewDelegate, UICollectio
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 99
+        return 48
     }
     
     func wy_collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -93,7 +93,7 @@ extension WYFlowLayoutAlignmentController: UICollectionViewDelegate, UICollectio
     }
     
     func wy_collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        return UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 15)
     }
     
     func wy_collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, flowLayoutAlignmentForSectionAt section: Int) -> WYFlowLayoutAlignment {
