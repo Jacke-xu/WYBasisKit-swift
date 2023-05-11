@@ -307,46 +307,6 @@ public extension WYCollectionViewFlowLayout {
             for item in 0..<itemCount {
                 
                 let itemAttributes = layoutAttributesForItem(at: IndexPath(item: item, section: section))
-                
-                if flowLayoutStyle == .heightEqualWidthIsNotEqual {
-                    
-                    if let currentAttr = itemAttributes {
-                        
-                        let nextAttr = (item + 1) == itemCount ?
-                        nil : layoutAttributesForItem(at: IndexPath(item: item + 1, section: section))
-                        
-                        layoutAttributes_t.append(currentAttr)
-                        cellTotalWidth += currentAttr.frame.size.width
-                        
-                        let previousY :CGFloat = previousAttr == nil ? 0 : previousAttr!.frame.maxY
-                        let currentY :CGFloat = currentAttr.frame.maxY
-                        let nextY:CGFloat = nextAttr == nil ? 0 : nextAttr!.frame.maxY
-                        
-                        if currentY != previousY && currentY != nextY {
-                            // 如果当前cell是单独一行
-                            if ((currentAttr.representedElementKind == UICollectionView.elementKindSectionHeader) || (currentAttr.representedElementKind == UICollectionView.elementKindSectionFooter)) {
-                                layoutAttributes_t.removeAll()
-                                cellTotalWidth = 0.0
-                            }else{
-                                updateCellAttributes(layoutAttributes: layoutAttributes_t, indexPath: IndexPath(item: item, section: section), cellTotalWidth: cellTotalWidth, cellAddHeight: &cellAddHeight)
-                                layoutAttributes_t.removeAll()
-                                cellTotalWidth = 0.0
-                            }
-                        }else if currentY != nextY {
-                            // 如果下一个cell在本行，这开始调整frame位置
-                            updateCellAttributes(layoutAttributes: layoutAttributes_t, indexPath: IndexPath(item: item, section: section), cellTotalWidth: cellTotalWidth, cellAddHeight: &cellAddHeight)
-                            layoutAttributes_t.removeAll()
-                            cellTotalWidth = 0.0
-                        }
-                        
-                        // 从新计算下一个cell的原点
-                        var nextlayoutAttributesFrame: CGRect = nextAttr?.frame ?? .zero
-                        nextlayoutAttributesFrame.origin.y = nextlayoutAttributesFrame.origin.y + cellAddHeight
-                        nextAttr?.frame = nextlayoutAttributesFrame
-                        
-                        previousAttr = currentAttr
-                    }
-                }
                 // 获取indexPath位置cell对应的布局属性
                 if itemAttributes != nil {
                     attributesArray.append(itemAttributes!)
@@ -374,20 +334,7 @@ public extension WYCollectionViewFlowLayout {
     }
     
     override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-        
-        let flowLayoutStyle: WYWaterfallsFlowLayoutStyle = flowLayoutStyleIn(indexPath.section)
-        
-        switch flowLayoutStyle {
-        case .widthAndHeightEqual:
-            return attributesWithWidthAndHeightEqual(indexPath: indexPath)
-            break
-        case .widthEqualHeightIsNotEqual:
-            return attributesWithWidthEqualHeightIsNotEqual(indexPath: indexPath)
-            break
-        case .heightEqualWidthIsNotEqual:
-            return attributesWithHeightEqualWidthIsNotEqual(indexPath: indexPath)
-            break
-        }
+        return attributesAt(indexPath: indexPath)
     }
     
     override func layoutAttributesForSupplementaryView(ofKind elementKind: String, at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
@@ -468,11 +415,7 @@ public extension WYCollectionViewFlowLayout {
 
 extension WYCollectionViewFlowLayout {
     
-    private func attributesWithWidthAndHeightEqual(indexPath: IndexPath) -> UICollectionViewLayoutAttributes {
-        return attributesWithWidthEqualHeightIsNotEqual(indexPath: indexPath)
-    }
-    
-    private func attributesWithWidthEqualHeightIsNotEqual(indexPath: IndexPath) -> UICollectionViewLayoutAttributes {
+    private func attributesAt(indexPath: IndexPath) -> UICollectionViewLayoutAttributes {
         
         // item.attributes
         let attributes = UICollectionViewLayoutAttributes(forCellWith: indexPath)
@@ -558,6 +501,9 @@ extension WYCollectionViewFlowLayout {
             
             // 计算每页可以显示几列
             var numberOfColumns: NSInteger = NSInteger(round(((collectionWidth + columnsSpacing) / (columnsSpacing + itemLayoutSize.width))))
+            if numberOfColumns <= 0 {
+                numberOfColumns = 1
+            }
             
             // 每页总的item宽度
             let totalItemWidth: CGFloat = CGFloat(numberOfColumns) * itemLayoutSize.width
@@ -654,69 +600,6 @@ extension WYCollectionViewFlowLayout {
             if (indexPath.item + 1) == collectionView?.numberOfItems(inSection: indexPath.section) {
                 contentSize.width += sectionInsets.right
             }
-        }
-        
-        return attributes
-    }
-    
-    private func attributesWithHeightEqualWidthIsNotEqual(indexPath: IndexPath) -> UICollectionViewLayoutAttributes {
-        return UICollectionViewLayoutAttributes(forCellWith: indexPath)
-    }
-    
-    // 调整属于同一行的cell的位置frame
-    private func updateCellAttributes(layoutAttributes: [UICollectionViewLayoutAttributes], indexPath: IndexPath, cellTotalWidth: CGFloat, cellAddHeight: inout CGFloat) {
-        var nowWidth : CGFloat = 0.0
-        let layoutAlignment: WYFlowLayoutAlignment = flowLayoutAlignmentIn(indexPath.section)
-        
-        // section.Insets
-        let sectionInsets: UIEdgeInsets = insetForSectionAt(indexPath.section)
-        // headerSize
-        let headerSize: CGSize = referenceSizeForHeaderIn(indexPath.section)
-        let itemSpacing: CGFloat = minimumInteritemSpacingForSectionAt(indexPath.section)
-        let flowLayoutMaxWidth: CGFloat = (headerSize.width - sectionInsets.left - sectionInsets.right)
-        switch layoutAlignment {
-        case .right:
-            nowWidth = headerSize.width - sectionInsets.left - sectionInsets.right
-            for var index in 0 ..< layoutAttributes.count {
-                index = layoutAttributes.count - 1 - index
-                let attributes = layoutAttributes[index]
-                var nowFrame = attributes.frame
-                nowFrame.origin.x = nowWidth - nowFrame.size.width
-                attributes.frame = calculateWrapHeight(attributes: &nowFrame, flowLayoutMaxWidth: flowLayoutMaxWidth, indexPath: indexPath, cellAddHeight: &cellAddHeight)
-                updateContentSize(attributes: attributes, indexPath: indexPath)
-                nowWidth = nowWidth - nowFrame.size.width - itemSpacing
-            }
-            break
-        default:
-            nowWidth = (layoutAlignment == .left) ? (sectionInsets.left) : ((flowLayoutMaxWidth - cellTotalWidth - (CGFloat(layoutAttributes.count - 1) * itemSpacing)) / 2)
-            for attributes in layoutAttributes {
-                var nowFrame = attributes.frame
-                nowFrame.origin.x = nowWidth
-                attributes.frame = calculateWrapHeight(attributes: &nowFrame, flowLayoutMaxWidth: flowLayoutMaxWidth, indexPath: indexPath, cellAddHeight: &cellAddHeight)
-                updateContentSize(attributes: attributes, indexPath: indexPath)
-                nowWidth += nowFrame.size.width + itemSpacing
-            }
-            break
-        }
-    }
-    
-    /// 调整换行显示时的高度
-    private func calculateWrapHeight(attributes: inout CGRect, flowLayoutMaxWidth: CGFloat, indexPath: IndexPath, cellAddHeight: inout CGFloat) -> CGRect {
-        
-        let itemNumberOfLines: NSInteger = itemNumberOfLines(indexPath.section)
-        
-        if attributes.size.width > flowLayoutMaxWidth {
-            if itemNumberOfLines != 1 {
-                
-                let maxNumberOfLines: NSInteger = NSInteger(ceil(Double(attributes.size.width) / Double(flowLayoutMaxWidth)))
-                
-                let numberOfLines: NSInteger = (itemNumberOfLines == 0) ? maxNumberOfLines : ((maxNumberOfLines > itemNumberOfLines) ? itemNumberOfLines : maxNumberOfLines)
-                
-                let addHeight: CGFloat = (minimumLineSpacingForSectionAt(indexPath.section) * CGFloat(numberOfLines - 1))
-                
-                cellAddHeight = cellAddHeight + addHeight
-            }
-            attributes.size.width = flowLayoutMaxWidth
         }
         return attributes
     }

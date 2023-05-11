@@ -73,7 +73,7 @@ extension WYFlowLayoutAlignmentController: UICollectionViewDelegate, UICollectio
     }
     
     func wy_collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 35, height: 35)
+        return CGSize(width: wy_randomFloat(minimux: 35, maximum: wy_screenWidth * 5), height: 35)
     }
     
     func wy_collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, numberOfLinesIn section: Int) -> Int {
@@ -97,11 +97,11 @@ extension WYFlowLayoutAlignmentController: UICollectionViewDelegate, UICollectio
     }
     
     func wy_collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, flowLayoutAlignmentForSectionAt section: Int) -> WYFlowLayoutAlignment {
-        return .center
+        return .left
     }
     
     func wy_collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, flowLayoutStyleForSectionAt section: Int) -> WYWaterfallsFlowLayoutStyle {
-        return .widthAndHeightEqual
+        return .heightEqualWidthIsNotEqual
     }
     
     func wy_collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, horizontalScrollItemArrangementDirectionForSectionAt section: Int) -> Bool {
