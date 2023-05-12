@@ -1273,6 +1273,7 @@
 				DEVELOPMENT_TEAM = 3J5533TZC2;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WYBasisKitTest/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = WYBasisKit;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -1304,6 +1305,7 @@
 				DEVELOPMENT_TEAM = 3J5533TZC2;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WYBasisKitTest/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = WYBasisKit;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;

@@ -63,7 +63,7 @@ class WYFlowLayoutAlignmentController: UIViewController {
 
 }
 
-extension WYFlowLayoutAlignmentController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, WYCollectionViewFlowLayoutDelegate {
+extension WYFlowLayoutAlignmentController: UICollectionViewDelegate, UICollectionViewDataSource, WYCollectionViewFlowLayoutDelegate {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 5
@@ -71,7 +71,7 @@ extension WYFlowLayoutAlignmentController: UICollectionViewDelegate, UICollectio
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 //        return 80
-        return wy_randomInteger(minimux: 20, maximum: 129)
+        return wy_randomInteger(minimux: 1, maximum: 129)
 //        return 2
 //        return 169
     }
@@ -112,10 +112,6 @@ extension WYFlowLayoutAlignmentController: UICollectionViewDelegate, UICollectio
     
     func wy_collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, flowLayoutAlignmentForSectionAt section: Int) -> WYFlowLayoutAlignment {
         return .left
-    }
-    
-    func wy_collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, flowLayoutStyleForSectionAt section: Int) -> WYWaterfallsFlowLayoutStyle {
-        return .widthAndHeightEqual
     }
     
     func wy_collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, horizontalScrollItemArrangementDirectionForSectionAt section: Int) -> Bool {

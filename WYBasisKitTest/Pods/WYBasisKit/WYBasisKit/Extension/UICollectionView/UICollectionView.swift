@@ -169,19 +169,6 @@ public extension UICollectionView {
     }
 }
 
-/// 瀑布流布局风格
-@objc public enum WYWaterfallsFlowLayoutStyle: NSInteger {
-    
-    /** 宽、高均相等(支持横向和竖向瀑布流) */
-    case widthAndHeightEqual = 0
-    
-    /** 等宽不等高(仅支持竖向瀑布流) */
-    case widthEqualHeightIsNotEqual = 1
-    
-    /** 等高不等宽(仅支持横向瀑布流) */
-    case heightEqualWidthIsNotEqual = 2
-}
-
 /// 瀑布流对齐方式
 @objc public enum WYFlowLayoutAlignment: NSInteger {
     
@@ -224,9 +211,6 @@ public extension UICollectionView {
     /** 分区header与上个分区footer之间的间距 */
     @objc optional func wy_collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, spacingBetweenHeaderAndLastPartitionFooter section: NSInteger) -> CGFloat
     
-    /** 布局风格 */
-    @objc optional func wy_collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, flowLayoutStyleForSectionAt section: NSInteger) -> WYWaterfallsFlowLayoutStyle
-    
     /** 分区item对齐方式 */
     @objc optional func wy_collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, flowLayoutAlignmentForSectionAt section: NSInteger) -> WYFlowLayoutAlignment
     
@@ -240,6 +224,12 @@ public extension UICollectionView {
     @objc optional func wy_collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, hoverForHeaderForSectionAt section: NSInteger) -> Bool
 }
 
+/**
+ *  自定义瀑布流使用说明
+ *  当设置UICollectionView滚动方向为横向时，务必保证每个cell的高度相同，否则布局会错乱
+ *  当设置UICollectionView滚动方向为竖向时，务必保证每个cell的宽度相同，否则布局会错乱
+ *  isPagingEnabled为true时，务必保证每个cell的宽、每个cell的高均相同，否则布局会错乱
+ */
 public class WYCollectionViewFlowLayout: UICollectionViewFlowLayout {
     
     /** delegate */
@@ -617,7 +607,33 @@ extension WYCollectionViewFlowLayout {
                 
                 itemInLines = itemInPage / numberOfColumns
                 
-                itemOffsetx = (((columnWidths[itemInLines] == 0) ? sectionInsets.left : 0) + columnWidths[itemInLines] + ((columnWidths[itemInLines] == 0) ? 0 : columnsSpacing) + ((collectionView?.isPagingEnabled ?? false) ? CGFloat(pageNumber) : 0.0) * (collectionView?.frame.size.width ?? 0))
+                
+                if collectionView?.isPagingEnabled == true {
+                    
+                    //itemOffsetx = (((columnWidths[itemInLines] == 0) ? sectionInsets.left : 0) + columnWidths[itemInLines] + ((columnWidths[itemInLines] == 0) ? 0 : columnsSpacing) + ((collectionView?.isPagingEnabled ?? false) ? CGFloat(pageNumber) : 0.0) * (collectionView?.frame.size.width ?? 0))
+                    
+                    //itemOffsetx = (((indexPath.item % totalItemInPage) < numberOfLines) ? sectionInsets.left : 0) + minLineWidth + (((indexPath.item % totalItemInPage) < numberOfLines) ? 0 : columnsSpacing) + ((((indexPath.item % totalItemInPage) < numberOfLines) && (minLineWidth > 0)) ? sectionInsets.right : 0) - ((indexPath.section == 0) ? 0 : (((indexPath.item % totalItemInPage) < numberOfLines) && (indexPath.item < numberOfLines)) ? sectionInsets.right : 0)
+                    
+                    
+                    if ((indexPath.item) == (itemInLines * numberOfColumns)) {
+                        wy_print("indexPath.item = \(indexPath.item), itemInLines = \(itemInLines), numberOfColumns = \(numberOfColumns)")
+                    }
+                    
+                    if ((indexPath.item + 1) == ((itemInLines + 1) * numberOfColumns)) {
+                        wy_print("indexPath.item = \(indexPath.item), itemInLines = \(itemInLines), numberOfColumns = \(numberOfColumns)")
+                    }
+                    
+                    // 是否是每页的第一列
+                    let isFirstColumnsInPage: Bool = ((itemInLines * numberOfColumns) + 1) == ((indexPath.item + 1) % totalItemInPage)
+                    
+                    // 是否是每页的最后一列
+                    let isLastColumnsInPage: Bool = (numberOfColumns * (numberOfLines + 1)) == ((indexPath.item + 1) % totalItemInPage)
+                    
+                    itemOffsetx = (isFirstColumnsInPage ? sectionInsets.left : 0) + columnWidths[itemInLines] + ((columnWidths[itemInLines] == 0) ? 0 : columnsSpacing) + (isLastColumnsInPage ? sectionInsets.right : 0) - ((isFirstColumnsInPage && ((indexPath.item + 1) > totalItemInPage)) ? columnsSpacing : 0) + ((isFirstColumnsInPage && ((indexPath.item + 1) > totalItemInPage)) ? sectionInsets.left : 0) - (((indexPath.section > 0) && isFirstColumnsInPage) ? columnsSpacing : 0) + (((indexPath.section > 0) && ((indexPath.item + 1) > totalItemInPage) && isFirstColumnsInPage) ? columnsSpacing : 0)
+                    
+                }else {
+                    itemOffsetx = ((columnWidths[itemInLines] == 0) ? sectionInsets.left : 0) + columnWidths[itemInLines] + ((columnWidths[itemInLines] == 0) ? 0 : columnsSpacing)
+                }
                 
                 itemOffsety = sectionInsets.top + (itemLayoutSize.height + lineSpacing) * CGFloat(itemInLines)
                 
@@ -731,11 +747,6 @@ extension WYCollectionViewFlowLayout {
     private func spacingBetweenHeaderAndLastPartitionFooter(_ section: NSInteger) -> CGFloat {
         guard let collectionView = collectionView else { return 0.0 }
         return delegate?.wy_collectionView?(collectionView, layout: self, spacingBetweenHeaderAndLastPartitionFooter: section) ?? 0.0
-    }
-    
-    private func flowLayoutStyleIn(_ section: NSInteger) -> WYWaterfallsFlowLayoutStyle {
-        guard let collectionView = collectionView else { return .widthAndHeightEqual }
-        return delegate?.wy_collectionView?(collectionView, layout: self, flowLayoutStyleForSectionAt: section) ?? .widthAndHeightEqual
     }
     
     private func flowLayoutAlignmentIn(_ section: NSInteger) -> WYFlowLayoutAlignment {
