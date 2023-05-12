@@ -10,9 +10,9 @@ import UIKit
 
 class WYFlowLayoutAlignmentController: UIViewController {
     
-    let headerSource: [String] = ["宽高相等"]
+    let isPagingEnabled: Bool = false
     
-    let dataSource: [[String]] = [["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16"]]
+    let headerSource: [String] = ["宽高相等"]
     
     lazy var horizontal: UICollectionView = {
 
@@ -21,7 +21,7 @@ class WYFlowLayoutAlignmentController: UIViewController {
         flowLayout.scrollDirection = .horizontal
         let collectionView = UICollectionView.wy_shared(flowLayout: flowLayout, delegate: self, dataSource: self, superView: view)
         collectionView.wy_register(["WidthAndHeightEqualCell"], [.cell])
-        collectionView.isPagingEnabled = false
+        collectionView.isPagingEnabled = isPagingEnabled
         collectionView.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
             make.top.equalToSuperview().offset(wy_navViewHeight)
@@ -33,6 +33,7 @@ class WYFlowLayoutAlignmentController: UIViewController {
     lazy var vertical: UICollectionView = {
         let collectionView = UICollectionView.wy_shared(flowLayout: WYCollectionViewFlowLayout(delegate: self), delegate: self, dataSource: self, superView: view)
         collectionView.wy_register(["WidthAndHeightEqualCell"], [.cell])
+        collectionView.isPagingEnabled = isPagingEnabled
         collectionView.snp.makeConstraints { make in
             make.left.right.bottom.equalToSuperview()
             make.top.equalToSuperview().offset(wy_navViewHeight + wy_screenWidth(235))
@@ -65,15 +66,23 @@ class WYFlowLayoutAlignmentController: UIViewController {
 extension WYFlowLayoutAlignmentController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, WYCollectionViewFlowLayoutDelegate {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
+        return 5
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 48
+//        return 80
+        return wy_randomInteger(minimux: 20, maximum: 129)
+//        return 2
+//        return 169
     }
     
     func wy_collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: wy_randomFloat(minimux: 35, maximum: wy_screenWidth * 5), height: 35)
+        
+        if collectionView == vertical {
+            return CGSize(width: 35, height: wy_randomInteger(minimux: 35, maximum: 135))
+        }else {
+            return CGSize(width: wy_randomInteger(minimux: 35, maximum: 135), height: 35)
+        }
     }
     
     func wy_collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, numberOfLinesIn section: Int) -> Int {
@@ -93,7 +102,12 @@ extension WYFlowLayoutAlignmentController: UICollectionViewDelegate, UICollectio
     }
     
     func wy_collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 15)
+        
+        return UIEdgeInsets(top: 15 + CGFloat((section * 5)), left: 15 + CGFloat((section * 5)), bottom: 15 + CGFloat((section * 5)), right: 15 + CGFloat((section * 5)))
+        
+        //return UIEdgeInsets(top: 15, left: 15, bottom: 20, right: 20)
+        
+        //return UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 15)
     }
     
     func wy_collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, flowLayoutAlignmentForSectionAt section: Int) -> WYFlowLayoutAlignment {
@@ -101,7 +115,7 @@ extension WYFlowLayoutAlignmentController: UICollectionViewDelegate, UICollectio
     }
     
     func wy_collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, flowLayoutStyleForSectionAt section: Int) -> WYWaterfallsFlowLayoutStyle {
-        return .heightEqualWidthIsNotEqual
+        return .widthAndHeightEqual
     }
     
     func wy_collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, horizontalScrollItemArrangementDirectionForSectionAt section: Int) -> Bool {
@@ -112,7 +126,7 @@ extension WYFlowLayoutAlignmentController: UICollectionViewDelegate, UICollectio
         
         let cell: WidthAndHeightEqualCell = collectionView.dequeueReusableCell(withReuseIdentifier: "WidthAndHeightEqualCell", for: indexPath) as! WidthAndHeightEqualCell
         
-        cell.textView.text = "\(indexPath.item)"
+        cell.textView.text = "\(indexPath.item + 1)"
 
         return cell
     }
