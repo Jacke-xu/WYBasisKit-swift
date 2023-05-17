@@ -395,7 +395,7 @@ public extension WYCollectionViewFlowLayout {
                 }
             }
             
-            // 获取每一组头视图header的UICollectionViewLayoutAttributes
+            // 获取每一组header的UICollectionViewLayoutAttributes
             let headerAttributes = layoutAttributesForSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, at: IndexPath(item: 0, section: section))
             if headerAttributes != nil {
                 attributesArray.append(headerAttributes!)
@@ -403,7 +403,7 @@ public extension WYCollectionViewFlowLayout {
                 columnHeights.removeAll()
             }
             
-            // 获取每一组尾视图footer的UICollectionViewLayoutAttributes
+            // 获取每一组footer的UICollectionViewLayoutAttributes
             let footerAttributes = layoutAttributesForSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, at: IndexPath(item: 0, section: section))
             if footerAttributes != nil {
                 attributesArray.append(footerAttributes!)
@@ -448,27 +448,27 @@ public extension WYCollectionViewFlowLayout {
                 // 悬浮方案
                 let contentOffsetx: CGFloat = collectionView?.contentOffset.x ?? 0.0
                 let contentOffsety: CGFloat = collectionView?.contentOffset.y ?? 0.0
-                
+
                 let minOffsetx: CGFloat = max(sectionOffset + lastContentWidth, contentOffsetx)
                 let minOffsety: CGFloat = max(sectionOffset + lastContentHeight, contentOffsety)
-                
+
                 let maxOffsetx: CGFloat = max((columnWidths.max() ?? 0.0) - sectionInsets.right - footerSize.width - sectionOffset, sectionOffset)
                 let maxOffsety: CGFloat = max((columnHeights.max() ?? 0.0) - sectionInsets.bottom - footerSize.height - sectionOffset, sectionOffset)
-                
+
                 if scrollDirection == .vertical {
                     headerOffset = min(minOffsety, maxOffsety)
                 }else {
                     headerOffset = min(minOffsetx, maxOffsetx)
                 }
-                
+
                 // 设置headerView在最上层
                 let headerView: UICollectionReusableView? = collectionView?.supplementaryView(forElementKind: UICollectionView.elementKindSectionHeader, at: indexPath)
                 if headerView != nil {
                     collectionView?.bringSubviewToFront(headerView!)
                 }
-                
+
             }else {
-                
+
                 // 不悬浮方案
                 if scrollDirection == .vertical {
                     headerOffset = (sectionOffset + lastContentHeight)
@@ -476,9 +476,9 @@ public extension WYCollectionViewFlowLayout {
                     headerOffset = (indexPath.section > 0) ? lastContentWidth : 0
                 }
             }
-            
+
             attributes.frame = CGRect(x: (scrollDirection == .vertical) ? 0 : headerOffset, y: (scrollDirection == .vertical) ? headerOffset : 0, width: headerSize.width, height: headerSize.height)
-            
+
             let itemCount: NSInteger = collectionView?.numberOfItems(inSection: indexPath.section) ?? 0
             if itemCount == 0 {
                 contentSize.height = attributes.frame.maxY
