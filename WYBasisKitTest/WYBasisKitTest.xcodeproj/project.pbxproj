@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		4A027019DE606531773A44D7 /* Pods_WYBasisKitTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3961A58ED9E18016F754F2FB /* Pods_WYBasisKitTest.framework */; };
+		DC7D92E72A137D7300800761 /* CollectionReusableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7D92E62A137D7300800761 /* CollectionReusableHeaderView.swift */; };
+		DC7D92E92A137D8100800761 /* CollectionReusableFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7D92E82A137D8100800761 /* CollectionReusableFooterView.swift */; };
 		DCFEBFE929EFDE2F001AE8E7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFEBFE829EFDE2F001AE8E7 /* AppDelegate.swift */; };
 		DCFEBFF029EFDE2F001AE8E7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DCFEBFEE29EFDE2F001AE8E7 /* Main.storyboard */; };
 		DCFEBFF229EFDE30001AE8E7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DCFEBFF129EFDE30001AE8E7 /* Assets.xcassets */; };
@@ -176,6 +178,8 @@
 		3961A58ED9E18016F754F2FB /* Pods_WYBasisKitTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WYBasisKitTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A628127A2EA1456F04DE740 /* Pods-WYBasisKitTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WYBasisKitTest.release.xcconfig"; path = "Target Support Files/Pods-WYBasisKitTest/Pods-WYBasisKitTest.release.xcconfig"; sourceTree = "<group>"; };
 		865E1EDDAF0233568A70050C /* Pods-WYBasisKitTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WYBasisKitTest.debug.xcconfig"; path = "Target Support Files/Pods-WYBasisKitTest/Pods-WYBasisKitTest.debug.xcconfig"; sourceTree = "<group>"; };
+		DC7D92E62A137D7300800761 /* CollectionReusableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionReusableHeaderView.swift; sourceTree = "<group>"; };
+		DC7D92E82A137D8100800761 /* CollectionReusableFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionReusableFooterView.swift; sourceTree = "<group>"; };
 		DCFEBFE529EFDE2F001AE8E7 /* WYBasisKitTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WYBasisKitTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCFEBFE829EFDE2F001AE8E7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DCFEBFEF29EFDE2F001AE8E7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -631,6 +635,8 @@
 			isa = PBXGroup;
 			children = (
 				DCFEC11529EFED62001AE8E7 /* WYFlowLayoutAlignmentController.swift */,
+				DC7D92E62A137D7300800761 /* CollectionReusableHeaderView.swift */,
+				DC7D92E82A137D8100800761 /* CollectionReusableFooterView.swift */,
 			);
 			path = "瀑布流";
 			sourceTree = "<group>";
@@ -1074,8 +1080,10 @@
 				DCFEC12529EFED62001AE8E7 /* WYCenterController.swift in Sources */,
 				DCFEC12B29EFED62001AE8E7 /* WYTestDownloadController.swift in Sources */,
 				DCFEC11B29EFED62001AE8E7 /* WYTestTableViewFooterView.swift in Sources */,
+				DC7D92E92A137D8100800761 /* CollectionReusableFooterView.swift in Sources */,
 				DCFEC12629EFED62001AE8E7 /* WYTestRequestController.swift in Sources */,
 				DCFEBFE929EFDE2F001AE8E7 /* AppDelegate.swift in Sources */,
+				DC7D92E72A137D7300800761 /* CollectionReusableHeaderView.swift in Sources */,
 				DCFEC14529F27E8E001AE8E7 /* WYTestButtonEdgeInsetsController.swift in Sources */,
 				DCFEC12A29EFED62001AE8E7 /* WYLeftController.swift in Sources */,
 				DCFEC12929EFED62001AE8E7 /* WYTestLiveStreamingController.swift in Sources */,

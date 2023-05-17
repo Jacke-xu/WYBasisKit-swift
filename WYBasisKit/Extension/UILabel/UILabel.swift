@@ -166,8 +166,7 @@ extension UILabel {
         }
         
         let lines = CTFrameGetLines(frame)
-        
-        if lines == [] as CFArray {
+        guard CFArrayGetCount(lines) > 0 else {
             return false
         }
         let count = CFArrayGetCount(lines)

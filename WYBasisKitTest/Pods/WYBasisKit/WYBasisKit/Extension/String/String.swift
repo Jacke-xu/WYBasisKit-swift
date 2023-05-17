@@ -40,7 +40,7 @@ public enum WYTimeFormat {
 public extension String {
     
     /// 返回一个计算好的字符串的宽度
-    func wy_calculateWidth(controlHeight: CGFloat = 0, controlFont: UIFont, lineSpacing: CGFloat = 0, wordsSpacing: CGFloat = 0) -> CGFloat {
+    func wy_calculateWidth(controlHeight: CGFloat, controlFont: UIFont, lineSpacing: CGFloat = 0, wordsSpacing: CGFloat = 0) -> CGFloat {
         
         let sharedControlHeight = (controlHeight == 0) ? controlFont.lineHeight : controlHeight
         return wy_calculategSize(controlSize: CGSize(width: .greatestFiniteMagnitude, height: sharedControlHeight), controlFont: controlFont, lineSpacing: lineSpacing, wordsSpacing: wordsSpacing).width
