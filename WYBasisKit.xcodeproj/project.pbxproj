@@ -9,13 +9,10 @@
 /* Begin PBXBuildFile section */
 		02561E71263AA6E506E07E1E /* Pods_WYBasisKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC6A316428A34D6400B0C0A6 /* Pods_WYBasisKit.framework */; };
 		1F24689A25B13DB700E02F78 /* WYProtocolManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F24689925B13DB700E02F78 /* WYProtocolManager.swift */; };
-		1F2468A025B13DFB00E02F78 /* WYAlignmentFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F24689E25B13DFB00E02F78 /* WYAlignmentFlowLayout.swift */; };
 		1F4A0E49256B4A52002E932D /* WYNetworkConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4A0E48256B4A52002E932D /* WYNetworkConfig.swift */; };
 		1F5C3E612578B61B00E0DBFF /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5C3E602578B61B00E0DBFF /* UIApplication.swift */; };
 		1F5C3E942578CD5400E0DBFF /* WYLocalizableManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5C3E932578CD5400E0DBFF /* WYLocalizableManager.swift */; };
-		1F9717FE25B55CB600CA7A33 /* WYWaterfallsFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9717FD25B55CB600CA7A33 /* WYWaterfallsFlowLayout.swift */; };
 		1F99DCC8257DCFAE003D2408 /* WYPagingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F99DCC7257DCFAE003D2408 /* WYPagingView.swift */; };
-		1FA6B68B25CD1B3400005170 /* WYWaterfallParagraphLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA6B68A25CD1B3400005170 /* WYWaterfallParagraphLayout.swift */; };
 		AA2827B426BFCF7A00EB9DBC /* WYLocalizable.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AA2827B326BFCF7A00EB9DBC /* WYLocalizable.bundle */; };
 		AA327F032569179F00CF5CBE /* WYBasisKitConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA327F022569179F00CF5CBE /* WYBasisKitConfig.swift */; };
 		AA484EB324FA262100B39D60 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA484EB224FA262100B39D60 /* AppDelegate.swift */; };
@@ -46,7 +43,6 @@
 		AAEE9002265B9558003B1748 /* WYNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAEE9000265B9558003B1748 /* WYNetworkManager.swift */; };
 		AAEE9003265B9558003B1748 /* WYNetworkServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAEE9001265B9558003B1748 /* WYNetworkServer.swift */; };
 		AAF09E7426DA2E420063102C /* UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF09E7326DA2E410063102C /* UICollectionView.swift */; };
-		DC1A3E4729FBAC30008DF7A6 /* WYHorizontalFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1A3E4629FBAC30008DF7A6 /* WYHorizontalFlowLayout.swift */; };
 		DC4D24BD271D55A1005FFE21 /* WYStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4D24BC271D55A1005FFE21 /* WYStorage.swift */; };
 		DC4F86D829E8004600D6DCA9 /* WYEmojiViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4F86D729E8004600D6DCA9 /* WYEmojiViewCell.swift */; };
 		DC4F86DA29E8006500D6DCA9 /* WYEmojiHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4F86D929E8006500D6DCA9 /* WYEmojiHeaderView.swift */; };
@@ -82,14 +78,11 @@
 /* Begin PBXFileReference section */
 		03E27E8906E5FB4F134A5419 /* Pods_WYBasisKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WYBasisKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F24689925B13DB700E02F78 /* WYProtocolManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYProtocolManager.swift; sourceTree = "<group>"; };
-		1F24689E25B13DFB00E02F78 /* WYAlignmentFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYAlignmentFlowLayout.swift; sourceTree = "<group>"; };
 		1F4A0E48256B4A52002E932D /* WYNetworkConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYNetworkConfig.swift; sourceTree = "<group>"; };
 		1F5C3E602578B61B00E0DBFF /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
 		1F5C3E932578CD5400E0DBFF /* WYLocalizableManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYLocalizableManager.swift; sourceTree = "<group>"; };
 		1F6AA1C325A6D56F00AADEE3 /* WYBasisKit.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WYBasisKit.entitlements; sourceTree = "<group>"; };
-		1F9717FD25B55CB600CA7A33 /* WYWaterfallsFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYWaterfallsFlowLayout.swift; sourceTree = "<group>"; };
 		1F99DCC7257DCFAE003D2408 /* WYPagingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYPagingView.swift; sourceTree = "<group>"; };
-		1FA6B68A25CD1B3400005170 /* WYWaterfallParagraphLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYWaterfallParagraphLayout.swift; sourceTree = "<group>"; };
 		75FD4F7DFBF58D8B82417F4D /* Pods-WYBasisKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WYBasisKit.release.xcconfig"; path = "Target Support Files/Pods-WYBasisKit/Pods-WYBasisKit.release.xcconfig"; sourceTree = "<group>"; };
 		95FF853B47A9BDC19CFD8BF0 /* Pods-WYBasisKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WYBasisKit.debug.xcconfig"; path = "Target Support Files/Pods-WYBasisKit/Pods-WYBasisKit.debug.xcconfig"; sourceTree = "<group>"; };
 		AA2827B326BFCF7A00EB9DBC /* WYLocalizable.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = WYLocalizable.bundle; sourceTree = "<group>"; };
@@ -124,7 +117,6 @@
 		AAEE9000265B9558003B1748 /* WYNetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYNetworkManager.swift; sourceTree = "<group>"; };
 		AAEE9001265B9558003B1748 /* WYNetworkServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYNetworkServer.swift; sourceTree = "<group>"; };
 		AAF09E7326DA2E410063102C /* UICollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionView.swift; sourceTree = "<group>"; };
-		DC1A3E4629FBAC30008DF7A6 /* WYHorizontalFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYHorizontalFlowLayout.swift; sourceTree = "<group>"; };
 		DC4D24BC271D55A1005FFE21 /* WYStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYStorage.swift; sourceTree = "<group>"; };
 		DC4F86D729E8004600D6DCA9 /* WYEmojiViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYEmojiViewCell.swift; sourceTree = "<group>"; };
 		DC4F86D929E8006500D6DCA9 /* WYEmojiHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYEmojiHeaderView.swift; sourceTree = "<group>"; };
@@ -205,17 +197,6 @@
 				1F24689925B13DB700E02F78 /* WYProtocolManager.swift */,
 			);
 			path = ProtocolManager;
-			sourceTree = "<group>";
-		};
-		1F24689C25B13DEF00E02F78 /* FlowLayout */ = {
-			isa = PBXGroup;
-			children = (
-				DC1A3E4629FBAC30008DF7A6 /* WYHorizontalFlowLayout.swift */,
-				1F24689E25B13DFB00E02F78 /* WYAlignmentFlowLayout.swift */,
-				1F9717FD25B55CB600CA7A33 /* WYWaterfallsFlowLayout.swift */,
-				1FA6B68A25CD1B3400005170 /* WYWaterfallParagraphLayout.swift */,
-			);
-			path = FlowLayout;
 			sourceTree = "<group>";
 		};
 		1F5C3E5F2578B60C00E0DBFF /* UIApplication */ = {
@@ -406,7 +387,6 @@
 			isa = PBXGroup;
 			children = (
 				DCF45C8629D56DB200E7136C /* ChatView */,
-				1F24689C25B13DEF00E02F78 /* FlowLayout */,
 				1F9B22B9258747770099AC92 /* BannerView */,
 				1F99DCC6257DCECB003D2408 /* PagingView */,
 				AA771BC82568F834002C748B /* ScrollText */,
@@ -718,7 +698,6 @@
 				DC4F86D829E8004600D6DCA9 /* WYEmojiViewCell.swift in Sources */,
 				AA771BD02568F834002C748B /* NSAttributedString.swift in Sources */,
 				AA771BD62568F834002C748B /* UIViewController.swift in Sources */,
-				DC1A3E4729FBAC30008DF7A6 /* WYHorizontalFlowLayout.swift in Sources */,
 				AAE02B1A267C61E000EF6D36 /* CALayer.swift in Sources */,
 				AA771BEA2568F834002C748B /* WYScrollText.swift in Sources */,
 				AA771BDC2568F834002C748B /* NSObject.swift in Sources */,
@@ -726,7 +705,6 @@
 				1F5C3E612578B61B00E0DBFF /* UIApplication.swift in Sources */,
 				AA771BE32568F834002C748B /* UITableView.swift in Sources */,
 				DCF1D25729DAD3C20047E2F1 /* WYChatEmojiView.swift in Sources */,
-				1F2468A025B13DFB00E02F78 /* WYAlignmentFlowLayout.swift in Sources */,
 				AA771BDA2568F834002C748B /* NumberFormatter.swift in Sources */,
 				AA771BD22568F834002C748B /* UIAlertController.swift in Sources */,
 				DCF45C8D29D5746800E7136C /* WYChatInputView.swift in Sources */,
@@ -752,9 +730,7 @@
 				DCB90A7827AE3A8A001DCA82 /* Foundation+JSONLog.m in Sources */,
 				AA771BD72568F834002C748B /* UINavigationController.swift in Sources */,
 				AA484EB324FA262100B39D60 /* AppDelegate.swift in Sources */,
-				1FA6B68B25CD1B3400005170 /* WYWaterfallParagraphLayout.swift in Sources */,
 				AA771BCF2568F834002C748B /* UIImage.swift in Sources */,
-				1F9717FE25B55CB600CA7A33 /* WYWaterfallsFlowLayout.swift in Sources */,
 				AA771BDB2568F834002C748B /* String.swift in Sources */,
 				AAEE9003265B9558003B1748 /* WYNetworkServer.swift in Sources */,
 				1F24689A25B13DB700E02F78 /* WYProtocolManager.swift in Sources */,
