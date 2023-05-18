@@ -80,10 +80,23 @@ extension WYFlowLayoutAlignmentController: UICollectionViewDelegate, UICollectio
         
         if collectionView == vertical {
             if wy_collectionView(collectionView, layout: collectionViewLayout, flowLayoutAlignmentForSectionAt: indexPath.section) == .default {
-                return CGSize(width: 35, height: wy_randomInteger(minimux: 35, maximum: 135))
+                if collectionView.isPagingEnabled == true {
+                    return CGSize(width: 35, height: 35)
+                }else {
+                    // 因为设置header悬浮后，collectionView滑动时内部会不断进行刷新，所以这里不能写随机size，否则会出现刷新抖动情况
+                    if wy_collectionView(collectionView, layout: collectionViewLayout, hoverForHeaderForSectionAt: indexPath.section) == true {
+                        return CGSize(width: 35, height: indexPath.row + 10)
+                    }else {
+                        return CGSize(width: 35, height: wy_randomInteger(minimux: 35, maximum: 135))
+                    }
+                }
             }else {
                 
-                let testString: String = wy_randomString(minimux: 1, maximum: 80)
+                if collectionView.isPagingEnabled == true {
+                    return CGSize(width: 35, height: 35)
+                }
+                
+                let testString: String = wy_randomString(minimux: 1, maximum: 20)
                 
                 let testFont: UIFont = .systemFont(ofSize: 15)
                 
@@ -117,12 +130,15 @@ extension WYFlowLayoutAlignmentController: UICollectionViewDelegate, UICollectio
             }
             
         }else {
+            if collectionView.isPagingEnabled == true {
+                return CGSize(width: 35, height: 35)
+            }
             return CGSize(width: wy_randomInteger(minimux: 35, maximum: 135), height: 35)
         }
     }
     
     func wy_collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, numberOfLinesIn section: Int) -> Int {
-        return 3
+        return 5
     }
     
     func wy_collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, numberOfColumnsIn section: Int) -> Int {
@@ -157,6 +173,9 @@ extension WYFlowLayoutAlignmentController: UICollectionViewDelegate, UICollectio
     }
     
     func wy_collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, hoverForHeaderForSectionAt section: NSInteger) -> Bool {
+        if wy_collectionView(collectionView, layout: collectionViewLayout, flowLayoutAlignmentForSectionAt: section) != .default {
+            return false
+        }
         return true
     }
     
@@ -165,15 +184,20 @@ extension WYFlowLayoutAlignmentController: UICollectionViewDelegate, UICollectio
     }
     
     func wy_collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: NSInteger) -> CGSize {
+        if collectionView.isPagingEnabled || collectionView == horizontal {
+            return .zero
+        }
         return CGSize(width: wy_screenWidth, height: 50)
     }
     
     func wy_collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: NSInteger) -> CGSize {
+        if collectionView.isPagingEnabled || collectionView == horizontal {
+            return .zero
+        }
         return CGSize(width: wy_screenWidth, height: 50)
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        
         return collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: (kind == UICollectionView.elementKindSectionHeader) ? "CollectionReusableHeaderView" : "CollectionReusableFooterView", for: indexPath)
     }
 

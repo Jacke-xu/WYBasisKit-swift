@@ -11,7 +11,7 @@ class CollectionReusableFooterView: UICollectionReusableView {
         
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .wy_random
+        backgroundColor = .black
     }
     
     required init?(coder: NSCoder) {

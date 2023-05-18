@@ -229,10 +229,10 @@ public extension UICollectionView {
 
 /**
  *  自定义瀑布流使用说明
- *  当设置UICollectionView滚动方向为横向时，务必保证每个cell的高度相同，否则布局会错乱
+ *  当设置UICollectionView滚动方向为横向时(不支持headerView与footerView)，务必保证每个cell的高度相同，否则布局会错乱
  *  当设置UICollectionView滚动方向为竖向时，如果没有设置item对齐方式(默认左对齐)，则需要保证每个item的宽度相同，否则布局会错乱，如果设置item对齐方式不是 WYFlowLayoutAlignment.default，则item的宽高可以随意
  *
- *  isPagingEnabled为true时，务必保证每个cell的宽与每个cell的高均相同，否则布局会错乱
+ *  isPagingEnabled为true时(不支持headerView与footerView)，务必保证每个cell的宽与每个cell的高均相同，否则布局会错乱
  */
 public class WYCollectionViewFlowLayout: UICollectionViewFlowLayout {
     
@@ -299,7 +299,6 @@ public extension WYCollectionViewFlowLayout {
             for item in 0..<itemCount {
                 
                 let indexPath: IndexPath = IndexPath(item: item, section: section)
-                
                 // 获取indexPath位置cell对应的布局属性
                 if var itemAttributes = layoutAttributesForItem(at: indexPath) {
                     
@@ -444,41 +443,37 @@ public extension WYCollectionViewFlowLayout {
             
             let sectionHeaderHover: Bool = hoverForHeaderIn(indexPath.section)
             
+            // 悬浮方案
             if sectionHeaderHover == true {
-                // 悬浮方案
-                let contentOffsetx: CGFloat = collectionView?.contentOffset.x ?? 0.0
-                let contentOffsety: CGFloat = collectionView?.contentOffset.y ?? 0.0
-
-                let minOffsetx: CGFloat = max(sectionOffset + lastContentWidth, contentOffsetx)
-                let minOffsety: CGFloat = max(sectionOffset + lastContentHeight, contentOffsety)
-
-                let maxOffsetx: CGFloat = max((columnWidths.max() ?? 0.0) - sectionInsets.right - footerSize.width - sectionOffset, sectionOffset)
-                let maxOffsety: CGFloat = max((columnHeights.max() ?? 0.0) - sectionInsets.bottom - footerSize.height - sectionOffset, sectionOffset)
-
-                if scrollDirection == .vertical {
-                    headerOffset = min(minOffsety, maxOffsety)
-                }else {
-                    headerOffset = min(minOffsetx, maxOffsetx)
-                }
-
+                
                 // 设置headerView在最上层
                 let headerView: UICollectionReusableView? = collectionView?.supplementaryView(forElementKind: UICollectionView.elementKindSectionHeader, at: indexPath)
                 if headerView != nil {
                     collectionView?.bringSubviewToFront(headerView!)
                 }
-
+                
+                if scrollDirection == .vertical {
+                    
+                    let contentOffsety: CGFloat = collectionView?.contentOffset.y ?? 0.0
+                    let minOffsety: CGFloat = max(sectionOffset + lastContentHeight, contentOffsety)
+                    let maxOffsety: CGFloat = max((columnHeights.max() ?? 0.0) - footerSize.height + sectionInsets.bottom, sectionOffset)
+                    
+                    headerOffset = min(minOffsety, maxOffsety)
+                }
             }else {
 
                 // 不悬浮方案
                 if scrollDirection == .vertical {
                     headerOffset = (sectionOffset + lastContentHeight)
-                }else {
-                    headerOffset = (indexPath.section > 0) ? lastContentWidth : 0
                 }
             }
 
-            attributes.frame = CGRect(x: (scrollDirection == .vertical) ? 0 : headerOffset, y: (scrollDirection == .vertical) ? headerOffset : 0, width: headerSize.width, height: headerSize.height)
-
+            if scrollDirection == .vertical {
+                attributes.frame = CGRect(x: (scrollDirection == .vertical) ? 0 : headerOffset, y: (scrollDirection == .vertical) ? headerOffset : 0, width: headerSize.width, height: headerSize.height)
+            }else {
+                attributes.frame = .zero
+            }
+            
             let itemCount: NSInteger = collectionView?.numberOfItems(inSection: indexPath.section) ?? 0
             if itemCount == 0 {
                 contentSize.height = attributes.frame.maxY
@@ -493,10 +488,7 @@ public extension WYCollectionViewFlowLayout {
                 attributes.frame = CGRect(x: 0, y: contentSize.height, width: footerSize.width, height: footerSize.height)
                 
             }else {
-                
-                let offsetx: CGFloat = (indexPath.section > 0) ? lastContentWidth : 0
-                
-                attributes.frame = CGRect(x: offsetx, y: (collectionView?.frame.size.height ?? 0) - footerSize.height, width: footerSize.width, height: footerSize.height)
+                attributes.frame = .zero
             }
             
             contentSize.height += footerSize.height
@@ -514,14 +506,18 @@ public extension WYCollectionViewFlowLayout {
     
     override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
         
-        let visibleSections: [IndexPath]? = collectionView?.indexPathsForVisibleSupplementaryElements(ofKind: UICollectionView.elementKindSectionHeader)
-        
-        if visibleSections?.isEmpty == false {
-            let firstVisibleSection: NSInteger = (visibleSections?.first?.section == 0) ? 0 : (visibleSections?.last!.section)!
-            return hoverForHeaderIn(firstVisibleSection)
-            
-        }else {
+        if (scrollDirection == .horizontal) || (collectionView?.isPagingEnabled == true) {
             return false
+        }else {
+            let visibleSections: [IndexPath]? = collectionView?.indexPathsForVisibleSupplementaryElements(ofKind: UICollectionView.elementKindSectionHeader)
+            
+            if visibleSections?.isEmpty == false {
+                let firstVisibleSection: NSInteger = (visibleSections?.first?.section == 0) ? 0 : (visibleSections?.last!.section)!
+                return hoverForHeaderIn(firstVisibleSection)
+                
+            }else {
+                return false
+            }
         }
     }
 }
@@ -543,7 +539,7 @@ extension WYCollectionViewFlowLayout {
         let sectionOffset: CGFloat = spacingBetweenHeaderAndLastPartitionFooter(indexPath.section)
         
         // headerSize
-        let headerSize: CGSize = referenceSizeForHeaderIn(indexPath.section)
+        let headerSize: CGSize = CGSize(width: collectionView?.frame.size.width ?? 0, height: referenceSizeForHeaderIn(indexPath.section).height)
         
         // headerOffset
         let headerOffset = sectionOffset + sectionInsets.top + headerSize.height
@@ -649,14 +645,8 @@ extension WYCollectionViewFlowLayout {
             // 分区行数
             let numberOfLines: NSInteger = numberOfLinesIn(indexPath.section)
             
-            // header高度
-            let headerHeight: CGFloat = referenceSizeForHeaderIn(indexPath.section).height
-            
-            // footer高度
-            let footerHeight: CGFloat = referenceSizeForFooterIn(indexPath.section).height
-            
             // 布局高度
-            let collectionHeight: CGFloat = (collectionView?.frame.size.height ?? 0.0) - sectionInsets.top - sectionInsets.bottom - headerHeight - footerHeight
+            let collectionHeight: CGFloat = (collectionView?.frame.size.height ?? 0.0) - sectionInsets.top - sectionInsets.bottom
             
             // 布局宽度
             let collectionWidth: CGFloat = (collectionView?.frame.size.width ?? 0) - sectionInsets.left - sectionInsets.right
@@ -749,7 +739,7 @@ extension WYCollectionViewFlowLayout {
                     itemOffsetx = ((columnWidths[itemInLines] == 0) ? sectionInsets.left : 0) + columnWidths[itemInLines] + ((columnWidths[itemInLines] == 0) ? 0 : columnsSpacing)
                 }
                 
-                itemOffsety = sectionInsets.top + headerHeight + (itemLayoutSize.height + lineSpacing) * CGFloat(itemInLines)
+                itemOffsety = sectionInsets.top + (itemLayoutSize.height + lineSpacing) * CGFloat(itemInLines)
                 
             }else {
                 
@@ -766,7 +756,7 @@ extension WYCollectionViewFlowLayout {
                     itemOffsetx = ((minLineWidth == 0) ? sectionInsets.left : 0) + minLineWidth + ((minLineWidth == 0) ? 0 : columnsSpacing)
                 }
                 
-                itemOffsety = sectionInsets.top + headerHeight + (CGFloat(minLine) * (itemLayoutSize.height + lineSpacing))
+                itemOffsety = sectionInsets.top + (CGFloat(minLine) * (itemLayoutSize.height + lineSpacing))
             }
             
             attributes.frame = CGRect(x: itemOffsetx, y: itemOffsety, width: itemLayoutSize.width, height: itemLayoutSize.height)
