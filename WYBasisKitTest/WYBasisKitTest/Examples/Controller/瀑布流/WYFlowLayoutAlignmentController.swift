@@ -200,11 +200,18 @@ extension WYFlowLayoutAlignmentController: UICollectionViewDelegate, UICollectio
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         return collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: (kind == UICollectionView.elementKindSectionHeader) ? "CollectionReusableHeaderView" : "CollectionReusableFooterView", for: indexPath)
     }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+
+        // 如果设置了header悬浮需要在这里处理下层级，不然滑动快了会层级错乱
+        if (collectionView == vertical) && (wy_collectionView(collectionView, layout: vertical.collectionViewLayout, hoverForHeaderForSectionAt: indexPath.section) == true) {
+            cell.superview?.sendSubviewToBack(cell)
+        }
+    }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell: WidthAndHeightEqualCell = collectionView.dequeueReusableCell(withReuseIdentifier: "WidthAndHeightEqualCell", for: indexPath) as! WidthAndHeightEqualCell
-        
         cell.textView.text = "\(indexPath.item + 1)"
 
         return cell

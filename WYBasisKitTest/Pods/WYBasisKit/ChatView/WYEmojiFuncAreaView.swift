@@ -64,10 +64,10 @@ public struct WYEmojiFuncAreaConfig {
     public var sendViewImageWithHighly: UIImage = UIImage.wy_createImage(from: .wy_rgb(64, 118, 246), size: CGSize(width: wy_screenWidth(60), height: wy_screenWidth(50)))
     
     /// 删除按钮文本
-    public var deleteViewText: String = WYLocalized("删除")
+    public var deleteViewText: String = "删除"
     
     /// 发送按钮文本
-    public var sendViewText: String = WYLocalized("发送")
+    public var sendViewText: String = "发送"
     
     /// 删除按钮字体字号
     public var deleteViewFont: UIFont = .boldSystemFont(ofSize: wy_screenWidth(16.5))
