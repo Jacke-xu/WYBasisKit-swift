@@ -203,7 +203,7 @@ extension WYFlowLayoutAlignmentController: UICollectionViewDelegate, UICollectio
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
 
-        // 如果设置了header悬浮需要在这里处理下层级，不然滑动快了会层级错乱
+        // 如果设置了header悬浮需要在这里处理下层级关系，不然滑动快了会层级错乱
         if (collectionView == vertical) && (wy_collectionView(collectionView, layout: vertical.collectionViewLayout, hoverForHeaderForSectionAt: indexPath.section) == true) {
             cell.superview?.sendSubviewToBack(cell)
         }

@@ -34,10 +34,6 @@ class WYTestChatController: UIViewController {
         
         emojiViewConfig.previewConfig.backgroundImage = UIImage.wy_find("emoji-preview-bg")
         
-        
-        emojiViewConfig.scrollDirection = .vertical
-        emojiViewConfig.isPagingEnabled = (emojiViewConfig.scrollDirection != .vertical)
-        emojiViewConfig.funcAreaConfig.show = (emojiViewConfig.scrollDirection == .vertical)
 //        emojiViewConfig.totalHeaderText = ""
 //        emojiViewConfig.recentlyHeaderText = ""
 //        emojiViewConfig.showRecently = false

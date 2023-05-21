@@ -71,6 +71,9 @@ public class WYChatView: UIView {
         return emojiView
     }()
     
+    /// 记录最近使用表情数据，用于实现延时更新最近使用表情
+    public var recentlyEmojis: [String] = []
+    
     public init() {
         super.init(frame: .zero)
         self.tableView.backgroundColor = .white
@@ -191,6 +194,11 @@ extension WYChatView: WYChatInputViewDelegate {
         }else {
             wy_print("显示键盘")
         }
+        
+        if recentlyEmojis.isEmpty == false {
+            emojiView?.updateRecentlyEmoji(chatInput.sharedEmojiAttributed(string: recentlyEmojis.joined()))
+            recentlyEmojis.removeAll()
+        }
         updateEmojiViewConstraints(isEmoji)
         delegate?.didClickEmojiTextView?(isEmoji)
     }
@@ -214,7 +222,11 @@ extension WYChatView: WYChatInputViewDelegate {
     }
     
     public func didClickKeyboardEvent(_ text: String) {
-        emojiView?.updateRecentlyEmoji(chatInput.textView.attributedText)
+        if emojiViewConfig.instantUpdatesRecently == true {
+            emojiView?.updateRecentlyEmoji(chatInput.textView.attributedText)
+        }else {
+            recentlyEmojis.append(text)
+        }
         chatInput.textView.text = ""
         updateEmojiFuncAreaViewState()
         chatInput.textViewDidChange(chatInput.textView)

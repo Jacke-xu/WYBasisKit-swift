@@ -14,12 +14,6 @@ public struct WYEmojiViewConfig {
 
     /// 自定义Emoji控件背景色
     public var backgroundColor: UIColor = .wy_hex("#ECECEC")
-    
-    /// 自定义Emoji控件的滚动方向
-    public var scrollDirection: UICollectionView.ScrollDirection = .vertical
-    
-    /// 自定义Emoji控件z是否需要翻页模式
-    public var isPagingEnabled: Bool = false
 
     /// 自定义Emoji控件的高度
     public var contentHeight: CGFloat = wy_screenWidth(350)
@@ -32,6 +26,9 @@ public struct WYEmojiViewConfig {
 
     /// 自定义Emoji控件是否需要显示最近使用的表情
     public var showRecently: Bool = true
+    
+    /// 最近使用表情是否需要点击发送后就立即更新
+    public var instantUpdatesRecently: Bool = false
 
     /// 自定义Emoji控件最近使用的表情显示几个(表情默认显示8列，这里就默认设置8个)
     public var recentlyCount: Int = 8
@@ -58,10 +55,7 @@ public struct WYEmojiViewConfig {
     public var headerTextOffset: CGPoint = CGPoint(x: wy_screenWidth(15), y: (wy_screenWidth(30) - UIFont.systemFont(ofSize: wy_screenWidth(15)).lineHeight) / 2)
 
     /// 自定义Emoji控件每行显示几个表情
-    public var numberOfColumns: Int = 8
-    
-    /// 自定义Emoji控件横线滚动时显示几列
-    public var numberOfLines: Int = 5
+    public var minimumLineCount: Int = 8
 
     /// 自定义Emoji控件单元格的Size
     public var itemSize: CGSize = CGSize(width: wy_screenWidth(30), height: wy_screenWidth(30))
@@ -106,21 +100,16 @@ public class WYChatEmojiView: UIView, WYEmojiFuncAreaViewDelegate {
     
     lazy var collectionView: UICollectionView = {
         
-        let emojiViewMinimumInteritemSpacing: CGFloat = (wy_screenWidth - emojiViewConfig.sectionInset.left - emojiViewConfig.sectionInset.right - (CGFloat(emojiViewConfig.numberOfColumns) * emojiViewConfig.itemSize.width)) / (CGFloat(emojiViewConfig.numberOfColumns) - 1.0)
+        let emojiViewMinimumInteritemSpacing: CGFloat = (wy_screenWidth - emojiViewConfig.sectionInset.left - emojiViewConfig.sectionInset.right - (CGFloat(emojiViewConfig.minimumLineCount) * emojiViewConfig.itemSize.width)) / (CGFloat(emojiViewConfig.minimumLineCount) - 1.0)
         
-        let flowLayout: WYCollectionViewFlowLayout = WYCollectionViewFlowLayout(delegate: self)
-        flowLayout.scrollDirection = emojiViewConfig.scrollDirection
-        flowLayout.minimumLineSpacing = emojiViewConfig.minimumLineSpacing
-        flowLayout.minimumInteritemSpacing = emojiViewMinimumInteritemSpacing
-        flowLayout.itemSize = emojiViewConfig.itemSize
-        let collectionView: UICollectionView = UICollectionView.wy_shared(flowLayout: flowLayout, delegate: self, dataSource: self, superView: self)
+        let collectionView: UICollectionView = UICollectionView.wy_shared(scrollDirection: .vertical, minimumLineSpacing: emojiViewConfig.minimumLineSpacing, minimumInteritemSpacing: emojiViewMinimumInteritemSpacing, itemSize: emojiViewConfig.itemSize, delegate: self, dataSource: self, superView: self)
         collectionView.register(WYEmojiViewCell.self, forCellWithReuseIdentifier: "WYEmojiViewCell")
         collectionView.register(WYEmojiHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "WYEmojiHeaderView")
         collectionView.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "UICollectionReusableView")
         collectionView.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: "UICollectionReusableView")
-        collectionView.isPagingEnabled = emojiViewConfig.isPagingEnabled
-        collectionView.showsVerticalScrollIndicator = !collectionView.isPagingEnabled
-        collectionView.showsHorizontalScrollIndicator = !collectionView.isPagingEnabled
+        collectionView.isPagingEnabled = false
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.showsHorizontalScrollIndicator = false
         collectionView.snp.makeConstraints { (make) in
             make.left.top.right.equalToSuperview()
             make.bottom.equalToSuperview().offset(-emojiViewConfig.collectionViewBottomOffset)
@@ -176,7 +165,7 @@ public class WYChatEmojiView: UIView, WYEmojiFuncAreaViewDelegate {
             
             var leftx: CGFloat = emojiViewConfig.sectionInset.left
             var line: Int = 0
-            for index: Int in 0..<emojiViewConfig.numberOfColumns {
+            for index: Int in 0..<emojiViewConfig.minimumLineCount {
                 leftx += emojiViewConfig.itemSize.width
                 if leftx > (self.wy_width - emojiViewConfig.funcAreaConfig.areaRightOffset - emojiViewConfig.funcAreaConfig.sendViewRightOffset - emojiViewConfig.funcAreaConfig.sendViewSize.width - emojiViewConfig.funcAreaConfig.deleteViewSize.width - emojiViewConfig.funcAreaConfig.sendViewLeftOffsetWithDeleteView) {
                     break
@@ -186,13 +175,13 @@ public class WYChatEmojiView: UIView, WYEmojiFuncAreaViewDelegate {
             }
             
             var offsetCount: Int = 0
-            let residual: Int = (emojiViewConfig.emojiSource.count % emojiViewConfig.numberOfColumns)
+            let residual: Int = (emojiViewConfig.emojiSource.count % emojiViewConfig.minimumLineCount)
             
             if residual > line {
                 offsetCount = (residual - line)
             }
             if residual == 0 {
-                offsetCount = (emojiViewConfig.numberOfColumns - line)
+                offsetCount = (emojiViewConfig.minimumLineCount - line)
             }
             
             var emojiSource: [String] = []
@@ -302,7 +291,7 @@ public class WYChatEmojiView: UIView, WYEmojiFuncAreaViewDelegate {
 
 }
 
-extension WYChatEmojiView: UICollectionViewDelegate, UICollectionViewDataSource, WYCollectionViewFlowLayoutDelegate {
+extension WYChatEmojiView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     public func numberOfSections(in collectionView: UICollectionView) -> Int {
         return dataSource.count
@@ -312,15 +301,7 @@ extension WYChatEmojiView: UICollectionViewDelegate, UICollectionViewDataSource,
         return dataSource[section].count
     }
     
-    public func wy_collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, numberOfColumnsIn section: NSInteger) -> NSInteger {
-        return emojiViewConfig.numberOfColumns
-    }
-    
-    public func wy_collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, numberOfLinesIn section: NSInteger) -> NSInteger {
-        return emojiViewConfig.numberOfLines
-    }
-    
-    public func wy_collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         
         if (recentlyEmoji.isEmpty == false) && (emojiViewConfig.showRecently == true) {
             if (section == 0) {
@@ -333,16 +314,16 @@ extension WYChatEmojiView: UICollectionViewDelegate, UICollectionViewDataSource,
         }
     }
     
-    public func wy_collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        guard (recentlyEmoji.isEmpty == false) && (emojiViewConfig.showRecently == true) && (emojiViewConfig.scrollDirection == .vertical)  else {
+    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        guard (recentlyEmoji.isEmpty == false) && (emojiViewConfig.showRecently == true)  else {
             return CGSize.zero
         }
         return CGSize(width: wy_width, height: (section < 2) ? emojiViewConfig.headerHeight : 0)
     }
     
-    public func wy_collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+    public func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
-        guard (recentlyEmoji.isEmpty == false) && (emojiViewConfig.showRecently == true) && (emojiViewConfig.scrollDirection == .vertical)  else {
+        guard (recentlyEmoji.isEmpty == false) && (emojiViewConfig.showRecently == true)  else {
             return collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "UICollectionReusableView", for: indexPath)
         }
         
@@ -362,7 +343,7 @@ extension WYChatEmojiView: UICollectionViewDelegate, UICollectionViewDataSource,
         return cell
     }
     
-    public func wy_collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
         return .zero
     }
     
