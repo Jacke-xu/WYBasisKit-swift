@@ -378,6 +378,50 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		DCC3407F2A2880CD0026CAD8 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				DCFEC13129F0D05C001AE8E7 /* ProtocolManager */,
+				DCFEC0FC29EFEAB8001AE8E7 /* Examples */,
+				DCFEC01E29EFE50F001AE8E7 /* Resource */,
+				DCFEBFE829EFDE2F001AE8E7 /* AppDelegate.swift */,
+				DCFEC01C29EFE496001AE8E7 /* WYTabBarController.swift */,
+				DCFEBFF629EFDE30001AE8E7 /* Info.plist */,
+				DCFEBFEE29EFDE2F001AE8E7 /* Main.storyboard */,
+				DCFEBFF129EFDE30001AE8E7 /* Assets.xcassets */,
+				DCFEBFF329EFDE30001AE8E7 /* LaunchScreen.storyboard */,
+			);
+			path = iOS;
+			sourceTree = "<group>";
+		};
+		DCC340802A2880EB0026CAD8 /* MacOS */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = MacOS;
+			sourceTree = "<group>";
+		};
+		DCC340812A2880F50026CAD8 /* WatchOS */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = WatchOS;
+			sourceTree = "<group>";
+		};
+		DCC340842A2881EE0026CAD8 /* iPadOS */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = iPadOS;
+			sourceTree = "<group>";
+		};
+		DCC340852A2881F80026CAD8 /* tvOS */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = tvOS;
+			sourceTree = "<group>";
+		};
 		DCFEBFDC29EFDE2F001AE8E7 = {
 			isa = PBXGroup;
 			children = (
@@ -403,15 +447,11 @@
 		DCFEBFE729EFDE2F001AE8E7 /* WYBasisKitTest */ = {
 			isa = PBXGroup;
 			children = (
-				DCFEC13129F0D05C001AE8E7 /* ProtocolManager */,
-				DCFEC0FC29EFEAB8001AE8E7 /* Examples */,
-				DCFEC01E29EFE50F001AE8E7 /* Resource */,
-				DCFEBFE829EFDE2F001AE8E7 /* AppDelegate.swift */,
-				DCFEC01C29EFE496001AE8E7 /* WYTabBarController.swift */,
-				DCFEBFEE29EFDE2F001AE8E7 /* Main.storyboard */,
-				DCFEBFF129EFDE30001AE8E7 /* Assets.xcassets */,
-				DCFEBFF329EFDE30001AE8E7 /* LaunchScreen.storyboard */,
-				DCFEBFF629EFDE30001AE8E7 /* Info.plist */,
+				DCC340852A2881F80026CAD8 /* tvOS */,
+				DCC340842A2881EE0026CAD8 /* iPadOS */,
+				DCC340812A2880F50026CAD8 /* WatchOS */,
+				DCC340802A2880EB0026CAD8 /* MacOS */,
+				DCC3407F2A2880CD0026CAD8 /* iOS */,
 			);
 			path = WYBasisKitTest;
 			sourceTree = "<group>";
@@ -1280,7 +1320,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3J5533TZC2;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = WYBasisKitTest/Info.plist;
+				INFOPLIST_FILE = WYBasisKitTest/iOS/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = WYBasisKit;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1312,7 +1352,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3J5533TZC2;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = WYBasisKitTest/Info.plist;
+				INFOPLIST_FILE = WYBasisKitTest/iOS/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = WYBasisKit;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

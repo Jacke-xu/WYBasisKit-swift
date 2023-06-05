@@ -267,6 +267,7 @@
 		DADAAFFCDC241D3E6A4DCF567C12D280 /* RequestTypeWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C2A62CD8C6FD05915B5ACBEFFA3ADC /* RequestTypeWrapper.swift */; };
 		DAFC6CE6321395CF4523DD66DADBB9BA /* ImageDrawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7889CDFA9FAE2DD9CB6DF5BE054A9381 /* ImageDrawing.swift */; };
 		DBB8088E14A2ADEDB1CD840BAC835267 /* CPListItem+Kingfisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DF603340D6BFC78639521E15F7988E /* CPListItem+Kingfisher.swift */; };
+		DCC340872A2988F00026CAD8 /* WYMoreViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC340862A2988F00026CAD8 /* WYMoreViewCell.swift */; };
 		DCFEC13D29F0D131001AE8E7 /* WYChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFEC13629F0D131001AE8E7 /* WYChatView.swift */; };
 		DCFEC13E29F0D131001AE8E7 /* WYEmojiViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFEC13729F0D131001AE8E7 /* WYEmojiViewCell.swift */; };
 		DCFEC13F29F0D131001AE8E7 /* WYChatMoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFEC13829F0D131001AE8E7 /* WYChatMoreView.swift */; };
@@ -757,6 +758,7 @@
 		DA69804B37B1D9949D24B0F327D5FFDD /* UIAlertController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = UIAlertController.swift; path = WYBasisKit/Extension/UIAlertController/UIAlertController.swift; sourceTree = "<group>"; };
 		DB7EB698E82525F4ABD3726A39D00688 /* Indicator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Indicator.swift; path = Sources/Views/Indicator.swift; sourceTree = "<group>"; };
 		DCA46946F95A9BB05E6D76402B466B0C /* SessionDataTask.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SessionDataTask.swift; path = Sources/Networking/SessionDataTask.swift; sourceTree = "<group>"; };
+		DCC340862A2988F00026CAD8 /* WYMoreViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYMoreViewCell.swift; sourceTree = "<group>"; };
 		DCFEC13629F0D131001AE8E7 /* WYChatView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYChatView.swift; sourceTree = "<group>"; };
 		DCFEC13729F0D131001AE8E7 /* WYEmojiViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYEmojiViewCell.swift; sourceTree = "<group>"; };
 		DCFEC13829F0D131001AE8E7 /* WYChatMoreView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYChatMoreView.swift; sourceTree = "<group>"; };
@@ -1455,6 +1457,7 @@
 				DCFEC13C29F0D131001AE8E7 /* WYEmojiHeaderView.swift */,
 				DCFEC15A29FA1AA3001AE8E7 /* WYEmojiFuncAreaView.swift */,
 				DCFEC15C29FA1B4F001AE8E7 /* WYEmojiPreviewView.swift */,
+				DCC340862A2988F00026CAD8 /* WYMoreViewCell.swift */,
 			);
 			path = ChatView;
 			sourceTree = "<group>";
@@ -2194,6 +2197,7 @@
 				74DC40247E343A1291614FECCD25A343 /* WYNetworkConfig.swift in Sources */,
 				DCFEC14229F0D131001AE8E7 /* WYChatInputView.swift in Sources */,
 				DCFEC14029F0D131001AE8E7 /* WYChatConfig.swift in Sources */,
+				DCC340872A2988F00026CAD8 /* WYMoreViewCell.swift in Sources */,
 				D8D9EAE285A2D5838D1AD2DD3E3B9BAB /* WYNetworkManager.swift in Sources */,
 				AEABD644740107F95F29636E06DA9FE4 /* WYNetworkServer.swift in Sources */,
 				66A8D289FB0D39034D87C95E9D63D2C8 /* WYPagingView.swift in Sources */,

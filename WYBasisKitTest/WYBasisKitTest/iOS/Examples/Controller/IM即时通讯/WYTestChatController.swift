@@ -38,8 +38,10 @@ class WYTestChatController: UIViewController {
 //        emojiViewConfig.recentlyHeaderText = ""
 //        emojiViewConfig.showRecently = false
         
+        moreViewConfig.moreSource = [["照片": "zhaopian"], ["拍摄": "paishe"], ["位置": "weizhi"], ["语音输入": "yuyinshuru"], ["收藏": "shoucang"], ["个人名片": "gerenmingpian"], ["文件": "wenjianjia"], ["音乐": "yinle"]]
         
         let chatView = WYChatView()
+        chatView.dataSource = emojiViewConfig.emojiSource
         chatView.delegate = self
         view.addSubview(chatView)
         chatView.snp.makeConstraints { make in
@@ -63,7 +65,50 @@ class WYTestChatController: UIViewController {
 
 extension WYTestChatController: WYChatViewDelegate {
     
-    func willShowPreviewView(_ imageName: String, _ imageView: UIImageView) {
-        wy_print("imageName = \(imageName), imageView = \(imageView)")
+    /// 点击了 文本/语音按钮 切换按钮
+    func didClickTextVoiceView(_ isText: Bool) {
+        if isText {
+            wy_print("显示键盘")
+        }else {
+            wy_print("显示语音")
+        }
+    }
+    
+    /// 点击了 表情/文本 切换按钮
+    func didClickEmojiTextView(_ isText: Bool) {
+        if isText {
+            wy_print("显示键盘")
+        }else {
+            wy_print("显示表情")
+        }
+    }
+    
+    /// 点击了 更多 按钮
+    func didClickMoreView(_ isText: Bool) {
+        if isText {
+            wy_print("显示键盘")
+        }else {
+            wy_print("显示更多")
+        }
+    }
+    
+    /// 输入框文本发生变化
+    func textDidChanged(_ text: String) {
+        wy_print("输入的文本：\(text)")
+    }
+    
+    /// 点击了 发送 按钮
+    func sendMessage(_ text: String) {
+        wy_print("发送文本消息：\(text)")
+    }
+    
+    /// 将要显示表情预览控件(仅限WYEmojiPreviewStyle == other时才会回调)
+    func willShowPreviewView(_ imageView: UIImageView, _ imageName: String) {
+        wy_print("imageView = \(imageView), imageName = \(imageName)")
+    }
+    
+    /// 点击了More控件内某个item
+    func didClick(_ moreView: WYChatMoreView, _ itemIndex: NSInteger) {
+        wy_print("点击More控件 \(moreView) 内第 \(itemIndex) 个item")
     }
 }

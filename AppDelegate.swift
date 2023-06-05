@@ -4,7 +4,7 @@
 //
 //  Created by 官人 on 2020/8/29.
 //  Copyright © 2020 官人. All rights reserved.
-//
+//  os(macOS) os(iOS) os(tvOS) os(watchOS) os(ipadOS) targetEnvironment(macCatalyst)
 
 import UIKit
 

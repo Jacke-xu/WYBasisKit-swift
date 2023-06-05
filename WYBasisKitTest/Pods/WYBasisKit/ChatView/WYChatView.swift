@@ -14,7 +14,7 @@ import UIKit
     @objc optional func didClickTextVoiceView(_ isText: Bool)
     
     /// 点击了 表情/文本 切换按钮
-    @objc optional func didClickEmojiTextView(_ isEmoji: Bool)
+    @objc optional func didClickEmojiTextView(_ isText: Bool)
     
     /// 点击了 更多 按钮
     @objc optional func didClickMoreView(_ isText: Bool)
@@ -26,7 +26,16 @@ import UIKit
     @objc optional func sendMessage(_ text: String)
     
     /// 将要显示表情预览控件(仅限WYEmojiPreviewStyle == other时才会回调)
-    @objc optional func willShowPreviewView(_ imageName: String, _ imageView: UIImageView)
+    @objc optional func willShowPreviewView(_ imageView: UIImageView, _ imageName: String)
+    
+    /// 点击了More控件内某个item
+    @objc optional func didClick(_ moreView: WYChatMoreView, _ itemIndex: NSInteger)
+}
+
+private enum WYChatTouchStyle {
+    case done
+    case more
+    case emoji
 }
 
 public class WYChatView: UIView {
@@ -55,6 +64,7 @@ public class WYChatView: UIView {
         return tableView
     }()
     
+    /// 表情控件
     public lazy var emojiView: WYChatEmojiView? = {
         guard inputBarConfig.emojiTextButtonSize != CGSize.zero else {
             return nil
@@ -71,13 +81,44 @@ public class WYChatView: UIView {
         return emojiView
     }()
     
+    /// More控件
+    public lazy var moreView: WYChatMoreView? = {
+        
+        guard inputBarConfig.moreButtonSize != CGSize.zero else {
+            return nil
+        }
+        
+        let moreView: WYChatMoreView = WYChatMoreView()
+        moreView.delegate = self
+        moreView.isHidden = true
+        addSubview(moreView)
+        moreView.snp.makeConstraints { make in
+            make.left.right.equalToSuperview()
+            make.height.equalTo(moreViewConfig.contentHeight())
+            make.bottom.equalToSuperview().offset(moreViewConfig.contentHeight())
+        }
+        
+        return moreView
+    }()
+    
     /// 记录最近使用表情数据，用于实现延时更新最近使用表情
     public var recentlyEmojis: [String] = []
+    
+    /// TableView数据源
+    public var dataSource: [String] = [] {
+        didSet {
+            tableView.reloadData()
+        }
+    }
+    
+    /// 区分当前点击的是哪个控件
+    private var touchStyle: WYChatTouchStyle = .done
     
     public init() {
         super.init(frame: .zero)
         self.tableView.backgroundColor = .white
         self.emojiView?.backgroundColor = .clear
+        self.moreView?.backgroundColor = .clear
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDismiss), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -87,11 +128,24 @@ public class WYChatView: UIView {
         let keyboardRect = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
         updateInputViewOffset(offsety: keyboardRect.size.height - wy_tabbarSafetyZone)
         updateEmojiViewConstraints(false)
+        updateMoreViewConstraints(false)
     }
     
     @objc private func keyboardWillDismiss() {
         
-        let offsety: CGFloat = chatInput.emojiView.isSelected ? emojiViewConfig.contentHeight : 0
+        chatInput.layer.removeAllAnimations()
+        var offsety: CGFloat = 0
+        switch touchStyle {
+        case .emoji:
+            offsety = chatInput.emojiView.isSelected ? emojiViewConfig.contentHeight : 0
+            break
+        case .more:
+            offsety = chatInput.moreView.isSelected ? moreViewConfig.contentHeight() : 0
+            break
+        default:
+            offsety = 0
+            break
+        }
         updateInputViewOffset(offsety: offsety)
     }
     
@@ -103,7 +157,7 @@ public class WYChatView: UIView {
                 })
                 self.chatInput.superview?.layoutIfNeeded()
             }
-        }completion: {[weak self] _ in
+        }completion: { [weak self] _ in
             if let self = self {
                 self.chatInput.updateTextViewOffset()
             }
@@ -116,9 +170,13 @@ public class WYChatView: UIView {
             return
         }
         
+        updateMoreViewConstraints(false)
+        
+        moreView?.isHidden = true
         emojiView?.isHidden = false
         
         if chatInput.textView.isFirstResponder == false {
+            touchStyle = .emoji
             keyboardWillDismiss()
         }
         
@@ -135,10 +193,42 @@ public class WYChatView: UIView {
         }
     }
     
+    private func updateMoreViewConstraints(_ isMore: Bool) {
+        
+        if (isMore == false) && (moreView?.isHidden == true) {
+            return
+        }
+        
+        updateEmojiViewConstraints(false)
+        
+        emojiView?.isHidden = true
+        moreView?.isHidden = false
+
+        if chatInput.textView.isFirstResponder == false {
+            touchStyle = .more
+            keyboardWillDismiss()
+        }
+
+        if inputBarConfig.moreButtonSize != CGSize.zero {
+            let moreOffset: CGFloat = isMore ? 0 : moreViewConfig.contentHeight()
+            UIView.animate(withDuration: 0.25) { [weak self] in
+                self?.moreView?.snp.updateConstraints { make in
+                    make.bottom.equalToSuperview().offset(moreOffset)
+                }
+                self?.emojiView?.superview?.layoutIfNeeded()
+            }completion: {[weak self] _ in
+                self?.moreView?.isHidden = !isMore
+            }
+        }
+    }
+    
     public func scrollViewDidScroll(_ scrollView: UIScrollView) {
         chatInput.emojiView.isSelected = false
+        chatInput.moreView.isSelected = false
         updateEmojiViewConstraints(false)
+        updateMoreViewConstraints(false)
         emojiView?.isHidden = true
+        moreView?.isHidden = true
     }
     
     required init?(coder: NSCoder) {
@@ -162,7 +252,7 @@ public class WYChatView: UIView {
 extension WYChatView: UITableViewDelegate, UITableViewDataSource {
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 20
+        return dataSource.count
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -179,37 +269,32 @@ extension WYChatView: UITableViewDelegate, UITableViewDataSource {
 extension WYChatView: WYChatInputViewDelegate {
     
     public func didClickMoreView(_ isText: Bool) {
-        if isText {
-            wy_print("显示键盘")
-        }else {
-            wy_print("显示更多")
-        }
         delegate?.didClickMoreView?(isText)
+        updateMoreViewConstraints(!isText)
     }
     
-    public func didClickEmojiTextView(_ isEmoji: Bool) {
-        if isEmoji {
-            wy_print("显示表情")
-            updateEmojiFuncAreaViewState()
+    public func didClickEmojiTextView(_ isText: Bool) {
+        if isText {
+
         }else {
-            wy_print("显示键盘")
+            updateEmojiFuncAreaViewState()
+            if recentlyEmojis.isEmpty == false {
+                emojiView?.updateRecentlyEmoji(chatInput.sharedEmojiAttributed(string: recentlyEmojis.joined()))
+                recentlyEmojis.removeAll()
+            }
         }
-        
-        if recentlyEmojis.isEmpty == false {
-            emojiView?.updateRecentlyEmoji(chatInput.sharedEmojiAttributed(string: recentlyEmojis.joined()))
-            recentlyEmojis.removeAll()
-        }
-        updateEmojiViewConstraints(isEmoji)
-        delegate?.didClickEmojiTextView?(isEmoji)
+        updateEmojiViewConstraints(!isText)
+        delegate?.didClickEmojiTextView?(isText)
     }
     
     public func didClickTextVoiceView(_ isText: Bool) {
         if isText {
-            wy_print("显示键盘")
+
         }else {
-            wy_print("显示语音")
             updateEmojiViewConstraints(false)
+            updateMoreViewConstraints(false)
             emojiView?.isHidden = true
+            moreView?.isHidden = true
         }
         delegate?.didClickTextVoiceView?(isText)
     }
@@ -218,7 +303,6 @@ extension WYChatView: WYChatInputViewDelegate {
         chatInput.textView.attributedText = chatInput.sharedEmojiAttributed(string: text)
         updateEmojiFuncAreaViewState()
         delegate?.textDidChanged?(text)
-        wy_print("输入的文本：\(text)")
     }
     
     public func didClickKeyboardEvent(_ text: String) {
@@ -231,7 +315,6 @@ extension WYChatView: WYChatInputViewDelegate {
         updateEmojiFuncAreaViewState()
         chatInput.textViewDidChange(chatInput.textView)
         delegate?.sendMessage?(text)
-        wy_print("发送文本消息：\(text)")
     }
     
     public func updateEmojiFuncAreaViewState() {
@@ -244,7 +327,7 @@ extension WYChatView: WYChatInputViewDelegate {
     }
 }
 
-extension WYChatView: WYChatEmojiViewDelegate {
+extension WYChatView: WYChatEmojiViewDelegate, WYChatMoreViewDelegate {
     
     public func didClick(_ emojiView: WYChatEmojiView, _ emoji: String) {
         
@@ -266,7 +349,7 @@ extension WYChatView: WYChatEmojiViewDelegate {
     }
     
     public func willShowPreviewView(_ imageName: String, _ imageView: UIImageView) {
-        delegate?.willShowPreviewView?(imageName, imageView)
+        delegate?.willShowPreviewView?(imageView, imageName)
     }
     
     public func didClickEmojiDeleteView() {
@@ -276,5 +359,10 @@ extension WYChatView: WYChatEmojiViewDelegate {
     public func sendMessage() {
         let emojiText: String = NSMutableAttributedString(attributedString: chatInput.textView.attributedText).wy_convertEmojiAttributedString(textColor: inputBarConfig.textColor, textFont: inputBarConfig.textFont).string
         didClickKeyboardEvent(wy_safe(emojiText))
+    }
+    
+    public func didClickMoreViewAt(_ itemIndex: NSInteger) {
+        guard let moreView = moreView else { return }
+        delegate?.didClick?(moreView, itemIndex)
     }
 }

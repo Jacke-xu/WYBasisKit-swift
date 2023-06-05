@@ -17,7 +17,7 @@ private let canSaveLastInputViewStyleKey: String = "canSaveLastInputViewStyleKey
     @objc optional func didClickTextVoiceView(_ isText: Bool)
     
     /// 点击了 表情/文本 切换按钮
-    @objc optional func didClickEmojiTextView(_ isEmoji: Bool)
+    @objc optional func didClickEmojiTextView(_ isText: Bool)
     
     /// 点击了 更多 按钮
     @objc optional func didClickMoreView(_ isText: Bool)
@@ -141,7 +141,7 @@ public class WYChatInputView: UIImageView {
         
         moreView.setBackgroundImage(inputBarConfig.moreButtomImage, for: .normal)
         moreView.setBackgroundImage(inputBarConfig.moreButtomImage, for: .highlighted)
-        moreView.addTarget(self, action: #selector(didClickAddView(sender:)), for: .touchUpInside)
+        moreView.addTarget(self, action: #selector(didClickMoreView(sender:)), for: .touchUpInside)
         addSubview(moreView)
         moreView.snp.makeConstraints { make in
             make.size.equalTo(inputBarConfig.moreButtonSize)
@@ -177,7 +177,7 @@ public class WYChatInputView: UIImageView {
         }
     }
     
-    @objc private func didClickAddView(sender: UIButton) {
+    @objc private func didClickMoreView(sender: UIButton) {
         sender.isSelected = !sender.isSelected
         
         textVoiceContentView.isSelected = true
@@ -186,11 +186,14 @@ public class WYChatInputView: UIImageView {
         emojiView.isSelected = false
         
         if sender.isSelected {
-            textView.resignFirstResponder()
+            if textView.canResignFirstResponder {
+                textView.resignFirstResponder()
+            }
         }else {
-            textView.becomeFirstResponder()
+            if textView.canBecomeFirstResponder {
+                textView.becomeFirstResponder()
+            }
         }
-        
         updateContentViewHeight()
         
         delegate?.didClickMoreView?(!sender.isSelected)
@@ -206,14 +209,17 @@ public class WYChatInputView: UIImageView {
         moreView.isSelected = false
         
         if sender.isSelected {
-            textView.resignFirstResponder()
+            if textView.canResignFirstResponder {
+                textView.resignFirstResponder()
+            }
         }else {
-            textView.becomeFirstResponder()
+            if textView.canBecomeFirstResponder {
+                textView.becomeFirstResponder()
+            }
         }
-        
         updateContentViewHeight()
         
-        delegate?.didClickEmojiTextView?(sender.isSelected)
+        delegate?.didClickEmojiTextView?(!sender.isSelected)
         saveLastInputViewStyle()
     }
     
@@ -284,6 +290,40 @@ public class WYChatInputView: UIImageView {
         }
     }
     
+    public func processingTextViewDidChange(_ textView: UITextView) {
+        
+        let cursorPosition = textView.offset(from: textView.beginningOfDocument, to: textView.selectedTextRange?.start ?? textView.beginningOfDocument)
+        
+        var emojiText: String = NSMutableAttributedString(attributedString: textView.attributedText).wy_convertEmojiAttributedString(textColor: inputBarConfig.textColor, textFont: inputBarConfig.textFont).string
+  
+        if inputBarConfig.canInputEmoji == false {
+            emojiText = emojiText.wy_replaceEmoji(inputBarConfig.emojiReplacement)
+            textView.text = emojiText
+        }
+        
+        textView.attributedText = sharedEmojiAttributed(string: emojiText)
+        
+        checkTextCount()
+        
+        emojiText = NSMutableAttributedString(attributedString: textView.attributedText).wy_convertEmojiAttributedString(textColor: inputBarConfig.textColor, textFont: inputBarConfig.textFont).string
+        
+        textPlaceholderView.isHidden = !emojiText.isEmpty
+        delegate?.textDidChanged?(wy_safe(emojiText))
+        
+        updateContentViewHeight()
+        
+        if cursorPosition < textView.attributedText.string.utf16.count {
+            let start: UITextPosition = textView.position(from: textView.beginningOfDocument, offset: cursorPosition)!
+            let end: UITextPosition = textView.position(from: start, offset: 0)!
+            textView.selectedTextRange = textView.textRange(from: start, to: end)
+        }
+        
+        UserDefaults.standard.setValue(wy_safe(emojiText), forKey: canSaveLastInputTextKey)
+        UserDefaults.standard.synchronize()
+        
+        updateTextViewOffset()
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -319,36 +359,24 @@ extension WYChatInputView: UITextViewDelegate {
     
     public func textViewDidChange(_ textView: UITextView) {
         
-        let cursorPosition = textView.offset(from: textView.beginningOfDocument, to: textView.selectedTextRange?.start ?? textView.beginningOfDocument)
+        // 以下获取键盘输入模式及判断selectedRange相关目的是为了解决textViewDidChange回调两次的问题
         
-        var emojiText: String = NSMutableAttributedString(attributedString: textView.attributedText).wy_convertEmojiAttributedString(textColor: inputBarConfig.textColor, textFont: inputBarConfig.textFont).string
-  
-        if inputBarConfig.canInputEmoji == false {
-            emojiText = emojiText.wy_replaceEmoji(inputBarConfig.emojiReplacement)
-            textView.text = emojiText
+        // 获取键盘输入模式
+        let lang: String = textView.textInputMode?.primaryLanguage ?? ""
+        
+        // 九宫格输入
+        if lang == "zh-Hans" {
+            // 拼音输入的时候 selectedRange 会有值 输入完成 selectedRange 会等于nil, 所以在输入完再进行相关的逻辑操作
+            if textView.markedTextRange == nil {
+                processingTextViewDidChange(textView)
+            }else {
+                // bar上的拼音监听
+                textPlaceholderView.isHidden = true
+            }
+        }else {
+            // 英文输入
+            processingTextViewDidChange(textView)
         }
-        
-        textView.attributedText = sharedEmojiAttributed(string: emojiText)
-        
-        checkTextCount()
-        
-        emojiText = NSMutableAttributedString(attributedString: textView.attributedText).wy_convertEmojiAttributedString(textColor: inputBarConfig.textColor, textFont: inputBarConfig.textFont).string
-        
-        textPlaceholderView.isHidden = !emojiText.isEmpty
-        delegate?.textDidChanged?(wy_safe(emojiText))
-        
-        updateContentViewHeight()
-        
-        if cursorPosition < textView.attributedText.string.utf16.count {
-            let start: UITextPosition = textView.position(from: textView.beginningOfDocument, offset: cursorPosition)!
-            let end: UITextPosition = textView.position(from: start, offset: 0)!
-            textView.selectedTextRange = textView.textRange(from: start, to: end)
-        }
-        
-        UserDefaults.standard.setValue(wy_safe(emojiText), forKey: canSaveLastInputTextKey)
-        UserDefaults.standard.synchronize()
-        
-        updateTextViewOffset()
     }
     
     public func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
