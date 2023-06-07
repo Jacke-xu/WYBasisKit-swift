@@ -11,7 +11,7 @@ import UIKit
 @objc public protocol WYEmojiViewCellDelegate {
     
     /// 长按了表情预览控件(仅限WYEmojiPreviewStyle == other时才会回调)
-    @objc optional func willShowPreviewView(_ imageName: String, _ imageView: UIImageView)
+    @objc optional func willShowPreviewView(_ gestureRecognizer: UILongPressGestureRecognizer, emoji: String, according: UIImageView)
 }
 
 public class WYEmojiViewCell: UICollectionViewCell {
@@ -40,24 +40,13 @@ public class WYEmojiViewCell: UICollectionViewCell {
             make.edges.equalToSuperview()
         }
         
-        let longPress: UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(didLongPress(sender:)))
-        longPress.minimumPressDuration = 0.5
-        addGestureRecognizer(longPress)
+        let gesture: UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(didLongPress(sender:)))
+        gesture.minimumPressDuration = 0.5
+        addGestureRecognizer(gesture)
     }
     
     @objc private func didLongPress(sender: UILongPressGestureRecognizer) {
-        if sender.state == .began {
-            
-            WYEmojiPreviewView.show(emoji: emoji, according: emojiView) { [weak self] imageName, imageView in
-                DispatchQueue.main.async {
-                    self?.delegate?.willShowPreviewView?(imageName, imageView)
-                }
-            }
-        }
-        
-        if (sender.state == .cancelled) || (sender.state == .ended) {
-            WYEmojiPreviewView.dismiss()
-        }
+        delegate?.willShowPreviewView?(sender, emoji: emoji, according: emojiView)
     }
     
     required init?(coder: NSCoder) {

@@ -8,13 +8,188 @@
 
 import UIKit
 
+public struct WYInputBarConfig {
+    
+    /// inputBar背景图
+    public var backgroundImage: UIImage = UIImage.wy_createImage(from: .wy_hex("#ECECEC"))
+    
+    /// 是否需要保存上次退出时输入框中的文本
+    public var canSaveLastInputText: Bool = true
+
+    /// 是否需要保存上次退出时输入框模式(语音输入还是文本输入)
+    public var canSaveLastInputViewStyle: Bool = true
+    
+    /// 是否允许输入Emoji表情
+    public var canInputEmoji: Bool = true
+
+    /// 输入法自带的Emoji表情替换成什么字符(需要canInputEmoji为false才生效)
+    public var emojiReplacement: String = ""
+    
+    /// 自定义表情转换时的正则匹配规则
+    public var emojiPattern: String = ""
+    
+    /// 文本切换按钮图片
+    public var textButtomImage: UIImage = UIImage.wy_createImage(from: .wy_random)
+    
+    /// 语音切换按钮图片
+    public var voiceButtonImage: UIImage = UIImage.wy_createImage(from: .wy_random)
+    
+    /// 表情切换按钮图片
+    public var emojiButtomImage: UIImage = UIImage.wy_createImage(from: .wy_random)
+    
+    /// 更多切换按钮图片
+    public var moreButtomImage: UIImage = UIImage.wy_createImage(from: .wy_random)
+    
+    /// 文本输入框背景图
+    public var textViewBackgroundImage: UIImage = UIImage.wy_createImage(from: .white)
+    
+    /// 语音输入框背景图
+    public var voiceViewBackgroundImage: UIImage = UIImage.wy_createImage(from: .white)
+    
+    /// 语音输入框按压状态背景图
+    public var voiceViewBackgroundImageForHighlighted: UIImage = UIImage.wy_createImage(from: .white)
+    
+    /// 语音输入框占位文本
+    public var voicePlaceholder: String = "语音框占位文本"
+
+    /// 语音输入框占位文本色值
+    public var voicePlaceholderColor: UIColor = .black
+
+    /// 语音框输入占位文本字体、字号
+    public var voicePlaceholderFont: UIFont = .systemFont(ofSize: wy_screenWidth(15))
+    
+    /// 键盘类型
+    public var chatKeyboardType: UIKeyboardType = .default
+    
+    /// 键盘右下角按钮类型
+    public var chatReturnKeyType: UIReturnKeyType = .send
+    
+    /// 输入框占位文本
+    public var textPlaceholder: String = "输入框占位文本"
+    
+    /// 输入框占位文本色值
+    public var textPlaceholderColor: UIColor = .lightGray
+
+    /// 输入框占位文本字体、字号
+    public var textPlaceholderFont: UIFont = .systemFont(ofSize: wy_screenWidth(15))
+
+    /// 输入框占位文本距离输入框左侧和顶部的间距
+    public var textPlaceholderOffset: CGPoint = CGPoint(x: wy_screenWidth(16), y: wy_screenWidth(12.5))
+    
+    /// 输入框内文本偏移量
+    public var inputTextEdgeInsets: UIEdgeInsets = UIEdgeInsets(top: wy_screenWidth(13), left: wy_screenWidth(10), bottom: wy_screenWidth(5), right: wy_screenWidth(5))
+    
+    /// 输入字符长度限制
+    public var inputTextLength: NSInteger = Int.max
+
+    /// 输入字符行数限制(0为不限制行数)
+    public var inputTextMaximumNumberOfLines: NSInteger = 0
+
+    /// 输入字符的截断方式
+    public var textLineBreakMode: NSLineBreakMode = .byTruncatingTail
+    
+    /// 输入框键盘语言(解决textViewDidChange回调两次的问题)
+    public var primaryLanguage: [String] = ["zh-Hans"]
+
+    /// 字符输入控件是否允许滑动
+    public var textViewIsScrollEnabled: Bool = true
+
+    /// 字符输入控件是否允许弹跳效果
+    public var textViewIsBounces: Bool = true
+
+    /// 字符输入控件光标颜色
+    public var inputViewCurvesColor: UIColor = .blue
+
+    /// 字符输入控件是否允许弹出用户交互菜单
+    public var textViewCanUserInteractionMenu: Bool = true
+    
+    /// 输入框输入文本色值
+    public var textColor: UIColor = .black
+
+    /// 输入框输入文本字体、字号
+    public var textFont: UIFont = .systemFont(ofSize: wy_screenWidth(15))
+    
+    /// 输入框文本行间距
+    public var textLineSpacing: CGFloat = 5
+
+    /// 输入框的最高高度
+    public var textViewMaxHeight: CGFloat = CGFLOAT_MAX
+    
+    /// 输入框、语音框的圆角半径
+    public var textViewCornerRadius: CGFloat = wy_screenWidth(8)
+
+    /// 输入框、语音框的边框颜色
+    public var textViewBorderColor: UIColor = .gray
+
+    /// 输入框、语音框的边框宽度
+    public var textViewBorderWidth: CGFloat = 1
+
+    /// 输入框、语音框的高度
+    public var inputViewHeight: CGFloat = wy_screenWidth(42)
+
+    /// 输入框、语音框距离InputBar的间距
+    public var inputViewEdgeInsets: UIEdgeInsets = UIEdgeInsets(top: wy_screenWidth(12), left: wy_screenWidth(57), bottom: wy_screenWidth(12), right: wy_screenWidth(100))
+    
+    /// 语音、文本切换按钮的size
+    public var voiceTextButtonSize: CGSize = CGSize(width: wy_screenWidth(31), height: wy_screenWidth(31))
+    
+    /// 表情、文本切换按钮的size
+    public var emojiTextButtonSize: CGSize = CGSize(width: wy_screenWidth(31), height: wy_screenWidth(31))
+    
+    /// 更多按钮的size
+    public var moreButtonSize: CGSize = CGSize(width: wy_screenWidth(31), height: wy_screenWidth(31))
+
+    /// 语音、文本切换按钮距离 输入框、语音框 左侧的间距
+    public var voiceTextButtonRightOffset: CGFloat = wy_screenWidth(13)
+
+    /// 语音、文本切换按钮距离 输入框、语音框 底部的间距
+    public var voiceTextButtonBottomOffset: CGFloat = wy_screenWidth(5)
+
+    /// 表情、文本切换按钮距离 输入框、语音框 右侧的间距
+    public var emojiTextButtonLeftOffset: CGFloat = wy_screenWidth(13)
+
+    /// 表情、文本切换按钮距离 输入框、语音框 底部的间距
+    public var emojiTextButtonBottomOffset: CGFloat = wy_screenWidth(5)
+    
+    /// 更多按钮距离 输入框、语音框 右侧的间距
+    public var moreButtonLeftOffset: CGFloat = wy_screenWidth(57)
+
+    /// 更多按钮距离 输入框、语音框 底部的间距
+    public var moreButtonBottomOffset: CGFloat = wy_screenWidth(5)
+    
+    public init() {}
+}
+
 private let canSaveLastInputTextKey: String = "canSaveLastInputTextKey"
 private let canSaveLastInputViewStyleKey: String = "canSaveLastInputViewStyleKey"
 
+/// 返回一个Bool值来判定各控件的点击或手势事件是否需要内部处理(默认返回True)
+@objc public protocol WYChatInputViewEventsHandler {
+    
+    /// 是否需要内部处理 文本/语音 按钮的点击事件
+    @objc optional func canManagerTextVoiceViewEvents(_ textVoiceView: UIButton) -> Bool
+    
+    /// 是否需要内部处理 语音(录音) 按钮的长按事件
+    @objc optional func canManagerRecordingViewLongPressEvents(_ recordingView: UIButton, _ gestureRecognizer: UILongPressGestureRecognizer) -> Bool
+    
+    /// 是否需要内部处理 文本/表情 切换按钮的点击事件
+    @objc optional func canManagerTextEmojiViewEvents(_ textEmojiView: UIButton) -> Bool
+    
+    /// 是否需要内部处理 更多 按钮的点击事件
+    @objc optional func canManagerMoreViewEvents(_ moreView: UIButton) -> Bool
+    
+    /// 是否需要内部处理 textView 的代理事件
+    @objc optional func canManagerTextViewDelegateEvents(_ textView: WYChatInputTextView, _ placeholderView: UILabel) -> Bool
+}
+
+/// 监听各控件点击事件
 @objc public protocol WYChatInputViewDelegate {
     
-    /// 点击了 文本/语音按钮 切换按钮
+    /// 点击了 文本/语音 切换按钮
     @objc optional func didClickTextVoiceView(_ isText: Bool)
+    
+    /// 长按了 语音 按钮
+    @objc optional func didLongPressRecordingView(_ state: UIGestureRecognizer.State)
     
     /// 点击了 表情/文本 切换按钮
     @objc optional func didClickEmojiTextView(_ isText: Bool)
@@ -38,6 +213,7 @@ public class WYChatInputView: UIImageView {
     public let emojiView: UIButton = UIButton(type: .custom)
     public let moreView: UIButton = UIButton(type: .custom)
     
+    public weak var eventsHandler: WYChatInputViewEventsHandler? = nil
     public weak var delegate: WYChatInputViewDelegate? = nil
     
     public init() {
@@ -58,8 +234,10 @@ public class WYChatInputView: UIImageView {
         textVoiceContentView.layer.cornerRadius = inputBarConfig.textViewCornerRadius
         textVoiceContentView.layer.borderWidth = inputBarConfig.textViewBorderWidth
         textVoiceContentView.layer.borderColor = inputBarConfig.textViewBorderColor.cgColor
-        textVoiceContentView.layer.masksToBounds = true
-        textVoiceContentView.addTarget(self, action: #selector(didClickRecordingButtonView(sender:)), for: .touchUpInside)
+        textVoiceContentView.layer.masksToBounds = true        
+        let gesture: UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(didLongPressRecordingButtonView(sender:)))
+        gesture.minimumPressDuration = 0.5
+        textVoiceContentView.addGestureRecognizer(gesture)
         addSubview(textVoiceContentView)
         textVoiceContentView.snp.makeConstraints { make in
             make.height.equalTo(inputBarConfig.inputViewHeight)
@@ -84,7 +262,9 @@ public class WYChatInputView: UIImageView {
         textView.textContainer.lineBreakMode = inputBarConfig.textLineBreakMode
         textView.textContainer.maximumNumberOfLines = inputBarConfig.inputTextMaximumNumberOfLines
         textView.isScrollEnabled = inputBarConfig.textViewIsScrollEnabled
-        textView.delegate = self
+        if (eventsHandler?.canManagerTextViewDelegateEvents?(textView, textPlaceholderView) ?? true) == true {
+            textView.delegate = self
+        }
         textVoiceContentView.addSubview(textView)
         textView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
@@ -153,6 +333,11 @@ public class WYChatInputView: UIImageView {
     }
     
     @objc private func didClickTextVoiceView(sender: UIButton) {
+        
+        guard (eventsHandler?.canManagerTextVoiceViewEvents?(sender) ?? true) else {
+            return
+        }
+        
         sender.isSelected = !sender.isSelected
         textVoiceContentView.isSelected = !sender.isSelected
         textView.isHidden = !textVoiceContentView.isSelected
@@ -171,13 +356,29 @@ public class WYChatInputView: UIImageView {
         saveLastInputViewStyle()
     }
     
-    @objc private func didClickRecordingButtonView(sender: UIButton) {
-        if sender.isSelected == false {
-            wy_print("录音准备")
+    @objc private func didLongPressRecordingButtonView(sender: UILongPressGestureRecognizer) {
+        
+        guard (eventsHandler?.canManagerRecordingViewLongPressEvents?(textVoiceContentView, sender) ?? true) else {
+            return
         }
+        
+        if sender.state == .began {
+            // 开始录音
+        }
+        
+        if (sender.state == .cancelled) || (sender.state == .ended) {
+            // 结束录音
+        }
+        
+        delegate?.didLongPressRecordingView?(sender.state)
     }
     
     @objc private func didClickMoreView(sender: UIButton) {
+        
+        guard (eventsHandler?.canManagerMoreViewEvents?(sender) ?? true) else {
+            return
+        }
+        
         sender.isSelected = !sender.isSelected
         
         textVoiceContentView.isSelected = true
@@ -201,6 +402,11 @@ public class WYChatInputView: UIImageView {
     }
     
     @objc private func didClickEmojiView(sender: UIButton) {
+        
+        guard (eventsHandler?.canManagerTextEmojiViewEvents?(sender) ?? true) else {
+            return
+        }
+        
         sender.isSelected = !sender.isSelected
         
         textVoiceContentView.isSelected = true
@@ -290,7 +496,7 @@ public class WYChatInputView: UIImageView {
         }
     }
     
-    public func processingTextViewDidChange(_ textView: UITextView) {
+    public func processingTextViewDidChange(_ textView: UITextView, silence: Bool) {
         
         let cursorPosition = textView.offset(from: textView.beginningOfDocument, to: textView.selectedTextRange?.start ?? textView.beginningOfDocument)
         
@@ -308,8 +514,9 @@ public class WYChatInputView: UIImageView {
         emojiText = NSMutableAttributedString(attributedString: textView.attributedText).wy_convertEmojiAttributedString(textColor: inputBarConfig.textColor, textFont: inputBarConfig.textFont).string
         
         textPlaceholderView.isHidden = !emojiText.isEmpty
-        delegate?.textDidChanged?(wy_safe(emojiText))
-        
+        if silence == false {
+            delegate?.textDidChanged?(wy_safe(emojiText))
+        }
         updateContentViewHeight()
         
         if cursorPosition < textView.attributedText.string.utf16.count {
@@ -322,6 +529,28 @@ public class WYChatInputView: UIImageView {
         UserDefaults.standard.synchronize()
         
         updateTextViewOffset()
+    }
+    
+    public func textViewDidChange(_ textView: UITextView, silence: Bool) {
+        
+        // 以下获取键盘输入模式及判断selectedRange相关目的是为了解决textViewDidChange回调两次的问题
+        
+        // 获取键盘输入模式
+        let primaryLanguage: String = textView.textInputMode?.primaryLanguage ?? ""
+        
+        // 九宫格输入
+        if inputBarConfig.primaryLanguage.contains(primaryLanguage) {
+            // 拼音输入的时候 selectedRange 会有值 输入完成 selectedRange 会等于nil, 所以在输入完再进行相关的逻辑操作
+            if textView.markedTextRange == nil {
+                processingTextViewDidChange(textView, silence: silence)
+            }else {
+                // bar上的拼音监听
+                textPlaceholderView.isHidden = true
+            }
+        }else {
+            // 英文输入
+            processingTextViewDidChange(textView, silence: silence)
+        }
     }
     
     required init?(coder: NSCoder) {
@@ -358,25 +587,7 @@ extension WYChatInputView: UITextViewDelegate {
     }
     
     public func textViewDidChange(_ textView: UITextView) {
-        
-        // 以下获取键盘输入模式及判断selectedRange相关目的是为了解决textViewDidChange回调两次的问题
-        
-        // 获取键盘输入模式
-        let lang: String = textView.textInputMode?.primaryLanguage ?? ""
-        
-        // 九宫格输入
-        if lang == "zh-Hans" {
-            // 拼音输入的时候 selectedRange 会有值 输入完成 selectedRange 会等于nil, 所以在输入完再进行相关的逻辑操作
-            if textView.markedTextRange == nil {
-                processingTextViewDidChange(textView)
-            }else {
-                // bar上的拼音监听
-                textPlaceholderView.isHidden = true
-            }
-        }else {
-            // 英文输入
-            processingTextViewDidChange(textView)
-        }
+        textViewDidChange(textView, silence: false)
     }
     
     public func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
@@ -413,7 +624,6 @@ extension WYChatInputView: UITextViewDelegate {
     }
 }
 
-
 public class WYChatInputTextView: UITextView {
     
     override public  func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
@@ -433,153 +643,4 @@ public class WYChatInputTextView: UITextView {
         originalRect.size.height = inputBarConfig.textFont.lineHeight + 2
         return originalRect
     }
-}
-
-public struct WYInputBarConfig {
-    
-    /// inputBar背景图
-    public var backgroundImage: UIImage = UIImage.wy_createImage(from: .wy_hex("#ECECEC"))
-    
-    /// 是否需要保存上次退出时输入框中的文本
-    public var canSaveLastInputText: Bool = true
-
-    /// 是否需要保存上次退出时输入框模式(语音输入还是文本输入)
-    public var canSaveLastInputViewStyle: Bool = true
-    
-    /// 是否允许输入Emoji表情
-    public var canInputEmoji: Bool = true
-
-    /// 输入法自带的Emoji表情替换成什么字符(需要canInputEmoji为false才生效)
-    public var emojiReplacement: String = ""
-    
-    /// 自定义表情转换时的正则匹配规则
-    public var emojiPattern: String = ""
-    
-    /// 文本切换按钮图片
-    public var textButtomImage: UIImage = UIImage.wy_createImage(from: .wy_random)
-    
-    /// 语音切换按钮图片
-    public var voiceButtonImage: UIImage = UIImage.wy_createImage(from: .wy_random)
-    
-    /// 表情切换按钮图片
-    public var emojiButtomImage: UIImage = UIImage.wy_createImage(from: .wy_random)
-    
-    /// 更多切换按钮图片
-    public var moreButtomImage: UIImage = UIImage.wy_createImage(from: .wy_random)
-    
-    /// 文本输入框背景图
-    public var textViewBackgroundImage: UIImage = UIImage.wy_createImage(from: .white)
-    
-    /// 语音输入框背景图
-    public var voiceViewBackgroundImage: UIImage = UIImage.wy_createImage(from: .white)
-    
-    /// 语音输入框按压状态背景图
-    public var voiceViewBackgroundImageForHighlighted: UIImage = UIImage.wy_createImage(from: .white)
-    
-    /// 语音输入框占位文本
-    public var voicePlaceholder: String = "语音框占位文本"
-
-    /// 语音输入框占位文本色值
-    public var voicePlaceholderColor: UIColor = .black
-
-    /// 语音框输入占位文本字体、字号
-    public var voicePlaceholderFont: UIFont = .systemFont(ofSize: wy_screenWidth(15))
-    
-    /// 键盘类型
-    public var chatKeyboardType: UIKeyboardType = .default
-    
-    /// 键盘右下角按钮类型
-    public var chatReturnKeyType: UIReturnKeyType = .send
-    
-    /// 输入框占位文本
-    public var textPlaceholder: String = "输入框占位文本"
-    
-    /// 输入框占位文本色值
-    public var textPlaceholderColor: UIColor = .lightGray
-
-    /// 输入框占位文本字体、字号
-    public var textPlaceholderFont: UIFont = .systemFont(ofSize: wy_screenWidth(15))
-
-    /// 输入框占位文本距离输入框左侧和顶部的间距
-    public var textPlaceholderOffset: CGPoint = CGPoint(x: wy_screenWidth(16), y: wy_screenWidth(12.5))
-    
-    /// 输入框内文本偏移量
-    public var inputTextEdgeInsets: UIEdgeInsets = UIEdgeInsets(top: wy_screenWidth(13), left: wy_screenWidth(10), bottom: wy_screenWidth(5), right: wy_screenWidth(5))
-    
-    /// 输入字符长度限制
-    public var inputTextLength: NSInteger = Int.max
-
-    /// 输入字符行数限制(0为不限制行数)
-    public var inputTextMaximumNumberOfLines: NSInteger = 0
-
-    /// 输入字符的截断方式
-    public var textLineBreakMode: NSLineBreakMode = .byTruncatingTail
-
-    /// 字符输入控件是否允许滑动
-    public var textViewIsScrollEnabled: Bool = true
-
-    /// 字符输入控件是否允许弹跳效果
-    public var textViewIsBounces: Bool = true
-
-    /// 字符输入控件光标颜色
-    public var inputViewCurvesColor: UIColor = .blue
-
-    /// 字符输入控件是否允许弹出用户交互菜单
-    public var textViewCanUserInteractionMenu: Bool = true
-    
-    /// 输入框输入文本色值
-    public var textColor: UIColor = .black
-
-    /// 输入框输入文本字体、字号
-    public var textFont: UIFont = .systemFont(ofSize: wy_screenWidth(15))
-    
-    /// 输入框文本行间距
-    public var textLineSpacing: CGFloat = 5
-
-    /// 输入框的最高高度
-    public var textViewMaxHeight: CGFloat = CGFLOAT_MAX
-    
-    /// 输入框、语音框的圆角半径
-    public var textViewCornerRadius: CGFloat = wy_screenWidth(8)
-
-    /// 输入框、语音框的边框颜色
-    public var textViewBorderColor: UIColor = .gray
-
-    /// 输入框、语音框的边框宽度
-    public var textViewBorderWidth: CGFloat = 1
-
-    /// 输入框、语音框的高度
-    public var inputViewHeight: CGFloat = wy_screenWidth(42)
-
-    /// 输入框、语音框距离InputBar的间距
-    public var inputViewEdgeInsets: UIEdgeInsets = UIEdgeInsets(top: wy_screenWidth(12), left: wy_screenWidth(57), bottom: wy_screenWidth(12), right: wy_screenWidth(100))
-    
-    /// 语音、文本切换按钮的size
-    public var voiceTextButtonSize: CGSize = CGSize(width: wy_screenWidth(31), height: wy_screenWidth(31))
-    
-    /// 表情、文本切换按钮的size
-    public var emojiTextButtonSize: CGSize = CGSize(width: wy_screenWidth(31), height: wy_screenWidth(31))
-    
-    /// 更多按钮的size
-    public var moreButtonSize: CGSize = CGSize(width: wy_screenWidth(31), height: wy_screenWidth(31))
-
-    /// 语音、文本切换按钮距离 输入框、语音框 左侧的间距
-    public var voiceTextButtonRightOffset: CGFloat = wy_screenWidth(13)
-
-    /// 语音、文本切换按钮距离 输入框、语音框 底部的间距
-    public var voiceTextButtonBottomOffset: CGFloat = wy_screenWidth(5)
-
-    /// 表情、文本切换按钮距离 输入框、语音框 右侧的间距
-    public var emojiTextButtonLeftOffset: CGFloat = wy_screenWidth(13)
-
-    /// 表情、文本切换按钮距离 输入框、语音框 底部的间距
-    public var emojiTextButtonBottomOffset: CGFloat = wy_screenWidth(5)
-    
-    /// 更多按钮距离 输入框、语音框 右侧的间距
-    public var moreButtonLeftOffset: CGFloat = wy_screenWidth(57)
-
-    /// 更多按钮距离 输入框、语音框 底部的间距
-    public var moreButtonBottomOffset: CGFloat = wy_screenWidth(5)
-    
-    public init() {}
 }

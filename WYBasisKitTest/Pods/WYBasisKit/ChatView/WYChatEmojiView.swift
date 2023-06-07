@@ -78,27 +78,45 @@ public struct WYEmojiViewConfig {
     public init() {}
 }
 
+/// 返回一个Bool值来判定各控件的点击或手势事件是否需要内部处理(默认返回True)
+@objc public protocol WYChatEmojiViewEventsHandler {
+    
+    /// 是否需要内部处理 Emoji 点击事件
+    @objc optional func canManagerEmojiViewClickEvents(_ emojiView: WYChatEmojiView, _ indexPath: IndexPath) -> Bool
+    
+    /// 是否需要内部处理 表情预览控件(仅限WYEmojiPreviewStyle == other时才会回调) 的长按事件
+    @objc optional func canManagerEmojiLongPressEvents(_ gestureRecognizer: UILongPressGestureRecognizer, emoji: String, imageView: UIImageView) -> Bool
+    
+    /// 是否需要内部处理 删除按钮 点击事件
+    @objc optional func canManagerEmojiDeleteViewClickEvents(_ deleteView: UIButton) -> Bool
+    
+    /// 是否需要内部处理 发送按钮 点击事件
+    @objc optional func canManagerEmojiSendViewClickEvents(_ sendView: UIButton) -> Bool
+}
+
 @objc public protocol WYChatEmojiViewDelegate {
     
     /// 监控Emoji点击事件
-    @objc optional func didClick(_ emojiView: WYChatEmojiView, _ emoji: String)
+    @objc optional func didClick(_ emojiView: WYChatEmojiView, _ indexPath: IndexPath)
     
     /// 长按了表情预览控件(仅限WYEmojiPreviewStyle == other时才会回调)
-    @objc optional func willShowPreviewView(_ imageName: String, _ imageView: UIImageView)
-    
-    /// 点击了删除按钮
-    @objc optional func didClickEmojiDeleteView()
+    @objc optional func emojiItemLongPress(_ gestureRecognizer: UILongPressGestureRecognizer, emoji: String, imageView: UIImageView)
     
     /// 点击了发送按钮
-    @objc optional func sendMessage()
+    @objc optional func didClickEmojiSendView(_ sendView: UIButton)
+    
+    /// 点击了删除按钮
+    @objc optional func didClickEmojiDeleteView(_ deleteView: UIButton)
 }
 
 public class WYChatEmojiView: UIView, WYEmojiFuncAreaViewDelegate {
     
+    public weak var eventsHandler: WYChatEmojiViewEventsHandler? = nil
+    
     /// 点击或长按事件代理
     public weak var delegate: WYChatEmojiViewDelegate?
     
-    lazy var collectionView: UICollectionView = {
+    public lazy var collectionView: UICollectionView = {
         
         let minimumInteritemSpacing: CGFloat = (wy_screenWidth - emojiViewConfig.sectionInset.left - emojiViewConfig.sectionInset.right - (CGFloat(emojiViewConfig.minimumLineCount) * emojiViewConfig.itemSize.width)) / (CGFloat(emojiViewConfig.minimumLineCount) - 1.0)
         
@@ -117,7 +135,7 @@ public class WYChatEmojiView: UIView, WYEmojiFuncAreaViewDelegate {
         return collectionView
     }()
     
-    lazy var funcAreaView: WYEmojiFuncAreaView? = {
+    public lazy var funcAreaView: WYEmojiFuncAreaView? = {
         
         guard emojiViewConfig.funcAreaConfig.show == true else {
             return nil
@@ -134,7 +152,7 @@ public class WYChatEmojiView: UIView, WYEmojiFuncAreaViewDelegate {
         return funcAreaView
     }()
     
-    lazy private var recentlyEmoji: [String] = {
+    public lazy var recentlyEmoji: [String] = {
         
         guard emojiViewConfig.showRecently == true else {
             return []
@@ -153,7 +171,7 @@ public class WYChatEmojiView: UIView, WYEmojiFuncAreaViewDelegate {
     
     private var appendEmoji: [String] = []
     
-    lazy private var dataSource: [[String]] = {
+    public lazy var dataSource: [[String]] = {
         var dataSource: [[String]] = []
         if (emojiViewConfig.showRecently == true) && (recentlyEmoji.isEmpty == false) {
             dataSource.append(recentlyEmoji)
@@ -246,12 +264,23 @@ public class WYChatEmojiView: UIView, WYEmojiFuncAreaViewDelegate {
         }
     }
     
-    @objc public func didClickSendView() {
-        delegate?.sendMessage?()
+    @objc public func didClickEmojiSendView(_ sendView: UIButton) {
+        
+        if let sendView: UIButton = funcAreaView?.sendView {
+            guard (eventsHandler?.canManagerEmojiSendViewClickEvents?(sendView) ?? true) else {
+                return
+            }
+        }
+        delegate?.didClickEmojiSendView?(sendView)
     }
-
-    @objc public func didClickDeleteView() {
-        delegate?.didClickEmojiDeleteView?()
+    
+    @objc public func didClickEmojiDeleteView(_ deleteView: UIButton) {
+        if let deleteView: UIButton = funcAreaView?.deleteView {
+            guard (eventsHandler?.canManagerEmojiDeleteViewClickEvents?(deleteView) ?? true) else {
+                return
+            }
+        }
+        delegate?.didClickEmojiDeleteView?(deleteView)
     }
     
     private func sectionInset(_ section: Int) -> UIEdgeInsets {
@@ -348,15 +377,33 @@ extension WYChatEmojiView: UICollectionViewDelegate, UICollectionViewDataSource,
     }
     
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        guard (eventsHandler?.canManagerEmojiViewClickEvents?(self, indexPath) ?? true) else {
+            return
+        }
         collectionView.deselectItem(at: indexPath, animated: true)
-        let emojiName: String = dataSource[indexPath.section][indexPath.item]
-        delegate?.didClick?(self, emojiName)
+        delegate?.didClick?(self, indexPath)
     }
 }
 
 extension WYChatEmojiView: WYEmojiViewCellDelegate {
     
-    public func willShowPreviewView(_ imageName: String, _ imageView: UIImageView) {
-        delegate?.willShowPreviewView?(imageName, imageView)
+    public func willShowPreviewView(_ gestureRecognizer: UILongPressGestureRecognizer, emoji: String, according: UIImageView) {
+        
+        guard (eventsHandler?.canManagerEmojiLongPressEvents?(gestureRecognizer, emoji: emoji, imageView: according) ?? true) else {
+            return
+        }
+        
+        if gestureRecognizer.state == .began {
+            WYEmojiPreviewView.show(emoji: emoji, according: according) { [weak self] imageName, imageView in
+                DispatchQueue.main.async {
+                    self?.delegate?.emojiItemLongPress?(gestureRecognizer, emoji: emoji, imageView: according)
+                }
+            }
+        }
+        
+        if (gestureRecognizer.state == .cancelled) || (gestureRecognizer.state == .ended) {
+            WYEmojiPreviewView.dismiss()
+        }
     }
 }
