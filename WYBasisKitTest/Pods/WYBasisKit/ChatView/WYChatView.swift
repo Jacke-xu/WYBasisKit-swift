@@ -188,7 +188,6 @@ public class WYChatView: UIView {
         self.emojiView?.backgroundColor = .clear
         self.moreView?.backgroundColor = .clear
         
-        
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDismiss), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -218,7 +217,6 @@ public class WYChatView: UIView {
             }
         }
         
-        chatInput.layer.removeAllAnimations()
         var offsety: CGFloat = 0
         switch touchStyle {
         case .emoji:
@@ -239,7 +237,10 @@ public class WYChatView: UIView {
     }
     
     private func updateInputViewOffset(offsety: CGFloat) {
-        UIView.animate(withDuration: 0.25) { [weak self] in
+        
+        chatInput.layer.removeAllAnimations()
+        
+        UIView.animate(withDuration: 0.2) { [weak self] in
             if let self = self {
                 self.chatInput.snp.updateConstraints({ make in
                     make.bottom.equalToSuperview().offset(-offsety)
@@ -270,8 +271,11 @@ public class WYChatView: UIView {
         }
         
         if inputBarConfig.emojiTextButtonSize != CGSize.zero {
+            
+            emojiView?.layer.removeAllAnimations()
+            
             let emojiOffset: CGFloat = isEmoji ? 0 : emojiViewConfig.contentHeight
-            UIView.animate(withDuration: 0.25) { [weak self] in
+            UIView.animate(withDuration: 0.35) { [weak self] in
                 self?.emojiView?.snp.updateConstraints { make in
                     make.bottom.equalToSuperview().offset(emojiOffset)
                 }
@@ -299,12 +303,15 @@ public class WYChatView: UIView {
         }
 
         if inputBarConfig.moreButtonSize != CGSize.zero {
+            
+            moreView?.layer.removeAllAnimations()
+            
             let moreOffset: CGFloat = isMore ? 0 : moreViewConfig.contentHeight()
-            UIView.animate(withDuration: 0.25) { [weak self] in
+            UIView.animate(withDuration: 0.4) { [weak self] in
                 self?.moreView?.snp.updateConstraints { make in
                     make.bottom.equalToSuperview().offset(moreOffset)
                 }
-                self?.emojiView?.superview?.layoutIfNeeded()
+                self?.moreView?.superview?.layoutIfNeeded()
             }completion: {[weak self] _ in
                 self?.moreView?.isHidden = !isMore
             }

@@ -364,6 +364,7 @@ public class WYChatInputView: UIImageView {
         
         if sender.state == .began {
             // 开始录音
+            
         }
         
         if (sender.state == .cancelled) || (sender.state == .ended) {

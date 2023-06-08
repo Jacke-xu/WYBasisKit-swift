@@ -92,6 +92,9 @@ public class WYBannerView: UIView {
     /// 只有一张图片时，是否需要隐藏PageControl，默认True
     public var pageControlHideForSingle: Bool = true
     
+    /// pageControl 是否允许用户交互
+    public var pageControlIsUserInteractionEnabled: Bool = true
+    
     /**
      *  是否需要无限轮播，默认开启
      *  当设置false时，会强制设置automaticCarousel为false
@@ -197,6 +200,22 @@ public class WYBannerView: UIView {
         scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
     }
     
+    /// 切换到指定下标处
+    @objc public func switchImage(_ pageIndex: NSInteger) {
+        
+        guard pageIndex != currentIndex else {
+            return
+        }
+        
+        if pageIndex < currentIndex {
+            currentIndex = (pageIndex + 1)
+            lastImage()
+        }else {
+            currentIndex = (pageIndex - 1)
+            nextImage()
+        }
+    }
+    
     deinit {
         stopTimer()
     }
@@ -297,11 +316,12 @@ extension WYBannerView {
                 
                 let pagecontrol = UIPageControl()
                 pagecontrol.hidesForSinglePage = pageControlHideForSingle
-                pagecontrol.isUserInteractionEnabled = false
+                pagecontrol.isUserInteractionEnabled = pageControlIsUserInteractionEnabled
                 pagecontrol.currentPage = 0
+                pagecontrol.addTarget(self, action: #selector(didClickPageControl(_:)), for: .valueChanged)
                 pagecontrol.numberOfPages = imageSource.count
                 if #available(iOS 14.0, *) {
-                    pagecontrol.allowsContinuousInteraction = false
+                    pagecontrol.backgroundStyle = .minimal
                 }
                 addSubview(pagecontrol)
                 
@@ -311,7 +331,7 @@ extension WYBannerView {
                 
                 if pageControlPosition == .zero {
                     let pageControlSize: CGSize = pagecontrol.size(forNumberOfPages: pagecontrol.numberOfPages)
-                    pageControlPosition = CGPoint(x: (wy_width - pageControlSize.width) / 2, y: wy_height - pageControlSize.height)
+                    pageControlPosition = CGPoint(x: (wy_width - pageControlSize.width) / 2, y: wy_height - pageControlSize.height - wy_screenWidth(10))
                 }else {
                     pageControlPosition = CGPoint(x: pageControlPosition.x, y: pageControlPosition.y)
                 }
@@ -500,6 +520,18 @@ extension WYBannerView {
         }
         get {
             return objc_getAssociatedObject(self, WYAssociatedKeys.pageControlSetting) as? (currentColor: UIColor?, defaultColor: UIColor?, currentImage: UIImage?, defaultImage: UIImage?) ?? (currentColor: nil, defaultColor: nil, currentImage: nil, defaultImage: nil)
+        }
+    }
+    
+    /// 分页指示器点击事件
+    @objc private func didClickPageControl(_ sender: UIPageControl) {
+        
+        stopTimer()
+        
+        switchImage(sender.currentPage)
+        
+        if canRestartedTimer == true {
+            startTimer()
         }
     }
     

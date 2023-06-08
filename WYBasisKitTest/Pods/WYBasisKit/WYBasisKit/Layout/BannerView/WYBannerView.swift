@@ -207,9 +207,6 @@ public class WYBannerView: UIView {
             return
         }
         
-        // 先停止定时器
-        stopTimer()
-        
         if pageIndex < currentIndex {
             currentIndex = (pageIndex + 1)
             lastImage()
