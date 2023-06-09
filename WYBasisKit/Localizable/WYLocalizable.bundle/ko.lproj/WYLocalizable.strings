@@ -101,3 +101,5 @@
 "WYLocalizable_47" = "전갈자리";
 
 "WYLocalizable_48" = "사수자리";
+
+"WYLocalizable_49" = "App은 음성인식에 접근할 수 있는 권한이 없습니다. 지금 가서 권한을 부여합니까?";

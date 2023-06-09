@@ -10,6 +10,8 @@
 		4A027019DE606531773A44D7 /* Pods_WYBasisKitTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3961A58ED9E18016F754F2FB /* Pods_WYBasisKitTest.framework */; };
 		DC7D92E72A137D7300800761 /* CollectionReusableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7D92E62A137D7300800761 /* CollectionReusableHeaderView.swift */; };
 		DC7D92E92A137D8100800761 /* CollectionReusableFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7D92E82A137D8100800761 /* CollectionReusableFooterView.swift */; };
+		DCC3409A2A317E6C0026CAD8 /* WYSpeechRecognitionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC340982A317E6C0026CAD8 /* WYSpeechRecognitionController.swift */; };
+		DCC3409B2A317E6C0026CAD8 /* WYSpeechRecognitionController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCC340992A317E6C0026CAD8 /* WYSpeechRecognitionController.xib */; };
 		DCFEBFE929EFDE2F001AE8E7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFEBFE829EFDE2F001AE8E7 /* AppDelegate.swift */; };
 		DCFEBFF029EFDE2F001AE8E7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DCFEBFEE29EFDE2F001AE8E7 /* Main.storyboard */; };
 		DCFEBFF229EFDE30001AE8E7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DCFEBFF129EFDE30001AE8E7 /* Assets.xcassets */; };
@@ -180,6 +182,8 @@
 		865E1EDDAF0233568A70050C /* Pods-WYBasisKitTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WYBasisKitTest.debug.xcconfig"; path = "Target Support Files/Pods-WYBasisKitTest/Pods-WYBasisKitTest.debug.xcconfig"; sourceTree = "<group>"; };
 		DC7D92E62A137D7300800761 /* CollectionReusableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionReusableHeaderView.swift; sourceTree = "<group>"; };
 		DC7D92E82A137D8100800761 /* CollectionReusableFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionReusableFooterView.swift; sourceTree = "<group>"; };
+		DCC340982A317E6C0026CAD8 /* WYSpeechRecognitionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYSpeechRecognitionController.swift; sourceTree = "<group>"; };
+		DCC340992A317E6C0026CAD8 /* WYSpeechRecognitionController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WYSpeechRecognitionController.xib; sourceTree = "<group>"; };
 		DCFEBFE529EFDE2F001AE8E7 /* WYBasisKitTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WYBasisKitTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCFEBFE829EFDE2F001AE8E7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DCFEBFEF29EFDE2F001AE8E7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -422,6 +426,15 @@
 			path = tvOS;
 			sourceTree = "<group>";
 		};
+		DCC340952A317DB40026CAD8 /* 语音识别 */ = {
+			isa = PBXGroup;
+			children = (
+				DCC340982A317E6C0026CAD8 /* WYSpeechRecognitionController.swift */,
+				DCC340992A317E6C0026CAD8 /* WYSpeechRecognitionController.xib */,
+			);
+			path = "语音识别";
+			sourceTree = "<group>";
+		};
 		DCFEBFDC29EFDE2F001AE8E7 = {
 			isa = PBXGroup;
 			children = (
@@ -643,6 +656,7 @@
 				DCFEC14829F27F86001AE8E7 /* 瀑布流 */,
 				DCFEC14729F27F83001AE8E7 /* 直播、点播播放器 */,
 				DCFEC14629F27F72001AE8E7 /* IM即时通讯 */,
+				DCC340952A317DB40026CAD8 /* 语音识别 */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1021,6 +1035,7 @@
 				DCFEC0D829EFE52C001AE8E7 /* [得意].png in Resources */,
 				DCFEC0C929EFE52C001AE8E7 /* [卖萌].png in Resources */,
 				DCFEC0F329EFE52C001AE8E7 /* [绿帽].png in Resources */,
+				DCC3409B2A317E6C0026CAD8 /* WYSpeechRecognitionController.xib in Resources */,
 				DCFEC0CD29EFE52C001AE8E7 /* [嘘].png in Resources */,
 				DCFEC09929EFE52B001AE8E7 /* [笑哭].png in Resources */,
 				DCFEC09D29EFE52B001AE8E7 /* [吐血].png in Resources */,
@@ -1108,6 +1123,7 @@
 			files = (
 				DCFEC11C29EFED62001AE8E7 /* WYTestView.swift in Sources */,
 				DCFEC11E29EFED62001AE8E7 /* WYParseGifController.swift in Sources */,
+				DCC3409A2A317E6C0026CAD8 /* WYSpeechRecognitionController.swift in Sources */,
 				DCFEC12429EFED62001AE8E7 /* WYTestVisualController.swift in Sources */,
 				DCFEC11D29EFED62001AE8E7 /* WYTestBannerController.swift in Sources */,
 				DCFEC12C29EFED62001AE8E7 /* WYMultilevelTableViewController.swift in Sources */,
@@ -1323,10 +1339,17 @@
 				INFOPLIST_FILE = WYBasisKitTest/iOS/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = WYBasisKit;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
+				INFOPLIST_KEY_NSCameraUsageDescription = "WYBasisKit申请使用相机权限，用于拍摄相关的测试";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "WYBasisKit申请使用位置权限，用于定位相关的测试";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "WYBasisKit申请使用麦克风权限用于语音相关的测试";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "WYBasisKit申请使用相册权限用于照片相关的测试";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "WYBasisKit申请使用语音转文字权限，用于语音与文字之间的转换测试";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = armv7;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1355,10 +1378,17 @@
 				INFOPLIST_FILE = WYBasisKitTest/iOS/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = WYBasisKit;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
+				INFOPLIST_KEY_NSCameraUsageDescription = "WYBasisKit申请使用相机权限，用于拍摄相关的测试";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "WYBasisKit申请使用位置权限，用于定位相关的测试";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "WYBasisKit申请使用麦克风权限用于语音相关的测试";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "WYBasisKit申请使用相册权限用于照片相关的测试";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "WYBasisKit申请使用语音转文字权限，用于语音与文字之间的转换测试";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = armv7;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

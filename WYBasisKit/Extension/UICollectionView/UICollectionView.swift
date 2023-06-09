@@ -300,7 +300,7 @@ public extension WYCollectionViewFlowLayout {
                 
                 let indexPath: IndexPath = IndexPath(item: item, section: section)
                 // 获取indexPath位置cell对应的布局属性
-                if var itemAttributes = layoutAttributesForItem(at: indexPath) {
+                if let itemAttributes = layoutAttributesForItem(at: indexPath) {
                     
                     if (scrollDirection == .vertical) && (alignment != .default) {
                         
@@ -314,10 +314,10 @@ public extension WYCollectionViewFlowLayout {
                         let collectionWidth: CGFloat = headerSize.width - sectionInsets.left - sectionInsets.right
                         
                         // 行间距
-                        var lineSpacing: CGFloat = minimumLineSpacingForSectionAt(indexPath.section)
+                        let lineSpacing: CGFloat = minimumLineSpacingForSectionAt(indexPath.section)
                         
                         // 列间距
-                        var columnsSpacing: CGFloat = minimumInteritemSpacingForSectionAt(indexPath.section)
+                        let columnsSpacing: CGFloat = minimumInteritemSpacingForSectionAt(indexPath.section)
                         
                         // 是否是最后一个item
                         let isLastItem: Bool = ((item + 1) == itemCount)
@@ -673,17 +673,11 @@ extension WYCollectionViewFlowLayout {
             // 每页总的item宽度
             let totalItemWidth: CGFloat = CGFloat(numberOfColumns) * itemLayoutSize.width
             
-            // 总页数
-            let pageNumber: NSInteger = indexPath.item / (numberOfLines * numberOfColumns)
-            
             // 最短的行宽
             var minLineWidth: CGFloat = columnWidths.min() ?? 0.0
             
             // 最短的行
             let minLine: NSInteger = columnWidths.firstIndex(of: minLineWidth) ?? 0
-            
-            // 最小的列高
-            let minColumnHeight: CGFloat = columnHeights.min() ?? 0.0
             
             // item的x值
             var itemOffsetx: CGFloat = 0
@@ -718,9 +712,6 @@ extension WYCollectionViewFlowLayout {
                 
                 // 该页中item的序号
                 let itemInPage: NSInteger = indexPath.item % (numberOfLines * numberOfColumns)
-                
-                // item的所在列
-                let itemInColumns: NSInteger = itemInPage % numberOfColumns
                 
                 itemInLines = itemInPage / numberOfColumns
                 

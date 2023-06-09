@@ -268,6 +268,13 @@
 		DAFC6CE6321395CF4523DD66DADBB9BA /* ImageDrawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7889CDFA9FAE2DD9CB6DF5BE054A9381 /* ImageDrawing.swift */; };
 		DBB8088E14A2ADEDB1CD840BAC835267 /* CPListItem+Kingfisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DF603340D6BFC78639521E15F7988E /* CPListItem+Kingfisher.swift */; };
 		DCC340872A2988F00026CAD8 /* WYMoreViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC340862A2988F00026CAD8 /* WYMoreViewCell.swift */; };
+		DCC340942A316FC70026CAD8 /* WYAudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC340932A316FC70026CAD8 /* WYAudioManager.swift */; };
+		DCC340C32A31C0C20026CAD8 /* WYMicrophoneAuthorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC340B82A31C0C20026CAD8 /* WYMicrophoneAuthorization.swift */; };
+		DCC340C42A31C0C20026CAD8 /* WYSpeechRecognitionAuthorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC340BA2A31C0C20026CAD8 /* WYSpeechRecognitionAuthorization.swift */; };
+		DCC340C52A31C0C20026CAD8 /* WYCameraAuthorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC340BC2A31C0C20026CAD8 /* WYCameraAuthorization.swift */; };
+		DCC340C62A31C0C20026CAD8 /* WYContactsAuthorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC340BE2A31C0C20026CAD8 /* WYContactsAuthorization.swift */; };
+		DCC340C72A31C0C20026CAD8 /* WYBiometricAuthorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC340C02A31C0C20026CAD8 /* WYBiometricAuthorization.swift */; };
+		DCC340C82A31C0C20026CAD8 /* WYPhotoAlbumsAuthorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC340C22A31C0C20026CAD8 /* WYPhotoAlbumsAuthorization.swift */; };
 		DCFEC13D29F0D131001AE8E7 /* WYChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFEC13629F0D131001AE8E7 /* WYChatView.swift */; };
 		DCFEC13E29F0D131001AE8E7 /* WYEmojiViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFEC13729F0D131001AE8E7 /* WYEmojiViewCell.swift */; };
 		DCFEC13F29F0D131001AE8E7 /* WYChatMoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFEC13829F0D131001AE8E7 /* WYChatMoreView.swift */; };
@@ -759,6 +766,13 @@
 		DB7EB698E82525F4ABD3726A39D00688 /* Indicator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Indicator.swift; path = Sources/Views/Indicator.swift; sourceTree = "<group>"; };
 		DCA46946F95A9BB05E6D76402B466B0C /* SessionDataTask.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SessionDataTask.swift; path = Sources/Networking/SessionDataTask.swift; sourceTree = "<group>"; };
 		DCC340862A2988F00026CAD8 /* WYMoreViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYMoreViewCell.swift; sourceTree = "<group>"; };
+		DCC340932A316FC70026CAD8 /* WYAudioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYAudioManager.swift; sourceTree = "<group>"; };
+		DCC340B82A31C0C20026CAD8 /* WYMicrophoneAuthorization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYMicrophoneAuthorization.swift; sourceTree = "<group>"; };
+		DCC340BA2A31C0C20026CAD8 /* WYSpeechRecognitionAuthorization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYSpeechRecognitionAuthorization.swift; sourceTree = "<group>"; };
+		DCC340BC2A31C0C20026CAD8 /* WYCameraAuthorization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYCameraAuthorization.swift; sourceTree = "<group>"; };
+		DCC340BE2A31C0C20026CAD8 /* WYContactsAuthorization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYContactsAuthorization.swift; sourceTree = "<group>"; };
+		DCC340C02A31C0C20026CAD8 /* WYBiometricAuthorization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYBiometricAuthorization.swift; sourceTree = "<group>"; };
+		DCC340C22A31C0C20026CAD8 /* WYPhotoAlbumsAuthorization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYPhotoAlbumsAuthorization.swift; sourceTree = "<group>"; };
 		DCFEC13629F0D131001AE8E7 /* WYChatView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYChatView.swift; sourceTree = "<group>"; };
 		DCFEC13729F0D131001AE8E7 /* WYEmojiViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYEmojiViewCell.swift; sourceTree = "<group>"; };
 		DCFEC13829F0D131001AE8E7 /* WYChatMoreView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYChatMoreView.swift; sourceTree = "<group>"; };
@@ -1168,6 +1182,7 @@
 		45BBDD6031EFD432E44129FEE1905109 /* WYBasisKit */ = {
 			isa = PBXGroup;
 			children = (
+				DCC340B62A31C0C20026CAD8 /* Authorization */,
 				7D7B5A8DDE20DCEB263E02DBD70DB36D /* Activity */,
 				DF1B01E9770DB557E683FC882FF390F6 /* Config */,
 				E6CEA2771D145770C195BFD68087584A /* Extension */,
@@ -1445,19 +1460,138 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
-		DCFEC13529F0D131001AE8E7 /* ChatView */ = {
+		DCC340922A316F6E0026CAD8 /* AudioManager */ = {
+			isa = PBXGroup;
+			children = (
+				DCC340932A316FC70026CAD8 /* WYAudioManager.swift */,
+			);
+			path = AudioManager;
+			sourceTree = "<group>";
+		};
+		DCC3409C2A31A18E0026CAD8 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				DCFEC13629F0D131001AE8E7 /* WYChatView.swift */,
+				DCC340A12A31A2480026CAD8 /* Input */,
+				DCC340A02A31A1FE0026CAD8 /* More */,
+				DCC3409F2A31A1ED0026CAD8 /* Emoji */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		DCC3409D2A31A19A0026CAD8 /* Config */ = {
 			isa = PBXGroup;
 			children = (
 				DCFEC13929F0D131001AE8E7 /* WYChatConfig.swift */,
-				DCFEC13629F0D131001AE8E7 /* WYChatView.swift */,
-				DCFEC13B29F0D131001AE8E7 /* WYChatInputView.swift */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
+		DCC3409E2A31A1D40026CAD8 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		DCC3409F2A31A1ED0026CAD8 /* Emoji */ = {
+			isa = PBXGroup;
+			children = (
 				DCFEC13A29F0D131001AE8E7 /* WYChatEmojiView.swift */,
-				DCFEC13829F0D131001AE8E7 /* WYChatMoreView.swift */,
 				DCFEC13729F0D131001AE8E7 /* WYEmojiViewCell.swift */,
 				DCFEC13C29F0D131001AE8E7 /* WYEmojiHeaderView.swift */,
 				DCFEC15A29FA1AA3001AE8E7 /* WYEmojiFuncAreaView.swift */,
 				DCFEC15C29FA1B4F001AE8E7 /* WYEmojiPreviewView.swift */,
+			);
+			path = Emoji;
+			sourceTree = "<group>";
+		};
+		DCC340A02A31A1FE0026CAD8 /* More */ = {
+			isa = PBXGroup;
+			children = (
+				DCFEC13829F0D131001AE8E7 /* WYChatMoreView.swift */,
 				DCC340862A2988F00026CAD8 /* WYMoreViewCell.swift */,
+			);
+			path = More;
+			sourceTree = "<group>";
+		};
+		DCC340A12A31A2480026CAD8 /* Input */ = {
+			isa = PBXGroup;
+			children = (
+				DCFEC13B29F0D131001AE8E7 /* WYChatInputView.swift */,
+			);
+			path = Input;
+			sourceTree = "<group>";
+		};
+		DCC340B62A31C0C20026CAD8 /* Authorization */ = {
+			isa = PBXGroup;
+			children = (
+				DCC340B72A31C0C20026CAD8 /* Microphone */,
+				DCC340B92A31C0C20026CAD8 /* SpeechRecognition */,
+				DCC340BB2A31C0C20026CAD8 /* Camera */,
+				DCC340BD2A31C0C20026CAD8 /* Contacts */,
+				DCC340BF2A31C0C20026CAD8 /* Biometric */,
+				DCC340C12A31C0C20026CAD8 /* PhotoAlbums */,
+			);
+			name = Authorization;
+			path = WYBasisKit/Authorization;
+			sourceTree = "<group>";
+		};
+		DCC340B72A31C0C20026CAD8 /* Microphone */ = {
+			isa = PBXGroup;
+			children = (
+				DCC340B82A31C0C20026CAD8 /* WYMicrophoneAuthorization.swift */,
+			);
+			path = Microphone;
+			sourceTree = "<group>";
+		};
+		DCC340B92A31C0C20026CAD8 /* SpeechRecognition */ = {
+			isa = PBXGroup;
+			children = (
+				DCC340BA2A31C0C20026CAD8 /* WYSpeechRecognitionAuthorization.swift */,
+			);
+			path = SpeechRecognition;
+			sourceTree = "<group>";
+		};
+		DCC340BB2A31C0C20026CAD8 /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				DCC340BC2A31C0C20026CAD8 /* WYCameraAuthorization.swift */,
+			);
+			path = Camera;
+			sourceTree = "<group>";
+		};
+		DCC340BD2A31C0C20026CAD8 /* Contacts */ = {
+			isa = PBXGroup;
+			children = (
+				DCC340BE2A31C0C20026CAD8 /* WYContactsAuthorization.swift */,
+			);
+			path = Contacts;
+			sourceTree = "<group>";
+		};
+		DCC340BF2A31C0C20026CAD8 /* Biometric */ = {
+			isa = PBXGroup;
+			children = (
+				DCC340C02A31C0C20026CAD8 /* WYBiometricAuthorization.swift */,
+			);
+			path = Biometric;
+			sourceTree = "<group>";
+		};
+		DCC340C12A31C0C20026CAD8 /* PhotoAlbums */ = {
+			isa = PBXGroup;
+			children = (
+				DCC340C22A31C0C20026CAD8 /* WYPhotoAlbumsAuthorization.swift */,
+			);
+			path = PhotoAlbums;
+			sourceTree = "<group>";
+		};
+		DCFEC13529F0D131001AE8E7 /* ChatView */ = {
+			isa = PBXGroup;
+			children = (
+				DCC340922A316F6E0026CAD8 /* AudioManager */,
+				DCC3409E2A31A1D40026CAD8 /* Models */,
+				DCC3409D2A31A19A0026CAD8 /* Config */,
+				DCC3409C2A31A18E0026CAD8 /* Views */,
 			);
 			path = ChatView;
 			sourceTree = "<group>";
@@ -2164,9 +2298,11 @@
 			files = (
 				CA22D7AD65A1D22C0FEC55A859A1ABD1 /* Bool.swift in Sources */,
 				6B3B5C8D8F0B8CBAAD17B67711E7F7E4 /* CALayer.swift in Sources */,
+				DCC340C52A31C0C20026CAD8 /* WYCameraAuthorization.swift in Sources */,
 				E20754912524C3DFFD640B18737F21B5 /* Foundation+JSONLog.m in Sources */,
 				D9A65CF839AF46EEAB9B5B5FE24ED639 /* NSAttributedString.swift in Sources */,
 				3777C27ADC208B1F7E82499683E84301 /* NSObject.swift in Sources */,
+				DCC340C62A31C0C20026CAD8 /* WYContactsAuthorization.swift in Sources */,
 				28ADE59C910BCDC9696CBFB7B7994CD1 /* NumberFormatter.swift in Sources */,
 				D588C9B7752B76C13EC083934A14632B /* String.swift in Sources */,
 				0604A9DC2DCAAAD9FE0401BF3416776D /* Timer.swift in Sources */,
@@ -2174,6 +2310,7 @@
 				83719262598CC858D5DF2602449268F7 /* UIApplication.swift in Sources */,
 				4B7642566C3B7E1BA5E885943413E1E3 /* UIButton.swift in Sources */,
 				C1502CE21ABBC0B509488314ABEB137D /* UICollectionView.swift in Sources */,
+				DCC340C42A31C0C20026CAD8 /* WYSpeechRecognitionAuthorization.swift in Sources */,
 				DCFEC13E29F0D131001AE8E7 /* WYEmojiViewCell.swift in Sources */,
 				2DDFC41AA98037D6B8D920A473371E48 /* UIColor.swift in Sources */,
 				C1BB20EC63B6B385144392620CAEEC6C /* UIDevice.swift in Sources */,
@@ -2181,11 +2318,14 @@
 				3C4F978BE00319A84257987DCBAE6ACD /* UILabel.swift in Sources */,
 				DCFEC13F29F0D131001AE8E7 /* WYChatMoreView.swift in Sources */,
 				E8E3FE40AD84A324F1D7D06CE5E7E5CD /* UINavigationController.swift in Sources */,
+				DCC340C32A31C0C20026CAD8 /* WYMicrophoneAuthorization.swift in Sources */,
 				A15E290D8D7CF1878E325F04957D3ABE /* UITableView.swift in Sources */,
+				DCC340C72A31C0C20026CAD8 /* WYBiometricAuthorization.swift in Sources */,
 				7F55F2ED929EE7F3F98A17DBB7CE3FE5 /* UITextField.swift in Sources */,
 				B7953E1005FBE828FC0D47C5B504E251 /* UIView.swift in Sources */,
 				2273FC04D15FF6ADC258D0278B5D9895 /* UIViewController.swift in Sources */,
 				E63075B5F7F483B9CC2127F315188FA4 /* WYActivity.swift in Sources */,
+				DCC340942A316FC70026CAD8 /* WYAudioManager.swift in Sources */,
 				DCFEC15D29FA1B4F001AE8E7 /* WYEmojiPreviewView.swift in Sources */,
 				DCFEC13D29F0D131001AE8E7 /* WYChatView.swift in Sources */,
 				DCFEC14329F0D131001AE8E7 /* WYEmojiHeaderView.swift in Sources */,
@@ -2197,6 +2337,7 @@
 				74DC40247E343A1291614FECCD25A343 /* WYNetworkConfig.swift in Sources */,
 				DCFEC14229F0D131001AE8E7 /* WYChatInputView.swift in Sources */,
 				DCFEC14029F0D131001AE8E7 /* WYChatConfig.swift in Sources */,
+				DCC340C82A31C0C20026CAD8 /* WYPhotoAlbumsAuthorization.swift in Sources */,
 				DCC340872A2988F00026CAD8 /* WYMoreViewCell.swift in Sources */,
 				D8D9EAE285A2D5838D1AD2DD3E3B9BAB /* WYNetworkManager.swift in Sources */,
 				AEABD644740107F95F29636E06DA9FE4 /* WYNetworkServer.swift in Sources */,

@@ -156,7 +156,7 @@ public struct WYActivity {
      *
      *  @param content            要显示的文本内容，支持 String 与 NSAttributedString
      *
-     *  @param contentView        加载活动控件的父视图，内部会按照 传入的View、控制器的View、keyWindow 的顺序去设置显示
+     *  @param contentView        加载活动控件的父视图，内部会按照 传入的View、控制器的View 的顺序去设置显示
      *
      *  @param offset             信息提示窗口相对于contentView的偏移量
      *
@@ -176,7 +176,7 @@ public struct WYActivity {
      *
      *  @param content            要显示的文本内容，支持 String 与 NSAttributedString
      *
-     *  @param contentView        加载信息提示窗口的父视图，内部会按照 传入的View、控制器的View、keyWindow 的顺序去设置显示
+     *  @param contentView        加载信息提示窗口的父视图，内部会按照 传入的View、控制器的View 的顺序去设置显示
      *
      *  @param position           信息提示窗口的显示位置，支持 top、middle、bottom
      *

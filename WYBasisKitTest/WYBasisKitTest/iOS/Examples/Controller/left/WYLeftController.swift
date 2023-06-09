@@ -26,7 +26,8 @@ class WYLeftController: UIViewController {
                                 "Gif",
                                 "瀑布流",
                                 "直播、点播播放器",
-                                "IM即时通讯"]
+                                "IM即时通讯",
+                                "语音识别"]
 
     let controller: [String] = ["WYTestDarkNightModeController",
                                 "WYTestAnimationController",
@@ -44,7 +45,8 @@ class WYLeftController: UIViewController {
                                 "WYParseGifController",
                                 "WYFlowLayoutAlignmentController",
                                 "WYTestLiveStreamingController",
-                                "WYTestChatController"]
+                                "WYTestChatController",
+                                "WYSpeechRecognitionController"]
 
     lazy var tableView: UITableView = {
 
@@ -68,6 +70,20 @@ class WYLeftController: UIViewController {
         tableView.backgroundColor = UIColor.wy_dynamic(.white, .black)
         
         WYProtocolManager.shared.add(delegate: self)
+        
+        // 网络监听
+        WYNetworkStatus.listening("left") { status in
+            switch status {
+            case .notReachable:
+                WYActivity.showInfo("无网络连接")
+            case .unknown :
+                WYActivity.showInfo("未知网络连接状态")
+            case .reachable(.ethernetOrWiFi):
+                WYActivity.showInfo("连接到WiFi网络")
+            case .reachable(.cellular):
+                WYActivity.showInfo("连接到移动网络")
+            }
+        }
     }
     
 

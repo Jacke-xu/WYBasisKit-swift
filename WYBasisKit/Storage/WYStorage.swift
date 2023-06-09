@@ -261,20 +261,20 @@ public struct WYStorage {
      *  @param complte      完成后回调，error 为空表示成功，否则为失败
      *
      */
-    public static func clearMemory(forPath path: String, asset: String = "", complte:((_ error: String?) -> Void)? = .none) {
+    public static func clearMemory(forPath path: String, asset: String = "", completion:((_ error: String?) -> Void)? = .none) {
         
         guard (path.count > 0) && (asset.count > 0) else {
             
-            if complte != nil {
-                complte!("\(path) 路径不存在或者该路径下没有需要清除的资源")
+            if completion != nil {
+                completion!("\(path) 路径不存在或者该路径下没有需要清除的资源")
             }
             return
         }
         
         guard let contents = try? FileManager.default.contentsOfDirectory(atPath: path) else {
             
-            if complte != nil {
-                complte!("\(path) 路径不存在或者该路径下没有需要清除的资源")
+            if completion != nil {
+                completion!("\(path) 路径不存在或者该路径下没有需要清除的资源")
             }
             return
         }
@@ -287,13 +287,13 @@ public struct WYStorage {
                 
                 guard let _ = try? FileManager.default.removeItem(atPath: contentPath) else {
                     
-                    if complte != nil {
-                        complte!("清除 \(obj) 资源失败")
+                    if completion != nil {
+                        completion!("清除 \(obj) 资源失败")
                     }
                     return
                 }
-                if complte != nil {
-                    complte!(nil)
+                if completion != nil {
+                    completion!(nil)
                 }
             }
             
@@ -305,19 +305,19 @@ public struct WYStorage {
                 
                 guard let _ = try? FileManager.default.removeItem(atPath: contentPath) else {
                     
-                    if complte != nil {
-                        complte!("清除 \(asset) 资源失败")
+                    if completion != nil {
+                        completion!("清除 \(asset) 资源失败")
                     }
                     return
                 }
-                if complte != nil {
-                    complte!(nil)
+                if completion != nil {
+                    completion!(nil)
                 }
                 return
                 
             }else {
-                if complte != nil {
-                    complte!("没有找到 \(asset) 这个资源")
+                if completion != nil {
+                    completion!("没有找到 \(asset) 这个资源")
                 }
                 return
             }

@@ -5,11 +5,12 @@ Pod::Spec.new do |kit|
   kit.summary      = 'WYBasisKit 不仅可以帮助开发者快速构建一个工程，还有基于常用网络框架和系统API而封装的各种实用方法、扩展，开发者只需简单的调用API就可以快速实现相应功能， 大幅提高开发效率。'
   kit.description  = <<-DESC
                          Localizable: 国际化解决方案
-                         Practical: 各种系统扩展
+                         Extension: 各种系统扩展
                          Networking: 网络请求解决方案
-                         Activity: loading指示器
+                         Activity: 活动指示器
                          Storage: 本地存储
                          Layout: 布局相关
+                         Authorization: 各种权限请求与判断
                    DESC
 
   kit.homepage     = 'https://github.com/Jacke-xu/WYBasisKit-swift'
@@ -61,6 +62,50 @@ Pod::Spec.new do |kit|
     kit.subspec 'Storage' do |storage|
        storage.source_files = 'WYBasisKit/Storage/**/*'
        storage.frameworks = 'Foundation', 'UIKit'
+    end
+
+    kit.subspec 'Authorization' do |authorization|
+       authorization.subspec 'Camera' do |camera|
+          camera.source_files = 'WYBasisKit/Authorization/Camera/**/*', 'WYBasisKit/Extension/UIAlertController/**/*'
+          camera.frameworks = 'AVFoundation', 'UIKit', 'Photos'
+          camera.resource = 'WYBasisKit/Localizable/WYLocalizable.bundle'
+          camera.dependency 'WYBasisKit/Localizable'
+       end
+
+       authorization.subspec 'Biometric' do |biometric|
+          biometric.source_files = 'WYBasisKit/Authorization/Biometric/**/*'
+          biometric.frameworks = 'Foundation', 'LocalAuthentication'
+          biometric.resource = 'WYBasisKit/Localizable/WYLocalizable.bundle'
+          biometric.dependency 'WYBasisKit/Localizable'
+       end
+
+       authorization.subspec 'Contacts' do |contacts|
+          contacts.source_files = 'WYBasisKit/Authorization/Contacts/**/*', 'WYBasisKit/Extension/UIAlertController/**/*'
+          contacts.frameworks = 'Contacts', 'UIKit'
+          contacts.resource = 'WYBasisKit/Localizable/WYLocalizable.bundle'
+          contacts.dependency 'WYBasisKit/Localizable'
+       end
+
+       authorization.subspec 'PhotoAlbums' do |photoAlbums|
+          photoAlbums.source_files = 'WYBasisKit/Authorization/PhotoAlbums/**/*', 'WYBasisKit/Extension/UIAlertController/**/*'
+          photoAlbums.frameworks = 'Photos', 'UIKit'
+          photoAlbums.resource = 'WYBasisKit/Localizable/WYLocalizable.bundle'
+          photoAlbums.dependency 'WYBasisKit/Localizable'
+       end
+
+       authorization.subspec 'Microphone' do |microphone|
+          microphone.source_files = 'WYBasisKit/Authorization/Microphone/**/*', 'WYBasisKit/Extension/UIAlertController/**/*'
+          microphone.frameworks = 'Photos', 'UIKit'
+          microphone.resource = 'WYBasisKit/Localizable/WYLocalizable.bundle'
+          microphone.dependency 'WYBasisKit/Localizable'
+       end
+
+       authorization.subspec 'SpeechRecognition' do |speechRecognition|
+          speechRecognition.source_files = 'WYBasisKit/Authorization/SpeechRecognition/**/*', 'WYBasisKit/Extension/UIAlertController/**/*'
+          speechRecognition.frameworks = 'Speech', 'UIKit'
+          speechRecognition.resource = 'WYBasisKit/Localizable/WYLocalizable.bundle'
+          speechRecognition.dependency 'WYBasisKit/Localizable'
+       end
     end
 
     kit.subspec 'Layout' do |layout|

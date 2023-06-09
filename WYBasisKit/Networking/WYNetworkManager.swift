@@ -9,7 +9,6 @@
 import Moya
 import Alamofire
 import HandyJSON
-import SwiftUI
 
 /// 网络请求任务类型
 public enum WYTaskMethod {
@@ -35,26 +34,6 @@ public enum WYFileType {
     case video
     /// URL路径上传
     case urlPath
-}
-
-/// 网络连接模式与用户操作选项
-public enum WYNetworkStatus {
-    
-    /// 未知网络，可能是不安全的连接
-    case unknown
-    /// 无网络连接
-    case notReachable
-    /// wifi网络
-    case reachableWifi
-    /// 蜂窝移动网络
-    case reachableCellular
-    
-    /// 用户未选择
-    case userNotSelectedConnect
-    /// 用户设置取消连接
-    case userCancelConnect
-    /// 用户设置继续连接
-    case userContinueConnect
 }
 
 /// 需要映射的Key
@@ -260,6 +239,77 @@ public struct WYFileModel {
     }
 }
 
+/**
+ *  利用 Alamofire 进行网络活动监听
+ *  iOS12开始 也可以通过系统 NWPathMonitor 实现监听，参考：https://www.cnblogs.com/breezemist/p/13602730.html
+ */
+public struct WYNetworkStatus {
+    
+    /**
+     *  当前是否连接到网络
+     */
+    public static let isReachable: Bool = NetworkReachabilityManager.default?.isReachable ?? false
+    
+    /**
+     *  当前网络是否是蜂窝网络(移动数据流量)
+     */
+    public static let isReachableOnCellular: Bool = NetworkReachabilityManager.default?.isReachableOnCellular ?? false
+    
+    /**
+     *  当前网络是否是WIFI网络
+     */
+    public static let isReachableOnEthernetOrWiFi: Bool = NetworkReachabilityManager.default?.isReachableOnEthernetOrWiFi ?? false
+    
+    /**
+     *  当前网络状态
+     */
+    public static let currentNetworkStatus: NetworkReachabilityManager.NetworkReachabilityStatus = NetworkReachabilityManager.default?.status ?? .notReachable
+    
+    /**
+     *  实时监听网络状态(不需要监听时需要手动调用 stopListening 方法结束监听状态)
+     *  alias 监听器对象别名，可根据别名获取到监听器对象
+     */
+    public static func listening(_ alias: String, handler: @escaping (_ status: NetworkReachabilityManager.NetworkReachabilityStatus) -> Void?) {
+        
+        stopListening(alias)
+        if let reachabilityManager = NetworkReachabilityManager() {
+            listeningObjects[alias] = reachabilityManager
+            reachabilityManager.startListening(onUpdatePerforming: { status in
+                handler(status)
+            })
+        }else {
+            WYNetworkManager.wy_networkPrint("创建别名为 \(alias) 的网络监听器失败")
+        }
+    }
+    
+    /**
+     *  结束实时监听网络状态
+     *  alias 监听器别名，根据别名找到指定的监听器对象，停止实时监听
+     *  total 是否需要所有监听器对象都停止监听
+     */
+    public static func stopListening(_ alias: String, total: Bool = false) {
+        guard total == true else {
+            if listeningObjects.keys.contains(alias) {
+                listeningObjects[alias]?.stopListening()
+                listeningObjects.removeValue(forKey: alias)
+                listeningObjects[alias] = nil
+            }
+            return
+        }
+        
+        for alias: String in listeningObjects.keys {
+            listeningObjects[alias]?.stopListening()
+            listeningObjects.removeValue(forKey: alias)
+            listeningObjects[alias] = nil
+        }
+    }
+    
+    /**
+     *  网络监听器容器
+     */
+    public private(set) static var listeningObjects: [String: NetworkReachabilityManager] = [:]
+}
+
 public struct WYNetworkManager {
     
     /**
@@ -349,9 +399,9 @@ public struct WYNetworkManager {
      *  @param complte      完成后回调，error 为空表示成功，否则为失败
      *
      */
-    public static func clearDiskCache(path: String, asset: String = "", complte:((_ error: String?) -> Void)? = .none) {
+    public static func clearDiskCache(path: String, asset: String = "", completion:((_ error: String?) -> Void)? = .none) {
         
-        WYStorage.clearMemory(forPath: path, asset: asset, complte: complte)
+        WYStorage.clearMemory(forPath: path, asset: asset, completion: completion)
     }
     
     /// 取消所有网络请求
@@ -390,7 +440,27 @@ public struct WYNetworkManager {
 
 extension WYNetworkManager {
     
-    private static var networkSecurityInfo = (WYNetworkStatus.userNotSelectedConnect, "")
+    /// 网络连接模式与用户操作选项
+    private enum NetworkStatus {
+        
+        /// 未知网络，可能是不安全的连接
+        case unknown
+        /// 无网络连接
+        case notReachable
+        /// wifi网络
+        case reachableWifi
+        /// 蜂窝移动网络
+        case reachableCellular
+        
+        /// 用户未选择
+        case userNotSelectedConnect
+        /// 用户设置取消连接
+        case userCancelConnect
+        /// 用户设置继续连接
+        case userContinueConnect
+    }
+    
+    private static var networkSecurityInfo = (NetworkStatus.userNotSelectedConnect, "")
     
     private static func request(method: HTTPMethod, path: String, data: Data?, config: WYNetworkConfig = .default, parameter: [String : Any], files: [WYFileModel], assetName: String = "", handler:((_ result: WYHandler) -> Void)?) {
         
@@ -584,7 +654,7 @@ extension WYNetworkManager {
         }
     }
     
-    private static func checkNetworkStatus(handler: ((_ status: (WYNetworkStatus, String)) -> Void)? = .none) {
+    private static func checkNetworkStatus(handler: ((_ status: (NetworkStatus, String)) -> Void)? = .none) {
         
         networkStatus(showStatusAlert: false, openSeting: true, statusHandler: { (status) in
             
@@ -647,13 +717,13 @@ extension WYNetworkManager {
         })
     }
     
-    private static func networkStatus(showStatusAlert: Bool, openSeting: Bool, statusHandler:((_ status: WYNetworkStatus) -> Void)? = nil, actionHandler:((_ action: String, _ status: WYNetworkStatus) -> Void)? = nil) {
+    private static func networkStatus(showStatusAlert: Bool, openSeting: Bool, statusHandler:((_ status: NetworkStatus) -> Void)? = nil, actionHandler:((_ action: String, _ status: NetworkStatus) -> Void)? = nil) {
         
         let manager = NetworkReachabilityManager()
-        manager!.startListening(onQueue: .main, onUpdatePerforming: { (status) in
+        manager?.startListening(onQueue: .main, onUpdatePerforming: { (status) in
             
             var message = WYLocalized("WYLocalizable_22", table: WYBasisKitConfig.kitLocalizableTable)
-            var networkStatus = WYNetworkStatus.unknown
+            var networkStatus = NetworkStatus.unknown
             var actions = openSeting ? [WYLocalized("WYLocalizable_23", table: WYBasisKitConfig.kitLocalizableTable), WYLocalized(WYLocalized("WYLocalizable_18", table: WYBasisKitConfig.kitLocalizableTable)), WYLocalized("WYLocalizable_19", table: WYBasisKitConfig.kitLocalizableTable)] : [WYLocalized("WYLocalizable_18", table: WYBasisKitConfig.kitLocalizableTable), WYLocalized("WYLocalizable_19", table: WYBasisKitConfig.kitLocalizableTable)]
             switch status {
                 
@@ -692,11 +762,11 @@ extension WYNetworkManager {
         })
     }
     
-    private static func showNetworkStatusAlert(showStatusAlert: Bool, status: WYNetworkStatus, message: String, actions: [String], actionHandler: ((_ action: String, _ status: WYNetworkStatus) -> Void)? = nil) {
+    private static func showNetworkStatusAlert(showStatusAlert: Bool, status: NetworkStatus, message: String, actions: [String], actionHandler: ((_ action: String, _ status: NetworkStatus) -> Void)? = nil) {
         
         if (showStatusAlert == false) {
             
-            networkSecurityInfo = (WYNetworkStatus.userNotSelectedConnect, "")
+            networkSecurityInfo = (NetworkStatus.userNotSelectedConnect, "")
             return
         }
         
@@ -711,7 +781,7 @@ extension WYNetworkManager {
                 
                 if actionStr == WYLocalized("WYLocalizable_23", table: WYBasisKitConfig.kitLocalizableTable) {
                     
-                    networkSecurityInfo = (WYNetworkStatus.userNotSelectedConnect, "")
+                    networkSecurityInfo = (NetworkStatus.userNotSelectedConnect, "")
                     
                     let settingUrl = URL(string: UIApplication.openSettingsURLString)
                     if let url = settingUrl, UIApplication.shared.canOpenURL(url) {
@@ -719,18 +789,17 @@ extension WYNetworkManager {
                     }
                 }else if ((actionStr == WYLocalized("WYLocalizable_18", table: WYBasisKitConfig.kitLocalizableTable)) && (status == .unknown)) {
                     
-                    networkSecurityInfo = (WYNetworkStatus.userContinueConnect, "")
+                    networkSecurityInfo = (NetworkStatus.userContinueConnect, "")
                     
                 }else if (((actionStr == WYLocalized("WYLocalizable_19", table: WYBasisKitConfig.kitLocalizableTable)) && (status == .unknown)) || ((actionStr == WYLocalized("WYLocalizable_01", table: WYBasisKitConfig.kitLocalizableTable)) && (status == .notReachable))) {
                     
                     let errorStr = (actionStr == WYLocalized("WYLocalizable_19", table: WYBasisKitConfig.kitLocalizableTable)) ? WYLocalized("WYLocalizable_24", table: WYBasisKitConfig.kitLocalizableTable) : WYLocalized("WYLocalizable_25", table: WYBasisKitConfig.kitLocalizableTable)
-                    networkSecurityInfo = (WYNetworkStatus.userCancelConnect, errorStr)
+                    networkSecurityInfo = (NetworkStatus.userCancelConnect, errorStr)
                     
                     cancelAllRequest()
                     
                 }else {
-                    
-                    networkSecurityInfo = (WYNetworkStatus.userNotSelectedConnect, "")
+                    networkSecurityInfo = (NetworkStatus.userNotSelectedConnect, "")
                 }
             })
         }
