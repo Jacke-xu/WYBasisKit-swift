@@ -18,8 +18,7 @@ public class WYScrollText: UIView {
     /// 点击事件代理(也可以通过传入block监听)
     public weak var delegate: WYScrollTextDelegate?
     /// 点击事件(也可以通过实现代理监听)
-    public func didClickHandler(handler:((_ index: NSInteger) -> Void)? = nil) {
-        
+    public func didClickHandler(handler:((_ index: NSInteger) -> Void)? = .none) {
         actionHandler = handler
     }
     /// 占位文本

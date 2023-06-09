@@ -30,7 +30,7 @@ public extension Timer {
             wy_print("计时器别名不能为空")
             return
         }
-
+        
         wy_timerContainer[alias] = (timer: DispatchSource.makeTimerSource(queue: queue), remainingTime: remainingTime, enterBackground: false, handler: handler)
         
         wy_timerContainer[alias]?.timer?.schedule(deadline: .now(), repeating: duration)

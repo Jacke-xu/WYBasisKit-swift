@@ -2,8 +2,8 @@
 //  WYContactsAuthorization.swift
 //  WYBasisKit
 //
-//  Created by Miraitowa on 2023/6/8.
-//  Copyright © 2023 Jacke·xu. All rights reserved.
+//  Created by 官人 on 2023/6/8.
+//  Copyright © 2023 官人. All rights reserved.
 //
 
 import UIKit
@@ -13,7 +13,7 @@ import Contacts
 public let contactsKey: String = "NSContactsUsageDescription"
 
 /// 检查通讯录权限并获取通讯录
-public func wy_authorizeAddressBookAccess(showAlert: Bool = true, keysToFetch: [String] = [CNContactFamilyNameKey, CNContactGivenNameKey, CNContactOrganizationNameKey, CNContactPhoneNumbersKey, CNContactNicknameKey], handler:((_ authorized: Bool, _ userInfo: [CNContact]?) -> Void)?) {
+public func wy_authorizeAddressBookAccess(showAlert: Bool = true, keysToFetch: [String] = [CNContactFamilyNameKey, CNContactGivenNameKey, CNContactOrganizationNameKey, CNContactPhoneNumbersKey, CNContactNicknameKey], handler: @escaping (_ authorized: Bool, _ userInfo: [CNContact]?) -> Void?) {
     
     if let _ = Bundle.main.infoDictionary?[contactsKey] as? String {
         
@@ -29,7 +29,7 @@ public func wy_authorizeAddressBookAccess(showAlert: Bool = true, keysToFetch: [
                     }else {
                         /// App无权访问通讯录 用户已明确拒绝
                         wy_showAuthorizeAlert(show: showAlert, message: WYLocalized("WYLocalizable_17", table: WYBasisKitConfig.kitLocalizableTable))
-                        handler?(false, nil)
+                        handler(false, nil)
                         return
                     }
                  }
@@ -41,18 +41,18 @@ public func wy_authorizeAddressBookAccess(showAlert: Bool = true, keysToFetch: [
         default:
             /// App无权访问通讯录 用户已明确拒绝
             wy_showAuthorizeAlert(show: showAlert, message: WYLocalized("WYLocalizable_17", table: WYBasisKitConfig.kitLocalizableTable))
-            handler?(false, nil)
+            handler(false, nil)
             return
         }
         
     }else {
         wy_print("请先在Info.plist中添加key：\(contactsKey)")
-        handler?(false, nil)
+        handler(false, nil)
         return
     }
     
     // 获取通讯录
-    func wy_openContact(contactStore: CNContactStore, keysToFetch: [String], handler:((_ authorized: Bool, _ userInfo: [CNContact]?) -> Void)?) {
+    func wy_openContact(contactStore: CNContactStore, keysToFetch: [String], handler: @escaping (_ authorized: Bool, _ userInfo: [CNContact]?) -> Void?) {
         
         if let _ = Bundle.main.infoDictionary?[contactsKey] as? String {
             
@@ -66,17 +66,16 @@ public func wy_authorizeAddressBookAccess(showAlert: Bool = true, keysToFetch: [
                         try contactStore.enumerateContacts(with: request, usingBlock: {(contact : CNContact, stop : UnsafeMutablePointer) -> Void in
                             contacts.append(contact)
                         })
-                        handler?(true, contacts)
+                        handler(true, contacts)
                     } catch {
-                        handler?(true, nil)
+                        handler(true, nil)
                     }
                 } else {
-                    handler?(true, nil)
+                    handler(true, nil)
                 }
             }
-            
         }else {
-            handler?(false, nil)
+            handler(false, nil)
         }
     }
     

@@ -101,3 +101,5 @@
 "WYLocalizable_47" = "天蝎座";
 
 "WYLocalizable_48" = "射手座";
+
+"WYLocalizable_49" = "App没有访问语音识别的权限，现在去授权?";

@@ -2,8 +2,8 @@
 //  WYBiometricAuthorization.swift
 //  WYBasisKit
 //
-//  Created by Miraitowa on 2023/6/8.
-//  Copyright © 2023 Jacke·xu. All rights reserved.
+//  Created by 官人 on 2023/6/8.
+//  Copyright © 2023 官人. All rights reserved.
 //
 
 import Foundation
@@ -60,7 +60,7 @@ public func wy_checkBiometric() -> WYBiometricMode {
 }
 
 /// 生物识别认证
-public func wy_verifyBiometrics(localizedFallbackTitle: String = "", localizedReason: String, handler:((_ isBackupHandler: Bool ,_ isSuccess: Bool, _ error: String) -> Void)?) {
+public func wy_verifyBiometrics(localizedFallbackTitle: String = "", localizedReason: String, handler: @escaping (_ isBackupHandler: Bool, _ isSuccess: Bool, _ error: String) -> Void?) {
     
     if wy_checkBiometric() == .faceID {
         
@@ -69,7 +69,7 @@ public func wy_verifyBiometrics(localizedFallbackTitle: String = "", localizedRe
             return
         }else {
             wy_print("请先在Info.plist中添加key：\(faceIDKey)")
-            handler!(false, false, WYLocalized("WYLocalizable_05", table: WYBasisKitConfig.kitLocalizableTable))
+            handler(false, false, WYLocalized("WYLocalizable_05", table: WYBasisKitConfig.kitLocalizableTable))
             return
         }
         
@@ -78,7 +78,7 @@ public func wy_verifyBiometrics(localizedFallbackTitle: String = "", localizedRe
         return
     }
     
-    func wy_checkBiometrics(localizedFallbackTitle: String = "", localizedReason: String, handler:((_ isBackupHandler: Bool ,_ isSuccess: Bool, _ error: String) -> Void)?) {
+    func wy_checkBiometrics(localizedFallbackTitle: String = "", localizedReason: String, handler: @escaping (_ isBackupHandler: Bool ,_ isSuccess: Bool, _ error: String) -> Void?) {
         
         let authContent = LAContext()
         
@@ -109,14 +109,14 @@ public func wy_verifyBiometrics(localizedFallbackTitle: String = "", localizedRe
                         
                         // 如果不放在主线程回调可能会有5-6s的延迟
                         DispatchQueue.main.async {
-                            handler!(false, true, "")
+                            handler(false, true, "")
                         }
                         
                     }else {
                         
                         DispatchQueue.main.async {
                             // 设备密码输入正确
-                            handler!(false, true, "")
+                            handler(false, true, "")
                         }
                     }
                     
@@ -127,7 +127,7 @@ public func wy_verifyBiometrics(localizedFallbackTitle: String = "", localizedRe
                         // 生物识别不可用
                         DispatchQueue.main.async {
                             
-                            handler!(false, false, WYLocalized("WYLocalizable_05", table: WYBasisKitConfig.kitLocalizableTable))
+                            handler(false, false, WYLocalized("WYLocalizable_05", table: WYBasisKitConfig.kitLocalizableTable))
                         }
                         return
                     }
@@ -143,11 +143,11 @@ public func wy_verifyBiometrics(localizedFallbackTitle: String = "", localizedRe
                                     
                                     if _success == true {
                                         
-                                        handler!(false, true, "")
+                                        handler(false, true, "")
                                     }else {
                                         
                                         // 生物识别已被锁定，锁屏并成功解锁iPhone后可重新打开本页面开启
-                                        handler!(false, false, WYLocalized("WYLocalizable_06", table: WYBasisKitConfig.kitLocalizableTable))
+                                        handler(false, false, WYLocalized("WYLocalizable_06", table: WYBasisKitConfig.kitLocalizableTable))
                                     }
                                 }
                             }
@@ -156,47 +156,47 @@ public func wy_verifyBiometrics(localizedFallbackTitle: String = "", localizedRe
                         DispatchQueue.main.async {
                             
                             // 用户点击取消按钮
-                            handler!(false, false, "")
+                            handler(false, false, "")
                         }
                     case .userFallback:
                         DispatchQueue.main.async {
                             // 用户点击了输入密码按钮，在这里处理点击事件"
-                            handler!(true, false, "")
+                            handler(true, false, "")
                         }
                     case .systemCancel:
                         
                         // 系统取消
                         DispatchQueue.main.async {
                             
-                            handler!(false, false, WYLocalized("WYLocalizable_07", table: WYBasisKitConfig.kitLocalizableTable))
+                            handler(false, false, WYLocalized("WYLocalizable_07", table: WYBasisKitConfig.kitLocalizableTable))
                         }
                     case .passcodeNotSet:
                         
                         // 用户未设置解锁密码
                         DispatchQueue.main.async {
                             
-                            handler!(false, false, WYLocalized("WYLocalizable_08", table: WYBasisKitConfig.kitLocalizableTable))
+                            handler(false, false, WYLocalized("WYLocalizable_08", table: WYBasisKitConfig.kitLocalizableTable))
                         }
                     case .touchIDNotAvailable:
                         
                         // 生物识别不可用
                         DispatchQueue.main.async {
                             
-                            handler!(false, false, WYLocalized("WYLocalizable_05", table: WYBasisKitConfig.kitLocalizableTable))
+                            handler(false, false, WYLocalized("WYLocalizable_05", table: WYBasisKitConfig.kitLocalizableTable))
                         }
                     case .touchIDNotEnrolled:
                         
                         // 未设置生物识别
                         DispatchQueue.main.async {
                             
-                            handler!(false, false, WYLocalized("WYLocalizable_09", table: WYBasisKitConfig.kitLocalizableTable))
+                            handler(false, false, WYLocalized("WYLocalizable_09", table: WYBasisKitConfig.kitLocalizableTable))
                         }
                     case .touchIDLockout:
                         
                         // 生物识别已被锁定，锁屏并成功解锁iPhone后可重新打开本页面开启
                         DispatchQueue.main.async {
                             
-                            handler!(false, false, WYLocalized("WYLocalizable_06", table: WYBasisKitConfig.kitLocalizableTable))
+                            handler(false, false, WYLocalized("WYLocalizable_06", table: WYBasisKitConfig.kitLocalizableTable))
                         }
                     default:break
                     }
@@ -208,7 +208,7 @@ public func wy_verifyBiometrics(localizedFallbackTitle: String = "", localizedRe
             // 生物识别已被锁定，锁屏并成功解锁iPhone后可重新打开本页面开启
             DispatchQueue.main.async {
                 
-                handler!(false, false, WYLocalized("WYLocalizable_06", table: WYBasisKitConfig.kitLocalizableTable))
+                handler(false, false, WYLocalized("WYLocalizable_06", table: WYBasisKitConfig.kitLocalizableTable))
             }
         }
     }

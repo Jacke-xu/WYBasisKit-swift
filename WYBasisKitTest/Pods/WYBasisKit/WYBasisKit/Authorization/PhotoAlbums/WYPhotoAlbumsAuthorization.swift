@@ -2,8 +2,8 @@
 //  WYPhotoAlbumsAuthorization.swift
 //  WYBasisKit
 //
-//  Created by Miraitowa on 2023/6/8.
-//  Copyright © 2023 Jacke·xu. All rights reserved.
+//  Created by 官人 on 2023/6/8.
+//  Copyright © 2023 官人. All rights reserved.
 //
 
 import UIKit
@@ -13,7 +13,7 @@ import Photos
 public let photoLibraryKey: String = "NSPhotoLibraryUsageDescription"
 
 /// 检查相册权限
-public func wy_authorizeAlbumAccess(showAlert: Bool = true, handler:((_ authorized: Bool, _ limited: Bool) -> Void)?) {
+public func wy_authorizeAlbumAccess(showAlert: Bool = true, handler: @escaping (_ authorized: Bool, _ limited: Bool) -> Void?) {
     
     if let _ = Bundle.main.infoDictionary?[photoLibraryKey] as? String {
         if #available(iOS 14, *) {
@@ -31,12 +31,12 @@ public func wy_authorizeAlbumAccess(showAlert: Bool = true, handler:((_ authoriz
         }
     }else {
         wy_print("请先在Info.plist中添加key：\(photoLibraryKey)")
-        handler?(false, false)
+        handler(false, false)
         return
     }
     
     // 检查相册权限
-    func wy_checkAlbumAccess(showAlert: Bool, authStatus: PHAuthorizationStatus, handler:((_ authorized: Bool, _ limited: Bool) -> Void)?) {
+    func wy_checkAlbumAccess(showAlert: Bool, authStatus: PHAuthorizationStatus, handler: @escaping (_ authorized: Bool, _ limited: Bool) -> Void?) {
         
         if let _ = Bundle.main.infoDictionary?[photoLibraryKey] as? String {
             
@@ -47,28 +47,28 @@ public func wy_authorizeAlbumAccess(showAlert: Bool = true, handler:((_ authoriz
                     
                     if status == .authorized {
                         /// 用户授权访问
-                        handler?(true, false)
+                        handler(true, false)
                     }else {
                         /// App无权访问照片库 用户已明确拒绝
                         wy_showAuthorizeAlert(show: showAlert, message: WYLocalized("WYLocalizable_13", table: WYBasisKitConfig.kitLocalizableTable))
-                        handler?(false, false)
+                        handler(false, false)
                     }
                 }
                 
             case .authorized:
                 /// 可以访问
-                handler?(true, false)
+                handler(true, false)
             case .limited:
                 /// 部分可访问
-                handler?(true, true)
+                handler(true, true)
             default:
                 /// App无权访问相册 用户已明确拒绝
                 wy_showAuthorizeAlert(show: showAlert, message: WYLocalized("WYLocalizable_13", table: WYBasisKitConfig.kitLocalizableTable))
-                handler?(false, false)
+                handler(false, false)
             }
             
         }else {
-            handler?(false, false)
+            handler(false, false)
         }
     }
     

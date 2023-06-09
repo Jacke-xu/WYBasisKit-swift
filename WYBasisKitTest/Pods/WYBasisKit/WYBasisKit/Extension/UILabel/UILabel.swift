@@ -166,10 +166,11 @@ extension UILabel {
         }
         
         let lines = CTFrameGetLines(frame)
-        guard CFArrayGetCount(lines) > 0 else {
+        let count = CFArrayGetCount(lines)
+        guard count > 0 else {
             return false
         }
-        let count = CFArrayGetCount(lines)
+        
         var origins = [CGPoint](repeating: CGPoint.zero, count: count)
         
         CTFrameGetLineOrigins(frame, CFRangeMake(0, 0), &origins)

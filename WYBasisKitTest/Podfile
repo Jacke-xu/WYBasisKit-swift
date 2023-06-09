@@ -12,7 +12,7 @@ target 'WYBasisKitTest' do
   pod 'WYBasisKit/Localizable'
   pod 'WYBasisKit/Activity'
   pod 'WYBasisKit/Storage'
-  pod 'ReachabilitySwift'
+  pod 'WYBasisKit/Authorization'
   pod 'IQKeyboardManagerSwift'
 end
 

@@ -11,7 +11,7 @@ import UIKit
 
 public extension UIAlertController {
     
-    class func wy_show(style: UIAlertController.Style = .alert, title: Any? = nil, message: Any? = nil, duration: TimeInterval = 0.0, actionSheetNeedCancel: Bool = true, textFieldPlaceholders: [Any] = [], actions: [Any] = [], handler:((_ actionStr: String, _ textFieldTexts: [String]) -> Void)? = nil) {
+    class func wy_show(style: UIAlertController.Style = .alert, title: Any? = nil, message: Any? = nil, duration: TimeInterval = 0.0, actionSheetNeedCancel: Bool = true, textFieldPlaceholders: [Any] = [], actions: [Any] = [], handler:((_ action: String, _ inputTexts: [String]) -> Void)? = nil) {
         
         DispatchQueue.main.async {
             

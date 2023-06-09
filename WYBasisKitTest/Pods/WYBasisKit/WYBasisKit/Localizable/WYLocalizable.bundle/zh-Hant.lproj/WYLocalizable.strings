@@ -101,3 +101,5 @@
 "WYLocalizable_47" = "天蠍座";
 
 "WYLocalizable_48" = "射手座";
+
+"WYLocalizable_49" = "App沒有訪問語音辨識的許可權，現在去授權？";

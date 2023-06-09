@@ -2,8 +2,8 @@
 //  WYSpeechRecognitionAuthorization.swift
 //  WYBasisKit
 //
-//  Created by Miraitowa on 2023/6/8.
-//  Copyright © 2023 Jacke·xu. All rights reserved.
+//  Created by 官人 on 2023/6/8.
+//  Copyright © 2023 官人. All rights reserved.
 //
 
 import UIKit
@@ -13,7 +13,7 @@ import Speech
 public let speechRecognitionKey: String = "NSSpeechRecognitionUsageDescription"
 
 /// 检查语音识别权限
-public func wy_authorizeSpeechRecognition(showAlert: Bool = true, handler:((_ authorized: Bool) -> Void)?) {
+public func wy_authorizeSpeechRecognition(showAlert: Bool = true, handler: @escaping (_ authorized: Bool) -> Void?) {
     
     if let _ = Bundle.main.infoDictionary?[speechRecognitionKey] as? String {
         
@@ -22,27 +22,27 @@ public func wy_authorizeSpeechRecognition(showAlert: Bool = true, handler:((_ au
             switch status {
             case .authorized:
                 // 已授权
-                handler?(true)
+                handler(true)
                 return
             case .denied:
                 // 拒绝授权
                 wy_showAuthorizeAlert(show: showAlert, message: WYLocalized("WYLocalizable_49", table: WYBasisKitConfig.kitLocalizableTable))
-                handler?(false)
+                handler(false)
                 return
             case .restricted:
                 // 保密，也就是不授权
                 wy_showAuthorizeAlert(show: showAlert, message: WYLocalized("WYLocalizable_49", table: WYBasisKitConfig.kitLocalizableTable))
-                handler?(false)
+                handler(false)
                 return
             case .notDetermined:
                 // 用户尚未决定是否授权
                 wy_showAuthorizeAlert(show: showAlert, message: WYLocalized("WYLocalizable_49", table: WYBasisKitConfig.kitLocalizableTable))
-                handler?(false)
+                handler(false)
                 return
             @unknown default:
                 // 其他可能情况
                 wy_showAuthorizeAlert(show: showAlert, message: WYLocalized("WYLocalizable_49", table: WYBasisKitConfig.kitLocalizableTable))
-                handler?(false)
+                handler(false)
                 return
             }
         }
@@ -69,6 +69,6 @@ public func wy_authorizeSpeechRecognition(showAlert: Bool = true, handler:((_ au
         
     }else {
         wy_print("请先在Info.plist中添加key：\(speechRecognitionKey)")
-        handler?(false)
+        handler(false)
     }
 }

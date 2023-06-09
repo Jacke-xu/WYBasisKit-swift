@@ -2,8 +2,8 @@
 //  WYMicrophoneAuthorization.swift
 //  WYBasisKit
 //
-//  Created by Miraitowa on 2023/6/8.
-//  Copyright © 2023 Jacke·xu. All rights reserved.
+//  Created by 官人 on 2023/6/8.
+//  Copyright © 2023 官人. All rights reserved.
 //
 
 import UIKit
@@ -13,7 +13,7 @@ import Photos
 public let microphoneKey: String = "NSMicrophoneUsageDescription"
 
 /// 检查麦克风权限
-public func wy_authorizeMicrophoneAccess(showAlert: Bool = true, handler:((_ authorized: Bool) -> Void)?) {
+public func wy_authorizeMicrophoneAccess(showAlert: Bool = true, handler: @escaping (_ authorized: Bool) -> Void?) {
     
     if let _ = Bundle.main.infoDictionary?[microphoneKey] as? String {
         
@@ -25,12 +25,12 @@ public func wy_authorizeMicrophoneAccess(showAlert: Bool = true, handler:((_ aut
                 DispatchQueue.main.async {
                     if authorized {
                         /// 用户授权访问
-                        handler?(true)
+                        handler(true)
                         return
                     }else {
                         /// App无权访问麦克风 用户已明确拒绝
                         wy_showAuthorizeAlert(show: showAlert, message: WYLocalized("WYLocalizable_15", table: WYBasisKitConfig.kitLocalizableTable))
-                        handler?(false)
+                        handler(false)
                         return
                     }
                 }
@@ -38,18 +38,18 @@ public func wy_authorizeMicrophoneAccess(showAlert: Bool = true, handler:((_ aut
             
         case .authorized:
             /// 可以访问
-            handler?(true)
+            handler(true)
             return
         default:
             /// App无权访问麦克风 用户已明确拒绝
             wy_showAuthorizeAlert(show: showAlert, message: WYLocalized("WYLocalizable_15", table: WYBasisKitConfig.kitLocalizableTable))
-            handler?(false)
+            handler(false)
             return
         }
         
     }else {
         wy_print("请先在Info.plist中添加key：\(microphoneKey)")
-        handler?(false)
+        handler(false)
         return
     }
     
