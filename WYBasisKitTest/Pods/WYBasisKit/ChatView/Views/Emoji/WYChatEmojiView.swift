@@ -11,6 +11,9 @@ private let emojiViewRecentlyCountKey: String = "emojiViewRecentlyCountKey"
 import UIKit
 
 public struct WYEmojiViewConfig {
+    
+    /// 自定义Emoji控件弹起或者收回时动画持续时长
+    public var animateDuration: TimeInterval = 0.25
 
     /// 自定义Emoji控件背景色
     public var backgroundColor: UIColor = .wy_hex("#ECECEC")

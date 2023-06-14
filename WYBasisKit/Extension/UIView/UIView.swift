@@ -157,19 +157,25 @@ public extension UIView {
     }
     
     /// 添加手势点击事件
-    func wy_addGesture(target: Any?, action: Selector?) {
+    @discardableResult
+    func wy_addGesture(target: Any?, action: Selector?) -> UITapGestureRecognizer {
         let gestureRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: target, action: action)
         isUserInteractionEnabled = true
         addGestureRecognizer(gestureRecognizer)
+        
+        return gestureRecognizer
     }
     
     /// 添加收起键盘的手势
-    func wy_gestureHidingkeyboard() {
+    @discardableResult
+    func wy_gestureHidingkeyboard() -> UITapGestureRecognizer {
         let gestureRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(wy_keyboardHide))
         gestureRecognizer.numberOfTapsRequired = 1
         //设置成false表示当前控件响应后会传播到其他控件上，默认为true
         gestureRecognizer.cancelsTouchesInView = false
         addGestureRecognizer(gestureRecognizer)
+        
+        return gestureRecognizer
     }
     
     @objc private func wy_keyboardHide() {

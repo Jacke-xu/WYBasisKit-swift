@@ -10,6 +10,9 @@ import UIKit
 
 public struct WYInputBarConfig {
     
+    /// inputBar弹起或者收回时动画持续时长
+    public var animateDuration: TimeInterval = 0.25
+    
     /// inputBar背景图
     public var backgroundImage: UIImage = UIImage.wy_createImage(from: .wy_hex("#ECECEC"))
     
@@ -89,7 +92,7 @@ public struct WYInputBarConfig {
     public var textLineBreakMode: NSLineBreakMode = .byTruncatingTail
     
     /// 输入框键盘语言(解决textViewDidChange回调两次的问题)
-    public var primaryLanguage: [String] = ["zh-Hans"]
+    public var primaryLanguage: [String] = ["zh-Hans", "zh-Hant"]
 
     /// 字符输入控件是否允许滑动
     public var textViewIsScrollEnabled: Bool = true
@@ -169,9 +172,6 @@ private let canSaveLastInputViewStyleKey: String = "canSaveLastInputViewStyleKey
     /// 是否需要内部处理 文本/语音 按钮的点击事件
     @objc optional func canManagerTextVoiceViewEvents(_ textVoiceView: UIButton) -> Bool
     
-    /// 是否需要内部处理 语音(录音) 按钮的长按事件
-    @objc optional func canManagerRecordingViewLongPressEvents(_ recordingView: UIButton, _ gestureRecognizer: UILongPressGestureRecognizer) -> Bool
-    
     /// 是否需要内部处理 文本/表情 切换按钮的点击事件
     @objc optional func canManagerTextEmojiViewEvents(_ textEmojiView: UIButton) -> Bool
     
@@ -187,9 +187,6 @@ private let canSaveLastInputViewStyleKey: String = "canSaveLastInputViewStyleKey
     
     /// 点击了 文本/语音 切换按钮
     @objc optional func didClickTextVoiceView(_ isText: Bool)
-    
-    /// 长按了 语音 按钮
-    @objc optional func didLongPressRecordingView(_ state: UIGestureRecognizer.State)
     
     /// 点击了 表情/文本 切换按钮
     @objc optional func didClickEmojiTextView(_ isText: Bool)
@@ -234,10 +231,12 @@ public class WYChatInputView: UIImageView {
         textVoiceContentView.layer.cornerRadius = inputBarConfig.textViewCornerRadius
         textVoiceContentView.layer.borderWidth = inputBarConfig.textViewBorderWidth
         textVoiceContentView.layer.borderColor = inputBarConfig.textViewBorderColor.cgColor
-        textVoiceContentView.layer.masksToBounds = true        
-        let gesture: UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(didLongPressRecordingButtonView(sender:)))
-        gesture.minimumPressDuration = 0.5
-        textVoiceContentView.addGestureRecognizer(gesture)
+        textVoiceContentView.layer.masksToBounds = true
+        textVoiceContentView.addTarget(self, action: #selector(recordButtonTouchDown), for: .touchDown)
+        textVoiceContentView.addTarget(self, action: #selector(recordButtonTouchUpInside), for: .touchUpInside)
+        textVoiceContentView.addTarget(self, action: #selector(recordButtonTouchUpOutside), for: .touchUpOutside)
+        textVoiceContentView.addTarget(self, action: #selector(recordButtonTouchUpDragExit), for: .touchDragExit)
+        textVoiceContentView.addTarget(self, action: #selector(recordButtonTouchUpDragEnter), for: .touchDragEnter)
         addSubview(textVoiceContentView)
         textVoiceContentView.snp.makeConstraints { make in
             make.height.equalTo(inputBarConfig.inputViewHeight)
@@ -356,22 +355,28 @@ public class WYChatInputView: UIImageView {
         saveLastInputViewStyle()
     }
     
-    @objc private func didLongPressRecordingButtonView(sender: UILongPressGestureRecognizer) {
-        
-        guard (eventsHandler?.canManagerRecordingViewLongPressEvents?(textVoiceContentView, sender) ?? true) else {
-            return
-        }
-        
-        if sender.state == .began {
-            // 开始录音
+    @objc private func recordButtonTouchDown() {
+        wy_print("recordButtonTouchDown")
+        /// 检查是否拥有麦克风权限
+        wy_authorizeMicrophoneAccess(showAlert: true) { authorized in
             
         }
-        
-        if (sender.state == .cancelled) || (sender.state == .ended) {
-            // 结束录音
-        }
-        
-        delegate?.didLongPressRecordingView?(sender.state)
+    }
+    
+    @objc private func recordButtonTouchUpInside() {
+        wy_print("recordButtonTouchUpInside")
+    }
+    
+    @objc private func recordButtonTouchUpOutside() {
+        wy_print("recordButtonTouchUpOutside")
+    }
+    
+    @objc private func recordButtonTouchUpDragExit() {
+        wy_print("recordButtonTouchUpDragExit")
+    }
+    
+    @objc private func recordButtonTouchUpDragEnter() {
+        wy_print("recordButtonTouchUpDragEnter")
     }
     
     @objc private func didClickMoreView(sender: UIButton) {
@@ -430,6 +435,7 @@ public class WYChatInputView: UIImageView {
         saveLastInputViewStyle()
     }
     
+    // 根据传入的表情字符串生成富文本，例如字符串 "哈哈[哈哈]" 会生成 "哈哈😄"
     public func sharedEmojiAttributed(string: String) -> NSAttributedString {
         let attributed: NSMutableAttributedString = NSMutableAttributedString.wy_convertEmojiAttributed(emojiString: string, textColor: inputBarConfig.textColor, textFont: inputBarConfig.textFont, emojiTable: emojiViewConfig.emojiSource, pattern: inputBarConfig.emojiPattern)
         attributed.wy_lineSpacing(lineSpacing: inputBarConfig.textLineSpacing, alignment: .left)
@@ -437,6 +443,7 @@ public class WYChatInputView: UIImageView {
         return attributed
     }
     
+    // 将表情富文本生成对应的富文本字符串，例如表情富文本 "哈哈😄" 会生成 "哈哈[哈哈]"
     public func sharedEmojiAttributedText(attributed: NSAttributedString) -> NSAttributedString {
         let attributed: NSMutableAttributedString = NSMutableAttributedString(attributedString: attributed).wy_convertEmojiAttributedString(textColor: inputBarConfig.textColor, textFont: inputBarConfig.textFont)
         attributed.wy_lineSpacing(lineSpacing: inputBarConfig.textLineSpacing, alignment: .left)
@@ -634,6 +641,26 @@ public class WYChatInputTextView: UITextView {
             return inputBarConfig.textViewCanUserInteractionMenu
         }else {
             return false
+        }
+    }
+    
+    // 重写复制方法兼容富文本
+    public override func copy(_ sender: Any?) {
+        // 获取用户选择的富文本
+        let subEmojiText = NSMutableAttributedString(attributedString: attributedText.attributedSubstring(from: selectedRange)).wy_convertEmojiAttributedString(textColor: inputBarConfig.textColor, textFont: inputBarConfig.textFont).string
+        // 复制到粘贴板上
+        UIPasteboard.general.string = subEmojiText
+    }
+    
+    // 重写粘贴方法兼容富文本
+    public override func paste(_ sender: Any?) {
+        
+        // 获取光标所在的位置并在对应位置插入复制的文本
+        if let string = UIPasteboard.general.string {
+            // 光标位置
+            let cursorPosition = offset(from: beginningOfDocument, to: selectedTextRange?.start ?? beginningOfDocument)
+            // 调用 insertText 方法后内部会触发 textViewDidChange 方法，在该方法内已实现纯文本转富文本操作
+            insertText(string)
         }
     }
     

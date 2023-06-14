@@ -10,6 +10,9 @@ import UIKit
 
 public struct WYMoreViewConfig {
     
+    /// 自定义More控件弹起或者收回时动画持续时长
+    public var animateDuration: TimeInterval = 0.25
+    
     /// 自定义More控件背景色
     public var backgroundColor: UIColor = .wy_hex("#ECECEC")
     

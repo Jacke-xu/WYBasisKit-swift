@@ -117,18 +117,21 @@ public extension UITableView {
     }
     
     /// 滑动或点击收起键盘
-    func wy_swipeOrTapCollapseKeyboard(target: Any? = nil, action: Selector? = nil) {
-        self.keyboardDismissMode = .onDrag
-        let gesture = UITapGestureRecognizer(target: ((target == nil) ? self : target!), action: ((action == nil) ? action : #selector(keyboardHide)))
+    @discardableResult
+    func wy_swipeOrTapCollapseKeyboard(target: Any? = nil, action: Selector? = nil, slideMode: UIScrollView.KeyboardDismissMode = .onDrag) -> UITapGestureRecognizer {
+        keyboardDismissMode = slideMode
+        let gesture = UITapGestureRecognizer(target: ((target == nil) ? self : target!), action: ((action == nil) ? #selector(keyboardHide) : action!))
         gesture.numberOfTapsRequired = 1
         // 设置成 false 表示当前控件响应后会传播到其他控件上，默认为 true
         gesture.cancelsTouchesInView = false
-        self.addGestureRecognizer(gesture)
+        addGestureRecognizer(gesture)
+        
+        return gesture
     }
     
     @objc private func keyboardHide() {
-        self.endEditing(true)
-        self.superview?.endEditing(true)
+        endEditing(true)
+        superview?.endEditing(true)
     }
     
     private struct WYAssociatedKeys {

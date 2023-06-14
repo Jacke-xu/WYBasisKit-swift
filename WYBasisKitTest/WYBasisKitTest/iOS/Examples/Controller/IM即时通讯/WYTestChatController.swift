@@ -101,17 +101,6 @@ extension WYTestChatController: WYChatViewDelegate {
         }
     }
     
-    func didLongPressRecordingView(_ state: UIGestureRecognizer.State) {
-        
-        if state == .began {
-            wy_print("开始录音")
-        }
-        
-        if (state == .cancelled) || (state == .ended) {
-            wy_print("结束录音")
-        }
-    }
-    
     /// 点击了 表情/文本 切换按钮
     func didClickEmojiTextView(_ isText: Bool) {
         if isText {
@@ -189,12 +178,6 @@ extension WYTestChatController: WYChatViewEventsHandler {
     /// 是否需要内部处理chatInput控件内 文本/语音 按钮的点击事件
     func canManagerTextVoiceViewEvents(_ textVoiceView: UIButton) -> Bool {
         //wy_print("是否需要内部处理chatInput控件内 文本/语音 按钮的点击事件, textVoiceView = \(textVoiceView)")
-        return true
-    }
-
-    /// 是否需要内部处理chatInput控件内 语音(录音) 按钮的长按事件
-    func canManagerRecordingViewLongPressEvents(_ recordingView: UIButton, _ gestureRecognizer: UILongPressGestureRecognizer) -> Bool {
-        //wy_print("是否需要内部处理chatInput控件内 语音(录音) 按钮的长按事件, recordingView = \(recordingView), gestureRecognizer.state = \(gestureRecognizer.state)")
         return true
     }
 
