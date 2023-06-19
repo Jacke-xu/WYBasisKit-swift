@@ -7,8 +7,8 @@
 
 import UIKit
 
-/// cell配置选项
-public struct WYChatBasicCellConfig {
+/// 通用聊天配置选项
+public struct WYBasicChatConfig {
     
     /// 是否显示昵称
     public var showNickname: Bool = false
@@ -54,20 +54,28 @@ class WYChatBasicCell: UITableViewCell {
     /// 头像控件
     public lazy var avatarView: UIImageView = {
         let avatarView: UIImageView = UIImageView()
+        contentView.addSubview(avatarView)
         return avatarView
     }()
     
     /// 昵称控件
     public lazy var nicknameView: UILabel = {
         let nicknameView: UILabel = UILabel()
+        contentView.addSubview(nicknameView)
         return nicknameView
     }()
     
     /// 时间控件
     public lazy var timeView: UILabel = {
         let timeView: UILabel = UILabel()
+        contentView.addSubview(timeView)
         return timeView
     }()
+    
+    override func updateConstraints() {
+        super.updateConstraints()
+        
+    }
 
     override func awakeFromNib() {
         super.awakeFromNib()

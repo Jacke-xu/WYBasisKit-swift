@@ -265,6 +265,7 @@
 		DADB683970A79389BE84916F222966BF /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40657E86CBA3CAD0618691599A431151 /* UIButton.swift */; };
 		DAFC6CE6321395CF4523DD66DADBB9BA /* ImageDrawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7C461FE41A2D1154046DD176CEDBB3 /* ImageDrawing.swift */; };
 		DBB8088E14A2ADEDB1CD840BAC835267 /* CPListItem+Kingfisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 514C934C797CBA9F3603E68AAC6D795A /* CPListItem+Kingfisher.swift */; };
+		DC77A3CA2A3C09D7005C8822 /* WYChatModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC77A3C92A3C09D7005C8822 /* WYChatModel.swift */; };
 		DCC340E12A332DEA0026CAD8 /* WYAudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC340D02A332DEA0026CAD8 /* WYAudioManager.swift */; };
 		DCC340E22A332DEA0026CAD8 /* WYChatConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC340D22A332DEA0026CAD8 /* WYChatConfig.swift */; };
 		DCC340E32A332DEA0026CAD8 /* WYChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC340D52A332DEA0026CAD8 /* WYChatView.swift */; };
@@ -743,6 +744,7 @@
 		D88649FD832F7FDD3E3B9AB017492F5E /* WYStorage.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WYStorage.swift; path = WYBasisKit/Storage/WYStorage.swift; sourceTree = "<group>"; };
 		D91E72B1FE4D2DF829E133ADB76E2A53 /* WYBannerView.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = WYBannerView.bundle; path = WYBasisKit/Layout/BannerView/WYBannerView.bundle; sourceTree = "<group>"; };
 		D9484A14D530B4148846A70730541706 /* IQBarButtonItem.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IQBarButtonItem.swift; path = IQKeyboardManagerSwift/IQToolbar/IQBarButtonItem.swift; sourceTree = "<group>"; };
+		DC77A3C92A3C09D7005C8822 /* WYChatModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYChatModel.swift; sourceTree = "<group>"; };
 		DCC340D02A332DEA0026CAD8 /* WYAudioManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYAudioManager.swift; sourceTree = "<group>"; };
 		DCC340D22A332DEA0026CAD8 /* WYChatConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYChatConfig.swift; sourceTree = "<group>"; };
 		DCC340D52A332DEA0026CAD8 /* WYChatView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYChatView.swift; sourceTree = "<group>"; };
@@ -1603,6 +1605,7 @@
 		DCC340D32A332DEA0026CAD8 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				DC77A3C92A3C09D7005C8822 /* WYChatModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -2204,6 +2207,7 @@
 				8276E3982CCE19A3EC10ABC8BF87DC5A /* UINavigationController.swift in Sources */,
 				EF9E3C0421C014328FF4D77683457CF0 /* UITableView.swift in Sources */,
 				92423F1E42B48F56527628C6366997D1 /* UITextField.swift in Sources */,
+				DC77A3CA2A3C09D7005C8822 /* WYChatModel.swift in Sources */,
 				B4E6CCB11919E9D1E6D73BD8B1A752F5 /* UIView.swift in Sources */,
 				F84677E5E9B3E34324ABE49F5CCA9019 /* UIViewController.swift in Sources */,
 				7CA8933030AA7C05203A319673C20DC8 /* WYActivity.swift in Sources */,
