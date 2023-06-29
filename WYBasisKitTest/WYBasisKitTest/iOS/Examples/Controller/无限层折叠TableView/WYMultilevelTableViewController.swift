@@ -21,7 +21,7 @@ class WYMultilevelTableViewController: UIViewController {
     lazy var tableView: UITableView = {
 
         let tableview = UITableView.wy_shared(style: .plain, separatorStyle: .singleLine, delegate: self, dataSource: self, superView: view)
-        tableview.wy_register("UITableViewCell", .cell)
+        tableview.wy_register(UITableViewCell.self, .cell)
         tableview.snp.makeConstraints { (make) in
             make.top.equalToSuperview().offset(wy_navViewHeight)
             make.left.right.bottom.equalToSuperview()

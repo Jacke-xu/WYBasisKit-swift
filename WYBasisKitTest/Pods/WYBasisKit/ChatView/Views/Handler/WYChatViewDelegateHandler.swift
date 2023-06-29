@@ -2,7 +2,7 @@
 //  WYChatViewDelegateHandler.swift
 //  WYBasisKit
 //
-//  Created by Miraitowa on 2023/6/14.
+//  Created by 官人 on 2023/6/14.
 //
 
 import Foundation
@@ -45,6 +45,9 @@ import Foundation
     
     /// 是否需要内部处理More控件内 cell 的点击事件
     @objc optional func canManagerMoreViewClickEvents(_ moreView: WYChatMoreView, _ itemIndex: NSInteger) -> Bool
+    
+    /// 是否需要内部处理tableView代理 cellForRowAt 方法
+    @objc optional func canManagerCellForRowEvents(_ chatView: WYChatView, _ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell?
 }
 
 @objc public protocol WYChatViewDelegate {
@@ -71,7 +74,7 @@ import Foundation
     @objc optional func textDidChanged(_ text: String)
     
     /// 点击了键盘上的 发送 按钮
-    @objc optional func keyboardSendMessage(_ text: String)
+    @objc optional func keyboardSendMessage(_ message: WYChatMessageModel)
     
     /// 点击了emoji控件内某个item
     @objc optional func didClickEmojiView(_ emojiView: WYChatEmojiView, _ indexPath: IndexPath)

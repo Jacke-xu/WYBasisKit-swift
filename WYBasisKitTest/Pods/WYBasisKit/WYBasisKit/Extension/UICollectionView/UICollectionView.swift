@@ -114,41 +114,28 @@ public extension UICollectionView {
     }
     
     /// 批量注册UICollectionView的Cell或Header/FooterView
-    func wy_register(_ classNames: [String], _ styles: [WYCollectionViewRegisterStyle]) {
-        for index in 0..<classNames.count {
-            wy_register(classNames[index], styles[index])
+    func wy_register(_ contentClasss: [AnyClass], _ styles: [WYCollectionViewRegisterStyle]) {
+        for index in 0..<contentClasss.count {
+            wy_register(contentClasss[index], styles[index])
         }
     }
     
     /// 注册UICollectionView的Cell或Header/FooterView
-    func wy_register(_ className: String, _ style: WYCollectionViewRegisterStyle) {
+    func wy_register(_ contentClass: AnyClass, _ style: WYCollectionViewRegisterStyle) {
         
-        guard className.isEmpty == false else {
-            fatalError("调用注册方法前必须创建与 \(className) 对应的类文件")
-        }
-        
-        let registerClass = (className == "UICollectionViewCell") ? className : (wy_projectName + "." + className)
+        let reuseIdentifier: String = NSStringFromClass(contentClass).components(separatedBy: ".").last ?? ""
         
         switch style {
         case .cell:
-            guard let cellClass = NSClassFromString(registerClass) as? UICollectionViewCell.Type else {
-                return
-            }
-            register(cellClass.self, forCellWithReuseIdentifier: className)
+            register(contentClass, forCellWithReuseIdentifier: reuseIdentifier)
             break
             
         case .headerView:
-            guard let headerViewClass = NSClassFromString(registerClass) as? UICollectionReusableView.Type else {
-                return
-            }
-            register(headerViewClass.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: className)
+            register(contentClass, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: reuseIdentifier)
             break
             
         case .footerView:
-            guard let footerViewClass = NSClassFromString(registerClass) as? UICollectionReusableView.Type else {
-                return
-            }
-            register(footerViewClass.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: className)
+            register(contentClass, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: reuseIdentifier)
             break
         }
     }
@@ -958,3 +945,4 @@ extension WYCollectionViewFlowLayout {
         static let wy_lastContentHeight = UnsafeRawPointer(bitPattern: "wy_lastContentHeight".hashValue)!
     }
 }
+

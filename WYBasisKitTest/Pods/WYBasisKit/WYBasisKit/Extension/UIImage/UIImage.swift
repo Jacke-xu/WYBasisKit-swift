@@ -35,6 +35,22 @@ public struct WYSourceBundle {
 
 public extension UIImage {
     
+    /**
+     *  图片翻转(旋转)
+     *  orientation: 图片翻转(旋转)的方向
+     *    case up // 默认方向
+     *    case upMirrored // 默认方向镜像翻转
+     *    case down // 顺时针旋转180°
+     *    case downMirrored // 顺时针旋转180°后镜像翻转
+     *    case left // 逆时针旋转90°
+     *    case leftMirrored // 逆时针旋转90°后镜像翻转
+     *    case right // 顺时针旋转90°
+     *    case rightMirrored // 顺针旋转90°后镜像翻转
+     */
+    func wy_flips(_ orientation: UIImage.Orientation) -> UIImage {
+        return UIImage(cgImage: cgImage!, scale: scale, orientation:orientation)
+    }
+    
     /// 截取指定View快照
     class func wy_screenshot(_ view: UIView) -> UIImage {
         
@@ -204,12 +220,12 @@ public extension UIImage {
     func wy_captureCircle(borderWidth: CGFloat, borderColor: UIColor) -> UIImage {
         
         var imageW = self.size.width + borderWidth * 2
-        var imageH = self.size.height + borderWidth * 2;
+        var imageH = self.size.height + borderWidth * 2
         imageW = min(imageH, imageW)
         imageH = imageW
         let imageSize = CGSize(width: imageW, height: imageH)
         //新建一个图形上下文
-        UIGraphicsBeginImageContextWithOptions(imageSize, false, 0.0);
+        UIGraphicsBeginImageContextWithOptions(imageSize, false, 0.0)
         let ctx = UIGraphicsGetCurrentContext()
         borderColor.set()
         //画大圆

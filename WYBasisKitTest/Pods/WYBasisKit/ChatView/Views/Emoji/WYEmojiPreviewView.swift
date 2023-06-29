@@ -2,7 +2,7 @@
 //  WYEmojiPreviewView.swift
 //  WYBasisKit
 //
-//  Created by Miraitowa on 2023/4/27.
+//  Created by 官人 on 2023/4/27.
 //
 
 import UIKit

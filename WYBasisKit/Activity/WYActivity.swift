@@ -28,8 +28,8 @@ public enum WYActivityAnimation {
     /// 默认，系统小菊花
     case indicator
     
-    /// 图片帧
-    case gif
+    /// gif图或者apng格式图片
+    case gifOrApng
 }
 
 /// 滚动信息提示窗口默认配置项
@@ -548,7 +548,7 @@ private class WYActivityLoadingView: UIView {
             indicator.startAnimating()
             
             break
-        case .gif:
+        case .gifOrApng:
             
             loadingLayout(subContro: imageView, contentView: contentView, subControSize: config.animationSize)
             
@@ -613,7 +613,7 @@ private class WYActivityLoadingView: UIView {
                 }
                 break
                 
-            case .gif:
+            case .gifOrApng:
                 textLayout(subContro: imageView, contentView: contentView)
                 break
             }

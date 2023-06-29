@@ -16,3 +16,6 @@ public var emojiViewConfig: WYEmojiViewConfig = WYEmojiViewConfig()
 
 /// More按钮相关配置
 public var moreViewConfig: WYMoreViewConfig = WYMoreViewConfig()
+
+/// 文本cell相关配置
+public var chatTextConfig: WYTextChatConfig = WYTextChatConfig()

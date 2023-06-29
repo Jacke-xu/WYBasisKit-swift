@@ -2,7 +2,7 @@
 //  WYMoreViewCell.swift
 //  WYBasisKit
 //
-//  Created by Miraitowa on 2023/6/2.
+//  Created by 官人 on 2023/6/2.
 //
 
 import UIKit

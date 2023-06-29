@@ -2,8 +2,8 @@
 //  WYTestChatController.swift
 //  WYBasisKit
 //
-//  Created by Miraitowa on 2023/3/30.
-//  Copyright © 2023 Jacke·xu. All rights reserved.
+//  Created by 官人 on 2023/3/30.
+//  Copyright © 2023 官人. All rights reserved.
 //
 
 import UIKit
@@ -52,7 +52,8 @@ class WYTestChatController: UIViewController {
         }
         
         let chatView = WYChatView()
-        chatView.dataSource = emojiViewConfig.emojiSource
+        chatView.userInfo = sharedUaerInfo()
+        chatView.dataSource = []
         chatView.eventsHandler = self
         chatView.delegate = self
         view.addSubview(chatView)
@@ -95,63 +96,66 @@ extension WYTestChatController: WYChatViewDelegate {
     /// 点击了 文本/语音 切换按钮
     func didClickTextVoiceView(_ isText: Bool) {
         if isText {
-            wy_print("显示键盘")
+            //wy_print("显示键盘")
         }else {
-            wy_print("显示语音")
+            //wy_print("显示语音")
         }
     }
     
     /// 点击了 表情/文本 切换按钮
     func didClickEmojiTextView(_ isText: Bool) {
         if isText {
-            wy_print("显示键盘")
+            //wy_print("显示键盘")
         }else {
-            wy_print("显示表情")
+            //wy_print("显示表情")
         }
     }
     
     /// 点击了 更多 按钮
     func didClickMoreView(_ isText: Bool) {
         if isText {
-            wy_print("显示键盘")
+            //wy_print("显示键盘")
         }else {
-            wy_print("显示更多")
+            //wy_print("显示更多")
         }
     }
     
     /// 输入框文本发生变化
     func textDidChanged(_ text: String) {
-        wy_print("输入的文本：\(text)")
+        //wy_print("输入的文本：\(text)")
     }
     
     /// 点击了键盘上的 发送 按钮
-    func keyboardSendMessage(_ text: String) {
-        wy_print("发送文本消息：\(text)")
+    func keyboardSendMessage(_ message: WYChatMessageModel) {
+        wy_print("发送文本消息：\(message)，时间戳 = \(message.timestamp)")
+        
+        
+        //message.timeFormat = "cencadi"
     }
     
     /// 点击了emoji控件内某个item
     func didClickEmojiView(_ emojiView: WYChatEmojiView, _ indexPath: IndexPath) {
-        wy_print("emojiView = \(emojiView), emojiName = \(emojiView.dataSource[indexPath.section][indexPath.item])")
+        //wy_print("emojiView = \(emojiView), emojiName = \(emojiView.dataSource[indexPath.section][indexPath.item])")
     }
     
     /// 点击了emoji控件内功能区删除按钮
     func didClickEmojiDeleteView(_ deleteView: UIButton) {
-        wy_print("点击了emoji控件内功能区删除按钮")
+        //wy_print("点击了emoji控件内功能区删除按钮")
     }
     
     /// 点击了emoji控件内功能区发送按钮
     func didClickEmojiSendView(_ sendView: UIButton) {
-        wy_print("点击了emoji控件内功能区发送按钮")
+        //wy_print("点击了emoji控件内功能区发送按钮")
     }
     
     /// 将要显示表情预览控件(仅限WYEmojiPreviewStyle == other时才会回调)
     func willShowPreviewView(_ imageView: UIImageView, _ imageName: String) {
-        wy_print("imageView = \(imageView), imageName = \(imageName)")
+        //wy_print("imageView = \(imageView), imageName = \(imageName)")
     }
     
     /// 点击了More控件内某个item
     func didClickMoreView(_ moreView: WYChatMoreView, _ itemIndex: NSInteger) {
-        wy_print("点击More控件 \(moreView) 内第 \(itemIndex) 个item")
+        //wy_print("点击More控件 \(moreView) 内第 \(itemIndex) 个item")
     }
 }
 
@@ -227,5 +231,33 @@ extension WYTestChatController: WYChatViewEventsHandler {
     func canManagerMoreViewClickEvents(_ moreView: WYChatMoreView, _ itemIndex: NSInteger) -> Bool {
         //wy_print("是否需要内部处理More控件内 cell 的点击事件, moreView = \(moreView), itemIndex = \(itemIndex)")
         return true
+    }
+    
+    /// 是否需要内部处理tableView代理 cellForRowAt 方法
+    func canManagerCellForRowEvents(_ chatView: WYChatView, _ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell? {
+        return nil
+    }
+}
+
+extension WYTestChatController {
+    
+    @discardableResult
+    func sharedUaerInfo() -> WYChatUaerModel {
+        
+        let assets: WYChatAssetsModel = WYChatAssetsModel()
+        assets.downloadPath = "https://tse1-mm.cn.bing.net/th/id/OIP-C.S-LCC291neIgqIkeleCE1gHaHa?pid=ImgDet&w=800&h=800&rs=1"
+        
+        let userModel: WYChatUaerModel = WYChatUaerModel()
+        userModel.id = "99999"
+        userModel.name = "官人"
+        userModel.nickname = "官人"
+        userModel.remarks = "这里是测试生成的备注信息"
+        userModel.signature = "这里是测试生成的用户签名"
+        userModel.area = "中国🇨🇳 香港🇭🇰"
+        userModel.qrCode = assets
+        userModel.avatar = assets
+        userModel.thumbnailAvatar = assets
+    
+        return userModel
     }
 }

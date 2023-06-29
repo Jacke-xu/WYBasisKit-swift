@@ -304,7 +304,7 @@ public func wy_print(_ messages: Any..., file: String = #file, function: String 
         timeFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss.SSS"
         let time = timeFormatter.string(from: Date())
         let message = messages.compactMap { "\($0)" }.joined(separator: " ")
-        print("\n\(time) ——> \((file as NSString).lastPathComponent) ——> \(function) ——> line:\(line)\n\n \(message)\n\n\n")
+        print("\n\(time) ——> \((file as NSString).lastPathComponent) ——> \(function) ——> line:\(line)\n\n\(message)\n\n\n")
     }
     #endif
 }

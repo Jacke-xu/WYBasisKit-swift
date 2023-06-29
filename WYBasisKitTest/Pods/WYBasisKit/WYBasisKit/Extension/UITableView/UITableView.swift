@@ -84,34 +84,23 @@ public extension UITableView {
     }
     
     /// 批量注册UITableView的Cell或HeaderFooterView
-    func wy_register(_ classNames: [String], _ styles: [WYTableViewRegisterStyle]) {
-        for index in 0..<classNames.count {
-            wy_register(classNames[index], styles[index])
+    func wy_register(_ contentClasss: [AnyClass], _ styles: [WYTableViewRegisterStyle]) {
+        for index in 0..<contentClasss.count {
+            wy_register(contentClasss[index], styles[index])
         }
     }
     
     /// 注册UITableView的Cell或HeaderFooterView
-    func wy_register(_ className: String, _ style: WYTableViewRegisterStyle) {
+    func wy_register(_ contentClass: AnyClass, _ style: WYTableViewRegisterStyle) {
         
-        guard className.isEmpty == false else {
-            fatalError("调用注册方法前必须创建与 \(className) 对应的类文件")
-        }
-        
-        let registerClass = (className == "UITableViewCell") ? className : (wy_projectName + "." + className)
+        let reuseIdentifier: String = NSStringFromClass(contentClass).components(separatedBy: ".").last ?? ""
         
         switch style {
         case .cell:
-            guard let cellClass = NSClassFromString(registerClass) as? UITableViewCell.Type else {
-                return
-            }
-            register(cellClass.self, forCellReuseIdentifier: className)
+            register(contentClass, forCellReuseIdentifier: reuseIdentifier)
             break
-
         case .headerFooterView:
-            guard let headerFooterViewClass = NSClassFromString(registerClass) as? UITableViewHeaderFooterView.Type else {
-                return
-            }
-            register(headerFooterViewClass.self, forHeaderFooterViewReuseIdentifier: className)
+            register(contentClass, forHeaderFooterViewReuseIdentifier: reuseIdentifier)
             break
         }
     }

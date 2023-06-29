@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CommonCrypto
 
 /// 获取时间戳的模式
 public enum WYTimestampMode {
@@ -16,6 +17,9 @@ public enum WYTimestampMode {
     
     /// 毫秒
     case millisecond
+    
+    /// 微秒
+    case microseconds
 }
 
 /// 时间格式化模式
@@ -35,6 +39,58 @@ public enum WYTimeFormat {
     case YMDHMS
     /// 传入自定义格式
     case custom(format: String)
+}
+
+/// 星期几
+public enum WYWhatDay: NSInteger {
+    
+    /// 未知
+    case unknown = 0
+    
+    /// 周日(Sun)
+    case sunday
+    
+    /// 周一(Mon)
+    case monday
+    
+    /// 周二(Tue)
+    case tuesday
+    
+    /// 周三(Wed)
+    case wednesday
+    
+    /// 周四(Thu)
+    case thursday
+    
+    /// 周五(Fri)
+    case friday
+    
+    /// 周六(Sat)
+    case saturday
+}
+
+public enum WYTimeDistance {
+    
+    /// 未知
+    case unknown
+    
+    /// 今天
+    case today
+    
+    /// 昨天
+    case yesterday
+    
+    /// 前天
+    case yesterdayBefore
+    
+    /// 一周内
+    case withinWeek
+    
+    /// 同一个月内
+    case withinSameMonth
+    
+    /// 同一年内
+    case withinSameYear
 }
 
 public extension String {
@@ -154,15 +210,51 @@ public extension String {
         return targetString.removingPercentEncoding ?? self
     }
     
-    /// 获取设备时间戳
-    static func wy_sharedDeviceTimestamp(mode: WYTimestampMode = .second) -> String {
+    /// base64编码
+    var wy_base64Encoded: String {
+        guard let data = data(using: .utf8) else {
+            return self
+        }
+        return data.base64EncodedString(options: Data.Base64EncodingOptions(rawValue: 0))
+    }
+    
+    /// base64解码
+    var wy_base64Decoded: String {
         
-        let timeInterval: TimeInterval = NSDate().timeIntervalSince1970
+        guard let data = data(using: .utf8) else {
+            return self
+        }
+        
+        if let decodedData = Data(base64Encoded: data, options: Data.Base64DecodingOptions(rawValue: 0)) {
+            return String(data: decodedData, encoding: .utf8) ?? self
+        }
+        return self
+    }
+    
+    /// md5加密
+    var wy_md5: String {
+        guard let data = data(using: .utf8) else {
+            return self
+        }
+        var digest = [UInt8](repeating: 0, count: Int(CC_MD5_DIGEST_LENGTH))
+        
+        _ = data.withUnsafeBytes { (bytes: UnsafeRawBufferPointer) in
+            return CC_MD5(bytes.baseAddress, CC_LONG(data.count), &digest)
+        }
+        return digest.map { String(format: "%02x", $0) }.joined()
+    }
+    
+    /// 获取设备时间戳
+    static func wy_sharedDeviceTimestamp(_ mode: WYTimestampMode = .second) -> String {
+        
+        let timeInterval: TimeInterval = Date().timeIntervalSince1970
         switch mode {
         case .second:
-            return "\(Int(timeInterval))"
+            return "\(timeInterval)".components(separatedBy: ".").first ?? ""
         case .millisecond:
-            return "\(CLongLong(round(timeInterval*1000)))"
+            return "\(CLongLong(round(timeInterval*1000)))".components(separatedBy: ".").first ?? ""
+        case .microseconds:
+            return "\(CLongLong(round(timeInterval*1000*1000)))".components(separatedBy: ".").first ?? ""
         }
     }
     
@@ -208,6 +300,39 @@ public extension String {
         return formatter.string(from: date as Date)
     }
     
+    /// 获取当前的 年、月、日
+    static func wy_currentYearMonthDay() -> (year: String, month: String, day: String) {
+        let calendar = Calendar.current
+        let dateComponets = calendar.dateComponents([Calendar.Component.year,Calendar.Component.month,Calendar.Component.day], from: Date())
+        return ("\(dateComponets.year!)", "\(dateComponets.month!)", "\(dateComponets.day!)")
+    }
+    
+    /// 获取当前月的总天数
+    static func wy_curentMonthDays() -> String {
+        let calendar = Calendar.current
+        let range = calendar.range(of: Calendar.Component.day, in: Calendar.Component.month, for: Date())
+        return "\(range!.count)"
+    }
+    
+    /// 时间戳转星期几
+    var wy_whatDay: WYWhatDay {
+
+        guard [10, 13].contains(count) else {
+            return .unknown
+        }
+        
+        let timeInterval: TimeInterval = NumberFormatter().number(from: self)?.doubleValue ?? 0.0
+
+        let date: Date = Date(timeIntervalSince1970: timeInterval / (count == 13 ? 1000.0 : 1.0))
+
+        var calendar: Calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = NSTimeZone.local
+        
+        let dateComponents: DateComponents = calendar.dateComponents([Calendar.Component.year,Calendar.Component.month,Calendar.Component.weekday,Calendar.Component.day], from: date)
+        
+        return WYWhatDay(rawValue: dateComponents.weekday ?? 0) ?? .unknown
+    }
+    
     /// 年月日格式转时间戳
     func wy_dateStrConvertTimestamp(_ dateFormat: WYTimeFormat) -> String {
         
@@ -222,6 +347,87 @@ public extension String {
         let date = format.date(from: self)
         
         return String(date!.timeIntervalSince1970)
+    }
+    
+    /**
+     *  计算两个时间戳之间的间隔周期(适用于IM项目)
+     *  messageTimestamp  消息对应的时间戳
+     *  clientTimestamp 客户端时间戳(当前的网络时间戳或者设备本地的时间戳)
+     */
+    static func wy_timeIntervalCycle(_ messageTimestamp: String, _ clientTimestamp: String = wy_sharedDeviceTimestamp()) -> WYTimeDistance {
+
+        guard ([10, 13].contains(messageTimestamp.count)) && ([10, 13].contains(clientTimestamp.count)) else {
+            return .unknown
+        }
+
+        var calendar: Calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = NSTimeZone.local
+
+        let dateFormatter: DateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        dateFormatter.calendar = calendar
+
+        var clientDate: Date!
+
+        let message_timestamp: TimeInterval = NumberFormatter().number(from: messageTimestamp)?.doubleValue ?? 0
+
+        let client_timestamp: TimeInterval = NumberFormatter().number(from: clientTimestamp)?.doubleValue ?? 0
+
+        if ((message_timestamp >= client_timestamp) || (message_timestamp <= 0)) {
+            clientDate = Date(timeIntervalSince1970: client_timestamp / (clientTimestamp.count == 13 ? 1000.0 : 1.0))
+        }else {
+            clientDate = Date(timeIntervalSince1970: message_timestamp / (messageTimestamp.count == 13 ? 1000.0 : 1.0))
+        }
+        
+        /// 一天的秒数
+        let secondsPerDay: TimeInterval = 24 * 60 * 60
+        
+        let componentsSet: Set<Calendar.Component> = [Calendar.Component.year, Calendar.Component.month, Calendar.Component.day]
+        
+        func components(_ day: TimeInterval) -> DateComponents {
+            
+            let date: Date = Date(timeIntervalSince1970: (client_timestamp / (clientTimestamp.count == 13 ? 1000.0 : 1.0)) - (day * secondsPerDay))
+            
+            return calendar.dateComponents(componentsSet, from: date)
+        }
+        
+        let clientComponents = calendar.dateComponents(componentsSet, from: clientDate)
+        
+        let dateComponents = (today: components(0),
+                              aDayAgo: components(1),
+                              twoDaysAgo: components(2),
+                              threeDaysAgo: components(3),
+                              fourDaysAgo: components(4),
+                              fiveDaysAgo: components(5),
+                              sixDaysAgo: components(6))
+
+        if ((clientComponents.year == dateComponents.today.year) && (clientComponents.month == dateComponents.today.month) && (clientComponents.day == dateComponents.today.day)) {
+            return .today
+        }
+
+        if ((clientComponents.year == dateComponents.aDayAgo.year) && (clientComponents.month == dateComponents.aDayAgo.month) && (clientComponents.day == dateComponents.aDayAgo.day)) {
+            return .yesterday
+        }
+
+        if ((clientComponents.year == dateComponents.twoDaysAgo.year) && (clientComponents.month == dateComponents.twoDaysAgo.month) && (clientComponents.day == dateComponents.twoDaysAgo.day)) {
+            return .yesterdayBefore
+        }
+        
+        if (((clientComponents.year == dateComponents.threeDaysAgo.year) && (clientComponents.month == dateComponents.threeDaysAgo.month) && (clientComponents.day == dateComponents.threeDaysAgo.day)) || ((clientComponents.year == dateComponents.fourDaysAgo.year) && (clientComponents.month == dateComponents.fourDaysAgo.month) && (clientComponents.day == dateComponents.fourDaysAgo.day)) ||
+            ((clientComponents.year == dateComponents.fiveDaysAgo.year) && (clientComponents.month == dateComponents.fiveDaysAgo.month) && (clientComponents.day == dateComponents.fiveDaysAgo.day)) ||
+            ((clientComponents.year == dateComponents.sixDaysAgo.year) && (clientComponents.month == dateComponents.sixDaysAgo.month) && (clientComponents.day == dateComponents.sixDaysAgo.day))) {
+            return .withinWeek
+        }
+        
+        if ((clientComponents.year == dateComponents.twoDaysAgo.year) && (clientComponents.month == dateComponents.twoDaysAgo.month)) {
+            return .withinSameMonth
+        }
+        
+        if clientComponents.year == dateComponents.twoDaysAgo.year {
+            return .withinSameYear
+        }
+        
+        return .unknown
     }
     
     /// 时间戳距离现在的间隔时间

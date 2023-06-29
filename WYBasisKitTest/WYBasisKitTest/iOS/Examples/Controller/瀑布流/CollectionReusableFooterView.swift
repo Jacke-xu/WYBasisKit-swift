@@ -2,7 +2,7 @@
 //  CollectionReusableFooterView.swift
 //  WYBasisKitTest
 //
-//  Created by Miraitowa on 2023/5/16.
+//  Created by 官人 on 2023/5/16.
 //
 
 import UIKit

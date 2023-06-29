@@ -2,59 +2,60 @@
 //  WYChatModel.swift
 //  WYBasisKit
 //
-//  Created by Miraitowa on 2023/6/16.
+//  Created by 官人 on 2023/6/16.
 //
 
 import Foundation
-import CoreLocation
 
-/// 允许语音断点播放的间隔时间(单位秒)
-public var voiceBreakpointIntervalTime: TimeInterval = 60
-
-/// 消息撤回时长间隔时间(单位秒)
+/// 消息撤回时长最大间隔时间(单位秒)
 public var messageWithdrawalInterval: TimeInterval = 120
 
 /// 聊天消息类型
-public enum WYChatMessageStyle {
+public enum WYChatMessageStyle: String, Codable {
     /// 未知
-    case none
+    case none = "WYChatBasicCell"
     /// 文本
-    case text
+    case text = "WYChatTextCell"
     /// 语音
-    case voice
+    case voice = "WYChatVoiceCell"
     /// 照片
-    case photo
+    case photo = "WYChatPhotoCell"
     /// 音乐
-    case music
+    case music = "WYChatMusicCell"
     /// 视频
-    case video
+    case video = "WYChatVideoCell"
     /// 红包
-    case luckyMoney
+    case luckyMoney = "WYChatLuckyMoneyCell"
     /// 转账
-    case transfer
+    case transfer = "WYChatTransferCell"
     /// 位置
-    case location
+    case location = "WYChatLocationCell"
     /// 拍一拍
-    case takePat
+    case takePat = "WYChatTakePatCell"
     /// 消息撤回
-    case withdrawn
+    case withdrawn = "WYChatWithdrawnCell"
     /// 音视频通话
-    case call
+    case call = "WYChatCallCell"
     /// 网页、小程序
-    case webpage
+    case webpage = "WYChatWebpageCell"
     /// 文件
-    case file
+    case file = "WYChatFileCell"
     /// 名片
-    case businessCard
+    case businessCard = "WYChatBusinessCardCell"
     /// 聊天记录(合集)
-    case chatRecords
+    case chatRecords = "WYChatRecordsCell"
+    
+    /// 获取所有枚举属性
+    public static func members() -> [WYChatMessageStyle] {
+        return [.none, .text, .voice, .photo, .music, .video, .luckyMoney, .transfer, .location, .takePat, .withdrawn, .call, .webpage, .file, .businessCard, .chatRecords]
+    }
 }
 
 /// 红包、转账收款状态
-public enum WYChatFundsState {
+public enum WYChatFundsState: NSInteger {
     
     /// 待收款
-    case unreceived
+    case unreceived = 0
     
     /// 已收款
     case received
@@ -67,10 +68,10 @@ public enum WYChatFundsState {
 }
 
 /// 通话类型
-public enum WYChatCallStyle {
+public enum WYChatCallStyle: NSInteger {
     
     /// 一对一语音
-    case oneToOneVoice
+    case oneToOneVoice = 0
     
     /// 一对一视屏
     case oneToOneVideo
@@ -83,9 +84,9 @@ public enum WYChatCallStyle {
 }
 
 /// 消息发送状态
-public enum WYChatMessageSendState {
+public enum WYChatMessageSendState: NSInteger {
     /// 未发送
-    case notSent
+    case notSent = 0
     /// 发送中
     case sending
     /// 发送成功
@@ -95,7 +96,7 @@ public enum WYChatMessageSendState {
 }
 
 /// 图片、视频等资源文件相关信息
-public struct WYChatAssetsModel {
+public class WYChatAssetsModel: NSObject {
     
     /// id
     public var id: String = ""
@@ -108,17 +109,13 @@ public struct WYChatAssetsModel {
     
     /// 本地文件路径
     public var localPath: String = ""
-    
-    public init(id: String = "", name: String = "", downloadPath: String = "", localPath: String = "") {
-        self.id = id
-        self.name = name
-        self.downloadPath = downloadPath
-        self.localPath = localPath
-    }
 }
 
 /// 语音消息Model
-public struct WYChatVoiceModel {
+public class WYChatVoiceModel: NSObject {
+    
+    /// id
+    public var id: String = ""
     
     /// 语音时长
     public var duration: TimeInterval = 0
@@ -127,11 +124,7 @@ public struct WYChatVoiceModel {
     public var played: Bool = false
     
     /// 是否被暂停播放(决定是否可以断点续播)
-    public var pause: Bool {
-        get {
-            return (pauseWithTimestamp + voiceBreakpointIntervalTime) > NSDate().timeIntervalSince1970
-        }
-    }
+    public var pause: Bool = false
     
     /// 被暂停播放时的时间戳
     public var pauseWithTimestamp: TimeInterval = 0
@@ -156,38 +149,20 @@ public struct WYChatVoiceModel {
     
     /// aac格式本地路
     public var aacPath: String = ""
-    
-    public init(duration: TimeInterval = 0, played: Bool = false, pauseWithTimestamp: TimeInterval = 0, currentPlayDuration: TimeInterval = 0, voiceToText: String = "", wavPath: String = "", mp3Path: String = "", amrPath: String = "", cafPath: String = "", aacPath: String = "") {
-        self.duration = duration
-        self.played = played
-        self.pauseWithTimestamp = pauseWithTimestamp
-        self.currentPlayDuration = currentPlayDuration
-        self.voiceToText = voiceToText
-        self.wavPath = wavPath
-        self.mp3Path = mp3Path
-        self.amrPath = amrPath
-        self.cafPath = cafPath
-        self.aacPath = aacPath
-    }
 }
 
 /// 照片消息Model
-public struct WYChatPhotoModel {
+public class WYChatPhotoModel: NSObject {
     
     /// 原图
     public var original: WYChatAssetsModel = WYChatAssetsModel()
     
     /// 缩略图
     public var thumbnail: WYChatAssetsModel = WYChatAssetsModel()
-    
-    public init(original: WYChatAssetsModel = WYChatAssetsModel(), thumbnail: WYChatAssetsModel = WYChatAssetsModel()) {
-        self.original = original
-        self.thumbnail = thumbnail
-    }
 }
 
 /// 音乐消息Model
-public struct WYChatMusicModel {
+public class WYChatMusicModel: NSObject {
     
     /// id
     public var id: String = ""
@@ -215,21 +190,10 @@ public struct WYChatMusicModel {
     
     /// 封面缩略图
     public var thumbnailCover: WYChatAssetsModel = WYChatAssetsModel()
-    
-    public init(id: String = "", name: String = "", composer: String = "", singer: String = "", duration: TimeInterval = 0, playedDuration: TimeInterval = 0, playPath: String = "", thumbnailCover: WYChatAssetsModel = WYChatAssetsModel()) {
-        self.id = id
-        self.name = name
-        self.composer = composer
-        self.singer = singer
-        self.duration = duration
-        self.playedDuration = playedDuration
-        self.playPath = playPath
-        self.thumbnailCover = thumbnailCover
-    }
 }
 
 /// 视频消息Model
-public struct WYChatVideoModel {
+public class WYChatVideoModel: NSObject {
     
     /// id
     public var id: String = ""
@@ -248,19 +212,10 @@ public struct WYChatVideoModel {
     
     /// 当前播放时长
     public var playedDuration: TimeInterval = 0
-    
-    public init(id: String = "", cover: WYChatAssetsModel = WYChatAssetsModel(), thumbnailCover: WYChatAssetsModel = WYChatAssetsModel(), video: WYChatAssetsModel = WYChatAssetsModel(), duration: TimeInterval = 0, playedDuration: TimeInterval = 0) {
-        self.id = id
-        self.cover = cover
-        self.thumbnailCover = thumbnailCover
-        self.video = video
-        self.duration = duration
-        self.playedDuration = playedDuration
-    }
 }
 
 /// 红包消息Model
-public struct WYChatLuckyMoneyModel {
+public class WYChatLuckyMoneyModel: NSObject {
     
     /// id
     public var id: String = ""
@@ -294,24 +249,10 @@ public struct WYChatLuckyMoneyModel {
     
     /// 说明(xx红包)
     public var notes: String = ""
-    
-    public init(id: String = "", fullCover: WYChatAssetsModel = WYChatAssetsModel(), smailCover: WYChatAssetsModel = WYChatAssetsModel(), coverVideo: WYChatAssetsModel = WYChatAssetsModel(), amounts: String = "", numberOfLuckyMoney: NSInteger = 0, numberOfRobbed: NSInteger = 0, amountsStolen: Double = 0, state: WYChatFundsState = .unreceived, remarks: String = "", notes: String = "") {
-        self.id = id
-        self.fullCover = fullCover
-        self.smailCover = smailCover
-        self.coverVideo = coverVideo
-        self.amounts = amounts
-        self.numberOfLuckyMoney = numberOfLuckyMoney
-        self.numberOfRobbed = numberOfRobbed
-        self.amountsStolen = amountsStolen
-        self.state = state
-        self.remarks = remarks
-        self.notes = notes
-    }
 }
 
 /// 定位消息Model
-public struct WYChatLocationModel {
+public class WYChatLocationModel: NSObject {
     
     /// 定位封面
     public var cover: WYChatAssetsModel = WYChatAssetsModel()
@@ -322,19 +263,15 @@ public struct WYChatLocationModel {
     /// 定位详细地址
     public var address: String = ""
     
-    /// 定位经纬度
-    public var location: CLLocationCoordinate2D = CLLocationCoordinate2D()
+    /// 定位经度
+    public var longitude: String = ""
     
-    public init(cover: WYChatAssetsModel = WYChatAssetsModel(), title: String = "", address: String = "", location: CLLocationCoordinate2D = CLLocationCoordinate2D()) {
-        self.cover = cover
-        self.title = title
-        self.address = address
-        self.location = location
-    }
+    /// 定位纬度
+    public var latitude: String = ""
 }
 
 /// 拍一拍model
-public struct WYChatTakePatModel {
+public class WYChatTakePatModel: NSObject {
     
     /// 拍人者
     public var striking: WYChatUaerModel = WYChatUaerModel()
@@ -344,16 +281,10 @@ public struct WYChatTakePatModel {
     
     /// 被拍者拍一拍设置
     public var notes: String = ""
-    
-    public init(striking: WYChatUaerModel = WYChatUaerModel(), beaten: WYChatUaerModel = WYChatUaerModel(), notes: String = "") {
-        self.striking = striking
-        self.beaten = beaten
-        self.notes = notes
-    }
 }
 
 /// 消息撤回model
-public struct WYChatWithdrawnModel {
+public class WYChatWithdrawnModel: NSObject {
     
     /// 发送时间
     public var sendTime: String = ""
@@ -369,17 +300,10 @@ public struct WYChatWithdrawnModel {
     
     /// 消息类型
     public var messageStyle: WYChatMessageStyle = .none
-    
-    public init(sendTime: String = "", withdrawalInterval: TimeInterval = messageWithdrawalInterval, withdrawnTime: String = "", messageStyle: WYChatMessageStyle = .none) {
-        self.sendTime = sendTime
-        self.withdrawalInterval = withdrawalInterval
-        self.withdrawnTime = withdrawnTime
-        self.messageStyle = messageStyle
-    }
 }
 
 /// 音视频通话model
-public struct WYChatCallModel {
+public class WYChatCallModel: NSObject {
     
     /// 通话时长
     public var durationOfCall: TimeInterval = 0
@@ -392,17 +316,10 @@ public struct WYChatCallModel {
     
     /// 通话成员信息(一对一通话时只有一个成员)
     public var members: [WYChatUaerModel] = []
-    
-    public init(durationOfCall: TimeInterval = 0, callStyle: WYChatCallStyle = .oneToOneVoice, promoter: WYChatUaerModel = WYChatUaerModel(), members: [WYChatUaerModel] = []) {
-        self.durationOfCall = durationOfCall
-        self.callStyle = callStyle
-        self.promoter = promoter
-        self.members = members
-    }
 }
 
 /// 网页、小程序model
-public struct WYChatWebpageModel {
+public class WYChatWebpageModel: NSObject {
     
     /// id
     public var id: String = ""
@@ -414,7 +331,7 @@ public struct WYChatWebpageModel {
     public var title: String = ""
     
     /// 描述
-    public var description: String = ""
+    public var remarks: String = ""
     
     /// 头像
     public var avatar: WYChatAssetsModel = WYChatAssetsModel()
@@ -424,20 +341,10 @@ public struct WYChatWebpageModel {
     
     /// 内容链接
     public var path: String = ""
-    
-    public init(id: String = "", cover: WYChatAssetsModel = WYChatAssetsModel(), title: String = "", description: String = "", avatar: WYChatAssetsModel = WYChatAssetsModel(), name: String = "", path: String = "") {
-        self.id = id
-        self.cover = cover
-        self.title = title
-        self.description = description
-        self.avatar = avatar
-        self.name = name
-        self.path = path
-    }
 }
 
 /// 文件model
-public struct WYChatFileModel {
+public class WYChatFileModel: NSObject {
     
     /// id
     public var id: String = ""
@@ -456,19 +363,10 @@ public struct WYChatFileModel {
     
     /// 头像
     public var avatar: WYChatAssetsModel = WYChatAssetsModel()
-    
-    public init(id: String = "", title: String = "", icon: WYChatAssetsModel = WYChatAssetsModel(), size: String = "", name: String = "", avatar: WYChatAssetsModel = WYChatAssetsModel()) {
-        self.id = id
-        self.title = title
-        self.icon = icon
-        self.size = size
-        self.name = name
-        self.avatar = avatar
-    }
 }
 
 /// 名片model
-public struct WYChatBusinessCardModel {
+public class WYChatBusinessCardModel: NSObject {
     
     /// id
     public var id: String = ""
@@ -477,17 +375,11 @@ public struct WYChatBusinessCardModel {
     public var userInfo: WYChatUaerModel = WYChatUaerModel()
     
     /// 描述
-    public var description: String = ""
-    
-    public init(id: String = "", userInfo: WYChatUaerModel = WYChatUaerModel(), description: String = "") {
-        self.id = id
-        self.userInfo = userInfo
-        self.description = description
-    }
+    public var remarks: String = ""
 }
 
 /// 聊天记录(合集)model
-public struct WYChatRecordsModel {
+public class WYChatRecordsModel: NSObject {
     
     /// 标题(xxx的聊天记录)
     public var title: String = ""
@@ -495,85 +387,68 @@ public struct WYChatRecordsModel {
     /// 消息合集
     public var messages: [WYChatMessageModel] = []
     
-    /// 描述
-    public var description: String = ""
-    
-    public init(title: String, messages: [WYChatMessageModel] = [], description: String) {
-        self.title = title
-        self.messages = messages
-        self.description = description
-    }
+    /// 备注
+    public var remarks: String = ""
 }
 
 /// 消息体
-public struct WYChatMeesageContentModel {
+public class WYChatMeesageContentModel: NSObject {
     
     /// 文本
-    var text: String? = nil
+    public var text: String? = nil
     
     /// 语音
-    var voice: WYChatVoiceModel? = nil
+    public var voice: WYChatVoiceModel? = nil
     
     /// 照片
-    var photo: WYChatPhotoModel? = nil
+    public var photo: WYChatPhotoModel? = nil
     
     /// 音乐
-    var music: WYChatMusicModel? = nil
+    public var music: WYChatMusicModel? = nil
     
     /// 视频
-    var video: WYChatVideoModel? = nil
+    public var video: WYChatVideoModel? = nil
     
     /// 红包
-    var luckyMoney: WYChatLuckyMoneyModel? = nil
+    public var luckyMoney: WYChatLuckyMoneyModel? = nil
     
     /// 转账
-    var transfer: WYChatLuckyMoneyModel? = nil
+    public var transfer: WYChatLuckyMoneyModel? = nil
     
     /// 位置
-    var location: WYChatLocationModel? = nil
+    public var location: WYChatLocationModel? = nil
     
     /// 拍一拍
-    var takePat: WYChatTakePatModel? = nil
+    public var takePat: WYChatTakePatModel? = nil
     
     /// 消息撤回
-    var withdrawn: WYChatWithdrawnModel? = nil
+    public var withdrawn: WYChatWithdrawnModel? = nil
     
     /// 音视频通话
-    var call: WYChatCallModel? = nil
+    public var call: WYChatCallModel? = nil
     
     /// 网页、小程序
-    var webpage: WYChatWebpageModel? = nil
+    public var webpage: WYChatWebpageModel? = nil
     
     /// 文件
-    var file: WYChatFileModel? = nil
+    public var file: WYChatFileModel? = nil
     
     /// 名片
-    var businessCard: WYChatBusinessCardModel? = nil
+    public var businessCard: WYChatBusinessCardModel? = nil
     
     /// 聊天记录(合集)
-    var chatRecords: WYChatRecordsModel? = nil
+    public var chatRecords: WYChatRecordsModel? = nil
     
-    public init(text: String? = nil, voice: WYChatVoiceModel? = nil, photo: WYChatPhotoModel? = nil, music: WYChatMusicModel? = nil, video: WYChatVideoModel? = nil, luckyMoney: WYChatLuckyMoneyModel? = nil, transfer: WYChatLuckyMoneyModel? = nil, location: WYChatLocationModel? = nil, takePat: WYChatTakePatModel? = nil, withdrawn: WYChatWithdrawnModel? = nil, call: WYChatCallModel? = nil, webpage: WYChatWebpageModel? = nil, file: WYChatFileModel? = nil, businessCard: WYChatBusinessCardModel? = nil, chatRecords: WYChatRecordsModel? = nil) {
-        self.text = text
-        self.voice = voice
-        self.photo = photo
-        self.music = music
-        self.video = video
-        self.luckyMoney = luckyMoney
-        self.transfer = transfer
-        self.location = location
-        self.takePat = takePat
-        self.withdrawn = withdrawn
-        self.call = call
-        self.webpage = webpage
-        self.file = file
-        self.businessCard = businessCard
-        self.chatRecords = chatRecords
+    /// 获取消息类型
+    public func style() -> WYChatMessageStyle {
+
+        let index: NSInteger = [nil, text, voice, photo, music, video, luckyMoney, transfer, location, takePat, withdrawn, call, webpage, file, businessCard, chatRecords].firstIndex(where: { $0 != nil }) ?? 0
+        return WYChatMessageStyle.members()[index]
     }
 }
 
 /// 聊天用户model
-public struct WYChatUaerModel {
+public class WYChatUaerModel: NSObject {
     
     /// 用户id
     public var id: String = ""
@@ -593,6 +468,9 @@ public struct WYChatUaerModel {
     /// 用户所在地区
     public var area: String = ""
     
+    /// 用户聊天列表
+    public var listOfSessions: [WYChatSessionModel] = []
+    
     /// 加入的群
     public var groups: [WYChatGroupModel] = []
     
@@ -608,23 +486,12 @@ public struct WYChatUaerModel {
     /// 更多信息
     public var moreInfo: Data? = nil
     
-    public init(id: String = "", name: String = "", nickname: String = "", remarks: String = "", signature: String = "", area: String = "", groups: [WYChatGroupModel] = [], qrCode: WYChatAssetsModel = WYChatAssetsModel(), avatar: WYChatAssetsModel = WYChatAssetsModel(), thumbnailAvatar: WYChatAssetsModel = WYChatAssetsModel(), moreInfo: Data? = nil) {
-        self.id = id
-        self.name = name
-        self.nickname = nickname
-        self.remarks = remarks
-        self.signature = signature
-        self.area = area
-        self.groups = groups
-        self.qrCode = qrCode
-        self.avatar = avatar
-        self.thumbnailAvatar = thumbnailAvatar
-        self.moreInfo = moreInfo
-    }
+    /// model在数组中对应的下标
+    var index: NSInteger = 0
 }
 
 /// 群聊Model
-public struct WYChatGroupModel {
+public class WYChatGroupModel: NSObject {
     
     /// 群ID
     public var id: String = ""
@@ -644,6 +511,9 @@ public struct WYChatGroupModel {
     /// 群头像缩略图
     public var thumbnailAvatar: WYChatAssetsModel = WYChatAssetsModel()
     
+    /// 是否开启了消息免打扰(0未开启，1已开启)
+    public var silence: String = "0"
+    
     /// 群公告
     public var publicity: String = ""
     
@@ -659,22 +529,28 @@ public struct WYChatGroupModel {
     /// 群成员信息
     public var members: [WYChatUaerModel] = []
     
-    public init(id: String = "", nickname: String = "", ownerInfo: WYChatUaerModel = WYChatUaerModel(), name: String = "", avatar: WYChatAssetsModel = WYChatAssetsModel(), thumbnailAvatar: WYChatAssetsModel = WYChatAssetsModel(), publicity: String = "", remarks: String = "", qrCode: WYChatAssetsModel = WYChatAssetsModel(), managers: [WYChatUaerModel] = [], members: [WYChatUaerModel] = []) {
-        self.id = id
-        self.nickname = nickname
-        self.ownerInfo = ownerInfo
-        self.name = name
-        self.avatar = avatar
-        self.thumbnailAvatar = thumbnailAvatar
-        self.publicity = publicity
-        self.remarks = remarks
-        self.qrCode = qrCode
-        self.managers = managers
-        self.members = members
-    }
+    /// model在数组中对应的下标
+    var index: NSInteger = 0
 }
 
-public struct WYChatMessageModel {
+/// 聊天model
+public class WYChatSessionModel: NSObject {
+    
+    /// 会话ID(用户ID或者群ID)
+    public var sessionID: String = ""
+    
+    /// 最后一条消息
+    public var lastMessage: WYChatMessageModel?
+    
+    /// 未读消息的ID列表
+    public var unreadMessages: [String] = []
+}
+
+/// 消息model
+public class WYChatMessageModel: NSObject {
+    
+    /// 打招呼的消息说明(如果该条消息是打招呼的消息，则会判断这个字段是否为空，不为空的话就会显示提示信息，如：以上是打招呼的内容)
+    public var greetingDescription: String = ""
     
     /**
      *  消息已读人数
@@ -690,43 +566,51 @@ public struct WYChatMessageModel {
     public var sendState: WYChatMessageSendState = .notSent
 
     /// 消息ID
-    public var id: String = ""
+    public var messageID: String = ""
+    
+    /// 会话ID(用户ID或者群ID)
+    public var sessionID: String = ""
+    
+    /// 当前客户端时间(依据此字段来计算消息发送时间和当前时间的间距，默认设备本地时间戳)
+    public var clientTimestamp: String?
+    
+    /// 上一条消息的发送时间
+    public var lastMessageTimestamp: String = ""
 
     /// 消息发送时间
     public var timestamp: String = ""
+    
+    /**
+     *  格式化后的消息发送时间(外部可自定义设置，如果没设置就默认依据timestamp显示)
+     *  默认聊天消息时间显示说明
+          1、当天的消息，以每5分钟为一个跨度显示时间，具体格式为：HH:mm，如 12:12
+          2、昨天的消息，显示格式为：昨天 HH:mm，如 昨天 12:12
+          3、消息超过2天、小于1周，显示星期+收发消息的时间，具体格式为：星期几 HH:mm，如    星期日 12:12
+          4、消息大于1周且是今年的消息，显示格式为：MMdd HH:mm，如 12月12日 12:12
+          5、消息时间不是今年的消息，显示格式为：yyyyMMdd HH:mm，如 2022年12月12日 12:12
+     */
+    public var timeFormat: String?
 
     /// 消息发送者信息
-    public var sendorInfo: WYChatUaerModel = WYChatUaerModel()
+    public var sendor: WYChatUaerModel = WYChatUaerModel()
 
     /// 消息所属群信息(若为空为单聊，否则为群聊)
-    public var groupInfo: WYChatGroupModel? = nil
+    public var group: WYChatGroupModel? = nil
 
     /// 消息内容
     public var content: WYChatMeesageContentModel = WYChatMeesageContentModel()
     
     /// 引用消息
     var reference: WYChatMeesageContentModel? = nil
-
-    /// 聊天消息类型
-    public var messageStyle: WYChatMessageStyle {
-
-        let index: NSInteger = [nil, content.text, content.voice, content.photo, content.music, content.video, content.luckyMoney, content.transfer, content.location, content.takePat, content.withdrawn, content.call, content.webpage, content.file, content.businessCard, content.chatRecords].firstIndex(where: { $0 != nil }) ?? 0
-        return messageStyles[index]
-    }
-
-    /// 引用消息类型
-    public var referenceStyle: WYChatMessageStyle {
-        let index: NSInteger = [nil, reference?.text, reference?.voice, reference?.photo, reference?.music, reference?.video, reference?.luckyMoney, reference?.transfer, reference?.location, reference?.takePat, reference?.withdrawn, reference?.call, reference?.webpage, reference?.file, reference?.businessCard, reference?.chatRecords].firstIndex(where: { $0 != nil }) ?? 0
-        return messageStyles[index]
-    }
+    
+    /// model在数组中对应的下标
+    var index: NSInteger = 0
 
     /**
      *  查看某人是否是该条消息的发送者
      *  userID 某人的ID
      */
     public func isSender(_ userID: String) ->Bool {
-        return (sendorInfo.id == userID)
+        return (userID == sendor.id)
     }
 }
-
-private let messageStyles: [WYChatMessageStyle] = [.none, .text, .video, .photo, .music, .video, .luckyMoney, .transfer, .location, .takePat, .withdrawn, .call, .webpage, .file, .businessCard, .chatRecords]

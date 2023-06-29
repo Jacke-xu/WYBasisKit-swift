@@ -1,7 +1,7 @@
 /*
   WYLocalizable.strings
   WYBasisKit
-
+  中文繁体
   Created by 官人 on 2020/11/21.
   Copyright © 2020 官人. All rights reserved.
 */
@@ -103,3 +103,23 @@
 "WYLocalizable_48" = "射手座";
 
 "WYLocalizable_49" = "App沒有訪問語音辨識的許可權，現在去授權？";
+
+"WYLocalizable_50" = "今天";
+
+"WYLocalizable_51" = "昨天";
+
+"WYLocalizable_52" = "前天";
+
+"WYLocalizable_53" = "星期日";
+
+"WYLocalizable_54" = "星期一";
+
+"WYLocalizable_55" = "星期二";
+
+"WYLocalizable_56" = "星期三";
+
+"WYLocalizable_57" = "星期四";
+
+"WYLocalizable_58" = "星期五";
+
+"WYLocalizable_59" = "星期六";

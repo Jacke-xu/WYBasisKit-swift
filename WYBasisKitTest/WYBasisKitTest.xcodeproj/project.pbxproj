@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4A027019DE606531773A44D7 /* Pods_WYBasisKitTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3961A58ED9E18016F754F2FB /* Pods_WYBasisKitTest.framework */; };
+		DC42B0ED2A42EC900004EB4C /* WYTestChatDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC42B0EC2A42EC900004EB4C /* WYTestChatDataSource.swift */; };
 		DC7D92E72A137D7300800761 /* CollectionReusableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7D92E62A137D7300800761 /* CollectionReusableHeaderView.swift */; };
 		DC7D92E92A137D8100800761 /* CollectionReusableFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7D92E82A137D8100800761 /* CollectionReusableFooterView.swift */; };
 		DCC3409A2A317E6C0026CAD8 /* WYSpeechRecognitionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC340982A317E6C0026CAD8 /* WYSpeechRecognitionController.swift */; };
@@ -180,6 +181,7 @@
 		3961A58ED9E18016F754F2FB /* Pods_WYBasisKitTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WYBasisKitTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A628127A2EA1456F04DE740 /* Pods-WYBasisKitTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WYBasisKitTest.release.xcconfig"; path = "Target Support Files/Pods-WYBasisKitTest/Pods-WYBasisKitTest.release.xcconfig"; sourceTree = "<group>"; };
 		865E1EDDAF0233568A70050C /* Pods-WYBasisKitTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WYBasisKitTest.debug.xcconfig"; path = "Target Support Files/Pods-WYBasisKitTest/Pods-WYBasisKitTest.debug.xcconfig"; sourceTree = "<group>"; };
+		DC42B0EC2A42EC900004EB4C /* WYTestChatDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYTestChatDataSource.swift; sourceTree = "<group>"; };
 		DC7D92E62A137D7300800761 /* CollectionReusableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionReusableHeaderView.swift; sourceTree = "<group>"; };
 		DC7D92E82A137D8100800761 /* CollectionReusableFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionReusableFooterView.swift; sourceTree = "<group>"; };
 		DCC340982A317E6C0026CAD8 /* WYSpeechRecognitionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYSpeechRecognitionController.swift; sourceTree = "<group>"; };
@@ -673,6 +675,7 @@
 			isa = PBXGroup;
 			children = (
 				DCFEC10729EFED62001AE8E7 /* WYTestChatController.swift */,
+				DC42B0EC2A42EC900004EB4C /* WYTestChatDataSource.swift */,
 			);
 			path = "IM即时通讯";
 			sourceTree = "<group>";
@@ -1151,6 +1154,7 @@
 				DCFEC13029EFED62001AE8E7 /* WYTestDarkNightModeController.swift in Sources */,
 				DCFEC12829EFED62001AE8E7 /* WYTestAnimationController.swift in Sources */,
 				DCFEC12229EFED62001AE8E7 /* WYTestRichTextController.swift in Sources */,
+				DC42B0ED2A42EC900004EB4C /* WYTestChatDataSource.swift in Sources */,
 				DCFEC01D29EFE496001AE8E7 /* WYTabBarController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1336,6 +1340,8 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3J5533TZC2;
+				EXCLUDED_ARCHS = "";
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WYBasisKitTest/iOS/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = WYBasisKit;
@@ -1375,6 +1381,8 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3J5533TZC2;
+				EXCLUDED_ARCHS = "";
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WYBasisKitTest/iOS/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = WYBasisKit;

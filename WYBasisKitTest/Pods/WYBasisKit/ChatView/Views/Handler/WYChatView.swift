@@ -8,6 +8,9 @@
 
 import UIKit
 
+/// 自定义聊天UITableViewCell
+public var customChatRegisterClasss: [AnyClass] = []
+
 public enum WYChatTouchStyle {
     case done
     case more
@@ -34,7 +37,27 @@ public class WYChatView: UIView {
 
         let tableView = UITableView.wy_shared(style: .plain, separatorStyle: .singleLine, delegate: self, dataSource: self, superView: self)
         tableView.wy_swipeOrTapCollapseKeyboard(target: self, action: #selector(inputViewResignFirstResponder), slideMode: .none)
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "UITableViewCell")
+        let registerClasss: [AnyClass] = [WYChatBasicCell.self,
+                                          WYChatTextCell.self,
+                                          WYChatVoiceCell.self,
+                                          WYChatPhotoCell.self,
+                                          WYChatMusicCell.self,
+                                          WYChatVideoCell.self,
+                                          WYChatLuckyMoneyCell.self,
+                                          WYChatTransferCell.self,
+                                          WYChatLocationCell.self,
+                                          WYChatTakePatCell.self,
+                                          WYChatWithdrawnCell.self,
+                                          WYChatCallCell.self,
+                                          WYChatWebpageCell.self,
+                                          WYChatFileCell.self,
+                                          WYChatBusinessCardCell.self,
+                                          WYChatRecordsCell.self]
+        
+        for register: AnyClass in (registerClasss + customChatRegisterClasss) {
+        
+            tableView.register(register, forCellReuseIdentifier: (NSStringFromClass(register).components(separatedBy: ".").last ?? ""))
+        }
         tableView.snp.makeConstraints { (make) in
             make.left.right.top.equalToSuperview()
             make.bottom.equalTo(chatInput.snp.top)
@@ -83,9 +106,16 @@ public class WYChatView: UIView {
     /// 记录最近使用表情数据，用于实现延时更新最近使用表情
     public var recentlyEmojis: [String] = []
     
+    /// 当前登录用户的用户信息
+    public var userInfo: WYChatUaerModel!
+    
     /// TableView数据源
-    public var dataSource: [String] = [] {
+    public var dataSource: [WYChatMessageModel] = [] {
         didSet {
+            guard userInfo != nil else {
+                wy_print("当前登录用户的用户信息为空")
+                return
+            }
             tableView.reloadData()
             scrollToLastMessage()
         }
@@ -94,9 +124,10 @@ public class WYChatView: UIView {
     /// 区分当前点击的是哪个控件
     public var touchStyle: WYChatTouchStyle = .done
     
-    public init() {
+    public init(userInfo: WYChatUaerModel? = nil) {
         super.init(frame: .zero)
         
+        self.userInfo = userInfo
         self.tableView.backgroundColor = .white
         self.emojiView?.backgroundColor = .clear
         self.moreView?.backgroundColor = .clear

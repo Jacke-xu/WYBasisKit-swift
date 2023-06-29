@@ -2,7 +2,7 @@
 //  WYChatViewEventHandler.swift
 //  WYBasisKit
 //
-//  Created by Miraitowa on 2023/6/14.
+//  Created by 官人 on 2023/6/14.
 //
 
 import Foundation
@@ -13,12 +13,21 @@ extension WYChatView: UITableViewDelegate, UITableViewDataSource {
         return dataSource.count
     }
     
-    public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60
-    }
-    
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+
+        guard let customCell: UITableViewCell = eventsHandler?.canManagerCellForRowEvents?(self, tableView, indexPath) else {
+            
+            let model: WYChatMessageModel = dataSource[indexPath.row]
+            
+            let contentCell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: model.content.style().rawValue, for: indexPath)
+            
+            if contentCell is WYChatBasicCell {
+                (contentCell as! WYChatBasicCell).userID = userInfo.id
+                (contentCell as! WYChatBasicCell).message = model
+            }
+            return contentCell
+        }
+        return customCell
     }
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -84,11 +93,56 @@ extension WYChatView: WYChatInputViewDelegate, WYChatInputViewEventsHandler {
         chatInput.textView.text = ""
         updateEmojiFuncAreaViewState()
         chatInput.textViewDidChange(chatInput.textView, silence: true)
-        delegate?.keyboardSendMessage?(text)
+        delegate?.keyboardSendMessage?(sendMessage(text))
     }
     
     public func didClickKeyboardEvent(_ text: String) {
         didClickKeyboardEvent(text, silence: false)
+    }
+    
+    @discardableResult
+    public func sendMessage(_ text: String) -> WYChatMessageModel  {
+        
+        /**
+         *  消息已读人数
+         *  单聊时  0未读，1已读
+         *  群聊时  若已读人数等于群人数则表示全部已读，否则为群内已读人数
+         */
+        let readers: String = "0"
+        
+        /// 消息发送状态
+        var sendState: WYChatMessageSendState = .sending
+        
+        /// 已读回执发送状态
+        let readBackState: WYChatMessageSendState = .notSent
+        
+        /// 消息发送时间
+        let timestamp: String = String.wy_sharedDeviceTimestamp()
+        
+        /// 消息发送者信息
+        let sendor: WYChatUaerModel = userInfo ?? WYChatUaerModel()
+
+        /// 消息内容
+        let content: WYChatMeesageContentModel = WYChatMeesageContentModel()
+        content.text = text
+         
+        /// 引用消息
+        let reference: WYChatMeesageContentModel? = nil
+        
+        let message: WYChatMessageModel = WYChatMessageModel()
+        message.readers = readers
+        message.readBackState = readBackState
+        message.sendState = sendState
+        message.timestamp = timestamp
+        message.sendor = sendor
+        message.content = content
+        message.index = dataSource.count
+        if dataSource.isEmpty == false {
+            message.lastMessageTimestamp = dataSource.last!.timestamp
+        }
+        dataSource.append(message)
+        
+        return message
     }
     
     public func canManagerTextVoiceViewEvents(_ textVoiceView: UIButton) -> Bool {

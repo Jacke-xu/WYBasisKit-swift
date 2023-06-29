@@ -2,8 +2,8 @@
 //  WYEmojiViewCell.swift
 //  WYBasisKit
 //
-//  Created by Miraitowa on 2023/4/13.
-//  Copyright © 2023 Jacke·xu. All rights reserved.
+//  Created by 官人 on 2023/4/13.
+//  Copyright © 2023 官人. All rights reserved.
 //
 
 import UIKit

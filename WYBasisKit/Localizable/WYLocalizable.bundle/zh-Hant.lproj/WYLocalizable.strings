@@ -1,7 +1,7 @@
 /*
   WYLocalizable.strings
   WYBasisKit
-
+  中文繁体
   Created by 官人 on 2020/11/21.
   Copyright © 2020 官人. All rights reserved.
 */
@@ -12,7 +12,7 @@
 
 "WYLocalizable_03" = "取消";
 
-"WYLocalizable_04" = "删除";
+"WYLocalizable_04" = "刪除";
 
 "WYLocalizable_05" = "生物識別不可用";
 
@@ -20,9 +20,9 @@
 
 "WYLocalizable_07" = "系統中斷了本次識別";
 
-"WYLocalizable_08" = "開啟生物識別前請設定解鎖密碼";
+"WYLocalizable_08" = "開啟生物識別前請設置解鎖密碼";
 
-"WYLocalizable_09" = "請在設備設定中開啟/設定生物識別功能";
+"WYLocalizable_09" = "請在設備設置中開啟/設置生物識別功能";
 
 "WYLocalizable_10" = "請輸入密碼驗證生物識別";
 
@@ -30,15 +30,15 @@
 
 "WYLocalizable_12" = "去授權";
 
-"WYLocalizable_13" = "App沒有訪問相册的許可權，現在去授權？";
+"WYLocalizable_13" = "App沒有訪問相冊的權限，現在去授權?";
 
-"WYLocalizable_14" = "App沒有訪問相機的許可權，現在去授權？";
+"WYLocalizable_14" = "App沒有訪問相機的權限，現在去授權?";
 
-"WYLocalizable_15" = "App沒有訪問麥克風的許可權，現在去授權？";
+"WYLocalizable_15" = "App沒有訪問麥克風的權限，現在去授權?";
 
-"WYLocalizable_16" = "App沒有訪問位置的許可權，現在去授權？";
+"WYLocalizable_16" = "App沒有訪問位置的權限，現在去授權?";
 
-"WYLocalizable_17" = "App沒有訪問通訊錄的許可權，現在去授權？";
+"WYLocalizable_17" = "App沒有訪問通訊錄的權限，現在去授權?";
 
 "WYLocalizable_18" = "繼續連接";
 
@@ -46,21 +46,21 @@
 
 "WYLocalizable_20" = "數據請求失敗";
 
-"WYLocalizable_21" = "狀態碼异常";
+"WYLocalizable_21" = "狀態碼異常";
 
 "WYLocalizable_22" = "未知的網絡，可能存在安全隱患，是否繼續？";
 
-"WYLocalizable_23" = "去設定";
+"WYLocalizable_23" = "去設置";
 
 "WYLocalizable_24" = "已取消不安全網絡連接";
 
-"WYLocalizable_25" = "無網絡連接，請檢查您的網絡設定";
+"WYLocalizable_25" = "無網絡連接，請檢查您的網絡設置";
 
 "WYLocalizable_26" = "您正在使用Wifi聯網";
 
 "WYLocalizable_27" = "您正在使用蜂窩移動網絡聯網";
 
-"WYLocalizable_28" = "不可用的網絡，請確認您的網路環境或網絡連接許可權已正確設定";
+"WYLocalizable_28" = "不可用的網絡，請確認您的網絡環境或網絡連接權限已正確設置";
 
 "WYLocalizable_29" = "響應數據Code校驗失敗";
 
@@ -102,4 +102,36 @@
 
 "WYLocalizable_48" = "射手座";
 
-"WYLocalizable_49" = "App沒有訪問語音辨識的許可權，現在去授權？";
+"WYLocalizable_49" = "App沒有訪問語音識別的權限，現在去授權?";
+
+"WYLocalizable_50" = "今天";
+
+"WYLocalizable_51" = "昨天";
+
+"WYLocalizable_52" = "前天";
+
+"WYLocalizable_53" = "星期日";
+
+"WYLocalizable_54" = "星期一";
+
+"WYLocalizable_55" = "星期二";
+
+"WYLocalizable_56" = "星期三";
+
+"WYLocalizable_57" = "星期四";
+
+"WYLocalizable_58" = "星期五";
+
+"WYLocalizable_59" = "星期六";
+
+"WYLocalizable_60" = "年";
+
+"WYLocalizable_61" = "月";
+
+"WYLocalizable_62" = "日";
+
+"WYLocalizable_63" = "時";
+
+"WYLocalizable_64" = "分";
+
+"WYLocalizable_65" = "秒";

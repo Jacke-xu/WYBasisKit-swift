@@ -86,7 +86,7 @@ public enum WYLanguage: RawRepresentable {
     /// 马来语(ms)
     case malay
     
-    /// 印度尼西亚语(id)
+    /// 印尼语(id)
     case indonesian
     
     /// 越南语(vi)

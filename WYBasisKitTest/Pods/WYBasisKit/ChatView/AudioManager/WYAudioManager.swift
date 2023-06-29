@@ -2,7 +2,7 @@
 //  WYAudioManager.swift
 //  WYBasisKit
 //
-//  Created by Miraitowa on 2023/6/8.
+//  Created by 官人 on 2023/6/8.
 //
 
 import Foundation

@@ -38,8 +38,8 @@ class WYTableViewGroupedController: UIViewController {
     lazy var tableView: UITableView = {
 
         let tableview = UITableView.wy_shared(style: .grouped, separatorStyle: .singleLine, delegate: self, dataSource: self, superView: view)
-        tableview.wy_register("UITableViewCell", .cell)
-        tableview.wy_register("WYGroupedHeaderView", .headerFooterView)
+        tableview.wy_register(UITableViewCell.self, .cell)
+        tableview.wy_register(WYGroupedHeaderView.self, .headerFooterView)
         tableview.snp.makeConstraints { (make) in
             make.top.equalToSuperview().offset(wy_navViewHeight)
             make.left.right.bottom.equalToSuperview()
