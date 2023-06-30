@@ -109,7 +109,7 @@ public class WYChatView: UIView {
     /// 当前登录用户的用户信息
     public var userInfo: WYChatUaerModel!
     
-    /// TableView数据源
+    /// tableView数据源
     public var dataSource: [WYChatMessageModel] = [] {
         didSet {
             guard userInfo != nil else {
@@ -135,6 +135,8 @@ public class WYChatView: UIView {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDismiss), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationDidBecomeActive(_:)), name: UIApplication.didBecomeActiveNotification, object: nil)
     }
     
     /// 点击空白处收起键盘、表情、更多...
@@ -306,6 +308,17 @@ public class WYChatView: UIView {
         emojiView?.funcAreaView?.deleteView.isUserInteractionEnabled = userInteractionEnabled
         emojiView?.funcAreaView?.sendView.isSelected = !userInteractionEnabled
         emojiView?.funcAreaView?.deleteView.isSelected = !userInteractionEnabled
+    }
+    
+    /// APP变的活跃了
+    @objc public func applicationDidBecomeActive(_ application: UIApplication) {
+        
+        guard (eventsHandler?.canManagerApplicationDidBecomeActiveEvents?(application) ?? false) == true else {
+            return
+        }
+        
+        delegate?.applicationDidBecomeActive?(application)
+        tableView.reloadData()
     }
     
     required init?(coder: NSCoder) {

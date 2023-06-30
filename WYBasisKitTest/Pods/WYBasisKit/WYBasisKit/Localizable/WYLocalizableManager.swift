@@ -393,6 +393,10 @@ public struct WYLocalizableManager {
     
     public static func localized(key: String, table: String = WYBasisKitConfig.localizableTable) -> String {
         
+        guard table.isEmpty == false else {
+            return key
+        }
+        
         if table == WYBasisKitConfig.localizableTable {
             
             guard bundle != nil else {

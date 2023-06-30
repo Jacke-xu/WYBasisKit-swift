@@ -46,19 +46,19 @@ public struct WYEmojiFuncAreaConfig {
     public var deleteViewAndSendViewCornerRadius: CGFloat = wy_screenWidth(5)
     
     /// 删除按钮不可点击时背景图
-    public var deleteViewImageWithUnenable: UIImage = UIImage.wy_createImage(from: .white, size: CGSize(width: wy_screenWidth(60), height: wy_screenWidth(50)))
+    public var deleteViewImageWithUnenable: UIImage = UIImage.wy_find("WYChatDeleteUnenable", inBundle: WYChatSourceBundle)
     
     /// 发送按钮不可点击时背景图
     public var sendViewImageWithUnenable: UIImage = UIImage.wy_createImage(from: .white, size: CGSize(width: wy_screenWidth(60), height: wy_screenWidth(50)))
     
     /// 删除按钮可点击时背景图
-    public var deleteViewImageWithEnable: UIImage = UIImage.wy_createImage(from: .white, size: CGSize(width: wy_screenWidth(60), height: wy_screenWidth(50)))
+    public var deleteViewImageWithEnable: UIImage = UIImage.wy_find("WYChatDeleteEnable", inBundle: WYChatSourceBundle)
     
     /// 发送按钮可点击时背景图
     public var sendViewImageWithEnable: UIImage = UIImage.wy_createImage(from: .wy_rgb(64, 118, 246), size: CGSize(width: wy_screenWidth(60), height: wy_screenWidth(50)))
     
     /// 删除按钮按压状态背景图
-    public var deleteViewImageWithHighly: UIImage = UIImage.wy_createImage(from: .white, size: CGSize(width: wy_screenWidth(60), height: wy_screenWidth(50)))
+    public var deleteViewImageWithHighly: UIImage = UIImage.wy_find("WYChatDeleteEnable", inBundle: WYChatSourceBundle)
     
     /// 发送按钮按压状态背景图
     public var sendViewImageWithHighly: UIImage = UIImage.wy_createImage(from: .wy_rgb(64, 118, 246), size: CGSize(width: wy_screenWidth(60), height: wy_screenWidth(50)))

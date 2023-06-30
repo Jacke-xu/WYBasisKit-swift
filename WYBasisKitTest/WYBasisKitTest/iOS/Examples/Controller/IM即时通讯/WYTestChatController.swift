@@ -16,28 +16,11 @@ class WYTestChatController: UIViewController {
         // Do any additional setup after loading the view.
         view.backgroundColor = .white
         
-        let resourcePath = (((Bundle(for: WYTestChatController.self).path(forResource: "Emoji", ofType: "plist")) ?? (Bundle.main.path(forResource: "Emoji", ofType: "plist"))) ?? "")
-        
-        inputBarConfig.textButtomImage = UIImage(named: "toggle_keyboard")!
-        inputBarConfig.voiceButtonImage = UIImage(named: "voice")!
-        inputBarConfig.emojiButtomImage = UIImage(named: "toggle_emoji")!
-        inputBarConfig.moreButtomImage = UIImage(named: "jia")!
-        inputBarConfig.emojiPattern = "\\[.{1,3}\\]"
-        
-        emojiViewConfig.emojiSource = try! NSArray(contentsOf: URL(string: "file://".appending(resourcePath))!, error: ()) as! [String]
-        
-        emojiViewConfig.funcAreaConfig.deleteViewImageWithUnenable = UIImage.wy_find("chatDeleteUnenable")
-        emojiViewConfig.funcAreaConfig.deleteViewImageWithEnable = UIImage.wy_find("chatDeleteEnable")
-        emojiViewConfig.funcAreaConfig.deleteViewImageWithHighly = UIImage.wy_find("chatDeleteEnable")
-        
         emojiViewConfig.funcAreaConfig.deleteViewText = ""
-        
-        emojiViewConfig.previewConfig.backgroundImage = UIImage.wy_find("emoji-preview-bg")
         
 //        emojiViewConfig.totalHeaderText = ""
 //        emojiViewConfig.recentlyHeaderText = ""
 //        emojiViewConfig.showRecently = false
-        
         
         moreViewConfig.moreSource = [["照片": "zhaopian"], ["拍摄": "paishe"], ["位置": "weizhi"], ["语音输入": "yuyinshuru"], ["收藏": "shoucang"], ["个人名片": "gerenmingpian"], ["文件": "wenjianjia"], ["音乐": "yinle"]]
         
@@ -77,6 +60,11 @@ class WYTestChatController: UIViewController {
 }
 
 extension WYTestChatController: WYChatViewDelegate {
+    
+    /// APP变的活跃了
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        //wy_print("applicationDidBecomeActive")
+    }
     
     /// 键盘将要弹出
     func keyboardWillShow(_ notification: Notification) {
@@ -128,9 +116,6 @@ extension WYTestChatController: WYChatViewDelegate {
     /// 点击了键盘上的 发送 按钮
     func keyboardSendMessage(_ message: WYChatMessageModel) {
         wy_print("发送文本消息：\(message)，时间戳 = \(message.timestamp)")
-        
-        
-        //message.timeFormat = "cencadi"
     }
     
     /// 点击了emoji控件内某个item
@@ -160,6 +145,12 @@ extension WYTestChatController: WYChatViewDelegate {
 }
 
 extension WYTestChatController: WYChatViewEventsHandler {
+    
+    /// 是否需要内部处理 APP变的活跃了 时的事件
+    func canManagerApplicationDidBecomeActiveEvents(_ application: UIApplication) -> Bool {
+        //wy_print("是否需要内部处理 APP变的活跃了 时的事件， application = \(application)")
+        return true
+    }
     
     /// 是否需要内部处理 键盘将要弹出 时的事件
     func canManagerKeyboardWillShowEvents(_ notification: Notification) -> Bool {

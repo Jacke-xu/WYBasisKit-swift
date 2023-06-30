@@ -16,7 +16,7 @@ public struct WYEmojiPreviewConfig {
     public var style: WYEmojiPreviewStyle = .default
     
     /// 表情预览控件的背景图
-    public var backgroundImage: UIImage = .wy_createImage(from: .white, size: CGSize(width: wy_screenWidth(100), height: wy_screenWidth(205)))
+    public var backgroundImage: UIImage = UIImage.wy_find("WYChatEmojiPreview", inBundle: WYChatSourceBundle)
     
     /// 表情预览控件的size
     public var previewSize: CGSize = CGSize(width: wy_screenWidth(80), height: wy_screenWidth(120))
@@ -69,13 +69,13 @@ public class WYEmojiPreviewView: UIImageView {
         }
         switch emojiViewConfig.previewConfig.style {
         case .default:
-            emojiView.image = UIImage.wy_find(emoji)
+            emojiView.image = UIImage.wy_find(emoji, inBundle: emojiViewConfig.emojiBundle)
             break
         case .gif:
-            emojiView.image = UIImage.wy_animatedParse(.GIF, name: emoji)?.animatedImage
+            emojiView.image = UIImage.wy_animatedParse(.GIF, name: emoji, inBundle: emojiViewConfig.emojiBundle)?.animatedImage
             break
         case .apng:
-            emojiView.image = UIImage.wy_animatedParse(.APNG, name: "apng_"+emoji)?.animatedImage
+            emojiView.image = UIImage.wy_animatedParse(.APNG, name: "apng_"+emoji, inBundle: emojiViewConfig.emojiBundle)?.animatedImage
             break
         case .other:
             handler(emoji, emojiView)

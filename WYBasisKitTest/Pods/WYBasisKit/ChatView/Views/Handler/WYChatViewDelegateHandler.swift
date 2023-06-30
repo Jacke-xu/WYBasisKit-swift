@@ -10,6 +10,9 @@ import Foundation
 /// 返回一个Bool值来判定各控件的点击或手势事件是否需要内部处理(默认返回True)
 @objc public protocol WYChatViewEventsHandler {
     
+    /// 是否需要内部处理 APP变的活跃了 时的事件
+    @objc optional func canManagerApplicationDidBecomeActiveEvents(_ application: UIApplication) -> Bool
+    
     /// 是否需要内部处理 键盘将要弹出 时的事件
     @objc optional func canManagerKeyboardWillShowEvents(_ notification: Notification) -> Bool
     
@@ -51,6 +54,9 @@ import Foundation
 }
 
 @objc public protocol WYChatViewDelegate {
+    
+    /// APP变的活跃了
+    @objc optional func applicationDidBecomeActive(_ application: UIApplication)
     
     /// 键盘将要弹出
     @objc optional func keyboardWillShow(_ notification: Notification)

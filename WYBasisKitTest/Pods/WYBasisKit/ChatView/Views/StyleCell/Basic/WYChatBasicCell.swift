@@ -48,7 +48,7 @@ public struct WYBasicChatConfig {
     public var timeColor: UIColor = .black
     
     /// 时间是否显示 上午/下午 标识
-    public var showAmPmSymbol: Bool = true
+    public var showAmPmSymbol: Bool = false
     
     public init() {}
 }
@@ -217,18 +217,22 @@ public extension WYChatBasicCell {
           4、消息大于1周且是今年的消息，显示格式为：MMdd HH:mm，如 12月12日 12:12
           5、消息时间不是今年的消息，显示格式为：yyyyMMdd HH:mm，如 2022年12月12日 12:12
      */
-    public func sharedTimeText(_ messageTimestamp: String, _ clientTimestamp: String = String.wy_sharedDeviceTimestamp(), _ lastMessageTimestamp: String) -> String {
-
-        let timeDistance: WYTimeDistance = String.wy_timeIntervalCycle(messageTimestamp, clientTimestamp)
+    public func sharedTimeText(_ messageTimestamp: String, _ clientTimestamp: String = String.wy_sharedDeviceTimestamp(), _ lastMessageTimestamp: String, _ locale: Locale = Locale(identifier: "zh_CN")) -> String {
         
         let showTime: Bool = ((NumberFormatter().number(from: messageTimestamp)?.doubleValue ?? 0) - (NumberFormatter().number(from: lastMessageTimestamp)?.doubleValue ?? 0) >= 300)
         
+        guard showTime == true else {
+            return ""
+        }
+
+        let timeDistance: WYTimeDistance = String.wy_timeIntervalCycle(messageTimestamp, clientTimestamp)
+        
         switch timeDistance {
         case .today:
-            return showTime ? messageTimestamp.wy_timestampConvertDate(.HM, config.showAmPmSymbol) : ""
+            return messageTimestamp.wy_timestampConvertDate(.HM, config.showAmPmSymbol)
             
         case .yesterday:
-            return showTime ? (WYLocalized("WYLocalizable_51", table: WYBasisKitConfig.kitLocalizableTable) + " " + messageTimestamp.wy_timestampConvertDate(.HM, config.showAmPmSymbol)) : ""
+            return (WYLocalized("WYLocalizable_51", table: WYBasisKitConfig.kitLocalizableTable) + " " + messageTimestamp.wy_timestampConvertDate(.HM, config.showAmPmSymbol))
             
         case .yesterdayBefore, .withinWeek:
             
@@ -242,14 +246,14 @@ public extension WYChatBasicCell {
                 WYLocalized("WYLocalizable_58", table: WYBasisKitConfig.kitLocalizableTable),
                 WYLocalized("WYLocalizable_59", table: WYBasisKitConfig.kitLocalizableTable)]
             
-            return showTime ? (whatDay[messageTimestamp.wy_whatDay.rawValue] + (messageTimestamp.wy_whatDay == .unknown ? "" : (" " + messageTimestamp.wy_timestampConvertDate(.HM, config.showAmPmSymbol)))) : ""
+            return whatDay[messageTimestamp.wy_whatDay.rawValue] + (messageTimestamp.wy_whatDay == .unknown ? "" : (" " + messageTimestamp.wy_timestampConvertDate(.HM, config.showAmPmSymbol)))
             
         case .withinSameMonth, .withinSameYear:
             
             let mm: String = WYLocalized("WYLocalizable_61", table: WYBasisKitConfig.kitLocalizableTable)
             let dd: String = WYLocalized("WYLocalizable_62", table: WYBasisKitConfig.kitLocalizableTable)
             
-            return showTime ? messageTimestamp.wy_timestampConvertDate(.custom(format: "MM\(mm)dd\(dd) HH:mm"), config.showAmPmSymbol) : ""
+            return messageTimestamp.wy_timestampConvertDate(.custom(format: "MM\(mm)dd\(dd) HH:mm"), config.showAmPmSymbol)
             
         default:
             
@@ -257,7 +261,7 @@ public extension WYChatBasicCell {
             let mm: String = WYLocalized("WYLocalizable_61", table: WYBasisKitConfig.kitLocalizableTable)
             let dd: String = WYLocalized("WYLocalizable_62", table: WYBasisKitConfig.kitLocalizableTable)
             
-            return showTime ? messageTimestamp.wy_timestampConvertDate(.custom(format: "yyyy\(yyyy)MM\(mm)dd\(dd) HH:mm"), config.showAmPmSymbol) : ""
+            return messageTimestamp.wy_timestampConvertDate(.custom(format: "yyyy\(yyyy)MM\(mm)dd\(dd) HH:mm"), config.showAmPmSymbol)
         }
     }
 }

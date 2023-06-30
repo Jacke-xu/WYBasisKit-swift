@@ -284,8 +284,12 @@ public extension String {
         }
     }
     
-    /// 时间戳转年月日格式
-    func  wy_timestampConvertDate(_ dateFormat: WYTimeFormat) -> String {
+    /**
+     *  时间戳转年月日格式
+     *  dateFormat 要转换的格式
+     *  showAmPmSymbol 是否显示上午下午，为true时为12小时制，否则为24小时制
+     */
+    func  wy_timestampConvertDate(_ dateFormat: WYTimeFormat, _ showAmPmSymbol: Bool = false) -> String {
         
         if self.isEmpty {return ""}
         
@@ -294,7 +298,14 @@ public extension String {
         let date: Date = Date(timeIntervalSince1970: Double(dateString)!)
         
         let formatter = DateFormatter()
-        
+        formatter.calendar = Calendar(identifier: .iso8601)
+        formatter.calendar.timeZone = NSTimeZone.local
+        if showAmPmSymbol == false {
+            // 不显示上午或者下午标识
+            formatter.amSymbol = ""
+            formatter.pmSymbol = ""
+            formatter.locale = Locale(identifier: "")
+        }
         formatter.dateFormat = sharedTimeFormat(dateFormat: dateFormat)
         
         return formatter.string(from: date as Date)
@@ -360,7 +371,7 @@ public extension String {
             return .unknown
         }
 
-        var calendar: Calendar = Calendar(identifier: .gregorian)
+        var calendar: Calendar = Calendar(identifier: .iso8601)
         calendar.timeZone = NSTimeZone.local
 
         let dateFormatter: DateFormatter = DateFormatter()

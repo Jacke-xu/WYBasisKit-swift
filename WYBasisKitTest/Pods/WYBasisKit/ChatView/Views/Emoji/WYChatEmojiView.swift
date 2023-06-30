@@ -8,6 +8,8 @@
 
 private let emojiViewRecentlyCountKey: String = "emojiViewRecentlyCountKey"
 
+private let emojiPath: String = Bundle(path: (((Bundle(for: WYBannerView.self).path(forResource: "WYChatView", ofType: "bundle")) ?? (Bundle.main.path(forResource: "WYChatView", ofType: "bundle"))) ?? ""))?.path(forResource: "WYChatViewEmoji", ofType: "plist") ?? ""
+
 import UIKit
 
 public struct WYEmojiViewConfig {
@@ -25,7 +27,10 @@ public struct WYEmojiViewConfig {
     public var collectionViewBottomOffset: CGFloat = 0
 
     /// 自定义Emoji数据源，示例：["[玫瑰](表情图片名)","[色](表情图片名)","[嘻嘻](表情图片名)"]
-    public var emojiSource: [String] = []
+    public var emojiSource: [String] = try! NSArray(contentsOf: URL(string: "file://".appending(emojiPath))!, error: ()) as! [String]
+    
+    /// 自定义加载Emoji图片的Bundle
+    public var emojiBundle: WYSourceBundle? = WYSourceBundle(bundleName: "WYChatView", subdirectory: "WYChatViewEmoji")
 
     /// 自定义Emoji控件是否需要显示最近使用的表情
     public var showRecently: Bool = true

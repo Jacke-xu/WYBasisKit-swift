@@ -29,19 +29,19 @@ public struct WYInputBarConfig {
     public var emojiReplacement: String = ""
     
     /// 自定义表情转换时的正则匹配规则
-    public var emojiPattern: String = ""
+    public var emojiPattern: String = "\\[.{1,3}\\]"
     
     /// 文本切换按钮图片
-    public var textButtomImage: UIImage = UIImage.wy_createImage(from: .wy_random)
+    public var textButtomImage: UIImage = UIImage.wy_find("WYChatViewTogglekeyboard", inBundle: WYChatSourceBundle)
     
     /// 语音切换按钮图片
-    public var voiceButtonImage: UIImage = UIImage.wy_createImage(from: .wy_random)
+    public var voiceButtonImage: UIImage = UIImage.wy_find("WYChatViewVoice", inBundle: WYChatSourceBundle)
     
     /// 表情切换按钮图片
-    public var emojiButtomImage: UIImage = UIImage.wy_createImage(from: .wy_random)
+    public var emojiButtomImage: UIImage = UIImage.wy_find("WYChatViewToggleEmoji", inBundle: WYChatSourceBundle)
     
     /// 更多切换按钮图片
-    public var moreButtomImage: UIImage = UIImage.wy_createImage(from: .wy_random)
+    public var moreButtomImage: UIImage = UIImage.wy_find("WYChatViewMore", inBundle: WYChatSourceBundle)
     
     /// 文本输入框背景图
     public var textViewBackgroundImage: UIImage = UIImage.wy_createImage(from: .white)
@@ -165,6 +165,7 @@ public struct WYInputBarConfig {
 
 private let canSaveLastInputTextKey: String = "canSaveLastInputTextKey"
 private let canSaveLastInputViewStyleKey: String = "canSaveLastInputViewStyleKey"
+public let WYChatSourceBundle: WYSourceBundle = WYSourceBundle(bundleName: "WYChatView")
 
 /// 返回一个Bool值来判定各控件的点击或手势事件是否需要内部处理(默认返回True)
 @objc public protocol WYChatInputViewEventsHandler {
@@ -437,7 +438,7 @@ public class WYChatInputView: UIImageView {
     
     // 根据传入的表情字符串生成富文本，例如字符串 "哈哈[哈哈]" 会生成 "哈哈😄"
     public func sharedEmojiAttributed(string: String) -> NSAttributedString {
-        let attributed: NSMutableAttributedString = NSMutableAttributedString.wy_convertEmojiAttributed(emojiString: string, textColor: inputBarConfig.textColor, textFont: inputBarConfig.textFont, emojiTable: emojiViewConfig.emojiSource, pattern: inputBarConfig.emojiPattern)
+        let attributed: NSMutableAttributedString = NSMutableAttributedString.wy_convertEmojiAttributed(emojiString: string, textColor: inputBarConfig.textColor, textFont: inputBarConfig.textFont, emojiTable: emojiViewConfig.emojiSource, sourceBundle: emojiViewConfig.emojiBundle, pattern: inputBarConfig.emojiPattern)
         attributed.wy_lineSpacing(lineSpacing: inputBarConfig.textLineSpacing, alignment: .left)
         
         return attributed

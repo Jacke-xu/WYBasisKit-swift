@@ -291,6 +291,7 @@
 		DCC340E92A332DEA0026CAD8 /* WYEmojiPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC340DD2A332DEA0026CAD8 /* WYEmojiPreviewView.swift */; };
 		DCC340EA2A332DEA0026CAD8 /* WYChatMoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC340DF2A332DEA0026CAD8 /* WYChatMoreView.swift */; };
 		DCC340EB2A332DEA0026CAD8 /* WYMoreViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC340E02A332DEA0026CAD8 /* WYMoreViewCell.swift */; };
+		DCCE550F2A4E7A4900A0A341 /* WYChatView.bundle in Resources */ = {isa = PBXBuildFile; fileRef = DCCE550E2A4E7A4900A0A341 /* WYChatView.bundle */; };
 		DCEB47282A395C8600C58A47 /* WYChatViewEventHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEB47272A395C8600C58A47 /* WYChatViewEventHandler.swift */; };
 		DCEB472A2A395D2D00C58A47 /* WYChatViewDelegateHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEB47292A395D2D00C58A47 /* WYChatViewDelegateHandler.swift */; };
 		DCEB47352A39600500C58A47 /* WYChatBasicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEB47342A39600500C58A47 /* WYChatBasicCell.swift */; };
@@ -784,6 +785,7 @@
 		DCC340DD2A332DEA0026CAD8 /* WYEmojiPreviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYEmojiPreviewView.swift; sourceTree = "<group>"; };
 		DCC340DF2A332DEA0026CAD8 /* WYChatMoreView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYChatMoreView.swift; sourceTree = "<group>"; };
 		DCC340E02A332DEA0026CAD8 /* WYMoreViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYMoreViewCell.swift; sourceTree = "<group>"; };
+		DCCE550E2A4E7A4900A0A341 /* WYChatView.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = WYChatView.bundle; sourceTree = "<group>"; };
 		DCD62E7072B23BE385BA8EEC106F5BE3 /* MoyaProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MoyaProvider.swift; path = Sources/Moya/MoyaProvider.swift; sourceTree = "<group>"; };
 		DCEB47272A395C8600C58A47 /* WYChatViewEventHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYChatViewEventHandler.swift; sourceTree = "<group>"; };
 		DCEB47292A395D2D00C58A47 /* WYChatViewDelegateHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYChatViewDelegateHandler.swift; sourceTree = "<group>"; };
@@ -1722,6 +1724,7 @@
 				DCC340D12A332DEA0026CAD8 /* Config */,
 				DCC340D32A332DEA0026CAD8 /* Models */,
 				DCC340D42A332DEA0026CAD8 /* Views */,
+				DCCE550E2A4E7A4900A0A341 /* WYChatView.bundle */,
 			);
 			path = ChatView;
 			sourceTree = "<group>";
@@ -2305,6 +2308,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DCCE550F2A4E7A4900A0A341 /* WYChatView.bundle in Resources */,
 				01C299B25DF3EEEE7CB2E6224D7042F7 /* WYActivity.bundle in Resources */,
 				5E6EF97F4FED759ED52AE07196008F4E /* WYBannerView.bundle in Resources */,
 				C01E5DAFE57240F9A5F6088462AE1308 /* WYLocalizable.bundle in Resources */,

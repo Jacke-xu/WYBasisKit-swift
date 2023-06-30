@@ -24,9 +24,8 @@ public class WYEmojiViewCell: UICollectionViewCell {
         
         set {
             emojiString = newValue
-            emojiView.image = UIImage.wy_find(newValue)
+            emojiView.image = UIImage.wy_find(newValue, inBundle: emojiViewConfig.emojiBundle)
         }
-        
         get {
             return emojiString
         }
