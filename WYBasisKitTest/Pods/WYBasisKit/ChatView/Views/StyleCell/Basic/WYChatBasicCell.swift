@@ -18,19 +18,37 @@ public struct WYBasicChatConfig {
     public var avatarContentMode: UIView.ContentMode = .scaleAspectFit
     
     /// 头像距离cell的偏移量
-    public var avatarOffset: CGPoint = CGPoint(x: wy_screenWidth(15), y: wy_screenWidth(35))
+    public var avatarOffset: (sendor: CGPoint, receive: CGPoint) = (
+        
+        sendor: CGPoint(x: -wy_screenWidth(15), y: wy_screenWidth(35)),
+        
+        receive: CGPoint(x: wy_screenWidth(15), y: wy_screenWidth(35)))
 
     /// 头像size
-    public var avatarSize: CGSize = CGSize(width: wy_screenWidth(60), height: wy_screenWidth(60))
+    public var avatarSize: CGSize = CGSize(width: wy_screenWidth(50), height: wy_screenWidth(50))
 
     /// 头像圆角半径
     public var avatarCornerRadius: CGFloat = wy_screenWidth(5)
     
-    /// 是否显示昵称
-    public var showNickname: Bool = false
+    /// 单聊时是否显示昵称
+    public var showNicknameForSingle: (sendor: Bool, receive: Bool) = (sendor: false, receive: false)
     
-    /// 昵称距离cell的偏移量
-    public var nameViewOffset: CGPoint = .zero
+    /// 群聊时是否显示昵称
+    public var showNicknameForGroup: (sendor: Bool, receive: Bool) = (sendor: false, receive: true)
+    
+    /// 单聊时昵称距离头像控件的偏移量
+    public var nameViewOffsetForSingle: (sendor: CGPoint, receive: CGPoint) = (
+        
+        sendor: CGPoint(x: -wy_screenWidth(20), y: -(UIFont.systemFont(ofSize: wy_screenWidth(13))).lineHeight),
+        
+        receive: CGPoint(x: wy_screenWidth(20), y: -(UIFont.systemFont(ofSize: wy_screenWidth(13))).lineHeight))
+    
+    /// 群聊时昵称距离头像控件的偏移量
+    public var nameViewOffsetForGroup: (sendor: CGPoint, receive: CGPoint) = (
+        
+        sendor: CGPoint(x: -wy_screenWidth(20), y: -(UIFont.systemFont(ofSize: wy_screenWidth(13))).lineHeight),
+        
+        receive: CGPoint(x: wy_screenWidth(20), y: -wy_screenWidth(5)))
 
     /// 昵称字体、字号
     public var nicknameFont: UIFont = .systemFont(ofSize: wy_screenWidth(13))
@@ -88,6 +106,8 @@ public class WYChatBasicCell: UITableViewCell {
     public override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         selectionStyle = .none
+        backgroundColor = .clear
+        contentView.backgroundColor = .clear
     }
     
     /// 数据(页面)刷新
@@ -99,9 +119,22 @@ public class WYChatBasicCell: UITableViewCell {
         avatarView.contentMode = config.avatarContentMode
         loadImage(avatarView)
         
-        nicknameView.text = config.showNickname ? message.sendor.name : ""
         nicknameView.font = config.nicknameFont
-        nicknameView.textColor = config.nicknameColor
+        nicknameView.text = message.sendor.name
+        if message.group == nil {
+            if message.isSender(userID) {
+                nicknameView.textColor = config.showNicknameForSingle.sendor ? config.nicknameColor : .clear
+            }else {
+                nicknameView.textColor = config.showNicknameForSingle.receive ? config.nicknameColor : .clear
+            }
+            
+        }else {
+            if message.isSender(userID) {
+                nicknameView.textColor = config.showNicknameForGroup.sendor ? config.nicknameColor : .clear
+            }else {
+                nicknameView.textColor = config.showNicknameForGroup.receive ? config.nicknameColor : .clear
+            }
+        }
         
         timeView.text = message.timeFormat ?? sharedTimeText(message.timestamp, message.clientTimestamp ?? String.wy_sharedDeviceTimestamp(), message.lastMessageTimestamp)
         timeView.font = config.timeFont
@@ -116,21 +149,33 @@ public class WYChatBasicCell: UITableViewCell {
         super.updateConstraints()
         
         avatarView.snp.updateConstraints { make in
-            make.top.equalToSuperview().offset(config.avatarOffset.y)
-            make.size.equalTo(config.avatarSize)
             if message.isSender(userID) {
-                make.right.equalToSuperview().offset(-config.avatarOffset.x)
+                make.top.equalToSuperview().offset(config.avatarOffset.sendor.y)
+                make.right.equalToSuperview().offset(config.avatarOffset.sendor.x)
             }else {
-                make.left.equalToSuperview().offset(config.avatarOffset.x)
+                make.top.equalToSuperview().offset(config.avatarOffset.receive.y)
+                make.left.equalToSuperview().offset(config.avatarOffset.receive.x)
             }
+            make.size.equalTo(config.avatarSize)
         }
         
         nicknameView.snp.updateConstraints { make in
-            make.top.equalToSuperview().offset(config.nameViewOffset.y)
             if message.isSender(userID) {
-                make.right.equalToSuperview().offset(-config.nameViewOffset.x)
+                if message.group == nil {
+                    make.right.equalTo(avatarView.snp.left).offset(config.nameViewOffsetForSingle.sendor.x)
+                    make.top.equalTo(avatarView).offset(config.nameViewOffsetForSingle.sendor.y)
+                }else {
+                    make.right.equalTo(avatarView.snp.left).offset(config.nameViewOffsetForGroup.sendor.x)
+                    make.top.equalTo(avatarView).offset(config.nameViewOffsetForSingle.sendor.y)
+                }
             }else {
-                make.left.equalToSuperview().offset(config.nameViewOffset.x)
+                if message.group == nil {
+                    make.left.equalTo(avatarView.snp.right).offset(config.nameViewOffsetForSingle.receive.x)
+                    make.top.equalTo(avatarView).offset(config.nameViewOffsetForSingle.receive.y)
+                }else {
+                    make.left.equalTo(avatarView.snp.right).offset(config.nameViewOffsetForGroup.receive.x)
+                    make.top.equalTo(avatarView).offset(config.nameViewOffsetForGroup.receive.y)
+                }
             }
         }
         

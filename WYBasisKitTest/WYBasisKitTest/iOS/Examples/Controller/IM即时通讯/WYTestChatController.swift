@@ -9,12 +9,14 @@
 import UIKit
 
 class WYTestChatController: UIViewController {
+    
+    var chatView: WYChatView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        view.backgroundColor = .white
+        view.backgroundColor = .wy_hex("#f6f6f6")
         
         emojiViewConfig.funcAreaConfig.deleteViewText = ""
         
@@ -34,8 +36,8 @@ class WYTestChatController: UIViewController {
             moreViewConfig.contentInset = UIEdgeInsets(top: wy_screenWidth(10), left: wy_screenWidth(20), bottom: wy_screenWidth(20), right: wy_screenWidth(40))
         }
         
-        let chatView = WYChatView()
-        chatView.userInfo = sharedUaerInfo()
+        chatView = WYChatView()
+        chatView.userInfo = sharedUaerInfo(id: "99999", name: "官人", avatar: "https://tse3-mm.cn.bing.net/th/id/OIP-C.sLiEXoTdJvx0fe3erN8NeAAAAA?pid=ImgDet&rs=1")
         chatView.dataSource = []
         chatView.eventsHandler = self
         chatView.delegate = self
@@ -115,7 +117,16 @@ extension WYTestChatController: WYChatViewDelegate {
     
     /// 点击了键盘上的 发送 按钮
     func keyboardSendMessage(_ message: WYChatMessageModel) {
-        wy_print("发送文本消息：\(message)，时间戳 = \(message.timestamp)")
+        //wy_print("发送文本消息：\(message)，时间戳 = \(message.timestamp)")
+        
+        let replyMessage: WYChatMessageModel = WYChatMessageModel()
+        replyMessage.timestamp = String.wy_sharedDeviceTimestamp()
+        replyMessage.lastMessageTimestamp = message.timestamp
+        replyMessage.clientTimestamp = String.wy_sharedDeviceTimestamp()
+        replyMessage.sendor = sharedUaerInfo(id: "88888", name: "大官人", avatar: "https://tse3-mm.cn.bing.net/th/id/OIP-C.sLiEXoTdJvx0fe3erN8NeAAAAA?pid=ImgDet&rs=1")
+        replyMessage.content.text = ["这是自动模拟的回复消息😄😄😄😄😄😄", "回复消息", "这是自动模拟的多行回复消息😄😄😄😄😄😄😄😄😄😄😄😄😄😄😄😄"][wy_randomInteger(minimux: 0, maximum: 2)]
+        replyMessage.index = message.index + 1
+        chatView.dataSource.append(replyMessage)
     }
     
     /// 点击了emoji控件内某个item
@@ -233,15 +244,15 @@ extension WYTestChatController: WYChatViewEventsHandler {
 extension WYTestChatController {
     
     @discardableResult
-    func sharedUaerInfo() -> WYChatUaerModel {
+    func sharedUaerInfo(id: String, name: String, avatar: String) -> WYChatUaerModel {
         
         let assets: WYChatAssetsModel = WYChatAssetsModel()
-        assets.downloadPath = "https://tse1-mm.cn.bing.net/th/id/OIP-C.S-LCC291neIgqIkeleCE1gHaHa?pid=ImgDet&w=800&h=800&rs=1"
+        assets.downloadPath = avatar
         
         let userModel: WYChatUaerModel = WYChatUaerModel()
-        userModel.id = "99999"
-        userModel.name = "官人"
-        userModel.nickname = "官人"
+        userModel.id = id
+        userModel.name = name
+        userModel.nickname = name
         userModel.remarks = "这里是测试生成的备注信息"
         userModel.signature = "这里是测试生成的用户签名"
         userModel.area = "中国🇨🇳 香港🇭🇰"

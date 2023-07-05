@@ -14,7 +14,7 @@ public struct WYMoreViewConfig {
     public var animateDuration: TimeInterval = 0.25
     
     /// 自定义More控件背景色
-    public var backgroundColor: UIColor = .wy_hex("#ECECEC")
+    public var backgroundColor: UIColor = .wy_hex("#f6f6f6")
     
     /// 自定义More控件滚动方向
     public var scrollDirection: UICollectionView.ScrollDirection = .horizontal
@@ -310,6 +310,10 @@ public extension WYChatMoreView {
     public func updatePageControl(defaultColor: UIColor, currentColor: UIColor) {
         pageControlSetting.defaultColor = defaultColor
         pageControlSetting.currentColor = currentColor
+        
+        DispatchQueue.main.async {
+            self.updatePageControlStyle()
+        }
     }
     
     /**
@@ -323,6 +327,10 @@ public extension WYChatMoreView {
     public func updatePageControl(defaultImage: UIImage? = nil, currentImage: UIImage? = nil) {
         pageControlSetting.currentImage = currentImage
         pageControlSetting.defaultImage = defaultImage
+        
+        DispatchQueue.main.async {
+            self.updatePageControlStyle()
+        }
     }
     
     /// 分页控制器设置选项

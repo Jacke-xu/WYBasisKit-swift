@@ -487,7 +487,7 @@ public class WYChatUaerModel: NSObject {
     public var moreInfo: Data? = nil
     
     /// model在数组中对应的下标
-    var index: NSInteger = 0
+    public var index: NSInteger = 0
 }
 
 /// 群聊Model
@@ -530,7 +530,7 @@ public class WYChatGroupModel: NSObject {
     public var members: [WYChatUaerModel] = []
     
     /// model在数组中对应的下标
-    var index: NSInteger = 0
+    public var index: NSInteger = 0
 }
 
 /// 聊天model
@@ -601,10 +601,10 @@ public class WYChatMessageModel: NSObject {
     public var content: WYChatMeesageContentModel = WYChatMeesageContentModel()
     
     /// 引用消息
-    var reference: WYChatMeesageContentModel? = nil
+    public var reference: WYChatMeesageContentModel? = nil
     
     /// model在数组中对应的下标
-    var index: NSInteger = 0
+    public var index: NSInteger = 0
 
     /**
      *  查看某人是否是该条消息的发送者

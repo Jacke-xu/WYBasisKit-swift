@@ -14,7 +14,7 @@ public struct WYInputBarConfig {
     public var animateDuration: TimeInterval = 0.25
     
     /// inputBar背景图
-    public var backgroundImage: UIImage = UIImage.wy_createImage(from: .wy_hex("#ECECEC"))
+    public var backgroundImage: UIImage = UIImage.wy_createImage(from: .wy_hex("#f6f6f6"))
     
     /// 是否需要保存上次退出时输入框中的文本
     public var canSaveLastInputText: Bool = true
@@ -113,7 +113,7 @@ public struct WYInputBarConfig {
     public var textFont: UIFont = .systemFont(ofSize: wy_screenWidth(15))
     
     /// 输入框文本行间距
-    public var textLineSpacing: CGFloat = 5
+    public var textLineSpacing: CGFloat = wy_screenWidth(5)
 
     /// 输入框的最高高度
     public var textViewMaxHeight: CGFloat = CGFLOAT_MAX
