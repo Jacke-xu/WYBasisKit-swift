@@ -574,7 +574,7 @@ public class WYChatMessageModel: NSObject {
     /// 当前客户端时间(依据此字段来计算消息发送时间和当前时间的间距，默认设备本地时间戳)
     public var clientTimestamp: String?
     
-    /// 上一条消息的发送时间
+    /// 上一次显示时间的那一条消息对应的时间(如果是第一条消息，则会出现为空的情况)
     public var lastMessageTimestamp: String = ""
 
     /// 消息发送时间
@@ -612,5 +612,28 @@ public class WYChatMessageModel: NSObject {
      */
     public func isSender(_ userID: String) ->Bool {
         return (userID == sendor.id)
+    }
+    
+    /**
+     *  获取上一次显示时间的那一条消息对应的时间
+     *  datas 包含WYChatMessageModel的数组
+     */
+    public func sharedLastMessageTimestamp(_ datas: [WYChatMessageModel]) -> String {
+        
+        var lastMessageTimestamp: String = ""
+        
+        if datas.isEmpty == false {
+            if datas.last?.lastMessageTimestamp.isEmpty ?? true {
+                lastMessageTimestamp = datas.last!.timestamp
+            }else {
+                let lastShowTime: Bool = ((NumberFormatter().number(from: datas.last!.timestamp)?.doubleValue ?? 0) - (NumberFormatter().number(from: datas.last!.lastMessageTimestamp)?.doubleValue ?? 0) >= chatTextConfig.basic.messageMinimumTimeSpan)
+                if lastShowTime {
+                    lastMessageTimestamp = datas.last!.timestamp
+                }else {
+                    lastMessageTimestamp = datas.last!.lastMessageTimestamp
+                }
+            }
+        }
+        return lastMessageTimestamp
     }
 }

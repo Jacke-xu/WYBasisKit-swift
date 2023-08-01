@@ -134,12 +134,10 @@ extension WYChatView: WYChatInputViewDelegate, WYChatInputViewEventsHandler {
         message.readBackState = readBackState
         message.sendState = sendState
         message.timestamp = timestamp
+        message.lastMessageTimestamp = message.sharedLastMessageTimestamp(dataSource)
         message.sendor = sendor
         message.content = content
         message.index = dataSource.count
-        if dataSource.isEmpty == false {
-            message.lastMessageTimestamp = dataSource.last!.timestamp
-        }
         dataSource.append(message)
         
         return message

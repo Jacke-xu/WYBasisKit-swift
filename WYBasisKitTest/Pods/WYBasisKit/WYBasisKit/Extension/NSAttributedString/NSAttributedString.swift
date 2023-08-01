@@ -207,8 +207,9 @@ public extension NSMutableAttributedString {
      *  将表情富文本生成对应的富文本字符串，例如表情富文本 "哈哈😄" 会生成 "哈哈[哈哈]"
      *  @param textColor     富文本的字体颜色
      *  @param textFont      富文本的字体
+     *  @param replace       未知图片(表情)的标识替换符，默认：[未知]
      */
-    func wy_convertEmojiAttributedString(textColor: UIColor, textFont: UIFont) -> NSMutableAttributedString {
+    func wy_convertEmojiAttributedString(textColor: UIColor, textFont: UIFont, replace: String = "[未知]") -> NSMutableAttributedString {
         
         let attributed: NSAttributedString = self
         
@@ -221,6 +222,11 @@ public extension NSMutableAttributedString {
                 let string: String = String(format: "%@", attachment.imageName)
                 // 替换成图片表情的标识
                 mutableString.replaceCharacters(in: range, with: string)
+            }else {
+                if value is NSTextAttachment {
+                    // 替换成图片表情的标识
+                    mutableString.replaceCharacters(in: range, with: replace)
+                }
             }
         }
         
@@ -290,7 +296,7 @@ public extension NSAttributedString {
     /// 获取每行显示的字符串(为了计算准确，尽量将使用到的属性如字间距、缩进、换行模式、字体等设置到调用本方法的attributedString对象中来, 没有用到的直接忽略)
     func wy_stringPerLine(controlWidth: CGFloat) -> [String] {
         
-        if self.string.isEmpty {
+        if self.string.utf16.count <= 0 {
             return []
         }
         
@@ -308,7 +314,8 @@ public extension NSAttributedString {
             lines.forEach({
                 let linerange = CTLineGetStringRange($0)
                 let range = NSMakeRange(linerange.location, linerange.length)
-                let string = (self.string as NSString).substring(with: range)
+                let subAttributed = NSMutableAttributedString(attributedString: attributedSubstring(from: range))
+                let string = subAttributed.wy_convertEmojiAttributedString(textColor: .white, textFont: .systemFont(ofSize: 10)).string
                 strings.append(string)
             })
         }

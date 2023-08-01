@@ -35,7 +35,7 @@ public class WYChatView: UIView {
     
     public lazy var tableView: UITableView = {
 
-        let tableView = UITableView.wy_shared(style: .plain, separatorStyle: .singleLine, delegate: self, dataSource: self, superView: self)
+        let tableView = UITableView.wy_shared(style: .plain, separatorStyle: .none, delegate: self, dataSource: self, superView: self)
         tableView.wy_swipeOrTapCollapseKeyboard(target: self, action: #selector(inputViewResignFirstResponder), slideMode: .none)
         let registerClasss: [AnyClass] = [WYChatBasicCell.self,
                                           WYChatTextCell.self,
@@ -55,7 +55,6 @@ public class WYChatView: UIView {
                                           WYChatRecordsCell.self]
         
         for register: AnyClass in (registerClasss + customChatRegisterClasss) {
-        
             tableView.register(register, forCellReuseIdentifier: (NSStringFromClass(register).components(separatedBy: ".").last ?? ""))
         }
         tableView.snp.makeConstraints { (make) in

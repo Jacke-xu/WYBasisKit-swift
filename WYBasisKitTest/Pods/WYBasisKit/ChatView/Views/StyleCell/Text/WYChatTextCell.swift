@@ -14,10 +14,10 @@ public struct WYTextChatConfig {
     public var basic: WYBasicChatConfig = WYBasicChatConfig()
     
     /// 单聊时气泡图距离昵称控件的偏移量
-    public var bubbleOffsetForSingle: (sendor: CGPoint, receive: CGPoint) = (sendor: CGPoint(x: wy_screenWidth(10), y: 0), receive: CGPoint(x: -wy_screenWidth(10), y: 0))
+    public var bubbleOffsetForSingle: (sendor: CGPoint, receive: CGPoint) = (sendor: CGPoint(x: wy_screenWidth(12), y: 0), receive: CGPoint(x: -wy_screenWidth(12), y: 0))
     
     /// 群聊时气泡图距离昵称控件的偏移量
-    public var bubbleOffsetForGroup: (sendor: CGPoint, receive: CGPoint) = (sendor: CGPoint(x: wy_screenWidth(10), y: 0), receive: CGPoint(x: -wy_screenWidth(10), y: -wy_screenWidth(8)))
+    public var bubbleOffsetForGroup: (sendor: CGPoint, receive: CGPoint) = (sendor: CGPoint(x: wy_screenWidth(12), y: 0), receive: CGPoint(x: -wy_screenWidth(12), y: 0))
     
     /// 气泡图距离对侧头像控件的间距
     public var bubbleMaxOffset: CGFloat = wy_screenWidth(5)
@@ -34,18 +34,21 @@ public struct WYTextChatConfig {
     /// 右侧(发送方)气泡背景色
     public var sendorBubbleColor: UIColor? = .wy_rgb(169, 233, 121)
     
+    /// 气泡图距离cell底部的间距
+    public var bubbleOffsetForBottom: CGFloat = -wy_screenWidth(15)
+    
     /// 文本距离气泡内部的边界距离
     public var textEdgeInsets: (sendor: UIEdgeInsets, receive: UIEdgeInsets) = (
         
-        sendor: UIEdgeInsets(top: wy_screenWidth(10), left: wy_screenWidth(10), bottom: wy_screenWidth(10), right: wy_screenWidth(16.5)),
+        sendor: UIEdgeInsets(top: wy_screenWidth(10), left: wy_screenWidth(10), bottom: wy_screenWidth(10), right: wy_screenWidth(15)),
         
-        receive: UIEdgeInsets(top: wy_screenWidth(10), left: wy_screenWidth(16.5), bottom: wy_screenWidth(10), right: wy_screenWidth(10)))
+        receive: UIEdgeInsets(top: wy_screenWidth(10), left: wy_screenWidth(15), bottom: wy_screenWidth(10), right: wy_screenWidth(10)))
     
     /// 字符行数限制(0为不限制行数)
     public var textMaximumNumberOfLines: NSInteger = 0
     
     /// 文本字体、字号
-    public var textFont: UIFont = .systemFont(ofSize: wy_screenWidth(13))
+    public var textFont: UIFont = .systemFont(ofSize: wy_screenWidth(15))
     
     /// 文本字体颜色
     public var textColor: UIColor = .black
@@ -82,6 +85,7 @@ public class WYChatTextCell: WYChatBasicCell {
     public override var message: WYChatMessageModel {
         didSet {
             updateContent(config: chatTextConfig)
+            updateStateViewConstraints(bubblesView)
         }
     }
     
@@ -112,13 +116,12 @@ public class WYChatTextCell: WYChatBasicCell {
                 textView.textContainerInset = UIEdgeInsets(top: (config.basic.avatarSize.height - config.textFont.lineHeight) / 2, left: chatTextConfig.textEdgeInsets.receive.left, bottom: (config.basic.avatarSize.height - config.textFont.lineHeight) / 2, right: chatTextConfig.textEdgeInsets.receive.right)
             }
         }
-        updateConstraints()
     }
     
     public override func updateConstraints() {
         super.updateConstraints()
         
-        bubblesView.snp.updateConstraints { make in
+        bubblesView.snp.remakeConstraints { make in
             make.height.greaterThanOrEqualTo(avatarView)
             if message.isSender(userID) {
                 
@@ -141,7 +144,7 @@ public class WYChatTextCell: WYChatBasicCell {
                     make.top.equalTo(nicknameView.snp.bottom).offset(chatTextConfig.bubbleOffsetForGroup.receive.y)
                 }
             }
-            make.bottom.equalToSuperview()
+            make.bottom.equalToSuperview().offset(chatTextConfig.bubbleOffsetForBottom)
         }
     }
     
@@ -155,17 +158,11 @@ public class WYChatTextCell: WYChatBasicCell {
     }
     
     // 获取textView的最大显示宽度
-    func sharedTextMaxWidth() -> CGFloat {
-        
+    public func sharedTextMaxWidth() -> CGFloat {
         if message.isSender(userID) {
-
-            let bubbleOffset: CGFloat = (message.group == nil) ? chatTextConfig.bubbleOffsetForSingle.sendor.x : chatTextConfig.bubbleOffsetForGroup.sendor.x
-            return wy_width - fabs(chatTextConfig.basic.avatarOffset.sendor.x) - fabs(chatTextConfig.basic.avatarOffset.receive.x) - (chatTextConfig.basic.avatarSize.width * 2) - fabs(chatTextConfig.bubbleMaxOffset) - (fabs(chatTextConfig.basic.nameViewOffsetForSingle.sendor.x) + bubbleOffset) - chatTextConfig.textEdgeInsets.sendor.left - chatTextConfig.textEdgeInsets.sendor.right
-            
+            return sharedContentMaxWidth() - fabs(chatTextConfig.textEdgeInsets.sendor.left) - fabs(chatTextConfig.textEdgeInsets.sendor.right)
         }else {
-            
-            let bubbleOffset: CGFloat = (message.group == nil) ? chatTextConfig.bubbleOffsetForSingle.receive.x : chatTextConfig.bubbleOffsetForGroup.receive.x
-            return wy_width - fabs(chatTextConfig.basic.avatarOffset.receive.x) - fabs(chatTextConfig.basic.avatarOffset.sendor.x) - (chatTextConfig.basic.avatarSize.width * 2) - fabs(chatTextConfig.bubbleMaxOffset) - (fabs(chatTextConfig.basic.nameViewOffsetForSingle.receive.x) + bubbleOffset) - chatTextConfig.textEdgeInsets.receive.left - chatTextConfig.textEdgeInsets.receive.right
+            return sharedContentMaxWidth() - fabs(chatTextConfig.textEdgeInsets.receive.left) - fabs(chatTextConfig.textEdgeInsets.receive.right)
         }
     }
     
