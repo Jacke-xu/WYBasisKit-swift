@@ -122,7 +122,9 @@ extension WYTestChatController: WYChatViewDelegate {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
             guard let self = self else { return }
             
-            chatView.dataSource.last?.sendState = .success
+            message.sendState = .success
+            message.readers = "1"
+            
             let replyMessage: WYChatMessageModel = WYChatMessageModel()
             replyMessage.timestamp = String.wy_sharedDeviceTimestamp()
             replyMessage.lastMessageTimestamp = replyMessage.sharedLastMessageTimestamp(chatView.dataSource)
@@ -131,6 +133,7 @@ extension WYTestChatController: WYChatViewDelegate {
             replyMessage.content.text = ["这是自动模拟的回复消息😄😄😄😄😄😄", "回复消息", "这是自动模拟的多行回复消息😄😄😄😄😄😄😄😄😄😄😄😄😄😄😄😄"][wy_randomInteger(minimux: 0, maximum: 2)]
             replyMessage.index = message.index + 1
             replyMessage.sendState = .success
+            replyMessage.readers = "1"
             chatView.dataSource.append(replyMessage)
         }
     }

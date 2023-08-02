@@ -85,7 +85,7 @@ public class WYChatTextCell: WYChatBasicCell {
     public override var message: WYChatMessageModel {
         didSet {
             updateContent(config: chatTextConfig)
-            updateStateViewConstraints(bubblesView)
+            updateOtherConstraints(bubblesView)
         }
     }
     

@@ -11,7 +11,7 @@ import Kingfisher
 /// 通用聊天配置选项
 public struct WYBasicChatConfig {
     
-    /// 消息显示的最小时间跨度，默认300秒，即5分钟
+    /// 消息显示的最小时间跨度，默认300秒
     public var messageMinimumTimeSpan: Double = 300
     
     /// 消息发送失败后cell上显示的状态图标
@@ -83,6 +83,21 @@ public struct WYBasicChatConfig {
     /// 时间是否显示 上午/下午 标识
     public var showAmPmSymbol: Bool = false
     
+    /// 是否显示已读未读标识(仅限单聊)
+    public var showReadMark: Bool = false
+    
+    /// 已读未读标识的字体
+    public var readMarkFont: UIFont = .systemFont(ofSize: wy_screenWidth(10))
+    
+    /// 已读未读标识的字体颜色
+    public var readMarkColor: (browse: UIColor, unread: UIColor) = (browse: .lightGray, unread: .blue)
+    
+    /// 已读未读标识距离消息内容(气泡)边界的偏移量(y用于距离底部的偏移量)
+    public var readMarkOffset: CGPoint = CGPoint(x: wy_screenWidth(5), y: wy_screenWidth(5))
+    
+    /// 已读未读标识的文本
+    public var readMarkText: (browse: String, unread: String) = (browse: "已读", unread: "未读")
+    
     public init() {}
 }
 
@@ -116,6 +131,16 @@ public class WYChatBasicCell: UITableViewCell {
         let timeView: UILabel = UILabel()
         contentView.addSubview(timeView)
         return timeView
+    }()
+    
+    /// 已读、未读状态控件
+    public lazy var readMarkView: UILabel? = {
+        guard config.showReadMark == true else {
+            return nil
+        }
+        let readMarkView: UILabel = UILabel()
+        contentView.addSubview(readMarkView)
+        return readMarkView
     }()
     
     /// loading控件
@@ -221,7 +246,7 @@ public class WYChatBasicCell: UITableViewCell {
         avatarView.wy_cornerRadius(config.avatarCornerRadius).wy_showVisual()
     }
     
-    public func updateStateViewConstraints(_ rely: UIView) {
+    public func updateOtherConstraints(_ rely: UIView) {
         loadingView.snp.remakeConstraints { make in
             make.size.equalTo(config.messageSendingStateSize)
             make.centerY.equalTo(rely)
@@ -230,6 +255,15 @@ public class WYChatBasicCell: UITableViewCell {
             }else {
                 make.left.equalTo(rely.snp.right).offset(config.messageSendingStateOffset)
             }
+        }
+        
+        readMarkView?.snp.remakeConstraints { make in
+            if message.isSender(userID) {
+                make.right.equalTo(rely.snp.left).offset(-config.readMarkOffset.x)
+            }else {
+                make.left.equalTo(rely.snp.right).offset(config.readMarkOffset.x)
+            }
+            make.bottom.equalTo(rely).offset(-config.readMarkOffset.y)
         }
     }
     
@@ -271,6 +305,15 @@ public extension WYChatBasicCell {
             loadingView.stopAnimating()
             loadingView.image = config.messageSendErrorImage
             break
+        }
+        
+        readMarkView?.font = config.readMarkFont
+        if Double(string: message.readers) > 0 {
+            readMarkView?.textColor = config.readMarkColor.browse
+            readMarkView?.text = config.readMarkText.browse
+        }else {
+            readMarkView?.textColor = config.readMarkColor.unread
+            readMarkView?.text = config.readMarkText.unread
         }
     }
     
