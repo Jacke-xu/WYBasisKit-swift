@@ -22,6 +22,9 @@ import Foundation
     /// 是否需要内部处理 tableView的滚动事件
     @objc optional func canManagerScrollViewDidScrollEvents(_ scrollView: UIScrollView) -> Bool
     
+    /// 是否需要内部处理chatInput控件内 语音 按钮的长按事件
+    @objc optional func canManagerVoiceRecordEvents(_ longPress: UILongPressGestureRecognizer) -> Bool
+    
     /// 是否需要内部处理chatInput控件内 文本/语音 按钮的点击事件
     @objc optional func canManagerTextVoiceViewEvents(_ textVoiceView: UIButton) -> Bool
     

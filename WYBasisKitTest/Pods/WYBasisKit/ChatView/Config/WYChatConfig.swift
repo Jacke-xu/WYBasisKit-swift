@@ -19,3 +19,6 @@ public var moreViewConfig: WYMoreViewConfig = WYMoreViewConfig()
 
 /// 文本Cell相关配置
 public var chatTextConfig: WYTextChatConfig = WYTextChatConfig()
+
+/// 语音动画相关配置
+public var recordAnimationConfig: WYRecordAnimationConfig = WYRecordAnimationConfig()

@@ -143,6 +143,10 @@ extension WYChatView: WYChatInputViewDelegate, WYChatInputViewEventsHandler {
         return message
     }
     
+    public func canManagerVoiceRecordEvents(_ longPress: UILongPressGestureRecognizer) -> Bool {
+        return eventsHandler?.canManagerVoiceRecordEvents?(longPress) ?? true
+    }
+    
     public func canManagerTextVoiceViewEvents(_ textVoiceView: UIButton) -> Bool {
         return eventsHandler?.canManagerTextVoiceViewEvents?(textVoiceView) ?? true
     }

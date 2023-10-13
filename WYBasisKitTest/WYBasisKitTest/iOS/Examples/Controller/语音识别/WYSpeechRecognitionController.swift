@@ -3,7 +3,7 @@
 //  WYBasisKitTest
 //
 //  Created by 官人 on 2023/6/8.
-//
+//  参考：https://blog.51cto.com/u_11643026/6273204
 
 import UIKit
 import Speech
@@ -33,6 +33,9 @@ class WYSpeechRecognitionController: UIViewController {
     
     // 语音引擎，负责提供录音输入
     private let audioEngine: AVAudioEngine? = AVAudioEngine()
+    
+    // 记录每次识别到的文字
+    private var audioToTexts: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,9 +76,6 @@ class WYSpeechRecognitionController: UIViewController {
         if recognitionTask != nil {
             // 取消当前语音识别任务。
             recognitionTask?.cancel()
-            // 语音识别任务的当前状态 是一个枚举值
-            wy_print(recognitionTask!.state)
-            
             recognitionTask = nil
         }
         
@@ -107,30 +107,52 @@ class WYSpeechRecognitionController: UIViewController {
         // 在用户说话的同时，将识别结果分批次返回
         recognitionRequest.shouldReportPartialResults = true
         
-        // 使用recognitionTask方法开始识别。
-        recognitionTask = speechRecognizer?.recognitionTask(with: recognitionRequest, resultHandler: { [weak self] (result, error) in
-            
-            // 用于检查识别是否结束
-            var isFinal = false
-            // 如果 result 不是 nil,
-            if result != nil {
-                // 将 textView.text 设置为 result 的最佳音译
-                self?.textView.text = result?.bestTranscription.formattedString
-                // 如果 result 是最终，将 isFinal 设置为 true
-                isFinal = (result?.isFinal)!
+        // 添加标点符号
+        if #available(iOS 16, *) {
+            recognitionRequest.addsPunctuation = true
+        } else {
+            // iOS16以下需要自己处理标点符号，建议可以参考：PaddleSpeech
+        }
+        
+        if #available(iOS 13, *) {
+            // 防止通过网络发送音频，识别将不再那么准确
+            if speechRecognizer?.supportsOnDeviceRecognition ?? false {
+                recognitionRequest.requiresOnDeviceRecognition = true
             }
-            
-            // 如果没有错误发生，或者 result 已经结束，停止audioEngine 录音，终止 recognitionRequest 和 recognitionTask
-            if error != nil || isFinal {
-                self?.audioEngine?.stop()
-                inputNode.removeTap(onBus: 0)
-                
-                self?.recognitionRequest = nil
-                self?.recognitionTask = nil
-                // 开始录音按钮可用
-                self?.voiceView.isEnabled = true
-            }
-        })
+        } else {
+            // Fallback on earlier versions
+        }
+        
+        // 使用recognitionTask方法开始识别，这里推荐代理实现方式，闭包方式无法将已经识别到的文本和新识别到的文本连接起来
+        recognitionTask = speechRecognizer?.recognitionTask(with: recognitionRequest, delegate: self)
+        
+        /*
+         recognitionTask = speechRecognizer?.recognitionTask(with: recognitionRequest, resultHandler: { [weak self] (result, error) in
+ 
+             guard let self = self else { return }
+             // 用于检查识别是否结束
+             var isFinal = false
+             // 如果 result 不是 nil,
+             if result != nil {
+                 // 将 textView.text 设置为 result 的最佳音译
+                 textView.text = result?.bestTranscription.formattedString ?? ""
+                 
+                 // 如果 result 是最终，将 isFinal 设置为 true
+                 isFinal = (result?.isFinal)!
+             }
+ 
+             // 如果没有错误发生，或者 result 已经结束，停止audioEngine 录音，终止 recognitionRequest 和 recognitionTask
+             if error != nil || isFinal {
+                 audioEngine?.stop()
+                 inputNode.removeTap(onBus: 0)
+ 
+                 self.recognitionRequest = nil
+                 recognitionTask = nil
+                 // 开始录音按钮可用
+                 voiceView.isEnabled = true
+             }
+         })
+         */
         
         // 向recognitionRequest加入一个音频输入
         let recordingFormat = inputNode.outputFormat(forBus: 0)
@@ -180,13 +202,57 @@ class WYSpeechRecognitionController: UIViewController {
     
 }
 
-extension WYSpeechRecognitionController: SFSpeechRecognizerDelegate {
+extension WYSpeechRecognitionController: SFSpeechRecognizerDelegate, SFSpeechRecognitionTaskDelegate {
     
-    func speechRecognizer(_ speechRecognizer: SFSpeechRecognizer, availabilityDidChange available: Bool) {
-        if available {
-            voiceView.isEnabled = true
-        }else {
-            voiceView.isEnabled = false
+    // Called when the task first detects speech in the source audio
+    func speechRecognitionDidDetectSpeech(_ task: SFSpeechRecognitionTask) {
+        wy_print("Called when the task first detects speech in the source audio")
+    }
+    
+    
+    // Called for all recognitions, including non-final hypothesis
+    func speechRecognitionTask(_ task: SFSpeechRecognitionTask, didHypothesizeTranscription transcription: SFTranscription) {
+        // 在这里实现即时转译效果
+        textView.text = audioToTexts.joined().appending(transcription.formattedString)
+    }
+    
+    
+    // Called only for final recognitions of utterances. No more about the utterance will be reported
+    func speechRecognitionTask(_ task: SFSpeechRecognitionTask, didFinishRecognition recognitionResult: SFSpeechRecognitionResult) {
+        // 这里是获取最终的识别结果，并且将 textView.text 设置为 result 的最佳音译
+        // 添加标点符号
+        var symbol: String = ""
+        if #available(iOS 16, *) {
+        } else {
+            symbol = ","
         }
+        audioToTexts.append(recognitionResult.bestTranscription.formattedString.appending(symbol))
+        textView.text = audioToTexts.joined()
+    }
+    
+    
+    // Called when the task is no longer accepting new audio but may be finishing final processing
+    func speechRecognitionTaskFinishedReadingAudio(_ task: SFSpeechRecognitionTask) {
+        wy_print("Called when the task is no longer accepting new audio but may be finishing final processing")
+    }
+    
+    
+    // Called when the task has been cancelled, either by client app, the user, or the system
+    func speechRecognitionTaskWasCancelled(_ task: SFSpeechRecognitionTask) {
+        wy_print("Called when the task has been cancelled, either by client app, the user, or the system")
+    }
+    
+    
+    // Called when recognition of all requested utterances is finished.
+    // If successfully is false, the error property of the task will contain error information
+    func speechRecognitionTask(_ task: SFSpeechRecognitionTask, didFinishSuccessfully successfully: Bool) {
+        
+        audioEngine?.stop()
+        audioEngine?.inputNode.removeTap(onBus: 0)
+        recognitionRequest = nil
+        recognitionTask = nil
+        audioToTexts.removeAll()
+        textView.text = "语音识别步骤\n1、按下 语音识别 按钮\n2、语音识别(说出想要识别的内容)\n3、按下 结束 按钮结束语音识别"
+        voiceView.isEnabled = true
     }
 }

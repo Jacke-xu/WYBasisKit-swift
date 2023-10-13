@@ -189,6 +189,12 @@ extension WYTestChatController: WYChatViewEventsHandler {
         //wy_print("是否需要内部处理 tableView的滚动事件, scrollView = \(scrollView)")
         return true
     }
+    
+    /// 是否需要内部处理chatInput控件内 语音 按钮的长按事件
+    func canManagerVoiceRecordEvents(_ longPress: UILongPressGestureRecognizer) -> Bool {
+        //wy_print("是否需要内部处理chatInput控件内 语音 按钮的长按事件, longPress = \(longPress)")
+        return true
+    }
 
     /// 是否需要内部处理chatInput控件内 文本/语音 按钮的点击事件
     func canManagerTextVoiceViewEvents(_ textVoiceView: UIButton) -> Bool {

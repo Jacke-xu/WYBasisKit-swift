@@ -282,6 +282,10 @@
 		DC79C53A2A550E5900EADFE4 /* WYChatWithdrawnCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC79C5392A550E5900EADFE4 /* WYChatWithdrawnCell.swift */; };
 		DC79C53C2A550F3D00EADFE4 /* WYChatBasicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC79C53B2A550F3D00EADFE4 /* WYChatBasicCell.swift */; };
 		DC79C53E2A550F5100EADFE4 /* WYChatTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC79C53D2A550F5100EADFE4 /* WYChatTextCell.swift */; };
+		DCA565812A7CF1BD0095FDCD /* WYRecordAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA5657F2A7CF1B50095FDCD /* WYRecordAnimationView.swift */; };
+		DCA565842A84BE7F0095FDCD /* WYSoundWavesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA565822A84BE7A0095FDCD /* WYSoundWavesView.swift */; };
+		DCA565882AA067F40095FDCD /* WYMoveupTipsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA565872AA067F40095FDCD /* WYMoveupTipsView.swift */; };
+		DCA5658A2AA5C3D90095FDCD /* WYRecordManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA565892AA5C3D90095FDCD /* WYRecordManager.swift */; };
 		DCC340E12A332DEA0026CAD8 /* WYAudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC340D02A332DEA0026CAD8 /* WYAudioManager.swift */; };
 		DCC340E22A332DEA0026CAD8 /* WYChatConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC340D22A332DEA0026CAD8 /* WYChatConfig.swift */; };
 		DCC340E32A332DEA0026CAD8 /* WYChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC340D52A332DEA0026CAD8 /* WYChatView.swift */; };
@@ -776,6 +780,10 @@
 		DC79C5392A550E5900EADFE4 /* WYChatWithdrawnCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYChatWithdrawnCell.swift; sourceTree = "<group>"; };
 		DC79C53B2A550F3D00EADFE4 /* WYChatBasicCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYChatBasicCell.swift; sourceTree = "<group>"; };
 		DC79C53D2A550F5100EADFE4 /* WYChatTextCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYChatTextCell.swift; sourceTree = "<group>"; };
+		DCA5657F2A7CF1B50095FDCD /* WYRecordAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYRecordAnimationView.swift; sourceTree = "<group>"; };
+		DCA565822A84BE7A0095FDCD /* WYSoundWavesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYSoundWavesView.swift; sourceTree = "<group>"; };
+		DCA565872AA067F40095FDCD /* WYMoveupTipsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYMoveupTipsView.swift; sourceTree = "<group>"; };
+		DCA565892AA5C3D90095FDCD /* WYRecordManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYRecordManager.swift; sourceTree = "<group>"; };
 		DCC340D02A332DEA0026CAD8 /* WYAudioManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYAudioManager.swift; sourceTree = "<group>"; };
 		DCC340D22A332DEA0026CAD8 /* WYChatConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYChatConfig.swift; sourceTree = "<group>"; };
 		DCC340D52A332DEA0026CAD8 /* WYChatView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYChatView.swift; sourceTree = "<group>"; };
@@ -1717,9 +1725,20 @@
 			path = ChatRecords;
 			sourceTree = "<group>";
 		};
+		DCA5657E2A7CF0A90095FDCD /* RecordAnimation */ = {
+			isa = PBXGroup;
+			children = (
+				DCA5657F2A7CF1B50095FDCD /* WYRecordAnimationView.swift */,
+				DCA565822A84BE7A0095FDCD /* WYSoundWavesView.swift */,
+				DCA565872AA067F40095FDCD /* WYMoveupTipsView.swift */,
+			);
+			path = RecordAnimation;
+			sourceTree = "<group>";
+		};
 		DCC340CE2A332DEA0026CAD8 /* ChatView */ = {
 			isa = PBXGroup;
 			children = (
+				DCA5657E2A7CF0A90095FDCD /* RecordAnimation */,
 				DCC340CF2A332DEA0026CAD8 /* AudioManager */,
 				DCC340D12A332DEA0026CAD8 /* Config */,
 				DCC340D32A332DEA0026CAD8 /* Models */,
@@ -1769,6 +1788,7 @@
 			isa = PBXGroup;
 			children = (
 				DCC340D72A332DEA0026CAD8 /* WYChatInputView.swift */,
+				DCA565892AA5C3D90095FDCD /* WYRecordManager.swift */,
 			);
 			path = Input;
 			sourceTree = "<group>";
@@ -2339,6 +2359,8 @@
 				DCC340E52A332DEA0026CAD8 /* WYEmojiViewCell.swift in Sources */,
 				B3302B995ECE946CB51A667A85628FA6 /* Bool.swift in Sources */,
 				DCC340E42A332DEA0026CAD8 /* WYChatInputView.swift in Sources */,
+				DCA565842A84BE7F0095FDCD /* WYSoundWavesView.swift in Sources */,
+				DCA565812A7CF1BD0095FDCD /* WYRecordAnimationView.swift in Sources */,
 				D696448493F89901D9A98624CCB9389D /* CALayer.swift in Sources */,
 				F644700D7D599EF19C170E9C5A4710EE /* Foundation+JSONLog.m in Sources */,
 				DC42B0C42A41849C0004EB4C /* WYChatVoiceCell.swift in Sources */,
@@ -2360,7 +2382,9 @@
 				DC42B0EB2A4186940004EB4C /* WYChatBusinessCardCell.swift in Sources */,
 				DC42B0D32A4185660004EB4C /* WYChatTransferCell.swift in Sources */,
 				DC42B0D02A41853D0004EB4C /* WYChatLuckyMoneyCell.swift in Sources */,
+				DCA5658A2AA5C3D90095FDCD /* WYRecordManager.swift in Sources */,
 				DCEB472A2A395D2D00C58A47 /* WYChatViewDelegateHandler.swift in Sources */,
+				DCA565882AA067F40095FDCD /* WYMoveupTipsView.swift in Sources */,
 				DCC340E92A332DEA0026CAD8 /* WYEmojiPreviewView.swift in Sources */,
 				CB5454A8C9D8230BE25B0758098CB2B7 /* UICollectionView.swift in Sources */,
 				DC42B0DF2A4186020004EB4C /* WYChatCallCell.swift in Sources */,

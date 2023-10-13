@@ -10,6 +10,9 @@ import UIKit
 
 public struct WYInputBarConfig {
     
+    /// 录音按钮长按手势允许手指移动的最大距离
+    public var recordViewLongPressMaxOffset: CGFloat = wy_screenWidth(100)
+    
     /// inputBar弹起或者收回时动画持续时长
     public var animateDuration: TimeInterval = 0.25
     
@@ -170,6 +173,9 @@ public let WYChatSourceBundle: WYSourceBundle = WYSourceBundle(bundleName: "WYCh
 /// 返回一个Bool值来判定各控件的点击或手势事件是否需要内部处理(默认返回True)
 @objc public protocol WYChatInputViewEventsHandler {
     
+    /// 是否需要内部处理 语音 按钮的长按事件
+    @objc optional func canManagerVoiceRecordEvents(_ longPress: UILongPressGestureRecognizer) -> Bool
+    
     /// 是否需要内部处理 文本/语音 按钮的点击事件
     @objc optional func canManagerTextVoiceViewEvents(_ textVoiceView: UIButton) -> Bool
     
@@ -210,6 +216,10 @@ public class WYChatInputView: UIImageView {
     public let textVoiceView: UIButton = UIButton(type: .custom)
     public let emojiView: UIButton = UIButton(type: .custom)
     public let moreView: UIButton = UIButton(type: .custom)
+    public lazy var recordView: WYRecordAnimationView = {
+        let recordView: WYRecordAnimationView = WYRecordAnimationView(alpha: 1.0)
+        return recordView
+    }()
     
     public weak var eventsHandler: WYChatInputViewEventsHandler? = nil
     public weak var delegate: WYChatInputViewDelegate? = nil
@@ -233,11 +243,10 @@ public class WYChatInputView: UIImageView {
         textVoiceContentView.layer.borderWidth = inputBarConfig.textViewBorderWidth
         textVoiceContentView.layer.borderColor = inputBarConfig.textViewBorderColor.cgColor
         textVoiceContentView.layer.masksToBounds = true
-        textVoiceContentView.addTarget(self, action: #selector(recordButtonTouchDown), for: .touchDown)
-        textVoiceContentView.addTarget(self, action: #selector(recordButtonTouchUpInside), for: .touchUpInside)
-        textVoiceContentView.addTarget(self, action: #selector(recordButtonTouchUpOutside), for: .touchUpOutside)
-        textVoiceContentView.addTarget(self, action: #selector(recordButtonTouchUpDragExit), for: .touchDragExit)
-        textVoiceContentView.addTarget(self, action: #selector(recordButtonTouchUpDragEnter), for: .touchDragEnter)
+        let longPresssGes = UILongPressGestureRecognizer(target: self, action: #selector(voiceViewLongPressMethod(_:)))
+        // 指定该手势允许手指移动的最大距离，如果用户手指按下时移动且超过了该距离，则该手势失效
+        longPresssGes.allowableMovement = inputBarConfig.recordViewLongPressMaxOffset
+        textVoiceContentView.addGestureRecognizer(longPresssGes)
         addSubview(textVoiceContentView)
         textVoiceContentView.snp.makeConstraints { make in
             make.height.equalTo(inputBarConfig.inputViewHeight)
@@ -356,28 +365,31 @@ public class WYChatInputView: UIImageView {
         saveLastInputViewStyle()
     }
     
-    @objc private func recordButtonTouchDown() {
-        wy_print("recordButtonTouchDown")
-        /// 检查是否拥有麦克风权限
-        wy_authorizeMicrophoneAccess(showAlert: true) { authorized in
-            
+    @objc private func voiceViewLongPressMethod(_ sender: UILongPressGestureRecognizer) {
+        
+        guard (eventsHandler?.canManagerVoiceRecordEvents?(sender) ?? true) else {
+            return
         }
-    }
-    
-    @objc private func recordButtonTouchUpInside() {
-        wy_print("recordButtonTouchUpInside")
-    }
-    
-    @objc private func recordButtonTouchUpOutside() {
-        wy_print("recordButtonTouchUpOutside")
-    }
-    
-    @objc private func recordButtonTouchUpDragExit() {
-        wy_print("recordButtonTouchUpDragExit")
-    }
-    
-    @objc private func recordButtonTouchUpDragEnter() {
-        wy_print("recordButtonTouchUpDragEnter")
+        
+        /// 检查是否拥有麦克风权限
+        wy_authorizeMicrophoneAccess(showAlert: true) { [weak self] authorized in
+            guard (self == self) && (authorized == true) else { return }
+            // 用户已授权使用麦克风，开始录音操作
+            DispatchQueue.main.async {
+                let point: CGPoint = sender.location(in: self?.recordView)
+                switch sender.state {
+                case .began:
+                    self?.recordView.start()
+                    break
+                case .changed:
+                    break
+                case .ended:
+                    break
+                default:
+                    break
+                }
+            }
+        }
     }
     
     @objc private func didClickMoreView(sender: UIButton) {

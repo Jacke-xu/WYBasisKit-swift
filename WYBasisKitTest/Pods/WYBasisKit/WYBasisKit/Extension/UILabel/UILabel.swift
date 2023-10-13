@@ -282,13 +282,14 @@ extension UILabel {
         
         for str: String in strings {
             
-            let range = totalString?.range(of: str)
+            let nsrange: NSRange = ((attributedText?.string ?? "") as NSString).range(of: str)
+            let range: Range? = attributedText?.string.range(from: nsrange)
             if (range?.lowerBound != nil) {
                 
                 totalString = totalString?.replacingCharacters(in: range!, with: wy_sharedString(count: str.count))
-                
+
                 var model = WYRichTextModel()
-                model.wy_range =  totalString?.nsRange(from: range!) ?? NSRange()
+                model.wy_range = totalString?.nsRange(from: range!) ?? NSRange()
                 model.wy_richText = str
                 
                 wy_attributeStrings.append(model)

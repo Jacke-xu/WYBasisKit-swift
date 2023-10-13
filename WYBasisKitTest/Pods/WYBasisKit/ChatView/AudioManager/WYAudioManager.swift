@@ -7,3 +7,6 @@
 
 import Foundation
 
+public struct WYAudioManager {
+    
+}
