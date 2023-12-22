@@ -13,11 +13,11 @@ public extension Timer {
     /**
      *  开始倒计时
      *  @param alias: 计时器别名
-     *  @param remainingTime: 倒计时时长
+     *  @param remainingTime: 倒计时时长，无限循环传：Int.max
      *  @param duration: 隔几秒回调一次倒计时，默认1秒
      *  @param handler: remainingTime == 0 倒计时已结束,  remainingTime > 0 倒计时正在进行中,剩余 remainingTime 秒,  remainingTime < 0 倒计时已结束，并且超时了 remainingTime 秒才回调的(例如后台返回前台)
      */
-    class func wy_start(_ alias: String, _ remainingTime: Int, duration: TimeInterval = 1, queue: DispatchQueue = .main, handler: @escaping (_ remainingTime: Int) -> Void) {
+    class func wy_start(_ alias: String, _ remainingTime: Int, _ duration: TimeInterval = 1, _ queue: DispatchQueue = .main, handler: @escaping (_ remainingTime: Int) -> Void) {
         
         wy_cancel(alias)
         

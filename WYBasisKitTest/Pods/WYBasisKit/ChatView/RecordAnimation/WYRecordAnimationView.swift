@@ -6,6 +6,9 @@
 //
 
 import UIKit
+import AVFoundation
+import CoreAudio
+import CoreAudioTypes
 
 public struct WYRecordAnimationConfig {
     
@@ -161,6 +164,9 @@ public struct WYRecordAnimationConfig {
     /// 声波动画操作区阴影透明度
     public var shadowOpacity: CGFloat = 0.1
     
+    /// 最多可以录制多少秒(最长录音时间)
+    public var maxRecordTime: TimeInterval = 60
+    
     /// 获取录音默认背景图
     private static func soundWavesDefaultImage(_ capInsets: UIEdgeInsets = UIEdgeInsets(top: wy_screenWidth(10), left: wy_screenWidth(10), bottom: wy_screenWidth(20), right: wy_screenWidth(10))) -> UIImage {
         
@@ -168,7 +174,42 @@ public struct WYRecordAnimationConfig {
     }
 }
 
+/// 聊天录音计时器Key
+public let recordManagerTimerKey: String = "WYRecordManagerTimerKey"
+
 public class WYRecordAnimationView: UIView {
+    
+    /// 录音文件保存地址
+    public let url: URL = WYStorage.createDirectory(directory: .documentDirectory, subDirectory: "WYChatAudio")
+    
+    /// 录音时间
+    public var recordTime: CGFloat = 0.0
+    
+    /// 声音数据
+    public var soundMeters: [CGFloat] = []
+    
+    /// 波形更新间隔
+    public var updateFequency: CGFloat = 0.05
+    
+    /// 创建录音器
+    public lazy var audioRecorder: AVAudioRecorder? = {
+        
+        let audioSession: AVAudioSession? = try? AVAudioSession.sharedInstance()
+        try? audioSession?.setCategory(.playAndRecord)
+        try? audioSession?.setActive(true)
+        
+        // 创建录音文件保存路径
+        let url: URL = WYStorage.createDirectory(directory: .documentDirectory, subDirectory: "WYChatAudio")
+        
+        let audioRecorder: AVAudioRecorder? = try? AVAudioRecorder(url: url, settings: sharedAudioSetting())
+        // 如果要监控声波则必须设置为true
+        audioRecorder?.isMeteringEnabled = true
+        
+        return audioRecorder
+    }()
+    
+    /// 当前录音状态
+    public var soundWavesStatus: WYSoundWavesStatus = .recording
     
     public init(alpha: CGFloat = 1.0) {
         super.init(frame: .zero)
@@ -176,8 +217,52 @@ public class WYRecordAnimationView: UIView {
         self.alpha = alpha
     }
     
-    /// 当前录音状态
-    public var soundWavesStatus: WYSoundWavesStatus = .recording
+    public func record() {
+        audioRecorder?.record()
+        Timer.wy_start(recordManagerTimerKey, Int.max, updateFequency) { [weak self] remainingTime in
+            self?.audioRecorder?.updateMeters()
+            self?.recordTime += (self?.updateFequency ?? 0)
+            self?.addSoundMeter(item: CGFloat(self?.audioRecorder?.averagePower(forChannel: 0) ?? 0))
+            if (self?.recordTime ?? 0) >= recordAnimationConfig.maxRecordTime {
+                self?.endRecordVoice()
+            }
+        }
+    }
+    
+    public func addSoundMeter(item: CGFloat) {
+        
+        var canSoundMetersCount: NSInteger = 0
+        
+        switch soundWavesStatus {
+        case .recording:
+            canSoundMetersCount = recordAnimationConfig.severalSoundWaves.recording
+            break
+        case .cancel:
+            canSoundMetersCount = recordAnimationConfig.severalSoundWaves.cancel
+            break
+        case .transfer:
+            canSoundMetersCount = recordAnimationConfig.severalSoundWaves.transfer
+            break
+        }
+        if soundMeters.count <  canSoundMetersCount {
+            soundMeters.append(item)
+        }else {
+            for index: NSInteger in 0 ..< soundMeters.count {
+                if index < (canSoundMetersCount - 1) {
+                    soundMeters[index] = soundMeters[index + 1]
+                }
+            }
+            // 插入新数据
+            soundMeters[canSoundMetersCount - 1] = item
+            soundWavesView.animationView.refreshSoundWaves(meters: soundMeters, status: soundWavesStatus)
+        }
+    }
+    
+    public func endRecordVoice() {
+        audioRecorder?.stop()
+        Timer.wy_cancel(recordManagerTimerKey)
+        soundMeters.removeAll()
+    }
     
     /// 开始录音动画
     public func start() {
@@ -192,6 +277,11 @@ public class WYRecordAnimationView: UIView {
                 make.bottom.equalToSuperview().offset(0)
             })
         }
+        
+        guard audioRecorder != nil else {
+            return
+        }
+        record()
     }
     
     /// 结束录音动画
@@ -390,8 +480,33 @@ public class WYRecordAnimationView: UIView {
         return cancelView
     }()
     
+    /**
+     *  录音文件设置
+     *  @return 录音设置
+     */
+    public func sharedAudioSetting() -> Dictionary<String, Any> {
+        
+        var dictionary: Dictionary = Dictionary<String, Any>()
+        // 设置录音格式
+        dictionary[AVFormatIDKey] = kAudioFormatMPEG4AAC
+        // 设置录音采样率，8000是电话采样率，对于一般录音已经够了
+        dictionary[AVSampleRateKey] = 44100.0
+        // 设置通道,这里采用单声道
+        dictionary[AVNumberOfChannelsKey] = 1
+        // 每个采样点位数,分为8、16、24、32
+        dictionary[AVLinearPCMBitDepthKey] = 8
+        // 是否使用浮点数采样
+        dictionary[AVLinearPCMIsFloatKey] = true
+        
+        return dictionary
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    deinit {
+        endRecordVoice()
     }
     
     /*

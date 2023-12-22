@@ -285,7 +285,6 @@
 		DCA565812A7CF1BD0095FDCD /* WYRecordAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA5657F2A7CF1B50095FDCD /* WYRecordAnimationView.swift */; };
 		DCA565842A84BE7F0095FDCD /* WYSoundWavesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA565822A84BE7A0095FDCD /* WYSoundWavesView.swift */; };
 		DCA565882AA067F40095FDCD /* WYMoveupTipsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA565872AA067F40095FDCD /* WYMoveupTipsView.swift */; };
-		DCA5658A2AA5C3D90095FDCD /* WYRecordManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA565892AA5C3D90095FDCD /* WYRecordManager.swift */; };
 		DCC340E12A332DEA0026CAD8 /* WYAudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC340D02A332DEA0026CAD8 /* WYAudioManager.swift */; };
 		DCC340E22A332DEA0026CAD8 /* WYChatConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC340D22A332DEA0026CAD8 /* WYChatConfig.swift */; };
 		DCC340E32A332DEA0026CAD8 /* WYChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC340D52A332DEA0026CAD8 /* WYChatView.swift */; };
@@ -783,7 +782,6 @@
 		DCA5657F2A7CF1B50095FDCD /* WYRecordAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYRecordAnimationView.swift; sourceTree = "<group>"; };
 		DCA565822A84BE7A0095FDCD /* WYSoundWavesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYSoundWavesView.swift; sourceTree = "<group>"; };
 		DCA565872AA067F40095FDCD /* WYMoveupTipsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYMoveupTipsView.swift; sourceTree = "<group>"; };
-		DCA565892AA5C3D90095FDCD /* WYRecordManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYRecordManager.swift; sourceTree = "<group>"; };
 		DCC340D02A332DEA0026CAD8 /* WYAudioManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYAudioManager.swift; sourceTree = "<group>"; };
 		DCC340D22A332DEA0026CAD8 /* WYChatConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYChatConfig.swift; sourceTree = "<group>"; };
 		DCC340D52A332DEA0026CAD8 /* WYChatView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYChatView.swift; sourceTree = "<group>"; };
@@ -1788,7 +1786,6 @@
 			isa = PBXGroup;
 			children = (
 				DCC340D72A332DEA0026CAD8 /* WYChatInputView.swift */,
-				DCA565892AA5C3D90095FDCD /* WYRecordManager.swift */,
 			);
 			path = Input;
 			sourceTree = "<group>";
@@ -2382,7 +2379,6 @@
 				DC42B0EB2A4186940004EB4C /* WYChatBusinessCardCell.swift in Sources */,
 				DC42B0D32A4185660004EB4C /* WYChatTransferCell.swift in Sources */,
 				DC42B0D02A41853D0004EB4C /* WYChatLuckyMoneyCell.swift in Sources */,
-				DCA5658A2AA5C3D90095FDCD /* WYRecordManager.swift in Sources */,
 				DCEB472A2A395D2D00C58A47 /* WYChatViewDelegateHandler.swift in Sources */,
 				DCA565882AA067F40095FDCD /* WYMoveupTipsView.swift in Sources */,
 				DCC340E92A332DEA0026CAD8 /* WYEmojiPreviewView.swift in Sources */,

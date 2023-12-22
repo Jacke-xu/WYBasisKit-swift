@@ -9,18 +9,11 @@ import UIKit
 
 public class WYMoveupTipsView: UIView {
     
-    /*
-     /// 取消按钮内部文本和提示文本
-     public var cancelRecordViewText: (onInterior: String, tips: String) = (onInterior: "×", tips: "松开 取消")
-     */
-    
     /// 提示文本View
     public var tipsView: UILabel = UILabel()
     
     /// 移动按钮
     public var moveuplView: UIButton = UIButton(type: .custom)
-    
-    /// 移动
     
     public init() {
         super.init(frame: .zero)
