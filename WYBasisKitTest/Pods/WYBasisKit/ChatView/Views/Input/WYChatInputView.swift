@@ -545,10 +545,10 @@ public class WYChatInputView: UIImageView {
             
             guard let self = self else {return}
             
-            specialSendButton?.snp.updateConstraints { make in
+            self.specialSendButton?.snp.updateConstraints { make in
                 make.size.equalTo(hasText ? inputBarConfig.specialSendButtonSize : CGSize.zero)
             }
-            specialSendButton?.superview?.layoutIfNeeded()
+            self.specialSendButton?.superview?.layoutIfNeeded()
         }
     }
     
@@ -596,7 +596,7 @@ public class WYChatInputView: UIImageView {
             self.textVoiceContentView.superview?.layoutIfNeeded()
         }completion: {[weak self] _ in
             guard let self = self else {return}
-            textView.contentSize = CGSize(width: textView.contentSize.width, height: contentHeight)
+            self.textView.contentSize = CGSize(width: self.textView.contentSize.width, height: contentHeight)
             self.updateTextViewOffset()
         }
     }

@@ -127,14 +127,14 @@ extension WYTestChatController: WYChatViewDelegate {
             
             let replyMessage: WYChatMessageModel = WYChatMessageModel()
             replyMessage.timestamp = String.wy_sharedDeviceTimestamp()
-            replyMessage.lastMessageTimestamp = replyMessage.sharedLastMessageTimestamp(chatView.dataSource)
+            replyMessage.lastMessageTimestamp = replyMessage.sharedLastMessageTimestamp(self.chatView.dataSource)
             replyMessage.clientTimestamp = String.wy_sharedDeviceTimestamp()
-            replyMessage.sendor = sharedUaerInfo(id: "88888", name: "大官人", avatar: "https://img1.baidu.com/it/u=3709586903,1286591012&fm=253&fmt=auto&app=138&f=JPEG")
+            replyMessage.sendor = self.sharedUaerInfo(id: "88888", name: "大官人", avatar: "https://img1.baidu.com/it/u=3709586903,1286591012&fm=253&fmt=auto&app=138&f=JPEG")
             replyMessage.content.text = ["这是自动模拟的回复消息😄😄😄😄😄😄", "回复消息", "这是自动模拟的多行回复消息😄😄😄😄😄😄😄😄😄😄😄😄😄😄😄😄"][wy_randomInteger(minimux: 0, maximum: 2)]
             replyMessage.index = message.index + 1
             replyMessage.sendState = .success
             replyMessage.readers = "1"
-            chatView.dataSource.append(replyMessage)
+            self.chatView.dataSource.append(replyMessage)
         }
     }
     

@@ -295,10 +295,10 @@ public extension WYChatBasicCell {
         case .sending, .notSent:
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
                 guard let self = self else { return }
-                loadingView.animationDuration = Double(string: "\(config.messageSendingGif.animationDuration)")
-                loadingView.animationImages = config.messageSendingGif.animationImages
-                loadingView.animationRepeatCount = 0
-                loadingView.startAnimating()
+                self.loadingView.animationDuration = Double(string: "\(self.config.messageSendingGif.animationDuration)")
+                self.loadingView.animationImages = self.config.messageSendingGif.animationImages
+                self.loadingView.animationRepeatCount = 0
+                self.loadingView.startAnimating()
             }
             break
         case .failed:
@@ -330,9 +330,9 @@ public extension WYChatBasicCell {
             switch result {
             case .success(let source):
                 imageView.image = source.image
-                message.sendor.avatar.localPath = imageCache.cachePath(forKey: urlString)
-                message.sendor.avatar.id = urlString.wy_md5
-                message.sendor.avatar.name = urlString.wy_md5
+                self.message.sendor.avatar.localPath = imageCache.cachePath(forKey: urlString)
+                self.message.sendor.avatar.id = urlString.wy_md5
+                self.message.sendor.avatar.name = urlString.wy_md5
                 break
             case .failure(let error):
                 wy_print("\(error)")

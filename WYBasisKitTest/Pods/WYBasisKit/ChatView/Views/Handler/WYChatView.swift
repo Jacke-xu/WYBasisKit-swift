@@ -154,8 +154,8 @@ public class WYChatView: UIView {
     public func scrollToLastMessage(_ animated: Bool = false) {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
-            if dataSource.isEmpty == false {
-                tableView.scrollToRow(at: IndexPath(row: dataSource.count - 1, section: 0), at: .bottom, animated: animated)
+            if self.dataSource.isEmpty == false {
+                self.tableView.scrollToRow(at: IndexPath(row: self.dataSource.count - 1, section: 0), at: .bottom, animated: animated)
             }
         }
     }

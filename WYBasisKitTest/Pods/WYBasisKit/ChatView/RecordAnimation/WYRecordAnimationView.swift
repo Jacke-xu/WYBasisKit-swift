@@ -297,12 +297,12 @@ public class WYRecordAnimationView: UIView {
             
             guard let self = self else { return }
             
-            bottomView.snp.updateConstraints({ make in
+            self.bottomView.snp.updateConstraints({ make in
                 make.bottom.equalToSuperview().offset(recordAnimationConfig.areaHeight)
             })
-            refresh(subview: cancelView, status: .recording)
-            refresh(subview: bottomView, status: .recording)
-            refresh(subview: soundWavesView, status: .recording)
+            self.refresh(subview: self.cancelView, status: .recording)
+            self.refresh(subview: self.bottomView, status: .recording)
+            self.refresh(subview: self.soundWavesView, status: .recording)
         }
     }
     
@@ -324,16 +324,16 @@ public class WYRecordAnimationView: UIView {
             
             switch status {
             case .recording:
-                refresh(subview: cancelView, status: .recording)
-                refresh(subview: bottomView, status: .recording)
+                self.refresh(subview: self.cancelView, status: .recording)
+                self.refresh(subview: self.bottomView, status: .recording)
                 break
             case .cancel:
-                refresh(subview: cancelView, status: .cancel)
-                refresh(subview: bottomView, status: .cancel)
+                self.refresh(subview: self.cancelView, status: .cancel)
+                self.refresh(subview: self.bottomView, status: .cancel)
                 break
             case .transfer:
-                refresh(subview: cancelView, status: .transfer)
-                refresh(subview: bottomView, status: .transfer)
+                self.refresh(subview: self.cancelView, status: .transfer)
+                self.refresh(subview: self.bottomView, status: .transfer)
                 break
             }
         }
@@ -348,13 +348,13 @@ public class WYRecordAnimationView: UIView {
             
             switch status {
             case .recording:
-                refresh(subview: soundWavesView, status: .recording)
+                self.refresh(subview: self.soundWavesView, status: .recording)
                 break
             case .cancel:
-                refresh(subview: soundWavesView, status: .cancel)
+                self.refresh(subview: self.soundWavesView, status: .cancel)
                 break
             case .transfer:
-                refresh(subview: soundWavesView, status: .transfer)
+                self.refresh(subview: self.soundWavesView, status: .transfer)
                 break
             }
         }
