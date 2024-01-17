@@ -141,13 +141,13 @@ public struct WYRecordAnimationConfig {
     public var moveupButtonBottomOffset: CGFloat = wy_screenWidth(35)
     
     /// 取消录音或者语音转文字按钮中心点距离声波动画控件底部的间距
-    public var moveupButtonTopOffset: CGFloat = wy_screenWidth(315)
+    public var moveupButtonTopOffset: CGFloat = wy_screenWidth(200)
     
     /// 取消录音或者语音转文字按钮中心点距离tip控件底部的间距
-    public var moveupButtonCenterOffsetY: CGFloat = wy_screenWidth(88)
+    public var moveupButtonCenterOffsetY: (onInterior: CGFloat, onExternal: CGFloat) = (onInterior: wy_screenWidth(60), onExternal: wy_screenWidth(50))
     
     /// 取消录音按钮和转文字按钮中心点X值距离屏幕父控件左侧或者右侧的间距
-    public var moveupButtonCenterOffsetX: CGFloat = wy_screenWidth(wy_screenWidth(120))
+    public var moveupButtonCenterOffsetX: CGFloat = wy_screenWidth(wy_screenWidth(100))
     
     /// 声波动画操作区边缘颜色
     public var strokeColor: UIColor = .clear
@@ -300,7 +300,7 @@ public class WYRecordAnimationView: UIView {
             self.bottomView.snp.updateConstraints({ make in
                 make.bottom.equalToSuperview().offset(recordAnimationConfig.areaHeight)
             })
-            self.refresh(subview: self.cancelView, status: .recording)
+            self.refresh(subview: self.leftView, status: .recording)
             self.refresh(subview: self.bottomView, status: .recording)
             self.refresh(subview: self.soundWavesView, status: .recording)
         }
@@ -324,15 +324,15 @@ public class WYRecordAnimationView: UIView {
             
             switch status {
             case .recording:
-                self.refresh(subview: self.cancelView, status: .recording)
+                self.refresh(subview: self.leftView, status: .recording)
                 self.refresh(subview: self.bottomView, status: .recording)
                 break
             case .cancel:
-                self.refresh(subview: self.cancelView, status: .cancel)
+                self.refresh(subview: self.leftView, status: .cancel)
                 self.refresh(subview: self.bottomView, status: .cancel)
                 break
             case .transfer:
-                self.refresh(subview: self.cancelView, status: .transfer)
+                self.refresh(subview: self.leftView, status: .transfer)
                 self.refresh(subview: self.bottomView, status: .transfer)
                 break
             }
@@ -365,10 +365,11 @@ public class WYRecordAnimationView: UIView {
         
         switch status {
         case .recording:
-            if subview == cancelView {
-                cancelView.snp.updateConstraints { make in
-                    make.size.equalTo(CGSize(width: wy_screenWidth(recordAnimationConfig.moveupButtonDiameter.onExternal), height: recordAnimationConfig.moveupButtonDiameter.onExternal))
-                    cancelView.refresh(isTransfer: false)
+            if subview == leftView {
+                leftView.moveuplView.snp.updateConstraints { make in
+                    make.centerY.equalTo(leftView.tipsView.snp.bottom).offset(recordAnimationConfig.moveupButtonCenterOffsetY.onExternal)
+                    make.width.height.equalTo(CGSize(width: wy_screenWidth(recordAnimationConfig.moveupButtonDiameter.onExternal), height: recordAnimationConfig.moveupButtonDiameter.onExternal))
+                    leftView.refresh(isRight: false)
                 }
             }
             
@@ -385,11 +386,12 @@ public class WYRecordAnimationView: UIView {
             }
             break
         case .cancel:
-            if subview == cancelView {
-                cancelView.snp.updateConstraints { make in
-                    make.size.equalTo(CGSize(width: wy_screenWidth(recordAnimationConfig.moveupButtonDiameter.onInterior), height: recordAnimationConfig.moveupButtonDiameter.onInterior))
+            if subview == leftView {
+                leftView.moveuplView.snp.updateConstraints { make in
+                    make.centerY.equalTo(leftView.tipsView.snp.bottom).offset(recordAnimationConfig.moveupButtonCenterOffsetY.onInterior)
+                    make.width.height.equalTo(CGSize(width: wy_screenWidth(recordAnimationConfig.moveupButtonDiameter.onInterior), height: recordAnimationConfig.moveupButtonDiameter.onInterior))
                 }
-                cancelView.refresh(isTransfer: false)
+                leftView.refresh(isRight: false)
             }
             
             if subview == soundWavesView {
@@ -405,11 +407,12 @@ public class WYRecordAnimationView: UIView {
             }
             break
         case .transfer:
-            if subview == cancelView {
-                cancelView.snp.updateConstraints { make in
-                    make.size.equalTo(CGSize(width: wy_screenWidth(recordAnimationConfig.moveupButtonDiameter.onExternal), height: recordAnimationConfig.moveupButtonDiameter.onExternal))
+            if subview == leftView {
+                leftView.moveuplView.snp.updateConstraints { make in
+                    make.centerY.equalTo(leftView.tipsView.snp.bottom).offset(recordAnimationConfig.moveupButtonCenterOffsetY.onExternal)
+                    make.width.height.equalTo(CGSize(width: wy_screenWidth(recordAnimationConfig.moveupButtonDiameter.onExternal), height: recordAnimationConfig.moveupButtonDiameter.onExternal))
                 }
-                cancelView.refresh(isTransfer: true)
+                leftView.refresh(isRight: true)
             }
             
             if subview == soundWavesView {
@@ -446,9 +449,11 @@ public class WYRecordAnimationView: UIView {
     }()
     
     public lazy var bottomView: UIView = {
+        
+        layoutIfNeeded()
+        
         let bottomView: UIView = UIView()
         bottomView.backgroundColor = .clear
-        
         bottomView.layer.addSublayer(bottomLayer)
         addSubview(bottomView)
         bottomView.snp.makeConstraints({ make in
@@ -469,15 +474,15 @@ public class WYRecordAnimationView: UIView {
         return soundWavesView
     }()
     
-    public lazy var cancelView: WYMoveupTipsView = {
-        let cancelView: WYMoveupTipsView = WYMoveupTipsView()
-        addSubview(cancelView)
-        cancelView.snp.makeConstraints { make in
-            make.centerX.equalToSuperview().offset(recordAnimationConfig.moveupButtonCenterOffsetX)
-            make.centerY.equalTo(self.snp.bottom).offset(-(frame.size.height - recordAnimationConfig.areaHeight - recordAnimationConfig.moveupButtonBottomOffset))
-            make.size.equalTo(CGSize(width: wy_screenWidth(recordAnimationConfig.moveupButtonDiameter.onExternal), height: recordAnimationConfig.moveupButtonDiameter.onExternal))
+    public lazy var leftView: WYMoveupTipsView = {
+        
+        let leftView: WYMoveupTipsView = WYMoveupTipsView()
+        addSubview(leftView)
+        leftView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview().offset(-recordAnimationConfig.moveupButtonCenterOffsetX)
+            make.centerY.equalTo(self.snp.bottom).offset(-(recordAnimationConfig.areaHeight + recordAnimationConfig.moveupButtonBottomOffset))
         }
-        return cancelView
+        return leftView
     }()
     
     /**

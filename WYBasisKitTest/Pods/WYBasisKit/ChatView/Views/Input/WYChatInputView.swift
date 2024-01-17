@@ -468,10 +468,8 @@ public class WYChatInputView: UIImageView {
                         self.recordView.switchStatus(.recording)
                     }
                     break
-                case .ended:
-                    self.recordView.stop()
-                    break
                 default:
+                    self.recordView.stop()
                     break
                 }
             }
