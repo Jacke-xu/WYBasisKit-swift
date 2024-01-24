@@ -142,75 +142,94 @@ public extension NSObject {
     }
 }
 
-public extension Dictionary {
-    
-    /// 字典转JSON字符串
-    func wy_convertJSON() -> String {
-        
-        let data = try? JSONSerialization.data(withJSONObject: self, options: JSONSerialization.WritingOptions.init(rawValue: 0))
-        
-        let jsonStr = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
-        
-        return jsonStr! as String
-    }
-    
-    /// 字典转Data
-    func wy_convertData() -> Data {
-        
-        return try! JSONSerialization.data(withJSONObject: self, options: [JSONSerialization.WritingOptions.prettyPrinted])
-    }
-}
-
 public extension String {
     
-    /// JSON字符串转字典
-    func wy_convertDictionary() -> [String: AnyObject]? {
-        
-        if let data = self.data(using: String.Encoding.utf8) {
-            do {
-                return try JSONSerialization.jsonObject(with: data, options: [JSONSerialization.ReadingOptions.init(rawValue: 0)]) as? [String: AnyObject]
-            } catch let error as NSError {
-                wy_print(error)
-            }
-        }
-        return nil
+    /// 字符串转data
+    func wy_convertData() -> Data? {
+        return self.data(using: String.Encoding.utf8)
     }
     
-    /// JSON字符串转数组
-    func wy_convertArray() -> [String: AnyObject] {
+    /// 字符串转字典
+    func wy_convertDictionary() -> [String: Any] {
         
-        let jsonData: Data = self.data(using: .utf8)!
-        
-        let array = try? JSONSerialization.jsonObject(with: jsonData, options: .mutableContainers)
-        if array != nil {
-            return array as! [String : AnyObject]
+        guard let stringData: Data = self.data(using: String.Encoding.utf8) else {
+            return ["": ""]
         }
-        return array as! [String : AnyObject]
+        if let dictionary = try? JSONSerialization.jsonObject(with: stringData, options: JSONSerialization.ReadingOptions.mutableContainers) {
+            return dictionary as? [String : Any] ?? ["":""]
+        }
+        return ["": ""]
     }
-}
-
-public extension Array {
     
-    /// 数组转JSON字符串
-    func wy_convertJSON() -> String {
+    /// 字符串转数组
+    func wy_convertArray() -> [Any] {
         
-        if (!JSONSerialization.isValidJSONObject(self)) {
-            wy_print("is not a valid json object")
-            return ""
+        guard let stringData: Data = self.data(using: String.Encoding.utf8) else {
+            return []
         }
-        let data = try? JSONSerialization.data(withJSONObject: self, options: [JSONSerialization.WritingOptions.init(rawValue: 0)])
         
-        let jsonStr = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
-        
-        return jsonStr! as String
+        if let array = try? JSONSerialization.jsonObject(with: stringData, options: JSONSerialization.ReadingOptions.mutableContainers) {
+            return array as? [Any] ?? []
+        }
+        return []
     }
 }
 
 public extension Data {
     
-    /// Data转JSON字符串
-    func wy_convertJSON() -> String {
-        
+    /// data转字符串
+    func wy_convertString() -> String {
         return String(data: self, encoding: .utf8) ?? ""
+    }
+    
+    /// data转字典
+    func wy_convertDictionary() -> [String: Any] {
+        return (try? JSONSerialization.jsonObject(with: self, options: JSONSerialization.ReadingOptions.mutableContainers) as? [String : Any]) ?? ["":""]
+    }
+    
+    /// data转数组
+    func wy_convertArray() -> [Any] {
+        return (try? JSONSerialization.jsonObject(with: self, options: JSONSerialization.ReadingOptions.mutableContainers) as? [Any]) ?? []
+    }
+}
+
+public extension Array {
+    
+    /// 数组转data
+    func wy_convertData() -> Data? {
+        return try? JSONSerialization.data(withJSONObject: self, options: JSONSerialization.WritingOptions.prettyPrinted)
+    }
+    
+    /// 数组转字符串
+    func wy_convertString() -> String {
+        
+        if (!JSONSerialization.isValidJSONObject(self)) {
+            return ""
+        }
+        if let data = try? JSONSerialization.data(withJSONObject: self, options: JSONSerialization.WritingOptions.prettyPrinted) {
+            return String(data: data, encoding: .utf8) ?? ""
+        }
+        return ""
+    }
+}
+
+public extension Dictionary {
+    
+    /// 字典转data
+    func wy_convertData() -> Data? {
+        return try? JSONSerialization.data(withJSONObject: self, options: JSONSerialization.WritingOptions.prettyPrinted)
+    }
+    
+    /// 字典转字符串
+    func wy_convertString() -> String {
+        
+        if (!JSONSerialization.isValidJSONObject(self)) {
+            return ""
+        }
+        
+        if let data = try? JSONSerialization.data(withJSONObject: self, options: JSONSerialization.WritingOptions.prettyPrinted) {
+            return String(data: data, encoding: .utf8) ?? ""
+        }
+        return ""
     }
 }

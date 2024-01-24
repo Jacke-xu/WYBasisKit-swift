@@ -6,8 +6,6 @@ source 'https://github.com/CocoaPods/Specs.git'
 
 target 'WYBasisKit' do
   pod 'SnapKit'
-  pod 'CleanJSON'
-  pod 'HandyJSON'
   pod 'Kingfisher'
   pod 'Moya'
 end

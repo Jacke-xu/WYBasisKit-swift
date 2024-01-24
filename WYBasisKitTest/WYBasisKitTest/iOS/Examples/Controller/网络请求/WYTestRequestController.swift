@@ -37,7 +37,8 @@ class WYTestRequestController: UIViewController {
         config.debugModeLog = false
         config.domain = "https://www.fastmock.site/mock/a768f2ffec3131e5b3d361fe098da4b5/networkRequest/"
         //config.originObject = true
-        //config.mapper = [.code: "ret"]
+        config.mapper = [.data: "source"]
+        
 
         let storageData: WYStorageData = WYStorage.takeOut(forKey: cacheKey, path: (config.requestCache?.cachePath.path) ?? "")
 
@@ -45,7 +46,7 @@ class WYTestRequestController: UIViewController {
 
         WYActivity.showLoading("加载中", in: view, delay: delay)
 
-        WYNetworkManager.request(method: .get, path: "networRequest", config: config) {[weak self] result in
+        WYNetworkManager.request(method: .post, path: "outerArray", config: config) {[weak self] result in
 
             guard self != nil else {return}
 

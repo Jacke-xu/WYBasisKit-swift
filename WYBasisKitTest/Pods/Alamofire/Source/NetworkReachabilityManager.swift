@@ -22,7 +22,7 @@
 //  THE SOFTWARE.
 //
 
-#if !(os(watchOS) || os(Linux) || os(Windows))
+#if canImport(SystemConfiguration)
 
 import Foundation
 import SystemConfiguration
@@ -113,8 +113,7 @@ open class NetworkReachabilityManager {
     private let reachability: SCNetworkReachability
 
     /// Protected storage for mutable state.
-    @Protected
-    private var mutableState = MutableState()
+    private let mutableState = Protected(MutableState())
 
     // MARK: - Initialization
 
@@ -168,7 +167,7 @@ open class NetworkReachabilityManager {
                              onUpdatePerforming listener: @escaping Listener) -> Bool {
         stopListening()
 
-        $mutableState.write { state in
+        mutableState.write { state in
             state.listenerQueue = queue
             state.listener = listener
         }
@@ -194,7 +193,8 @@ open class NetworkReachabilityManager {
                 let description = weakManager.manager?.flags?.readableDescription ?? "nil"
 
                 return Unmanaged.passRetained(description as CFString)
-            })
+            }
+        )
         let callback: SCNetworkReachabilityCallBack = { _, flags, info in
             guard let info = info else { return }
 
@@ -219,7 +219,7 @@ open class NetworkReachabilityManager {
     open func stopListening() {
         SCNetworkReachabilitySetCallback(reachability, nil, nil)
         SCNetworkReachabilitySetDispatchQueue(reachability, nil)
-        $mutableState.write { state in
+        mutableState.write { state in
             state.listener = nil
             state.listenerQueue = nil
             state.previousStatus = nil
@@ -236,7 +236,7 @@ open class NetworkReachabilityManager {
     func notifyListener(_ flags: SCNetworkReachabilityFlags) {
         let newStatus = NetworkReachabilityStatus(flags)
 
-        $mutableState.write { state in
+        mutableState.write { state in
             guard state.previousStatus != newStatus else { return }
 
             state.previousStatus = newStatus
@@ -266,7 +266,7 @@ extension SCNetworkReachabilityFlags {
     var canConnectWithoutUserInteraction: Bool { canConnectAutomatically && !contains(.interventionRequired) }
     var isActuallyReachable: Bool { isReachable && (!isConnectionRequired || canConnectWithoutUserInteraction) }
     var isCellular: Bool {
-        #if os(iOS) || os(tvOS)
+        #if os(iOS) || os(tvOS) || (swift(>=5.9) && os(visionOS))
         return contains(.isWWAN)
         #else
         return false

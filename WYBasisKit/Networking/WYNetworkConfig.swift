@@ -161,7 +161,7 @@ public struct WYNetworkConfig {
     public static var callbackQueue: DispatchQueue? = .global()
     public var callbackQueue: DispatchQueue? = callbackQueue
     
-    /// 自定义传入JSON解析时需要映射的Key及其对应的解析字段
+    /// 自定义传入JSON解析时需要映射的Key及其对应的解析字段(仅针对第一层数据映射，第二层级以后的建议在对应的model类中使用Codable原生映射方法)
     public static var mapper: [WYMappingKey: String] = [:]
     public var mapper: [WYMappingKey: String] = mapper
     

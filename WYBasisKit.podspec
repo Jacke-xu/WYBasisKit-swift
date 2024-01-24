@@ -1,7 +1,7 @@
 Pod::Spec.new do |kit|
 
   kit.name         = 'WYBasisKit'
-  kit.version      = '1.2.9'
+  kit.version      = '1.3.0'
   kit.summary      = 'WYBasisKit 不仅可以帮助开发者快速构建一个工程，还有基于常用网络框架和系统API而封装的各种实用方法、扩展，开发者只需简单的调用API就可以快速实现相应功能， 大幅提高开发效率。'
   kit.description  = <<-DESC
                          Localizable: 国际化解决方案
@@ -10,6 +10,7 @@ Pod::Spec.new do |kit|
                          Activity: 活动指示器
                          Storage: 本地存储
                          Layout: 布局相关
+                         Codable: 数据解析
                          Authorization: 各种权限请求与判断
                    DESC
 
@@ -34,12 +35,16 @@ Pod::Spec.new do |kit|
     end
 
     kit.subspec 'Extension' do |extension|
-
        extension.source_files = 'WYBasisKit/Extension/**/*'
        extension.frameworks = 'Foundation', 'UIKit', 'LocalAuthentication', 'Photos', 'CoreFoundation', 'CommonCrypto'
        extension.resource = 'WYBasisKit/Localizable/WYLocalizable.bundle'
        extension.dependency 'WYBasisKit/Localizable'
        extension.dependency 'WYBasisKit/Config'
+    end
+
+    kit.subspec 'Codable' do |codable|
+       codable.source_files = 'WYBasisKit/Codable/**/*'
+       codable.frameworks = 'Foundation', 'UIKit'
     end
     
     kit.subspec 'Networking' do |networking|
@@ -48,8 +53,8 @@ Pod::Spec.new do |kit|
        networking.resource = 'WYBasisKit/Localizable/WYLocalizable.bundle'
        networking.dependency 'WYBasisKit/Localizable'
        networking.dependency 'WYBasisKit/Storage'
+       networking.dependency 'WYBasisKit/Codable'
        networking.dependency 'Moya'
-       networking.dependency 'HandyJSON'
     end
 
     kit.subspec 'Activity' do |activity|

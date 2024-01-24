@@ -264,10 +264,21 @@ open class AnimatedImageView: UIImageView {
     // Reset the animator.
     private func reset() {
         animator = nil
-        if let image = image, let imageSource = image.kf.imageSource {
-            let targetSize = bounds.scaled(UIScreen.main.scale).size
+        if let image = image, let frameSource = image.kf.frameSource {
+            #if os(visionOS)
+            let targetSize = bounds.scaled(UITraitCollection.current.displayScale).size
+            #else
+            var scale: CGFloat = 0
+            
+            if #available(iOS 13.0, tvOS 13.0, *) {
+                scale = UITraitCollection.current.displayScale
+            } else {
+                scale = UIScreen.main.scale
+            }
+            let targetSize = bounds.scaled(scale).size
+            #endif
             let animator = Animator(
-                imageSource: imageSource,
+                frameSource: frameSource,
                 contentMode: contentMode,
                 size: targetSize,
                 imageSize: image.kf.size,
@@ -385,7 +396,7 @@ extension AnimatedImageView {
         /// The maximum count of image frames that needs preload.
         public let maxFrameCount: Int
 
-        private let imageSource: CGImageSource
+        private let frameSource: ImageFrameSource
         private let maxRepeatCount: RepeatCount
 
         private let maxTimeStep: TimeInterval = 1.0
@@ -467,7 +478,37 @@ extension AnimatedImageView {
         ///   - count: Count of frames needed to be preloaded.
         ///   - repeatCount: The repeat count should this animator uses.
         ///   - preloadQueue: Dispatch queue used for preloading images.
-        init(imageSource source: CGImageSource,
+        convenience init(imageSource source: CGImageSource,
+                         contentMode mode: UIView.ContentMode,
+                         size: CGSize,
+                         imageSize: CGSize,
+                         imageScale: CGFloat,
+                         framePreloadCount count: Int,
+                         repeatCount: RepeatCount,
+                         preloadQueue: DispatchQueue) {
+            let frameSource = CGImageFrameSource(data: nil, imageSource: source, options: nil)
+            self.init(frameSource: frameSource,
+                      contentMode: mode,
+                      size: size,
+                      imageSize: imageSize,
+                      imageScale: imageScale,
+                      framePreloadCount: count,
+                      repeatCount: repeatCount,
+                      preloadQueue: preloadQueue)
+        }
+        
+        /// Creates an animator with a custom image frame source.
+        ///
+        /// - Parameters:
+        ///   - frameSource: The reference of animated image.
+        ///   - mode: Content mode of the `AnimatedImageView`.
+        ///   - size: Size of the `AnimatedImageView`.
+        ///   - imageSize: Size of the `KingfisherWrapper`.
+        ///   - imageScale: Scale of the `KingfisherWrapper`.
+        ///   - count: Count of frames needed to be preloaded.
+        ///   - repeatCount: The repeat count should this animator uses.
+        ///   - preloadQueue: Dispatch queue used for preloading images.
+        init(frameSource source: ImageFrameSource,
              contentMode mode: UIView.ContentMode,
              size: CGSize,
              imageSize: CGSize,
@@ -475,7 +516,7 @@ extension AnimatedImageView {
              framePreloadCount count: Int,
              repeatCount: RepeatCount,
              preloadQueue: DispatchQueue) {
-            self.imageSource = source
+            self.frameSource = source
             self.contentMode = mode
             self.size = size
             self.imageSize = imageSize
@@ -483,13 +524,10 @@ extension AnimatedImageView {
             self.maxFrameCount = count
             self.maxRepeatCount = repeatCount
             self.preloadQueue = preloadQueue
-            
-            GraphicsContext.begin(size: imageSize, scale: imageScale)
         }
         
         deinit {
             resetAnimatedFrames()
-            GraphicsContext.end()
         }
 
         /// Gets the image frame of a given index.
@@ -504,7 +542,7 @@ extension AnimatedImageView {
         }
 
         func prepareFramesAsynchronously() {
-            frameCount = Int(CGImageSourceGetCount(imageSource))
+            frameCount = frameSource.frameCount
             animatedFrames.reserveCapacity(frameCount)
             preloadQueue.async { [weak self] in
                 self?.setupAnimatedFrames()
@@ -529,7 +567,7 @@ extension AnimatedImageView {
             var duration: TimeInterval = 0
 
             (0..<frameCount).forEach { index in
-                let frameDuration = GIFAnimatedImage.getFrameDuration(from: imageSource, at: index)
+                let frameDuration = frameSource.duration(at: index)
                 duration += min(frameDuration, maxTimeStep)
                 animatedFrames.append(AnimatedFrame(image: nil, duration: frameDuration))
 
@@ -546,19 +584,8 @@ extension AnimatedImageView {
 
         private func loadFrame(at index: Int) -> UIImage? {
             let resize = needsPrescaling && size != .zero
-            let options: [CFString: Any]?
-            if resize {
-                options = [
-                    kCGImageSourceCreateThumbnailFromImageIfAbsent: true,
-                    kCGImageSourceCreateThumbnailWithTransform: true,
-                    kCGImageSourceShouldCacheImmediately: true,
-                    kCGImageSourceThumbnailMaxPixelSize: max(size.width, size.height)
-                ]
-            } else {
-                options = nil
-            }
-
-            guard let cgImage = CGImageSourceCreateImageAtIndex(imageSource, index, options as CFDictionary?) else {
+            let maxSize = resize ? size : nil
+            guard let cgImage = frameSource.frame(at: index, maxSize: maxSize) else {
                 return nil
             }
             
@@ -568,13 +595,12 @@ extension AnimatedImageView {
                 // To get a workaround, create another image ref and use that to create the final image. This leads to
                 // some performance loss, but there is little we can do.
                 // https://github.com/onevcat/Kingfisher/issues/1844
-                guard let context = GraphicsContext.current(size: imageSize, scale: imageScale, inverting: true, cgImage: cgImage),
-                      let decodedImageRef = cgImage.decoded(on: context, scale: imageScale)
-                else {
+                // https://github.com/onevcat/Kingfisher/pulls/2194
+                guard let unretainedImage = CGImage.create(ref: cgImage) else {
                     return KFCrossPlatformImage(cgImage: cgImage)
                 }
                 
-                return KFCrossPlatformImage(cgImage: decodedImageRef)
+                return KFCrossPlatformImage(cgImage: unretainedImage)
             } else {
                 let image = KFCrossPlatformImage(cgImage: cgImage)
                 if backgroundDecode {
@@ -700,3 +726,5 @@ class SafeArray<Element> {
 }
 #endif
 #endif
+
+

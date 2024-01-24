@@ -8,6 +8,13 @@
 
 import UIKit
 
+//class WYTestChatController: UIViewController {
+//
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
+//    }
+//}
+
 class WYTestChatController: UIViewController {
     
     var chatView: WYChatView!

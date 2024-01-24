@@ -1,8 +1,8 @@
 PODS:
-  - Alamofire (5.7.1)
+  - Alamofire (5.8.1)
   - HandyJSON (5.0.2)
-  - IQKeyboardManagerSwift (6.5.11)
-  - Kingfisher (7.7.0)
+  - IQKeyboardManagerSwift (6.5.16)
+  - Kingfisher (7.10.2)
   - Moya (15.0.0):
     - Moya/Core (= 15.0.0)
   - Moya/Core (15.0.0):
@@ -82,10 +82,10 @@ SPEC REPOS:
     - WYLivePlayer
 
 SPEC CHECKSUMS:
-  Alamofire: 0123a34370cb170936ae79a8df46cc62b2edeb88
+  Alamofire: 3ca42e259043ee0dc5c0cdd76c4bc568b8e42af7
   HandyJSON: 9e4e236f5d2dbefad5155a77417bbea438201c03
-  IQKeyboardManagerSwift: c7955c0bdbf7b2eb29bb7daaa44e3d90f55a9a85
-  Kingfisher: f043ac666dfc96c1f37604f93effb45a7ee3a3e1
+  IQKeyboardManagerSwift: 12d89768845bb77b55cc092ecc2b1f9370f06b76
+  Kingfisher: 99edc495d3b7607e6425f0d6f6847b2abd6d716d
   Moya: 138f0573e53411fb3dc17016add0b748dfbd78ee
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
   WYBasisKit: e71c013072f963e6f57eb344d2538d989696237b
@@ -93,4 +93,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 8ee7e441b8fc46ae0f908233b8ac043bf7da41d7
 
-COCOAPODS: 1.11.3
+COCOAPODS: 1.11.2
