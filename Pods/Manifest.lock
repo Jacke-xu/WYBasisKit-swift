@@ -13,7 +13,7 @@ DEPENDENCIES:
   - SnapKit
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git:
     - Alamofire
     - Kingfisher
     - Moya
@@ -25,6 +25,6 @@ SPEC CHECKSUMS:
   Moya: 138f0573e53411fb3dc17016add0b748dfbd78ee
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
 
-PODFILE CHECKSUM: 0bdcc44088d423e618b3a6f10546ae0224c93d06
+PODFILE CHECKSUM: c9790d0c966f9b52def8c5aa91b1641a5e22a14e
 
-COCOAPODS: 1.11.2
+COCOAPODS: 1.15.0
