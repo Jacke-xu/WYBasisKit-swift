@@ -12,6 +12,7 @@ target 'WYBasisKitTest' do
   pod 'WYBasisKit/Localizable'
   pod 'WYBasisKit/Activity'
   pod 'WYBasisKit/Storage'
+  pod 'WYBasisKit/Codable'
   pod 'WYBasisKit/Authorization'
   pod 'IQKeyboardManagerSwift'
 end

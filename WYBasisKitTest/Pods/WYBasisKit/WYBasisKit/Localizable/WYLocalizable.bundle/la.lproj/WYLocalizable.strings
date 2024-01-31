@@ -1,86 +1,86 @@
 /*
   WYLocalizable.strings
   WYBasisKit
-
+  拉丁语
   Created by 官人 on 2020/11/21.
   Copyright © 2020 官人. All rights reserved.
 */
 
-"WYLocalizable_01" = "got it";
+"WYLocalizable_01" = "Got it";
 
-"WYLocalizable_02" = "contrasignum";
+"WYLocalizable_02" = "Password";
 
-"WYLocalizable_03" = "annulla";
+"WYLocalizable_03" = "Cancel";
 
-"WYLocalizable_04" = "dele";
+"WYLocalizable_04" = "Delere";
 
-"WYLocalizable_05" = "Biometrics non disponibile";
+"WYLocalizable_05" = "Biometrica not available";
 
-"WYLocalizable_06" = "Recognitio biometrica clausus est, clausus est schermum et dispositivum successfully discoluere. Post rediaperire hunc paginam, potest rediaperire";
+"WYLocalizable_06" = "Biometrica clausa est, scrinium claude et artificium feliciter reserare ac hanc paginam recludere";
 
-"WYLocalizable_07" = "Sistema hoc cognoscentiam interrupta";
+"WYLocalizable_07" = "ratio hanc identificationem interrupit";
 
-"WYLocalizable_08" = "Configura contrasignum desbloquere, quaeso, antequam cognosceret biometricum";
+"WYLocalizable_08" = "Tesseram unlock pone ante quam verterem in biometricis";
 
-"WYLocalizable_09" = "Abilite/constitue functionem biometricam in optimis dispositivi";
+"WYLocalizable_09" = "Quaeso enable/pone biometrica in fabrica occasus";
 
-"WYLocalizable_10" = "Enter a password to verify biometrics";
+"WYLocalizable_10" = "Placere password ut quin biometrica";
 
-"WYLocalizable_11" = "Nullum nuntium";
+"WYLocalizable_11" = "No news yet";
 
-"WYLocalizable_12" = "Authorization";
+"WYLocalizable_12" = "Deauthorize";
 
-"WYLocalizable_13" = "Applicatio non habet permissionem ad albamum accessere. Authorise nunc?";
+"WYLocalizable_13" = "App non licentiam adeundi phoenicis album, nunc auctorizandi?";
 
-"WYLocalizable_14" = "Aplicatio aplicationis non habet accessum ad instrumentum photographicum. Authorise nunc?";
+"WYLocalizable_14" = "App non licentiam accedere ad cameram, nunc ad patres auctores fiant?";
 
-"WYLocalizable_15" = "Applicatio non habet accessum ad microphonum. Authorise nunc?";
+"WYLocalizable_15" = "App non licentiam accedere tortor ligula, nunc auctorizare";
 
-"WYLocalizable_16" = "Applicatio non habet permissionem ad locum accessere. Authorisare nunc?";
+"WYLocalizable_16" = "App non licentiam aditus locus, nunc auctorizare";
 
-"WYLocalizable_17" = "Aplicatio aplicationis non habet permissionem accedere ad librum adressa. Authorise nunc?";
+"WYLocalizable_17" = "App non permittitur accedere ad librum electronicum, nunc auctorizare?";
 
-"WYLocalizable_18" = "Continue connecting";
+"WYLocalizable_18" = "Perge coniungere";
 
-"WYLocalizable_19" = "Cancella connexionem";
+"WYLocalizable_19" = "Cancel Connection";
 
-"WYLocalizable_20" = "Data request failed";
+"WYLocalizable_20" = "Data petitio defecit";
 
-"WYLocalizable_21" = "Codice status abnormale";
+"WYLocalizable_21" = "Status Codicis abnormes";
 
-"WYLocalizable_22" = "Unknown network, may be security risks. Would you like to continue?";
+"WYLocalizable_22" = "Retis incognita, periculum securitatis esse potest, pergere?";
 
-"WYLocalizable_23" = "CategoryName";
+"WYLocalizable_23" = "Perge ad Occasus";
 
-"WYLocalizable_24" = "Connexio retis non secura annullata";
+"WYLocalizable_24" = "Intutus nexus retis cancellatus";
 
-"WYLocalizable_25" = "Nullum connexium rete, obsecro configurationes rete vestras";
+"WYLocalizable_25" = "Nullum retis nexum, quaeso retis occasus reprehendo";
 
-"WYLocalizable_26" = "WiFi utilis ad internet connect are";
+"WYLocalizable_26" = "Wifi" uteris;
 
-"WYLocalizable_27" = "Retem mobilem cellulam ad netopus utilizatis";
+"WYLocalizable_27" = "Connexa sunt cum Internet utens retiacula cellulosa";
 
-"WYLocalizable_28" = "Unavailable network, please confirm that your network environment or network connection permissions have been set correctly";
+"WYLocalizable_28" = "Retis Unavailable, quaeso confirmas permissiones retis vel nexus retis recte positas";
 
-"WYLocalizable_29" = "Verificatio datorum respondentiae";
+"WYLocalizable_29" = "Responsio data Codicis verificationem defecit";
 
-"WYLocalizable_30" = "simpliciter";
+"WYLocalizable_30" = "Modo";
 
-"WYLocalizable_31" = "%@Minutos abhinc";
+"WYLocalizable_31" = "%@ minutes ago";
 
-"WYLocalizable_32" = "%@horas abhinc";
+"WYLocalizable_32" = "%@ hours ago";
 
-"WYLocalizable_33" = "%@dies abhinc";
+"WYLocalizable_33" = "%@ dies ago";
 
-"WYLocalizable_34" = "%@mense abhinc";
+"WYLocalizable_34" = "%@ month ago";
 
-"WYLocalizable_35" = "%@annos abhinc";
+"WYLocalizable_35" = "%@ abhinc";
 
-"WYLocalizable_36" = "Non est carta telephonica";
+"WYLocalizable_36" = "No SIM Card";
 
 "WYLocalizable_37" = "Capricornus";
 
-"WYLocalizable_38" = "aquarius";
+"WYLocalizable_38" = "Aquarius";
 
 "WYLocalizable_39" = "Pisces";
 
@@ -92,14 +92,46 @@
 
 "WYLocalizable_43" = "Cancer";
 
-"WYLocalizable_44" = "paper size";
+"WYLocalizable_44" = "Leo";
 
 "WYLocalizable_45" = "Virgo";
 
-"WYLocalizable_46" = "libra";
+"WYLocalizable_46" = "Libra";
 
-"WYLocalizable_47" = "paper size";
+"WYLocalizable_47" = "Scorpio";
 
 "WYLocalizable_48" = "Sagittarius";
 
-"WYLocalizable_49" = "Aplicatio aplicationis non habet accessum ad cognoscendum sermonis. Autenticare nunc?";
+"WYLocalizable_49" = "App non licentiam aditum ad recognitionem sermonis, nunc ad auctorizandum?";
+
+"WYLocalizable_50" = "Hodie";
+
+"WYLocalizable_51" = "Heri";
+
+"WYLocalizable_52" = "Pridie heri";
+
+"WYLocalizable_53" = "Dominica";
+
+"WYLocalizable_54" = "Lunae";
+
+"WYLocalizable_55" = "Martis";
+
+"WYLocalizable_56" = "Mercurii";
+
+"WYLocalizable_57" = "Jovis";
+
+"WYLocalizable_58" = "Veneris";
+
+"WYLocalizable_59" = "Sabbato";
+
+"WYLocalizable_60" = "Annus";
+
+"WYLocalizable_61" = "mensis";
+
+"Dies" = "Dies";
+
+"WYLocalizable_63" = "Hora";
+
+"WYLocalizable_64" = "Minutes";
+
+"WYLocalizable_65" = "secunda";

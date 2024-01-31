@@ -1,6 +1,5 @@
 PODS:
   - Alamofire (5.8.1)
-  - HandyJSON (5.0.2)
   - IQKeyboardManagerSwift (6.5.16)
   - Kingfisher (7.10.2)
   - Moya (15.0.0):
@@ -8,53 +7,54 @@ PODS:
   - Moya/Core (15.0.0):
     - Alamofire (~> 5.0)
   - SnapKit (5.6.0)
-  - WYBasisKit (1.2.9):
-    - WYBasisKit/Extension (= 1.2.9)
-  - WYBasisKit/Activity (1.2.9):
+  - WYBasisKit (1.3.0):
+    - WYBasisKit/Extension (= 1.3.0)
+  - WYBasisKit/Activity (1.3.0):
     - WYBasisKit/Localizable
-  - WYBasisKit/Authorization (1.2.9):
-    - WYBasisKit/Authorization/Biometric (= 1.2.9)
-    - WYBasisKit/Authorization/Camera (= 1.2.9)
-    - WYBasisKit/Authorization/Contacts (= 1.2.9)
-    - WYBasisKit/Authorization/Microphone (= 1.2.9)
-    - WYBasisKit/Authorization/PhotoAlbums (= 1.2.9)
-    - WYBasisKit/Authorization/SpeechRecognition (= 1.2.9)
-  - WYBasisKit/Authorization/Biometric (1.2.9):
+  - WYBasisKit/Authorization (1.3.0):
+    - WYBasisKit/Authorization/Biometric (= 1.3.0)
+    - WYBasisKit/Authorization/Camera (= 1.3.0)
+    - WYBasisKit/Authorization/Contacts (= 1.3.0)
+    - WYBasisKit/Authorization/Microphone (= 1.3.0)
+    - WYBasisKit/Authorization/PhotoAlbums (= 1.3.0)
+    - WYBasisKit/Authorization/SpeechRecognition (= 1.3.0)
+  - WYBasisKit/Authorization/Biometric (1.3.0):
     - WYBasisKit/Localizable
-  - WYBasisKit/Authorization/Camera (1.2.9):
+  - WYBasisKit/Authorization/Camera (1.3.0):
     - WYBasisKit/Localizable
-  - WYBasisKit/Authorization/Contacts (1.2.9):
+  - WYBasisKit/Authorization/Contacts (1.3.0):
     - WYBasisKit/Localizable
-  - WYBasisKit/Authorization/Microphone (1.2.9):
+  - WYBasisKit/Authorization/Microphone (1.3.0):
     - WYBasisKit/Localizable
-  - WYBasisKit/Authorization/PhotoAlbums (1.2.9):
+  - WYBasisKit/Authorization/PhotoAlbums (1.3.0):
     - WYBasisKit/Localizable
-  - WYBasisKit/Authorization/SpeechRecognition (1.2.9):
+  - WYBasisKit/Authorization/SpeechRecognition (1.3.0):
     - WYBasisKit/Localizable
-  - WYBasisKit/Config (1.2.9)
-  - WYBasisKit/Extension (1.2.9):
+  - WYBasisKit/Codable (1.3.0)
+  - WYBasisKit/Config (1.3.0)
+  - WYBasisKit/Extension (1.3.0):
     - WYBasisKit/Config
     - WYBasisKit/Localizable
-  - WYBasisKit/Layout (1.2.9):
-    - WYBasisKit/Layout/BannerView (= 1.2.9)
-    - WYBasisKit/Layout/PagingView (= 1.2.9)
-    - WYBasisKit/Layout/ScrollText (= 1.2.9)
-  - WYBasisKit/Layout/BannerView (1.2.9):
+  - WYBasisKit/Layout (1.3.0):
+    - WYBasisKit/Layout/BannerView (= 1.3.0)
+    - WYBasisKit/Layout/PagingView (= 1.3.0)
+    - WYBasisKit/Layout/ScrollText (= 1.3.0)
+  - WYBasisKit/Layout/BannerView (1.3.0):
     - Kingfisher
     - WYBasisKit/Localizable
-  - WYBasisKit/Layout/PagingView (1.2.9):
+  - WYBasisKit/Layout/PagingView (1.3.0):
     - SnapKit
-  - WYBasisKit/Layout/ScrollText (1.2.9):
+  - WYBasisKit/Layout/ScrollText (1.3.0):
     - SnapKit
     - WYBasisKit/Localizable
-  - WYBasisKit/Localizable (1.2.9):
+  - WYBasisKit/Localizable (1.3.0):
     - WYBasisKit/Config
-  - WYBasisKit/Networking (1.2.9):
-    - HandyJSON
+  - WYBasisKit/Networking (1.3.0):
     - Moya
+    - WYBasisKit/Codable
     - WYBasisKit/Localizable
     - WYBasisKit/Storage
-  - WYBasisKit/Storage (1.2.9)
+  - WYBasisKit/Storage (1.3.0)
   - WYLivePlayer (1.0.0):
     - Kingfisher
     - SnapKit
@@ -64,6 +64,7 @@ DEPENDENCIES:
   - WYBasisKit
   - WYBasisKit/Activity
   - WYBasisKit/Authorization
+  - WYBasisKit/Codable
   - WYBasisKit/Layout
   - WYBasisKit/Localizable
   - WYBasisKit/Networking
@@ -71,9 +72,8 @@ DEPENDENCIES:
   - WYLivePlayer
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git:
     - Alamofire
-    - HandyJSON
     - IQKeyboardManagerSwift
     - Kingfisher
     - Moya
@@ -83,14 +83,13 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Alamofire: 3ca42e259043ee0dc5c0cdd76c4bc568b8e42af7
-  HandyJSON: 9e4e236f5d2dbefad5155a77417bbea438201c03
   IQKeyboardManagerSwift: 12d89768845bb77b55cc092ecc2b1f9370f06b76
   Kingfisher: 99edc495d3b7607e6425f0d6f6847b2abd6d716d
   Moya: 138f0573e53411fb3dc17016add0b748dfbd78ee
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
-  WYBasisKit: e71c013072f963e6f57eb344d2538d989696237b
+  WYBasisKit: 50b16252a47b028f7e0e259f34b17023e11806b4
   WYLivePlayer: cc4a80531488cad20ca45ebe58f529f31bbc44d9
 
-PODFILE CHECKSUM: 8ee7e441b8fc46ae0f908233b8ac043bf7da41d7
+PODFILE CHECKSUM: 4f97f5d7c3e052c83a9fae92b4aa1415a37b7157
 
-COCOAPODS: 1.11.2
+COCOAPODS: 1.15.0

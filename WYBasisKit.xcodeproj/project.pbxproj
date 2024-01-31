@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -680,7 +680,7 @@
 				CLASSPREFIX = WY;
 				LastSwiftUpdateCheck = 1160;
 				LastUpgradeCheck = 1500;
-				ORGANIZATIONNAME = "Jacke·xu";
+				ORGANIZATIONNAME = "官人";
 				TargetAttributes = {
 					AA484EAE24FA262100B39D60 = {
 						CreatedOnToolsVersion = 11.6;
@@ -689,7 +689,7 @@
 				};
 			};
 			buildConfigurationList = AA484EAA24FA262100B39D60 /* Build configuration list for PBXProject "WYBasisKit" */;
-			compatibilityVersion = "Xcode 13.0";
+			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (

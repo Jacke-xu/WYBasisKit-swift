@@ -296,7 +296,7 @@ public extension NSAttributedString {
     /// 获取每行显示的字符串(为了计算准确，尽量将使用到的属性如字间距、缩进、换行模式、字体等设置到调用本方法的attributedString对象中来, 没有用到的直接忽略)
     func wy_stringPerLine(controlWidth: CGFloat) -> [String] {
         
-        if self.string.utf16.count <= 0 {
+        if (self.string.utf16.count <= 0) {
             return []
         }
         

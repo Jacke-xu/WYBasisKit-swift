@@ -59,7 +59,7 @@ Pod::Spec.new do |kit|
 
     kit.subspec 'Activity' do |activity|
        activity.source_files = 'WYBasisKit/Activity/WYActivity.swift', 'WYBasisKit/Extension/UIView/UIView.swift', 'WYBasisKit/Extension/UIViewController/UIViewController.swift', 'WYBasisKit/Extension/NSAttributedString/NSAttributedString.swift', 'WYBasisKit/Extension/String/String.swift', 'WYBasisKit/Extension/UIImage/UIImage.swift', 'WYBasisKit/Config/WYBasisKitConfig.swift'
-       activity.frameworks = 'Foundation', 'UIKit', 'CommonCrypto'
+       activity.frameworks = 'Foundation', 'UIKit'
        activity.resource = 'WYBasisKit/Activity/WYActivity.bundle', 'WYBasisKit/Localizable/WYLocalizable.bundle'
        activity.dependency 'WYBasisKit/Localizable'
     end

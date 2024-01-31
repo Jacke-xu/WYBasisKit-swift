@@ -1,82 +1,82 @@
 /*
   WYLocalizable.strings
   WYBasisKit
-
+  马来语
   Created by 官人 on 2020/11/21.
   Copyright © 2020 官人. All rights reserved.
 */
 
-"WYLocalizable_01" = "Dapat.";
+"WYLocalizable_01" = "Faham";
 
-"WYLocalizable_02" = "Katalaluan";
+"WYLocalizable_02" = "Kata Laluan";
 
-"WYLocalizable_03" = "batalkan";
+"WYLocalizable_03" = "Batal";
 
-"WYLocalizable_04" = "padam";
+"WYLocalizable_04" = "Padam";
 
 "WYLocalizable_05" = "Biometrik tidak tersedia";
 
-"WYLocalizable_06" = "Pengenalan biometrik telah dikunci, kunci skrin dan berjaya membuka peranti. Selepas membuka semula halaman ini, ia boleh dibuka semula";
+"WYLocalizable_06" = "Biometrik telah dikunci, kunci skrin dan berjaya membuka kunci peranti dan membuka semula halaman ini untuk membuka semula";
 
-"WYLocalizable_07" = "Sistem mengganggu pengenalan ini";
+"WYLocalizable_07" = "Sistem telah mengganggu pengenalan ini";
 
-"WYLocalizable_08" = "Sila tetapkan kata laluan buka sebelum benarkan pengenalan biometrik";
+"WYLocalizable_08" = "Sila tetapkan kata laluan buka kunci sebelum menghidupkan biometrik";
 
-"WYLocalizable_09" = "Sila benarkan/tetapkan fungsi biometrik dalam tetapan peranti";
+"WYLocalizable_09" = "Sila dayakan/tetapkan biometrik dalam tetapan peranti";
 
-"WYLocalizable_10" = "Sila masukkan kata laluan untuk sahkan biometrik";
+"WYLocalizable_10" = "Sila masukkan kata laluan untuk mengesahkan biometrik";
 
-"WYLocalizable_11" = "Tiada mesej lagi";
+"WYLocalizable_11" = "Tiada berita lagi";
 
-"WYLocalizable_12" = "Pengesahan";
+"WYLocalizable_12" = "Nyahkebenaran";
 
-"WYLocalizable_13" = "Aplikasi tidak mempunyai keizinan untuk mengakses album. Benarkan sekarang?";
+"WYLocalizable_13" = "Apl tidak mempunyai kebenaran untuk mengakses album foto, sekarang pergi ke kebenaran?";
 
-"WYLocalizable_14" = "Aplikasi tidak mempunyai akses ke kamera. Benarkan sekarang?";
+"WYLocalizable_14" = "Apl tidak mempunyai kebenaran untuk mengakses kamera, sekarang pergi ke kebenaran?";
 
-"WYLocalizable_15" = "Aplikasi tidak mempunyai akses ke mikrofon. Mengizinkan sekarang?";
+"WYLocalizable_15" = "Apl tidak mempunyai kebenaran untuk mengakses mikrofon, sekarang pergi ke kebenaran?";
 
-"WYLocalizable_16" = "Aplikasi tidak mempunyai keizinan untuk mengakses lokasi. Izinkan sekarang?";
+"WYLocalizable_16" = "Apl tidak mempunyai kebenaran untuk mengakses lokasi, sekarang pergi ke kebenaran?";
 
-"WYLocalizable_17" = "Aplikasi tidak mempunyai keizinan untuk mengakses buku alamat. Benarkan sekarang?";
+"WYLocalizable_17" = "Apl tidak mempunyai kebenaran untuk mengakses buku alamat, sekarang pergi ke kebenaran?";
 
-"WYLocalizable_18" = "Teruskan sambung";
+"WYLocalizable_18" = "Teruskan menyambung";
 
 "WYLocalizable_19" = "Batalkan Sambungan";
 
 "WYLocalizable_20" = "Permintaan data gagal";
 
-"WYLocalizable_21" = "Kod status tidak normal";
+"WYLocalizable_21" = "Kod Status Tidak Normal";
 
-"WYLocalizable_22" = "Rangkaian tidak diketahui, mungkin ada risiko keselamatan. Anda ingin teruskan?";
+"WYLocalizable_22" = "Rangkaian tidak diketahui, mungkin terdapat risiko keselamatan, teruskan?";
 
-"WYLocalizable_23" = "Untuk ditetapkan";
+"WYLocalizable_23" = "Pergi ke Tetapan";
 
 "WYLocalizable_24" = "Sambungan rangkaian tidak selamat dibatalkan";
 
 "WYLocalizable_25" = "Tiada sambungan rangkaian, sila semak tetapan rangkaian anda";
 
-"WYLocalizable_26" = "Anda menggunakan WiFi untuk menyambung ke internet";
+"WYLocalizable_26" = "Anda menggunakan Wifi";
 
-"WYLocalizable_27" = "Anda menggunakan rangkaian bimbit sel untuk rangkaian";
+"WYLocalizable_27" = "Anda disambungkan ke Internet menggunakan rangkaian selular";
 
-"WYLocalizable_28" = "Rangkaian tidak tersedia, sila sahkan bahawa persekitaran rangkaian anda atau kebenaran sambungan rangkaian telah ditetapkan dengan betul";
+"WYLocalizable_28" = "Rangkaian tidak tersedia, sila sahkan persekitaran rangkaian anda atau kebenaran sambungan rangkaian telah ditetapkan dengan betul";
 
-"WYLocalizable_29" = "Pengesahan Kod Data Balasan gagal";
+"WYLocalizable_29" = "Pengesahan kod data tindak balas gagal";
 
-"WYLocalizable_30" = "Hanya";
+"WYLocalizable_30" = "Tadi";
 
-"WYLocalizable_31" = "%@Minutes ago";
+"WYLocalizable_31" = "%@ minit lalu";
 
-"WYLocalizable_32" = "%@Hours ago";
+"WYLocalizable_32" = "%@ jam yang lalu";
 
-"WYLocalizable_33" = "%@Days ago";
+"WYLocalizable_33" = "%@ days ago";
 
-"WYLocalizable_34" = "%@Month ago";
+"WYLocalizable_34" = "%@ month ago";
 
-"WYLocalizable_35" = "%@Tahun yang lalu";
+"WYLocalizable_35" = "%@ tahun lalu";
 
-"WYLocalizable_36" = "Tiada kad telefon";
+"WYLocalizable_36" = "Tiada Kad SIM";
 
 "WYLocalizable_37" = "Capricornus";
 
@@ -90,16 +90,48 @@
 
 "WYLocalizable_42" = "Gemini";
 
-"WYLocalizable_43" = "Kanker";
+"WYLocalizable_43" = "Kanser";
 
-"WYLocalizable_44" = "leo";
+"WYLocalizable_44" = "Leo";
 
 "WYLocalizable_45" = "Virgo";
 
-"WYLocalizable_46" = "unit synonyms for matching user input";
+"WYLocalizable_46" = "Libra";
 
 "WYLocalizable_47" = "Scorpio";
 
 "WYLocalizable_48" = "Sagittarius";
 
-"WYLocalizable_49" = "Aplikasi tidak mempunyai akses ke pengenalan ucapan. Benarkan sekarang?";
+"WYLocalizable_49" = "Apl tidak mempunyai kebenaran untuk mengakses pengecaman pertuturan, sekarang pergi ke kebenaran?";
+
+"WYLocalizable_50" = "Hari ini";
+
+"WYLocalizable_51" = "Semalam";
+
+"WYLocalizable_52" = "Sehari sebelum semalam";
+
+"WYLocalizable_53" = "Ahad";
+
+"WYLocalizable_54" = "Isnin";
+
+"WYLocalizable_55" = "Selasa";
+
+"WYLocalizable_56" = "Rabu";
+
+"WYLocalizable_57" = "Khamis";
+
+"WYLocalizable_58" = "Jumaat";
+
+"WYLocalizable_59" = "Sabtu";
+
+"WYLocalizable_60" = "Tahun";
+
+"WYLocalizable_61" = "Bulan";
+
+"WYLocalizable_62" = "Hari";
+
+"WYLocalizable_63" = "Jam";
+
+"WYLocalizable_64" = "Minit";
+
+"WYLocalizable_65" = "saat";

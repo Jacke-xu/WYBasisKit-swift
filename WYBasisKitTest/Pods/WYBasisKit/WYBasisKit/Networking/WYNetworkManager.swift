@@ -8,7 +8,6 @@
 
 import Moya
 import Alamofire
-import HandyJSON
 
 /// 网络请求任务类型
 public enum WYTaskMethod {
@@ -42,29 +41,12 @@ public enum WYMappingKey {
 }
 
 /// 网络请求解析对象
-public struct WYResponse: HandyJSON {
+public struct WYResponse: Codable {
     
-    public var message: String? = ""
+    public var message: String = ""
     public var code: String = ""
-    public var data: String? = ""
+    public var data: String = ""
     
-    /// 自定义传入JSON解析时需要映射的Key及其对应的解析字段
-    public static var mapper: [WYMappingKey: String] = [:]
-    public mutating func mapping(mapper: HelpingMapper) {
-        
-        for mappingKey in WYResponse.mapper.keys {
-            
-            switch mappingKey {
-            case .message:
-                mapper.specify(property: &message, name: WYResponse.mapper[mappingKey] ?? "")
-            case .code:
-                mapper.specify(property: &code, name: WYResponse.mapper[mappingKey] ?? "")
-            case .data:
-                mapper.specify(property: &data, name: WYResponse.mapper[mappingKey] ?? "")
-            }
-        }
-        WYResponse.mapper = [:]
-    }
     public init() {}
 }
 
@@ -138,7 +120,7 @@ public struct WYError {
     }
 }
 
-public struct WYDownloadModel: HandyJSON {
+public struct WYDownloadModel: Codable {
     
     /// 资源路径
     public var assetPath: String = ""
@@ -530,7 +512,9 @@ extension WYNetworkManager {
                     downloadModel.assetName = (target.request.assetName.isEmpty ? (response.response?.suggestedFilename ?? "") : target.request.assetName)
                     downloadModel.mimeType = format
                     
-                    handlerSuccess(response: WYSuccess(origin: downloadModel.toJSONString() ?? ""), handler: handler)
+                    let codable: WYCodable = WYCodable()
+                    let jsonString = try? codable.decode(String.self, from: codable.encode(Data.self, from: downloadModel))
+                    handlerSuccess(response: WYSuccess(origin: jsonString ?? ""), handler: handler)
                     
                 }else {
                     
@@ -559,14 +543,35 @@ extension WYNetworkManager {
                             
                         }else {
                             do {
-                                WYResponse.mapper = config.mapper
-                                let responseData = try WYResponse.deserialize(from: response.mapString())
                                 
-                                if responseData?.code == config.serverRequestSuccessCode {
+                                let codable: WYCodable = WYCodable()
+                                
+                                if config.mapper.isEmpty == false {
+                                    var mappingKeys: [[String]: String] = [[String]: String]()
+                                    if let mapperMessage: String = config.mapper[WYMappingKey.message] {
+                                        mappingKeys[["message"]] = mapperMessage
+                                    }
                                     
-                                    if (config.requestCache != nil) && (config.requestCache!.cacheKey.count > 0) && (responseData?.data != nil) {
+                                    if let mapperCode: String = config.mapper[WYMappingKey.code] {
+                                        mappingKeys[["code"]] = mapperCode
+                                    }
+                                    
+                                    if let mapperData: String = config.mapper[WYMappingKey.data] {
+                                        mappingKeys[["data"]] = mapperData
+                                    }
+                                    
+                                    if mappingKeys.isEmpty == false {
+                                        codable.mappingKeys = .mapper(mappingKeys)
+                                    }
+                                }
+                                
+                                let responseData = try codable.decode(WYResponse.self, from: response.data)
+                                
+                                if responseData.code == config.serverRequestSuccessCode {
+                                    
+                                    if (config.requestCache != nil) && (config.requestCache!.cacheKey.count > 0) && (responseData.data.isEmpty == false) {
                                         
-                                        if let storageData: Data = responseData?.data?.data(using: .utf8) {
+                                        if let storageData: Data = responseData.data.data(using: .utf8) {
                                             
                                             storage = WYStorage.storage(forKey: config.requestCache!.cacheKey, data: storageData, durable: config.requestCache!.storageDurable, path: (config.requestCache?.cachePath)!)
                                         }
@@ -574,13 +579,13 @@ extension WYNetworkManager {
                                     
                                     showDebugModeLog(target: target, response: response)
                                     
-                                    handlerSuccess(response: WYSuccess(parse: responseData?.data ?? "", storage: storage), handler: handler)
+                                    handlerSuccess(response: WYSuccess(parse: responseData.data, storage: storage), handler: handler)
                                     
                                 }else {
                                     
                                     showDebugModeLog(target: target, response: response)
                                     
-                                    handlerFailure(error: WYError(code: responseData?.code ?? "", describe: (responseData?.message ?? WYLocalized("WYLocalizable_29", table: WYBasisKitConfig.kitLocalizableTable))), debugModeLog: config.debugModeLog, handler: handler)
+                                    handlerFailure(error: WYError(code: responseData.code, describe: (responseData.message.isEmpty ? WYLocalized("WYLocalizable_29", table: WYBasisKitConfig.kitLocalizableTable) : responseData.message)), debugModeLog: config.debugModeLog, handler: handler)
                                 }
                                 
                             } catch  {

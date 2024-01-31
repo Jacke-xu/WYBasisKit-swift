@@ -525,7 +525,7 @@
 				DCFEBFE129EFDE2F001AE8E7 /* Sources */,
 				DCFEBFE229EFDE2F001AE8E7 /* Frameworks */,
 				DCFEBFE329EFDE2F001AE8E7 /* Resources */,
-				832EB47AA80A8451563477BE /* [CP] Embed Pods Frameworks */,
+				DE8E4DEC773CCA025A8B4F0A /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -579,9 +579,10 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
+				CLASSPREFIX = WY;
 				LastSwiftUpdateCheck = 1430;
 				LastUpgradeCheck = 1430;
-				ORGANIZATIONNAME = "";
+				ORGANIZATIONNAME = "官人";
 				TargetAttributes = {
 					DCFEBFE429EFDE2F001AE8E7 = {
 						CreatedOnToolsVersion = 14.3;
@@ -655,7 +656,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		832EB47AA80A8451563477BE /* [CP] Embed Pods Frameworks */ = {
+		DE8E4DEC773CCA025A8B4F0A /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -915,7 +916,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = JX362P6GEC;
+				DEVELOPMENT_TEAM = "";
 				EXCLUDED_ARCHS = "";
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -956,7 +957,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = JX362P6GEC;
+				DEVELOPMENT_TEAM = "";
 				EXCLUDED_ARCHS = "";
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				GENERATE_INFOPLIST_FILE = YES;

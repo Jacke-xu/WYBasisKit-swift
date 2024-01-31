@@ -2,8 +2,8 @@
 //  WYLivePlayer.swift
 //  WYBasisKit
 //
-//  Created by 官人 on 2022/4/21.
-//  Copyright © 2022 官人. All rights reserved.
+//  Created by jacke·xu on 2022/4/21.
+//  Copyright © 2022 Jacke·xu. All rights reserved.
 //
 
 import UIKit
@@ -96,7 +96,7 @@ public class WYLivePlayer: UIImageView {
             failReplayNumber = 0
         }
         
-        releasePlayer()
+        release()
         createPlayer(with: url)
         ijkPlayer?.prepareToPlay()
         
@@ -144,11 +144,11 @@ public class WYLivePlayer: UIImageView {
             image = player.thumbnailImageAtCurrentTime()
         }
         options = nil
-        releasePlayer()
+        release()
     }
     
     /// 释放播放器组件
-    public func releasePlayer() {
+    public func release() {
         
         guard let player = ijkPlayer else {
             return
@@ -224,7 +224,7 @@ public class WYLivePlayer: UIImageView {
                     failReplayNumber += 1
                     play(with: mediaUrl)
                 }else {
-                    releasePlayer()
+                    release()
                 }
             case .userExited:
                 callback(with: .userExited)
@@ -284,7 +284,7 @@ public class WYLivePlayer: UIImageView {
     }
     
     deinit {
-        releasePlayer()
+        release()
     }
 
     /*
