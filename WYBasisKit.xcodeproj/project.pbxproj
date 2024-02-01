@@ -88,7 +88,6 @@
 		1F4A0E48256B4A52002E932D /* WYNetworkConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYNetworkConfig.swift; sourceTree = "<group>"; };
 		1F5C3E602578B61B00E0DBFF /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
 		1F5C3E932578CD5400E0DBFF /* WYLocalizableManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYLocalizableManager.swift; sourceTree = "<group>"; };
-		1F6AA1C325A6D56F00AADEE3 /* WYBasisKit.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WYBasisKit.entitlements; sourceTree = "<group>"; };
 		1F99DCC7257DCFAE003D2408 /* WYPagingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYPagingView.swift; sourceTree = "<group>"; };
 		75FD4F7DFBF58D8B82417F4D /* Pods-WYBasisKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WYBasisKit.release.xcconfig"; path = "Target Support Files/Pods-WYBasisKit/Pods-WYBasisKit.release.xcconfig"; sourceTree = "<group>"; };
 		95FF853B47A9BDC19CFD8BF0 /* Pods-WYBasisKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WYBasisKit.debug.xcconfig"; path = "Target Support Files/Pods-WYBasisKit/Pods-WYBasisKit.debug.xcconfig"; sourceTree = "<group>"; };
@@ -108,6 +107,7 @@
 		AA484EBB24FA262500B39D60 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AA484EBE24FA262500B39D60 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AA484EC024FA262500B39D60 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AA6633102B6B5FDC009D7A8F /* WYBasisKit.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = WYBasisKit.entitlements; sourceTree = SOURCE_ROOT; };
 		AA771B942568F834002C748B /* UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		AA771B962568F834002C748B /* NSAttributedString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSAttributedString.swift; sourceTree = "<group>"; };
 		AA771B982568F834002C748B /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
@@ -297,6 +297,7 @@
 				AA771B912568F834002C748B /* WYBasisKit */,
 				AA484EB224FA262100B39D60 /* AppDelegate.swift */,
 				DCFEBFDA29EFD8E4001AE8E7 /* ViewController.swift */,
+				AA6633102B6B5FDC009D7A8F /* WYBasisKit.entitlements */,
 				AA484EB824FA262100B39D60 /* Main.storyboard */,
 				AA484EBB24FA262500B39D60 /* Assets.xcassets */,
 				AA484EBD24FA262500B39D60 /* LaunchScreen.storyboard */,
@@ -318,7 +319,6 @@
 		AA771B912568F834002C748B /* WYBasisKit */ = {
 			isa = PBXGroup;
 			children = (
-				1F6AA1C325A6D56F00AADEE3 /* WYBasisKit.entitlements */,
 				AA771C0D25691241002C748B /* Config */,
 				AA771BB12568F834002C748B /* Layout */,
 				AAA9E5E126DB3B68009C064B /* Activity */,
@@ -972,7 +972,7 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = WYBasisKit/WYBasisKit.entitlements;
+				CODE_SIGN_ENTITLEMENTS = WYBasisKit.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = JX362P6GEC;
@@ -1009,7 +1009,7 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = WYBasisKit/WYBasisKit.entitlements;
+				CODE_SIGN_ENTITLEMENTS = WYBasisKit.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = JX362P6GEC;
