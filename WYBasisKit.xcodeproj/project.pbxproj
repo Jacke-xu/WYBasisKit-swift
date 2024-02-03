@@ -36,13 +36,16 @@
 		AA771BD72568F834002C748B /* UINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA771BA42568F834002C748B /* UINavigationController.swift */; };
 		AA771BDA2568F834002C748B /* NumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA771BAA2568F834002C748B /* NumberFormatter.swift */; };
 		AA771BDB2568F834002C748B /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA771BAC2568F834002C748B /* String.swift */; };
-		AA771BDC2568F834002C748B /* NSObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA771BAE2568F834002C748B /* NSObject.swift */; };
 		AA771BDE2568F834002C748B /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA771BB32568F834002C748B /* UILabel.swift */; };
 		AA771BE02568F834002C748B /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA771BB72568F834002C748B /* UIButton.swift */; };
 		AA771BE22568F834002C748B /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA771BBA2568F834002C748B /* UIView.swift */; };
 		AA771BE32568F834002C748B /* UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA771BBD2568F834002C748B /* UITableView.swift */; };
 		AA771BE42568F834002C748B /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA771BBF2568F834002C748B /* UITextField.swift */; };
 		AA771BEA2568F834002C748B /* WYScrollText.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA771BC92568F834002C748B /* WYScrollText.swift */; };
+		AA78B6892B6E119B000AA35B /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA78B6882B6E119B000AA35B /* Double.swift */; };
+		AA78B68B2B6E11AD000AA35B /* Decimal.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA78B68A2B6E11AD000AA35B /* Decimal.swift */; };
+		AA78B68D2B6E11B9000AA35B /* CGFloat.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA78B68C2B6E11B9000AA35B /* CGFloat.swift */; };
+		AA78B68F2B6E11CB000AA35B /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA78B68E2B6E11CB000AA35B /* Int.swift */; };
 		AAA9E5E726DB3D0F009C064B /* WYActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA9E5E626DB3D0F009C064B /* WYActivity.swift */; };
 		AAA9E5E926DB6569009C064B /* WYActivity.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AAA9E5E826DB6569009C064B /* WYActivity.bundle */; };
 		AAB7BDE726257F3600BD57EC /* WYBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB7BDE626257F3600BD57EC /* WYBannerView.swift */; };
@@ -117,13 +120,16 @@
 		AA771BA42568F834002C748B /* UINavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UINavigationController.swift; sourceTree = "<group>"; };
 		AA771BAA2568F834002C748B /* NumberFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberFormatter.swift; sourceTree = "<group>"; };
 		AA771BAC2568F834002C748B /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
-		AA771BAE2568F834002C748B /* NSObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSObject.swift; sourceTree = "<group>"; };
 		AA771BB32568F834002C748B /* UILabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
 		AA771BB72568F834002C748B /* UIButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
 		AA771BBA2568F834002C748B /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		AA771BBD2568F834002C748B /* UITableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITableView.swift; sourceTree = "<group>"; };
 		AA771BBF2568F834002C748B /* UITextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
 		AA771BC92568F834002C748B /* WYScrollText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYScrollText.swift; sourceTree = "<group>"; };
+		AA78B6882B6E119B000AA35B /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
+		AA78B68A2B6E11AD000AA35B /* Decimal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Decimal.swift; sourceTree = "<group>"; };
+		AA78B68C2B6E11B9000AA35B /* CGFloat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGFloat.swift; sourceTree = "<group>"; };
+		AA78B68E2B6E11CB000AA35B /* Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
 		AAA9E5E626DB3D0F009C064B /* WYActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYActivity.swift; sourceTree = "<group>"; };
 		AAA9E5E826DB6569009C064B /* WYActivity.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = WYActivity.bundle; sourceTree = "<group>"; };
 		AAB7BDE626257F3600BD57EC /* WYBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYBannerView.swift; sourceTree = "<group>"; };
@@ -406,14 +412,6 @@
 			path = String;
 			sourceTree = "<group>";
 		};
-		AA771BAD2568F834002C748B /* NSObject */ = {
-			isa = PBXGroup;
-			children = (
-				AA771BAE2568F834002C748B /* NSObject.swift */,
-			);
-			path = NSObject;
-			sourceTree = "<group>";
-		};
 		AA771BB12568F834002C748B /* Layout */ = {
 			isa = PBXGroup;
 			children = (
@@ -485,17 +483,20 @@
 		AA771BF62568F91F002C748B /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				AA78B6832B6E1122000AA35B /* Int */,
+				AA771BAB2568F834002C748B /* String */,
+				AA78B6822B6E111C000AA35B /* Double */,
+				AA78B6842B6E1128000AA35B /* CGFloat */,
+				AA78B6852B6E1154000AA35B /* Decimal */,
 				DC94950428152F9B005AE3F7 /* Bool */,
 				AAB2712626B571F300771549 /* Timer */,
 				AAE02B18267C61B400EF6D36 /* CALayer */,
 				AA771BB82568F834002C748B /* UIView */,
 				AA771BB62568F834002C748B /* UIButton */,
 				AA771BB22568F834002C748B /* UILabel */,
-				AA771BAB2568F834002C748B /* String */,
 				AA771B972568F834002C748B /* UIColor */,
 				AA771B932568F834002C748B /* UIImage */,
 				AA771B9F2568F834002C748B /* UIDevice */,
-				AA771BAD2568F834002C748B /* NSObject */,
 				AA771BBE2568F834002C748B /* UITextField */,
 				1F5C3E5F2578B60C00E0DBFF /* UIApplication */,
 				AA771BBC2568F834002C748B /* UITableView */,
@@ -516,6 +517,38 @@
 				DCB90A7727AE3A8A001DCA82 /* Foundation+JSONLog.m */,
 			);
 			path = Config;
+			sourceTree = "<group>";
+		};
+		AA78B6822B6E111C000AA35B /* Double */ = {
+			isa = PBXGroup;
+			children = (
+				AA78B6882B6E119B000AA35B /* Double.swift */,
+			);
+			path = Double;
+			sourceTree = "<group>";
+		};
+		AA78B6832B6E1122000AA35B /* Int */ = {
+			isa = PBXGroup;
+			children = (
+				AA78B68E2B6E11CB000AA35B /* Int.swift */,
+			);
+			path = Int;
+			sourceTree = "<group>";
+		};
+		AA78B6842B6E1128000AA35B /* CGFloat */ = {
+			isa = PBXGroup;
+			children = (
+				AA78B68C2B6E11B9000AA35B /* CGFloat.swift */,
+			);
+			path = CGFloat;
+			sourceTree = "<group>";
+		};
+		AA78B6852B6E1154000AA35B /* Decimal */ = {
+			isa = PBXGroup;
+			children = (
+				AA78B68A2B6E11AD000AA35B /* Decimal.swift */,
+			);
+			path = Decimal;
 			sourceTree = "<group>";
 		};
 		AAA9E5E126DB3B68009C064B /* Activity */ = {
@@ -779,7 +812,6 @@
 				AA771BD62568F834002C748B /* UIViewController.swift in Sources */,
 				AAE02B1A267C61E000EF6D36 /* CALayer.swift in Sources */,
 				AA771BEA2568F834002C748B /* WYScrollText.swift in Sources */,
-				AA771BDC2568F834002C748B /* NSObject.swift in Sources */,
 				1F5C3E612578B61B00E0DBFF /* UIApplication.swift in Sources */,
 				DCC340B22A31AD050026CAD8 /* WYBiometricAuthorization.swift in Sources */,
 				AA771BE32568F834002C748B /* UITableView.swift in Sources */,
@@ -802,17 +834,21 @@
 				AA771BD12568F834002C748B /* UIColor.swift in Sources */,
 				DCC340B52A31B0B70026CAD8 /* WYSpeechRecognitionAuthorization.swift in Sources */,
 				DC71E7ED2807C59500F070B0 /* Timer.swift in Sources */,
+				AA78B68B2B6E11AD000AA35B /* Decimal.swift in Sources */,
 				AA06A3592B60DC000049A555 /* WYCodable.swift in Sources */,
 				AAB7BDE726257F3600BD57EC /* WYBannerView.swift in Sources */,
 				DCFEBFDB29EFD8E4001AE8E7 /* ViewController.swift in Sources */,
+				AA78B6892B6E119B000AA35B /* Double.swift in Sources */,
 				DCC340AF2A31A6A60026CAD8 /* WYContactsAuthorization.swift in Sources */,
 				1F99DCC8257DCFAE003D2408 /* WYPagingView.swift in Sources */,
 				AA771BE42568F834002C748B /* UITextField.swift in Sources */,
+				AA78B68F2B6E11CB000AA35B /* Int.swift in Sources */,
 				DC94950628152FAD005AE3F7 /* Bool.swift in Sources */,
 				DC94977328169103005AE3F7 /* WYLivePlayer.swift in Sources */,
 				DCC340A92A31A62E0026CAD8 /* WYCameraAuthorization.swift in Sources */,
 				DCB90A7827AE3A8A001DCA82 /* Foundation+JSONLog.m in Sources */,
 				AA771BD72568F834002C748B /* UINavigationController.swift in Sources */,
+				AA78B68D2B6E11B9000AA35B /* CGFloat.swift in Sources */,
 				AA06A35A2B60DC000049A555 /* WYCodingKeyedDecodingContainer.swift in Sources */,
 				AA484EB324FA262100B39D60 /* AppDelegate.swift in Sources */,
 				AA771BCF2568F834002C748B /* UIImage.swift in Sources */,

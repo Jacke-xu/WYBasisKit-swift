@@ -36,7 +36,7 @@ Pod::Spec.new do |kit|
 
     kit.subspec 'Extension' do |extension|
        extension.source_files = 'WYBasisKit/Extension/**/*'
-       extension.frameworks = 'Foundation', 'UIKit', 'LocalAuthentication', 'Photos', 'CoreFoundation', 'CommonCrypto'
+       extension.frameworks = 'Foundation', 'UIKit', 'LocalAuthentication', 'Photos', 'CoreFoundation'
        extension.resource = 'WYBasisKit/Localizable/WYLocalizable.bundle'
        extension.dependency 'WYBasisKit/Localizable'
        extension.dependency 'WYBasisKit/Config'
