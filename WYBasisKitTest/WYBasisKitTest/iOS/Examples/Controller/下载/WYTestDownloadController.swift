@@ -86,7 +86,7 @@ class WYTestDownloadController: UIViewController {
                     
                     WYActivity.dismissLoading(in: self.view)
                     
-                    let assetObj: WYDownloadModel? = WYDownloadModel.deserialize(from: success.origin)
+                    let assetObj: WYDownloadModel? = try! WYCodable().decode(WYDownloadModel.self, from: success.origin.data(using: .utf8)!)
                     
                     wy_print("assetObj = \(String(describing: assetObj))")
                     

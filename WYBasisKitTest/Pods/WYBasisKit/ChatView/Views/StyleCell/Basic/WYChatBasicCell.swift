@@ -7,6 +7,7 @@
 
 import UIKit
 import Kingfisher
+import CommonCrypto
 
 /// 通用聊天配置选项
 public struct WYBasicChatConfig {
@@ -295,7 +296,7 @@ public extension WYChatBasicCell {
         case .sending, .notSent:
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
                 guard let self = self else { return }
-                self.loadingView.animationDuration = Double(string: "\(self.config.messageSendingGif.animationDuration)")
+                self.loadingView.animationDuration = self.config.messageSendingGif.animationDuration.wy_convertTo(Double.self)
                 self.loadingView.animationImages = self.config.messageSendingGif.animationImages
                 self.loadingView.animationRepeatCount = 0
                 self.loadingView.startAnimating()
@@ -308,7 +309,7 @@ public extension WYChatBasicCell {
         }
         
         readMarkView?.font = config.readMarkFont
-        if Double(string: message.readers) > 0 {
+        if message.readers.wy_convertTo(Double.self) > 0 {
             readMarkView?.textColor = config.readMarkColor.browse
             readMarkView?.text = config.readMarkText.browse
         }else {
@@ -439,5 +440,23 @@ public extension WYChatBasicCell {
                 return (wy_width - fabs(chatTextConfig.basic.avatarOffset.sendor.x) - fabs(chatTextConfig.basic.avatarOffset.receive.x) - (chatTextConfig.basic.avatarSize.width * 2.0) - fabs(chatTextConfig.bubbleMaxOffset)) - fabs(config.nameViewOffsetForGroup.receive.x) + fabs(chatTextConfig.bubbleOffsetForGroup.receive.x)
             }
         }
+    }
+}
+
+public extension String {
+    /// MD5加密
+    public var wy_md5: String {
+        let str = self.cString(using: .utf8)
+        let strLen = CUnsignedInt(self.lengthOfBytes(using: .utf8))
+        let digestLen = Int(CC_MD5_DIGEST_LENGTH)
+        let result = UnsafeMutablePointer<CUnsignedChar>.allocate(capacity:digestLen)
+        CC_MD5(str!, strLen, result)
+            
+        let hash = NSMutableString()
+        for i in 0 ..< digestLen {
+            hash.appendFormat("%02X", result[i])
+        }
+        free(result) //解决MD5加密造成的内存泄漏问题
+        return String(format: hash as String)
     }
 }

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import CommonCrypto
 
 /// 获取时间戳的模式
 public enum WYTimestampMode {
@@ -94,6 +93,37 @@ public enum WYTimeDistance {
 }
 
 public extension String {
+    
+    /// String转CGFloat、Double、Int、NSInteger、Decimal
+    func wy_convertTo<T: Any>(_ type: T.Type) -> T {
+        
+        guard (type == CGFloat.self) || (type == Double.self) || (type == Int.self) || (type == NSInteger.self) || (type == Decimal.self) || (type == String.self) else {
+            fatalError("type只能是CGFloat、Double、Int、NSInteger、Decimal中的一种")
+        }
+        
+        /// 判断是否是纯数字
+        func securityCheck(_ string: String) -> String {
+            return string.isEmpty ? "0" : self
+        }
+        
+        if type == CGFloat.self {
+            return CGFloat(Float(securityCheck(self)) ?? 0.0) as! T
+        }
+        
+        if type == Double.self {
+            return Double(securityCheck(self)) as! T
+        }
+        
+        if type == Int.self {
+            return Int(securityCheck(self)) as! T
+        }
+        
+        if type == Decimal.self {
+            return Decimal(string: securityCheck(self)) as! T
+        }
+        
+        return self as! T
+    }
     
     /// 返回一个计算好的字符串的宽度
     func wy_calculateWidth(controlHeight: CGFloat, controlFont: UIFont, lineSpacing: CGFloat = 0, wordsSpacing: CGFloat = 0) -> CGFloat {
@@ -229,19 +259,6 @@ public extension String {
             return String(data: decodedData, encoding: .utf8) ?? self
         }
         return self
-    }
-    
-    /// md5加密
-    var wy_md5: String {
-        guard let data = data(using: .utf8) else {
-            return self
-        }
-        var digest = [UInt8](repeating: 0, count: Int(CC_MD5_DIGEST_LENGTH))
-        
-        _ = data.withUnsafeBytes { (bytes: UnsafeRawBufferPointer) in
-            return CC_MD5(bytes.baseAddress, CC_LONG(data.count), &digest)
-        }
-        return digest.map { String(format: "%02x", $0) }.joined()
     }
     
     /// 获取设备时间戳

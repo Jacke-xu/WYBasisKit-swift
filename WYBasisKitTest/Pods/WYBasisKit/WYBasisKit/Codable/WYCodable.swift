@@ -29,13 +29,13 @@ open class WYCodable: JSONDecoder {
         return try decode(type, from: topLevel)
     }
     
-    /// 将字典及数组解析成传入的类型
+    /// 将Dictionary及Array解析成传入的类型
     open func decode<T: Decodable>(_ type: T.Type, from convertible: WYCodableContainerConvertible
     ) throws -> T {
         try decode(type, from: convertible.asJSONContainer())
     }
     
-    /// 将传入的model转换成指定类型(convertType限字典、数组、Data、String)
+    /// 将传入的model转换成指定类型(convertType限Dictionary、Array、Data、String)
     open func encode<T: Any>(_ convertType: T.Type, from model: Codable) throws -> T {
 
         let encoder = JSONEncoder()

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CommonCrypto
 
 /// 获取时间戳的模式
 public enum WYTimestampMode {
@@ -225,6 +226,29 @@ public extension String {
             .reduce(replacement) { $0 + String($1) }
     }
     
+    /**
+     *  MD5加密
+     *  @param uppercase: 是否需要大写，默认false
+     *  @param 𝟯𝟮bits: 是否需要32位加密，默认true，32位，传false则16位
+     */
+    func wy_md5(_ uppercase: Bool = false, 𝟯𝟮bits: Bool = true) -> String {
+        guard let str = self.cString(using: .utf8) else { fatalError("传入的待加密字符串有误") }
+        let strLen = CUnsignedInt(self.lengthOfBytes(using: .utf8))
+        let digestLen = Int(CC_MD5_DIGEST_LENGTH)
+        let result = UnsafeMutablePointer<CUnsignedChar>.allocate(capacity:digestLen)
+        CC_MD5(str, strLen, result)
+            
+        let hash = NSMutableString()
+        // 16位实际上是从 32 位字符串中，取中间的第 9 位到第 24 位的部分
+        let start: NSInteger = 𝟯𝟮bits ? 0 : 4
+        let end: NSInteger = 𝟯𝟮bits ? digestLen : 12
+        for i in start ..< end {
+            hash.appendFormat(uppercase ? "%02X" : "%02x", result[i])
+        }
+        free(result) //解决MD5加密造成的内存泄漏问题
+        return String(format: hash as String)
+    }
+    
     /// Encode
     func wy_encoded(escape: String = "?!@#$^&%*+,:;='\"`<>()[]{}/\\| ") -> String {
         
@@ -233,7 +257,7 @@ public extension String {
     }
     
     /// Decode
-    func wy_decoded() -> String {
+    var wy_decoded: String {
         
         let targetString: NSMutableString = NSMutableString(string: self)
         targetString.replaceOccurrences(of: "+", with: "", options: .literal, range: NSMakeRange(0, targetString.length))

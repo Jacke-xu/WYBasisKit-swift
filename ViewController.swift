@@ -18,7 +18,6 @@ class ViewController: UIViewController {
         WYActivity.showScrollInfo("查看测试/使用样例请移步 WYBasisKit/WYBasisKitTest")
     }
     
-
     /*
     // MARK: - Navigation
 
