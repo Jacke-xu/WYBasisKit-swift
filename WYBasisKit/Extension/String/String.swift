@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import CommonCrypto
+import CommonCrypto.CommonDigest
 
 /// 获取时间戳的模式
 public enum WYTimestampMode {
