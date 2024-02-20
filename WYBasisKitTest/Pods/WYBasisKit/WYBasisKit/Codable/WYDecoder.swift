@@ -1,4 +1,4 @@
-// 
+//
 //  WYDecoder.swift
 //  WYBasisKit
 //
