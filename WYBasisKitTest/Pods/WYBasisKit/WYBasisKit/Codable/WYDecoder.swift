@@ -228,6 +228,21 @@ extension WYCodableInfo {
             return String(format: "%f", doubleValue)
         }
         
+        if value is Dictionary<String, Any> {
+            let dictionaryString: String = try (value as? Dictionary<String, Any>)?.wy_convertToString() ?? String.defaultValue
+            return dictionaryString
+        }
+        
+        if value is Array<Any> {
+            let arrayString: String = try (value as? Array<Any>)?.wy_convertToString() ?? String.defaultValue
+            return arrayString
+        }
+        
+        if value is Data {
+            let dataString: String = try (value as? Data)?.wy_convertToString() ?? String.defaultValue
+            return dataString
+        }
+        
         return nil
     }
     

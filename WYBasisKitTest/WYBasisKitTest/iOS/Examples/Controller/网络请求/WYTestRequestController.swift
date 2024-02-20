@@ -23,30 +23,21 @@ class WYTestRequestController: UIViewController {
         textView.textColor = .black
         view.addSubview(textView)
         
-//        let array: [String] = []
-//        let append: String = "\"WYLocalizable_"
-//        var textString = "/*\n  WYLocalizable.strings\n  WYBasisKit\n\n  Created by 官人 on 2020/11/21.\n  Copyright © 2020 官人. All rights reserved.\n*/\n\n"
-//        for index in 0..<array.count {
-//            textString = textString + ((index < 9) ? (append + "0" + "\(index+1)" + "\"" + " = " + "\"" + "\(array[index])" + "\";") : (append + "\(index + 1)" + "\""  + " = " + "\"" + "\(array[index])" + "\";")) + "\n\n"
-//            textView.text = textString
-//        }
-        
         let cacheKey = "testCache"
         var config = WYNetworkConfig.default
         config.requestCache = WYNetworkRequestCache(cacheKey: cacheKey)
         config.debugModeLog = false
-        config.domain = "https://www.fastmock.site/mock/a768f2ffec3131e5b3d361fe098da4b5/networkRequest/"
+        config.domain = "https://api.xygeng.cn/"
         //config.originObject = true
-        config.mapper = [.data: "source"]
+        config.mapper = [.message: "updateTime"]
         
-
         let storageData: WYStorageData = WYStorage.takeOut(forKey: cacheKey, path: (config.requestCache?.cachePath.path) ?? "")
 
         let delay: TimeInterval = ((storageData.isInvalid == false) && (storageData.userData != nil)) ? 2 : 0
 
         WYActivity.showLoading("加载中", in: view, delay: delay)
 
-        WYNetworkManager.request(method: .post, path: "outerArray", config: config) {[weak self] result in
+        WYNetworkManager.request(method: .get, path: "one", config: config) {[weak self] result in
 
             guard self != nil else {return}
 

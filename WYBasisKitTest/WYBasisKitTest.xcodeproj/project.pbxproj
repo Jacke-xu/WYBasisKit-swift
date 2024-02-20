@@ -525,7 +525,7 @@
 				DCFEBFE129EFDE2F001AE8E7 /* Sources */,
 				DCFEBFE229EFDE2F001AE8E7 /* Frameworks */,
 				DCFEBFE329EFDE2F001AE8E7 /* Resources */,
-				DE8E4DEC773CCA025A8B4F0A /* [CP] Embed Pods Frameworks */,
+				291E8F77BA38C38053C50BCE /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -656,7 +656,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		DE8E4DEC773CCA025A8B4F0A /* [CP] Embed Pods Frameworks */ = {
+		291E8F77BA38C38053C50BCE /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (

@@ -47,7 +47,11 @@ public struct WYResponse: Codable {
     public var code: String = ""
     public var data: String = ""
     
-    public init() {}
+    public init(message: String = "", code: String = "", data: String = "") {
+        self.message = message
+        self.code = code
+        self.data = data
+    }
 }
 
 public enum WYHandler {
@@ -134,7 +138,12 @@ public struct WYDownloadModel: Codable {
     /// 资源格式
     public var mimeType: String = ""
     
-    public init() {}
+    public init(assetPath: String = "", diskPath: String = "", assetName: String = "", mimeType: String = "") {
+        self.assetPath = assetPath
+        self.diskPath = diskPath
+        self.assetName = assetName
+        self.mimeType = mimeType
+    }
 }
 
 public struct WYFileModel {
@@ -513,9 +522,8 @@ extension WYNetworkManager {
                     downloadModel.mimeType = format
                     
                     let codable: WYCodable = WYCodable()
-                    let jsonString = try? codable.decode(String.self, from: codable.encode(Data.self, from: downloadModel))
+                    let jsonString = try? codable.encode(String.self, from: downloadModel)
                     handlerSuccess(response: WYSuccess(origin: jsonString ?? ""), handler: handler)
-                    
                 }else {
                     
                     let statusCode = response.statusCode
@@ -543,23 +551,21 @@ extension WYNetworkManager {
                             
                         }else {
                             do {
-                                
                                 let codable: WYCodable = WYCodable()
-                                
                                 if config.mapper.isEmpty == false {
                                     var mappingKeys: [[String]: String] = [[String]: String]()
                                     if let mapperMessage: String = config.mapper[WYMappingKey.message] {
-                                        mappingKeys[["message"]] = mapperMessage
+                                        mappingKeys[[mapperMessage]] = "message"
                                     }
-                                    
+
                                     if let mapperCode: String = config.mapper[WYMappingKey.code] {
-                                        mappingKeys[["code"]] = mapperCode
+                                        mappingKeys[[mapperCode]] = "code"
                                     }
-                                    
+
                                     if let mapperData: String = config.mapper[WYMappingKey.data] {
-                                        mappingKeys[["data"]] = mapperData
+                                        mappingKeys[[mapperData]] = "data"
                                     }
-                                    
+
                                     if mappingKeys.isEmpty == false {
                                         codable.mappingKeys = .mapper(mappingKeys)
                                     }

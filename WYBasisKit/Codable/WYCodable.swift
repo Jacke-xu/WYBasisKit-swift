@@ -12,7 +12,7 @@ open class WYCodable: JSONDecoder {
     /// 解析时需要映射的Key(仅针对第一层数据映射，第二层级以后的(第一层也可以)建议在对应的model类中使用Codable原生映射方法)
     open var mappingKeys: KeyDecodingStrategy = .useDefaultKeys
     
-    /// 将Data类型数据解析成传入的类型
+    /// 将Data类型数据解析成传入的Model类型
     open override func decode<T: Decodable>(_ type: T.Type, from data: Data) throws -> T {
         let topLevel: Any
         do {
@@ -37,7 +37,6 @@ open class WYCodable: JSONDecoder {
     
     /// 将传入的model转换成指定类型(convertType限Dictionary、Array、Data、String)
     open func encode<T: Any>(_ convertType: T.Type, from model: Codable) throws -> T {
-
         let encoder = JSONEncoder()
         if (convertType.self == String.self) || (convertType.self == Data.self) {
             let codableError: WYCodableError = (convertType.self == String.self) ? WYCodableError.modelToStringError : WYCodableError.modelToDataError

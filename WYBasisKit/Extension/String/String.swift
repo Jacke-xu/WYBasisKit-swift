@@ -245,7 +245,7 @@ public extension String {
         for i in start ..< end {
             hash.appendFormat(uppercase ? "%02X" : "%02x", result[i])
         }
-        free(result) //解决MD5加密造成的内存泄漏问题
+        free(result) // 解决MD5加密造成的内存泄漏问题
         return String(format: hash as String)
     }
     
