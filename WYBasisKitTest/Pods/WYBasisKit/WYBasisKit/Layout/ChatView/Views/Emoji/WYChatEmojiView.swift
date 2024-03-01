@@ -153,7 +153,7 @@ public class WYChatEmojiView: UIView, WYEmojiFuncAreaViewDelegate {
         funcAreaView.delegate = self
         addSubview(funcAreaView)
         funcAreaView.snp.makeConstraints { make in
-            make.size.equalTo(emojiViewConfig.funcAreaConfig.areaSize)
+            make.size.equalTo(CGSize(width: emojiViewConfig.funcAreaConfig.deleteViewLeftOffsetWithArea + emojiViewConfig.funcAreaConfig.deleteViewSize.width + emojiViewConfig.funcAreaConfig.sendViewLeftOffsetWithDeleteView + emojiViewConfig.funcAreaConfig.sendViewSize.width, height: emojiViewConfig.funcAreaConfig.areaHeight))
             make.right.equalToSuperview().offset(-emojiViewConfig.funcAreaConfig.areaRightOffset)
             make.bottom.equalToSuperview().offset(-emojiViewConfig.funcAreaConfig.areaBottomOffset)
         }
@@ -193,7 +193,7 @@ public class WYChatEmojiView: UIView, WYEmojiFuncAreaViewDelegate {
             var line: Int = 0
             for index: Int in 0..<emojiViewConfig.minimumLineCount {
                 leftx += emojiViewConfig.itemSize.width
-                if leftx > (self.wy_width - emojiViewConfig.funcAreaConfig.areaRightOffset - emojiViewConfig.funcAreaConfig.sendViewRightOffset - emojiViewConfig.funcAreaConfig.sendViewSize.width - emojiViewConfig.funcAreaConfig.deleteViewSize.width - emojiViewConfig.funcAreaConfig.sendViewLeftOffsetWithDeleteView) {
+                if leftx > (self.wy_width - emojiViewConfig.funcAreaConfig.deleteViewLeftOffsetWithArea - emojiViewConfig.funcAreaConfig.areaRightOffset - emojiViewConfig.funcAreaConfig.sendViewRightOffset - emojiViewConfig.funcAreaConfig.sendViewSize.width - emojiViewConfig.funcAreaConfig.deleteViewSize.width - emojiViewConfig.funcAreaConfig.sendViewLeftOffsetWithDeleteView) {
                     break
                 }
                 leftx += flowLayout.minimumInteritemSpacing
@@ -221,7 +221,6 @@ public class WYChatEmojiView: UIView, WYEmojiFuncAreaViewDelegate {
             if appendEmoji.isEmpty == false {
                 dataSource.append(appendEmoji)
             }
-            
         }else {
             dataSource.append(emojiViewConfig.emojiSource)
         }

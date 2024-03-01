@@ -12,11 +12,14 @@ public struct WYEmojiFuncAreaConfig {
     /// 是否需要在右下角显示功能区(内含删除按钮和发送按钮)
     public var show: Bool = true
     
+    /// 设置使用独立的发送按钮(当输入框中有字符出现时，会在InputBar的右侧出现一个独立的发送按钮)时，是否需要继续在功能区显示发送按钮
+    public var removeSendView: Bool = inputBarConfig.showSpecialSendButton
+    
     /// 功能区显示后，如果列表最后一行的表情被功能区遮挡，被遮挡的表情是否需要换行显示
     public var wrapLastLineOfEmoji: Bool = true
     
-    /// 整个功能区size
-    public var areaSize: CGSize = CGSize(width: wy_screenWidth(152), height: wy_screenWidth(100))
+    /// 整个功能区高度
+    public var areaHeight: CGFloat = wy_screenWidth(100)
     
     /// 删除按钮是否需要支持长按连续删除输入框内容
     public var longPressDelete: Bool = true
@@ -26,6 +29,9 @@ public struct WYEmojiFuncAreaConfig {
     
     /// 整个功能区距离emoji控件底部的间距
     public var areaBottomOffset: CGFloat = 0
+    
+    /// 删除按钮左侧距离功能区左侧的间距
+    public var deleteViewLeftOffsetWithArea: CGFloat = inputBarConfig.showSpecialSendButton ? wy_screenWidth(20) : 0
     
     /// 发送按钮size
     public var sendViewSize: CGSize = CGSize(width: wy_screenWidth(60), height: wy_screenWidth(50))
@@ -93,7 +99,13 @@ public struct WYEmojiFuncAreaConfig {
     /// 发送按钮按压状态文本颜色
     public var sendViewTextColorWithHighly: UIColor = .white
     
-    public init() {}
+    public init() {
+        /// 在这里判断是否需要调整功能区内发送按钮相关的间距、size等设置
+        if removeSendView == true {
+            sendViewSize = .zero
+            sendViewLeftOffsetWithDeleteView = 0
+        }
+    }
 }
 
 @objc public protocol WYEmojiFuncAreaViewDelegate {
@@ -120,9 +132,8 @@ public class WYEmojiFuncAreaView: UIView {
         
         addSubview(gradualView)
         gradualView.snp.makeConstraints { make in
-            make.top.right.equalToSuperview()
+            make.top.width.right.equalToSuperview()
             make.height.equalTo(emojiViewConfig.funcAreaConfig.sendViewAndDeleteViewTopOffset)
-            make.left.equalToSuperview().offset(emojiViewConfig.funcAreaConfig.areaSize.width - emojiViewConfig.funcAreaConfig.sendViewRightOffset - emojiViewConfig.funcAreaConfig.sendViewSize.width - emojiViewConfig.funcAreaConfig.deleteViewSize.width - emojiViewConfig.funcAreaConfig.sendViewLeftOffsetWithDeleteView)
         }
         gradualView.wy_makeVisual { make in
             make.wy_gradualColors([emojiViewConfig.backgroundColor.withAlphaComponent(0),emojiViewConfig.backgroundColor.withAlphaComponent(0.3),emojiViewConfig.backgroundColor.withAlphaComponent(0.6),emojiViewConfig.backgroundColor.withAlphaComponent(0.8), emojiViewConfig.backgroundColor])
