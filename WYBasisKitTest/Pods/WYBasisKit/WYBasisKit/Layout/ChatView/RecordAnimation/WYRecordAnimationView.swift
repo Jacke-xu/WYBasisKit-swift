@@ -75,10 +75,7 @@ public struct WYRecordAnimationConfig {
                                             transfer: .wy_rgb(169, 233, 121))
     
     /// 取消按钮背景图
-    public var cancelRecordViewImage: (onInterior: UIImage, onExternal: UIImage) = (onInterior: .wy_createImage(from: .wy_rgb(236, 236, 236)), onExternal: .wy_createImage(from: .wy_rgb(57, 57, 57)))
-    
-    /// 取消按钮背景色
-    public var cancelRecordViewColor: (onInterior: UIColor, onExternal: UIColor) = (onInterior: .wy_rgb(236, 236, 236), onExternal: .wy_rgb(57, 57, 57))
+    public var cancelRecordViewImage: (onInterior: UIImage, onExternal: UIImage) = (onInterior: .wy_createImage(from: .wy_rgb(236, 236, 236), size: CGSize(width: wy_screenWidth(100), height: wy_screenWidth(100))).wy_captureCircle(), onExternal: .wy_createImage(from: .wy_rgb(57, 57, 57), size: CGSize(width: wy_screenWidth(80), height: wy_screenWidth(80))).wy_captureCircle())
     
     /// 取消按钮内部文本和提示文本
     public var cancelRecordViewText: (onInterior: String, tips: String) = (onInterior: "×", tips: "松开 取消")
@@ -90,31 +87,28 @@ public struct WYRecordAnimationConfig {
     public var recordViewTips: String = "松开 发送"
     
     /// 转文字按钮背景图
-    public var transferViewImage: (onInterior: UIImage, onExternal: UIImage) = (onInterior: .wy_createImage(from: .wy_rgb(236, 236, 236)), onExternal: .wy_createImage(from: .wy_rgb(57, 57, 57)))
-    
-    /// 转文字按钮背景色
-    public var transferViewColor: (onInterior: UIColor, onExternal: UIColor) = (onInterior: .wy_rgb(236, 236, 236), onExternal: .wy_rgb(57, 57, 57))
+    public var transferViewImage: (onInterior: UIImage, onExternal: UIImage) = (onInterior: .wy_createImage(from: .wy_rgb(236, 236, 236), size: CGSize(width: wy_screenWidth(100), height: wy_screenWidth(100))).wy_captureCircle(), onExternal: .wy_createImage(from: .wy_rgb(57, 57, 57), size: CGSize(width: wy_screenWidth(80), height: wy_screenWidth(80))).wy_captureCircle())
     
     /// 取消按钮及转文字按钮的提示语字号和色值
-    public var tipsInfoForMoveup: (font: UIFont, color: UIColor) = (font: .systemFont(ofSize: wy_screenWidth(10)), color: .wy_rgb(163, 163, 163))
+    public var tipsInfoForMoveup: (font: UIFont, color: UIColor) = (font: .systemFont(ofSize: wy_screenWidth(15)), color: .wy_rgb(163, 163, 163))
     
     /// 录音按钮提示语字体及色值
-    public var recordViewTipsInfo: (font: UIFont, color: UIColor) = (font: .systemFont(ofSize: wy_screenWidth(10)), color: .wy_rgb(163, 163, 163))
+    public var recordViewTipsInfo: (font: UIFont, color: UIColor) = (font: .systemFont(ofSize: wy_screenWidth(15)), color: .wy_rgb(163, 163, 163))
     
     /// 取消录音按钮内部字体、色值
-    public var cancelRecordViewTextInfoForInterior: (font: UIFont, color: UIColor) = (font: .systemFont(ofSize: 12), color: .wy_rgb(20, 20, 20))
+    public var cancelRecordViewTextInfoForInterior: (font: UIFont, color: UIColor) = (font: .systemFont(ofSize: wy_screenWidth(30)), color: .wy_rgb(20, 20, 20))
     
     /// 取消录音按钮外部字体、色值
-    public var cancelRecordViewTextInfoForExternal: (font: UIFont, color: UIColor) = (font: .systemFont(ofSize: 10), color: .wy_rgb(156, 156, 156))
+    public var cancelRecordViewTextInfoForExternal: (font: UIFont, color: UIColor) = (font: .systemFont(ofSize: wy_screenWidth(30)), color: .wy_rgb(156, 156, 156))
     
     /// 转文字按钮内部字体、色值
-    public var transferViewTextInfoForInterior: (font: UIFont, color: UIColor) = (font: .systemFont(ofSize: 12), color: .wy_rgb(20, 20, 20))
+    public var transferViewTextInfoForInterior: (font: UIFont, color: UIColor) = (font: .systemFont(ofSize: wy_screenWidth(30)), color: .wy_rgb(20, 20, 20))
     
     /// 转文字按钮外部字体、色值
-    public var transferViewTextInfoForExternal: (font: UIFont, color: UIColor) = (font: .systemFont(ofSize: 10), color: .wy_rgb(156, 156, 156))
+    public var transferViewTextInfoForExternal: (font: UIFont, color: UIColor) = (font: .systemFont(ofSize: wy_screenWidth(30)), color: .wy_rgb(156, 156, 156))
     
     /// 取消录音按钮和转文字按钮的偏转角度
-    public var moveupViewDeviationAngle: CGFloat = wy_screenWidth(20)
+    public var moveupViewDeviationAngle: CGFloat = wy_screenWidth(28)
     
     /// 录音按钮背景色
     public var recordViewColor:(onInterior: UIColor, onExternal: UIColor) = (onInterior: .wy_rgb(57, 57, 57), onExternal: .white)
@@ -138,13 +132,13 @@ public struct WYRecordAnimationConfig {
     public var moveupButtonDiameter: (onInterior: CGFloat, onExternal: CGFloat) = (onInterior: wy_screenWidth(100), onExternal: wy_screenWidth(80))
     
     /// 取消录音或者语音转文字按钮中心点距离底部圆弧顶点的间距
-    public var moveupButtonBottomOffset: CGFloat = wy_screenWidth(35)
+    public var moveupButtonBottomOffset: CGFloat = wy_screenWidth(65)
     
     /// 取消录音或者语音转文字按钮中心点距离声波动画控件底部的间距
-    public var moveupButtonTopOffset: CGFloat = wy_screenWidth(200)
+    public var moveupButtonTopOffset: CGFloat = wy_screenWidth(180)
     
     /// 取消录音或者语音转文字按钮中心点距离tip控件底部的间距
-    public var moveupButtonCenterOffsetY: (onInterior: CGFloat, onExternal: CGFloat) = (onInterior: wy_screenWidth(60), onExternal: wy_screenWidth(50))
+    public var moveupButtonCenterOffsetY: (onInterior: CGFloat, onExternal: CGFloat) = (onInterior: wy_screenWidth(55), onExternal: wy_screenWidth(45))
     
     /// 取消录音按钮和转文字按钮中心点X值距离屏幕父控件左侧或者右侧的间距
     public var moveupButtonCenterOffsetX: CGFloat = wy_screenWidth(wy_screenWidth(100))
@@ -281,11 +275,13 @@ public class WYRecordAnimationView: UIView {
         guard audioRecorder != nil else {
             return
         }
+        
         record()
     }
     
     /// 结束录音动画
     public func stop() {
+        endRecordVoice()
         UIView.animate(withDuration: 0.2,
                        delay: 0,
                        usingSpringWithDamping: 1,
@@ -369,7 +365,7 @@ public class WYRecordAnimationView: UIView {
                 leftView.moveuplView.snp.updateConstraints { make in
                     make.centerY.equalTo(leftView.tipsView.snp.bottom).offset(recordAnimationConfig.moveupButtonCenterOffsetY.onExternal)
                     make.width.height.equalTo(CGSize(width: wy_screenWidth(recordAnimationConfig.moveupButtonDiameter.onExternal), height: recordAnimationConfig.moveupButtonDiameter.onExternal))
-                    leftView.refresh(isRight: false)
+                    leftView.refresh(isDefault: true, isTouched: false)
                 }
             }
             
@@ -391,7 +387,7 @@ public class WYRecordAnimationView: UIView {
                     make.centerY.equalTo(leftView.tipsView.snp.bottom).offset(recordAnimationConfig.moveupButtonCenterOffsetY.onInterior)
                     make.width.height.equalTo(CGSize(width: wy_screenWidth(recordAnimationConfig.moveupButtonDiameter.onInterior), height: recordAnimationConfig.moveupButtonDiameter.onInterior))
                 }
-                leftView.refresh(isRight: false)
+                leftView.refresh(isDefault: true, isTouched: true)
             }
             
             if subview == soundWavesView {
@@ -412,7 +408,7 @@ public class WYRecordAnimationView: UIView {
                     make.centerY.equalTo(leftView.tipsView.snp.bottom).offset(recordAnimationConfig.moveupButtonCenterOffsetY.onExternal)
                     make.width.height.equalTo(CGSize(width: wy_screenWidth(recordAnimationConfig.moveupButtonDiameter.onExternal), height: recordAnimationConfig.moveupButtonDiameter.onExternal))
                 }
-                leftView.refresh(isRight: true)
+                leftView.refresh(isDefault: true, isTouched: false)
             }
             
             if subview == soundWavesView {
@@ -476,7 +472,7 @@ public class WYRecordAnimationView: UIView {
     
     public lazy var leftView: WYMoveupTipsView = {
         
-        let leftView: WYMoveupTipsView = WYMoveupTipsView()
+        let leftView: WYMoveupTipsView = WYMoveupTipsView(isDefault: true)
         addSubview(leftView)
         leftView.snp.makeConstraints { make in
             make.centerX.equalToSuperview().offset(-recordAnimationConfig.moveupButtonCenterOffsetX)

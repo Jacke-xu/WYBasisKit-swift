@@ -217,7 +217,7 @@ public extension UIImage {
      *
      *  @return 切割好的图片
      */
-    func wy_captureCircle(borderWidth: CGFloat, borderColor: UIColor) -> UIImage {
+    func wy_captureCircle(borderWidth: CGFloat = 0, borderColor: UIColor = .clear) -> UIImage {
         
         var imageW = self.size.width + borderWidth * 2
         var imageH = self.size.height + borderWidth * 2

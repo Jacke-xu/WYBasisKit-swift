@@ -15,7 +15,8 @@ public class WYMoveupTipsView: UIView {
     /// 移动按钮
     public var moveuplView: UIButton = UIButton(type: .custom)
     
-    public init() {
+    /// isDefault为true时表示左侧取消控件，否则为右侧文字转语音(或其他)控件
+    public init(isDefault: Bool) {
         super.init(frame: .zero)
         
         tipsView.backgroundColor = .clear
@@ -29,61 +30,52 @@ public class WYMoveupTipsView: UIView {
         }
 
         addSubview(moveuplView)
+        moveuplView.backgroundColor = .clear
+        
+        moveuplView.setBackgroundImage(isDefault ? recordAnimationConfig.cancelRecordViewImage.onExternal : recordAnimationConfig.transferViewImage.onExternal, for: .normal)
+        moveuplView.setBackgroundImage(isDefault ? recordAnimationConfig.cancelRecordViewImage.onInterior : recordAnimationConfig.transferViewImage.onInterior, for: .selected)
+        
+        moveuplView.setTitle(isDefault ? recordAnimationConfig.cancelRecordViewText.onInterior : recordAnimationConfig.transferViewText.onInterior, for: .normal)
+        moveuplView.setTitle(isDefault ? recordAnimationConfig.cancelRecordViewText.onInterior : recordAnimationConfig.transferViewText.onInterior, for: .selected)
+        
+        moveuplView.setTitleColor(isDefault ? recordAnimationConfig.cancelRecordViewTextInfoForExternal.color : recordAnimationConfig.transferViewTextInfoForExternal.color, for: .normal)
+        moveuplView.setTitleColor(isDefault ? recordAnimationConfig.cancelRecordViewTextInfoForInterior.color : recordAnimationConfig.transferViewTextInfoForInterior.color, for: .selected)
+        
         moveuplView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.centerY.equalTo(tipsView.snp.bottom).offset(recordAnimationConfig.moveupButtonCenterOffsetY.onExternal)
             make.width.height.equalTo(recordAnimationConfig.moveupButtonDiameter.onExternal)
             make.bottom.equalToSuperview()
         }
-        moveuplView.wy_cornerRadius(recordAnimationConfig.moveupButtonDiameter.onExternal / 2).wy_showVisual()
     }
     
     /// 刷新取消录音或者转文字按钮状态
-    public func refresh(isRight: Bool) {
+    public func refresh(isDefault: Bool, isTouched: Bool) {
         
-        moveuplView.isSelected = !moveuplView.isSelected
+        moveuplView.isSelected = isTouched
         
-        moveuplView.transform = CGAffineTransform(rotationAngle: isRight ? recordAnimationConfig.moveupViewDeviationAngle : -recordAnimationConfig.moveupViewDeviationAngle)
+        moveuplView.transform = CGAffineTransform(rotationAngle: isDefault ? recordAnimationConfig.moveupViewDeviationAngle : -recordAnimationConfig.moveupViewDeviationAngle)
         
         if moveuplView.isSelected == true {
             
-            tipsView.text = isRight ? recordAnimationConfig.transferViewText.tips : recordAnimationConfig.cancelRecordViewText.tips
+            tipsView.text = isDefault ? recordAnimationConfig.cancelRecordViewText.tips : recordAnimationConfig.transferViewText.tips
             
-            moveuplView.backgroundColor = isRight ? recordAnimationConfig.transferViewColor.onInterior : recordAnimationConfig.cancelRecordViewColor.onInterior
-            moveuplView.setBackgroundImage(isRight ? recordAnimationConfig.transferViewImage.onInterior : recordAnimationConfig.cancelRecordViewImage.onInterior, for: .normal)
-            moveuplView.setBackgroundImage(isRight ? recordAnimationConfig.transferViewImage.onInterior : recordAnimationConfig.cancelRecordViewImage.onInterior, for: .selected)
-            moveuplView.setTitle(isRight ? recordAnimationConfig.transferViewText.onInterior : recordAnimationConfig.cancelRecordViewText.onInterior, for: .normal)
-            moveuplView.setTitle(isRight ? recordAnimationConfig.transferViewText.onInterior : recordAnimationConfig.cancelRecordViewText.onInterior, for: .selected)
-            moveuplView.titleLabel?.font = isRight ? recordAnimationConfig.transferViewTextInfoForExternal.font : recordAnimationConfig.cancelRecordViewTextInfoForExternal.font
-            moveuplView.setTitleColor(isRight ? recordAnimationConfig.transferViewTextInfoForExternal.color : recordAnimationConfig.cancelRecordViewTextInfoForExternal.color, for: .normal)
-            moveuplView.setTitleColor(isRight ? recordAnimationConfig.transferViewTextInfoForExternal.color : recordAnimationConfig.cancelRecordViewTextInfoForExternal.color, for: .selected)
+            moveuplView.titleLabel?.font = isDefault ? recordAnimationConfig.cancelRecordViewTextInfoForExternal.font : recordAnimationConfig.transferViewTextInfoForExternal.font
+            
             moveuplView.snp.updateConstraints { make in
                 make.width.height.equalTo(recordAnimationConfig.moveupButtonDiameter.onInterior)
             }
-            moveuplView.wy_clearVisual()
-            moveuplView.wy_cornerRadius(recordAnimationConfig.moveupButtonDiameter.onInterior / 2).wy_showVisual()
             
         }else {
             
             tipsView.text = ""
             
-            moveuplView.backgroundColor = isRight ? recordAnimationConfig.transferViewColor.onExternal : recordAnimationConfig.cancelRecordViewColor.onExternal
-            moveuplView.setBackgroundImage(isRight ? recordAnimationConfig.transferViewImage.onExternal : recordAnimationConfig.cancelRecordViewImage.onExternal, for: .normal)
-            moveuplView.setBackgroundImage(isRight ? recordAnimationConfig.transferViewImage.onExternal : recordAnimationConfig.cancelRecordViewImage.onExternal, for: .selected)
-            moveuplView.setTitle(isRight ? recordAnimationConfig.transferViewText.onInterior : recordAnimationConfig.cancelRecordViewText.onInterior, for: .normal)
-            moveuplView.setTitle(isRight ? recordAnimationConfig.transferViewText.onInterior : recordAnimationConfig.cancelRecordViewText.onInterior, for: .selected)
-            moveuplView.titleLabel?.font = isRight ? recordAnimationConfig.transferViewTextInfoForInterior.font : recordAnimationConfig.cancelRecordViewTextInfoForInterior.font
-            moveuplView.setTitleColor(isRight ? recordAnimationConfig.transferViewTextInfoForInterior.color : recordAnimationConfig.cancelRecordViewTextInfoForInterior.color, for: .normal)
-            moveuplView.setTitleColor(isRight ? recordAnimationConfig.transferViewTextInfoForInterior.color : recordAnimationConfig.cancelRecordViewTextInfoForInterior.color, for: .selected)
+            moveuplView.titleLabel?.font = isDefault ? recordAnimationConfig.cancelRecordViewTextInfoForInterior.font : recordAnimationConfig.transferViewTextInfoForInterior.font
+            
             moveuplView.snp.updateConstraints { make in
                 make.width.height.equalTo(recordAnimationConfig.moveupButtonDiameter.onExternal)
-                moveuplView.wy_clearVisual()
-                moveuplView.wy_cornerRadius(recordAnimationConfig.moveupButtonDiameter.onExternal / 2).wy_showVisual()
             }
         }
-        backgroundColor = .orange
-        tipsView.backgroundColor = .blue
-        moveuplView.backgroundColor = .purple
     }
     
     required init?(coder: NSCoder) {
