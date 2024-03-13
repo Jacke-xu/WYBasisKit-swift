@@ -1579,9 +1579,9 @@
 		AA4E6DF72B84BA19003C8A44 /* Emoji */ = {
 			isa = PBXGroup;
 			children = (
+				AA4E6DFA2B84BA19003C8A44 /* WYChatEmojiView.swift */,
 				AA4E6DF82B84BA19003C8A44 /* WYEmojiViewCell.swift */,
 				AA4E6DF92B84BA19003C8A44 /* WYEmojiFuncAreaView.swift */,
-				AA4E6DFA2B84BA19003C8A44 /* WYChatEmojiView.swift */,
 				AA4E6DFB2B84BA19003C8A44 /* WYEmojiHeaderView.swift */,
 				AA4E6DFC2B84BA19003C8A44 /* WYEmojiPreviewView.swift */,
 			);

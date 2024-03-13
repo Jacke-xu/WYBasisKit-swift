@@ -256,7 +256,8 @@ public class WYChatInputView: UIImageView {
         let recordView: WYRecordAnimationView = WYRecordAnimationView(alpha: 1.0)
         superview?.addSubview(recordView)
         recordView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.left.top.right.equalToSuperview()
+            make.bottom.equalToSuperview().offset(recordAnimationConfig.recordViewBottomOffset)
         }
         return recordView
     }()

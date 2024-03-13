@@ -75,7 +75,7 @@ public struct WYRecordAnimationConfig {
                                             transfer: .wy_rgb(169, 233, 121))
     
     /// 取消按钮背景图
-    public var cancelRecordViewImage: (onInterior: UIImage, onExternal: UIImage) = (onInterior: .wy_createImage(from: .wy_rgb(236, 236, 236), size: CGSize(width: wy_screenWidth(100), height: wy_screenWidth(100))).wy_captureCircle(), onExternal: .wy_createImage(from: .wy_rgb(57, 57, 57), size: CGSize(width: wy_screenWidth(80), height: wy_screenWidth(80))).wy_captureCircle())
+    public var cancelRecordViewImage: (onInterior: UIImage, onExternal: UIImage) = (onInterior: .wy_createImage(from: .wy_rgb(236, 236, 236), size: CGSize(width: wy_screenWidth(100), height: wy_screenWidth(100))).wy_cuttingRound(), onExternal: .wy_createImage(from: .wy_rgb(57, 57, 57), size: CGSize(width: wy_screenWidth(80), height: wy_screenWidth(80))).wy_cuttingRound())
     
     /// 取消按钮内部文本和提示文本
     public var cancelRecordViewText: (onInterior: String, tips: String) = (onInterior: "×", tips: "松开 取消")
@@ -87,7 +87,7 @@ public struct WYRecordAnimationConfig {
     public var recordViewTips: String = "松开 发送"
     
     /// 转文字按钮背景图
-    public var transferViewImage: (onInterior: UIImage, onExternal: UIImage) = (onInterior: .wy_createImage(from: .wy_rgb(236, 236, 236), size: CGSize(width: wy_screenWidth(100), height: wy_screenWidth(100))).wy_captureCircle(), onExternal: .wy_createImage(from: .wy_rgb(57, 57, 57), size: CGSize(width: wy_screenWidth(80), height: wy_screenWidth(80))).wy_captureCircle())
+    public var transferViewImage: (onInterior: UIImage, onExternal: UIImage) = (onInterior: .wy_createImage(from: .wy_rgb(236, 236, 236), size: CGSize(width: wy_screenWidth(100), height: wy_screenWidth(100))).wy_cuttingRound(), onExternal: .wy_createImage(from: .wy_rgb(57, 57, 57), size: CGSize(width: wy_screenWidth(80), height: wy_screenWidth(80))).wy_cuttingRound())
     
     /// 取消按钮及转文字按钮的提示语字号和色值
     public var tipsInfoForMoveup: (font: UIFont, color: UIColor) = (font: .systemFont(ofSize: wy_screenWidth(15)), color: .wy_rgb(163, 163, 163))
@@ -126,7 +126,10 @@ public struct WYRecordAnimationConfig {
     public var arcRadian: CGFloat = wy_screenWidth(35)
     
     /// 声波动画可滑动区域的高度
-    public var areaHeight: CGFloat = wy_screenWidth(100)
+    public var areaHeight: CGFloat = wy_screenWidth(150)
+    
+    /// 整个声波动画组件向下偏移多少(可兼顾齐刘海)
+    public var recordViewBottomOffset: CGFloat = wy_tabbarSafetyZone
     
     /// 取消录音或者语音转文字按钮直径
     public var moveupButtonDiameter: (onInterior: CGFloat, onExternal: CGFloat) = (onInterior: wy_screenWidth(100), onExternal: wy_screenWidth(80))

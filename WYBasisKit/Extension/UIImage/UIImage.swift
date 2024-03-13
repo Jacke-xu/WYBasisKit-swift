@@ -210,43 +210,48 @@ public extension UIImage {
     }
     
     /**
-     *  将图片切割成圆形
+     *  将图片切割成圆形(可同时添加边框)
      *
-     *  @param borderWidth   边框的宽度
-     *  @param borderColor   边框的颜色
+     *  @param borderWidth   边框宽度
+     *  @param borderColor   边框颜色
      *
      *  @return 切割好的图片
      */
-    func wy_captureCircle(borderWidth: CGFloat = 0, borderColor: UIColor = .clear) -> UIImage {
+    func wy_cuttingRound(borderWidth: CGFloat = 0, borderColor: UIColor = .clear) -> UIImage {
+        return wy_drawing(cornerRadius: size.width / 2, borderWidth: borderWidth, borderColor: borderColor)
+    }
+    
+    /**
+     *  给图片添加圆角、边框
+     *
+     *  @param cornerRadius  圆角半径
+     *  @param borderWidth   边框宽度
+     *  @param borderColor   边框颜色
+     *  @param corners       圆角位置
+     *
+     *  @return 切割好的图片
+     */
+    func wy_drawing(cornerRadius: CGFloat, borderWidth: CGFloat = 0, borderColor: UIColor = .clear, corners: UIRectCorner = .allCorners) -> UIImage {
         
-        var imageW = self.size.width + borderWidth * 2
-        var imageH = self.size.height + borderWidth * 2
-        imageW = min(imageH, imageW)
-        imageH = imageW
-        let imageSize = CGSize(width: imageW, height: imageH)
-        //新建一个图形上下文
-        UIGraphicsBeginImageContextWithOptions(imageSize, false, 0.0)
-        let ctx = UIGraphicsGetCurrentContext()
-        borderColor.set()
-        //画大圆
-        let bigRadius = imageW * 0.5
-        let centerX = imageW * 0.5
-        let centerY = imageH * 0.5
+        // 创建一个新的图片上下文
+        UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
         
-        ctx?.addArc(center: CGPoint(x: centerX, y: centerY), radius: bigRadius, startAngle: 0, endAngle: CGFloat.pi * 2, clockwise: true)
-        ctx?.fillPath()
-        //画小圆
-        let smallRadius = bigRadius - borderWidth
-        ctx?.addArc(center: CGPoint(x: centerX, y: centerY), radius: smallRadius, startAngle: 0, endAngle: CGFloat.pi * 2, clockwise: true)
-        //切割
-        ctx?.clip()
-        //画图片
-        self.draw(in: CGRect(x: borderWidth, y: borderWidth, width: self.size.width, height: self.size.height))
-        //从上下文中取出图片
-        let newImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        // 设置边框颜色
+        borderColor.setFill()
+        
+        // 设置边框
+        UIRectFill(CGRect(x: 0, y: 0, width: size.width, height: size.height))
+        
+        // 绘制圆角
+        let path = UIBezierPath(roundedRect: CGRect(x: borderWidth, y: borderWidth, width: size.width - borderWidth * 2, height: size.height - borderWidth * 2), byRoundingCorners: corners, cornerRadii: CGSize(width: cornerRadius, height: cornerRadius))
+        path.addClip()
+        draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
+        
+        // 获取带有圆角和边框的图片
+        let roundedImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
-        return newImage
+        return roundedImage!
     }
     
     /**
