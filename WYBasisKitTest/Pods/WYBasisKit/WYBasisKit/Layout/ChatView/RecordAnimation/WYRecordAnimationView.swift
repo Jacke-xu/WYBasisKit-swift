@@ -36,7 +36,7 @@ public struct WYRecordAnimationConfig {
                                   cancel: CGFloat,
                                   transfer: CGFloat) = (
                                     recording: wy_screenWidth(130),
-                                                cancel: wy_screenWidth(30),
+                                                cancel: wy_screenWidth(90),
                                                 transfer: wy_screenWidth(170))
     
     /// 声波线之间的间距
@@ -138,7 +138,7 @@ public struct WYRecordAnimationConfig {
     public var moveupButtonBottomOffset: CGFloat = wy_screenWidth(65)
     
     /// 取消录音或者语音转文字按钮中心点距离声波动画控件底部的间距
-    public var moveupButtonTopOffset: CGFloat = wy_screenWidth(180)
+    public var moveupButtonTopOffset: CGFloat = wy_screenWidth(130)
     
     /// 取消录音或者语音转文字按钮中心点距离tip控件底部的间距
     public var moveupButtonCenterOffsetY: (onInterior: CGFloat, onExternal: CGFloat) = (onInterior: wy_screenWidth(55), onExternal: wy_screenWidth(45))
@@ -217,17 +217,18 @@ public class WYRecordAnimationView: UIView {
     public func record() {
         audioRecorder?.record()
         Timer.wy_start(recordManagerTimerKey, Int.max, updateFequency) { [weak self] remainingTime in
-            self?.audioRecorder?.updateMeters()
-            self?.recordTime += (self?.updateFequency ?? 0)
-            self?.addSoundMeter(item: CGFloat(self?.audioRecorder?.averagePower(forChannel: 0) ?? 0))
-            if (self?.recordTime ?? 0) >= recordAnimationConfig.maxRecordTime {
-                self?.endRecordVoice()
+            DispatchQueue.main.async {
+                self?.audioRecorder?.updateMeters()
+                self?.recordTime += (self?.updateFequency ?? 0)
+                self?.addSoundMeter(item: CGFloat(self?.audioRecorder?.averagePower(forChannel: 0) ?? 0))
+                if (self?.recordTime ?? 0) >= recordAnimationConfig.maxRecordTime {
+                    self?.endRecordVoice()
+                }
             }
         }
     }
     
     public func addSoundMeter(item: CGFloat) {
-        
         var canSoundMetersCount: NSInteger = 0
         
         switch soundWavesStatus {
