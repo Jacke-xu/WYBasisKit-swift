@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		4A027019DE606531773A44D7 /* Pods_WYBasisKitTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3961A58ED9E18016F754F2FB /* Pods_WYBasisKitTest.framework */; };
-		6503F0592BF209990074498E /* WYCallMethodController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6503F0582BF209990074498E /* WYCallMethodController.swift */; };
-		6503F05D2BF209DC0074498E /* WYMethodClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6503F05C2BF209DC0074498E /* WYMethodClass.swift */; };
 		DC42B0ED2A42EC900004EB4C /* WYTestChatDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC42B0EC2A42EC900004EB4C /* WYTestChatDataSource.swift */; };
 		DC7D92E72A137D7300800761 /* CollectionReusableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7D92E62A137D7300800761 /* CollectionReusableHeaderView.swift */; };
 		DC7D92E92A137D8100800761 /* CollectionReusableFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7D92E82A137D8100800761 /* CollectionReusableFooterView.swift */; };
@@ -78,8 +76,6 @@
 /* Begin PBXFileReference section */
 		3961A58ED9E18016F754F2FB /* Pods_WYBasisKitTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WYBasisKitTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A628127A2EA1456F04DE740 /* Pods-WYBasisKitTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WYBasisKitTest.release.xcconfig"; path = "Target Support Files/Pods-WYBasisKitTest/Pods-WYBasisKitTest.release.xcconfig"; sourceTree = "<group>"; };
-		6503F0582BF209990074498E /* WYCallMethodController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYCallMethodController.swift; sourceTree = "<group>"; };
-		6503F05C2BF209DC0074498E /* WYMethodClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYMethodClass.swift; sourceTree = "<group>"; };
 		865E1EDDAF0233568A70050C /* Pods-WYBasisKitTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WYBasisKitTest.debug.xcconfig"; path = "Target Support Files/Pods-WYBasisKitTest/Pods-WYBasisKitTest.debug.xcconfig"; sourceTree = "<group>"; };
 		DC42B0EC2A42EC900004EB4C /* WYTestChatDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYTestChatDataSource.swift; sourceTree = "<group>"; };
 		DC7D92E62A137D7300800761 /* CollectionReusableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionReusableHeaderView.swift; sourceTree = "<group>"; };
@@ -169,15 +165,6 @@
 				3961A58ED9E18016F754F2FB /* Pods_WYBasisKitTest.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		6503F0572BF209650074498E /* 方法调用 */ = {
-			isa = PBXGroup;
-			children = (
-				6503F0582BF209990074498E /* WYCallMethodController.swift */,
-				6503F05C2BF209DC0074498E /* WYMethodClass.swift */,
-			);
-			path = "方法调用";
 			sourceTree = "<group>";
 		};
 		6A2E34580CAEDDBB0D711CD1 /* Pods */ = {
@@ -331,7 +318,6 @@
 		DCFEC10429EFED62001AE8E7 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				6503F0572BF209650074498E /* 方法调用 */,
 				DCFEC15929F27FB1001AE8E7 /* left */,
 				DCFEC15829F27FAE001AE8E7 /* center */,
 				DCFEC15729F27FAC001AE8E7 /* right */,
@@ -724,7 +710,6 @@
 				DCFEC12C29EFED62001AE8E7 /* WYMultilevelTableViewController.swift in Sources */,
 				DCFEC11929EFED62001AE8E7 /* WYTestTableViewHeaderView.swift in Sources */,
 				DCFEC12E29EFED62001AE8E7 /* WYTestInterfaceOrientationController.swift in Sources */,
-				6503F0592BF209990074498E /* WYCallMethodController.swift in Sources */,
 				DCFEC13329F0D05C001AE8E7 /* WYProtocolManager.swift in Sources */,
 				DCFEC12F29EFED62001AE8E7 /* WYRightController.swift in Sources */,
 				DCFEC11F29EFED62001AE8E7 /* WYTestChatController.swift in Sources */,
@@ -742,7 +727,6 @@
 				DCFEC12729EFED62001AE8E7 /* WYTableViewGroupedController.swift in Sources */,
 				DCFEC12D29EFED62001AE8E7 /* WYFlowLayoutAlignmentController.swift in Sources */,
 				DCFEC12129EFED62001AE8E7 /* WYQRCodeController.swift in Sources */,
-				6503F05D2BF209DC0074498E /* WYMethodClass.swift in Sources */,
 				DCFEC12029EFED62001AE8E7 /* WYTableViewPlainController.swift in Sources */,
 				DCFEC13029EFED62001AE8E7 /* WYTestDarkNightModeController.swift in Sources */,
 				DCFEC12829EFED62001AE8E7 /* WYTestAnimationController.swift in Sources */,
