@@ -525,7 +525,7 @@
 				DCFEBFE129EFDE2F001AE8E7 /* Sources */,
 				DCFEBFE229EFDE2F001AE8E7 /* Frameworks */,
 				DCFEBFE329EFDE2F001AE8E7 /* Resources */,
-				F4F27FA3F9B60C3FCC4FE385 /* [CP] Embed Pods Frameworks */,
+				D4B2CCFDEF7D7564F49D90F4 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -656,7 +656,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		F4F27FA3F9B60C3FCC4FE385 /* [CP] Embed Pods Frameworks */ = {
+		D4B2CCFDEF7D7564F49D90F4 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -916,7 +916,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = ZZ9K5ZWPF5;
+				DEVELOPMENT_TEAM = JX362P6GEC;
 				EXCLUDED_ARCHS = "";
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1020,7 +1020,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = ZZ9K5ZWPF5;
+				DEVELOPMENT_TEAM = JX362P6GEC;
 				EXCLUDED_ARCHS = "";
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				GENERATE_INFOPLIST_FILE = YES;

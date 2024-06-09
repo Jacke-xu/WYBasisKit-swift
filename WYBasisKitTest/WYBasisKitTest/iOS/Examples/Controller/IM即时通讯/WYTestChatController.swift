@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ChatView
 
 class WYTestChatController: UIViewController {
     
