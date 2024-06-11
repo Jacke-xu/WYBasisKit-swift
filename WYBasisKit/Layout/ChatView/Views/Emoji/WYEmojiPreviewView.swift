@@ -97,6 +97,7 @@ public class WYEmojiPreviewView: UIImageView {
         }
     }
     
+    @discardableResult
     public class func show(emoji: String, according: UIView, handler: @escaping ((_ imageName: String, _ imageView: UIImageView) -> Void)) ->WYEmojiPreviewView?  {
         
         release()
