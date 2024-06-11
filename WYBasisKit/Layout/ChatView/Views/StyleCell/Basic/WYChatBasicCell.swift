@@ -211,23 +211,23 @@ public class WYChatBasicCell: UITableViewCell {
         nicknameView.snp.updateConstraints { make in
             make.height.equalTo(((nicknameView.textColor == .clear) ? 0 : config.nicknameFont.lineHeight))
             if message.isSender(userID) {
-                make.left.equalToSuperview().offset(fabs(chatTextConfig.basic.avatarOffset.receive.x) + config.avatarSize.width + fabs(chatTextConfig.bubbleMaxOffset))
+                make.left.equalToSuperview().offset(abs(chatTextConfig.basic.avatarOffset.receive.x) + config.avatarSize.width + abs(chatTextConfig.bubbleMaxOffset))
                 if message.group == nil {
-                    make.width.equalTo(sharedContentMaxWidth() - fabs(chatTextConfig.bubbleOffsetForSingle.sendor.x))
+                    make.width.equalTo(sharedContentMaxWidth() - abs(chatTextConfig.bubbleOffsetForSingle.sendor.x))
                     make.top.equalTo(timeView.snp.bottom).offset((timeView.text?.isEmpty ?? true) ? 0 : config.nameViewOffsetForSingle.sendor.y)
                 }else {
-                    make.width.equalTo(sharedContentMaxWidth() - fabs(chatTextConfig.bubbleOffsetForGroup.sendor.x))
+                    make.width.equalTo(sharedContentMaxWidth() - abs(chatTextConfig.bubbleOffsetForGroup.sendor.x))
                     make.top.equalTo(timeView.snp.bottom).offset((timeView .text?.isEmpty ?? true) ? 0 : config.nameViewOffsetForGroup.sendor.y)
                 }
             }else {
                 if message.group == nil {
                     
-                    make.left.equalToSuperview().offset(fabs(chatTextConfig.basic.avatarOffset.receive.x) + config.avatarSize.width + fabs(config.nameViewOffsetForSingle.receive.x))
-                    make.width.equalTo(sharedContentMaxWidth() - fabs(chatTextConfig.bubbleOffsetForSingle.receive.x))
+                    make.left.equalToSuperview().offset(abs(chatTextConfig.basic.avatarOffset.receive.x) + config.avatarSize.width + abs(config.nameViewOffsetForSingle.receive.x))
+                    make.width.equalTo(sharedContentMaxWidth() - abs(chatTextConfig.bubbleOffsetForSingle.receive.x))
                     make.top.equalTo(timeView.snp.bottom).offset((timeView.text?.isEmpty ?? true) ? 0 : config.nameViewOffsetForSingle.receive.y)
                 }else {
-                    make.left.equalToSuperview().offset(fabs(chatTextConfig.basic.avatarOffset.receive.x) + config.avatarSize.width + fabs(config.nameViewOffsetForGroup.receive.x))
-                    make.width.equalTo(sharedContentMaxWidth() - fabs(chatTextConfig.bubbleOffsetForGroup.receive.x))
+                    make.left.equalToSuperview().offset(abs(chatTextConfig.basic.avatarOffset.receive.x) + config.avatarSize.width + abs(config.nameViewOffsetForGroup.receive.x))
+                    make.width.equalTo(sharedContentMaxWidth() - abs(chatTextConfig.bubbleOffsetForGroup.receive.x))
                     make.top.equalTo(timeView.snp.bottom).offset((timeView.text?.isEmpty ?? true) ? 0 : config.nameViewOffsetForGroup.receive.y)
                 }
             }
@@ -287,7 +287,7 @@ public class WYChatBasicCell: UITableViewCell {
 
 public extension WYChatBasicCell {
     
-    public func updateMessageState() {
+    func updateMessageState() {
         loadingView.isHidden = (message.sendState == .success)
         switch message.sendState {
         case .success:
@@ -320,7 +320,7 @@ public extension WYChatBasicCell {
         }
     }
     
-    public func loadImage(_ imageView: UIImageView) {
+    func loadImage(_ imageView: UIImageView) {
          
         let imageCache = try! ImageCache(name: message.sendor.name, cacheDirectoryURL: createDirectory(directory: .cachesDirectory, subDirectory: "WYBasisKit/WYChatView/\(message.sendor.name)"))
         
@@ -345,7 +345,7 @@ public extension WYChatBasicCell {
     }
     
     /// 创建一个指定目录/文件夹
-    public func createDirectory(directory: FileManager.SearchPathDirectory, subDirectory: String) -> URL {
+    func createDirectory(directory: FileManager.SearchPathDirectory, subDirectory: String) -> URL {
         
         let directoryURLs = FileManager.default.urls(for: directory,
                                                         in: .userDomainMask)
@@ -370,7 +370,7 @@ public extension WYChatBasicCell {
           4、消息大于1周且是今年的消息，显示格式为：MMdd HH:mm，如 12月12日 12:12
           5、消息时间不是今年的消息，显示格式为：yyyyMMdd HH:mm，如 2022年12月12日 12:12
      */
-    public func sharedTimeText(_ messageTimestamp: String, _ clientTimestamp: String = String.wy_sharedDeviceTimestamp(), _ lastMessageTimestamp: String, _ locale: Locale = Locale(identifier: "zh_CN")) -> String {
+    func sharedTimeText(_ messageTimestamp: String, _ clientTimestamp: String = String.wy_sharedDeviceTimestamp(), _ lastMessageTimestamp: String, _ locale: Locale = Locale(identifier: "zh_CN")) -> String {
         
         let showTime: Bool = ((NumberFormatter().number(from: messageTimestamp)?.doubleValue ?? 0) - (NumberFormatter().number(from: lastMessageTimestamp)?.doubleValue ?? 0) >= config.messageMinimumTimeSpan)
         
@@ -419,27 +419,27 @@ public extension WYChatBasicCell {
     }
     
     // 获取内容(气泡图)的最大显示宽度
-    public func sharedContentMaxWidth() -> CGFloat {
+    func sharedContentMaxWidth() -> CGFloat {
         
         if message.isSender(userID) {
             
             if message.group == nil {
                 
-                return (wy_width - fabs(chatTextConfig.basic.avatarOffset.sendor.x) - fabs(chatTextConfig.basic.avatarOffset.receive.x) - (chatTextConfig.basic.avatarSize.width * 2.0) - fabs(chatTextConfig.bubbleMaxOffset)) - fabs(config.nameViewOffsetForSingle.sendor.x) + fabs(chatTextConfig.bubbleOffsetForSingle.sendor.x)
+                return (wy_width - abs(chatTextConfig.basic.avatarOffset.sendor.x) - abs(chatTextConfig.basic.avatarOffset.receive.x) - (chatTextConfig.basic.avatarSize.width * 2.0) - abs(chatTextConfig.bubbleMaxOffset)) - abs(config.nameViewOffsetForSingle.sendor.x) + abs(chatTextConfig.bubbleOffsetForSingle.sendor.x)
                 
             }else {
                 
-                return (wy_width - fabs(chatTextConfig.basic.avatarOffset.sendor.x) - fabs(chatTextConfig.basic.avatarOffset.receive.x) - (chatTextConfig.basic.avatarSize.width * 2.0) - fabs(chatTextConfig.bubbleMaxOffset)) - fabs(config.nameViewOffsetForGroup.sendor.x) + fabs(chatTextConfig.bubbleOffsetForGroup.sendor.x)
+                return (wy_width - abs(chatTextConfig.basic.avatarOffset.sendor.x) - abs(chatTextConfig.basic.avatarOffset.receive.x) - (chatTextConfig.basic.avatarSize.width * 2.0) - abs(chatTextConfig.bubbleMaxOffset)) - abs(config.nameViewOffsetForGroup.sendor.x) + abs(chatTextConfig.bubbleOffsetForGroup.sendor.x)
             }
             
         }else {
             if message.group == nil {
                 
-                return (wy_width - fabs(chatTextConfig.basic.avatarOffset.sendor.x) - fabs(chatTextConfig.basic.avatarOffset.receive.x) - (chatTextConfig.basic.avatarSize.width * 2.0) - fabs(chatTextConfig.bubbleMaxOffset)) - fabs(config.nameViewOffsetForSingle.receive.x) + fabs(chatTextConfig.bubbleOffsetForSingle.receive.x)
+                return (wy_width - abs(chatTextConfig.basic.avatarOffset.sendor.x) - abs(chatTextConfig.basic.avatarOffset.receive.x) - (chatTextConfig.basic.avatarSize.width * 2.0) - abs(chatTextConfig.bubbleMaxOffset)) - abs(config.nameViewOffsetForSingle.receive.x) + abs(chatTextConfig.bubbleOffsetForSingle.receive.x)
                 
             }else {
                 
-                return (wy_width - fabs(chatTextConfig.basic.avatarOffset.sendor.x) - fabs(chatTextConfig.basic.avatarOffset.receive.x) - (chatTextConfig.basic.avatarSize.width * 2.0) - fabs(chatTextConfig.bubbleMaxOffset)) - fabs(config.nameViewOffsetForGroup.receive.x) + fabs(chatTextConfig.bubbleOffsetForGroup.receive.x)
+                return (wy_width - abs(chatTextConfig.basic.avatarOffset.sendor.x) - abs(chatTextConfig.basic.avatarOffset.receive.x) - (chatTextConfig.basic.avatarSize.width * 2.0) - abs(chatTextConfig.bubbleMaxOffset)) - abs(config.nameViewOffsetForGroup.receive.x) + abs(chatTextConfig.bubbleOffsetForGroup.receive.x)
             }
         }
     }

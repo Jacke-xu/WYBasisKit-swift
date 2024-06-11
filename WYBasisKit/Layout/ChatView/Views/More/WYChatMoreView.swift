@@ -83,22 +83,22 @@ public struct WYMoreViewConfig {
 public extension WYMoreViewConfig {
     
     /// 计算单个item的Size
-    public func moreItemSize() -> CGSize {
+    func moreItemSize() -> CGSize {
         return CGSize(width: imageViewSize.width, height: imageViewSize.height + textTopOffset + textViewFont.lineHeight)
     }
     
     /// 计算每页需要显示几行item
-    public func numberOfLinesInPage() -> NSInteger {
+    func numberOfLinesInPage() -> NSInteger {
         return maxHeightForever ? itemMaxLineWithPage : min(itemMaxLineWithPage, NSInteger(ceil(CGFloat(moreSource.count) / CGFloat(itemMaxCountWithLine))))
     }
     
     /// 计算需要几页才能显示完毕所有Item
-    public func numberOfPages() -> NSInteger {
+    func numberOfPages() -> NSInteger {
         return NSInteger(ceil(CGFloat(moreViewConfig.moreSource.count) / CGFloat((itemMaxLineWithPage * itemMaxCountWithColumn))))
     }
     
     /// 返回一个bool值，判断一页是否能否显示完毕所有的item
-    public func showTotalItemInPage() -> Bool {
+    func showTotalItemInPage() -> Bool {
         
         if scrollDirection == .horizontal {
             return moreViewConfig.moreSource.count <= (itemMaxLineWithPage * itemMaxCountWithLine)
@@ -109,7 +109,7 @@ public extension WYMoreViewConfig {
     }
     
     /// 计算自定义more控件高度
-    public func contentHeight() -> CGFloat {
+    func contentHeight() -> CGFloat {
         
         let lineSpace: CGFloat = (numberOfLinesInPage() > 1) ? (CGFloat((numberOfLinesInPage() - 1)) * minimumLineSpacing) : 0
         
@@ -119,7 +119,7 @@ public extension WYMoreViewConfig {
     }
     
     /// 获取默认的分页控制器原点位置
-    public func defaultPageControlPosition(_ pageControl: UIPageControl) -> CGPoint {
+    func defaultPageControlPosition(_ pageControl: UIPageControl) -> CGPoint {
         
         let pageControlSize: CGSize = pageControl.size(forNumberOfPages: pageControl.numberOfPages)
         if scrollDirection == .horizontal {
@@ -258,7 +258,7 @@ extension WYChatMoreView: UICollectionViewDelegate, UICollectionViewDataSource, 
 public extension WYChatMoreView {
     
     /// 分页控件
-    public var pageControl: UIPageControl? {
+    var pageControl: UIPageControl? {
         
         set(newValue) {
             objc_setAssociatedObject(self, WYAssociatedKeys.pageControl, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
@@ -280,7 +280,7 @@ public extension WYChatMoreView {
                 }
                 if moreViewConfig.scrollDirection == .vertical {
                     // 围绕中心旋转90度
-                    pagecontrol.transform = CGAffineTransform(rotationAngle: M_PI_2)
+                    pagecontrol.transform = CGAffineTransform(rotationAngle: Double.pi / 2)
                 }
                 addSubview(pagecontrol)
                 
@@ -308,7 +308,7 @@ public extension WYChatMoreView {
      *  @param defaultColor    其他页码的颜色
      *  @param currentColor    当前页码的颜色
      */
-    public func updatePageControl(defaultColor: UIColor, currentColor: UIColor) {
+    func updatePageControl(defaultColor: UIColor, currentColor: UIColor) {
         pageControlSetting.defaultColor = defaultColor
         pageControlSetting.currentColor = currentColor
         
@@ -325,7 +325,7 @@ public extension WYChatMoreView {
      *  @param defaultImage    其他页码的图片
      *  @param currentImage    当前页码的图片
      */
-    public func updatePageControl(defaultImage: UIImage? = nil, currentImage: UIImage? = nil) {
+    func updatePageControl(defaultImage: UIImage? = nil, currentImage: UIImage? = nil) {
         pageControlSetting.currentImage = currentImage
         pageControlSetting.defaultImage = defaultImage
         

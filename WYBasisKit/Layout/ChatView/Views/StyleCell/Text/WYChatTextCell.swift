@@ -64,7 +64,6 @@ public class WYChatTextCell: WYChatBasicCell {
     
     public lazy var bubblesView: UIImageView = {
         let imageView: UIImageView = UIImageView()
-        bubblesView
         contentView.addSubview(imageView)
         return imageView
     }()
@@ -126,7 +125,7 @@ public class WYChatTextCell: WYChatBasicCell {
             make.height.greaterThanOrEqualTo(avatarView)
             if message.isSender(userID) {
                 
-                make.left.greaterThanOrEqualToSuperview().offset((chatTextConfig.basic.avatarSize.width + fabs(chatTextConfig.basic.avatarOffset.receive.x) + chatTextConfig.bubbleMaxOffset))
+                make.left.greaterThanOrEqualToSuperview().offset((chatTextConfig.basic.avatarSize.width + abs(chatTextConfig.basic.avatarOffset.receive.x) + chatTextConfig.bubbleMaxOffset))
                 if message.group == nil {
                     make.right.equalTo(nicknameView).offset(chatTextConfig.bubbleOffsetForSingle.sendor.x)
                     make.top.equalTo(nicknameView.snp.bottom).offset(chatTextConfig.bubbleOffsetForSingle.sendor.y)
@@ -136,7 +135,7 @@ public class WYChatTextCell: WYChatBasicCell {
                     make.top.equalTo(nicknameView.snp.bottom).offset(chatTextConfig.bubbleOffsetForGroup.sendor.y)
                 }
             }else {
-                make.right.lessThanOrEqualToSuperview().offset(-(chatTextConfig.basic.avatarSize.width + fabs(chatTextConfig.basic.avatarOffset.sendor.x) + chatTextConfig.bubbleMaxOffset))
+                make.right.lessThanOrEqualToSuperview().offset(-(chatTextConfig.basic.avatarSize.width + abs(chatTextConfig.basic.avatarOffset.sendor.x) + chatTextConfig.bubbleMaxOffset))
                 if message.group == nil {
                     make.left.equalTo(nicknameView).offset(chatTextConfig.bubbleOffsetForSingle.receive.x)
                     make.top.equalTo(nicknameView.snp.bottom).offset(chatTextConfig.bubbleOffsetForSingle.receive.y)
@@ -161,9 +160,9 @@ public class WYChatTextCell: WYChatBasicCell {
     // 获取textView的最大显示宽度
     public func sharedTextMaxWidth() -> CGFloat {
         if message.isSender(userID) {
-            return sharedContentMaxWidth() - fabs(chatTextConfig.textEdgeInsets.sendor.left) - fabs(chatTextConfig.textEdgeInsets.sendor.right)
+            return sharedContentMaxWidth() - abs(chatTextConfig.textEdgeInsets.sendor.left) - abs(chatTextConfig.textEdgeInsets.sendor.right)
         }else {
-            return sharedContentMaxWidth() - fabs(chatTextConfig.textEdgeInsets.receive.left) - fabs(chatTextConfig.textEdgeInsets.receive.right)
+            return sharedContentMaxWidth() - abs(chatTextConfig.textEdgeInsets.receive.left) - abs(chatTextConfig.textEdgeInsets.receive.right)
         }
     }
     
