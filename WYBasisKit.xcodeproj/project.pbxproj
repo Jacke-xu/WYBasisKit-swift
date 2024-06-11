@@ -276,7 +276,8 @@
 			children = (
 				1F24689825B13DB700E02F78 /* ProtocolManager */,
 			);
-			path = Other;
+			name = Other;
+			path = WYBasisKit/Other;
 			sourceTree = "<group>";
 		};
 		1F24689825B13DB700E02F78 /* ProtocolManager */ = {
@@ -368,6 +369,7 @@
 		AA484EA624FA262100B39D60 = {
 			isa = PBXGroup;
 			children = (
+				1F24689725B13D9D00E02F78 /* Other */,
 				AA771B912568F834002C748B /* WYBasisKit */,
 				AA484EB224FA262100B39D60 /* AppDelegate.swift */,
 				DCFEBFDA29EFD8E4001AE8E7 /* ViewController.swift */,
@@ -652,7 +654,6 @@
 				AA06A34F2B60DC000049A555 /* Codable */,
 				AA771BC02568F834002C748B /* Networking */,
 				DCC340A32A31A5360026CAD8 /* Authorization */,
-				1F24689725B13D9D00E02F78 /* Other */,
 			);
 			path = WYBasisKit;
 			sourceTree = "<group>";

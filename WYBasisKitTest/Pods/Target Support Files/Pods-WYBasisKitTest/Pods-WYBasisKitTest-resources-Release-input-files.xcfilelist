@@ -1,0 +1,9 @@
+${PODS_ROOT}/Target Support Files/Pods-WYBasisKitTest/Pods-WYBasisKitTest-resources.sh
+${PODS_CONFIGURATION_BUILD_DIR}/Alamofire/Alamofire.bundle
+${PODS_ROOT}/../../WYBasisKit/Layout/ChatView/WYChatView.bundle
+${PODS_ROOT}/IQKeyboardManagerSwift/IQKeyboardManagerSwift/PrivacyInfo.xcprivacy
+${PODS_CONFIGURATION_BUILD_DIR}/Kingfisher/Kingfisher.bundle
+${PODS_CONFIGURATION_BUILD_DIR}/SnapKit/SnapKit_Privacy.bundle
+${PODS_ROOT}/WYBasisKit/WYBasisKit/Activity/WYActivity.bundle
+${PODS_ROOT}/WYBasisKit/WYBasisKit/Localizable/WYLocalizable.bundle
+${PODS_ROOT}/WYBasisKit/WYBasisKit/Layout/BannerView/WYBannerView.bundle
