@@ -192,7 +192,7 @@ public class WYRecordAnimationView: UIView {
     /// 创建录音器
     public lazy var audioRecorder: AVAudioRecorder? = {
         
-        let audioSession: AVAudioSession? = try? AVAudioSession.sharedInstance()
+        let audioSession: AVAudioSession? = AVAudioSession.sharedInstance()
         try? audioSession?.setCategory(.playAndRecord)
         try? audioSession?.setActive(true)
         

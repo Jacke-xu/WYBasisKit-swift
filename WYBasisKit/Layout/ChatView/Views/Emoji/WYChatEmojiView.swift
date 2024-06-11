@@ -239,7 +239,7 @@ public class WYChatEmojiView: UIView, WYEmojiFuncAreaViewDelegate {
             return
         }
         
-        let mutableString: NSMutableString = NSMutableString(string: attributedText.string)
+        let _: NSMutableString = NSMutableString(string: attributedText.string)
         attributedText.enumerateAttribute(NSAttributedString.Key.attachment, in: NSMakeRange(0, attributedText.string.utf16.count), options: NSAttributedString.EnumerationOptions.longestEffectiveRangeNotRequired) { value, range, stop in
             if value is WYTextAttachment {
                 // 拿到文本附件

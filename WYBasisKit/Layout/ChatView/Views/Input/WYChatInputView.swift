@@ -792,7 +792,7 @@ public class WYChatInputTextView: UITextView {
         // 获取光标所在的位置并在对应位置插入复制的文本
         if let string = UIPasteboard.general.string {
             // 光标位置
-            let cursorPosition = offset(from: beginningOfDocument, to: selectedTextRange?.start ?? beginningOfDocument)
+            _ = offset(from: beginningOfDocument, to: selectedTextRange?.start ?? beginningOfDocument)
             // 调用 insertText 方法后内部会触发 textViewDidChange 方法，在该方法内已实现纯文本转富文本操作
             insertText(string)
         }
