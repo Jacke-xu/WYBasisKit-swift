@@ -8,11 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		02561E71263AA6E506E07E1E /* Pods_WYBasisKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC6A316428A34D6400B0C0A6 /* Pods_WYBasisKit.framework */; };
-		1F24689A25B13DB700E02F78 /* WYProtocolManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F24689925B13DB700E02F78 /* WYProtocolManager.swift */; };
 		1F4A0E49256B4A52002E932D /* WYNetworkConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4A0E48256B4A52002E932D /* WYNetworkConfig.swift */; };
 		1F5C3E612578B61B00E0DBFF /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5C3E602578B61B00E0DBFF /* UIApplication.swift */; };
 		1F5C3E942578CD5400E0DBFF /* WYLocalizableManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5C3E932578CD5400E0DBFF /* WYLocalizableManager.swift */; };
 		1F99DCC8257DCFAE003D2408 /* WYPagingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F99DCC7257DCFAE003D2408 /* WYPagingView.swift */; };
+		65AF369E2C18103800B294CB /* WYProtocolManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65AF369B2C18103800B294CB /* WYProtocolManager.swift */; };
 		AA06A3582B60DC000049A555 /* WYDecodingStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA06A3502B60DC000049A555 /* WYDecodingStorage.swift */; };
 		AA06A3592B60DC000049A555 /* WYCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA06A3512B60DC000049A555 /* WYCodable.swift */; };
 		AA06A35A2B60DC000049A555 /* WYCodingKeyedDecodingContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA06A3522B60DC000049A555 /* WYCodingKeyedDecodingContainer.swift */; };
@@ -121,11 +121,11 @@
 
 /* Begin PBXFileReference section */
 		03E27E8906E5FB4F134A5419 /* Pods_WYBasisKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WYBasisKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		1F24689925B13DB700E02F78 /* WYProtocolManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYProtocolManager.swift; sourceTree = "<group>"; };
 		1F4A0E48256B4A52002E932D /* WYNetworkConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYNetworkConfig.swift; sourceTree = "<group>"; };
 		1F5C3E602578B61B00E0DBFF /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
 		1F5C3E932578CD5400E0DBFF /* WYLocalizableManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYLocalizableManager.swift; sourceTree = "<group>"; };
 		1F99DCC7257DCFAE003D2408 /* WYPagingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYPagingView.swift; sourceTree = "<group>"; };
+		65AF369B2C18103800B294CB /* WYProtocolManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYProtocolManager.swift; sourceTree = "<group>"; };
 		75FD4F7DFBF58D8B82417F4D /* Pods-WYBasisKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WYBasisKit.release.xcconfig"; path = "Target Support Files/Pods-WYBasisKit/Pods-WYBasisKit.release.xcconfig"; sourceTree = "<group>"; };
 		95FF853B47A9BDC19CFD8BF0 /* Pods-WYBasisKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WYBasisKit.debug.xcconfig"; path = "Target Support Files/Pods-WYBasisKit/Pods-WYBasisKit.debug.xcconfig"; sourceTree = "<group>"; };
 		AA06A3502B60DC000049A555 /* WYDecodingStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WYDecodingStorage.swift; sourceTree = "<group>"; };
@@ -271,23 +271,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1F24689725B13D9D00E02F78 /* Other */ = {
-			isa = PBXGroup;
-			children = (
-				1F24689825B13DB700E02F78 /* ProtocolManager */,
-			);
-			name = Other;
-			path = WYBasisKit/Other;
-			sourceTree = "<group>";
-		};
-		1F24689825B13DB700E02F78 /* ProtocolManager */ = {
-			isa = PBXGroup;
-			children = (
-				1F24689925B13DB700E02F78 /* WYProtocolManager.swift */,
-			);
-			path = ProtocolManager;
-			sourceTree = "<group>";
-		};
 		1F5C3E5F2578B60C00E0DBFF /* UIApplication */ = {
 			isa = PBXGroup;
 			children = (
@@ -320,6 +303,22 @@
 				75FD4F7DFBF58D8B82417F4D /* Pods-WYBasisKit.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		65AF369C2C18103800B294CB /* ProtocolManager */ = {
+			isa = PBXGroup;
+			children = (
+				65AF369B2C18103800B294CB /* WYProtocolManager.swift */,
+			);
+			path = ProtocolManager;
+			sourceTree = "<group>";
+		};
+		65AF369D2C18103800B294CB /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				65AF369C2C18103800B294CB /* ProtocolManager */,
+			);
+			path = Other;
 			sourceTree = "<group>";
 		};
 		94F8A53F1CB5643B124486A8 /* Frameworks */ = {
@@ -369,7 +368,7 @@
 		AA484EA624FA262100B39D60 = {
 			isa = PBXGroup;
 			children = (
-				1F24689725B13D9D00E02F78 /* Other */,
+				65AF369D2C18103800B294CB /* Other */,
 				AA771B912568F834002C748B /* WYBasisKit */,
 				AA484EB224FA262100B39D60 /* AppDelegate.swift */,
 				DCFEBFDA29EFD8E4001AE8E7 /* ViewController.swift */,
@@ -1137,6 +1136,7 @@
 				AA4A49DA2C15897E0069646C /* WYChatConfig.swift in Sources */,
 				AAE02B1A267C61E000EF6D36 /* CALayer.swift in Sources */,
 				AA771BEA2568F834002C748B /* WYScrollText.swift in Sources */,
+				65AF369E2C18103800B294CB /* WYProtocolManager.swift in Sources */,
 				AA4A49F12C15897E0069646C /* WYChatWebpageCell.swift in Sources */,
 				AA4A49E42C15897E0069646C /* WYChatVideoCell.swift in Sources */,
 				AA4A49E52C15897E0069646C /* WYChatTakePatCell.swift in Sources */,
@@ -1205,7 +1205,6 @@
 				AA771BDB2568F834002C748B /* String.swift in Sources */,
 				AAEE9003265B9558003B1748 /* WYNetworkServer.swift in Sources */,
 				AA4A49E82C15897E0069646C /* WYChatLocationCell.swift in Sources */,
-				1F24689A25B13DB700E02F78 /* WYProtocolManager.swift in Sources */,
 				AA4A49ED2C15897E0069646C /* WYChatLuckyMoneyCell.swift in Sources */,
 				AA771BE02568F834002C748B /* UIButton.swift in Sources */,
 				AA4A49E62C15897E0069646C /* WYChatFileCell.swift in Sources */,
