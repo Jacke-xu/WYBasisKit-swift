@@ -19,6 +19,7 @@ Pod::Spec.new do |kit|
   kit.author             = { '官人' => 'mobileAppDvlp@icloud.com' }
   kit.ios.deployment_target = '12.0'
   kit.source       = { :git => 'https://github.com/Jacke-xu/WYBasisKit-swift.git', :tag => "#{kit.version}" }
+  #kit.source       = { :svn => "http://119.3.227.245:8000/svn/sdk_wan_client/FastSDK"}
   kit.swift_versions = '5.0'
   kit.requires_arc = true
   kit.default_subspecs = 'Extension'
