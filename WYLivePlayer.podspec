@@ -26,6 +26,7 @@ Pod::Spec.new do |livePlayer|
   livePlayer.dependency 'SnapKit'
   livePlayer.dependency 'Kingfisher'
   livePlayer.vendored_frameworks = 'WYBasisKit/LivePlayer/WYLivePlayer/IJKMediaFramework.framework'
+  #livePlayer.vendored_libraries = 'xxx.a'
   livePlayer.libraries = 'c++', 'z', 'bz2'
   livePlayer.frameworks = 'UIKit', 'AudioToolbox', 'CoreGraphics', 'AVFoundation', 'CoreMedia', 'CoreVideo', 'MediaPlayer', 'CoreServices', 'Metal', 'QuartzCore', 'VideoToolbox'
 end
