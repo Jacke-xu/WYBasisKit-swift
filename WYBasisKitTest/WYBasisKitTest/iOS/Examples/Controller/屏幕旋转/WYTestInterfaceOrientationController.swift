@@ -39,6 +39,7 @@ class WYTestInterfaceOrientationController: UIViewController {
         label.font = .systemFont(ofSize: 15)
         label.text = sharedInterfaceOrientationString()
         label.textAlignment = .center
+        label.numberOfLines = 0
         view.addSubview(label)
         label.snp.makeConstraints { make in
             make.edges.equalToSuperview()
@@ -93,23 +94,34 @@ class WYTestInterfaceOrientationController: UIViewController {
         var string: String = ""
         switch UIDevice.current.wy_interfaceOrientation {
         case .portrait:
-            string = "竖向"
+            string = "竖向\n\(sharedScreenResolution())"
         case .landscapeLeft:
-            string = "横向-左"
+            string = "横向-左\n\(sharedScreenResolution())"
         case .landscapeRight:
-            string = "横向-右"
+            string = "横向-右\n\(sharedScreenResolution())"
         case .portraitUpsideDown:
-            string = "竖向-颠倒"
+            string = "竖向-颠倒\n\(sharedScreenResolution())"
         case .landscape:
-            string = "横向"
+            string = "横向\n\(sharedScreenResolution())"
         case .allButUpsideDown:
-            string = "竖向 / 横向"
+            string = "竖向 / 横向\n\(sharedScreenResolution())"
         case .all:
-            string = "竖向 / 横向 /  竖向-颠倒"
+            string = "竖向 / 横向 /  竖向-颠倒\n\(sharedScreenResolution())"
         default:
-            string = "未知"
+            string = "未知\n\(sharedScreenResolution())"
         }
         return string
+    }
+    
+    func sharedScreenResolution() -> String {
+        
+        let screen = UIScreen.main
+        let scale = screen.scale
+        let bounds = screen.bounds
+        let width = bounds.width * scale
+        let height = bounds.height * scale
+        
+        return "宽\(width) 高\(height)"
     }
     
     override func viewWillDisappear(_ animated: Bool) {

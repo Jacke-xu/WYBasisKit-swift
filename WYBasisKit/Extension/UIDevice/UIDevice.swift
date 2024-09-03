@@ -65,7 +65,6 @@ public extension UIDevice {
                 host_info(mach_host_self(), Int32(HOST_BASIC_INFO), $0, &size)
             }
         }
-        print(result, hostInfo)
         switch hostInfo.cpu_type {
         case CPU_TYPE_ARM:
             return "ARM"
