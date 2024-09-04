@@ -8,6 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		4A027019DE606531773A44D7 /* Pods_WYBasisKitTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3961A58ED9E18016F754F2FB /* Pods_WYBasisKitTest.framework */; };
+		6535C6612C8838C3002FF69B /* WYGenericTypeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6535C6602C8838C3002FF69B /* WYGenericTypeController.swift */; };
+		6535C6632C8838E6002FF69B /* WYOffLineMethodController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6535C6622C8838E6002FF69B /* WYOffLineMethodController.swift */; };
+		6535C6672C883920002FF69B /* SDKResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6535C6642C883920002FF69B /* SDKResponse.swift */; };
+		6535C6682C883920002FF69B /* SDKRequestContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6535C6652C883920002FF69B /* SDKRequestContext.swift */; };
+		6535C6692C883920002FF69B /* SDKRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6535C6662C883920002FF69B /* SDKRequest.swift */; };
+		6535C66C2C8839F1002FF69B /* UserRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6535C66A2C8839F1002FF69B /* UserRequest.swift */; };
+		6535C66D2C8839F1002FF69B /* UserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6535C66B2C8839F1002FF69B /* UserResponse.swift */; };
 		DC42B0ED2A42EC900004EB4C /* WYTestChatDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC42B0EC2A42EC900004EB4C /* WYTestChatDataSource.swift */; };
 		DC7D92E72A137D7300800761 /* CollectionReusableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7D92E62A137D7300800761 /* CollectionReusableHeaderView.swift */; };
 		DC7D92E92A137D8100800761 /* CollectionReusableFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7D92E82A137D8100800761 /* CollectionReusableFooterView.swift */; };
@@ -76,6 +83,13 @@
 /* Begin PBXFileReference section */
 		3961A58ED9E18016F754F2FB /* Pods_WYBasisKitTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WYBasisKitTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A628127A2EA1456F04DE740 /* Pods-WYBasisKitTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WYBasisKitTest.release.xcconfig"; path = "Target Support Files/Pods-WYBasisKitTest/Pods-WYBasisKitTest.release.xcconfig"; sourceTree = "<group>"; };
+		6535C6602C8838C3002FF69B /* WYGenericTypeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYGenericTypeController.swift; sourceTree = "<group>"; };
+		6535C6622C8838E6002FF69B /* WYOffLineMethodController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYOffLineMethodController.swift; sourceTree = "<group>"; };
+		6535C6642C883920002FF69B /* SDKResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SDKResponse.swift; sourceTree = "<group>"; };
+		6535C6652C883920002FF69B /* SDKRequestContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SDKRequestContext.swift; sourceTree = "<group>"; };
+		6535C6662C883920002FF69B /* SDKRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SDKRequest.swift; sourceTree = "<group>"; };
+		6535C66A2C8839F1002FF69B /* UserRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserRequest.swift; sourceTree = "<group>"; };
+		6535C66B2C8839F1002FF69B /* UserResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserResponse.swift; sourceTree = "<group>"; };
 		865E1EDDAF0233568A70050C /* Pods-WYBasisKitTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WYBasisKitTest.debug.xcconfig"; path = "Target Support Files/Pods-WYBasisKitTest/Pods-WYBasisKitTest.debug.xcconfig"; sourceTree = "<group>"; };
 		DC42B0EC2A42EC900004EB4C /* WYTestChatDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYTestChatDataSource.swift; sourceTree = "<group>"; };
 		DC7D92E62A137D7300800761 /* CollectionReusableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionReusableHeaderView.swift; sourceTree = "<group>"; };
@@ -165,6 +179,27 @@
 				3961A58ED9E18016F754F2FB /* Pods_WYBasisKitTest.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6535C65E2C88386F002FF69B /* 离线方法调用 */ = {
+			isa = PBXGroup;
+			children = (
+				6535C6622C8838E6002FF69B /* WYOffLineMethodController.swift */,
+			);
+			path = "离线方法调用";
+			sourceTree = "<group>";
+		};
+		6535C65F2C883875002FF69B /* 泛型 */ = {
+			isa = PBXGroup;
+			children = (
+				6535C6602C8838C3002FF69B /* WYGenericTypeController.swift */,
+				6535C6662C883920002FF69B /* SDKRequest.swift */,
+				6535C6652C883920002FF69B /* SDKRequestContext.swift */,
+				6535C6642C883920002FF69B /* SDKResponse.swift */,
+				6535C66A2C8839F1002FF69B /* UserRequest.swift */,
+				6535C66B2C8839F1002FF69B /* UserResponse.swift */,
+			);
+			path = "泛型";
 			sourceTree = "<group>";
 		};
 		655FF9922C17E8EB00C0A984 /* visionOS */ = {
@@ -330,23 +365,25 @@
 				DCFEC15829F27FAE001AE8E7 /* center */,
 				DCFEC15729F27FAC001AE8E7 /* right */,
 				DCFEC15629F27FAA001AE8E7 /* 暗夜、白昼模式 */,
-				DCFEC15529F27FA7001AE8E7 /* 约束view添加动画 */,
 				DCFEC15429F27FA4001AE8E7 /* 边框、圆角、阴影、渐变 */,
-				DCFEC15329F27FA2001AE8E7 /* ButtonEdgeInsets */,
-				DCFEC15229F27F9F001AE8E7 /* Banner */,
-				DCFEC15129F27F9C001AE8E7 /* RichText */,
-				DCFEC15029F27F9A001AE8E7 /* 无限层折叠TableView */,
-				DCFEC14F29F27F98001AE8E7 /* tableView.plain */,
-				DCFEC14E29F27F95001AE8E7 /* tableView.grouped */,
-				DCFEC14D29F27F93001AE8E7 /* 下载 */,
-				DCFEC14C29F27F90001AE8E7 /* 网络请求 */,
-				DCFEC14B29F27F8E001AE8E7 /* 屏幕旋转 */,
 				DCFEC14A29F27F8B001AE8E7 /* 二维码 */,
-				DCFEC14929F27F89001AE8E7 /* Gif */,
+				6535C65F2C883875002FF69B /* 泛型 */,
+				6535C65E2C88386F002FF69B /* 离线方法调用 */,
+				DCFEC14B29F27F8E001AE8E7 /* 屏幕旋转 */,
 				DCFEC14829F27F86001AE8E7 /* 瀑布流 */,
-				DCFEC14729F27F83001AE8E7 /* 直播、点播播放器 */,
-				DCFEC14629F27F72001AE8E7 /* IM即时通讯 */,
+				DCFEC14C29F27F90001AE8E7 /* 网络请求 */,
+				DCFEC15029F27F9A001AE8E7 /* 无限层折叠TableView */,
+				DCFEC14D29F27F93001AE8E7 /* 下载 */,
 				DCC340952A317DB40026CAD8 /* 语音识别 */,
+				DCFEC15529F27FA7001AE8E7 /* 约束view添加动画 */,
+				DCFEC14729F27F83001AE8E7 /* 直播、点播播放器 */,
+				DCFEC15229F27F9F001AE8E7 /* Banner */,
+				DCFEC15329F27FA2001AE8E7 /* ButtonEdgeInsets */,
+				DCFEC14929F27F89001AE8E7 /* Gif */,
+				DCFEC14629F27F72001AE8E7 /* IM即时通讯 */,
+				DCFEC15129F27F9C001AE8E7 /* RichText */,
+				DCFEC14E29F27F95001AE8E7 /* tableView.grouped */,
+				DCFEC14F29F27F98001AE8E7 /* tableView.plain */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -711,6 +748,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				DCFEC11C29EFED62001AE8E7 /* WYTestView.swift in Sources */,
+				6535C6672C883920002FF69B /* SDKResponse.swift in Sources */,
+				6535C66C2C8839F1002FF69B /* UserRequest.swift in Sources */,
 				DCFEC11E29EFED62001AE8E7 /* WYParseGifController.swift in Sources */,
 				DCC3409A2A317E6C0026CAD8 /* WYSpeechRecognitionController.swift in Sources */,
 				DCFEC12429EFED62001AE8E7 /* WYTestVisualController.swift in Sources */,
@@ -721,6 +760,9 @@
 				DCFEC13329F0D05C001AE8E7 /* WYProtocolManager.swift in Sources */,
 				DCFEC12F29EFED62001AE8E7 /* WYRightController.swift in Sources */,
 				DCFEC11F29EFED62001AE8E7 /* WYTestChatController.swift in Sources */,
+				6535C66D2C8839F1002FF69B /* UserResponse.swift in Sources */,
+				6535C6632C8838E6002FF69B /* WYOffLineMethodController.swift in Sources */,
+				6535C6612C8838C3002FF69B /* WYGenericTypeController.swift in Sources */,
 				DCFEC11A29EFED62001AE8E7 /* WYLeftControllerHeaderView.swift in Sources */,
 				DCFEC12529EFED62001AE8E7 /* WYCenterController.swift in Sources */,
 				DCFEC12B29EFED62001AE8E7 /* WYTestDownloadController.swift in Sources */,
@@ -737,10 +779,12 @@
 				DCFEC12129EFED62001AE8E7 /* WYQRCodeController.swift in Sources */,
 				DCFEC12029EFED62001AE8E7 /* WYTableViewPlainController.swift in Sources */,
 				DCFEC13029EFED62001AE8E7 /* WYTestDarkNightModeController.swift in Sources */,
+				6535C6692C883920002FF69B /* SDKRequest.swift in Sources */,
 				DCFEC12829EFED62001AE8E7 /* WYTestAnimationController.swift in Sources */,
 				DCFEC12229EFED62001AE8E7 /* WYTestRichTextController.swift in Sources */,
 				DC42B0ED2A42EC900004EB4C /* WYTestChatDataSource.swift in Sources */,
 				DCFEC01D29EFE496001AE8E7 /* WYTabBarController.swift in Sources */,
+				6535C6682C883920002FF69B /* SDKRequestContext.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -27,7 +27,9 @@ class WYLeftController: UIViewController {
                                 "瀑布流",
                                 "直播、点播播放器",
                                 "IM即时通讯",
-                                "语音识别"]
+                                "语音识别",
+                                "泛型",
+                                "离线方法调用"]
 
     let controller: [String] = ["WYTestDarkNightModeController",
                                 "WYTestAnimationController",
@@ -46,7 +48,9 @@ class WYLeftController: UIViewController {
                                 "WYFlowLayoutAlignmentController",
                                 "WYTestLiveStreamingController",
                                 "WYTestChatController",
-                                "WYSpeechRecognitionController"]
+                                "WYSpeechRecognitionController",
+                                "WYGenericTypeController",
+                                "WYOffLineMethodController"]
 
     lazy var tableView: UITableView = {
 
