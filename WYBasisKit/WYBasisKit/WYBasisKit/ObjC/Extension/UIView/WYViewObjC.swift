@@ -26,70 +26,70 @@ import WYBasisKitSwift
 
 @objc public extension UIView {
     
-    /** view.width */
+    /// view.width
     @objc(wy_width)
     var wy_widthObjC: CGFloat {
         set { self.wy_width = newValue }
         get { return self.wy_width }
     }
     
-    /** view.height */
+    /// view.height
     @objc(wy_height)
     var wy_heightObjC: CGFloat {
         set { self.wy_height = newValue }
         get { return self.wy_height }
     }
     
-    /** view.origin.x */
+    /// view.origin.x
     @objc(wy_left)
     var wy_leftObjC: CGFloat {
         set { self.wy_left = newValue }
         get { return self.wy_left }
     }
     
-    /** view.origin.x + view.width */
+    /// view.origin.x + view.width
     @objc(wy_right)
     var wy_rightObjC: CGFloat {
         set { self.wy_right = newValue }
         get { return self.wy_right }
     }
     
-    /** view.origin.y */
+    /// view.origin.y
     @objc(wy_top)
     var wy_topObjC: CGFloat {
         set { self.wy_top = newValue }
         get { return self.wy_top }
     }
     
-    /** view.origin.y + view.height */
+    /// view.origin.y + view.height
     @objc(wy_bottom)
     var wy_bottomObjC: CGFloat {
         set { self.wy_bottom = newValue }
         get { return self.wy_bottom }
     }
     
-    /** view.center.x */
+    /// view.center.x
     @objc(wy_centerx)
     var wy_centerxObjC: CGFloat {
         set { self.wy_centerx = newValue }
         get { return self.wy_centerx }
     }
     
-    /** view.center.y */
+    /// view.center.y
     @objc(wy_centery)
     var wy_centeryObjC: CGFloat {
         set { self.wy_centery = newValue }
         get { return self.wy_centery }
     }
     
-    /** view.origin */
+    /// view.origin
     @objc(wy_origin)
     var wy_originObjC: CGPoint {
         set { self.wy_origin = newValue }
         get { return self.wy_origin }
     }
     
-    /** view.size */
+    /// view.size
     @objc(wy_size)
     var wy_sizeObjC: CGSize {
         set { self.wy_size = newValue }

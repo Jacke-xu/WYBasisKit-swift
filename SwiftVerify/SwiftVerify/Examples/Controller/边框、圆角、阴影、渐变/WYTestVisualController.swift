@@ -13,11 +13,6 @@ class WYTestVisualController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
-        // 调试直达入口:启动时带WY_AUTO_SCROLL=bottom可自动滚到底部，配合截图验证动态区
-        if ProcessInfo.processInfo.environment["WY_AUTO_SCROLL"] == "bottom" {
-            scrollView.contentOffset = CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.height + scrollView.contentInset.bottom)
-        }
     }
 
     /// 每个静态组合的标题和链式配置(标题显示在视觉区下方的外部标签上，不会被边框、圆角、阴影挡住)
@@ -178,6 +173,7 @@ class WYTestVisualController: UIViewController {
         let actionTitles = ["重复应用视觉", "清除后0.6秒重建", "指定边框换厚度", "移除指定边框"]
         let actionSelectors = [#selector(reapplyVisual), #selector(clearAndReapply), #selector(cycleEdgeBorder), #selector(removeEdgeBorder)]
         let actionStack = UIStackView()
+        actionStack.backgroundColor = .clear
         actionStack.axis = .vertical
         actionStack.spacing = 8
         container.addSubview(actionStack)
@@ -216,16 +212,19 @@ class WYTestVisualController: UIViewController {
     }
 
     private func refreshStatus() {
-        let edgeText = edgeBorderRemoved ? "已移除" : "厚度\(edgeThicknesses[borderIndex])"
+        let edgeText = edgeBorderRemoved ? "已移除" : "厚度\(Int(edgeThicknesses[borderIndex]))"
         statusLabel.text = "已应用\(applyCount)次 · 指定边框\(edgeText) · 当前尺寸\(isBigSize ? "全宽x150" : "全宽x110")"
     }
 
     @objc private func toggleSize() {
         isBigSize = !isBigSize
-        bigButton.snp.updateConstraints { make in
-            make.height.equalTo(isBigSize ? 150 : 110)
+        // 验证动画同步:动画上下文里改约束并强制布局，view本体和圆角、边框、渐变、阴影应以相同时长一起过渡
+        UIView.animate(withDuration: 0.25) {
+            self.bigButton.snp.updateConstraints { make in
+                make.height.equalTo(self.isBigSize ? 150 : 110)
+            }
+            self.view.layoutIfNeeded()
         }
-        // 故意不调用wy_showVisual，验证圆角、边框、渐变、阴影靠bounds监听自动跟随新尺寸
         refreshStatus()
     }
 

@@ -10,7 +10,6 @@ import UIKit
 
 /// 渐变方向
 @frozen public enum WYGradientDirection: Int {
-
     /// 从左到右
     case leftToRight = 0
     /// 从上到下
@@ -23,7 +22,7 @@ import UIKit
 
 public extension UIView {
 
-    /** view.width */
+    /// view.width
     var wy_width: CGFloat {
         set {
             var frame: CGRect = self.frame
@@ -35,7 +34,7 @@ public extension UIView {
         }
     }
 
-    /** view.height */
+    /// view.height
     var wy_height: CGFloat {
         set {
             var frame: CGRect = self.frame
@@ -47,7 +46,7 @@ public extension UIView {
         }
     }
 
-    /** view.origin.x */
+    /// view.origin.x
     var wy_left: CGFloat {
         set {
             var frame: CGRect = self.frame
@@ -59,7 +58,7 @@ public extension UIView {
         }
     }
 
-    /** view.origin.x + view.width */
+    /// view.origin.x + view.width
     var wy_right: CGFloat {
         set {
             var frame: CGRect = self.frame
@@ -71,7 +70,7 @@ public extension UIView {
         }
     }
 
-    /** view.origin.y */
+    /// view.origin.y
     var wy_top: CGFloat {
         set {
             var frame: CGRect = self.frame
@@ -83,7 +82,7 @@ public extension UIView {
         }
     }
 
-    /** view.origin.y + view.height */
+    /// view.origin.y + view.height
     var wy_bottom: CGFloat {
         set {
             var frame: CGRect = self.frame
@@ -95,7 +94,7 @@ public extension UIView {
         }
     }
 
-    /** view.center.x */
+    /// view.center.x
     var wy_centerx: CGFloat {
         set {
             // 防视图带形变时定位不准(frame在形变下取的是包围盒)，直接改center才能命中真实中心点
@@ -108,7 +107,7 @@ public extension UIView {
         }
     }
 
-    /** view.center.y */
+    /// view.center.y
     var wy_centery: CGFloat {
         set {
             // 防视图带形变时定位不准(frame在形变下取的是包围盒)，直接改center才能命中真实中心点
@@ -121,7 +120,7 @@ public extension UIView {
         }
     }
 
-    /** view.origin */
+    /// view.origin
     var wy_origin: CGPoint {
         set {
             var frame: CGRect = self.frame
@@ -133,7 +132,7 @@ public extension UIView {
         }
     }
 
-    /** view.size */
+    /// view.size
     var wy_size: CGSize {
         set {
             var frame: CGRect = self.frame
@@ -457,10 +456,8 @@ public extension UIView {
     }
 }
 
-// 内部实现
+// 内部实现，链式编程实现部分
 private extension UIView {
-
-    // 链式编程实现部分
 
     func wy_addShadow() {
         let config = wy_visualConfig
@@ -734,6 +731,79 @@ private extension UIView {
         objc_setAssociatedObject(self, &WYAssociatedKeys.borderObserver, nil, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
     }
 
+    /// 视觉图层同步过渡用的动画key(每次先移除同key旧动画再加新的，防快速连点时动画叠加)
+    static let wy_visualSyncAnimationKey = "WYBasisKit.visualSyncAnimation"
+
+    /// 让视觉图层与view本体同拍过渡(动画上下文里给图层补一份显式动画组后再落模型值，没有动画上下文时禁用隐式动画直接落值)
+    /// - Parameter layer: 要同步的视觉图层(圆角mask、链式边框、渐变、指定位置边框、阴影背景视图的layer)
+    /// - Parameter frame: 图层的新frame(传nil表示frame不变，只更新路径)
+    /// - Parameter path: CAShapeLayer的新路径(非CAShapeLayer时忽略)
+    /// - Parameter shadowPath: 普通CALayer的新阴影路径
+    static func wy_syncLayerGeometry(_ layer: CALayer, frame: CGRect?, path: CGPath? = nil, shadowPath: CGPath? = nil) {
+
+        // 防隐式动画在真实渲染里不跟拍:改约束动画时bounds监听里靠CATransaction隐式动画同步这些图层，屏幕上圆角mask不参与过渡(动画中圆角变直角)、边框和渐变瞬间跳到新尺寸压到还没挪完的周边控件，动画结束又恢复正常；这里照搬WYAirBubbleView验证过的做法，动画上下文里给每个图层显式加一份动画组(fromValue取presentation当前屏显值、时长取inheritedAnimationDuration)，让图层和view本体一起平滑过渡
+        if UIView.inheritedAnimationDuration > 0 {
+
+            layer.removeAnimation(forKey: wy_visualSyncAnimationKey)
+
+            var animations: [CAAnimation] = []
+            let presentation = layer.presentation()
+
+            if let path = path, let shapeLayer = layer as? CAShapeLayer {
+                let pathAnimation = CABasicAnimation(keyPath: "path")
+                pathAnimation.fromValue = (presentation as? CAShapeLayer)?.path ?? shapeLayer.path
+                pathAnimation.toValue = path
+                animations.append(pathAnimation)
+            }
+
+            if let shadowPath = shadowPath {
+                let shadowPathAnimation = CABasicAnimation(keyPath: "shadowPath")
+                shadowPathAnimation.fromValue = presentation?.shadowPath ?? layer.shadowPath
+                shadowPathAnimation.toValue = shadowPath
+                animations.append(shadowPathAnimation)
+            }
+
+            if let frame = frame {
+                let boundsAnimation = CABasicAnimation(keyPath: "bounds")
+                boundsAnimation.fromValue = presentation?.bounds ?? layer.bounds
+                // 防bounds动画值类型不匹配:bounds是CGRect，toValue传CGSize会被桥接成尺寸类型的NSValue，渲染端解不出bounds导致动画中图层尺寸归零(渐变漏底、指定位置边框消失)，必须包成origin为.zero的完整CGRect
+                boundsAnimation.toValue = CGRect(origin: .zero, size: frame.size)
+                animations.append(boundsAnimation)
+
+                let positionAnimation = CABasicAnimation(keyPath: "position")
+                positionAnimation.fromValue = presentation?.position ?? layer.position
+                positionAnimation.toValue = CGPoint(x: frame.midX, y: frame.midY)
+                animations.append(positionAnimation)
+            }
+
+            if animations.isEmpty == false {
+                let group = CAAnimationGroup()
+                group.animations = animations
+                group.duration = UIView.inheritedAnimationDuration
+                // 公共API拿不到当前动画上下文的自定义曲线，UIView.animate默认曲线就是easeInEaseOut，用同名曲线对齐大多数场景
+                group.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+                group.beginTime = 0
+                group.isRemovedOnCompletion = true
+                group.fillMode = .removed
+                layer.add(group, forKey: wy_visualSyncAnimationKey)
+            }
+        }
+
+        // 模型值直接落位，屏幕上的过渡交给上面的动画组，模型上不能再叠隐式动画
+        CATransaction.begin()
+        CATransaction.setDisableActions(true)
+        if let path = path, let shapeLayer = layer as? CAShapeLayer {
+            shapeLayer.path = path
+        }
+        if let shadowPath = shadowPath {
+            layer.shadowPath = shadowPath
+        }
+        if let frame = frame {
+            layer.frame = frame
+        }
+        CATransaction.commit()
+    }
+
     /// 视图bounds变化后，把已应用的圆角mask、边框、渐变、阴影路径按新尺寸重算(没有视觉图层时直接返回)
     func wy_refreshVisualLayout() {
 
@@ -747,23 +817,21 @@ private extension UIView {
         let visualFrame: CGRect = wy_sharedBounds()
 
         if let maskLayer = layer.mask as? CAShapeLayer, maskLayer.name == WYLayerName.maskLayer {
-            maskLayer.frame = visualFrame
-            maskLayer.path = bezierPath.cgPath
+            UIView.wy_syncLayerGeometry(maskLayer, frame: visualFrame, path: bezierPath.cgPath)
         }
 
         if let borderLayer = layer.sublayers?.first(where: { $0.name == WYLayerName.boardLayer }) as? CAShapeLayer {
-            borderLayer.frame = visualFrame
-            borderLayer.path = bezierPath.cgPath
+            UIView.wy_syncLayerGeometry(borderLayer, frame: visualFrame, path: bezierPath.cgPath)
         }
 
         if let gradientLayer = layer.sublayers?.first(where: { $0.name == WYLayerName.gradientLayer }) {
-            gradientLayer.frame = visualFrame
+            UIView.wy_syncLayerGeometry(gradientLayer, frame: visualFrame)
         }
 
         // 阴影背景视图的位置由约束自动跟随，这里只按新尺寸重算阴影路径
         let config = wy_visualConfig
         if let shadowBackgroundView = config.shadowBackgroundView, (config.cornerRadius > 0) || (config.bezierPath != nil) {
-            shadowBackgroundView.layer.shadowPath = bezierPath.cgPath
+            UIView.wy_syncLayerGeometry(shadowBackgroundView.layer, frame: nil, shadowPath: bezierPath.cgPath)
         }
     }
 
@@ -833,17 +901,17 @@ private extension CALayer {
 
             switch info.edge {
             case .top:
-                sublayer.frame = CGRect(x: 0, y: 0,
-                                        width: bounds.width, height: info.thickness)
+                UIView.wy_syncLayerGeometry(sublayer, frame: CGRect(x: 0, y: 0,
+                                                                    width: bounds.width, height: info.thickness))
             case .bottom:
-                sublayer.frame = CGRect(x: 0, y: bounds.height - info.thickness,
-                                        width: bounds.width, height: info.thickness)
+                UIView.wy_syncLayerGeometry(sublayer, frame: CGRect(x: 0, y: bounds.height - info.thickness,
+                                                                    width: bounds.width, height: info.thickness))
             case .left:
-                sublayer.frame = CGRect(x: 0, y: 0,
-                                        width: info.thickness, height: bounds.height)
+                UIView.wy_syncLayerGeometry(sublayer, frame: CGRect(x: 0, y: 0,
+                                                                    width: info.thickness, height: bounds.height))
             case .right:
-                sublayer.frame = CGRect(x: bounds.width - info.thickness, y: 0,
-                                        width: info.thickness, height: bounds.height)
+                UIView.wy_syncLayerGeometry(sublayer, frame: CGRect(x: bounds.width - info.thickness, y: 0,
+                                                                    width: info.thickness, height: bounds.height))
             default:
                 break
             }
