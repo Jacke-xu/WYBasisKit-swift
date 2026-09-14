@@ -7,149 +7,259 @@
 //
 
 import UIKit
+import SnapKit
 
 class WYTestVisualController: UIViewController {
-    
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        // 调试直达入口:启动时带WY_AUTO_SCROLL=bottom可自动滚到底部，配合截图验证动态区
+        if ProcessInfo.processInfo.environment["WY_AUTO_SCROLL"] == "bottom" {
+            scrollView.contentOffset = CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.height + scrollView.contentInset.bottom)
+        }
+    }
+
+    /// 每个静态组合的标题和链式配置(标题显示在视觉区下方的外部标签上，不会被边框、圆角、阴影挡住)
+    private let visualItems: [(title: String, make: (UIView) -> Void)] = [
+        ("radius 10", { $0.wy_cornerRadius(10) }),
+        ("radius 15 topRight", { $0.wy_cornerRadius(15).wy_rectCorner([.topRight]) }),
+        ("border 5", { $0.wy_borderWidth(5).wy_borderColor(.black) }),
+        ("radius 10 + border 5", { $0.wy_cornerRadius(10).wy_borderWidth(5).wy_borderColor(.black) }),
+        ("radius 10 + border 20 (宽边框吃圆角场景)", { $0.wy_cornerRadius(10).wy_borderWidth(20).wy_borderColor(.systemRed) }),
+        ("radius 30 + border 10 topLeft", { $0.wy_cornerRadius(30).wy_borderWidth(10).wy_rectCorner([.topLeft]).wy_borderColor(.systemBlue) }),
+        ("渐变→", { $0.wy_gradualColors([.orange, .red]) }),
+        ("渐变↓", { $0.wy_gradualColors([.orange, .red]).wy_gradientDirection(.topToBottom) }),
+        ("渐变↘", { $0.wy_gradualColors([.orange, .red]).wy_gradientDirection(.leftToLowRight) }),
+        ("渐变↙", { $0.wy_gradualColors([.orange, .red]).wy_gradientDirection(.rightToLowLeft) }),
+        ("渐变 + radius 15", { $0.wy_gradualColors([.orange, .red]).wy_cornerRadius(15) }),
+        ("渐变 + radius 15 + border 5", { $0.wy_gradualColors([.orange, .red]).wy_cornerRadius(15).wy_borderWidth(5).wy_borderColor(.black) }),
+        ("阴影(无路径)", { $0.wy_shadowColor(.black).wy_shadowRadius(8).wy_shadowOpacity(0.6) }),
+        ("阴影 + radius 15", { $0.wy_shadowColor(.black).wy_shadowRadius(8).wy_shadowOpacity(0.6).wy_cornerRadius(15) }),
+        ("阴影 + radius + border", { $0.wy_shadowColor(.black).wy_shadowRadius(8).wy_shadowOpacity(0.6).wy_cornerRadius(15).wy_borderWidth(5).wy_borderColor(.black) }),
+        ("全叠加(渐变+圆角+边框+阴影)", { $0.wy_gradualColors([.orange, .red]).wy_cornerRadius(15).wy_borderWidth(5).wy_borderColor(.black).wy_shadowColor(.black).wy_shadowRadius(8).wy_shadowOpacity(0.6) }),
+        ("椭圆路径 + border 5 + 阴影", { $0.wy_bezierPath(UIBezierPath(ovalIn: CGRect(x: 8, y: 5, width: 155, height: 100))).wy_borderWidth(5).wy_borderColor(.purple).wy_shadowColor(.black).wy_shadowRadius(8).wy_shadowOpacity(0.6) }),
+        ("指定位置边框 all 8", { $0.backgroundColor = UIColor.systemTeal }),
+    ]
+
+    private let scrollView = UIScrollView()
+    private let bigButton = UIButton(type: .custom)
+    private let statusLabel = UILabel()
+    private var applyCount: Int = 0
+    private var borderIndex: Int = 0
+    private var edgeBorderRemoved: Bool = false
+    private var isBigSize: Bool = false
+    private let edgeThicknesses: [CGFloat] = [6, 14]
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Do any additional setup after loading the view.
-        
-        let lineView1 = createLineView()
-        lineView1.snp.makeConstraints { make in
-            make.width.equalTo(1)
-            make.top.equalToSuperview().offset(UIDevice.wy_navViewHeight)
-            make.bottom.equalToSuperview()
-            make.right.equalToSuperview().offset(-20)
+        view.backgroundColor = .white
+        navigationItem.title = "边框、圆角、阴影、渐变"
+
+        scrollView.alwaysBounceVertical = true
+        view.addSubview(scrollView)
+        scrollView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
         }
-        
-        let lineView2 = createLineView()
-        lineView2.snp.makeConstraints { make in
-            make.width.top.bottom.equalTo(lineView1)
-            make.right.equalToSuperview().offset(-220)
+
+        let contentStack = UIStackView()
+        contentStack.axis = .vertical
+        contentStack.spacing = 16
+        scrollView.addSubview(contentStack)
+        contentStack.snp.makeConstraints { make in
+            make.edges.equalToSuperview().inset(UIEdgeInsets(top: 16, left: 16, bottom: 30, right: 16))
+            make.width.equalTo(scrollView).offset(-32)
         }
-        
-        let lineView3 = createLineView()
-        lineView3.snp.makeConstraints { make in
-            make.left.right.equalToSuperview()
-            make.top.equalToSuperview().offset(200)
-            make.height.equalTo(1)
+
+        contentStack.addArrangedSubview(makeHintLabel())
+
+        // 静态组合矩阵，两个一行，每项固定半列宽(防fillEqually把奇数行压扁导致固定路径的椭圆等视觉溢出越界)
+        var rowItems: [(container: UIView, demoView: UIView, item: (title: String, make: (UIView) -> Void))] = []
+        for item in visualItems {
+            let demoItem = makeDemoItem(title: item.title)
+            rowItems.append((container: demoItem.container, demoView: demoItem.demoView, item: item))
+            if rowItems.count == 2 {
+                contentStack.addArrangedSubview(makeRow(rowItems))
+                rowItems = []
+            }
         }
-        
-        let lineView4 = createLineView()
-        lineView4.snp.makeConstraints { make in
-            make.left.right.height.equalTo(lineView3)
-            make.top.equalToSuperview().offset(300)
+        if rowItems.isEmpty == false {
+            contentStack.addArrangedSubview(makeRow(rowItems))
         }
-        
-        let lineView5 = createLineView()
-        lineView5.snp.makeConstraints { make in
-            make.left.right.height.equalTo(lineView3)
-            make.top.equalToSuperview().offset(350)
-        }
-        
-        let lineView6 = createLineView()
-        lineView6.snp.makeConstraints { make in
-            make.width.top.bottom.equalTo(lineView1)
-            make.right.equalToSuperview().offset(-120)
-        }
-        
-        let button1 = UIButton(type: .custom)
-        view.addSubview(button1)
-        button1.wy_backgroundColor(.orange, forState: .normal)
-        button1.titleLabel?.numberOfLines = 0
-        button1.setTitle("frame控件", for: .normal)
-        button1.wy_borderWidth(5).wy_borderColor(.yellow).wy_rectCorner([.bottomLeft, .topRight]).wy_cornerRadius(10).wy_shadowRadius(20).wy_shadowColor(.green).wy_shadowOpacity(0.5).wy_showVisual()
-        button1.frame = CGRect(x: 20, y: 200, width: 100, height: 100)
-        
-        let button = UIButton(type: .custom)
-        button.addTarget(self, action: #selector(updateButtonConstraints(button:)), for: .touchUpInside)
-        button.titleLabel?.numberOfLines = 0
-        button.setTitle("约束控件", for: .normal)
-        button.wy_addBorder(edges: [.top, .right], color: .magenta, thickness: 20)
-        view.addSubview(button)
-        button.wy_makeVisual { make in
-            make.wy_gradualColors([.yellow, .purple])
-            make.wy_gradientDirection(.leftToLowRight)
-            make.wy_borderWidth(5)
-            make.wy_borderColor(UIColor.black)
-            make.wy_rectCorner(.topRight)
-            make.wy_cornerRadius(20)
-            make.wy_shadowRadius(30)
-            make.wy_shadowColor(.green)
-            make.wy_shadowOffset(.zero)
-            make.wy_shadowOpacity(0.5)
-            //make.wy_bezierPath(UIBezierPath(ovalIn: CGRect(x: 0, y: 0, width: 100, height: 50)))
-        }
-        button.snp.makeConstraints { (make) in
-            make.right.equalToSuperview().offset(-20)
-            make.top.equalToSuperview().offset(200)
-            make.size.equalTo(CGSize(width: 100, height: 100))
-        }
-        
-        let gradualView = UIView()
-        gradualView.backgroundColor = .orange
-        view.addSubview(gradualView)
-        gradualView.snp.makeConstraints { (make) in
-            make.left.equalToSuperview().offset(20)
-            make.top.equalToSuperview().offset(500)
-            make.size.equalTo(CGSize(width: 100, height: 100))
-        }
-        gradualView.wy_rectCorner(.allCorners)
-        gradualView.wy_cornerRadius(10)
-        gradualView.wy_borderColor(.black)
-        gradualView.wy_borderWidth(5)
-        gradualView.wy_gradualColors([UIColor.orange,
-                                      UIColor.red])
-        gradualView.wy_gradientDirection(.leftToRight)
-        gradualView.wy_showVisual()
+
+        // viewBounds场景：控件还没布局(bounds为0)时先应用视觉，靠传入的固定bounds出效果
+        let viewBoundsItem = makeDemoItem(title: "viewBounds(100x70)优先")
+        contentStack.addArrangedSubview(makeRow([(container: viewBoundsItem.container, demoView: viewBoundsItem.demoView, item: (title: "viewBounds", make: { _ in }))]))
+        viewBoundsItem.demoView.wy_cornerRadius(18).wy_borderWidth(4).wy_borderColor(.systemGreen).wy_gradualColors([.yellow, .purple]).wy_viewBounds(CGRect(x: 0, y: 0, width: 100, height: 70)).wy_showVisual()
+
+        contentStack.addArrangedSubview(makeDynamicArea())
+        applyBigButtonVisual()
+        bigButton.wy_addBorder(edges: .all, color: .magenta, thickness: edgeThicknesses[borderIndex])
+        refreshStatus()
     }
-    
-    @objc func updateButtonConstraints(button: UIButton) {
-        button.snp.updateConstraints { (make) in
-            make.right.equalToSuperview().offset(-20)
-            make.top.equalToSuperview().offset(200)
-            make.size.equalTo(CGSize(width: 200, height: 150))
+
+    /// 把一至两个演示项摆成一行，每项显式半列宽
+    private func makeRow(_ items: [(container: UIView, demoView: UIView, item: (title: String, make: (UIView) -> Void))]) -> UIStackView {
+        let rowStack = UIStackView(arrangedSubviews: items.map { $0.container })
+        rowStack.axis = .horizontal
+        rowStack.spacing = 16
+        for current in items {
+            current.container.snp.makeConstraints { make in
+                make.width.equalTo(rowStack).multipliedBy(0.5).offset(items.count > 1 ? -8 : 0)
+            }
+
+            // 指定位置边框走单独API，viewBounds场景由调用方自行应用，其余走链式
+            if current.item.title.hasPrefix("指定位置") {
+                current.demoView.wy_addBorder(edges: .all, color: .magenta, thickness: 8)
+            }else if current.item.title.hasPrefix("viewBounds") == false {
+                current.demoView.wy_makeVisual(current.item.make)
+            }
         }
-        button.wy_gradualColors([.orange, .red])
-        button.wy_gradientDirection(.topToBottom)
-        button.wy_borderWidth(10)
-        button.wy_borderColor(UIColor.purple)
-        button.wy_rectCorner(.topLeft)
-        button.wy_cornerRadius(30)
-        button.wy_shadowRadius(10)
-        button.wy_shadowColor(.red)
-        button.wy_shadowOffset(.zero)
-        button.wy_shadowOpacity(0.5)
-        button.wy_showVisual()
-        
-        button.wy_addBorder(edges: [.bottom, .left], color: .magenta, thickness: 25)
-        
-        perform(#selector(removeBorder(sender:)), with: button, afterDelay: 5)
+        return rowStack
     }
-    
-    @objc func removeBorder(sender: UIButton) {
-        sender.wy_removeBorder(edges: [.top, .right], thickness: 20)
+
+    /// 顶部说明
+    private func makeHintLabel() -> UILabel {
+        let hintLabel = UILabel()
+        hintLabel.font = .systemFont(ofSize: 12)
+        hintLabel.textColor = .darkGray
+        hintLabel.numberOfLines = 0
+        hintLabel.text = "静态矩阵看几何与组合：'radius 10 + border 20'可见圆角必须仍是10(不能被宽边框吃成直角)；全叠加里紫色边框在最上层、渐变在最底层。动态区：点大按钮只改约束不改视觉，圆角/边框/渐变/阴影应自动跟随新尺寸不变形；'重复应用'连点多次应无任何闪烁。"
+        return hintLabel
     }
-    
-    func createLineView() -> UIView {
-        let lineView = UIView()
-        lineView.backgroundColor = .wy_random
-        view.addSubview(lineView)
-        return lineView
+
+    /// 造一个"视觉区+外部标签"的演示项，标签在视觉区下方不会被任何视觉挡住
+    private func makeDemoItem(title: String) -> (container: UIView, demoView: UIView) {
+        let container = UIStackView()
+        container.axis = .vertical
+        container.spacing = 4
+
+        let demoView = UIView()
+        demoView.backgroundColor = UIColor(white: 0.92, alpha: 1.0)
+        demoView.snp.makeConstraints { make in
+            make.height.equalTo(110)
+        }
+        container.addArrangedSubview(demoView)
+
+        let titleLabel = UILabel()
+        titleLabel.text = title
+        titleLabel.font = .systemFont(ofSize: 9)
+        titleLabel.textColor = .darkGray
+        titleLabel.numberOfLines = 2
+        container.addArrangedSubview(titleLabel)
+
+        return (container, demoView)
     }
-    
-    deinit {
-        WYLogManager.output("WYTestVisualController release")
+
+    /// 动态验证区(重复应用/清除重建/同边替换/尺寸跟随)
+    private func makeDynamicArea() -> UIView {
+        let container = UIView()
+
+        statusLabel.font = .systemFont(ofSize: 11)
+        statusLabel.textColor = .darkGray
+        statusLabel.numberOfLines = 0
+        container.addSubview(statusLabel)
+        statusLabel.snp.makeConstraints { make in
+            make.top.leading.trailing.equalToSuperview()
+        }
+
+        bigButton.setTitle("约束控件(点击只改约束尺寸)", for: .normal)
+        bigButton.setTitleColor(.black, for: .normal)
+        bigButton.titleLabel?.font = .systemFont(ofSize: 12)
+        bigButton.titleLabel?.numberOfLines = 0
+        bigButton.addTarget(self, action: #selector(toggleSize), for: .touchUpInside)
+        container.addSubview(bigButton)
+        bigButton.snp.makeConstraints { make in
+            make.top.equalTo(statusLabel.snp.bottom).offset(12)
+            make.leading.trailing.equalToSuperview()
+            make.height.equalTo(110)
+        }
+
+        let actionTitles = ["重复应用视觉", "清除后0.6秒重建", "指定边框换厚度", "移除指定边框"]
+        let actionSelectors = [#selector(reapplyVisual), #selector(clearAndReapply), #selector(cycleEdgeBorder), #selector(removeEdgeBorder)]
+        let actionStack = UIStackView()
+        actionStack.axis = .vertical
+        actionStack.spacing = 8
+        container.addSubview(actionStack)
+        actionStack.snp.makeConstraints { make in
+            make.top.equalTo(bigButton.snp.bottom).offset(12)
+            make.leading.trailing.bottom.equalToSuperview()
+        }
+
+        // 两个一行摆动作按钮
+        for index in stride(from: 0, to: actionTitles.count, by: 2) {
+            let rowStack = UIStackView()
+            rowStack.axis = .horizontal
+            rowStack.spacing = 8
+            rowStack.distribution = .fillEqually
+            actionStack.addArrangedSubview(rowStack)
+
+            for subIndex in index...min(index + 1, actionTitles.count - 1) {
+                let actionButton = UIButton(type: .system)
+                actionButton.setTitle(actionTitles[subIndex], for: .normal)
+                actionButton.titleLabel?.font = .systemFont(ofSize: 12)
+                actionButton.backgroundColor = UIColor(white: 0.9, alpha: 1.0)
+                actionButton.layer.cornerRadius = 6
+                actionButton.addTarget(self, action: actionSelectors[subIndex], for: .touchUpInside)
+                rowStack.addArrangedSubview(actionButton)
+                actionButton.snp.makeConstraints { make in
+                    make.height.equalTo(36)
+                }
+            }
+        }
+        return container
     }
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
+
+    /// 大按钮的完整链式视觉
+    private func applyBigButtonVisual() {
+        bigButton.wy_gradualColors([.orange, .red]).wy_gradientDirection(.topToBottom).wy_cornerRadius(20).wy_borderWidth(8).wy_borderColor(.purple).wy_rectCorner(.allCorners).wy_shadowColor(.black).wy_shadowRadius(10).wy_shadowOpacity(0.5).wy_showVisual()
+    }
+
+    private func refreshStatus() {
+        let edgeText = edgeBorderRemoved ? "已移除" : "厚度\(edgeThicknesses[borderIndex])"
+        statusLabel.text = "已应用\(applyCount)次 · 指定边框\(edgeText) · 当前尺寸\(isBigSize ? "全宽x150" : "全宽x110")"
+    }
+
+    @objc private func toggleSize() {
+        isBigSize = !isBigSize
+        bigButton.snp.updateConstraints { make in
+            make.height.equalTo(isBigSize ? 150 : 110)
+        }
+        // 故意不调用wy_showVisual，验证圆角、边框、渐变、阴影靠bounds监听自动跟随新尺寸
+        refreshStatus()
+    }
+
+    @objc private func reapplyVisual() {
+        applyBigButtonVisual()
+        applyCount += 1
+        refreshStatus()
+    }
+
+    @objc private func clearAndReapply() {
+        bigButton.wy_clearVisual()
+        bigButton.wy_removeBorder(edges: .all)
+        Task {
+            try? await Task.wy_delay(0.6, cancelThrows: false, onMain: { [weak self] in
+                guard let self = self else { return }
+                self.applyBigButtonVisual()
+                self.edgeBorderRemoved = false
+                self.bigButton.wy_addBorder(edges: .all, color: .magenta, thickness: self.edgeThicknesses[self.borderIndex])
+                self.applyCount += 1
+                self.refreshStatus()
+            })
+        }
+    }
+
+    @objc private func cycleEdgeBorder() {
+        borderIndex = (borderIndex + 1) % edgeThicknesses.count
+        edgeBorderRemoved = false
+        bigButton.wy_addBorder(edges: .all, color: .magenta, thickness: edgeThicknesses[borderIndex])
+        refreshStatus()
+    }
+
+    @objc private func removeEdgeBorder() {
+        edgeBorderRemoved = true
+        bigButton.wy_removeBorder(edges: .all)
+        refreshStatus()
+    }
 }

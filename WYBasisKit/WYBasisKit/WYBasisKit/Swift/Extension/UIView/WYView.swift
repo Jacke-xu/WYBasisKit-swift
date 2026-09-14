@@ -154,7 +154,7 @@ public extension UIView {
      *
      */
     static func wy_numberOfLines(total: Int, perLine: Int) -> Int {
-        // 防除零崩溃:total或perLine小于等于0时没有行数的意义，直接返回0
+        // 防除零崩溃(total或perLine小于等于0时没有行数的意义，直接返回0)
         guard total > 0, perLine > 0 else {
             return 0
         }
