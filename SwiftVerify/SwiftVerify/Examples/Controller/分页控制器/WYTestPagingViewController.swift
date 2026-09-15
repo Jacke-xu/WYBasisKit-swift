@@ -523,7 +523,7 @@ class WYTestPagingViewController: UIViewController {
         pagingView.bar_title_defaultFont = settings.titleDefaultFont
         pagingView.bar_title_selectedFont = settings.titleSelectedFont
         // 标题自适应(换行与缩字互斥由库内部处理，固定宽度Item下才生效)
-        pagingView.bar_title_maxLines = settings.titleMaxLines
+        pagingView.bar_title_numberOfLines = settings.titleMaxLines
         pagingView.bar_title_shrinkFontToFit = settings.titleShrinkFontToFit
         pagingView.bar_title_minimumFontScale = settings.titleMinimumFontScale
         
@@ -882,7 +882,7 @@ class PagingSettingsViewController: UIViewController, UITableViewDataSource, UIT
             }
         case "titleDefaultFont": return "\(Int(settings.titleDefaultFont.pointSize))"
         case "titleSelectedFont": return "\(Int(settings.titleSelectedFont.pointSize))"
-        case "titleMaxLines": return "\(settings.titleMaxLines)"
+        case "titleMaxLines": return (settings.titleMaxLines == 0) ? "0(不限)" : "\(settings.titleMaxLines)"
         case "titleShrinkFontToFit": return settings.titleShrinkFontToFit ? "是" : "否"
         case "titleMinimumFontScale": return "\(settings.titleMinimumFontScale)"
         case "itemDefaultIconTintColor": return (settings.itemDefaultIconTintColor == nil) ? "未设置" : "已设置"
@@ -1046,7 +1046,7 @@ class PagingSettingsViewController: UIViewController, UITableViewDataSource, UIT
                 case "dividingStripHeight": self.settings.dividingStripHeight = cgVal
                 case "scrollLineHeight": self.settings.scrollLineHeight = cgVal
                 case "titleSelectedScale": self.settings.titleSelectedScale = cgVal
-                case "titleMaxLines": self.settings.titleMaxLines = max(1, Int(val))
+                case "titleMaxLines": self.settings.titleMaxLines = max(0, Int(val))
                 case "titleMinimumFontScale": self.settings.titleMinimumFontScale = min(max(cgVal, 0), 1)
                 default: break
                 }

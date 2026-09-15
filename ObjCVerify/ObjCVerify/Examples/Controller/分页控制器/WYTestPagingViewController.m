@@ -95,6 +95,15 @@ typedef NS_ENUM(NSInteger, DisplayMode) {
 @property (nonatomic, assign) CGSize itemImageViewSize;
 @property (nonatomic, assign) UIViewContentMode itemImageContentMode;
 
+// 标题自适应(换行与缩字)
+@property (nonatomic, assign) NSInteger titleMaxLines;
+@property (nonatomic, assign) BOOL titleShrinkFontToFit;
+@property (nonatomic, assign) CGFloat titleMinimumFontScale;
+
+// 图标tint颜色(nil表示不设置)
+@property (nonatomic, strong) UIColor *itemDefaultIconTintColor;
+@property (nonatomic, strong) UIColor *itemSelectedIconTintColor;
+
 // 字体
 @property (nonatomic, strong) UIFont *titleDefaultFont;
 @property (nonatomic, strong) UIFont *titleSelectedFont;
@@ -162,6 +171,15 @@ typedef NS_ENUM(NSInteger, DisplayMode) {
         _itemInsideMargins = UIEdgeInsetsZero;
         _itemImageViewSize = CGSizeZero;
         _itemImageContentMode = UIViewContentModeScaleAspectFit;
+
+        // 标题自适应(换行与缩字)
+        _titleMaxLines = 1;
+        _titleShrinkFontToFit = YES;
+        _titleMinimumFontScale = 0.6;
+
+        // 图标tint颜色
+        _itemDefaultIconTintColor = nil;
+        _itemSelectedIconTintColor = nil;
 
         // 字体
         _titleDefaultFont = [UIFont systemFontOfSize:15];
@@ -393,6 +411,16 @@ typedef NS_ENUM(NSInteger, DisplayMode) {
         return self.settings.pagingBounce ? @"是" : @"否";
     } else if ([key isEqualToString:@"barBounce"]) {
         return self.settings.barBounce ? @"是" : @"否";
+    } else if ([key isEqualToString:@"titleMaxLines"]) {
+        return self.settings.titleMaxLines == 0 ? @"0(不限)" : [NSString stringWithFormat:@"%ld", (long)self.settings.titleMaxLines];
+    } else if ([key isEqualToString:@"titleShrinkFontToFit"]) {
+        return self.settings.titleShrinkFontToFit ? @"是" : @"否";
+    } else if ([key isEqualToString:@"titleMinimumFontScale"]) {
+        return [NSString stringWithFormat:@"%@", @(self.settings.titleMinimumFontScale)];
+    } else if ([key isEqualToString:@"itemDefaultIconTintColor"]) {
+        return self.settings.itemDefaultIconTintColor ? @"已设置" : @"未设置";
+    } else if ([key isEqualToString:@"itemSelectedIconTintColor"]) {
+        return self.settings.itemSelectedIconTintColor ? @"已设置" : @"未设置";
     } else if ([key containsString:@"Color"]) {
         return @"已设置";
     }
@@ -423,7 +451,8 @@ typedef NS_ENUM(NSInteger, DisplayMode) {
         [self showContentModeSheet];
         return;
     } else if ([key isEqualToString:@"scrollLineFollowFinger"] ||
-               [key isEqualToString:@"slideThroughIntermediatePages"]) {
+               [key isEqualToString:@"slideThroughIntermediatePages"] ||
+               [key isEqualToString:@"titleShrinkFontToFit"]) {
         [self showBoolEditorForKey:key];
         return;
     } else if ([key isEqualToString:@"autoCenter"] || [key isEqualToString:@"canScrollController"] ||
@@ -443,7 +472,8 @@ typedef NS_ENUM(NSInteger, DisplayMode) {
     } else if ([@[@"barHeight", @"originlLeftOffset", @"originlRightOffset", @"autoCenterMinSideSpacing", @"dividingOffset",
                   @"buttonDividingOffset", @"itemWidth", @"itemHeight", @"itemCornerRadius", @"itemBorderWidth",
                   @"scrollLineWidth", @"scrollLineBottomOffset", @"scrollLineCornerRadius", @"titleSelectedScale",
-                  @"dividingStripHeight", @"scrollLineHeight"] containsObject:key]) {
+                  @"dividingStripHeight", @"scrollLineHeight",
+                  @"titleMaxLines", @"titleMinimumFontScale"] containsObject:key]) {
         [self showNumberEditorForKey:key];
         return;
     } else {
@@ -530,6 +560,8 @@ typedef NS_ENUM(NSInteger, DisplayMode) {
         else if ([key isEqualToString:@"titleSelectedScale"]) currentValue = self.settings.titleSelectedScale;
         else if ([key isEqualToString:@"dividingStripHeight"]) currentValue = self.settings.dividingStripHeight;
         else if ([key isEqualToString:@"scrollLineHeight"]) currentValue = self.settings.scrollLineHeight;
+        else if ([key isEqualToString:@"titleMaxLines"]) currentValue = self.settings.titleMaxLines;
+        else if ([key isEqualToString:@"titleMinimumFontScale"]) currentValue = self.settings.titleMinimumFontScale;
 
         textField.text = [NSString stringWithFormat:@"%@", @(currentValue)];
     }];
@@ -556,6 +588,10 @@ typedef NS_ENUM(NSInteger, DisplayMode) {
             else if ([key isEqualToString:@"titleSelectedScale"]) self.settings.titleSelectedScale = value;
             else if ([key isEqualToString:@"dividingStripHeight"]) self.settings.dividingStripHeight = value;
             else if ([key isEqualToString:@"scrollLineHeight"]) self.settings.scrollLineHeight = value;
+            // 防行数输入负数喂给库出未定义行为:收敛到0，0表示不限行数
+            else if ([key isEqualToString:@"titleMaxLines"]) self.settings.titleMaxLines = MAX(0, (NSInteger)value);
+            // 防缩字下限超出合法范围:收敛到0~1
+            else if ([key isEqualToString:@"titleMinimumFontScale"]) self.settings.titleMinimumFontScale = MIN(MAX(value, 0), 1);
 
             [self.tableView reloadData];
         }
@@ -597,6 +633,7 @@ typedef NS_ENUM(NSInteger, DisplayMode) {
     BOOL currentValue = NO;
     if ([key isEqualToString:@"scrollLineFollowFinger"]) currentValue = self.settings.scrollLineFollowFinger;
     else if ([key isEqualToString:@"slideThroughIntermediatePages"]) currentValue = self.settings.slideThroughIntermediatePages;
+    else if ([key isEqualToString:@"titleShrinkFontToFit"]) currentValue = self.settings.titleShrinkFontToFit;
 
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"切换状态"
                                                                    message:currentValue ? @"当前状态: 开启" : @"当前状态: 关闭"
@@ -604,6 +641,7 @@ typedef NS_ENUM(NSInteger, DisplayMode) {
     [alert addAction:[UIAlertAction actionWithTitle:@"切换" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         if ([key isEqualToString:@"scrollLineFollowFinger"]) self.settings.scrollLineFollowFinger = !currentValue;
         else if ([key isEqualToString:@"slideThroughIntermediatePages"]) self.settings.slideThroughIntermediatePages = !currentValue;
+        else if ([key isEqualToString:@"titleShrinkFontToFit"]) self.settings.titleShrinkFontToFit = !currentValue;
         [self.tableView reloadData];
     }]];
     [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
@@ -778,6 +816,17 @@ typedef NS_ENUM(NSInteger, DisplayMode) {
     }];
     [colorAlert addAction:customAction];
 
+    // 图标tint两键支持清除(nil)方便验证"不设置时图标原样显示"
+    if ([@[@"itemDefaultIconTintColor", @"itemSelectedIconTintColor"] containsObject:key]) {
+        UIAlertAction *clearAction = [UIAlertAction actionWithTitle:@"清除(不设置)"
+                                                              style:UIAlertActionStyleDestructive
+                                                            handler:^(UIAlertAction * _Nonnull action) {
+            [self setColor:nil forKey:key];
+            [self.tableView reloadData];
+        }];
+        [colorAlert addAction:clearAction];
+    }
+
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
     [colorAlert addAction:cancelAction];
 
@@ -878,6 +927,10 @@ typedef NS_ENUM(NSInteger, DisplayMode) {
         return self.settings.itemNormalBorderColor ?: [UIColor clearColor];
     } else if ([key isEqualToString:@"itemSelectedBorderColor"]) {
         return self.settings.itemSelectedBorderColor ?: [UIColor clearColor];
+    } else if ([key isEqualToString:@"itemDefaultIconTintColor"]) {
+        return self.settings.itemDefaultIconTintColor ?: [UIColor clearColor];
+    } else if ([key isEqualToString:@"itemSelectedIconTintColor"]) {
+        return self.settings.itemSelectedIconTintColor ?: [UIColor clearColor];
     } else if ([key isEqualToString:@"titleDefaultColor"]) {
         return self.settings.titleDefaultColor;
     } else if ([key isEqualToString:@"titleSelectedColor"]) {
@@ -905,6 +958,10 @@ typedef NS_ENUM(NSInteger, DisplayMode) {
         self.settings.itemNormalBorderColor = color;
     } else if ([key isEqualToString:@"itemSelectedBorderColor"]) {
         self.settings.itemSelectedBorderColor = color;
+    } else if ([key isEqualToString:@"itemDefaultIconTintColor"]) {
+        self.settings.itemDefaultIconTintColor = color;
+    } else if ([key isEqualToString:@"itemSelectedIconTintColor"]) {
+        self.settings.itemSelectedIconTintColor = color;
     } else if ([key isEqualToString:@"titleDefaultColor"]) {
         self.settings.titleDefaultColor = color;
     } else if ([key isEqualToString:@"titleSelectedColor"]) {
@@ -983,6 +1040,8 @@ typedef NS_ENUM(NSInteger, DisplayMode) {
                 @{@"title": @"Item选中背景", @"key": @"itemSelectedBgColor"},
                 @{@"title": @"Item边框色(默认)", @"key": @"itemNormalBorderColor"},
                 @{@"title": @"Item边框色(选中)", @"key": @"itemSelectedBorderColor"},
+                @{@"title": @"Item图标tint(默认)", @"key": @"itemDefaultIconTintColor"},
+                @{@"title": @"Item图标tint(选中)", @"key": @"itemSelectedIconTintColor"},
                 @{@"title": @"标题默认颜色", @"key": @"titleDefaultColor"},
                 @{@"title": @"标题选中颜色", @"key": @"titleSelectedColor"},
                 @{@"title": @"分隔带颜色", @"key": @"dividingStripColor"},
@@ -1011,7 +1070,10 @@ typedef NS_ENUM(NSInteger, DisplayMode) {
             // 字体设置
             @[
                 @{@"title": @"默认字体大小", @"key": @"titleDefaultFont"},
-                @{@"title": @"选中字体大小", @"key": @"titleSelectedFont"}
+                @{@"title": @"选中字体大小", @"key": @"titleSelectedFont"},
+                @{@"title": @"标题换行行数", @"key": @"titleMaxLines"},
+                @{@"title": @"标题缩字自适应", @"key": @"titleShrinkFontToFit"},
+                @{@"title": @"标题缩字下限", @"key": @"titleMinimumFontScale"}
             ],
             // 其他设置
             @[
@@ -1396,10 +1458,16 @@ typedef NS_ENUM(NSInteger, DisplayMode) {
     pagingView.bar_item_insideMargins = settings.itemInsideMargins;
     pagingView.bar_item_imageViewSize = settings.itemImageViewSize;
     pagingView.bar_item_imageContentMode = settings.itemImageContentMode;
+    pagingView.bar_item_defaultIconTintColor = settings.itemDefaultIconTintColor;
+    pagingView.bar_item_selectedIconTintColor = settings.itemSelectedIconTintColor;
 
     // 字体设置
     pagingView.bar_title_defaultFont = settings.titleDefaultFont;
     pagingView.bar_title_selectedFont = settings.titleSelectedFont;
+    // 标题自适应(换行与缩字互斥由库内部处理，固定宽度Item下才生效)
+    pagingView.bar_title_numberOfLines = settings.titleMaxLines;
+    pagingView.bar_title_shrinkFontToFit = settings.titleShrinkFontToFit;
+    pagingView.bar_title_minimumFontScale = settings.titleMinimumFontScale;
 
     // 其他设置
     pagingView.bar_selectedIndex = settings.selectedIndex;

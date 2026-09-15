@@ -346,14 +346,14 @@ import WYBasisKitSwift
         set { bar_title_selectedScale = newValue }
     }
 
-    /// 文本显示不下时最多可换行到几行，默认1不换行(仅在bar_item_width传入固定宽度时生效，自适应宽度时Item会随文本撑开不存在显示不下；大于1时按换行显示，此时bar_title_shrinkFontToFit不生效，两个属性只能生效一个，Item高度装不下所有行时超出部分截断)
-    @objc(bar_title_maxLines)
-    var bar_title_maxLinesObjC: Int {
-        get { return bar_title_maxLines }
-        set { bar_title_maxLines = newValue }
+    /// 文本显示不下时最多可换行到几行，默认1不换行，传0表示不限行数(仅在bar_item_width传入固定宽度时生效，自适应宽度时Item会随文本撑开不存在显示不下；不为1时按换行显示，此时bar_title_shrinkFontToFit不生效，两个属性只能生效一个，Item高度装不下所有行时超出部分截断)
+    @objc(bar_title_numberOfLines)
+    var bar_title_numberOfLinesObjC: Int {
+        get { return bar_title_numberOfLines }
+        set { bar_title_numberOfLines = newValue }
     }
 
-    /// 文本显示不下时是否缩小字号自适应完整显示，默认true(仅在bar_item_width传入固定宽度且bar_title_maxLines为1时生效，大于1走换行显示；false时显示不下直接截断)
+    /// 文本显示不下时是否缩小字号自适应完整显示，默认true(仅在bar_item_width传入固定宽度且bar_title_numberOfLines为1时生效，不为1走换行显示；false时显示不下直接截断)
     @objc(bar_title_shrinkFontToFit)
     var bar_title_shrinkFontToFitObjC: Bool {
         get { return bar_title_shrinkFontToFit }

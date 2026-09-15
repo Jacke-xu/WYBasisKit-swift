@@ -68,9 +68,10 @@ extension WYPagingView {
             // 图片显示模式由容器统一设置(Item自身不持有容器属性)
             buttonItem.iconView?.contentMode = bar_item_imageContentMode
 
-            // 标题换行与缩字由容器统一设置(Item自身不持有容器属性)，行数大于1时按换行显示并自动关闭缩字(两个属性只能生效一个)
-            buttonItem.textView?.numberOfLines = max(1, bar_title_maxLines)
-            buttonItem.textView?.adjustsFontSizeToFitWidth = bar_title_shrinkFontToFit && (bar_title_maxLines <= 1)
+            // 标题换行与缩字由容器统一设置(Item自身不持有容器属性)，行数不为1时按换行显示并自动关闭缩字(两个属性只能生效一个)
+            // 防负数行数喂给UILabel出未定义行为:收敛到0，0表示不限行数
+            buttonItem.textView?.numberOfLines = max(0, bar_title_numberOfLines)
+            buttonItem.textView?.adjustsFontSizeToFitWidth = bar_title_shrinkFontToFit && (bar_title_numberOfLines == 1)
             // 防缩字下限系数超出UILabel合法范围:收敛到0~1
             buttonItem.textView?.minimumScaleFactor = min(max(bar_title_minimumFontScale, 0), 1)
 
