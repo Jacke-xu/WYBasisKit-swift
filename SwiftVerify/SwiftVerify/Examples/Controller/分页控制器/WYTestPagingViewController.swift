@@ -516,10 +516,16 @@ class WYTestPagingViewController: UIViewController {
         pagingView.bar_item_insideMargins = settings.itemInsideMargins
         pagingView.bar_item_imageViewSize = settings.itemImageViewSize
         pagingView.bar_item_imageContentMode = settings.itemImageContentMode
-        
+        pagingView.bar_item_defaultIconTintColor = settings.itemDefaultIconTintColor
+        pagingView.bar_item_selectedIconTintColor = settings.itemSelectedIconTintColor
+
         // 字体设置
         pagingView.bar_title_defaultFont = settings.titleDefaultFont
         pagingView.bar_title_selectedFont = settings.titleSelectedFont
+        // 标题自适应(换行与缩字互斥由库内部处理，固定宽度Item下才生效)
+        pagingView.bar_title_maxLines = settings.titleMaxLines
+        pagingView.bar_title_shrinkFontToFit = settings.titleShrinkFontToFit
+        pagingView.bar_title_minimumFontScale = settings.titleMinimumFontScale
         
         // 其他设置
         pagingView.bar_selectedIndex = settings.selectedIndex
@@ -622,6 +628,15 @@ struct PagingSettingsModel {
     var itemInsideMargins: UIEdgeInsets = .zero
     var itemImageViewSize: CGSize = .zero
     var itemImageContentMode: UIView.ContentMode = .scaleAspectFit
+
+    // 标题自适应(换行与缩字)
+    var titleMaxLines: Int = 1
+    var titleShrinkFontToFit: Bool = true
+    var titleMinimumFontScale: CGFloat = 0.6
+
+    // 图标tint颜色
+    var itemDefaultIconTintColor: UIColor? = nil
+    var itemSelectedIconTintColor: UIColor? = nil
     
     // 字体
     var titleDefaultFont: UIFont = UIFont.systemFont(ofSize: 15)
@@ -689,6 +704,8 @@ class PagingSettingsViewController: UIViewController, UITableViewDataSource, UIT
             ("Item选中背景", "itemSelectedBgColor"),
             ("Item边框色(默认)", "itemNormalBorderColor"),
             ("Item边框色(选中)", "itemSelectedBorderColor"),
+            ("Item图标tint(默认)", "itemDefaultIconTintColor"),
+            ("Item图标tint(选中)", "itemSelectedIconTintColor"),
             ("标题默认颜色", "titleDefaultColor"),
             ("标题选中颜色", "titleSelectedColor"),
             ("分隔带颜色", "dividingStripColor"),
@@ -720,7 +737,10 @@ class PagingSettingsViewController: UIViewController, UITableViewDataSource, UIT
         // 字体设置
         [
             ("默认字体大小", "titleDefaultFont"),
-            ("选中字体大小", "titleSelectedFont")
+            ("选中字体大小", "titleSelectedFont"),
+            ("标题换行行数", "titleMaxLines"),
+            ("标题缩字自适应", "titleShrinkFontToFit"),
+            ("标题缩字下限", "titleMinimumFontScale")
         ],
         
         // 其他设置
@@ -862,6 +882,11 @@ class PagingSettingsViewController: UIViewController, UITableViewDataSource, UIT
             }
         case "titleDefaultFont": return "\(Int(settings.titleDefaultFont.pointSize))"
         case "titleSelectedFont": return "\(Int(settings.titleSelectedFont.pointSize))"
+        case "titleMaxLines": return "\(settings.titleMaxLines)"
+        case "titleShrinkFontToFit": return settings.titleShrinkFontToFit ? "是" : "否"
+        case "titleMinimumFontScale": return "\(settings.titleMinimumFontScale)"
+        case "itemDefaultIconTintColor": return (settings.itemDefaultIconTintColor == nil) ? "未设置" : "已设置"
+        case "itemSelectedIconTintColor": return (settings.itemSelectedIconTintColor == nil) ? "未设置" : "已设置"
         case "selectedIndex": return "\(settings.selectedIndex)"
         case "canScrollController": return settings.canScrollController ? "是" : "否"
         case "canScrollBar": return settings.canScrollBar ? "是" : "否"
@@ -881,6 +906,8 @@ class PagingSettingsViewController: UIViewController, UITableViewDataSource, UIT
         case "itemSelectedBgColor": return settings.itemSelectedBgColor
         case "itemNormalBorderColor": return settings.itemNormalBorderColor ?? .clear
         case "itemSelectedBorderColor": return settings.itemSelectedBorderColor ?? .clear
+        case "itemDefaultIconTintColor": return settings.itemDefaultIconTintColor ?? .clear
+        case "itemSelectedIconTintColor": return settings.itemSelectedIconTintColor ?? .clear
         case "titleDefaultColor": return settings.titleDefaultColor
         case "titleSelectedColor": return settings.titleSelectedColor
         case "dividingStripColor": return settings.dividingStripColor
@@ -943,15 +970,15 @@ class PagingSettingsViewController: UIViewController, UITableViewDataSource, UIT
             alert.addAction(UIAlertAction(title: "取消", style: .cancel))
             present(alert, animated: true)
             
-        case "autoCenter", "canScrollController", "canScrollBar", "slideThroughIntermediatePages", "pagingBounce", "barBounce":
+        case "autoCenter", "canScrollController", "canScrollBar", "slideThroughIntermediatePages", "pagingBounce", "barBounce", "titleShrinkFontToFit":
             showBoolEditor(for: key)
-            
+
         case "titleDefaultFont", "titleSelectedFont":
             showFontEditor(for: key)
-            
+
         case "selectedIndex":
             showIndexEditor()
-            
+
         default:
             if key.contains("Color") {
                 showColorEditor(for: key)
@@ -959,7 +986,8 @@ class PagingSettingsViewController: UIViewController, UITableViewDataSource, UIT
                        "buttonDividingOffset", "itemWidth", "itemHeight", "itemCornerRadius",
                        "scrollLineWidth", "scrollLineBottomOffset", "scrollLineCornerRadius", "dividingStripHeight", "titleSelectedScale",
                        "itemBorderWidth",
-                       "scrollLineHeight"].contains(key) {
+                       "scrollLineHeight",
+                       "titleMaxLines", "titleMinimumFontScale"].contains(key) {
                 showNumberEditor(for: key)
             } else {
                 let alert = UIAlertController(title: "提示", message: "该设置项暂不支持编辑", preferredStyle: .alert)
@@ -992,6 +1020,8 @@ class PagingSettingsViewController: UIViewController, UITableViewDataSource, UIT
             case "dividingStripHeight": current = self.settings.dividingStripHeight
             case "scrollLineHeight": current = self.settings.scrollLineHeight
             case "titleSelectedScale": current = self.settings.titleSelectedScale
+            case "titleMaxLines": current = CGFloat(self.settings.titleMaxLines)
+            case "titleMinimumFontScale": current = self.settings.titleMinimumFontScale
             default: current = 0
             }
             tf.text = "\(current)"
@@ -1016,6 +1046,8 @@ class PagingSettingsViewController: UIViewController, UITableViewDataSource, UIT
                 case "dividingStripHeight": self.settings.dividingStripHeight = cgVal
                 case "scrollLineHeight": self.settings.scrollLineHeight = cgVal
                 case "titleSelectedScale": self.settings.titleSelectedScale = cgVal
+                case "titleMaxLines": self.settings.titleMaxLines = max(1, Int(val))
+                case "titleMinimumFontScale": self.settings.titleMinimumFontScale = min(max(cgVal, 0), 1)
                 default: break
                 }
                 self.tableView.reloadData()
@@ -1056,6 +1088,7 @@ class PagingSettingsViewController: UIViewController, UITableViewDataSource, UIT
         case "slideThroughIntermediatePages": current = settings.slideThroughIntermediatePages
         case "pagingBounce": current = settings.pagingBounce
         case "barBounce": current = settings.barBounce
+        case "titleShrinkFontToFit": current = settings.titleShrinkFontToFit
         default: return
         }
         let alert = UIAlertController(title: "切换状态", message: "当前：\(current ? "开启" : "关闭")", preferredStyle: .alert)
@@ -1067,6 +1100,7 @@ class PagingSettingsViewController: UIViewController, UITableViewDataSource, UIT
             case "slideThroughIntermediatePages": self.settings.slideThroughIntermediatePages.toggle()
             case "pagingBounce": self.settings.pagingBounce.toggle()
             case "barBounce": self.settings.barBounce.toggle()
+            case "titleShrinkFontToFit": self.settings.titleShrinkFontToFit.toggle()
             default: break
             }
             self.tableView.reloadData()
@@ -1171,6 +1205,13 @@ class PagingSettingsViewController: UIViewController, UITableViewDataSource, UIT
                 self.tableView.reloadData()
             })
         }
+        // 图标tint两键支持清除(nil)方便验证"不设置时图标原样显示"
+        if ["itemDefaultIconTintColor", "itemSelectedIconTintColor"].contains(key) {
+            alert.addAction(UIAlertAction(title: "清除(不设置)", style: .destructive) { _ in
+                self.setColor(nil, for: key)
+                self.tableView.reloadData()
+            })
+        }
         alert.addAction(UIAlertAction(title: "自定义RGB", style: .default) { _ in self.showCustomColorPicker(for: key) })
         alert.addAction(UIAlertAction(title: "取消", style: .cancel))
         presentAsPopover(alert, for: key)
@@ -1193,19 +1234,21 @@ class PagingSettingsViewController: UIViewController, UITableViewDataSource, UIT
         present(alert, animated: true)
     }
     
-    private func setColor(_ color: UIColor, for key: String) {
+    private func setColor(_ color: UIColor?, for key: String) {
         switch key {
-        case "pagingContentColor": settings.pagingContentColor = color
+        case "pagingContentColor": settings.pagingContentColor = color ?? .white
         case "pagingBgColor": settings.pagingBgColor = color
-        case "barBgColor": settings.barBgColor = color
-        case "itemDefaultBgColor": settings.itemDefaultBgColor = color
-        case "itemSelectedBgColor": settings.itemSelectedBgColor = color
+        case "barBgColor": settings.barBgColor = color ?? .white
+        case "itemDefaultBgColor": settings.itemDefaultBgColor = color ?? .white
+        case "itemSelectedBgColor": settings.itemSelectedBgColor = color ?? .white
         case "itemNormalBorderColor": settings.itemNormalBorderColor = color
         case "itemSelectedBorderColor": settings.itemSelectedBorderColor = color
-        case "titleDefaultColor": settings.titleDefaultColor = color
-        case "titleSelectedColor": settings.titleSelectedColor = color
-        case "dividingStripColor": settings.dividingStripColor = color
-        case "scrollLineColor": settings.scrollLineColor = color
+        case "itemDefaultIconTintColor": settings.itemDefaultIconTintColor = color
+        case "itemSelectedIconTintColor": settings.itemSelectedIconTintColor = color
+        case "titleDefaultColor": settings.titleDefaultColor = color ?? .wy_hex("#7B809E")
+        case "titleSelectedColor": settings.titleSelectedColor = color ?? .wy_hex("#2D3952")
+        case "dividingStripColor": settings.dividingStripColor = color ?? .wy_hex("#F2F2F2")
+        case "scrollLineColor": settings.scrollLineColor = color ?? .wy_hex("#2D3952")
         default: break
         }
     }

@@ -80,6 +80,9 @@ extension WYPagingView {
                 currentButtonItem = buttonItem
             }
 
+            // 图标tint初始态由容器统一设置(Item自身不持有容器属性；之后切页时在updateButtonItemProperty里随选中态刷新)
+            applyIconTint(to: buttonItem, isSelected: (index == bar_selectedIndex))
+
             barScrollView.insertSubview(buttonItem, at: 0)
 
             // 设置顶部和底部约束

@@ -191,7 +191,21 @@ import WYBasisKitSwift
         get { return bar_item_imageContentMode }
         set { bar_item_imageContentMode = newValue }
     }
-    
+
+    /// 分页栏Item图片Normal状态tint颜色，默认nil不设置(设置后图标强制按模板图渲染颜色才会生效；仅设置单个状态时另一状态沿用上次颜色，与边框颜色切换行为一致)
+    @objc(bar_item_defaultIconTintColor)
+    var bar_item_defaultIconTintColorObjC: UIColor? {
+        get { return bar_item_defaultIconTintColor }
+        set { bar_item_defaultIconTintColor = newValue }
+    }
+
+    /// 分页栏Item图片Selected状态tint颜色，默认nil不设置(设置后图标强制按模板图渲染颜色才会生效)
+    @objc(bar_item_selectedIconTintColor)
+    var bar_item_selectedIconTintColorObjC: UIColor? {
+        get { return bar_item_selectedIconTintColor }
+        set { bar_item_selectedIconTintColor = newValue }
+    }
+
     /// 分页栏item圆角半径, 默认0
     @objc(bar_item_cornerRadius)
     var bar_item_cornerRadiusObjC: CGFloat {

@@ -138,6 +138,12 @@ public class WYPagingView: UIView {
     /// 分页栏Item图片显示模式，默认.scaleAspectFit(等比缩放完整显示，可改.scaleAspectFill裁剪填满/.scaleToFill拉伸填满等)
     public var bar_item_imageContentMode: UIView.ContentMode = .scaleAspectFit
 
+    /// 分页栏Item图片Normal状态tintColor，默认nil
+    public var bar_item_defaultIconTintColor: UIColor? = nil
+
+    /// 分页栏Item图片Selected状态tintColor，默认nil不设置
+    public var bar_item_selectedIconTintColor: UIColor? = nil
+
     /// 分页栏item圆角半径, 默认0
     public var bar_item_cornerRadius: CGFloat = 0
 

@@ -103,17 +103,30 @@ extension WYPagingView {
         }
     }
 
+    // 应用图标当前状态的tint颜色(对应状态未设置tint时不干预，图标保持原样或上次颜色，与边框颜色切换行为一致；设置了tint才强制模板渲染，防原图渲染模式下颜色不生效)
+    func applyIconTint(to item: WYPagingItem, isSelected: Bool) {
+        guard let iconView = item.iconView else { return }
+        guard let tintColor = isSelected ? bar_item_selectedIconTintColor : bar_item_defaultIconTintColor else { return }
+        // 防每次切换都new一份UIImage包装对象:已是模板图就不重复转换
+        if let image = iconView.image, image.renderingMode != .alwaysTemplate {
+            iconView.image = image.withRenderingMode(.alwaysTemplate)
+        }
+        iconView.tintColor = tintColor
+    }
+
     func updateButtonItemProperty(currentItem: WYPagingItem) {
 
         if(currentItem.tag != currentButtonItem.tag) {
 
             currentButtonItem.setIsSelected(false)
+            applyIconTint(to: currentButtonItem, isSelected: false)
             applySelectedScale(to: currentButtonItem, isSelected: false)
 
             /// 将当前选中的item赋值
             currentButtonItem = currentItem
 
             currentButtonItem.setIsSelected(true)
+            applyIconTint(to: currentButtonItem, isSelected: true)
             applySelectedScale(to: currentButtonItem, isSelected: true)
 
             /// 调用最终的方法
