@@ -91,7 +91,7 @@ public class WYPagingView: UIView {
     public var bar_itemTopOffset: CGFloat? = nil
 
     /**
-     标题总占宽(含间距、bar_originlLeftOffset与bar_originlRightOffset)小于一屏时是否自动居中，默认false靠左显示，自适应与固定Item宽度均支持
+     标题总占宽(含间距、bar_originlLeftOffset与bar_originlRightOffset)小于一屏时是否自动居中，默认false靠左显示
 
      居中时如果设置了bar_originlLeftOffset/RightOffset，则精确保留bar_originlLeftOffset/RightOffset为两端边距，剩余空间全部均摊到Item之间的间距上
 
@@ -443,6 +443,7 @@ public class WYPagingItem: UIButton {
         super.init(frame: .zero)
         self.translatesAutoresizingMaskIntoConstraints = false
         self.isUserInteractionEnabled = true
+        self.clipsToBounds = true
 
         // 保存状态数据
         self.normalText = normalText
@@ -463,12 +464,13 @@ public class WYPagingItem: UIButton {
         self.contentDividingOffset = dividingOffset
         self.contentImageViewSize = imageViewSize
 
+        // 防圆角与边框只写配置不渲染(WYView扩展的点语法必须以wy_showVisual收尾，缺了圆角边框完全不显示)
         if cornerRadius > 0 {
-            self.wy_rectCorner(.allCorners).wy_cornerRadius(cornerRadius)
+            self.wy_rectCorner(.allCorners).wy_cornerRadius(cornerRadius).wy_showVisual()
         }
 
         if let borderColor = normalBorderColor, borderWidth > 0 {
-            self.wy_borderWidth(borderWidth).wy_borderColor(borderColor)
+            self.wy_borderWidth(borderWidth).wy_borderColor(borderColor).wy_showVisual()
         }
 
         // 设置默认背景色
@@ -502,15 +504,11 @@ public class WYPagingItem: UIButton {
             textView.font = isSelected ? selectedTextFont : normalTextFont
         }
 
-        // 切换边框颜色(圆角与边框互相独立，只设圆角没边框时圆角也要正常渲染)
-        if cornerRadius > 0 {
-            self.wy_rectCorner(.allCorners)
-                .wy_cornerRadius(cornerRadius)
-        }
-
+        // 切换边框颜色(圆角配置在初始化时已写入并渲染，wy_showVisual按完整配置原地更新，只换边框色不会动圆角)
         if borderWidth > 0, let borderColor = isSelected ? selectedBorderColor : normalBorderColor {
             self.wy_borderWidth(borderWidth)
                 .wy_borderColor(borderColor)
+                .wy_showVisual()
         }
 
         // 切换背景色

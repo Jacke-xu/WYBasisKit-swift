@@ -113,7 +113,9 @@ extension WYPagingView {
             objc_setAssociatedObject(self, &WYAssociatedKeys.lastAutoItemHeight, newValue.map { NSNumber(value: Double($0)) }, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
         get {
-            return CGFloat((objc_getAssociatedObject(self, &WYAssociatedKeys.lastAutoItemHeight) as? NSNumber)?.doubleValue ?? 0)
+            // 防可选属性永远拿不到nil(未设置时被?? 0吞掉后提升成非可选值):如实返回nil，bar_item_height是否仍是自动值的判断语义才准确
+            guard let number = objc_getAssociatedObject(self, &WYAssociatedKeys.lastAutoItemHeight) as? NSNumber else { return nil }
+            return CGFloat(number.doubleValue)
         }
     }
 

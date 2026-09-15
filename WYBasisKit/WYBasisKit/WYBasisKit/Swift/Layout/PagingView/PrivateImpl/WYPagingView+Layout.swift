@@ -332,6 +332,11 @@ extension WYPagingView {
             scrollLine!.heightAnchor.constraint(equalToConstant: bar_scrollLineHeight).isActive = true
             scrollLine!.topAnchor.constraint(equalTo: barScrollView.topAnchor, constant: bar_height - bar_scrollLineBottomOffset - bar_scrollLineHeight).isActive = true
 
+            // 防滑动线圆角不渲染(WYView扩展的点语法必须以wy_showVisual收尾):创建时一次性渲染，之后宽度变化由bounds监听自动跟随，不用每次切页跟手重设
+            if bar_scrollLineCornerRadius > 0 {
+                scrollLine!.wy_rectCorner(.allCorners).wy_cornerRadius(bar_scrollLineCornerRadius).wy_showVisual()
+            }
+
             objc_setAssociatedObject(self, &WYAssociatedKeys.barScrollLine, scrollLine!, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
         return scrollLine!

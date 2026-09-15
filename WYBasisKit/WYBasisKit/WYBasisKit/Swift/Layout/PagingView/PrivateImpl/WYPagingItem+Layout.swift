@@ -33,47 +33,54 @@ extension WYPagingItem {
             let iconSize = (contentImageViewSize == .zero ? normalImage?.size : contentImageViewSize) ?? .zero
             let textSize = (normalText as NSString?)?.size(withAttributes: [.font: normalTextFont]) ?? .zero
 
+            // 防设边框后内容被压扁(Item高度被分页栏固定，边框宽度再叠加进自动边距会把内容盒挤得比内容本身小，文字被裁上下边、图片被缩小):自动边距先扣掉四周边框占位再分配剩余空间，边框宽度只作为最外圈内边距
+            let borderInset: CGFloat = (borderWidth > 0) ? borderWidth : 0
+
             switch contentPosition {
             case .imageTopTitleBottom, .imageBottomTitleTop:
                 // 竖向布局
                 if itemHeight > 0 {
                     let contentHeight = iconSize.height + contentDividingOffset + textSize.height
-                    let remaining = max(0, itemHeight - contentHeight)
-                    finalMargins.top = remaining / 2
-                    finalMargins.bottom = remaining / 2
+                    let remaining = max(0, itemHeight - borderInset * 2 - contentHeight)
+                    finalMargins.top = borderInset + remaining / 2
+                    finalMargins.bottom = borderInset + remaining / 2
                 }
                 // 水平方向：如果有固定宽度则居中，否则不加额外左右边距（让内容自然显示）
                 if itemWidth > 0 {
                     let contentWidth = iconSize.width + contentDividingOffset + textSize.width
-                    let remaining = max(0, itemWidth - contentWidth)
-                    finalMargins.left = remaining / 2
-                    finalMargins.right = remaining / 2
+                    let remaining = max(0, itemWidth - borderInset * 2 - contentWidth)
+                    finalMargins.left = borderInset + remaining / 2
+                    finalMargins.right = borderInset + remaining / 2
                 }
 
             case .imageLeftTitleRight, .imageRightTitleLeft:
                 // 横向布局
                 if itemWidth > 0 {
                     let contentWidth = iconSize.width + contentDividingOffset + textSize.width
-                    let remaining = max(0, itemWidth - contentWidth)
-                    finalMargins.left = remaining / 2
-                    finalMargins.right = remaining / 2
+                    let remaining = max(0, itemWidth - borderInset * 2 - contentWidth)
+                    finalMargins.left = borderInset + remaining / 2
+                    finalMargins.right = borderInset + remaining / 2
                 }
                 // 垂直方向：如果有固定高度则居中，否则不加额外上下边距
                 if itemHeight > 0 {
                     let contentHeight = max(iconSize.height, textSize.height)
-                    let remaining = max(0, itemHeight - contentHeight)
-                    finalMargins.top = remaining / 2
-                    finalMargins.bottom = remaining / 2
+                    let remaining = max(0, itemHeight - borderInset * 2 - contentHeight)
+                    finalMargins.top = borderInset + remaining / 2
+                    finalMargins.bottom = borderInset + remaining / 2
                 }
             }
-        }
 
-        // 防设置边框后内容贴着边框被压住(宽度没算边框):自动边距时把边框宽度计入四周内边距(必须在实际建约束之前生效)，显式传入边距则尊重传入值
-        if (borderWidth > 0) && (insideMargins == .zero) {
-            finalMargins.left += borderWidth
-            finalMargins.right += borderWidth
-            finalMargins.top += borderWidth
-            finalMargins.bottom += borderWidth
+            // 防自适应方向上内容压到边框线上:未传Item宽/高的方向没有剩余空间可分，边框占位仍然要单独保留
+            if borderInset > 0 {
+                if itemWidth <= 0 {
+                    finalMargins.left = borderInset
+                    finalMargins.right = borderInset
+                }
+                if itemHeight <= 0 {
+                    finalMargins.top = borderInset
+                    finalMargins.bottom = borderInset
+                }
+            }
         }
 
         // ==================== 创建内容视图 ====================

@@ -40,7 +40,7 @@ class WYTestPagingViewController: UIViewController {
             print("分页视图布局完成(\(isReload ? "重载" : "首次"), 落位到第 \(pagingIndex) 页) - 闭包回调")
         }
         pagingView.itemDidRepeatClick { pagingView, pagingIndex in
-            print("重复点击了当前页 第 \(pagingIndex + 1) 页 - 通过闭包回调")
+            print("重复点击了当前页 第 \(pagingIndex) 页 - 通过闭包回调")
         }
 
         return pagingView
@@ -554,7 +554,7 @@ extension WYTestPagingViewController: WYPagingViewDelegate {
     }
 
     func wy_pagingViewItemDidRepeatClick(_ pagingView: WYPagingView, pagingIndex: Int) {
-        print("重复点击了当前页 第 \(pagingIndex + 1) 页 - 代理回调")
+        print("重复点击了当前页 第 \(pagingIndex) 页 - 代理回调")
     }
 }
 
