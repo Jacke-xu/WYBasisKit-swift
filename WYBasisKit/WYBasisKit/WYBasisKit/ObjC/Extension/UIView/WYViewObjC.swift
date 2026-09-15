@@ -13,7 +13,6 @@ import WYBasisKitSwift
 /// 渐变方向
 @objc(WYGradientDirection)
 @frozen public enum WYGradientDirectionObjC: Int {
-    
     /// 从左到右
     case leftToRight = 0
     /// 从上到下
