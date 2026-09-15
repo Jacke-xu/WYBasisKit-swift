@@ -44,6 +44,10 @@ class WYTestVisualController: UIViewController {
     private var borderIndex: Int = 0
     private var edgeBorderRemoved: Bool = false
     private var isBigSize: Bool = false
+    private var isOffset: Bool = false
+    private var isRotated: Bool = false
+    private var isScaled: Bool = false
+    private var isNarrow: Bool = false
     private let edgeThicknesses: [CGFloat] = [6, 14]
 
     override func viewDidLoad() {
@@ -119,7 +123,7 @@ class WYTestVisualController: UIViewController {
         hintLabel.font = .systemFont(ofSize: 12)
         hintLabel.textColor = .darkGray
         hintLabel.numberOfLines = 0
-        hintLabel.text = "静态矩阵看几何与组合：'radius 10 + border 20'可见圆角必须仍是10(不能被宽边框吃成直角)；全叠加里紫色边框在最上层、渐变在最底层。动态区：点大按钮只改约束不改视觉，圆角/边框/渐变/阴影应自动跟随新尺寸不变形；'重复应用'连点多次应无任何闪烁。"
+        hintLabel.text = "静态矩阵看几何与组合：'radius 10 + border 20'可见圆角必须仍是10(不能被宽边框吃成直角)；全叠加里紫色边框在最上层、渐变在最底层。动态区：点大按钮只改约束不改视觉，圆角/边框/渐变/阴影应自动跟随新尺寸不变形；'重复应用'连点多次应无任何闪烁；位移/旋转/缩放/改宽同样要同步跟随；'直切尺寸'应一步到位不闪帧；'慢动画2秒'途中再点应无缝反向。"
         return hintLabel
     }
 
@@ -146,7 +150,7 @@ class WYTestVisualController: UIViewController {
         return (container, demoView)
     }
 
-    /// 动态验证区(重复应用/清除重建/同边替换/尺寸跟随)
+    /// 动态验证区(重复应用/清除重建/同边替换/尺寸跟随/位移/旋转/缩放/改宽/直切/慢动画中断)
     private func makeDynamicArea() -> UIView {
         let container = UIView()
 
@@ -166,12 +170,13 @@ class WYTestVisualController: UIViewController {
         container.addSubview(bigButton)
         bigButton.snp.makeConstraints { make in
             make.top.equalTo(statusLabel.snp.bottom).offset(12)
-            make.leading.trailing.equalToSuperview()
+            // 约束用宽度+中心点定位(初始和leading/trailing等价)，后面位移、改宽都能用updateConstraints只动常量
+            make.width.centerX.equalToSuperview()
             make.height.equalTo(110)
         }
 
-        let actionTitles = ["重复应用视觉", "清除后0.6秒重建", "指定边框换厚度", "移除指定边框"]
-        let actionSelectors = [#selector(reapplyVisual), #selector(clearAndReapply), #selector(cycleEdgeBorder), #selector(removeEdgeBorder)]
+        let actionTitles = ["重复应用视觉", "清除后0.6秒重建", "指定边框换厚度", "移除指定边框", "移动位置", "旋转45度", "缩放0.7", "宽度减120", "直切尺寸", "慢动画2秒"]
+        let actionSelectors = [#selector(reapplyVisual), #selector(clearAndReapply), #selector(cycleEdgeBorder), #selector(removeEdgeBorder), #selector(togglePosition), #selector(toggleRotation), #selector(toggleScale), #selector(toggleWidth), #selector(snapSize), #selector(slowToggleSize)]
         let actionStack = UIStackView()
         actionStack.backgroundColor = .clear
         actionStack.axis = .vertical
@@ -213,13 +218,80 @@ class WYTestVisualController: UIViewController {
 
     private func refreshStatus() {
         let edgeText = edgeBorderRemoved ? "已移除" : "厚度\(Int(edgeThicknesses[borderIndex]))"
-        statusLabel.text = "已应用\(applyCount)次 · 指定边框\(edgeText) · 当前尺寸\(isBigSize ? "全宽x150" : "全宽x110")"
+        let transformText = isRotated ? "旋转45度" : (isScaled ? "缩放0.7" : "无形变")
+        statusLabel.text = "已应用\(applyCount)次 · 指定边框\(edgeText) · 当前尺寸\(isNarrow ? "减宽" : "全宽")x\(isBigSize ? 150 : 110) · \(transformText) · \(isOffset ? "位移80" : "未位移")"
     }
 
     @objc private func toggleSize() {
         isBigSize = !isBigSize
         // 验证动画同步:动画上下文里改约束并强制布局，view本体和圆角、边框、渐变、阴影应以相同时长一起过渡
         UIView.animate(withDuration: 0.25) {
+            self.bigButton.snp.updateConstraints { make in
+                make.height.equalTo(self.isBigSize ? 150 : 110)
+            }
+            self.view.layoutIfNeeded()
+        }
+        refreshStatus()
+    }
+
+    @objc private func togglePosition() {
+        isOffset = !isOffset
+        // 验证位移同步:动画上下文里只改水平位置不改尺寸，渐变、边框、阴影背景视图应整体一起平移
+        UIView.animate(withDuration: 0.4) {
+            self.bigButton.snp.updateConstraints { make in
+                make.centerX.equalToSuperview().offset(self.isOffset ? 80 : 0)
+            }
+            self.view.layoutIfNeeded()
+        }
+        refreshStatus()
+    }
+
+    @objc private func toggleRotation() {
+        isRotated = !isRotated
+        isScaled = false
+        // 验证形变同步:transform旋转45度，圆角、边框、渐变是子图层天然跟着转，阴影背景视图靠库内部同步transform跟转
+        UIView.animate(withDuration: 0.4) {
+            self.bigButton.transform = self.isRotated ? CGAffineTransform(rotationAngle: .pi / 4) : .identity
+        }
+        refreshStatus()
+    }
+
+    @objc private func toggleScale() {
+        isScaled = !isScaled
+        isRotated = false
+        // 验证形变同步:transform整体缩放0.7，全部视觉图层应一起缩放不变形
+        UIView.animate(withDuration: 0.4) {
+            self.bigButton.transform = self.isScaled ? CGAffineTransform(scaleX: 0.7, y: 0.7) : .identity
+        }
+        refreshStatus()
+    }
+
+    @objc private func toggleWidth() {
+        isNarrow = !isNarrow
+        // 验证宽度跟随:动画上下文里只改宽度，左右边框、渐变、阴影路径应同时收缩不拉伸
+        UIView.animate(withDuration: 0.25) {
+            self.bigButton.snp.updateConstraints { make in
+                make.width.equalToSuperview().offset(self.isNarrow ? -120 : 0)
+            }
+            self.view.layoutIfNeeded()
+        }
+        refreshStatus()
+    }
+
+    @objc private func snapSize() {
+        // 验证无动画直切:不在动画上下文里改尺寸，视觉图层应一步到位且不闪帧
+        isBigSize = !isBigSize
+        bigButton.snp.updateConstraints { make in
+            make.height.equalTo(isBigSize ? 150 : 110)
+        }
+        view.layoutIfNeeded()
+        refreshStatus()
+    }
+
+    @objc private func slowToggleSize() {
+        // 验证动画中断接力:2秒慢动画途中再点会反向，视觉图层应从当前屏显位置无缝接上不跳变
+        isBigSize = !isBigSize
+        UIView.animate(withDuration: 2.0) {
             self.bigButton.snp.updateConstraints { make in
                 make.height.equalTo(self.isBigSize ? 150 : 110)
             }

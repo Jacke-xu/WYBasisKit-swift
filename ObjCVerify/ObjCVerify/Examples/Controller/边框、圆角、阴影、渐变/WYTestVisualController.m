@@ -20,6 +20,10 @@ typedef void(^WYVisualMakeBlock)(UIView *make);
 @property (nonatomic, assign) NSInteger borderIndex;
 @property (nonatomic, assign) BOOL edgeBorderRemoved;
 @property (nonatomic, assign) BOOL isBigSize;
+@property (nonatomic, assign) BOOL isOffset;
+@property (nonatomic, assign) BOOL isRotated;
+@property (nonatomic, assign) BOOL isScaled;
+@property (nonatomic, assign) BOOL isNarrow;
 
 @end
 
@@ -159,7 +163,7 @@ typedef void(^WYVisualMakeBlock)(UIView *make);
     hintLabel.font = [UIFont systemFontOfSize:12];
     hintLabel.textColor = [UIColor darkGrayColor];
     hintLabel.numberOfLines = 0;
-    hintLabel.text = @"静态矩阵看几何与组合：'radius 10 + border 20'可见圆角必须仍是10(不能被宽边框吃成直角)；全叠加里紫色边框在最上层、渐变在最底层。动态区：点大按钮只改约束不改视觉，圆角/边框/渐变/阴影应自动跟随新尺寸不变形；'重复应用'连点多次应无任何闪烁。";
+    hintLabel.text = @"静态矩阵看几何与组合：'radius 10 + border 20'可见圆角必须仍是10(不能被宽边框吃成直角)；全叠加里紫色边框在最上层、渐变在最底层。动态区：点大按钮只改约束不改视觉，圆角/边框/渐变/阴影应自动跟随新尺寸不变形；'重复应用'连点多次应无任何闪烁；位移/旋转/缩放/改宽同样要同步跟随；'直切尺寸'应一步到位不闪帧；'慢动画2秒'途中再点应无缝反向。";
     return hintLabel;
 }
 
@@ -189,7 +193,7 @@ typedef void(^WYVisualMakeBlock)(UIView *make);
     return container;
 }
 
-/// 动态验证区(重复应用/清除重建/同边替换/尺寸跟随)
+/// 动态验证区(重复应用/清除重建/同边替换/尺寸跟随/位移/旋转/缩放/改宽/直切/慢动画中断)
 - (UIView *)makeDynamicArea {
     UIView *container = [[UIView alloc] init];
 
@@ -213,7 +217,8 @@ typedef void(^WYVisualMakeBlock)(UIView *make);
     self.bigButton = bigButton;
     [bigButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(statusLabel.mas_bottom).offset(12);
-        make.leading.and.trailing.equalTo(container);
+        // 约束用宽度+中心点定位(初始和leading/trailing等价)，后面位移、改宽都能用mas_updateConstraints只动常量
+        make.width.and.centerX.equalTo(container);
         make.height.equalTo(@110);
     }];
 
@@ -228,8 +233,8 @@ typedef void(^WYVisualMakeBlock)(UIView *make);
     }];
 
     // 两个一行摆动作按钮
-    NSArray<NSString *> *actionTitles = @[@"重复应用视觉", @"清除后0.6秒重建", @"指定边框换厚度", @"移除指定边框"];
-    NSArray<NSString *> *actionSelectorNames = @[NSStringFromSelector(@selector(reapplyVisual)), NSStringFromSelector(@selector(clearAndReapply)), NSStringFromSelector(@selector(cycleEdgeBorder)), NSStringFromSelector(@selector(removeEdgeBorder))];
+    NSArray<NSString *> *actionTitles = @[@"重复应用视觉", @"清除后0.6秒重建", @"指定边框换厚度", @"移除指定边框", @"移动位置", @"旋转45度", @"缩放0.7", @"宽度减120", @"直切尺寸", @"慢动画2秒"];
+    NSArray<NSString *> *actionSelectorNames = @[NSStringFromSelector(@selector(reapplyVisual)), NSStringFromSelector(@selector(clearAndReapply)), NSStringFromSelector(@selector(cycleEdgeBorder)), NSStringFromSelector(@selector(removeEdgeBorder)), NSStringFromSelector(@selector(togglePosition)), NSStringFromSelector(@selector(toggleRotation)), NSStringFromSelector(@selector(toggleScale)), NSStringFromSelector(@selector(toggleWidth)), NSStringFromSelector(@selector(snapSize)), NSStringFromSelector(@selector(slowToggleSize))];
     for (NSUInteger index = 0; index < actionTitles.count; index += 2) {
         UIStackView *rowStack = [[UIStackView alloc] init];
         rowStack.axis = UILayoutConstraintAxisHorizontal;
@@ -268,13 +273,81 @@ typedef void(^WYVisualMakeBlock)(UIView *make);
 
 - (void)refreshStatus {
     NSString *edgeText = self.edgeBorderRemoved ? @"已移除" : [NSString stringWithFormat:@"厚度%.0f", self.currentEdgeThickness];
-    self.statusLabel.text = [NSString stringWithFormat:@"已应用%ld次 · 指定边框%@ · 当前尺寸%@", (long)self.applyCount, edgeText, self.isBigSize ? @"全宽x150" : @"全宽x110"];
+    NSString *transformText = self.isRotated ? @"旋转45度" : (self.isScaled ? @"缩放0.7" : @"无形变");
+    NSString *sizeText = [NSString stringWithFormat:@"%@x%@", self.isNarrow ? @"减宽" : @"全宽", self.isBigSize ? @"150" : @"110"];
+    self.statusLabel.text = [NSString stringWithFormat:@"已应用%ld次 · 指定边框%@ · 当前尺寸%@ · %@ · %@", (long)self.applyCount, edgeText, sizeText, transformText, self.isOffset ? @"位移80" : @"未位移"];
 }
 
 - (void)toggleSize {
     self.isBigSize = !self.isBigSize;
     // 验证动画同步:动画上下文里改约束并强制布局，view本体和圆角、边框、渐变、阴影应以相同时长一起过渡
     [UIView animateWithDuration:0.25 animations:^{
+        [self.bigButton mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.equalTo(@(self.isBigSize ? 150 : 110));
+        }];
+        [self.view layoutIfNeeded];
+    }];
+    [self refreshStatus];
+}
+
+- (void)togglePosition {
+    self.isOffset = !self.isOffset;
+    // 验证位移同步:动画上下文里只改水平位置不改尺寸，渐变、边框、阴影背景视图应整体一起平移
+    [UIView animateWithDuration:0.4 animations:^{
+        [self.bigButton mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(self.bigButton.superview).offset(self.isOffset ? 80 : 0);
+        }];
+        [self.view layoutIfNeeded];
+    }];
+    [self refreshStatus];
+}
+
+- (void)toggleRotation {
+    self.isRotated = !self.isRotated;
+    self.isScaled = NO;
+    // 验证形变同步:transform旋转45度，圆角、边框、渐变是子图层天然跟着转，阴影背景视图靠库内部同步transform跟转
+    [UIView animateWithDuration:0.4 animations:^{
+        self.bigButton.transform = self.isRotated ? CGAffineTransformMakeRotation(M_PI / 4) : CGAffineTransformIdentity;
+    }];
+    [self refreshStatus];
+}
+
+- (void)toggleScale {
+    self.isScaled = !self.isScaled;
+    self.isRotated = NO;
+    // 验证形变同步:transform整体缩放0.7，全部视觉图层应一起缩放不变形
+    [UIView animateWithDuration:0.4 animations:^{
+        self.bigButton.transform = self.isScaled ? CGAffineTransformMakeScale(0.7, 0.7) : CGAffineTransformIdentity;
+    }];
+    [self refreshStatus];
+}
+
+- (void)toggleWidth {
+    self.isNarrow = !self.isNarrow;
+    // 验证宽度跟随:动画上下文里只改宽度，左右边框、渐变、阴影路径应同时收缩不拉伸
+    [UIView animateWithDuration:0.25 animations:^{
+        [self.bigButton mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.width.equalTo(self.bigButton.superview).offset(self.isNarrow ? -120 : 0);
+        }];
+        [self.view layoutIfNeeded];
+    }];
+    [self refreshStatus];
+}
+
+- (void)snapSize {
+    // 验证无动画直切:不在动画上下文里改尺寸，视觉图层应一步到位且不闪帧
+    self.isBigSize = !self.isBigSize;
+    [self.bigButton mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.height.equalTo(@(self.isBigSize ? 150 : 110));
+    }];
+    [self.view layoutIfNeeded];
+    [self refreshStatus];
+}
+
+- (void)slowToggleSize {
+    // 验证动画中断接力:2秒慢动画途中再点会反向，视觉图层应从当前屏显位置无缝接上不跳变
+    self.isBigSize = !self.isBigSize;
+    [UIView animateWithDuration:2.0 animations:^{
         [self.bigButton mas_updateConstraints:^(MASConstraintMaker *make) {
             make.height.equalTo(@(self.isBigSize ? 150 : 110));
         }];
@@ -290,7 +363,8 @@ typedef void(^WYVisualMakeBlock)(UIView *make);
 }
 
 - (void)clearAndReapply {
-    [self.bigButton wy_clearVisual];
+    // 防取到block没调用:wy_clearVisual在OC桥接里是block属性，方括号消息只拿到block不会执行，必须带()调用，否则视觉永远清不掉(点了清除重建没反应)
+    [self.bigButton wy_clearVisual]();
     [self.bigButton wy_removeBorder:UIRectEdgeAll];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self applyBigButtonVisual];

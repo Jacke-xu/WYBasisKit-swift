@@ -487,6 +487,8 @@ private extension UIView {
                     NSLayoutConstraint(item: shadowView, attribute: NSLayoutConstraint.Attribute.bottom, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self, attribute: NSLayoutConstraint.Attribute.bottom, multiplier: 1.0, constant: 0)])
 
                 config.shadowBackgroundView = shadowView
+                // 防形变残留错位:视图已带transform时新建的阴影背景视图要先抄一份transform，否则第一帧两层不贴合
+                shadowView.transform = self.transform
             }
         }else {
             // 不需要背景视图时，撤掉旧的
@@ -704,10 +706,12 @@ private extension UIView {
         let thickness: CGFloat
     }
 
-    /// 监听layer.bounds变化的观察者(销毁时自动停止观察，不需要手动removeObserver)
+    /// 监听layer.bounds/transform变化的观察者(销毁时自动停止观察，不需要手动removeObserver)
     final class WYBoundsObserver {
 
         var observation: NSKeyValueObservation?
+
+        var transformObservation: NSKeyValueObservation?
 
         init(view: UIView) {
             observation = view.layer.observe(\.bounds, options: [.new, .old]) { [weak view] _, change in
@@ -716,10 +720,15 @@ private extension UIView {
                 view.layer.wy_updateBorderFrames()
                 view.wy_refreshVisualLayout()
             }
+            transformObservation = view.layer.observe(\.transform, options: [.new]) { [weak view] _, _ in
+                // 防阴影背景视图不跟形变:位移、旋转、缩放只改transform不动bounds，靠约束定位的阴影背景视图不会跟着动，这里把视图当前的transform抄给它让阴影和本体始终贴在一起(在动画上下文里改transform时，这次赋值也会被UIKit做成同拍动画)
+                guard Thread.isMainThread, let view = view else { return }
+                view.wy_visualConfig.shadowBackgroundView?.transform = view.transform
+            }
         }
     }
 
-    /// 开启bounds监听，让指定位置边框和已应用的链式视觉跟随视图尺寸变化自动更新
+    /// 开启bounds/transform监听，让指定位置边框和已应用的链式视觉跟随视图尺寸变化自动更新、阴影背景视图跟随视图形变移动
     func wy_startBoundsObserving() {
         guard objc_getAssociatedObject(self, &WYAssociatedKeys.borderObserver) == nil else { return }
         let observer = WYBoundsObserver(view: self)
