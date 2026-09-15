@@ -332,6 +332,27 @@ import WYBasisKitSwift
         set { bar_title_selectedScale = newValue }
     }
 
+    /// 文本显示不下时最多可换行到几行，默认1不换行(仅在bar_item_width传入固定宽度时生效，自适应宽度时Item会随文本撑开不存在显示不下；大于1时按换行显示，此时bar_title_shrinkFontToFit不生效，两个属性只能生效一个，Item高度装不下所有行时超出部分截断)
+    @objc(bar_title_maxLines)
+    var bar_title_maxLinesObjC: Int {
+        get { return bar_title_maxLines }
+        set { bar_title_maxLines = newValue }
+    }
+
+    /// 文本显示不下时是否缩小字号自适应完整显示，默认true(仅在bar_item_width传入固定宽度且bar_title_maxLines为1时生效，大于1走换行显示；false时显示不下直接截断)
+    @objc(bar_title_shrinkFontToFit)
+    var bar_title_shrinkFontToFitObjC: Bool {
+        get { return bar_title_shrinkFontToFit }
+        set { bar_title_shrinkFontToFit = newValue }
+    }
+
+    /// 文本缩字自适应的最小字号系数，默认0.6(例如：15号字最小缩到约9号；仅在bar_title_shrinkFontToFit生效时有意义，取值范围0~1，超出按边界值处理)
+    @objc(bar_title_minimumFontScale)
+    var bar_title_minimumFontScaleObjC: CGFloat {
+        get { return bar_title_minimumFontScale }
+        set { bar_title_minimumFontScale = newValue }
+    }
+
     /// 当前选中的页面的Index，初始化时也可以用来设置默认选中第几个页面
     @objc(bar_selectedIndex)
     var bar_selectedIndexObjC: Int {

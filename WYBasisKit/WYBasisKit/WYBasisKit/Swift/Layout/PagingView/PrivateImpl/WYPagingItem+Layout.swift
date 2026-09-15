@@ -128,10 +128,14 @@ extension WYPagingItem {
                     icon.widthAnchor.constraint(equalToConstant: iconSize.width),
                     icon.heightAnchor.constraint(equalToConstant: iconSize.height),
                     label.leadingAnchor.constraint(equalTo: icon.trailingAnchor, constant: contentDividingOffset),
-                    label.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
+                    label.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+                    // 防文本无右边界时宽度不足不触发换行或缩字(直接画出Item外):给文本补右边界
+                    label.trailingAnchor.constraint(lessThanOrEqualTo: contentView.trailingAnchor)
                 ])
                 // 宽度下限用可更新约束(选中/未选中字体不同时随状态重算，见updateTextContentSize)
                 textContentWidthConstraint = contentView.widthAnchor.constraint(greaterThanOrEqualToConstant: totalWidth)
+                // 防宽度下限与固定Item宽度的必需约束冲突(固定宽度小于文本宽时被随机打断后内容溢出Item):下限降为999让位固定宽度，宽度不足时按缩字或换行处理
+                textContentWidthConstraint?.priority = .init(999)
                 textContentWidthConstraint?.isActive = true
 
             case .imageRightTitleLeft:
@@ -146,6 +150,8 @@ extension WYPagingItem {
                     icon.heightAnchor.constraint(equalToConstant: iconSize.height)
                 ])
                 textContentWidthConstraint = contentView.widthAnchor.constraint(greaterThanOrEqualToConstant: totalWidth)
+                // 防宽度下限与固定Item宽度的必需约束冲突(固定宽度小于文本宽时被随机打断后内容溢出Item):下限降为999让位固定宽度，宽度不足时按缩字或换行处理
+                textContentWidthConstraint?.priority = .init(999)
                 textContentWidthConstraint?.isActive = true
 
             case .imageTopTitleBottom:
@@ -157,9 +163,14 @@ extension WYPagingItem {
                     icon.widthAnchor.constraint(equalToConstant: iconSize.width),
                     icon.heightAnchor.constraint(equalToConstant: iconSize.height),
                     label.topAnchor.constraint(equalTo: icon.bottomAnchor, constant: contentDividingOffset),
-                    label.centerXAnchor.constraint(equalTo: contentView.centerXAnchor)
+                    label.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+                    // 防文本无左右边界时宽度不足不触发换行或缩字(直接画出Item外):给文本补左右边界，配合centerX保持换行后居中
+                    label.leadingAnchor.constraint(greaterThanOrEqualTo: contentView.leadingAnchor),
+                    label.trailingAnchor.constraint(lessThanOrEqualTo: contentView.trailingAnchor)
                 ])
                 textContentWidthConstraint = contentView.widthAnchor.constraint(greaterThanOrEqualToConstant: maxWidth)
+                // 防宽度下限与固定Item宽度的必需约束冲突(固定宽度小于文本宽时被随机打断后内容溢出Item):下限降为999让位固定宽度，宽度不足时按缩字或换行处理
+                textContentWidthConstraint?.priority = .init(999)
                 textContentWidthConstraint?.isActive = true
                 textContentHeightConstraint = contentView.heightAnchor.constraint(greaterThanOrEqualToConstant: totalHeight)
                 // 防顶部偏移后内容高度下限把item底部顶出分页栏:降为998给底部边界约束让路
@@ -175,9 +186,14 @@ extension WYPagingItem {
                     icon.topAnchor.constraint(equalTo: label.bottomAnchor, constant: contentDividingOffset),
                     icon.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
                     icon.widthAnchor.constraint(equalToConstant: iconSize.width),
-                    icon.heightAnchor.constraint(equalToConstant: iconSize.height)
+                    icon.heightAnchor.constraint(equalToConstant: iconSize.height),
+                    // 防文本无左右边界时宽度不足不触发换行或缩字(直接画出Item外):给文本补左右边界，配合centerX保持换行后居中
+                    label.leadingAnchor.constraint(greaterThanOrEqualTo: contentView.leadingAnchor),
+                    label.trailingAnchor.constraint(lessThanOrEqualTo: contentView.trailingAnchor)
                 ])
                 textContentWidthConstraint = contentView.widthAnchor.constraint(greaterThanOrEqualToConstant: maxWidth)
+                // 防宽度下限与固定Item宽度的必需约束冲突(固定宽度小于文本宽时被随机打断后内容溢出Item):下限降为999让位固定宽度，宽度不足时按缩字或换行处理
+                textContentWidthConstraint?.priority = .init(999)
                 textContentWidthConstraint?.isActive = true
                 textContentHeightConstraint = contentView.heightAnchor.constraint(greaterThanOrEqualToConstant: totalHeight)
                 // 防顶部偏移后内容高度下限把item底部顶出分页栏:降为998给底部边界约束让路
